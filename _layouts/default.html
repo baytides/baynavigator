@@ -439,21 +439,175 @@
     footer h3 {
       color: var(--accent-orange);
     }
-      /* Logo styling */
-      .site-logo {
-        display: block;
-        text-align: center;
-        margin-bottom: 30px;
-      }
 
-      .site-logo img {
-        max-width: 100%;
-        height: auto;
-        width: 600px;
-        display: block;
-        margin: 0 auto;
-        border-radius: 8px;
+    /* Global Search Bar */
+    .global-search-container {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--bg-main);
+      padding: 20px 0;
+      margin: -40px -40px 30px -40px;
+      padding-left: 40px;
+      padding-right: 40px;
+      border-bottom: 2px solid var(--border-light);
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .global-search-container input {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 18px;
+      border: 3px solid var(--border-light);
+      border-radius: 12px;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .global-search-container input:focus {
+      outline: none;
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 4px rgba(255, 111, 0, 0.1);
+    }
+
+    /* Quick Filters */
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0 0 0;
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      background: var(--bg-main);
+      border: 2px solid var(--border-light);
+      border-radius: 25px;
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      background: var(--light-cyan);
+      border-color: var(--primary-teal);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--primary-teal) 0%, #00bcd4 100%);
+      border-color: var(--primary-teal);
+      color: white;
+    }
+
+    .filter-btn:focus {
+      outline: 2px solid var(--accent-orange);
+      outline-offset: 2px;
+    }
+
+    /* Search Results Counter */
+    .search-results-info {
+      margin: 15px 0;
+      padding: 12px 20px;
+      background: var(--light-cyan);
+      border-radius: 8px;
+      display: none;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .search-results-info.show {
+      display: block;
+    }
+
+    /* Collapsible sections */
+    .collapsible-section {
+      margin: 30px 0;
+    }
+
+    .section-toggle {
+      background: linear-gradient(135deg, var(--light-cyan) 0%, var(--lighter-cyan) 100%);
+      border: none;
+      width: 100%;
+      text-align: left;
+      padding: 20px 25px;
+      font-size: 1.5em;
+      font-weight: 600;
+      color: var(--text-heading);
+      cursor: pointer;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+
+    .section-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 172, 193, 0.2);
+    }
+
+    .section-toggle:focus {
+      outline: 2px solid var(--accent-orange);
+      outline-offset: 2px;
+    }
+
+    .section-toggle::after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform 0.3s ease;
+    }
+
+    .section-toggle.active::after {
+      transform: rotate(-180deg);
+    }
+
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .section-content.active {
+      max-height: 10000px;
+      transition: max-height 0.5s ease;
+    }
+
+    /* Highlight matching text in search */
+    .search-highlight {
+      background: #fff59d;
+      padding: 2px 4px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .search-highlight {
+        background: #b8860b;
+        color: #000;
       }
+    }
+
+    /* Logo styling */
+    .site-logo {
+      display: block;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .site-logo img {
+      max-width: 100%;
+      height: auto;
+      width: 600px;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
     
     /* Skip to main content link for accessibility */
     .skip-link {
@@ -485,6 +639,30 @@
       
       footer {
         padding: 20px;
+      }
+      
+      .global-search-container {
+        margin: -20px -20px 20px -20px;
+        padding: 15px 20px;
+      }
+      
+      .global-search-container input {
+        font-size: 16px;
+        padding: 12px 16px;
+      }
+      
+      .quick-filters {
+        gap: 8px;
+      }
+      
+      .filter-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+      
+      .section-toggle {
+        padding: 15px 20px;
+        font-size: 1.3em;
       }
       
       .site-logo img {
@@ -584,8 +762,6 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
   
   <main id="main-content" role="main">
-    {% include install-banner.html %}
-    
     {{ content }}
   </main>
 
@@ -599,9 +775,7 @@
       links.forEach(link => {
         const href = link.getAttribute('href');
         
-        // Check if it's an external link (starts with http/https)
         if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-          // Don't modify if it's an internal link to your own domain
           if (!href.includes('bayareadiscounts.com') && !href.includes(window.location.hostname)) {
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');
@@ -638,17 +812,201 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
       
-      // Add table search functionality (but skip Eligibility Icons table)
+      // ============== GLOBAL SEARCH & FILTERS ==============
+      
+      // Create global search bar
+      const mainContent = document.querySelector('main');
+      const searchContainer = document.createElement('div');
+      searchContainer.className = 'global-search-container';
+      searchContainer.innerHTML = `
+        <input type="text" 
+               id="global-search" 
+               placeholder="🔍 Search all benefits..." 
+               aria-label="Search all benefits"
+               autocomplete="off">
+        <div class="quick-filters">
+          <button class="filter-btn" data-filter="all">🌎 All</button>
+          <button class="filter-btn" data-filter="🎓">🎓 Students</button>
+          <button class="filter-btn" data-filter="💳">💳 Income-Eligible</button>
+          <button class="filter-btn" data-filter="👵">👵 Seniors</button>
+          <button class="filter-btn" data-filter="🧒">🧒 Youth</button>
+          <button class="filter-btn" data-filter="📍">📍 Residency Required</button>
+        </div>
+        <div class="search-results-info" id="search-results-info"></div>
+      `;
+      
+      // Insert at the very beginning of main content
+      const firstChild = mainContent.firstChild;
+      mainContent.insertBefore(searchContainer, firstChild);
+      
+      const globalSearch = document.getElementById('global-search');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const resultsInfo = document.getElementById('search-results-info');
+      
+      let activeFilter = 'all';
+      let searchTerm = '';
+      
+      // Global search function
+      function performGlobalSearch() {
+        const filter = searchTerm.toLowerCase();
+        let visibleCount = 0;
+        let totalCount = 0;
+        
+        // Search through all tables
+        document.querySelectorAll('main table').forEach(table => {
+          // Skip eligibility icons table and footer tables
+          if (table.closest('footer')) return;
+          
+          let prevElement = table.previousElementSibling;
+          let skipTable = false;
+          for (let i = 0; i < 3 && prevElement; i++) {
+            if (prevElement.tagName && prevElement.tagName.match(/^H[1-6]$/) &&
+                prevElement.textContent.includes('Eligibility Icons')) {
+              skipTable = true;
+              break;
+            }
+            prevElement = prevElement.previousElementSibling;
+          }
+          if (skipTable) return;
+          
+          const rows = table.querySelectorAll('tbody tr');
+          rows.forEach(row => {
+            totalCount++;
+            const text = row.textContent.toLowerCase();
+            const firstCell = row.querySelector('td:first-child');
+            const eligibilityIcons = firstCell ? firstCell.textContent : '';
+            
+            // Apply filter
+            let matchesFilter = true;
+            if (activeFilter !== 'all') {
+              matchesFilter = eligibilityIcons.includes(activeFilter);
+            }
+            
+            // Apply search
+            const matchesSearch = !filter || text.includes(filter);
+            
+            const isVisible = matchesFilter && matchesSearch;
+            row.style.display = isVisible ? '' : 'none';
+            
+            if (isVisible) visibleCount++;
+          });
+        });
+        
+        // Show results info
+        if (filter || activeFilter !== 'all') {
+          resultsInfo.textContent = `Showing ${visibleCount} of ${totalCount} programs`;
+          resultsInfo.classList.add('show');
+        } else {
+          resultsInfo.classList.remove('show');
+        }
+        
+        // Open sections that have visible results
+        if (filter) {
+          document.querySelectorAll('.section-content').forEach(content => {
+            const visibleRows = content.querySelectorAll('tbody tr:not([style*="display: none"])').length;
+            if (visibleRows > 0) {
+              content.classList.add('active');
+              const button = content.previousElementSibling;
+              if (button) {
+                button.classList.add('active');
+                button.setAttribute('aria-expanded', 'true');
+              }
+            }
+          });
+        }
+      }
+      
+      // Global search event
+      globalSearch.addEventListener('input', function() {
+        searchTerm = this.value;
+        performGlobalSearch();
+      });
+      
+      // Filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          activeFilter = this.dataset.filter;
+          performGlobalSearch();
+        });
+      });
+      
+      // Set "All" as default active
+      filterButtons[0].classList.add('active');
+      
+      // ============== ACCORDION SECTIONS ==============
+      
+      // Find all h2 elements (section headers)
+      const h2Elements = document.querySelectorAll('main h2');
+      
+      h2Elements.forEach((h2, index) => {
+        // Skip the first h2 (main title) and Categories section
+        if (index === 0 || h2.textContent.includes('Categories')) return;
+        
+        // Create wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = 'collapsible-section';
+        
+        // Create toggle button
+        const button = document.createElement('button');
+        button.className = 'section-toggle';
+        button.textContent = h2.textContent;
+        button.setAttribute('aria-expanded', 'false');
+        
+        // Create content wrapper
+        const content = document.createElement('div');
+        content.className = 'section-content';
+        
+        // Move all content between this h2 and next h2 into content wrapper
+        let nextElement = h2.nextElementSibling;
+        while (nextElement && nextElement.tagName !== 'H2') {
+          const elementToMove = nextElement;
+          nextElement = nextElement.nextElementSibling;
+          content.appendChild(elementToMove);
+        }
+        
+        // Replace h2 with collapsible structure
+        h2.parentNode.insertBefore(wrapper, h2);
+        wrapper.appendChild(button);
+        wrapper.appendChild(content);
+        h2.remove();
+        
+        // Add click handler
+        button.addEventListener('click', function() {
+          const isActive = content.classList.contains('active');
+          
+          // Toggle this section
+          if (isActive) {
+            content.classList.remove('active');
+            button.classList.remove('active');
+            button.setAttribute('aria-expanded', 'false');
+          } else {
+            content.classList.add('active');
+            button.classList.add('active');
+            button.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+      
+      // Open first section by default
+      const firstSection = document.querySelector('.section-content');
+      const firstButton = document.querySelector('.section-toggle');
+      if (firstSection && firstButton) {
+        firstSection.classList.add('active');
+        firstButton.classList.add('active');
+        firstButton.setAttribute('aria-expanded', 'true');
+      }
+      
+      // ============== TABLE SEARCH (KEEP EXISTING) ==============
+      
       const tables = document.querySelectorAll('table');
       tables.forEach(table => {
-        // Skip if table is inside footer
         if (table.closest('footer')) return;
         
-        // Skip if this is the Eligibility Icons table
         let currentElement = table.previousElementSibling;
         let shouldSkip = false;
         
-        // Look back up to 3 elements for a heading with "Eligibility Icons"
         for (let i = 0; i < 3 && currentElement; i++) {
           if (currentElement.tagName && currentElement.tagName.match(/^H[1-6]$/)) {
             if (currentElement.textContent.includes('Eligibility Icons')) {
@@ -682,7 +1040,6 @@
             if (isVisible) visibleCount++;
           });
           
-          // Update styling based on results
           this.classList.remove('has-results', 'no-results');
           if (this.value) {
             if (visibleCount === 0) {
@@ -694,14 +1051,11 @@
         });
       });
       
-      // Add keyboard shortcut (Ctrl/Cmd + K) to focus first search box
+      // Keyboard shortcut (Ctrl/Cmd + K) to focus global search
       document.addEventListener('keydown', function(e) {
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
           e.preventDefault();
-          const firstSearch = document.querySelector('.table-search');
-          if (firstSearch) {
-            firstSearch.focus();
-          }
+          globalSearch.focus();
         }
       });
       
@@ -723,7 +1077,6 @@
       
       // ============== PWA FUNCTIONALITY ==============
       
-      // Register Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
@@ -736,7 +1089,6 @@
         });
       }
 
-      // PWA Install Prompt
       let deferredPrompt;
       const installButton = document.createElement('button');
       installButton.id = 'install-button';
