@@ -1,7 +1,12 @@
-[![Bay Area Discounts logo](https://raw.githubusercontent.com/bayareadiscounts/bayareadiscounts/refs/heads/main/logo.png)](https://bayareadiscounts.com)
+<h1 style="display:none">Bay Area Discounts</h1>
+
+<a href="https://bayareadiscounts.com" class="site-logo">
+  <img src="https://raw.githubusercontent.com/bayareadiscounts/bayareadiscounts/refs/heads/main/logo.png" 
+       alt="Bay Area Discounts logo">
+</a>
 # College & University Student Resources
 
-Comprehensive guide to free and discounted benefits available to students enrolled at Bay Area colleges and universities. Benefits include transit passes, food assistance, emergency grants, recreation access, and more. _Always verify benefits and eligibility with your college or university as programs and requirements may change._
+Comprehensive guide to free and discounted benefits available exclusively to students enrolled at Bay Area colleges and universities. Benefits include transit passes, food assistance, emergency grants, recreation access, and more. _Always verify benefits and eligibility with your college or university as programs and requirements may change._
 
 **Quick Navigation:**
 - [Discount Platforms](#discount-platforms-and-verification-services)

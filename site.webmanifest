@@ -24,16 +24,16 @@
   "categories": ["finance", "lifestyle", "utilities", "reference"],
   "shortcuts": [
     {
-      "name": "Main Guide",
-      "short_name": "Guide",
-      "description": "View the main benefits guide",
+      "name": "Bay Area Discounts",
+      "short_name": "Discounts",
+      "description": "View the main discount guide",
       "url": "/",
       "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
     },
     {
       "name": "College Student Resources",
-      "short_name": "College",
-      "description": "Benefits for college students",
+      "short_name": "Students",
+      "description": "Resources for college students",
       "url": "/college-university.html",
       "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
     },

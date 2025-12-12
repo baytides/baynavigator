@@ -1,4 +1,9 @@
-[![Bay Area Discounts logo](https://raw.githubusercontent.com/bayareadiscounts/bayareadiscounts/refs/heads/main/logo.png)](https://bayareadiscounts.com)
+<h1 style="display:none">Bay Area Discounts</h1>
+
+<a href="https://bayareadiscounts.com" class="site-logo">
+  <img src="https://raw.githubusercontent.com/bayareadiscounts/bayareadiscounts/refs/heads/main/logo.png" 
+       alt="Bay Area Discounts logo">
+</a>
 # Resources for Nonprofit Organizations
 
 Resources and support for nonprofit organizations, including free meeting spaces, technology donations and discounts, and professional services.
