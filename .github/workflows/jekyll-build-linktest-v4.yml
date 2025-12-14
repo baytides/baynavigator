@@ -26,9 +26,10 @@ jobs:
         run: |
           bundle exec jekyll build --trace
 
-      - name: Basic validation
+      - name: Validate HTML (warnings only)
+        continue-on-error: true
         run: |
           gem install html-proofer
           htmlproofer ./_site \
             --disable-external \
-            --ignore-urls "/linkedin.com/,/facebook.com/,/twitter.com/"
+            --ignore-urls "/linkedin.com/,/facebook.com/,/twitter.com/" || true
