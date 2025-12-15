@@ -23,6 +23,9 @@
   <!-- Vision Pro Optimized CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/vision-pro-optimized.css' | relative_url }}">
   
+  <!-- Accessibility Toolbar -->
+  <link rel="stylesheet" href="{{ '/assets/css/accessibility-toolbar.css' | relative_url }}">
+
   <style>
     /* CSS Variables for theming */
     :root {
@@ -225,6 +228,9 @@
   {% if page.url != '/students.html' %}
     <script src="{{ '/assets/js/search-filter.js' | relative_url }}"></script>
   {% endif %}
+
+  <!-- Accessibility Toolbar -->
+  <script src="{{ '/assets/js/accessibility-toolbar.js' | relative_url }}"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
