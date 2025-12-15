@@ -13,6 +13,17 @@
   timeframe: "Ongoing"
   link: "https://www.agreenersource.com/non-profits/"
   link_text: "Register"
+  
+  - id: "alameda-county-property-salvage"
+  name: "Alameda County Property & Salvage Donations"
+  category: "Computers & Equipment"
+  area: "Alameda County"
+  eligibility:
+    - "🤝"
+  benefit: "Donated surplus county property including office furniture, equipment, and supplies provided to eligible nonprofit organizations as in-kind donations"
+  timeframe: "Ongoing"
+  link: "https://gsa.acgov.org/local-services/property-salvage/donations/"
+  link_text: "Learn More"
 
 - id: "building-resources"
   name: "Building Resources"
@@ -25,6 +36,28 @@
   timeframe: "Ongoing"
   link: "https://buildingresources.org/"
   link_text: "Learn More"
+  
+  - id: "california-federal-surplus-program"
+  name: "California Federal Surplus Property Program"
+  category: "Computers & Equipment"
+  area: "California"
+  eligibility:
+    - "🤝"
+  benefit: "Access to donated federal surplus property including furniture, equipment, vehicles, and technology through the State of California for eligible nonprofit organizations"
+  timeframe: "Ongoing"
+  link: "https://www.dgs.ca.gov/OFAM/Services/Page-Content/Office-of-Fleet-and-Asset-Management-Services-List-Folder/Apply-or-Renew-as-Federal-Donee-of-Surplus-Property"
+  link_text: "Apply as Donee"
+  
+  - id: "city-of-san-jose-surplus"
+  name: "City of San José Surplus Property Donation Program"
+  category: "Computers & Equipment"
+  area: "San José"
+  eligibility:
+    - "🤝"
+  benefit: "Surplus property (valued at $1,500 or less) available to eligible nonprofits, including equipment, furnishings, and other items"
+  timeframe: "Ongoing - subject to availability"
+  link: "https://www.sanjoseca.gov/your-government/departments-offices/public-works/surplus-property"
+  link_text: "Learn More"
 
 - id: "good360"
   name: "Good360"
@@ -36,6 +69,39 @@
   timeframe: "Ongoing"
   link: "https://good360.org/"
   link_text: "Become a Member"
+  
+  - id: "goodstack-nonprofit-discounts"
+  name: "Goodstack Nonprofit Discounts"
+  category: "Tech & Services Discounts"
+  area: "Bay Area-based nonprofit access"
+  eligibility:
+    - "🤝"
+  benefit: "Offers discounted access to essential software and tech tools like Zoom, Adobe Acrobat, Asana, and OpenAI plans for eligible nonprofit organizations"
+  timeframe: "Ongoing"
+  link: "https://causes.goodstack.io/"
+  link_text: "Enroll"
+  
+  - id: "santa-clara-county-surplus-donations"
+  name: "Santa Clara County Surplus Property Donation Program"
+  category: "Computers & Equipment"
+  area: "Santa Clara County"
+  eligibility:
+    - "🤝"
+  benefit: "Donated surplus county property including office furniture, equipment, and supplies available to eligible nonprofit organizations upon request and approval"
+  timeframe: "Ongoing"
+  link: "https://prc.santaclaracounty.gov/surplus-property-program/request-donations-county-surplus-property"
+  link_text: "Request Donation"
+
+- id: "santa-clara-county-library-surplus"
+  name: "Santa Clara County Library District Surplus Property Donations"
+  category: "Computers & Equipment"
+  area: "Santa Clara County"
+  eligibility:
+    - "🤝"
+  benefit: "Donated surplus library property including furniture, shelving, and equipment for eligible nonprofit organizations located within Santa Clara County"
+  timeframe: "Ongoing"
+  link: "https://sccld.org/surplus-property-donation-program/"
+  link_text: "Program Details"
 
 - id: "sf-virtual-warehouse"
   name: "San Francisco Virtual Warehouse"
@@ -59,7 +125,7 @@
   link: "https://www.scrap-sf.org/"
   link_text: "Visit SCRAP"
 
-- id: "san-mateo-surplus-property"
+- id: "smc-surplus-property"
   name: "San Mateo County Surplus Property Program"
   category: "Computers & Equipment"
   area: "San Mateo County"
@@ -67,8 +133,8 @@
     - "🤝"
   benefit: "Free surplus office furniture, supplies, and equipment for San Mateo County-based nonprofits and public schools"
   timeframe: "Ongoing"
-  link: "https://www.smcsustainability.org/wp-content/uploads/2024_03_07-Govdeals.com-Customer-Registration-Instructions-Community-Tier_Final.pdf"
-  link_text: "Program Instructions (PDF)"
+  link: "https://docs.google.com/forms/d/e/1FAIpQLSfwPk-gLzC8SRHZPOj2jCHP9RxJ4ca8zAOoA5FLCl7W2ZJ0Pw/viewform"
+  link_text: "Request an Invitation"
 
 - id: "tech-exchange"
   name: "Tech Exchange"
@@ -80,6 +146,17 @@
   timeframe: "Ongoing"
   link: "https://www.techexchange.org/lowcostcomputers"
   link_text: "Request Equipment"
+  
+  - id: "techsoup-discount-marketplace"
+  name: "TechSoup Discount Marketplace"
+  category: "Tech & Services Discounts"
+  area: "Bay Area-based nonprofit access"
+  eligibility:
+    - "🤝"
+  benefit: "Provides access to donated and deeply discounted software, hardware, cloud services, and training for nonprofits by verifying nonprofit status"
+  timeframe: "Ongoing"
+  link: "https://www.techsoup.org/"
+  link_text: "Explore Discounts"
 
 - id: "world-computer-exchange"
   name: "World Computer Exchange"
@@ -95,17 +172,6 @@
 # =========================
 # Legal Services
 # =========================
-
-- id: "corp-sfbar"
-  name: "Community Organization Representation Project (CORP)"
-  category: "Legal Services"
-  area: "San Francisco"
-  eligibility:
-    - "🤝"
-  benefit: "Free legal assistance for nonprofits including incorporation, 501(c)(3) applications, governance, contracts, and transactional matters"
-  timeframe: "Ongoing"
-  link: "https://www.sfbar.org/jdc/jdc-legal-services-programs/corp/"
-  link_text: "Apply Online"
 
 - id: "justice-diversity-center"
   name: "Justice & Diversity Center (JDC)"
@@ -127,7 +193,7 @@
     - "🤝"
   benefit: "Pro bono legal support for Black-led nonprofit organizations through partnerships with community foundations"
   timeframe: "Ongoing"
-  link: "https://www.sfbar.org/jdc/jdc-legal-services-programs/corp/"
+  link: "https://www.sfbar.org/jdc/jdc-legal-services-programs/corp/rep/"
   link_text: "Apply for Support"
 
 # =========================
@@ -140,21 +206,21 @@
   area: "San Mateo County"
   eligibility:
     - "🤝"
-  benefit: "Free meeting and event spaces for nonprofits including rooms for up to 150 people, coworking areas, A/V equipment, and kitchen access"
+  benefit: "Free meeting and event spaces for select local nonprofits including rooms for up to 150 people, coworking areas, A/V equipment, and kitchen access"
   timeframe: "Ongoing"
   link: "https://chanzuckerberg.com/communityspace/"
-  link_text: "Apply for Membership"
+  link_text: "Apply for Access"
 
 - id: "generation-thrive-spaces"
   name: "Generation Thrive"
   category: "Meeting & Event Spaces"
-  area: "Oakland & San Francisco"
+  area: "Bay Area-wide"
   eligibility:
     - "🤝"
-  benefit: "Free meeting and event spaces for Bay Area nonprofits including conference rooms, coworking space, A/V equipment, and printing; priority for Warriors and Kaiser grantees"
+  benefit: "Free meeting and event spaces for Bay Area-based nonprofits including conference rooms, coworking space, A/V equipment, and printing; priority for Warriors and Kaiser grantees"
   timeframe: "Ongoing"
   link: "https://community.warriors.com/generation-thrive/spaces/"
-  link_text: "Request Space"
+  link_text: "Request Meeting Space"
 
 - id: "google-community-space"
   name: "Google Community Space"
@@ -162,10 +228,10 @@
   area: "San Francisco"
   eligibility:
     - "🤝"
-  benefit: "Free event and meeting spaces for nonprofits including A/V equipment, coworking areas, kitchen access, and technology tools; limited to one event per quarter"
+  benefit: "Free event and meeting spaces for Bay Area-based nonprofits including A/V equipment, coworking areas, kitchen access, and technology tools; limited to one event per quarter"
   timeframe: "Ongoing"
   link: "https://communityspace.withgoogle.com/"
-  link_text: "Apply for Membership"
+  link_text: "Apply for Access"
 
 - id: "ohana-floor-salesforce"
   name: "Salesforce Ohana Floor"
@@ -173,21 +239,21 @@
   area: "San Francisco"
   eligibility:
     - "🤝"
-  benefit: "Free 61st-floor event space for local nonprofits with capacity up to 250 guests; includes A/V support and event staff; available once every 12 months"
+  benefit: "Free 61st-floor event space for Bay Area-based nonprofits with capacity up to 250 guests; includes A/V support and event staff; available once every 12 months"
   timeframe: "Weeknights only"
   link: "https://www.salesforce.com/company/ohana-floors-san-francisco/"
-  link_text: "Request an Event"
+  link_text: "Request for an Event"
 
 - id: "sobrato-conference-space"
   name: "Sobrato Nonprofit Centers Conference Space"
   category: "Meeting & Event Spaces"
-  area: "Multiple Bay Area locations"
+  area: "Bay Area-wide"
   eligibility:
     - "🤝"
   benefit: "Free meeting and conference space for nonprofits ranging from 3 to 200 people; includes A/V equipment and hospitality areas"
   timeframe: "Ongoing"
   link: "https://www.sobrato.com/sobrato-philanthropies/what-we-do/non-profit-sustainability/conference-space-nonprofit-centers/"
-  link_text: "Request Space"
+  link_text: "Apply for Access"
 
 - id: "tides-converge"
   name: "Tides Converge"
@@ -195,7 +261,7 @@
   area: "San Francisco"
   eligibility:
     - "🤝"
-  benefit: "Meeting and event spaces for nonprofits and social enterprises within a large shared campus; also offers affordable coworking memberships and office leases"
+  benefit: "Meeting and event spaces for local nonprofits and social enterprises within a large shared campus; also offers affordable coworking memberships and office leases"
   timeframe: "Ongoing"
   link: "https://www.tides.org/social-purpose-real-estate/office-space/"
   link_text: "Learn More"
