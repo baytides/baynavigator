@@ -361,10 +361,8 @@ a:visited {
   line-height: 1.6;
   margin: 1rem 0;
   
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  /* Line clamping removed - handled by read-more.js instead */
+  /* This allows the JavaScript to access full text and add smart truncation with Read more button */
 }
 
 .program-footer {
