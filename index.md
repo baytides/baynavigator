@@ -63,7 +63,7 @@ layout: default
 
 Stretch your budget and discover more of what your community has to offer.
 
-This guide features free and low cost services, programs, and benefits across the counties commonly recognized as the San Francisco Bay Area: Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano, and Sonoma. Resources are highlighted for public benefit recipients such as SNAP or EBT and Medi Cal, seniors, youth, college students, military members and veterans, and anyone looking to reduce everyday expenses, including local nonprofit organizations.
+This guide features free and low cost services, programs, and benefits across the counties commonly recognized as the San Francisco Bay Area: Alameda, Contra Costa, Marin, Napa, San Francisco, San Mateo, Santa Clara, Solano, and Sonoma. Resources are highlighted for public benefit recipients such as SNAP/EBT/Medi Cal, seniors, youth, college students, military members and veterans, and anyone looking to reduce everyday expenses, including local nonprofit organizations.
 
 As a community driven project, we work to keep information current. However, availability and eligibility can change, and some listings may occasionally be out of date. Always refer to the program’s website for the most up to date details.
 
