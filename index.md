@@ -58,7 +58,7 @@ This guide features free and low-cost resources across the counties commonly rec
 
 As a community driven project, we work to keep information current. However, availability and eligibility can change, and some listings may occasionally be out of date. Always refer to the program's website for the most current details.
 
---
+---
 
 {% include search-filter-ui.html %}
 
