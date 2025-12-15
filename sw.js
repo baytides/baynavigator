@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bay-area-benefits-v2';
+const CACHE_NAME = 'bay-area-discounts';
 const urlsToCache = [
   '/',
   '/students.html',
