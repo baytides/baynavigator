@@ -194,28 +194,48 @@ class I18n {
   }
   
   addLanguageSwitcher() {
+    // Reuse existing switcher if present (avoids duplicates when include renders it)
+    let switchBtn = document.getElementById('lang-switch');
+    if (switchBtn) {
+      this.wireLanguageSwitch(switchBtn);
+      this.updateLanguageLabel(switchBtn);
+      return;
+    }
+
     const header = document.querySelector('.site-nav .nav-menu');
     if (!header) return;
     
     const langSwitcher = document.createElement('li');
     langSwitcher.innerHTML = `
-      <button class="lang-switch" id="lang-switch" aria-label="Switch language">
+      <button class="lang-switch" id="lang-switch" type="button" aria-label="Switch language">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="2" y1="12" x2="22" y2="12"></line>
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
         </svg>
-        <span>${this.currentLang === 'en' ? 'ES' : 'EN'}</span>
+        <span></span>
       </button>
     `;
     
     header.appendChild(langSwitcher);
-    
-    const switchBtn = langSwitcher.querySelector('#lang-switch');
-    switchBtn.addEventListener('click', () => {
+    switchBtn = langSwitcher.querySelector('#lang-switch');
+    this.updateLanguageLabel(switchBtn);
+    this.wireLanguageSwitch(switchBtn);
+  }
+
+  updateLanguageLabel(button) {
+    const labelSpan = button.querySelector('span');
+    if (labelSpan) {
+      labelSpan.textContent = this.currentLang === 'en' ? 'ES' : 'EN';
+    }
+  }
+
+  wireLanguageSwitch(button) {
+    if (!button) return;
+    button.addEventListener('click', () => {
       const newLang = this.currentLang === 'en' ? 'es' : 'en';
       this.setLanguage(newLang);
-      switchBtn.querySelector('span').textContent = newLang === 'en' ? 'ES' : 'EN';
+      this.updateLanguageLabel(button);
     });
   }
 }

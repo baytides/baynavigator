@@ -5,10 +5,16 @@
 
 <script>
 // Show iOS install banner
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isStandalone = window.navigator.standalone === true;
+document.addEventListener('DOMContentLoaded', function() {
+  const installBanner = document.getElementById('ios-install-banner');
+  if (!installBanner) return;
 
-if (isIOS && !isStandalone) {
-  document.getElementById('ios-install-banner').style.display = 'block';
-}
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.navigator.standalone === true;
+  const isDisplayModeStandalone = window.matchMedia('(display-mode: standalone)').matches;
+
+  if (isIOS && !isStandalone && !isDisplayModeStandalone) {
+    installBanner.style.display = 'block';
+  }
+});
 </script>

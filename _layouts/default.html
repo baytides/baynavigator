@@ -8,12 +8,12 @@
   <meta name="color-scheme" content="light dark">
   
   <!-- Favicons - Updated paths -->
-  <link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/assets/images/favicons/favicon.svg" />
-  <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="{{ '/assets/images/favicons/favicon-96x96.png' | relative_url }}" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicons/favicon.svg' | relative_url }}" />
+  <link rel="shortcut icon" href="{{ '/assets/images/favicons/favicon.ico' | relative_url }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicons/apple-touch-icon.png' | relative_url }}" />
   <meta name="apple-mobile-web-app-title" content="Bay Area Discounts" />
-  <link rel="manifest" href="/assets/images/favicons/site.webmanifest" />
+  <link rel="manifest" href="{{ '/assets/images/favicons/site.webmanifest' | relative_url }}" />
   
   <!-- PWA Theme Color -->
   <meta name="theme-color" content="#00acc1">
@@ -240,10 +240,10 @@
   {% endif %}
 
   <!-- Accessibility Toolbar -->
-  <script src="/assets/js/accessibility-toolbar.js"></script>
+  <script src="{{ '/assets/js/accessibility-toolbar.js' | relative_url }}"></script>
 
   <!-- Read More Functionality -->
-  <script src="/assets/js/read-more.js"></script>
+  <script src="{{ '/assets/js/read-more.js' | relative_url }}"></script>
 
   <!-- Inline JavaScript for PWA and global search -->
   <script>
@@ -295,7 +295,7 @@
       
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register("{{ '/sw.js' | relative_url }}")
             .then(registration => {
               console.log('ServiceWorker registered:', registration);
             })
@@ -308,6 +308,7 @@
       let deferredPrompt;
       const installButton = document.createElement('button');
       installButton.id = 'install-button';
+      installButton.type = 'button';
       installButton.innerHTML = '📱 Install App';
       installButton.style.cssText = `
         display: none;

@@ -1,11 +1,13 @@
 @media print {
   /* Hide non-essential elements */
   .site-header,
-  .accessibility-button,
-  .accessibility-panel,
+  #accessibility-button,
+  #accessibility-panel,
   .back-to-top,
-  .share-btn,
-  .pwa-install-button,
+  .action-buttons,
+  .action-btn,
+  .share-tooltip,
+  #install-button,
   .search-panel,
   .filter-buttons,
   .keyboard-help-modal,

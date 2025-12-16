@@ -4,19 +4,22 @@
   data-program-id="{{ include.program.id }}"
   data-program-name="{{ include.program.name }}"
   data-category="{{ include.program.category }}"
-  data-area="{% if include.program.area[0] %}{{ include.program.area | join: ' ' }}{% else %}{{ include.program.area }}{% endif %}"
-  data-eligibility="{{ include.program.eligibility | join: ' ' }}"
+  data-area="{% if include.program.area %}{% assign area_val = include.program.area %}{% if area_val | first %}{{ area_val | join: ' ' }}{% else %}{{ area_val }}{% endif %}{% endif %}"
+  data-eligibility="{% if include.program.eligibility %}{{ include.program.eligibility | join: ' ' }}{% endif %}"
 >
   <div class="program-card-header">
     <div style="flex: 1;">
       <h3 class="program-name">{{ include.program.name }}</h3>
       <div class="program-meta">
-          {% if include.program.area[0] %}
-            {% for area in include.program.area %}
-              <span class="program-area">{{ area }}</span>
-            {% endfor %}
-          {% else %}
-            <span class="program-area">{{ include.program.area }}</span>
+          {% if include.program.area %}
+            {% assign area_val = include.program.area %}
+            {% if area_val | first %}
+              {% for area in area_val %}
+                <span class="program-area">{{ area }}</span>
+              {% endfor %}
+            {% else %}
+              <span class="program-area">{{ area_val }}</span>
+            {% endif %}
           {% endif %}
         <span class="program-category">{{ include.program.category }}</span>
       </div>

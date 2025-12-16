@@ -2,8 +2,8 @@
   <div class="favorites-header">
     <h2>My Saved Programs</h2>
     <div class="favorites-actions">
-      <button id="clear-favorites" class="btn-secondary">Clear All</button>
-      <button id="close-favorites" class="btn-primary">Back to All Programs</button>
+      <button id="clear-favorites" class="btn-secondary" type="button">Clear All</button>
+      <button id="close-favorites" class="btn-primary" type="button">Back to All Programs</button>
     </div>
   </div>
   
@@ -21,7 +21,7 @@
 </div>
 
 <!-- Favorites toggle button in header -->
-<button id="view-favorites" class="favorites-toggle-btn" aria-label="View saved programs">
+<button id="view-favorites" class="favorites-toggle-btn" type="button" aria-label="View saved programs">
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
   </svg>
@@ -182,7 +182,8 @@
   const mainContent = document.getElementById('search-results') || document.getElementById('results');
   const searchPanel = document.querySelector('.search-panel');
   
-  if (!viewFavoritesBtn) return;
+  if (!viewFavoritesBtn || !favoritesView || !favoritesList || !noFavorites) return;
+  if (!window.favorites) return;
   
   // Show favorites view
   viewFavoritesBtn.addEventListener('click', function() {
@@ -193,23 +194,27 @@
   });
   
   // Close favorites view
-  closeFavoritesBtn.addEventListener('click', function() {
-    favoritesView.style.display = 'none';
-    if (mainContent) mainContent.style.display = '';
-    if (searchPanel) searchPanel.style.display = '';
-  });
+  if (closeFavoritesBtn) {
+    closeFavoritesBtn.addEventListener('click', function() {
+      favoritesView.style.display = 'none';
+      if (mainContent) mainContent.style.display = '';
+      if (searchPanel) searchPanel.style.display = '';
+    });
+  }
   
   // Clear all favorites
-  clearFavoritesBtn.addEventListener('click', function() {
-    if (confirm('Are you sure you want to remove all saved programs?')) {
-      window.favorites.clear();
-      renderFavorites();
-    }
-  });
+  if (clearFavoritesBtn) {
+    clearFavoritesBtn.addEventListener('click', function() {
+      if (confirm('Are you sure you want to remove all saved programs?')) {
+        window.favorites.clear();
+        renderFavorites();
+      }
+    });
+  }
   
   // Render favorites
   function renderFavorites() {
-    const favoriteIds = window.favorites.favorites;
+    const favoriteIds = Array.isArray(window.favorites.favorites) ? window.favorites.favorites : [];
     
     if (favoriteIds.length === 0) {
       favoritesList.innerHTML = '';

@@ -151,7 +151,9 @@
 <script>
 (function() {
   const modal = document.getElementById('keyboard-help-modal');
+  if (!modal) return;
   const closeBtn = modal.querySelector('.keyboard-help-close');
+  if (!closeBtn) return;
   
   // Close on button click
   closeBtn.addEventListener('click', function() {

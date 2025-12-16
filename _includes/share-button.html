@@ -12,7 +12,7 @@
   </button>
 </div>
 
-<div id="share-tooltip" class="share-tooltip" role="status" aria-live="polite"></div>
+<!-- Tooltip is created dynamically if not present -->
 
 <style>
 .action-btn {
@@ -107,9 +107,9 @@
 <script>
 (function() {
   const shareButtons = document.querySelectorAll('.share-search');
-  const tooltip = document.getElementById('share-tooltip');
+  if (!shareButtons.length) return;
 
-  if (!shareButtons.length || !tooltip) return;
+  const tooltip = getOrCreateTooltip();
   
   shareButtons.forEach((shareBtn) => {
     shareBtn.addEventListener('click', async function() {
@@ -143,13 +143,23 @@
   });
   
   function showTooltip(message) {
-    if (!tooltip) return;
     tooltip.textContent = message;
     tooltip.classList.add('show');
     
     setTimeout(() => {
       tooltip.classList.remove('show');
     }, 3000);
+  }
+
+  function getOrCreateTooltip() {
+    const existing = document.querySelector('.share-tooltip');
+    if (existing) return existing;
+    const el = document.createElement('div');
+    el.className = 'share-tooltip';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    document.body.appendChild(el);
+    return el;
   }
 })();
 </script>

@@ -79,9 +79,9 @@ As a community driven project, we work to keep information current. However, ava
 {% include back-to-top.html %}
 
 <!-- Load JavaScript -->
-<script src="/assets/js/url-sharing.js"></script>
-<script src="/assets/js/keyboard-shortcuts.js"></script>
-<script src="/assets/js/simple-analytics.js"></script>
+<script src="{{ '/assets/js/url-sharing.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/keyboard-shortcuts.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/simple-analytics.js' | relative_url }}"></script>
 
 <!-- Integrate URL sharing with search/filter -->
 <script>

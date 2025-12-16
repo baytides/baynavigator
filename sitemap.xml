@@ -6,7 +6,7 @@ permalink: /sitemap.xml
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Homepage -->
   <url>
-    <loc>{{ site.url }}/</loc>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,7 +14,7 @@ permalink: /sitemap.xml
   
   <!-- Student Resources Page -->
   <url>
-    <loc>{{ site.url }}/students.html</loc>
+    <loc>{{ site.url }}{{ site.baseurl }}/students.html</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -24,7 +24,7 @@ permalink: /sitemap.xml
   {% for page in site.pages %}
     {% unless page.url contains '/404' %}
     <url>
-      <loc>{{ site.url }}{{ page.url }}</loc>
+      <loc>{{ site.url }}{{ site.baseurl }}{{ page.url }}</loc>
       {% if page.date %}
         <lastmod>{{ page.date | date_to_xmlschema }}</lastmod>
       {% else %}

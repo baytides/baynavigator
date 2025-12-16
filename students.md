@@ -93,11 +93,11 @@ As a community driven project, we work to keep information current. However, ava
         <div class="filter-group">
           <h3 class="filter-group-label">Institution Type</h3>
           <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="type" data-value="">All</button>
-            <button class="filter-btn" data-filter="type" data-value="community-college">Community Colleges</button>
-            <button class="filter-btn" data-filter="type" data-value="csu">CSU</button>
-            <button class="filter-btn" data-filter="type" data-value="uc">UC</button>
-            <button class="filter-btn" data-filter="type" data-value="private">Private</button>
+            <button type="button" class="filter-btn active" data-filter="type" data-value="">All</button>
+            <button type="button" class="filter-btn" data-filter="type" data-value="community-college">Community Colleges</button>
+            <button type="button" class="filter-btn" data-filter="type" data-value="csu">CSU</button>
+            <button type="button" class="filter-btn" data-filter="type" data-value="uc">UC</button>
+            <button type="button" class="filter-btn" data-filter="type" data-value="private">Private</button>
           </div>
         </div>
 
@@ -105,12 +105,12 @@ As a community driven project, we work to keep information current. However, ava
         <div class="filter-group">
           <h3 class="filter-group-label">Location</h3>
           <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="location" data-value="">All</button>
-            <button class="filter-btn" data-filter="location" data-value="san-francisco">San Francisco</button>
-            <button class="filter-btn" data-filter="location" data-value="east-bay">East Bay</button>
-            <button class="filter-btn" data-filter="location" data-value="peninsula">Peninsula</button>
-            <button class="filter-btn" data-filter="location" data-value="south-bay">South Bay</button>
-            <button class="filter-btn" data-filter="location" data-value="north-bay">North Bay</button>
+            <button type="button" class="filter-btn active" data-filter="location" data-value="">All</button>
+            <button type="button" class="filter-btn" data-filter="location" data-value="san-francisco">San Francisco</button>
+            <button type="button" class="filter-btn" data-filter="location" data-value="east-bay">East Bay</button>
+            <button type="button" class="filter-btn" data-filter="location" data-value="peninsula">Peninsula</button>
+            <button type="button" class="filter-btn" data-filter="location" data-value="south-bay">South Bay</button>
+            <button type="button" class="filter-btn" data-filter="location" data-value="north-bay">North Bay</button>
           </div>
         </div>
 
@@ -118,14 +118,14 @@ As a community driven project, we work to keep information current. However, ava
         <div class="filter-group">
           <h3 class="filter-group-label">Program Type</h3>
           <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="tag" data-value="">All</button>
-            <button class="filter-btn" data-filter="tag" data-value="food">Food</button>
-            <button class="filter-btn" data-filter="tag" data-value="transit">Transit</button>
-            <button class="filter-btn" data-filter="tag" data-value="housing">Housing</button>
-            <button class="filter-btn" data-filter="tag" data-value="financial">Financial</button>
-            <button class="filter-btn" data-filter="tag" data-value="technology">Technology</button>
-            <button class="filter-btn" data-filter="tag" data-value="wellness">Wellness</button>
-            <button class="filter-btn" data-filter="tag" data-value="emergency">Emergency</button>
+            <button type="button" class="filter-btn active" data-filter="tag" data-value="">All</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="food">Food</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="transit">Transit</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="housing">Housing</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="financial">Financial</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="technology">Technology</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="wellness">Wellness</button>
+            <button type="button" class="filter-btn" data-filter="tag" data-value="emergency">Emergency</button>
           </div>
         </div>
       </div>
@@ -532,9 +532,9 @@ As a community driven project, we work to keep information current. However, ava
 </style>
 
 <!-- Load JavaScript -->
-<script src="/assets/js/url-sharing.js"></script>
-<script src="/assets/js/keyboard-shortcuts.js"></script>
-<script src="/assets/js/simple-analytics.js"></script>
+<script src="{{ '/assets/js/url-sharing.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/keyboard-shortcuts.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/simple-analytics.js' | relative_url }}"></script>
 
 <!-- Student page JavaScript -->
 <script>

@@ -1,18 +1,19 @@
 const CACHE_NAME = 'bay-area-discounts';
+const BASE_URL = self.registration.scope.replace(/\/$/, '');
 const urlsToCache = [
-  '/',
-  '/students.html',
-  '/assets/css/vision-pro-optimized.css',
-  '/assets/css/accessibility-toolbar.css',
-  '/assets/css/read-more.css',
-  '/assets/js/search-filter.js',
-  '/assets/js/accessibility-toolbar.js',
-  '/assets/js/read-more.js',
-  '/assets/images/favicons/favicon-96x96.png',
-  '/assets/images/favicons/favicon.svg',
-  '/assets/images/favicons/apple-touch-icon.png',
-  '/assets/images/logo/banner.svg',
-  '/assets/images/logo/logo.svg'
+  `${BASE_URL}/`,
+  `${BASE_URL}/students.html`,
+  `${BASE_URL}/assets/css/vision-pro-optimized.css`,
+  `${BASE_URL}/assets/css/accessibility-toolbar.css`,
+  `${BASE_URL}/assets/css/read-more.css`,
+  `${BASE_URL}/assets/js/search-filter.js`,
+  `${BASE_URL}/assets/js/accessibility-toolbar.js`,
+  `${BASE_URL}/assets/js/read-more.js`,
+  `${BASE_URL}/assets/images/favicons/favicon-96x96.png`,
+  `${BASE_URL}/assets/images/favicons/favicon.svg`,
+  `${BASE_URL}/assets/images/favicons/apple-touch-icon.png`,
+  `${BASE_URL}/assets/images/logo/banner.svg`,
+  `${BASE_URL}/assets/images/logo/logo.svg`
 ];
 
 // Install service worker and cache resources
@@ -31,25 +32,24 @@ self.addEventListener('install', event => {
 
 // Fetch from cache, fallback to network
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Cache hit - return response
         if (response) {
           return response;
         }
-        
-        // Clone the request
+
         const fetchRequest = event.request.clone();
         
         return fetch(fetchRequest).then(response => {
-          // Check if valid response
-          // Allow both 'basic' (same-origin) and 'cors' (cross-origin with CORS) responses
           if (!response || response.status !== 200 || (response.type !== 'basic' && response.type !== 'cors')) {
             return response;
           }
 
-          // Clone the response
           const responseToCache = response.clone();
 
           caches.open(CACHE_NAME)

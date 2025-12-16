@@ -17,7 +17,16 @@
   };
 
   // Load saved settings or use defaults
-  let settings = JSON.parse(localStorage.getItem('a11y-settings')) || { ...defaults };
+  let settings = { ...defaults };
+  try {
+    const stored = localStorage.getItem('a11y-settings');
+    if (stored) {
+      settings = { ...defaults, ...JSON.parse(stored) };
+    }
+  } catch (err) {
+    // Ignore corrupted storage and fall back to defaults
+    settings = { ...defaults };
+  }
 
   // Create and inject the accessibility toolbar
   function createToolbar() {
@@ -319,7 +328,7 @@
       e.preventDefault();
       const button = document.getElementById('accessibility-button');
       const panel = document.getElementById('accessibility-panel');
-      togglePanel(button, panel);
+      if (button && panel) togglePanel(button, panel);
     }
     
     // Alt + +: Increase font size
