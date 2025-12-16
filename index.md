@@ -20,7 +20,7 @@ actions: true
   });
 </script>
 
-<div class="heading-dark-adjust">
+<div class="heading-dark-adjust" markdown="1">
 
 ## Stretch your budget and discover more of what your community has to offer.
 

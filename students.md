@@ -23,7 +23,7 @@ actions: true
   });
 </script>
 
-<div class="heading-dark-adjust">
+<div class="heading-dark-adjust" markdown="1">
 
 ## College & University Student Resources
 
