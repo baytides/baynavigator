@@ -21,6 +21,13 @@
             Student Resources
           </a>
         </li>
+        <li>
+          <a href="{{ site.baseurl | default: '' }}/favorites.html"
+             class="nav-link"
+             {% if page.url == '/favorites.html' %}aria-current="page"{% endif %}>
+            Saved Programs
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
