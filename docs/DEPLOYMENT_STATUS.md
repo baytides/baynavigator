@@ -256,3 +256,18 @@ curl https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api/cate
 
 **Last Updated:** December 17, 2025
 **Next Steps:** Debug Azure Functions via Portal or local testing
+
+## 🔧 Infrastructure Consolidation Complete (Dec 21)
+
+**Cleaned up duplicate Azure resources:**
+- ✅ Deleted old Cosmos DB (bayareadiscounts-cosmos-db)
+- ✅ Deleted old Function App (baytides-discounts-functions-app)  
+- ✅ Deleted old Application Insights (baytides-discounts-functions)
+
+**Now using consolidated infrastructure:**
+- Function App: `bayarea-api-prod` (Basic B1, ~$13/mo)
+- Cosmos DB: `baytides-discounts-cosmos` (Free tier, $0/mo)
+- All code uses environment variables (fully portable)
+- GitHub secrets updated with new app name and publish profile
+
+**Cost: ~$35/month** (98% under budget)
