@@ -1,13 +1,8 @@
 name: Deploy Azure Functions
 
+# Temporarily disabled - deploy manually with: func azure functionapp publish bayarea-api-prod --javascript
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'azure-functions/**'
-      - '.github/workflows/azure-functions-deploy.yml'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch: # Only allow manual trigger
 
 jobs:
   deploy:
