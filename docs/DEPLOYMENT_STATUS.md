@@ -57,7 +57,7 @@ See [AZURE_SERVICES_GUIDE.md](AZURE_SERVICES_GUIDE.md) for complete documentatio
   
 - 🔄 Creating Function App: `bayarea-api-prod`
   - Plan: Basic B1 (Linux, 1 core)
-  - Runtime: Node.js 20
+  - Runtime: Node.js 24
   - Cost: ~$13/month
   - Managed Identity: Enabled (secure Cosmos DB access)
   - Environment Variables: Configured for Cosmos DB
@@ -116,7 +116,7 @@ Once basic endpoints are working, add:
 
 ### Azure Functions
 - **URL:** `https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net`
-- **Runtime:** Node.js 20
+- **Runtime:** Node.js 24
 - **Model:** Programming Model v3 (function.json)
 - **Cost:** $0.00/month (within free tier)
 
