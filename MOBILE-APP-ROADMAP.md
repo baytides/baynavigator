@@ -456,11 +456,60 @@ self.addEventListener('push', event => {
 
 ---
 
+## Repository Strategy
+
+### Recommended: Separate Repository
+
+Create a new repository `bayareadiscounts-mobile` for the mobile app:
+
+**Why Separate?**
+- ✅ Clean separation of web and mobile code
+- ✅ Independent deployment pipelines
+- ✅ Faster CI/CD (mobile builds don't trigger on web changes)
+- ✅ Simpler version control (mobile v1.0.0 vs web releases)
+- ✅ Different team access controls
+- ✅ Smaller repository sizes
+
+**Repository Structure:**
+```
+bayareadiscounts/          # Current web repo (keep as-is)
+bayareadiscounts-mobile/   # New mobile repo
+```
+
+**Sharing Code Between Repos:**
+- Mobile app calls web API endpoints (https://bayareadiscounts.com/api)
+- Types and constants copied to mobile (minimal duplication)
+- OR: Create optional `bayareadiscounts-shared` npm package later if needed
+
+**Create Mobile Repo:**
+```bash
+# From your local machine
+gh repo create bayareadiscounts-mobile \
+  --public \
+  --description "Native iOS & Android app for Bay Area Discounts" \
+  --clone
+
+cd bayareadiscounts-mobile
+
+# Initialize React Native with Expo
+npx create-expo-app@latest . --template blank-typescript
+
+# Set up initial structure
+mkdir -p src/{screens,components,navigation,services,utils,types}
+
+# Initial commit
+git add .
+git commit -m "Initial React Native Expo setup"
+git push origin main
+```
+
+---
+
 ## Recommended Next Steps
 
 ### Immediate (Week 1-2)
 1. ✅ **Decide on mobile framework** - React Native recommended
-2. ✅ **Set up mobile repository** - `bayareadiscounts-mobile`
+2. ✅ **Set up mobile repository** - Create `bayareadiscounts-mobile` (see above)
 3. ✅ **Create app mockups** - Design mobile-specific screens
 4. ✅ **API audit** - Document all endpoints needed
 
