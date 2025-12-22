@@ -1,5 +1,10 @@
 <div id="step-flow" class="step-flow-page" role="main" aria-label="Find programs">
   <div class="step-flow-container">
+    <!-- Logo -->
+    <div class="wizard-logo">
+      <img src="{{ site.baseurl | default: '' }}/assets/images/logo/banner.svg" alt="Bay Area Discounts">
+    </div>
+
     <!-- Step 1: Eligibility -->
     <section class="step-page" id="step-1" aria-labelledby="step-1-title">
       <div class="step-header">
@@ -231,9 +236,22 @@
 .step-flow-container {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
+  gap: 2rem;
+}
+
+/* Wizard logo */
+.wizard-logo {
+  text-align: center;
+}
+
+.wizard-logo img {
+  max-width: 320px;
+  height: auto;
+  display: block;
 }
 
 .step-page {

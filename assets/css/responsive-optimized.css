@@ -327,8 +327,8 @@ a:visited {
 
 .programs-container,
 #search-results {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -583,13 +583,8 @@ a:visited {
 
   .programs-container,
   #search-results {
+    grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .program-card {
-    flex: 1 1 100%;
-    min-width: 100%;
-    max-width: 100%;
   }
 
   .sort-field {
@@ -709,15 +704,11 @@ a:visited {
   }
 }
 
-/* Large screens */
-@media (min-width: 1440px) {
+/* Large screens - 3 column layout */
+@media (min-width: 1024px) {
   .programs-container,
   #search-results {
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  }
-
-  .program-card {
-    min-height: 320px;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
