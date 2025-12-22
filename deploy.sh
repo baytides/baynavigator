@@ -14,19 +14,21 @@ if ! command -v swa &> /dev/null; then
     exit 1
 fi
 
-# Check if _site directory exists
-if [ ! -d "_site" ]; then
-    echo "📦 Building Jekyll site..."
-    bundle exec jekyll build
-else
-    echo "✓ Found existing _site directory"
-    read -p "Rebuild Jekyll site? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "📦 Rebuilding Jekyll site..."
-        bundle exec jekyll build
-    fi
+# Download latest build from GitHub Actions
+echo "📦 Downloading latest build from GitHub Actions..."
+LATEST_RUN=$(gh run list --workflow=deploy.yml --status=success --limit 1 --json databaseId --jq '.[0].databaseId')
+
+if [ -z "$LATEST_RUN" ]; then
+    echo "❌ Error: No successful build found"
+    exit 1
 fi
+
+echo "   Using build from run: $LATEST_RUN"
+rm -rf /tmp/bayarea-deploy
+mkdir -p /tmp/bayarea-deploy
+gh run download "$LATEST_RUN" -n site -D /tmp/bayarea-deploy -R baytides/bayareadiscounts
+
+DEPLOY_DIR="/tmp/bayarea-deploy"
 
 # Get deployment token from Azure
 echo "🔑 Retrieving deployment token from Azure..."
@@ -44,7 +46,7 @@ fi
 
 # Deploy to Azure Static Web Apps
 echo "🚀 Deploying to Azure Static Web Apps..."
-swa deploy _site \
+swa deploy "$DEPLOY_DIR" \
     --deployment-token "$DEPLOYMENT_TOKEN" \
     --env production
 
