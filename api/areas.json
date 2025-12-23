@@ -4,25 +4,25 @@
       "id": "san-francisco",
       "name": "San Francisco",
       "type": "county",
-      "programCount": 40
+      "programCount": 38
     },
     {
       "id": "alameda-county",
       "name": "Alameda County",
       "type": "county",
-      "programCount": 20
+      "programCount": 18
     },
     {
       "id": "contra-costa-county",
       "name": "Contra Costa County",
       "type": "county",
-      "programCount": 16
+      "programCount": 14
     },
     {
       "id": "marin-county",
       "name": "Marin County",
       "type": "county",
-      "programCount": 6
+      "programCount": 4
     },
     {
       "id": "napa-county",
@@ -34,7 +34,7 @@
       "id": "san-mateo-county",
       "name": "San Mateo County",
       "type": "county",
-      "programCount": 24
+      "programCount": 22
     },
     {
       "id": "santa-clara-county",
@@ -46,13 +46,13 @@
       "id": "solano-county",
       "name": "Solano County",
       "type": "county",
-      "programCount": 2
+      "programCount": 1
     },
     {
       "id": "sonoma-county",
       "name": "Sonoma County",
       "type": "county",
-      "programCount": 4
+      "programCount": 2
     },
     {
       "id": "bay-area",
@@ -64,7 +64,7 @@
       "id": "statewide",
       "name": "Statewide",
       "type": "state",
-      "programCount": 47
+      "programCount": 45
     },
     {
       "id": "nationwide",
