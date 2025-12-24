@@ -1,0 +1,19 @@
+{
+  "id": "napa-county-library-databases",
+  "name": "Napa County Library Databases",
+  "category": "library_resources",
+  "description": "Free access to research databases and digital resources with Napa County library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Napa County"
+  ],
+  "website": "https://www.napacounty.gov/919/Databases",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

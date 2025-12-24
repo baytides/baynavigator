@@ -1,0 +1,19 @@
+{
+  "id": "online-archive-of-california",
+  "name": "Online Archive of California",
+  "category": "library_resources",
+  "description": "Free access to detailed descriptions of primary resource collections from over 200 libraries, archives, historical societies, and museums throughout California",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "California"
+  ],
+  "website": "https://oac.cdlib.org/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

@@ -54,14 +54,14 @@
       "name": "Nonprofit Organizations",
       "description": "For registered nonprofits",
       "icon": "🤝",
-      "programCount": 23
+      "programCount": 24
     },
     {
       "id": "everyone",
       "name": "Everyone",
       "description": "Available to all residents",
       "icon": "🌎",
-      "programCount": 98
+      "programCount": 116
     }
   ]
 }

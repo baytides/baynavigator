@@ -81,3 +81,232 @@
   link: https://www.library.ca.gov/services/to-libraries/nyt/
   link_text: Visit Program
   verified_date: '2025-12-16'
+- id: sfpl-elibrary
+  name: SFPL eLibrary
+  category: Library Resources
+  area: San Francisco
+  eligibility:
+  - everyone
+  benefit: Free access to ebooks, audiobooks, magazines, newspapers, movies, music,
+    learning courses, research databases, and more with SF library card
+  how_to_use: Sign in with your San Francisco Public Library card
+  timeframe: Ongoing
+  link: https://sfpl.org/research-learn/elibrary
+  link_text: Browse eLibrary
+  verified_date: '2025-12-24'
+- id: sfpl-digital-collections
+  name: SF Digital Collections
+  category: Library Resources
+  area: San Francisco
+  eligibility:
+  - everyone
+  benefit: Free access to archival photographs, manuscripts, documents, maps, ephemera,
+    and audiovisual materials from digitized and born-digital collections
+  timeframe: Ongoing
+  link: https://digitalsf.org/
+  link_text: Explore Collections
+  verified_date: '2025-12-24'
+- id: open-library
+  name: Open Library
+  category: Library Resources
+  area: Nationwide
+  eligibility:
+  - everyone
+  benefit: Free access to millions of books including ebooks to borrow, with goal
+    to provide one web page for every book ever published
+  how_to_use: Create free account or sign in with Internet Archive, Google, or library card
+  timeframe: Ongoing
+  link: https://openlibrary.org/
+  link_text: Browse Library
+  verified_date: '2025-12-24'
+- id: libby-app
+  name: Libby by OverDrive
+  category: Library Resources
+  area: Bay Area-wide
+  eligibility:
+  - everyone
+  benefit: Free ebooks, audiobooks, and magazines from your local library delivered
+    to your phone or tablet
+  how_to_use: Download the Libby app and sign in with your library card
+  timeframe: Ongoing
+  link: https://www.overdrive.com/apps/libby
+  link_text: Get Libby
+  verified_date: '2025-12-24'
+- id: california-digital-newspaper-collection
+  name: California Digital Newspaper Collection
+  category: Library Resources
+  area: California
+  eligibility:
+  - everyone
+  benefit: Free access to digitized California newspapers from 1846 to present
+  timeframe: Ongoing
+  link: https://cdnc.ucr.edu/cgi-bin/cdnc
+  link_text: Search Newspapers
+  verified_date: '2025-12-24'
+- id: career-online-high-school
+  name: Career Online High School
+  category: Library Resources
+  area: California
+  eligibility:
+  - everyone
+  benefit: Free accredited high school diploma, career certificate, and career portfolio
+    including resume and cover letter with extensive career development support
+  how_to_use: Must have a library card in good standing with an affiliated California library
+  timeframe: Ongoing
+  link: https://ca.careeronlinehs.org/
+  link_text: Learn More
+  verified_date: '2025-12-24'
+- id: online-archive-of-california
+  name: Online Archive of California
+  category: Library Resources
+  area: California
+  eligibility:
+  - everyone
+  benefit: Free access to detailed descriptions of primary resource collections from
+    over 200 libraries, archives, historical societies, and museums throughout California
+  timeframe: Ongoing
+  link: https://oac.cdlib.org/
+  link_text: Browse Collections
+  verified_date: '2025-12-24'
+- id: alameda-county-library-digital
+  name: Alameda County Library Digital Resources
+  category: Library Resources
+  area: Alameda County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Alameda County library card
+  how_to_use: Sign in with your Alameda County Library card
+  timeframe: Ongoing
+  link: https://aclibrary.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: oakland-library-digital
+  name: Oakland Public Library Digital Resources
+  category: Library Resources
+  area: Alameda County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Oakland library card
+  how_to_use: Sign in with your Oakland Public Library card
+  timeframe: Ongoing
+  link: https://oaklandlibrary.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: san-mateo-county-library-digital
+  name: San Mateo County Library Digital Resources
+  category: Library Resources
+  area: San Mateo County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with San Mateo County library card
+  how_to_use: Sign in with your San Mateo County Library card
+  timeframe: Ongoing
+  link: https://smcl.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: peninsula-library-digital
+  name: Peninsula Library System E-Services
+  category: Library Resources
+  area: San Mateo County
+  eligibility:
+  - everyone
+  benefit: Free digital resources and e-services for Peninsula Library System cardholders
+  how_to_use: Sign in with your Peninsula Library System card
+  timeframe: Ongoing
+  link: https://plsinfo.org/e-services/
+  link_text: Browse E-Services
+  verified_date: '2025-12-24'
+- id: contra-costa-library-digital
+  name: Contra Costa County Library Digital Resources
+  category: Library Resources
+  area: Contra Costa County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Contra Costa County library card
+  how_to_use: Sign in with your Contra Costa County Library card
+  timeframe: Ongoing
+  link: https://ccclib.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: sfpl-services
+  name: San Francisco Public Library Services
+  category: Library Resources
+  area: San Francisco
+  eligibility:
+  - everyone
+  benefit: Free library services including digital resources, programs, and community
+    offerings with SF library card
+  how_to_use: Sign in with your San Francisco Public Library card
+  timeframe: Ongoing
+  link: https://sfpl.org/services
+  link_text: Browse Services
+  verified_date: '2025-12-24'
+- id: santa-clara-county-library-digital
+  name: Santa Clara County Library Digital Resources
+  category: Library Resources
+  area: Santa Clara County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Santa Clara County library card
+  how_to_use: Sign in with your Santa Clara County Library card
+  timeframe: Ongoing
+  link: https://sccld.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: marin-county-library-digital
+  name: Marin County Free Library Digital Resources
+  category: Library Resources
+  area: Marin County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Marin County library card
+  how_to_use: Sign in with your Marin County Free Library card
+  timeframe: Ongoing
+  link: https://marinlibrary.org/resource/
+  link_text: Browse Resources
+  verified_date: '2025-12-24'
+- id: sonoma-county-library-digital
+  name: Sonoma County Library eLibrary
+  category: Library Resources
+  area: Sonoma County
+  eligibility:
+  - everyone
+  benefit: Free digital resources including ebooks, audiobooks, databases, and online
+    learning with Sonoma County library card
+  how_to_use: Sign in with your Sonoma County Library card
+  timeframe: Ongoing
+  link: https://sonomalibrary.org/elibrary/a-z
+  link_text: Browse eLibrary
+  verified_date: '2025-12-24'
+- id: solano-county-library-digital
+  name: Solano County Library 24/7 Digital Library
+  category: Library Resources
+  area: Solano County
+  eligibility:
+  - everyone
+  benefit: Free 24/7 digital resources including ebooks, audiobooks, databases, and
+    online learning with Solano County library card
+  how_to_use: Sign in with your Solano County Library card
+  timeframe: Ongoing
+  link: https://solanolibrary.com/247-digital-library/
+  link_text: Browse Digital Library
+  verified_date: '2025-12-24'
+- id: napa-county-library-databases
+  name: Napa County Library Databases
+  category: Library Resources
+  area: Napa County
+  eligibility:
+  - everyone
+  benefit: Free access to research databases and digital resources with Napa County
+    library card
+  how_to_use: Sign in with your Napa County Library card
+  timeframe: Ongoing
+  link: https://www.napacounty.gov/919/Databases
+  link_text: Browse Databases
+  verified_date: '2025-12-24'

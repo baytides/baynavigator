@@ -1,0 +1,19 @@
+{
+  "id": "california-grants-portal",
+  "name": "California Grants Portal",
+  "category": "community",
+  "description": "Free searchable database of state grant opportunities for nonprofits and community organizations",
+  "eligibility": [
+    "nonprofits"
+  ],
+  "areas": [
+    "California"
+  ],
+  "website": "https://www.grants.ca.gov/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

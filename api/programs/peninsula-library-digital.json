@@ -1,0 +1,19 @@
+{
+  "id": "peninsula-library-digital",
+  "name": "Peninsula Library System E-Services",
+  "category": "library_resources",
+  "description": "Free digital resources and e-services for Peninsula Library System cardholders",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "San Mateo County"
+  ],
+  "website": "https://plsinfo.org/e-services/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

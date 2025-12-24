@@ -1,0 +1,19 @@
+{
+  "id": "california-digital-newspaper-collection",
+  "name": "California Digital Newspaper Collection",
+  "category": "library_resources",
+  "description": "Free access to digitized California newspapers from 1846 to present",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "California"
+  ],
+  "website": "https://cdnc.ucr.edu/cgi-bin/cdnc",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

@@ -263,3 +263,16 @@
   link: https://www.stanthonysf.org/services/clothing/shop-for-clothes/
   link_text: Schedule Visit
   verified_date: '2025-12-16'
+- id: california-grants-portal
+  name: California Grants Portal
+  category: Community Services
+  area: California
+  eligibility:
+  - nonprofits
+  benefit: Free searchable database of state grant opportunities for nonprofits and
+    community organizations
+  how_to_use: Search and filter grants by category, deadline, and eligibility
+  timeframe: Ongoing
+  link: https://www.grants.ca.gov/
+  link_text: Search Grants
+  verified_date: '2025-12-24'

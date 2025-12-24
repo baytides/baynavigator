@@ -1,0 +1,19 @@
+{
+  "id": "libby-app",
+  "name": "Libby by OverDrive",
+  "category": "library_resources",
+  "description": "Free ebooks, audiobooks, and magazines from your local library delivered to your phone or tablet",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Bay Area-wide"
+  ],
+  "website": "https://www.overdrive.com/apps/libby",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

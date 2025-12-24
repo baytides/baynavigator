@@ -1,0 +1,19 @@
+{
+  "id": "san-mateo-county-library-digital",
+  "name": "San Mateo County Library Digital Resources",
+  "category": "library_resources",
+  "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with San Mateo County library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "San Mateo County"
+  ],
+  "website": "https://smcl.org/resource/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

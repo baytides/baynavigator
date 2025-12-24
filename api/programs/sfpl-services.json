@@ -1,0 +1,19 @@
+{
+  "id": "sfpl-services",
+  "name": "San Francisco Public Library Services",
+  "category": "library_resources",
+  "description": "Free library services including digital resources, programs, and community offerings with SF library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "website": "https://sfpl.org/services",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

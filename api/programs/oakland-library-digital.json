@@ -1,0 +1,19 @@
+{
+  "id": "oakland-library-digital",
+  "name": "Oakland Public Library Digital Resources",
+  "category": "library_resources",
+  "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Oakland library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Alameda County"
+  ],
+  "website": "https://oaklandlibrary.org/resource/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "open-library",
+  "name": "Open Library",
+  "category": "library_resources",
+  "description": "Free access to millions of books including ebooks to borrow, with goal to provide one web page for every book ever published",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Nationwide"
+  ],
+  "website": "https://openlibrary.org/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

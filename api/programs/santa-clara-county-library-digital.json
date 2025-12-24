@@ -1,0 +1,19 @@
+{
+  "id": "santa-clara-county-library-digital",
+  "name": "Santa Clara County Library Digital Resources",
+  "category": "library_resources",
+  "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Santa Clara County library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Santa Clara County"
+  ],
+  "website": "https://sccld.org/resource/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

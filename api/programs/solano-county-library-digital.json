@@ -1,0 +1,19 @@
+{
+  "id": "solano-county-library-digital",
+  "name": "Solano County Library 24/7 Digital Library",
+  "category": "library_resources",
+  "description": "Free 24/7 digital resources including ebooks, audiobooks, databases, and online learning with Solano County library card",
+  "eligibility": [
+    "everyone"
+  ],
+  "areas": [
+    "Solano County"
+  ],
+  "website": "https://solanolibrary.com/247-digital-library/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "requirements": null,
+  "howToApply": null,
+  "lastUpdated": "2025-12-24"
+}

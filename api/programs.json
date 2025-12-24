@@ -1,6 +1,6 @@
 {
-  "total": 237,
-  "count": 237,
+  "total": 256,
+  "count": 256,
   "offset": 0,
   "programs": [
     {
@@ -413,6 +413,25 @@
         "San Francisco"
       ],
       "website": "https://www.stanthonysf.org/services/clothing/shop-for-clothes/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "california-grants-portal",
+      "name": "California Grants Portal",
+      "category": "community",
+      "description": "Free searchable database of state grant opportunities for nonprofits and community organizations",
+      "eligibility": [
+        "nonprofits"
+      ],
+      "areas": [
+        "California"
+      ],
+      "website": "https://www.grants.ca.gov/",
       "cost": null,
       "phone": null,
       "email": null,
@@ -1845,6 +1864,348 @@
         "Statewide"
       ],
       "website": "https://www.library.ca.gov/services/to-libraries/nyt/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "sfpl-elibrary",
+      "name": "SFPL eLibrary",
+      "category": "library_resources",
+      "description": "Free access to ebooks, audiobooks, magazines, newspapers, movies, music, learning courses, research databases, and more with SF library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "San Francisco"
+      ],
+      "website": "https://sfpl.org/research-learn/elibrary",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "sfpl-digital-collections",
+      "name": "SF Digital Collections",
+      "category": "library_resources",
+      "description": "Free access to archival photographs, manuscripts, documents, maps, ephemera, and audiovisual materials from digitized and born-digital collections",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "San Francisco"
+      ],
+      "website": "https://digitalsf.org/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "open-library",
+      "name": "Open Library",
+      "category": "library_resources",
+      "description": "Free access to millions of books including ebooks to borrow, with goal to provide one web page for every book ever published",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Nationwide"
+      ],
+      "website": "https://openlibrary.org/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "libby-app",
+      "name": "Libby by OverDrive",
+      "category": "library_resources",
+      "description": "Free ebooks, audiobooks, and magazines from your local library delivered to your phone or tablet",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Bay Area-wide"
+      ],
+      "website": "https://www.overdrive.com/apps/libby",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "california-digital-newspaper-collection",
+      "name": "California Digital Newspaper Collection",
+      "category": "library_resources",
+      "description": "Free access to digitized California newspapers from 1846 to present",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "California"
+      ],
+      "website": "https://cdnc.ucr.edu/cgi-bin/cdnc",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "career-online-high-school",
+      "name": "Career Online High School",
+      "category": "library_resources",
+      "description": "Free accredited high school diploma, career certificate, and career portfolio including resume and cover letter with extensive career development support",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "California"
+      ],
+      "website": "https://ca.careeronlinehs.org/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "online-archive-of-california",
+      "name": "Online Archive of California",
+      "category": "library_resources",
+      "description": "Free access to detailed descriptions of primary resource collections from over 200 libraries, archives, historical societies, and museums throughout California",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "California"
+      ],
+      "website": "https://oac.cdlib.org/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "alameda-county-library-digital",
+      "name": "Alameda County Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Alameda County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Alameda County"
+      ],
+      "website": "https://aclibrary.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "oakland-library-digital",
+      "name": "Oakland Public Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Oakland library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Alameda County"
+      ],
+      "website": "https://oaklandlibrary.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "san-mateo-county-library-digital",
+      "name": "San Mateo County Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with San Mateo County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "San Mateo County"
+      ],
+      "website": "https://smcl.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "peninsula-library-digital",
+      "name": "Peninsula Library System E-Services",
+      "category": "library_resources",
+      "description": "Free digital resources and e-services for Peninsula Library System cardholders",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "San Mateo County"
+      ],
+      "website": "https://plsinfo.org/e-services/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "contra-costa-library-digital",
+      "name": "Contra Costa County Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Contra Costa County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Contra Costa County"
+      ],
+      "website": "https://ccclib.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "sfpl-services",
+      "name": "San Francisco Public Library Services",
+      "category": "library_resources",
+      "description": "Free library services including digital resources, programs, and community offerings with SF library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "San Francisco"
+      ],
+      "website": "https://sfpl.org/services",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "santa-clara-county-library-digital",
+      "name": "Santa Clara County Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Santa Clara County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Santa Clara County"
+      ],
+      "website": "https://sccld.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "marin-county-library-digital",
+      "name": "Marin County Free Library Digital Resources",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Marin County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Marin County"
+      ],
+      "website": "https://marinlibrary.org/resource/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "sonoma-county-library-digital",
+      "name": "Sonoma County Library eLibrary",
+      "category": "library_resources",
+      "description": "Free digital resources including ebooks, audiobooks, databases, and online learning with Sonoma County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Sonoma County"
+      ],
+      "website": "https://sonomalibrary.org/elibrary/a-z",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "solano-county-library-digital",
+      "name": "Solano County Library 24/7 Digital Library",
+      "category": "library_resources",
+      "description": "Free 24/7 digital resources including ebooks, audiobooks, databases, and online learning with Solano County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Solano County"
+      ],
+      "website": "https://solanolibrary.com/247-digital-library/",
+      "cost": null,
+      "phone": null,
+      "email": null,
+      "requirements": null,
+      "howToApply": null,
+      "lastUpdated": "2025-12-24"
+    },
+    {
+      "id": "napa-county-library-databases",
+      "name": "Napa County Library Databases",
+      "category": "library_resources",
+      "description": "Free access to research databases and digital resources with Napa County library card",
+      "eligibility": [
+        "everyone"
+      ],
+      "areas": [
+        "Napa County"
+      ],
+      "website": "https://www.napacounty.gov/919/Databases",
       "cost": null,
       "phone": null,
       "email": null,
