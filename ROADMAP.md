@@ -58,15 +58,17 @@ The following documentation files still contain outdated Azure Functions referen
 ## Phase 2: Feature Enhancements (1-3 Months)
 
 ### Search & Discovery
-- [ ] **Fuzzy search** - Improve search to handle typos and partial matches
-- [ ] **Search suggestions** - Auto-complete based on program names
+- [x] **Fuzzy search** - Search handles typos and partial matches
+- [x] **Search suggestions** - Auto-complete based on program names
 - [ ] **Recent searches** - Store in localStorage for quick access
 - [ ] **Saved searches** - Allow users to save filter combinations
 
 ### User Experience
+- [x] **PWA install in utility bar** - Cleaner mobile experience with install button in utility bar
+- [x] **Theme support** - Light, dark, and auto modes with manual override
 - [ ] **Program comparison** - Side-by-side view of 2-3 programs
 - [ ] **Print-friendly view** - Optimized print stylesheet for programs
-- [ ] **Share functionality** - Generate shareable links with pre-applied filters
+- [x] **Share functionality** - Share button in utility bar with UTM tracking
 - [ ] **QR codes** - For offline access to program information
 
 ### Data & Content

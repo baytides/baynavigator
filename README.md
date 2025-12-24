@@ -37,17 +37,18 @@ This community-driven resource aims to:
 
 ## ✨ Features
 
-- 🔍 **Smart Search** - Search by keyword, program name, or organization
+- 🔍 **Smart Search** - Fuzzy search with typo tolerance and search suggestions
 - 🏷️ **Category Filters** - Browse by type (Food, Health, Transportation, Technology, etc.)
 - 📍 **Location Filters** - Find programs by county or area
 - 👥 **Eligibility Filters** - See only programs you qualify for
-- ♿ **Accessibility Toolbar** - Font size, high contrast, dyslexia-friendly fonts, keyboard navigation
+- ♿ **Accessibility Toolbar** - Font size (50-200%), high contrast, dyslexia-friendly fonts, focus mode, keyboard navigation
 - 📱 **Mobile-Optimized** - Works great on phones, tablets, and computers
-- 🌐 **Offline Support** - PWA (Progressive Web App) with service worker caching
-- 🎨 **Dark Mode** - Automatic based on system preference
+- 🌐 **PWA with Offline Support** - Install as an app from the utility bar; service worker caching for offline access
+- 🎨 **Theme Support** - Light, dark, and auto modes with manual override
 - 🔒 **Privacy-First** - No personal data or cookies; self-hosted Plausible with aggregate metrics only
 - 🔗 **Transparent Referrals** - External program links carry `utm_source=bayareadiscounts` for anonymous impact tracking; no compensation or referral fees
- - 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions.
+- 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions
+- ⌨️ **Keyboard Shortcuts** - Ctrl/Cmd+K for search, full keyboard navigation support
 
 ---
 

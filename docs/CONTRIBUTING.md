@@ -580,29 +580,38 @@ bayareadiscounts/
 │
 ├── _includes/                 # 🧩 Reusable components
 │   ├── footer.html
+│   ├── utility-bar.html      # Theme, spacing, share, install controls
 │   ├── program-card.html     # Individual program display
 │   └── search-filter-ui.html # Search and filter interface
 │
 ├── _layouts/                  # 📄 Page templates
-│   └── default.html          # Main layout with scripts
+│   └── default.html          # Main layout with PWA and scripts
+│
+├── api/                       # 📡 Static JSON API (auto-generated)
 │
 ├── assets/
 │   ├── css/                   # 🎨 Stylesheets
+│   │   ├── design-tokens.css
+│   │   ├── base.css
 │   │   ├── responsive-optimized.css
-│   │   ├── accessibility-toolbar.css
-│   │   └── read-more.css
+│   │   └── accessibility-toolbar.css
 │   │
 │   ├── js/                    # ⚙️ JavaScript
-│   │   ├── search-filter.js       # Search/filter functionality
+│   │   ├── search-filter.js       # Fuzzy search/filter
 │   │   ├── accessibility-toolbar.js
-│   │   └── read-more.js
+│   │   ├── step-flow.js           # Onboarding wizard
+│   │   └── apca-contrast.js       # WCAG 3.0 contrast
 │   │
 │   └── images/                # 🖼️ Logos, icons, favicons
+│
+├── scripts/                   # 🔧 Build scripts
+│   └── generate-api.js       # API generation from YAML
+│
+├── tests/                     # 🧪 Playwright E2E tests
 │
 ├── index.md                   # 🏠 Homepage
 ├── students.md                # 🎓 Student-specific page
 ├── README.md                  # 📖 Project documentation
-├── CONTRIBUTING.md            # 📝 This file
 ├── _config.yml                # ⚙️ Jekyll configuration
 └── sw.js                      # 📱 Service worker for PWA
 ```
@@ -610,20 +619,24 @@ bayareadiscounts/
 ### Key Files to Know
 
 **Data Files:**
-- `_data/programs/*.yml` - All program data
+- `_data/programs/*.yml` - All program data (14 category files)
 
 **Templates:**
 - `_includes/program-card.html` - How each program displays
 - `_includes/search-filter-ui.html` - Search and filter interface
-- `_layouts/default.html` - Main page template
+- `_includes/utility-bar.html` - Theme selector, text spacing, share, PWA install
+- `_layouts/default.html` - Main page template with PWA handling
 
 **Scripts:**
-- `assets/js/search-filter.js` - Powers search and filtering
+- `assets/js/search-filter.js` - Powers fuzzy search and filtering
 - `assets/js/accessibility-toolbar.js` - Accessibility features
-- `assets/js/read-more.js` - "Read more" button functionality
+- `assets/js/step-flow.js` - Onboarding wizard for preferences
+- `scripts/generate-api.js` - Generates static JSON API from YAML
 
 **Styles:**
-- `assets/css/responsive-optimized.css` - Main responsive styles with mobile/tablet/desktop optimizations
+- `assets/css/design-tokens.css` - CSS custom properties for theming
+- `assets/css/base.css` - Core styles
+- `assets/css/responsive-optimized.css` - Mobile/tablet/desktop optimizations
 - `assets/css/accessibility-toolbar.css` - Accessibility toolbar styles
 
 ---

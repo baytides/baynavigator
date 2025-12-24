@@ -148,9 +148,14 @@ All accessibility features are tested and supported in:
 
 Progressive enhancement ensures graceful degradation in older browsers.
 
-## Bug Fixes (December 2025)
+## Recent Updates (December 2025)
 
-### Fixed Issues
+### Enhancements
+1. **PWA install moved to utility bar**: Cleaner mobile experience with install button in utility bar instead of footer/floating pill
+2. **Theme override system**: Manual light/dark/auto theme selection in utility bar
+3. **Text spacing toggle**: WCAG 2.1.4 AAA compliant text spacing available in utility bar
+
+### Bug Fixes
 1. **Dark mode gradient typo**: Corrected hex color `#0d2626a15` → `#0d262615`
 2. **Spacing toggle visual state**: Added visual styling synchronization on page load
 3. **Focus trap in step-flow modal**: Implemented keyboard navigation containment

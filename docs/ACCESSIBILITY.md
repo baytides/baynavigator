@@ -26,6 +26,7 @@ This website aims to conform to the **Web Content Accessibility Guidelines (WCAG
 
 - **Full Keyboard Support**: All interactive elements accessible via keyboard
 - **Keyboard Shortcuts**:
+  - `Ctrl/Cmd + K` - Focus global search
   - `/` - Focus search bar
   - `Escape` - Clear filters or blur input
   - `?` - Show keyboard help
@@ -131,7 +132,7 @@ If you wish to report a complaint regarding our accessibility, please contact us
 
 ## Last Updated
 
-This accessibility statement was last reviewed on: **January 2024**
+This accessibility statement was last reviewed on: **December 2025**
 
 ---
 
