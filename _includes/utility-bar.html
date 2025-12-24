@@ -67,31 +67,6 @@
           </button>
         </div>
 
-
-        {% if site.translations_enabled %}
-        <!-- Translate -->
-        <div class="utility-item">
-          <label for="translate-select" class="utility-label">
-            <svg class="utility-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-            <span>Translate</span>
-          </label>
-          <select id="translate-select" class="utility-select" aria-label="Select a language">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="zh-Hans">Chinese (Simplified)</option>
-            <option value="tl">Tagalog</option>
-            <option value="vi">Tiếng Việt</option>
-          </select>
-          <button type="button" id="translate-btn" class="utility-btn" aria-label="Translate this page">
-            <span>Translate</span>
-          </button>
-        </div>
-        {% endif %}
-
       </div>
     </div>
 
@@ -430,8 +405,6 @@ body[data-font-size="x-large"] {
   const utilityBarContent = document.getElementById('utility-bar-content');
   const utilityBarToggle = document.getElementById('utility-bar-toggle');
   const themeSelect = document.getElementById('theme-select');
-  const translateSelect = document.getElementById('translate-select');
-  const translateBtn = document.getElementById('translate-btn');
   const spacingToggle = document.getElementById('spacing-toggle');
 
   const printBtn = document.getElementById('print-btn');
@@ -446,10 +419,8 @@ body[data-font-size="x-large"] {
   // Load saved preferences
   function loadPreferences() {
     const theme = localStorage.getItem('theme-preference') || 'auto';
-    const fontSize = localStorage.getItem('font-size-preference') || 'normal';
     const textSpacing = localStorage.getItem('text-spacing-preference') || 'normal';
     const barExpanded = localStorage.getItem('utility-bar-expanded');
-    const preferredLanguage = localStorage.getItem('preferred_language') || 'en';
 
     const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
     const defaultExpanded = isMobileViewport ? 'false' : 'true';
@@ -460,10 +431,6 @@ body[data-font-size="x-large"] {
       themeSelect.value = theme;
     }
     applyTheme(theme);
-
-    if (translateSelect) {
-      translateSelect.value = preferredLanguage;
-    }
 
     // Set text spacing
     applyTextSpacing(textSpacing);
@@ -553,36 +520,6 @@ body[data-font-size="x-large"] {
       const theme = e.target.value;
       localStorage.setItem('theme-preference', theme);
       applyTheme(theme);
-      console.log('Theme changed to:', theme, 'data-theme attribute:', document.body.getAttribute('data-theme'));
-    });
-  }
-
-  function translateToSelectedLanguage() {
-    if (!translateSelect) return;
-    const targetLang = translateSelect.value;
-    localStorage.setItem('preferred_language', targetLang);
-
-    if (window.azureTranslator && typeof window.azureTranslator.translatePage === 'function') {
-      if (targetLang === 'en' && typeof window.azureTranslator.restorePage === 'function') {
-        window.azureTranslator.restorePage();
-      } else {
-        window.azureTranslator.translatePage(targetLang).catch((err) => {
-          console.error('Translation failed:', err);
-        });
-      }
-    }
-  }
-
-  if (translateSelect) {
-    translateSelect.addEventListener('change', () => {
-      // Update stored preference immediately, but only translate on button press to avoid surprises
-      localStorage.setItem('preferred_language', translateSelect.value);
-    });
-  }
-
-  if (translateBtn) {
-    translateBtn.addEventListener('click', () => {
-      translateToSelectedLanguage();
     });
   }
 
@@ -599,9 +536,11 @@ body[data-font-size="x-large"] {
       if (newSpacing === 'enhanced') {
         spacingToggle.style.background = 'var(--primary, #1e40af)';
         spacingToggle.style.color = 'white';
+        spacingToggle.style.borderColor = 'var(--primary, #1e40af)';
       } else {
         spacingToggle.style.background = '';
         spacingToggle.style.color = '';
+        spacingToggle.style.borderColor = '';
       }
     });
   }
