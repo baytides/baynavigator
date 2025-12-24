@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/responsive-optimized.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/accessibility-toolbar.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/read-more.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/features.css' | relative_url }}">
 
   <!-- Privacy-friendly analytics by Plausible -->
   <link rel="preconnect" href="https://plausible.baytides.org" crossorigin>
@@ -63,7 +64,11 @@
   <!-- Search/Filter JavaScript - exclude from students page -->
   {% if page.url != '/students.html' %}
     <script src="{{ '/assets/js/search-filter.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/filter-presets.js' | relative_url }}"></script>
   {% endif %}
+
+  <!-- Feedback System -->
+  <script src="{{ '/assets/js/feedback.js' | relative_url }}"></script>
 
   <!-- APCA Contrast Checker (WCAG 3.0) -->
   <script src="{{ '/assets/js/apca-contrast.js' | relative_url }}"></script>

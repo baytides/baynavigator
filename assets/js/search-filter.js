@@ -486,20 +486,27 @@ class DiscountSearchFilter {
 
     // Handle "All" buttons as exclusive per type
     if (isAllButton) {
-      document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
     } else {
       const allBtn = document.querySelector(`[data-filter-type="${filterType}"][data-all="true"]`);
       if (allBtn) {
         allBtn.classList.remove('active');
+        allBtn.setAttribute('aria-pressed', 'false');
       }
 
       btn.classList.toggle('active');
+      btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
 
       // If nothing remains active for this type, restore the "All" state
       const remainingActive = document.querySelectorAll(`[data-filter-type="${filterType}"].active:not([data-all="true"])`);
       if (remainingActive.length === 0 && allBtn) {
         allBtn.classList.add('active');
+        allBtn.setAttribute('aria-pressed', 'true');
       }
     }
 
