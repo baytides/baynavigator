@@ -230,8 +230,6 @@ bundle exec jekyll serve
 
 ## ➕ Adding a New Program
 
-**Note:** Programs are stored in YAML files for version control, but the live website uses Azure Cosmos DB. After your PR is merged, a maintainer will sync the changes to the database using the migration script. See [Data Architecture](#data-architecture) for details.
-
 ### Step 1: Choose the Right File
 
 Programs are organized by category in `_data/programs/`:
@@ -697,47 +695,36 @@ Run `bundle exec jekyll build`. If it succeeds, your YAML is valid. If there are
 
 ## 🏗️ Data Architecture
 
-### YAML + Cosmos DB Hybrid Model
+### Static Site with JSON API
 
-Bay Area Discounts uses a hybrid approach for data storage:
+Bay Area Discounts uses a simple, efficient static architecture:
 
-**YAML Files (`_data/programs/*.yml`)**
+**YAML Files (`_data/programs/*.yml`)** - Source of Truth
 - ✅ Version control - Track all changes via Git
 - ✅ Open source transparency - Anyone can view/download data
 - ✅ Easy contributions - Submit PRs to update programs
-- ✅ Backup - Redundant copy of all program data
+- ✅ Jekyll integration - Powers the static site directly
 
-**Azure Cosmos DB (Production Database)**
-- ✅ Fast API access - Powers the REST API
-- ✅ Real-time queries - No site rebuilds needed
-- ✅ Scalable - Handles any traffic volume
-- ✅ Global distribution - Low latency worldwide
+**Static JSON API (`api/`)** - Auto-Generated
+- ✅ Fast API access - Pre-built JSON files served statically
+- ✅ Zero server costs - No database or backend required
+- ✅ Automatic updates - GitHub Actions regenerates on changes
+- ✅ CDN-optimized - Served via Azure Static Web Apps
 
 ### Data Flow
 
 ```
-Contributors → YAML Files (PR) → Merged → Maintainer runs migration → Cosmos DB → Live API
+Contributors → YAML Files (PR) → Merged → GitHub Actions → Static JSON API → Live Site
 ```
 
-### For Maintainers: Syncing Data
+### How It Works
 
-After merging PRs that change YAML files, sync to Cosmos DB:
+1. Program data lives in `_data/programs/*.yml` files
+2. When changes are pushed to `main`, GitHub Actions runs `scripts/generate-api.js`
+3. The script generates static JSON files in the `api/` directory
+4. Jekyll builds the site and everything deploys to Azure Static Web Apps
 
-```bash
-cd scripts
-npm install
-
-# Set environment variables (get from Azure Portal)
-export COSMOS_DB_ENDPOINT="https://..."
-export COSMOS_DB_KEY="your-key"
-export COSMOS_DB_DATABASE_NAME="bayareadiscounts"
-export COSMOS_DB_CONTAINER_NAME="programs"
-
-# Run migration
-npm run migrate
-```
-
-See [AZURE_INTEGRATION.md](./AZURE_INTEGRATION.md) for complete Azure setup.
+No manual sync or database management required!
 
 ---
 
@@ -747,7 +734,6 @@ See [AZURE_INTEGRATION.md](./AZURE_INTEGRATION.md) for complete Azure setup.
 - 🐛 [Report an Issue](../../issues) for bugs
 - 📧 Contact maintainers through GitHub issues
 - 📖 See [API_ENDPOINTS.md](./API_ENDPOINTS.md) for API documentation
-- ☁️ See [AZURE_INTEGRATION.md](./AZURE_INTEGRATION.md) for Azure setup
 
 ---
 

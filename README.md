@@ -85,10 +85,8 @@ fetch('https://bayareadiscounts.com/api/programs.json')
 ## � Documentation
 
 - **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute
-- **[API Documentation](docs/API_ENDPOINTS.md)** - REST API endpoints (see also [OpenAPI spec](openapi/bayareadiscounts-api.yaml))
+- **[API Documentation](docs/API_ENDPOINTS.md)** - Static JSON API endpoints (see also [OpenAPI spec](openapi/bayareadiscounts-api.yaml))
 - **[Accessibility](docs/ACCESSIBILITY.md)** - WCAG 2.2 AAA compliance details
-- **[Azure Setup](docs/GETTING_STARTED_AZURE.md)** - Infrastructure and deployment
-- **[Security](docs/SECURITY_HARDENING.md)** - Security measures and best practices
 - **[All Documentation](docs/)** - Complete docs directory
 
 ---
@@ -107,14 +105,10 @@ fetch('https://bayareadiscounts.com/api/programs.json')
 - `_data/programs/` - Program data organized by category (YAML files)
 - `api/` - Static JSON API endpoints (auto-generated)
 - `scripts/` - Build scripts including API generator
-- `infrastructure/` - Azure Infrastructure as Code (Bicep)
 - `_includes/` - Reusable components (search UI, program cards, etc.)
 - `_layouts/` - Page templates
 - `assets/js/` - JavaScript for search/filter functionality
 - `assets/css/` - Styling and responsive design
-
-**Azure Integration:**
-See [AZURE_INTEGRATION.md](docs/AZURE_INTEGRATION.md) for details on how we use Azure while staying 100% open source.
 
 ---
 
