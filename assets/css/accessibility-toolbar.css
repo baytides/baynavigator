@@ -632,6 +632,108 @@ body.high-contrast button:focus {
   outline-offset: 2px !important;
 }
 
+/* High contrast - filter buttons */
+body.high-contrast .filter-btn {
+  background: white !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+}
+
+body.high-contrast .filter-btn:hover {
+  background: #e6e6e6 !important;
+}
+
+body.high-contrast .filter-btn.active {
+  background: #000 !important;
+  color: white !important;
+  border-color: #000 !important;
+}
+
+/* High contrast - program link buttons */
+body.high-contrast .program-link {
+  background: #000 !important;
+  color: white !important;
+  border: 3px solid #000 !important;
+  text-decoration: none !important;
+}
+
+body.high-contrast .program-link:hover,
+body.high-contrast .program-link:focus {
+  background: #333 !important;
+  outline: 3px solid #000 !important;
+  outline-offset: 2px !important;
+}
+
+/* High contrast - program cards */
+body.high-contrast .program-card {
+  border: 3px solid #000 !important;
+  background: white !important;
+}
+
+/* High contrast - badges */
+body.high-contrast .eligibility-badge,
+body.high-contrast .program-badge,
+body.high-contrast .program-area,
+body.high-contrast .program-category {
+  background: white !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+/* High contrast - search input */
+body.high-contrast #search-input {
+  background: white !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+}
+
+body.high-contrast #search-input::placeholder {
+  color: #333 !important;
+}
+
+/* High contrast - sort select */
+body.high-contrast .sort-select,
+body.high-contrast .utility-select {
+  background: white !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+}
+
+/* High contrast - utility bar buttons */
+body.high-contrast .utility-btn {
+  background: white !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+body.high-contrast .utility-btn:hover {
+  background: #e6e6e6 !important;
+}
+
+/* High contrast - favorite toggle */
+body.high-contrast .favorite-toggle {
+  background: white !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+body.high-contrast .favorite-toggle.active {
+  background: #000 !important;
+  color: white !important;
+}
+
+/* High contrast - reset button */
+body.high-contrast .reset-btn {
+  background: white !important;
+  color: #000 !important;
+  border: 3px solid #000 !important;
+}
+
+body.high-contrast .reset-btn:hover {
+  background: #000 !important;
+  color: white !important;
+}
+
 /* High contrast mode - Dark theme element styling */
 @media (prefers-color-scheme: dark) {
   body.high-contrast table,
@@ -654,6 +756,105 @@ body.high-contrast button:focus {
     background: #1a1a1a !important;
     outline: 3px solid #fff !important;
     outline-offset: 2px !important;
+  }
+
+  /* High contrast dark - filter buttons */
+  body.high-contrast .filter-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+  }
+
+  body.high-contrast .filter-btn:hover {
+    background: #1a1a1a !important;
+  }
+
+  body.high-contrast .filter-btn.active {
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #fff !important;
+  }
+
+  /* High contrast dark - program link buttons */
+  body.high-contrast .program-link {
+    background: #ffff00 !important;
+    color: #000 !important;
+    border: 3px solid #ffff00 !important;
+  }
+
+  body.high-contrast .program-link:hover,
+  body.high-contrast .program-link:focus {
+    background: #ffff66 !important;
+  }
+
+  /* High contrast dark - program cards */
+  body.high-contrast .program-card {
+    border: 3px solid #fff !important;
+    background: #000 !important;
+  }
+
+  /* High contrast dark - badges */
+  body.high-contrast .eligibility-badge,
+  body.high-contrast .program-badge,
+  body.high-contrast .program-area,
+  body.high-contrast .program-category {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
+
+  /* High contrast dark - search input */
+  body.high-contrast #search-input {
+    background: #000 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+  }
+
+  body.high-contrast #search-input::placeholder {
+    color: #ccc !important;
+  }
+
+  /* High contrast dark - sort select */
+  body.high-contrast .sort-select,
+  body.high-contrast .utility-select {
+    background: #000 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+  }
+
+  /* High contrast dark - utility bar buttons */
+  body.high-contrast .utility-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
+
+  body.high-contrast .utility-btn:hover {
+    background: #1a1a1a !important;
+  }
+
+  /* High contrast dark - favorite toggle */
+  body.high-contrast .favorite-toggle {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+  }
+
+  body.high-contrast .favorite-toggle.active {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* High contrast dark - reset button */
+  body.high-contrast .reset-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 3px solid #fff !important;
+  }
+
+  body.high-contrast .reset-btn:hover {
+    background: #fff !important;
+    color: #000 !important;
   }
 }
 
@@ -678,6 +879,105 @@ body[data-theme="dark"].high-contrast button:focus {
   background: #1a1a1a !important;
   outline: 3px solid #fff !important;
   outline-offset: 2px !important;
+}
+
+/* High contrast dark manual toggle - filter buttons */
+body[data-theme="dark"].high-contrast .filter-btn {
+  background: #000 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+}
+
+body[data-theme="dark"].high-contrast .filter-btn:hover {
+  background: #1a1a1a !important;
+}
+
+body[data-theme="dark"].high-contrast .filter-btn.active {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
+
+/* High contrast dark manual toggle - program link buttons */
+body[data-theme="dark"].high-contrast .program-link {
+  background: #ffff00 !important;
+  color: #000 !important;
+  border: 3px solid #ffff00 !important;
+}
+
+body[data-theme="dark"].high-contrast .program-link:hover,
+body[data-theme="dark"].high-contrast .program-link:focus {
+  background: #ffff66 !important;
+}
+
+/* High contrast dark manual toggle - program cards */
+body[data-theme="dark"].high-contrast .program-card {
+  border: 3px solid #fff !important;
+  background: #000 !important;
+}
+
+/* High contrast dark manual toggle - badges */
+body[data-theme="dark"].high-contrast .eligibility-badge,
+body[data-theme="dark"].high-contrast .program-badge,
+body[data-theme="dark"].high-contrast .program-area,
+body[data-theme="dark"].high-contrast .program-category {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+/* High contrast dark manual toggle - search input */
+body[data-theme="dark"].high-contrast #search-input {
+  background: #000 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+}
+
+body[data-theme="dark"].high-contrast #search-input::placeholder {
+  color: #ccc !important;
+}
+
+/* High contrast dark manual toggle - sort select */
+body[data-theme="dark"].high-contrast .sort-select,
+body[data-theme="dark"].high-contrast .utility-select {
+  background: #000 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+}
+
+/* High contrast dark manual toggle - utility bar buttons */
+body[data-theme="dark"].high-contrast .utility-btn {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body[data-theme="dark"].high-contrast .utility-btn:hover {
+  background: #1a1a1a !important;
+}
+
+/* High contrast dark manual toggle - favorite toggle */
+body[data-theme="dark"].high-contrast .favorite-toggle {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body[data-theme="dark"].high-contrast .favorite-toggle.active {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+/* High contrast dark manual toggle - reset button */
+body[data-theme="dark"].high-contrast .reset-btn {
+  background: #000 !important;
+  color: #fff !important;
+  border: 3px solid #fff !important;
+}
+
+body[data-theme="dark"].high-contrast .reset-btn:hover {
+  background: #fff !important;
+  color: #000 !important;
 }
 
 /* Dyslexia-friendly font */
