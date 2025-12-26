@@ -8,7 +8,7 @@ description: Our commitment to protecting your privacy while helping you access 
 
 # Privacy Policy
 
-**Last Updated**: December 18, 2025
+**Last Updated**: December 25, 2025
 **Effective Date**: December 18, 2025
 
 <div class="simple-language-summary" aria-label="Simple language summary">
@@ -265,6 +265,32 @@ This website uses minimal third-party services, and we are transparent about eac
 **Privacy Policy**: https://privacy.microsoft.com/en-us/privacystatement
 
 **Important**: Microsoft does not use translation content to train AI models or for any purpose other than providing the translation service. Microsoft's privacy policy explicitly states that customer data submitted to Azure AI services is not used for model training without explicit customer consent, which we do not provide.
+
+### 4. Sentry (Mobile App Crash Reporting)
+
+**Service**: Crash and error reporting for mobile applications
+**Provider**: Functional Software, Inc. (Sentry)
+**Applies To**: Bay Area Discounts mobile apps for iOS and Android only (not the website)
+
+**Data Collected**: When the mobile app experiences a crash or error, Sentry automatically collects technical diagnostic information to help us fix bugs and improve app stability. This includes:
+- Error messages and stack traces (technical details about what went wrong)
+- App version and build number
+- Device type and operating system version
+- Available memory and storage at time of crash
+- App state and navigation path leading to the error
+
+**Data We Explicitly Remove**: Before any crash report is sent to Sentry, we automatically strip the following information to protect your privacy:
+- IP addresses (removed before transmission)
+- Device identifiers (removed before transmission)
+- Any other personally identifiable information
+
+**What We Do NOT Collect**: Crash reports do not include your name, email, location, saved programs, browsing history, or any content you view in the app.
+
+**Data Retention**: Crash reports are retained for 90 days to allow us to identify and fix recurring issues, then automatically deleted.
+
+**Privacy Policy**: https://sentry.io/privacy/
+
+**Why We Use This**: Crash reporting helps us identify and fix bugs that affect app stability. Without this information, we would have no way to know when users experience problems or how to fix them. We chose Sentry specifically because it allows us to strip personally identifiable information before reports are sent, ensuring crash reports remain anonymous and focused solely on technical diagnostics.
 
 ---
 
@@ -533,7 +559,7 @@ For clarity, we define key terms used in this privacy policy.
 
 ### What This Policy Covers
 
-This privacy policy applies to the bayareadiscounts.com website, all subdomains of bayareadiscounts.com (if any), mobile-responsive versions of the website (the same website viewed on mobile devices), and Progressive Web App (PWA) version if installed on your device.
+This privacy policy applies to the bayareadiscounts.com website, all subdomains of bayareadiscounts.com (if any), mobile-responsive versions of the website (the same website viewed on mobile devices), Progressive Web App (PWA) version if installed on your device, Bay Area Discounts mobile app for iOS (available on the App Store), and Bay Area Discounts mobile app for Android (available on Google Play).
 
 ### What This Policy Does NOT Cover
 
@@ -543,10 +569,10 @@ This privacy policy does not cover external websites linked from bayareadiscount
 
 ## Effective Date and Version
 
-**Privacy Policy Version**: 2.0
+**Privacy Policy Version**: 2.1
 **Effective Date**: December 18, 2025
-**Last Updated**: December 18, 2025
-**Next Scheduled Review**: June 18, 2026
+**Last Updated**: December 25, 2025
+**Next Scheduled Review**: June 25, 2026
 
 ---
 
