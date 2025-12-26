@@ -54,7 +54,7 @@ Bay Area Discounts is one of Bay Tides' community education initiatives, providi
 
 **We do not collect, store, process, share, or sell any Personally Identifiable Information (PII).**
 
-This website is designed with privacy-by-design principles and data minimization as core values. We have intentionally architected this service to operate without collecting personal information. This means we do not collect names, email addresses, phone numbers, physical addresses, Social Security numbers, or any other personally identifiable information. We do not require usernames, passwords, or user profiles. We do not track your browsing patterns, page visits, time on site, or click behavior. We use zero cookies for any purpose. We do not display ads, work with ad networks, or engage in behavioral advertising. Since we have no user data, we have nothing to sell to third parties. We do not track you across websites or build user profiles.
+This website is designed with privacy-by-design principles and data minimization as core values. We have intentionally architected this service to operate without collecting personal information. This means we do not collect names, email addresses, phone numbers, physical addresses, Social Security numbers, or any other personally identifiable information. We do not require usernames, passwords, or user profiles. We do not track your browsing patterns, page visits, time on site, or click behavior. We do not display ads, work with ad networks, or engage in behavioral advertising. Since we have no user data, we have nothing to sell to third parties. We do not track you across websites, through our mobile apps, or build user profiles.
 
 ---
 
@@ -80,7 +80,7 @@ We do not collect demographic information of any kind. We do not ask for or infe
 
 ### Protected Categories
 
-We do not collect information in protected categories. This includes health information, financial information, biometric data, sexual orientation, religious beliefs, or political affiliations. As a nonprofit focused on providing public information about discount programs, we have no need for or interest in collecting sensitive personal information.
+We do not collect information in protected categories. This includes health information, financial information, biometric data, sexual orientation, religious beliefs, or political affiliations. As a nonprofit focused on providing a public service we have no need for or interest in collecting sensitive personal information.
 
 ---
 
@@ -112,12 +112,6 @@ When you use the translation feature to view the website in another language, a 
 
 We want to be explicit about what does NOT happen during translation. We do NOT log which pages you translate or create any record of translation requests tied to your identity. We do NOT store your IP address or any information that could identify you. We do NOT associate translations with any identifier, session token, or user profile (as we have no user accounts). We do NOT retain translation content after processing is complete. We do NOT use translation data for analytics, profiling, or improving our services. We do NOT share translation requests with any third parties except Microsoft Azure, which acts solely as a data processor on our behalf.
 
-### Microsoft Azure AI Translator
-
-Translation processing is performed by **Microsoft Azure AI Translator** as a data processor on our behalf, meaning Microsoft processes translations solely for the purpose of providing translation services and does not use your content for any other purpose. Microsoft's role is strictly limited. They implement purpose limitation (processing translations only to return translated text), do not use content as training data (Microsoft does not use your content to train AI models), do not retain translation content (translation content is not retained after processing is complete), act as a data processor and not a data controller (they process data on our instructions, not for their own purposes), and are bound by Microsoft's Privacy Policy available at https://privacy.microsoft.com/en-us/privacystatement.
-
-**Technical Details**: Translation requests are sent via HTTPS encryption to ensure confidentiality during transmission. No authentication tokens or user identifiers are included in translation requests. Each request is stateless with no session tracking or user profiling. Microsoft's standard data processing terms apply, which include security and privacy protections. The translation service is hosted in Microsoft's West US 2 region in the United States.
-
 ---
 
 ## Accessibility Features {#accessibility-features}
@@ -128,7 +122,7 @@ Text spacing adjustments are applied via CSS (Cascading Style Sheets) directly o
 
 Theme switching (Light/Dark/Auto modes) is managed by JavaScript running in your browser and preferences stored in local storage. When you select a theme, JavaScript applies CSS classes to change colors. Your preference is saved in local storage so it persists across visits. No theme preference data is transmitted to our servers.
 
-Saved programs or favorites are stored in your browser's local storage only. When you click the "favorite" or "save" button on a program, JavaScript stores only the program ID number in local storage. We never see which programs you've favorited or track this information in any way.
+Saved programs or favorites are stored in your browser or device's local storage only. When you click the "favorite" or "save" button on a program, JavaScript stores only the program ID number in your local storage. We never see which programs you've favorited or track this information in any way.
 
 Print functionality uses your browser's native print dialog. When you click "Print," your browser opens its built-in print interface. We don't track print actions or see which pages you print.
 
@@ -138,9 +132,9 @@ Keyboard navigation is handled by browser HTML semantics. The website uses prope
 
 ## External Links
 
-This website contains links to external resources including government benefit program websites (such as the California Department of Social Services for CalFresh), utility company websites (such as Pacific Gas & Electric for the CARE program), community organization websites, and application portals for discount programs.
+Our services contain links to external resources including government benefit program websites (such as the California Department of Social Services for CalFresh), utility company websites (such as Pacific Gas & Electric for the CARE program), community organization websites, and application portals for discount programs or services.
 
-**Important Notice**: When you click an external link, you leave bayareadiscounts.com and are directed to a different website. At that point, you become subject to the privacy policy of the destination website, not ours. We are not responsible for the privacy practices of external sites. We do not control or endorse the content of external websites. Different organizations have different privacy policies, and some may collect personal information, use cookies, or track visitors. We strongly recommend reviewing the privacy policy of any external site you visit before providing any personal information.
+**Important Notice**: When you click an external link, you leave bayareadiscounts.com and are directed to a third-party website. At that point, you become subject to the privacy policy of the destination website, not ours. We are not responsible for the privacy practices of external sites. We do not control or endorse the content of external websites. Different organizations have different privacy policies, and some may collect personal information, use cookies, or track visitors. We strongly recommend reviewing the privacy policy of any external site you visit before providing any personal information.
 
 The inclusion of a link to an external website does not imply our endorsement of that website, its operator, or its privacy practices. We provide these links as a public service to help you find information about discount programs, but we cannot and do not guarantee the privacy practices of external organizations.
 
@@ -148,7 +142,7 @@ The inclusion of a link to an external website does not imply our endorsement of
 
 ## No Cookies Policy
 
-**This website does not use cookies of any kind.**
+**This website does not use cookies.**
 
 ### What Are Cookies?
 
@@ -156,11 +150,11 @@ Cookies are small text files stored on your device by websites. Traditional cook
 
 ### Why We Don't Use Cookies
 
-Many websites use hundreds of tracking cookies. **Bay Area Discounts uses ZERO cookies** for several important reasons. First, cookies can track users across sessions and websites, creating privacy concerns. Second, cookies are unnecessary for our purposes as we use local storage for necessary functionality. Third, people seeking assistance deserve privacy without tracking, and cookies can undermine that privacy. Fourth, not using cookies means no cookie consent requirements, simplifying the user experience and eliminating complex consent management systems. Fifth, fewer HTTP requests from cookie exchanges improve page load times and performance.
+Many websites use hundreds of tracking cookies. **Bay Area Discounts does not use cookies** for several important reasons. First, cookies can track users across sessions and websites, creating privacy concerns. Second, cookies are unnecessary for our purposes as our services utilize your browser or device's local storage for essential functionality. Third, people seeking assistance deserve privacy without tracking, and cookies can undermine that privacy. Fourth, not using cookies means no cookie consent requirements, simplifying the user experience and eliminating complex consent management systems. Fifth, fewer HTTP requests from cookie exchanges improve page load times and performance.
 
 ### Third-Party Cookies
 
-We also do NOT allow any third-party cookies on this website. This means we do not permit cookies from advertising networks (such as Google Ads or Facebook Ads), analytics services (such as Google Analytics), social media platforms (such as Facebook pixel trackers or Twitter widgets), content delivery networks (CDNs), or tag managers (such as Google Tag Manager). Our zero-cookie policy means you can use this website without any tracking cookies being placed on your device.
+We also do NOT allow any third-party cookies on this website. This means we do not permit cookies from advertising networks (such as Google or Facebook), third-party analytics services (such as Google Analytics), social media platforms (such as Facebook pixel trackers or Twitter/X widgets), or tag managers (such as Google Tag Manager). Our zero-cookie policy means you can use this website without any tracking cookies being placed on your device.
 
 ---
 
@@ -174,7 +168,7 @@ We do not knowingly collect personal information from children under 13. Moreove
 
 ### For Parents and Guardians
 
-This website is designed to help families find assistance programs. Parents and guardians can use this site with confidence knowing that no information about children is collected or stored. No tracking or profiling of children occurs. No targeted advertising to children is displayed (we don't display any advertising at all). Educational content is freely accessible without registration or data collection. We believe families should be able to research assistance programs privately without surveillance of their children or themselves.
+Our services are designed to help families find assistance programs. Parents and guardians can use our products with confidence knowing that no information about children is collected or stored. No tracking or profiling of children occurs. No targeted advertising to children is displayed (we don't display any advertising at all). Educational content is freely accessible without registration or data collection. We believe families should be able to research assistance programs privately without surveillance of their children or themselves.
 
 ---
 
@@ -222,13 +216,13 @@ For EU residents, we note that any translation requests may be processed through
 
 ### 501(c)(3) Nonprofit Organization
 
-Bay Tides is a qualified 501(c)(3) tax-exempt nonprofit organization under Section 501(c)(3) of the Internal Revenue Code. As a nonprofit organization, Bay Tides operates differently from commercial entities in several important ways. We are not a commercial entity and do not operate with a profit motive. We do not sell products or services. We do not engage in commercial advertising. Our mission is purely charitable and educational, focused on protecting the San Francisco Bay and empowering communities.
+Bay Tides is a qualified 501(c)(3) tax-exempt nonprofit organization under Section 501(c)(3) of the Internal Revenue Code. As a nonprofit organization, Bay Tides operates differently from commercial entities in several important ways. We are not a commercial entity and do not operate with a profit motive. We do not sell products or services, or engage in commercial advertising. Our mission is purely charitable and educational, focused on protecting the San Francisco Bay's environment.
 
 ### Privacy Law Exemptions
 
-While certain privacy laws provide exemptions for nonprofits, **Bay Tides voluntarily exceeds all privacy requirements** as a matter of organizational principle. We do not collect personal information, which exceeds CCPA/CPRA requirements. We do not use cookies, exceeding the ePrivacy Directive (EU Cookie Law). We do not track users, exceeding FTC privacy guidelines. We provide transparency through open-source code, allowing public verification of our privacy practices.
+While certain privacy laws provide exemptions for nonprofits, **Bay Tides voluntarily exceeds all privacy requirements** as a matter of organizational principle. We do not collect personal information, which exceeds CCPA/CPRA requirements. We do not use cookies, exceeding the ePrivacy Directive (EU Cookie Law). We do not track users, exceeding FTC privacy guidelines. We provide transparency through open-source code, allowing public verification of our practices.
 
-**Important**: Even though we may qualify for certain nonprofit exemptions under various laws, we choose to operate under the strictest privacy standards as a matter of principle and community trust. We believe nonprofits serving vulnerable populations should be held to the highest privacy standards, not the lowest legal requirements.
+**Important**: Even though we may qualify for certain nonprofit exemptions under various laws, we choose to operate under the strictest privacy standards as a matter of principle and community trust. We believe nonprofits should be held to the highest privacy standards, not the lowest legal requirements.
 
 ---
 
@@ -256,17 +250,7 @@ This website uses minimal third-party services, and we are transparent about eac
 
 **Data Processing Agreement**: Microsoft acts as a data processor under standard Azure terms. Microsoft processes translation requests solely to provide the translation service and does not use the content for any other purpose. Translation content is not logged, stored, or retained after the translation is completed and returned to your browser.
 
-### 3. Microsoft Azure AI Translator
-
-**Service**: Machine translation
-**Provider**: Microsoft Corporation
-**Data Processed**: Text content submitted for translation (not retained) and source and target language codes.
-
-**Privacy Policy**: https://privacy.microsoft.com/en-us/privacystatement
-
-**Important**: Microsoft does not use translation content to train AI models or for any purpose other than providing the translation service. Microsoft's privacy policy explicitly states that customer data submitted to Azure AI services is not used for model training without explicit customer consent, which we do not provide.
-
-### 4. Sentry (Mobile App Crash Reporting)
+### 3. Sentry (Mobile App Crash Reporting)
 
 **Service**: Crash and error reporting for mobile applications
 **Provider**: Functional Software, Inc. (Sentry)
@@ -279,7 +263,7 @@ This website uses minimal third-party services, and we are transparent about eac
 - Available memory and storage at time of crash
 - App state and navigation path leading to the error
 
-**Data We Explicitly Remove**: Before any crash report is sent to Sentry, we automatically strip the following information to protect your privacy:
+**Data We Explicitly Remove**: Before any crash report is sent to Sentry, our mobile apps automatically strip the following information to protect your privacy:
 - IP addresses (removed before transmission)
 - Device identifiers (removed before transmission)
 - Any other personally identifiable information
@@ -298,7 +282,7 @@ This website uses minimal third-party services, and we are transparent about eac
 **Hosting**: Self-hosted Plausible Analytics on infrastructure we control
 **Status**: **Currently ENABLED**
 
-We use a self-hosted version of Plausible Analytics to understand basic usage patterns and improve the website. Unlike many analytics services, Plausible collects only essential, aggregated metrics with strict privacy protections.
+We use a self-hosted version of Plausible Analytics to understand basic usage patterns and improve our website. Unlike many analytics services, Plausible collects only essential, aggregated metrics with strict privacy protections.
 
 #### What We Measure
 
@@ -469,7 +453,7 @@ Redwood City, CA 94065
 
 **Email**: privacy [at] baytides [dot] org
 
-**Response Time**: We will respond to privacy inquiries within **30 days** (or sooner as required by applicable law).
+**Response Time**: We strive to respond to privacy inquiries within **30 days** (or as required by applicable law).
 
 ### Exercising Your Rights
 
@@ -485,7 +469,7 @@ If you believe your privacy rights have been violated, you may contact us at pri
 
 ### Our Philosophy
 
-Bay Area Discounts was intentionally designed with **privacy-by-design** principles because we believe in several core values. First, people seeking assistance programs deserve privacy and respect. Looking for help should not mean surrendering your privacy. Second, community trust is earned through actions, not promises. We demonstrate our commitment to privacy through our technical architecture, not just policy statements. Third, data minimization is the ethical choice for nonprofits serving vulnerable populations. Collecting less data reduces risk and respects dignity. Fourth, the best way to protect data is not to collect it in the first place. This eliminates the risk of data breaches, unauthorized access, or misuse. Fifth, privacy should be accessible to everyone, not just technical users who know how to use ad blockers or VPNs. Finally, as part of Bay Tides' mission to empower communities through education, we believe people should be able to access educational resources without surveillance or tracking.
+Bay Area Discounts was intentionally designed with **privacy-by-design** principles because we believe in several core values. First, people seeking assistance programs deserve privacy and respect. Looking for help should not mean surrendering your privacy. Second, community trust is earned through actions, not promises. We demonstrate our commitment to privacy through our technical architecture, not just policy statements. Third, data minimization is the ethical choice for nonprofits serving the community. Collecting less data reduces risk and respects dignity. Fourth, the best way to protect data is not to collect it in the first place. This eliminates the risk of data breaches, unauthorized access, or misuse. Fifth, privacy should be accessible to everyone, not just technical users who know how to use ad blockers or VPNs. Finally, as part of Bay Tides' mission to empower communities through education, we believe people should be able to access educational resources without mass surveillance or tracking.
 
 ### Technical Choices
 
@@ -497,7 +481,7 @@ We made deliberate technical choices to ensure privacy. We built a static site w
 
 ### Open Source Commitment
 
-Bay Area Discounts is **fully open source**, meaning our entire codebase is publicly available at github.com/baytides/bayareadiscounts. Every line of code can be inspected and audited. There is no hidden code or proprietary tracking. Anyone can verify our privacy claims by reading the source code. Our complete version history is tracked in Git, showing all changes over time.
+Bay Area Discounts is **open source**, meaning our entire codebase is publicly available at github.com/baytides/bayareadiscounts. Every line of code can be inspected and audited. There is no hidden code or proprietary tracking. Anyone can verify our privacy claims by reading the source code.
 
 ### How to Verify Our Claims
 
@@ -513,11 +497,11 @@ We welcome independent security and privacy audits. If you conduct an audit and 
 
 ### Inclusive Privacy
 
-We believe privacy and accessibility are interconnected rights that should be available to everyone. Our accessible privacy controls ensure all privacy features are keyboard-accessible and usable without a mouse. Our privacy information is screen reader compatible, with proper heading structure and ARIA labels. Our accessibility features don't send analytics or tracking data to our servers. This privacy policy is written in plain language to be understandable to the general public, not just lawyers. The website and this privacy policy are WCAG 2.2 AAA compliant, meeting the highest accessibility standard.
+We believe privacy and accessibility are interconnected rights that should be available to everyone. Our accessible privacy controls ensure all privacy features are keyboard-accessible and usable without a mouse, and our products are screen reader compatible, with proper heading structure and ARIA labels. Our accessibility features don't send analytics or tracking data to our servers. This privacy policy is written in plain language to be understandable to the general public, not just lawyers. The website and this privacy policy are WCAG 2.2 AAA compliant, meeting the highest accessibility standard.
 
 ### Privacy for All
 
-Privacy is not a luxury - it's a right for everyone. People with disabilities deserve privacy without compromising accessibility. Low-income individuals deserve privacy when seeking assistance. Non-English speakers deserve privacy when using translation features. Children and families deserve privacy when researching programs. We designed this website so that accessibility features work without server tracking, ensuring privacy and accessibility are not in conflict.
+Privacy is not a luxury - it's a right for everyone. People with disabilities deserve privacy without compromising accessibility. Low-income individuals deserve privacy when seeking assistance. Non-English speakers deserve privacy when using translation features. Children and families deserve privacy when researching programs. We designed our services so that accessibility features work without tracking, ensuring privacy and accessibility are not in conflict.
 
 ---
 
