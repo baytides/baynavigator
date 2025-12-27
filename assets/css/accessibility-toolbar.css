@@ -338,16 +338,9 @@
    Comprehensive styling for simplified content
    ============================================ */
 
-/* Show simple language summaries when mode is enabled */
-body.simple-language .simple-language-summary,
-body.simple-language .simple-language-helper,
-body.simple-language .simple-language-tip {
-  display: block;
-}
-
-/* Base summary box style */
+/* Base summary box style - HIDDEN BY DEFAULT */
 .simple-language-summary {
-  display: none;
+  display: none !important;
   background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
   border: 2px solid #0ea5e9;
   border-radius: 12px;
@@ -371,9 +364,16 @@ body.simple-language .simple-language-tip {
   margin-bottom: 8px;
 }
 
+/* Show simple language summaries when mode is enabled */
+body.simple-language .simple-language-summary,
+body.simple-language .simple-language-helper,
+body.simple-language .simple-language-tip {
+  display: block !important;
+}
+
 /* Inline helper text that appears next to elements */
 .simple-language-helper {
-  display: none;
+  display: none !important;
   background: #fef9c3;
   border: 1px solid #facc15;
   border-radius: 6px;
@@ -390,7 +390,7 @@ body.simple-language .simple-language-tip {
 
 /* Tip boxes for additional context */
 .simple-language-tip {
-  display: none;
+  display: none !important;
   background: #ecfdf5;
   border: 1px solid #10b981;
   border-left: 4px solid #10b981;
