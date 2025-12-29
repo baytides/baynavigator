@@ -1,10 +1,10 @@
 {
   "categories": [
     {
-      "id": "arts-culture",
-      "name": "Arts & Culture",
-      "icon": "🎨",
-      "programCount": 0
+      "id": "community",
+      "name": "Community",
+      "icon": "🏘️",
+      "programCount": 51
     },
     {
       "id": "education",
@@ -13,22 +13,46 @@
       "programCount": 5
     },
     {
+      "id": "equipment",
+      "name": "Equipment",
+      "icon": "🔧",
+      "programCount": 10
+    },
+    {
+      "id": "finance",
+      "name": "Finance",
+      "icon": "💰",
+      "programCount": 16
+    },
+    {
       "id": "food",
       "name": "Food",
       "icon": "🍎",
       "programCount": 26
     },
     {
-      "id": "health-wellness",
-      "name": "Health & Wellness",
+      "id": "health",
+      "name": "Health",
       "icon": "💊",
-      "programCount": 0
+      "programCount": 14
     },
     {
-      "id": "housing-utilities",
-      "name": "Housing & Utilities",
-      "icon": "🏠",
-      "programCount": 0
+      "id": "legal",
+      "name": "Legal",
+      "icon": "⚖️",
+      "programCount": 9
+    },
+    {
+      "id": "library_resources",
+      "name": "Library Resources",
+      "icon": "📖",
+      "programCount": 25
+    },
+    {
+      "id": "pet_resources",
+      "name": "Pet Resources",
+      "icon": "🐾",
+      "programCount": 24
     },
     {
       "id": "recreation",
@@ -37,16 +61,22 @@
       "programCount": 28
     },
     {
+      "id": "technology",
+      "name": "Technology",
+      "icon": "💻",
+      "programCount": 16
+    },
+    {
       "id": "transportation",
       "name": "Transportation",
       "icon": "🚌",
       "programCount": 23
     },
     {
-      "id": "other",
-      "name": "Other Resources",
-      "icon": "📋",
-      "programCount": 0
+      "id": "utilities",
+      "name": "Utilities",
+      "icon": "🏠",
+      "programCount": 98
     }
   ]
 }

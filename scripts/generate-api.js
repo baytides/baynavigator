@@ -26,14 +26,19 @@ if (!fs.existsSync(PROGRAMS_DIR)) {
 
 // Category metadata with icons
 const CATEGORY_METADATA = {
-  'arts-culture': { name: 'Arts & Culture', icon: '🎨' },
+  'community': { name: 'Community', icon: '🏘️' },
   'education': { name: 'Education', icon: '📚' },
+  'equipment': { name: 'Equipment', icon: '🔧' },
+  'finance': { name: 'Finance', icon: '💰' },
   'food': { name: 'Food', icon: '🍎' },
-  'health-wellness': { name: 'Health & Wellness', icon: '💊' },
-  'housing-utilities': { name: 'Housing & Utilities', icon: '🏠' },
+  'health': { name: 'Health', icon: '💊' },
+  'legal': { name: 'Legal', icon: '⚖️' },
+  'library_resources': { name: 'Library Resources', icon: '📖' },
+  'pet_resources': { name: 'Pet Resources', icon: '🐾' },
   'recreation': { name: 'Recreation', icon: '⚽' },
+  'technology': { name: 'Technology', icon: '💻' },
   'transportation': { name: 'Transportation', icon: '🚌' },
-  'other': { name: 'Other Resources', icon: '📋' }
+  'utilities': { name: 'Utilities', icon: '🏠' }
 };
 
 // Eligibility metadata with icons
