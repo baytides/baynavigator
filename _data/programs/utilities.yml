@@ -2530,10 +2530,25 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto Utilities offers one of the most generous heat pump water heater rebates in the region, with affordable financing options that make the switch accessible for all residents.
+  what_they_offer: |
+    - $3,500 rebate for heat pump water heater
+    - Full-service installation as low as $2,300
+    - Payment plan: $1,100 with $20/month for 5 years
+    - Replaces gas water heater
+    - High efficiency and lower operating costs
+    - Professional installation available
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Reserve funds online before installation
+    3. Choose full-service or DIY installation
+    4. Have heat pump water heater installed within 120 days
+    5. Submit final documentation
+    6. Select payment option (full rebate or financing)
+  phone: '650-329-2161'
   benefit: $3,500 rebate for replacing gas water heater with heat pump water heater;
     full-service installation as low as $2,300 or $1,100 with $20/month payments for
     5 years
-  how_to_use: Reserve funds online, install within 120 days, submit final documentation
   timeframe: Ongoing
   link: https://www.paloalto.gov/switch
   link_text: Apply
@@ -2544,8 +2559,23 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto Utilities offers rebates for replacing gas furnaces with efficient heat pump HVAC systems that provide both heating and cooling from a single unit.
+  what_they_offer: |
+    - $2,500 rebate for heat pump HVAC
+    - Replaces gas furnace
+    - Single system for heating and cooling
+    - High efficiency operation
+    - Lower energy costs
+    - Reduced carbon footprint
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Reserve funds online before installation
+    3. Purchase qualifying heat pump HVAC system
+    4. Have professionally installed within 120 days
+    5. Submit final documentation and receipts
+    6. Receive rebate after approval
+  phone: '650-329-2161'
   benefit: $2,500 rebate for replacing gas furnace with heat pump HVAC system
-  how_to_use: Reserve funds online, install within 120 days, submit final documentation
   timeframe: Ongoing
   link: https://www.paloalto.gov/electrifymyhome
   link_text: Apply
@@ -2556,9 +2586,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto Utilities rewards residents who fully electrify their homes and disconnect from natural gas service, supporting the city's sustainability goals.
+  what_they_offer: |
+    - $2,500 incentive for gas meter removal
+    - Rewards full home electrification
+    - Stacks with other electrification rebates
+    - Eliminates gas service charges
+    - Zero-emission home achievement
+    - Supports city climate goals
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Replace all gas appliances with electric
+    3. Request gas meter disconnection from CPAU
+    4. Confirm gas meter has been removed
+    5. Submit documentation of electrification
+    6. Receive incentive after verification
+  phone: '650-329-2161'
   benefit: $2,500 incentive for fully electrifying your home with confirmation of
     gas meter removal
-  how_to_use: Complete full home electrification and confirm gas meter removal
   timeframe: Ongoing
   link: https://www.paloalto.gov/electrifymyhome
   link_text: Learn More
@@ -2569,9 +2614,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto Utilities provides substantial rebates for installing EV charging infrastructure at multi-family buildings, schools, and non-profit organizations.
+  what_they_offer: |
+    - Up to $80,000 in rebates
+    - For schools and educational facilities
+    - For non-profit organizations
+    - For multi-family residential buildings
+    - For mixed-use properties
+    - Supports EV adoption in shared spaces
+  how_to_get_it: |
+    1. Must be eligible property type in Palo Alto
+    2. Must be CPAU electric customer
+    3. Apply through CPAU before installation
+    4. Get project approval
+    5. Install EV charging infrastructure
+    6. Submit documentation for rebate
+  phone: '650-329-2161'
   benefit: Up to $80,000 for installing EV chargers at schools, non-profits, multi-family,
     and mixed-use properties
-  how_to_use: Apply through CPAU; subject to funding availability
   timeframe: While funds last
   link: https://www.paloalto.gov/EV
   link_text: Apply
@@ -2582,10 +2642,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto Utilities helps offset the cost of electrical infrastructure upgrades needed for EV charger installations, making charging infrastructure more affordable.
+  what_they_offer: |
+    - Up to $10,000 for single-family homes
+    - Up to $100,000 for multi-family/schools/non-profits
+    - Covers utility service connection fees
+    - Covers substructure work costs
+    - Enables higher-capacity EV charging
+    - Reduces infrastructure barriers
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Plan EV charger installation requiring upgrades
+    3. Apply through CPAU before work begins
+    4. Get project scope approved
+    5. Complete infrastructure upgrades
+    6. Submit documentation for rebate
+  phone: '650-329-2161'
   benefit: Up to $10,000 for single-family homes or $100,000 for schools/non-profits/multi-family
     for infrastructure upgrades related to EV charger installation
-  how_to_use: Apply through CPAU for utility service connection fee and substructure
-    work costs
   timeframe: Ongoing
   link: https://www.paloalto.gov/EV
   link_text: Apply
@@ -2596,9 +2670,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto offers rebates for converting water-intensive lawns and pools to sustainable, drought-tolerant landscaping through a partnership with Valley Water.
+  what_they_offer: |
+    - Up to $4 per square foot rebate
+    - For lawn to low-water landscape conversion
+    - For swimming pool removal and conversion
+    - Sustainable landscaping options
+    - Significant water savings
+    - Artificial turf not eligible
+  how_to_get_it: |
+    1. Must be a City of Palo Alto water customer
+    2. Apply through Valley Water before starting
+    3. Get project pre-approved
+    4. Convert lawn or pool to sustainable landscape
+    5. Complete project per guidelines
+    6. Submit final documentation for rebate
+  phone: '650-329-2161'
   benefit: Up to $4 per sq ft for converting lawn and/or swimming pool to sustainable,
     low-water-use landscape; artificial turf not eligible
-  how_to_use: Apply through Valley Water before starting work
   timeframe: Ongoing
   link: https://watersavings.org
   link_text: Apply
@@ -2609,9 +2698,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto offers rebates for installing graywater systems that reuse washing machine water for landscape irrigation, reducing water consumption.
+  what_they_offer: |
+    - Up to $400 rebate
+    - For laundry-to-landscape graywater systems
+    - Reuses washer rinse water
+    - Irrigates landscape with recycled water
+    - Reduces potable water use
+    - Sustainable water management
+  how_to_get_it: |
+    1. Must be a City of Palo Alto water customer
+    2. Apply through Valley Water before starting
+    3. Get project pre-approved
+    4. Install graywater laundry-to-landscape system
+    5. Ensure proper installation and connections
+    6. Submit final documentation for rebate
+  phone: '650-329-2161'
   benefit: Up to $400 for installing graywater laundry-to-landscape system to direct
     washer rinse water to landscape
-  how_to_use: Apply through Valley Water before starting work
   timeframe: Ongoing
   link: https://watersavings.org
   link_text: Apply
@@ -2622,9 +2726,24 @@
   area: City of Palo Alto
   eligibility:
   - everyone
+  description: City of Palo Alto offers rebates for various stormwater management features that capture and filter rainwater, reducing runoff and protecting local waterways.
+  what_they_offer: |
+    - Rebates for rain barrels
+    - Rebates for cisterns
+    - Rebates for pervious pavement
+    - Rebates for rain gardens
+    - Reduces stormwater runoff
+    - Protects local water quality
+  how_to_get_it: |
+    1. Must be a City of Palo Alto property owner
+    2. Choose qualifying stormwater feature
+    3. Apply through City of Palo Alto
+    4. Obtain building permit if required
+    5. Install stormwater management feature
+    6. Submit documentation for rebate
+  phone: '650-329-2161'
   benefit: Rebates for rain barrels, cisterns, pervious pavement, and rain gardens
     to reduce stormwater runoff
-  how_to_use: Apply through City of Palo Alto; some features require building permit
   timeframe: Ongoing
   link: https://www.paloalto.gov/stormwater
   link_text: Apply
