@@ -4,9 +4,23 @@
   area: San Mateo County
   eligibility:
   - disability
+  description: The Center for Independence of Individuals with Disabilities (CID) provides portable backup batteries to individuals who depend on electricity for medical equipment during Public Safety Power Shutoffs (PSPS).
+  what_they_offer: |
+    - Portable backup battery loans during PSPS events
+    - Batteries sized for medical equipment (CPAP, oxygen, etc.)
+    - No cost to borrow
+    - Priority support for Medical Baseline customers
+    - Advance notification of PSPS events
+  how_to_get_it: |
+    1. Enroll in PG&E's Medical Baseline program
+    2. Register with CID's PSPS preparedness program
+    3. Provide medical documentation of equipment needs
+    4. When PSPS is announced, contact CID to arrange battery pickup
+    5. Return battery after power is restored
+  phone: '650-645-1780'
+  address: 2001 Winward Way, Suite 103, San Mateo, CA 94404
   benefit: Borrow portable batteries during Public Safety Power Shutoffs for those
     requiring electricity for medical reasons
-  how_to_use: Sign up for Medical Baseline program and contact CID during PSPS events
   timeframe: During PSPS events
   link: https://www.cidsanmateo.org/services/ddar-psps-prepardness.php
   link_text: Learn More
@@ -17,8 +31,21 @@
   area: San Francisco
   eligibility:
   - low-income
+  description: CleanPowerSF is San Francisco's community choice energy program that provides 100% renewable electricity to residents and businesses, with additional bill relief options for qualifying low-income customers.
+  what_they_offer: |
+    - 100% renewable electricity at competitive rates
+    - Automatic enrollment for SF residents and businesses
+    - Bill relief programs for low-income customers
+    - SuperGreen option for 100% CA solar/wind
+    - Combined savings with PG&E CARE/FERA programs
+  how_to_get_it: |
+    1. CleanPowerSF enrollment is automatic for SF residents
+    2. For bill relief, enroll in PG&E's CARE or FERA program
+    3. CARE/FERA discounts apply to both PG&E delivery and CleanPowerSF generation
+    4. Contact CleanPowerSF for additional assistance options
+    5. Low-income customers can request rate comparisons
+  phone: '415-554-0773'
   benefit: Additional bill-relief options for qualifying customers
-  how_to_use: Check PG&E or local power provider programs
   timeframe: Limited funding
   link: https://www.cleanpowersf.org
   link_text: Learn More
@@ -29,8 +56,22 @@
   area: Alameda County
   eligibility:
   - low-income
+  description: The East Bay Municipal Utility District (EBMUD) Customer Assistance Program provides significant discounts on water and wastewater bills for income-eligible households in Alameda and Contra Costa counties.
+  what_they_offer: |
+    - 35% discount on water and wastewater bills (Tier 1)
+    - 50% discount for households at 100% federal poverty level (Tier 2)
+    - Crisis assistance for customers facing shutoff
+    - Flexible payment arrangements
+    - Free leak detection assistance
+  how_to_get_it: |
+    1. Check income eligibility (based on federal poverty guidelines)
+    2. Download application from EBMUD website or call to request
+    3. Provide proof of income (tax return, benefit letter, pay stubs)
+    4. Submit application by mail, email, or in person
+    5. Renew every two years to maintain discount
+  phone: '866-403-2683'
+  address: 375 11th Street, Oakland, CA 94607
   benefit: 35-50% discount on water and wastewater bills for income-eligible customers
-  how_to_use: Apply through EBMUD
   timeframe: Ongoing
   link: https://www.ebmud.com/customers/account/assistance-programs/
   link_text: Apply
@@ -41,9 +82,22 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The Low Income Home Energy Assistance Program (LIHEAP) is a federally funded program that helps low-income households pay their energy bills and make energy-efficient home improvements.
+  what_they_offer: |
+    - Up to $3,000 per year for energy bill assistance
+    - Help preventing utility disconnection
+    - Energy efficiency improvements (weatherization)
+    - Energy-related home repairs
+    - Crisis assistance for emergencies
+    - Assistance with heating and cooling costs
+  how_to_get_it: |
+    1. Find your local LIHEAP provider through CSD website
+    2. Check income eligibility (typically 60% of state median income)
+    3. Gather documents: ID, utility bills, income verification
+    4. Submit application through local Community Action Agency
+    5. If approved, payment goes directly to utility company
   benefit: Up to $3,000 per year to help pay energy bills, avoid disconnection, and
     pay for energy efficiency improvements and energy-related home repairs
-  how_to_use: Apply via local agency
   timeframe: Funding cycles
   link: https://www.csd.ca.gov/energybills
   link_text: Apply
@@ -54,10 +108,23 @@
   area: Statewide
   eligibility:
   - disability
+  description: The Medical Baseline Allowance program provides additional low-cost energy to customers with qualifying medical conditions that require extra electricity or gas, and includes priority notification before power shutoffs.
+  what_they_offer: |
+    - Additional baseline energy at lowest tier rates
+    - 500 extra kWh of electricity per month
+    - 25 extra therms of gas per month (for heating)
+    - Advance notification of Public Safety Power Shutoffs (PSPS)
+    - Protection from disconnection during extreme weather
+    - Eligibility for free portable battery program
+  how_to_get_it: |
+    1. Have doctor complete Medical Baseline certification form
+    2. Qualifying conditions include: life-support equipment, heating/cooling for medical conditions, CPAP/BiPAP, electric wheelchair, etc.
+    3. Submit form to your utility provider (PG&E, SCE, SDG&E, etc.)
+    4. Recertify every 2 years (or as required)
+    5. Contact utility immediately if medical equipment is affected by outage
   benefit: Extra low-cost energy allowance for customers with qualifying medical conditions
     requiring additional electricity or gas (including CPAP); also get alerted before
     Public Safety Power Shutoffs
-  how_to_use: Apply through your utility provider (PG&E, etc.)
   timeframe: Ongoing
   link: https://www.cpuc.ca.gov/consumer-support/financial-assistance-savings-and-discounts/medical-baseline
   link_text: Learn More
@@ -68,9 +135,22 @@
   area: San Mateo County
   eligibility:
   - low-income
+  description: Peninsula Clean Energy offers e-bike rebates to help income-qualified San Mateo County residents transition to clean transportation, reducing both costs and carbon emissions.
+  what_they_offer: |
+    - Up to $1,000 rebate for new electric bicycle
+    - Available to CARE or FERA program participants
+    - Can combine with state CARB e-bike rebate
+    - Works with most e-bike retailers
+    - Covers standard and cargo e-bikes
+  how_to_get_it: |
+    1. Must be a Peninsula Clean Energy customer
+    2. Must be enrolled in PG&E's CARE or FERA program
+    3. Purchase a new qualifying electric bicycle
+    4. Submit rebate application with proof of purchase
+    5. Receive rebate check within 6-8 weeks
+  phone: '866-966-0110'
   benefit: Up to $1,000 rebate for electric bike; must participate in CARE or FERA
     program; can combine with other e-bike rebates
-  how_to_use: Apply through Peninsula Clean Energy
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/rebates-offers/e-bikes/
   link_text: Apply
@@ -82,9 +162,24 @@
   eligibility:
   - low-income
   - everyone
+  description: Peninsula Clean Energy offers rebates for San Mateo County residents to replace gas furnaces with efficient electric heat pumps that provide both heating and cooling.
+  what_they_offer: |
+    - $1,500 base rebate for heat pump installation
+    - Additional $1,000 for CARE/FERA customers ($2,500 total)
+    - Replaces gas furnace with electric heat pump
+    - Provides both heating and air conditioning
+    - Can combine with BayREN and federal incentives
+    - Access to vetted contractor network
+  how_to_get_it: |
+    1. Verify you're a Peninsula Clean Energy customer
+    2. Get quotes from licensed HVAC contractors
+    3. Choose a qualifying heat pump system
+    4. Complete installation with required permits
+    5. Submit rebate application with documentation
+    6. Receive rebate check after approval
+  phone: '866-966-0110'
   benefit: $1,500 rebate to replace gas heater/furnace with electric heat pump; CARE
     customers get additional $1,000
-  how_to_use: Apply through Peninsula Clean Energy
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/home-upgrade-services/heating-and-cooling-upgrades/
   link_text: Apply
@@ -95,10 +190,27 @@
   area: San Mateo County
   eligibility:
   - low-income
+  description: Peninsula Clean Energy's Home Upgrade Services provides no-cost electrification for income-eligible homeowners, converting gas appliances to electric with a full-service approach from assessment to installation.
+  what_they_offer: |
+    - Free in-home energy assessment
+    - No-cost installation of electric appliances
+    - Heat pump water heaters and HVAC systems
+    - Induction cooktops and electric dryers
+    - Electrical panel upgrades if needed
+    - All permits and inspections handled
+    - Pre-vetted, quality contractors
+    - Fixed, transparent pricing
+  how_to_get_it: |
+    1. Complete online eligibility survey
+    2. Must own single-family home in San Mateo County
+    3. Meet income guidelines (typically 80% AMI or below)
+    4. Schedule free in-home assessment
+    5. Review and approve recommended upgrades
+    6. PCE coordinates installation and rebates
+  phone: '866-966-0110'
   benefit: No-cost installation services for income-eligible single-family homeowners
     to convert gas appliances to electric; includes assessment, pre-vetted contractor,
     permits, rebates, and fixed pricing
-  how_to_use: Complete eligibility survey to schedule in-home assessment
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/home-electrification/
   link_text: Check Eligibility
@@ -109,9 +221,24 @@
   area: San Mateo County
   eligibility:
   - low-income
+  description: Peninsula Clean Energy helps income-qualified San Mateo County residents afford electric vehicles with a $2,000 rebate toward used plug-in hybrids or fully-electric vehicles.
+  what_they_offer: |
+    - $2,000 rebate for used EV purchase
+    - Covers plug-in hybrid and fully-electric vehicles
+    - Must purchase from licensed dealer
+    - Can combine with federal tax credits
+    - Can combine with other state/local rebates
+    - Stackable with Clean Cars for All program
+  how_to_get_it: |
+    1. Verify you're a Peninsula Clean Energy customer
+    2. Confirm income eligibility (CARE/FERA enrollment)
+    3. Purchase qualifying used EV from licensed dealer
+    4. Apply within 180 days of purchase
+    5. Submit proof of purchase and vehicle registration
+    6. Receive rebate check after approval
+  phone: '866-966-0110'
   benefit: $2,000 toward purchase of used plug-in hybrid or fully-electric vehicle
     from dealer; can combine with other rebates and tax credits
-  how_to_use: Apply through Peninsula Clean Energy after purchase
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/rebates-offers/ev-rebate-program/
   link_text: Apply
@@ -123,11 +250,26 @@
   eligibility:
   - low-income
   - everyone
+  description: Peninsula Clean Energy offers substantial rebates for San Mateo County residents to replace gas or electric water heaters with efficient heat pump water heaters.
+  what_they_offer: |
+    - $2,500 rebate for replacing gas water heater
+    - $500 rebate for replacing electric resistance water heater
+    - Additional $1,000 for CARE/FERA customers
+    - Additional $1,000 for electrical panel upgrade
+    - Up to $4,000 total rebate possible
+    - Can combine with zero-interest loan program
+    - Access to pre-vetted contractors
+  how_to_get_it: |
+    1. Verify you're a Peninsula Clean Energy customer
+    2. Get quotes from licensed plumbers/contractors
+    3. Choose a qualifying heat pump water heater
+    4. Complete installation with required permits
+    5. Submit rebate application with documentation
+    6. Optional: Apply for zero-interest loan for remaining costs
+  phone: '866-966-0110'
   benefit: Up to $4,000 rebate for replacing water heater with electric heat pump
     ($500 for electric replacement, $2,500 for gas replacement, plus $1,000 for CARE
     customers and $1,000 for electrical panel upgrade)
-  how_to_use: Apply through Peninsula Clean Energy; can combine with zero-interest
-    loan
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/home-upgrade-services/water-heating-upgrades/
   link_text: Apply
@@ -138,11 +280,27 @@
   area: San Mateo County
   eligibility:
   - everyone
+  description: Peninsula Clean Energy offers zero-interest financing to help San Mateo County residents electrify their homes without upfront costs, with convenient repayment through monthly utility bills.
+  what_they_offer: |
+    - Up to $10,000 zero-interest loan
+    - No money down required
+    - 5-year repayment term
+    - Covers heat pump water heaters
+    - Covers heat pump HVAC systems
+    - Covers electrical panel upgrades
+    - Covers energy efficiency improvements
+    - Repayment on monthly electric bill
+  how_to_get_it: |
+    1. Must be a Peninsula Clean Energy customer
+    2. Choose qualifying electrification project
+    3. Get quotes from licensed contractors
+    4. Apply for financing through PCE
+    5. Complete installation
+    6. Loan payments added to monthly electric bill
+  phone: '866-966-0110'
   benefit: Up to $10,000 zero-interest loan for electric heat pump water heaters,
     heating/AC, electrical panel, and energy efficiency upgrades; no money down, 5-year
     term
-  how_to_use: Apply through Peninsula Clean Energy; repayments included on monthly
-    electric bill
   timeframe: Ongoing
   link: https://www.peninsulacleanenergy.com/residential/financing/
   link_text: Apply
@@ -153,9 +311,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: PG&E's Arrearage Management Plan helps CARE-enrolled customers reduce their past-due utility debt by forgiving up to $8,000 over 12 months when they make consistent on-time payments.
+  what_they_offer: |
+    - Up to $8,000 in debt forgiveness
+    - 1/12 of debt forgiven each month
+    - Must make on-time payments for 12 months
+    - Prevents disconnection while enrolled
+    - Can re-enroll if you fall behind
+    - Works alongside CARE discount
+  how_to_get_it: |
+    1. Must be enrolled in PG&E CARE program
+    2. Must owe at least $500 on your account
+    3. Account must be more than 90 days past due
+    4. Contact PG&E or apply online to enroll
+    5. Make on-time monthly payments for 12 months
+    6. 1/12 of your debt is forgiven each month you pay on time
+  phone: '800-743-5000'
   benefit: Save up to $8,000 on overdue utility bills for CARE customers; must owe
     at least $500 and be more than 90 days past due
-  how_to_use: Enroll in CARE first, then apply for AMP
   timeframe: Ongoing
   link: https://www.pge.com/en/account/billing-and-assistance/financial-assistance/arrearage-management-plan-amp.html
   link_text: Apply
@@ -166,9 +339,24 @@
   area: Statewide
   eligibility:
   - everyone
+  description: PG&E's Automated Response Technology Program rewards customers for enrolling smart home devices that can automatically adjust energy use during peak demand periods, helping stabilize the grid.
+  what_they_offer: |
+    - $25 enrollment bonus per device
+    - Monthly lottery entry for $500 prize
+    - Eligible devices: smart thermostats, batteries, EV chargers
+    - Automatic adjustments during peak times
+    - Helps reduce energy costs
+    - Supports grid reliability
+  how_to_get_it: |
+    1. Must be a PG&E residential customer
+    2. Own a compatible smart device (Nest, ecobee, Tesla, etc.)
+    3. Device must be connected to Wi-Fi
+    4. Enroll through PG&E's website or app
+    5. Allow device to auto-adjust during demand events
+    6. Receive $25 bonus and lottery entries
+  phone: '800-743-5000'
   benefit: Get paid $25 to enroll smart devices (thermostats, batteries, EV chargers)
     for energy optimization; monthly lottery for $500 prize
-  how_to_use: Enroll eligible smart devices connected to Wi-Fi
   timeframe: Ongoing
   link: https://www.pge.com/en/save-energy-and-money/energy-saving-programs/demand-response-programs/automated-response-technology.html
   link_text: Enroll
@@ -179,9 +367,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: PG&E's CARE (California Alternate Rates for Energy) and FERA (Family Electric Rate Assistance) programs provide significant utility bill discounts for income-qualified households.
+  what_they_offer: |
+    - CARE: 35% discount on electricity, 20% on natural gas
+    - FERA: 18% discount on electricity for larger households
+    - Gateway to many other programs and rebates
+    - Protection from service disconnection during extreme weather
+    - Eligibility for Medical Baseline if medically necessary
+    - Automatic re-enrollment every 2 years
+  how_to_get_it: |
+    1. Check income eligibility (based on household size and income)
+    2. CARE: Income at or below 200% federal poverty level
+    3. FERA: 3+ person household, slightly higher income limits
+    4. Apply online at pge.com/care
+    5. Or call PG&E or submit mail-in application
+    6. Provide income verification if requested
+  phone: '800-743-5000'
   benefit: 35% discount on electricity bills and 20% on natural gas through CARE;
     enrollment also qualifies for more incentives from other programs
-  how_to_use: Apply online or call PG&E
   timeframe: Ongoing
   link: https://www.pge.com/care
   link_text: Apply
@@ -192,9 +395,26 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The Energy Savings Assistance Program provides free home energy upgrades and weatherization services to income-qualified households, helping reduce energy bills and improve comfort.
+  what_they_offer: |
+    - Free energy assessment of your home
+    - LED lighting upgrades
+    - New energy-efficient refrigerator
+    - Weatherization (insulation, caulking, weather stripping)
+    - HVAC repairs or replacement
+    - Heat pump water heater installation
+    - Smart power strips
+    - All services and equipment at no cost
+  how_to_get_it: |
+    1. Check income eligibility (typically 200% federal poverty level)
+    2. Contact PG&E to request free assessment
+    3. Technician visits home to evaluate needs
+    4. Receive free installation of qualifying upgrades
+    5. Renters and homeowners both eligible
+    6. May qualify through CARE enrollment
+  phone: '800-743-5000'
   benefit: Free home upgrades and repairs including heat pump water heaters, furnaces,
     lighting, refrigerators; all at no charge for income-eligible customers
-  how_to_use: Apply via PG&E for free assessment
   timeframe: Ongoing
   link: https://www.pge.com/en/save-energy-and-money/energy-saving-programs/energy-savings-assistance-program.html
   link_text: Apply
@@ -205,10 +425,25 @@
   area: Statewide
   eligibility:
   - everyone
+  description: PG&E provides rebates for generators and portable battery storage to help customers in high fire-threat areas prepare for power outages during Public Safety Power Shutoffs.
+  what_they_offer: |
+    - $300 rebate on generator purchase
+    - $300 rebate on portable battery storage
+    - For customers in Tier 2 or 3 High Fire-Threat Districts
+    - Must be enrolled in CARE or FERA
+    - Helps maintain power during PSPS events
+    - One rebate per household per year
+  how_to_get_it: |
+    1. Verify you're in Tier 2 or 3 High Fire-Threat District
+    2. Must be enrolled in CARE or FERA program
+    3. Purchase qualifying generator or battery
+    4. Apply online within 90 days of purchase
+    5. Submit proof of purchase and CARE/FERA enrollment
+    6. Receive rebate check
+  phone: '800-743-5000'
   benefit: $300 rebate on purchase of generator or battery storage for power outage
     preparedness; must be in Tier 2 or 3 High Fire-Threat District and enrolled in
     CARE or FERA
-  how_to_use: Check eligibility and apply through PG&E
   timeframe: Ongoing
   link: https://www.pge.com/en/outages-and-safety/outage-preparedness-and-support/general-outage-resources/generator-and-battery-rebate-program.html
   link_text: Apply
@@ -219,9 +454,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The Self-Generation Incentive Program (SGIP) Equity program provides substantial incentives for income-qualified households to install home battery storage, covering up to 85% of the cost.
+  what_they_offer: |
+    - 85% discount on battery storage systems
+    - $850 per kWh incentive
+    - Covers Tesla Powerwall, Enphase, and other brands
+    - Backup power during outages
+    - Can pair with solar for maximum savings
+    - Priority for Medical Baseline customers
+  how_to_get_it: |
+    1. Must meet income eligibility (CARE/FERA or similar)
+    2. Work with SGIP-registered contractor
+    3. Contractor submits application on your behalf
+    4. Get approved before installation
+    5. Install qualifying battery storage system
+    6. Incentive applied to project cost
+  phone: '800-743-5000'
   benefit: 85% discount on backup battery storage ($850 per kWh) through CPUC's Self-Generation
     Incentive Program Equity program
-  how_to_use: Apply via PG&E
   timeframe: Ongoing
   link: https://www.pge.com/en/save-energy-and-money/rebates-and-incentives/self-generation-incentive-program.html
   link_text: Apply
@@ -232,9 +482,24 @@
   area: Statewide
   eligibility:
   - everyone
+  description: PG&E's Induction Cooktop Test Drive lets customers try induction cooking at home before making a purchase decision, with a free two-week loaner including everything needed to get started.
+  what_they_offer: |
+    - Free two-week induction cooktop loan
+    - Portable single-burner induction unit
+    - Induction-compatible pan included
+    - Instructions and cooking tips
+    - Pre-paid return shipping label
+    - No cost or obligation to buy
+  how_to_get_it: |
+    1. Must be a PG&E customer
+    2. Visit the Induction Loaner Library website
+    3. Reserve an available induction cooktop
+    4. Receive unit by mail
+    5. Try it for two weeks
+    6. Return using included shipping label
+  phone: '800-743-5000'
   benefit: Borrow induction cooktop unit for two weeks; includes cooktop, pan, and
     instructions with return shipping label
-  how_to_use: Request through PG&E
   timeframe: Ongoing
   link: https://pge-induction.myturn.com/library/?WT.mc_id=Vanity_inductionloaner
   link_text: Request
@@ -245,9 +510,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: PG&E's Match My Payment Program helps customers reduce past-due balances by matching every dollar they pay, up to $1,000, effectively cutting their debt in half.
+  what_they_offer: |
+    - PG&E matches your payments dollar-for-dollar
+    - Up to $1,000 in matching funds
+    - Pay $500, PG&E pays $500 for you
+    - Helps clear past-due balances faster
+    - One-time program (once per account)
+    - Available while funds last
+  how_to_get_it: |
+    1. Must be a PG&E residential customer
+    2. Must have at least $100 past due balance
+    3. Meet income eligibility requirements
+    4. Contact PG&E to check availability and enroll
+    5. Make payments toward your balance
+    6. PG&E matches each payment up to $1,000 total
+  phone: '800-743-5000'
   benefit: PG&E matches every dollar you pay up to $1,000 toward past due balance;
     must have at least $100 past due
-  how_to_use: Contact PG&E to enroll
   timeframe: While funds last
   link: https://www.pge.com/en/account/billing-and-assistance/financial-assistance/match-my-payment-program.html
   link_text: Apply
@@ -258,10 +538,25 @@
   area: Statewide
   eligibility:
   - everyone
+  description: PG&E offers a substantial rebate for permanent home battery storage to customers who have experienced frequent Enhanced Powerline Safety Settings (EPSS) outages, helping them maintain power reliability.
+  what_they_offer: |
+    - $7,500 rebate for permanent battery storage
+    - For customers with 5+ EPSS outages since Jan 2023
+    - Must enroll in Automated Demand Response
+    - Must be on time-of-use rate plan
+    - Can combine with SGIP incentives
+    - Covers Tesla Powerwall, Enphase, and other systems
+  how_to_get_it: |
+    1. Use PG&E lookup tool to check EPSS outage history
+    2. Must have 5+ outages since January 1, 2023
+    3. Enroll in Automated Demand Response program
+    4. Switch to time-of-use rate plan
+    5. Apply and get approved before installation
+    6. Install qualifying battery storage system
+  phone: '800-743-5000'
   benefit: $7,500 rebate on permanent battery storage; must have experienced 5+ Enhanced
     Powerline Safety Settings outages since January 1, 2023; must be enrolled in Automated
     Demand Response and on time-of-use rate plan
-  how_to_use: Use lookup tool to check eligibility; can combine with SGIP
   timeframe: Funds exhausted; check back in 2026
   link: https://www.pge.com/en/save-energy-and-money/rebates-and-incentives/permanent-battery-storage-rebate.html
   link_text: Check Status
@@ -272,9 +567,24 @@
   area: Statewide
   eligibility:
   - disability
+  description: PG&E provides free portable backup batteries to customers who depend on electricity for medical equipment and have experienced power shutoffs, ensuring they can maintain critical care during outages.
+  what_they_offer: |
+    - Free portable backup battery
+    - For Medical Baseline customers
+    - For Self-Identified Vulnerable customers
+    - Powers medical devices during outages
+    - For those who experienced PSPS or EPSS outages
+    - Battery shipped directly to your home
+  how_to_get_it: |
+    1. Must be enrolled in Medical Baseline program
+    2. Or registered as Self-Identified Vulnerable customer
+    3. Must rely on electricity for medical equipment
+    4. Must have experienced PSPS or EPSS outage
+    5. Apply through PG&E website or call
+    6. Battery shipped to your address at no cost
+  phone: '800-743-5000'
   benefit: Free portable battery for Medical Baseline or Self-Identified Vulnerable
     customers who rely on medical devices and experienced PSPS or EPSS outages
-  how_to_use: Apply through PG&E if eligible
   timeframe: Ongoing
   link: https://www.pge.com/en/account/billing-and-assistance/financial-assistance/portable-battery-program.html
   link_text: Apply
@@ -285,9 +595,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The REACH program provides emergency bill assistance for PG&E customers facing disconnection, offering up to $300 to help income-eligible households avoid losing power or gas service.
+  what_they_offer: |
+    - Up to $300 energy bill credit
+    - Helps prevent service disconnection
+    - For customers who received shutoff notice
+    - Available once every 12 months
+    - Payment goes directly to PG&E bill
+    - Can combine with other assistance programs
+  how_to_get_it: |
+    1. Must be income-eligible (up to 200% federal poverty level)
+    2. Must have received 15-day or 48-hour disconnection notice
+    3. Apply online or call REACH hotline
+    4. Provide proof of income if requested
+    5. Credit applied directly to your PG&E account
+    6. Can reapply after 12 months if needed
+  phone: '800-933-9677'
   benefit: Up to $300 energy credit for past-due bills if received 15-day or 48-hour
     disconnection notice for income-eligible customers; can apply once per 12 months
-  how_to_use: Apply after receiving disconnection notice
   timeframe: Ongoing
   link: https://www.pge.com/en/account/billing-and-assistance/financial-assistance/relief-for-energy-assistance-through-community-help.html
   link_text: Apply
@@ -298,9 +623,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: PG&E's Residential Charging Solutions Rebate covers up to 100% of the cost of home EV charging equipment and installation for income-qualified customers, making electric vehicle ownership more accessible.
+  what_they_offer: |
+    - Up to 100% rebate on EV charger cost
+    - Covers installation by licensed electrician
+    - PG&E-approved charging equipment
+    - Available for CARE/FERA customers
+    - Level 2 charging capability
+    - Faster home charging than standard outlet
+  how_to_get_it: |
+    1. Must be enrolled in CARE or FERA program
+    2. Must own or lease an electric vehicle
+    3. Choose PG&E-approved charging equipment
+    4. Hire licensed California electrician
+    5. Complete installation and inspection
+    6. Apply for rebate with documentation
+  phone: '800-743-5000'
   benefit: Up to 100% rebate to cover full cost of PG&E-approved EV charging equipment
     installed by licensed California electrician
-  how_to_use: Apply through PG&E; must use licensed electrician
   timeframe: While funds last
   link: https://www.pge.com/en/clean-energy/electric-vehicles/getting-started-with-electric-vehicles/residential-charging-solutions-rebate.html
   link_text: Apply
@@ -311,9 +651,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: PG&E offers a $4,000 rebate for income-qualified customers purchasing pre-owned electric vehicles, making EVs more affordable whether buying from dealers or private sellers.
+  what_they_offer: |
+    - $4,000 rebate for used EV purchase
+    - Covers Battery Electric Vehicles (BEV)
+    - Covers Plug-in Hybrid Electric Vehicles (PHEV)
+    - Purchase from dealer or private party
+    - Can combine with federal tax credits
+    - Can combine with other state/local rebates
+  how_to_get_it: |
+    1. Must be a PG&E customer
+    2. Meet income eligibility (CARE/FERA or income-qualified)
+    3. Purchase or lease qualifying used EV
+    4. Apply within 180 days of purchase
+    5. Submit proof of purchase and registration
+    6. Receive rebate after approval
+  phone: '800-743-5000'
   benefit: $4,000 rebate for pre-owned Battery Electric or Plug-in Hybrid Electric
     Vehicle from dealers or private parties; can combine with other incentives
-  how_to_use: Apply within 180 days after purchasing or leasing
   timeframe: Ongoing
   link: https://evrebates.pge.com/program-requirements
   link_text: Apply
@@ -324,9 +679,24 @@
   area: Statewide
   eligibility:
   - everyone
+  description: PG&E's V2X pilot program provides rebates for bidirectional EV chargers that can power your home using your electric vehicle's battery during outages or peak demand periods.
+  what_they_offer: |
+    - $2,500-$4,000 rebate for V2X charger
+    - Additional $1,500 for early adopters
+    - Powers home from EV battery
+    - Backup power during outages
+    - Can sell energy back to grid
+    - Compatible with select EVs (Ford F-150 Lightning, etc.)
+  how_to_get_it: |
+    1. Must be a PG&E residential customer
+    2. Own a V2X-compatible electric vehicle
+    3. Purchase approved bidirectional charger
+    4. Hire licensed electrician for installation
+    5. Apply through PG&E's V2X portal
+    6. Receive rebate after installation verification
+  phone: '800-743-5000'
   benefit: $2,500-$4,000 rebate for two-way charger to power home from EV battery;
     additional $1,500 for early adopters
-  how_to_use: Apply through PG&E with compatible car and equipment
   timeframe: Ongoing
   link: https://www.pge.com/en/clean-energy/electric-vehicles/getting-started-with-electric-vehicles/vehicle-to-everything-v2x-pilot-programs.html
   link_text: Apply
@@ -337,9 +707,23 @@
   area: Statewide
   eligibility:
   - everyone
+  description: WatterSaver is a demand response program that pays customers to enroll their smart electric water heaters, automatically shifting water heating to off-peak times to save money and support the grid.
+  what_they_offer: |
+    - $50 enrollment bonus
+    - $5 per month for participation
+    - Automatic water heating optimization
+    - Shifts heating to lower-cost times
+    - No change to hot water availability
+    - Smart control via Wi-Fi
+  how_to_get_it: |
+    1. Must have Wi-Fi-enabled electric water heater
+    2. Compatible brands include Rheem, A.O. Smith, Bradford White
+    3. Sign up on WatterSaver website
+    4. Connect water heater to Wi-Fi
+    5. Receive $50 enrollment bonus
+    6. Earn $5/month ongoing (program currently on hold)
   benefit: $50 to enroll wifi-enabled smart electric water heater and $5/month to
     participate; shifts water heating to lower cost times
-  how_to_use: Sign up with smart water heater
   timeframe: Program on hold; sign up for notifications
   link: https://www.watter-saver.com/
   link_text: Get Notified
@@ -350,9 +734,25 @@
   area: Bay Area-wide
   eligibility:
   - low-income
+  description: The Bay Area Air Quality Management District's Clean Cars for All program provides substantial incentives for income-qualified residents to replace older polluting vehicles with new or used electric vehicles.
+  what_they_offer: |
+    - $10,000-$12,000 rebate for EV purchase or lease
+    - New or used battery electric vehicles qualify
+    - Additional $2,000 for home EV charger
+    - Trade in pre-2008 gas or diesel vehicle
+    - Covers purchase or lease up to 4 years
+    - Can combine with federal tax credits
+  how_to_get_it: |
+    1. Must live in Bay Area (9-county region)
+    2. Household income at or below 400% federal poverty level
+    3. Own a registered pre-2008 gas/diesel vehicle
+    4. Vehicle must be running and pass smog
+    5. Apply and get pre-approved BEFORE purchase
+    6. Trade in old vehicle and buy/lease qualifying EV
+  phone: '415-749-4900'
+  address: 375 Beale Street, Suite 600, San Francisco, CA 94105
   benefit: $10,000-$12,000 rebate to buy or lease new or used battery electric car
     when trading in pre-2008 gas/diesel vehicle; plus up to $2,000 for EV charger
-  how_to_use: Trade in eligible vehicle and apply
   timeframe: While funding lasts
   link: https://www.baaqmd.gov/funding-and-incentives/residents/clean-cars-for-all
   link_text: Apply
@@ -363,9 +763,25 @@
   area: Bay Area-wide
   eligibility:
   - low-income
+  description: The Clean Cars for All program also offers rebates for hydrogen fuel cell vehicles, providing another zero-emission option for Bay Area residents replacing older polluting vehicles.
+  what_they_offer: |
+    - $10,000 rebate for fuel cell vehicle
+    - New or used fuel cell vehicles qualify
+    - Trade in pre-2007 gas or diesel vehicle
+    - Covers purchase or lease
+    - Zero emissions, hydrogen-powered
+    - Can combine with other incentives
+  how_to_get_it: |
+    1. Must live in Bay Area (9-county region)
+    2. Household income at or below 400% federal poverty level
+    3. Own a registered pre-2007 gas/diesel vehicle
+    4. Vehicle must be running and pass smog
+    5. Apply and get pre-approved BEFORE purchase
+    6. Trade in old vehicle and buy/lease fuel cell vehicle
+  phone: '415-749-4900'
+  address: 375 Beale Street, Suite 600, San Francisco, CA 94105
   benefit: $10,000 rebate to buy or lease new or used fuel cell car when trading in
     pre-2007 gas/diesel vehicle
-  how_to_use: Trade in eligible vehicle and apply
   timeframe: While funding lasts
   link: https://www.baaqmd.gov/funding-and-incentives/residents/clean-cars-for-all
   link_text: Apply
@@ -376,9 +792,25 @@
   area: Bay Area-wide
   eligibility:
   - low-income
+  description: For those who don't need a car, Clean Cars for All offers a mobility option combining an e-bike and transit credits, providing sustainable transportation alternatives when trading in an older vehicle.
+  what_they_offer: |
+    - $7,500 total value mobility package
+    - Electric bicycle included
+    - Bay Area transit credit/passes
+    - Trade in pre-2008 gas or diesel vehicle
+    - Supports car-free lifestyle
+    - Covers multiple transit agencies
+  how_to_get_it: |
+    1. Must live in Bay Area (9-county region)
+    2. Household income at or below 400% federal poverty level
+    3. Own a registered pre-2008 gas/diesel vehicle
+    4. Vehicle must be running and pass smog
+    5. Apply and get pre-approved
+    6. Trade in old vehicle and receive e-bike + transit credits
+  phone: '415-749-4900'
+  address: 375 Beale Street, Suite 600, San Francisco, CA 94105
   benefit: $7,500 for electric bike and Bay Area transit service when trading in pre-2008
     gas/diesel vehicle
-  how_to_use: Trade in eligible vehicle and apply
   timeframe: While funding lasts
   link: https://www.baaqmd.gov/funding-and-incentives/residents/clean-cars-for-all
   link_text: Apply
@@ -389,9 +821,25 @@
   area: Bay Area-wide
   eligibility:
   - everyone
+  description: BAAQMD's Vehicle Buy Back program pays $2,000 for older vehicles to be scrapped, reducing air pollution from high-emitting cars while providing owners compensation for retiring their vehicles.
+  what_they_offer: |
+    - $2,000 payment for your old vehicle
+    - Vehicle must be year 2000 or older
+    - Cars and small trucks eligible
+    - Vehicle must be running
+    - No income requirements
+    - Open to all Bay Area residents
+  how_to_get_it: |
+    1. Must own vehicle for at least 2 years
+    2. Vehicle registered in Bay Area for 2+ years
+    3. Vehicle must be year 2000 or older
+    4. Must be in running condition
+    5. Contact BAAQMD to schedule inspection
+    6. If approved, receive $2,000 and vehicle is scrapped
+  phone: '415-749-4900'
+  address: 375 Beale Street, Suite 600, San Francisco, CA 94105
   benefit: $2,000 to turn in working older car or small truck (2000 or older) for
     scrapping; must be registered in Bay Area for 2 years
-  how_to_use: Contact BAAQMD to schedule vehicle inspection
   timeframe: Ongoing
   link: https://www.baaqmd.gov/en/funding-and-incentives/residents/vehicle-buy-back-program
   link_text: Apply
@@ -403,10 +851,26 @@
   eligibility:
   - low-income
   - everyone
+  description: BAAQMD's Wood Stove Replacement Program helps Bay Area residents replace wood-burning stoves with clean electric heat pumps, improving air quality and reducing home heating costs.
+  what_they_offer: |
+    - Up to $6,500 base incentive for heat pump replacement
+    - Additional $4,000 for Food Stamps/WIC/SSI recipients
+    - Up to $10,500 total for income-qualified households
+    - Up to $1,000 for removal only (no replacement)
+    - Priority for disadvantaged communities
+    - Covers installation costs
+  how_to_get_it: |
+    1. Sign up for program notifications on BAAQMD website
+    2. Must have wood-burning stove or fireplace
+    3. Apply when program reopens (January 13, 2026)
+    4. Submit income documentation if claiming additional rebate
+    5. Get approved and schedule installation
+    6. Receive incentive after project completion
+  phone: '415-749-4900'
+  address: 375 Beale Street, Suite 600, San Francisco, CA 94105
   benefit: Up to $10,500 to replace wood-burning stove with electric heat pump ($6,500
     base + $4,000 for Food Stamps/WIC/SSI recipients); or up to $1,000 for removal
     only; preference for disadvantaged communities
-  how_to_use: Sign up for notification; program reopens January 13, 2026
   timeframe: Reopens January 13, 2026
   link: https://www.baaqmd.gov/en/funding-and-incentives/residents/clean-heet-program
   link_text: Sign Up for Notifications
@@ -417,8 +881,22 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The California Air Resources Board (CARB) E-Bike Incentive Project provides substantial point-of-sale discounts for income-qualified residents to purchase new electric bicycles.
+  what_they_offer: |
+    - Up to $2,000 instant discount on new e-bike
+    - Point-of-sale reduction (no waiting for rebate)
+    - Covers standard and cargo e-bikes
+    - Additional for adaptive e-bikes
+    - Available at participating retailers
+    - Vouchers released in rounds
+  how_to_get_it: |
+    1. Sign up for email notifications on CARB website
+    2. When vouchers available, apply online quickly
+    3. Meet income eligibility (typically 300% federal poverty level)
+    4. Receive voucher code if selected
+    5. Use voucher at participating e-bike retailer
+    6. Discount applied at checkout
   benefit: Up to $2,000 point-of-sale discount for new electric bicycle
-  how_to_use: Sign up to email list for notification of future rounds
   timeframe: Limited vouchers; sign up for notifications
   link: https://ww2.arb.ca.gov/our-work/programs/california-e-bike-incentive-project/about
   link_text: Sign Up
@@ -429,9 +907,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: California's Consumer Assistance Program offers payment to retire vehicles that have failed smog inspections, helping low-income residents get problem vehicles off the road.
+  what_they_offer: |
+    - $1,500 for vehicles that failed previous smog check
+    - $2,000 for vehicles that failed most recent inspection
+    - Vehicle must be retired (scrapped)
+    - No repair required before retiring
+    - Payment issued after vehicle retirement
+    - Helps reduce air pollution
+  how_to_get_it: |
+    1. Vehicle must have failed a smog check
+    2. Check income eligibility on BAR website
+    3. Must have owned and registered vehicle for 2+ years
+    4. Submit application through Bureau of Automotive Repair
+    5. Get vehicle dismantled at authorized facility
+    6. Receive payment after retirement confirmation
+  phone: '800-952-5210'
   benefit: $1,500-$2,000 to retire gas/diesel vehicle that failed smog check ($2,000
     if failed most recent inspection)
-  how_to_use: Apply through Bureau of Automotive Repair
   timeframe: Ongoing
   link: https://www.bar.ca.gov/cap/retirement
   link_text: Check Eligibility
@@ -442,10 +935,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: The Driving Clean Assistance Program provides comprehensive support for income-qualified Californians to trade in old gas vehicles for clean alternatives, including financial counseling and down payment help.
+  what_they_offer: |
+    - Up to $10,000 toward clean vehicle purchase
+    - Additional $2,000 charging/fueling card
+    - Alternative: $7,500 mobility option (e-bike + transit)
+    - Down payment assistance
+    - Financial counseling services
+    - Lender referrals for financing
+  how_to_get_it: |
+    1. Check income eligibility on DCAP website
+    2. MUST apply BEFORE trading in your car
+    3. Vehicle must meet age and emissions requirements
+    4. Complete application with income documentation
+    5. Get pre-approved before vehicle purchase
+    6. Trade in old vehicle and purchase/lease clean vehicle
   benefit: Up to $10,000 + $2,000 charge card or $7,500 mobility option for trading
     in old gas car; includes down payment assistance, financial counseling, and lender
     referral
-  how_to_use: Apply BEFORE trading in car
   timeframe: Ongoing
   link: https://drivingcleanca.org/about-us/dcap-eligibility/
   link_text: Check Eligibility
@@ -456,9 +963,23 @@
   area: Nationwide
   eligibility:
   - everyone
+  description: The federal 30C tax credit provides a 30% tax credit for installing electric vehicle charging equipment at home, available in eligible low-income and rural census tracts.
+  what_they_offer: |
+    - 30% tax credit on EV charger installation
+    - Up to $1,000 maximum credit
+    - Covers charger equipment and installation
+    - Available in eligible census tracts
+    - Reduces federal income tax owed
+    - Applies to primary and secondary homes
+  how_to_get_it: |
+    1. Check if your address is in eligible census tract
+    2. Use Rewiring America eligibility map tool
+    3. Purchase and install EV charging equipment
+    4. Keep all receipts and documentation
+    5. File IRS Form 8911 with tax return
+    6. Credit reduces your tax liability
   benefit: 30% tax credit up to $1,000 for installing EV charger at home in eligible
     areas; must install before June 30, 2026
-  how_to_use: Check eligibility map and claim on tax return
   timeframe: Through June 30, 2026
   link: https://homes.rewiringamerica.org/federal-incentives/30c-ev-charger-tax-credit
   link_text: Check Eligibility
@@ -469,9 +990,24 @@
   area: Statewide
   eligibility:
   - low-income
+  description: California's Weatherization Assistance Program provides free energy efficiency upgrades to help low-income households reduce energy costs and improve home comfort and safety.
+  what_they_offer: |
+    - Free home energy audit
+    - Insulation (attic, wall, floor)
+    - Air sealing and weatherstripping
+    - Heating system repairs or replacement
+    - Water heater repairs or replacement
+    - Minor home repairs for energy efficiency
+    - All services at no cost
+  how_to_get_it: |
+    1. Find your local weatherization provider
+    2. Check income eligibility (typically 200% federal poverty level)
+    3. Submit application with income documentation
+    4. Technician conducts home energy audit
+    5. Eligible improvements installed at no cost
+    6. Both homeowners and renters can apply
   benefit: Free energy efficiency upgrades to cut bills for low-income homeowners
     and renters
-  how_to_use: Apply through local agency
   timeframe: Ongoing
   link: https://www.csd.ca.gov/Pages/Assistance-HomeEnergyEfficiency.aspx
   link_text: Check Availability
@@ -482,10 +1018,26 @@
   area: Bay Area-wide
   eligibility:
   - low-income
+  description: BayREN's EASE Home Program covers 80% of home efficiency upgrade costs for income-qualified Bay Area homeowners, with a capped out-of-pocket maximum and vetted contractors.
+  what_they_offer: |
+    - 80% of upgrade costs covered by BayREN
+    - Your share capped at $1,000 maximum
+    - Insulation upgrades
+    - Duct sealing and HVAC improvements
+    - Help applying for additional rebates
+    - Fixed pricing with pre-vetted contractors
+    - No surprise costs
+  how_to_get_it: |
+    1. Check income eligibility (varies by household size)
+    2. Apply through BayREN website
+    3. Schedule free home energy assessment
+    4. Review recommended improvements and costs
+    5. BayREN handles rebate applications
+    6. Pay your capped share (max $1,000)
+  phone: '866-878-6008'
   benefit: BayREN covers 80% of cost for home efficiency measures (insulation, duct
     sealing); your share not to exceed $1,000; includes help with other rebates and
     fixed pricing with vetted contractors
-  how_to_use: Apply through BayREN
   timeframe: Ongoing
   link: https://www.bayren.org/ease-home
   link_text: Apply
@@ -496,9 +1048,25 @@
   area: Bay Area-wide
   eligibility:
   - everyone
+  description: BayREN offers rebates for professional home energy assessments, providing homeowners with a comprehensive score and report identifying upgrades that can reduce energy costs.
+  what_they_offer: |
+    - $200 rebate for energy assessment
+    - Professional in-home evaluation
+    - Home Energy Score (1-10 rating)
+    - Detailed report of improvement opportunities
+    - Cost and savings estimates
+    - Prioritized upgrade recommendations
+    - Helps plan home electrification
+  how_to_get_it: |
+    1. Find a BayREN-qualified assessor on website
+    2. Schedule in-home energy assessment
+    3. Assessor evaluates home and provides score
+    4. Receive detailed report with recommendations
+    5. Submit rebate application with assessment receipt
+    6. Receive $200 rebate
+  phone: '866-878-6008'
   benefit: $200 rebate for professional home energy assessment; includes score and
     report about potential upgrades and savings
-  how_to_use: Schedule assessment through BayREN
   timeframe: Ongoing
   link: https://www.bayren.org/home-energy-score-hes
   link_text: Find an Assessor
@@ -509,9 +1077,25 @@
   area: Bay Area-wide
   eligibility:
   - everyone
+  description: Cal Water offers a variety of rebates for water-saving products and landscape improvements, plus free conservation kits to help customers reduce water usage and lower bills.
+  what_they_offer: |
+    - High-efficiency toilet rebates
+    - Smart irrigation controller rebates
+    - Lawn replacement/turf conversion rebates
+    - High-efficiency faucet rebates
+    - Free water conservation kit
+    - Leak detection resources
+    - Various seasonal promotions
+  how_to_get_it: |
+    1. Verify you're a Cal Water customer
+    2. Browse available rebates on website
+    3. Check product eligibility requirements
+    4. Purchase qualifying water-saving product
+    5. Submit rebate application with proof of purchase
+    6. Request free conservation kit separately
+  phone: '800-722-4333'
   benefit: Rebates for irrigation systems, lawn replacement, faucets, toilets, and
     more; plus free conservation kit
-  how_to_use: Apply through CalWater
   timeframe: Ongoing
   link: https://www.calwater.com/conservation-rebates/
   link_text: Apply
@@ -522,10 +1106,25 @@
   area: Bay Area-wide
   eligibility:
   - everyone
+  description: The Energy Smart Homes program provides incentives for fully electrifying homes by removing all gas appliances and switching to efficient electric alternatives.
+  what_they_offer: |
+    - $4,250+ total incentive for full electrification
+    - Heat pump HVAC system incentive
+    - Heat pump water heater incentive
+    - Induction cooking incentive
+    - Electric dryer incentive
+    - Covers single-family homes
+    - Covers multi-family low-rise and ADUs
+  how_to_get_it: |
+    1. Plan to replace ALL gas appliances with electric
+    2. Apply through Energy Smart Homes website
+    3. Get quotes from contractors
+    4. Complete installation of all electric appliances
+    5. Submit documentation for rebate
+    6. Receive incentive after verification
   benefit: $4,250+ for removing ALL gas appliances and installing electric alternatives
     (heat pump heating, heat pump water heating, electric/induction cooking, electric
     dryer); for single-family, multi-family low-rise, and ADUs
-  how_to_use: Apply through Energy Smart Homes
   timeframe: Ongoing
   link: https://caenergysmarthomes.com/alterations/
   link_text: Apply
