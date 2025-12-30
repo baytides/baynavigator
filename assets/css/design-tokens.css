@@ -255,7 +255,9 @@
 
 /* ============================================
    DARK MODE - Manual Toggle Override
+   Supports both :root (html) for instant load and body for runtime
    ============================================ */
+:root[data-theme="dark"],
 body[data-theme="dark"] {
   /* Backgrounds */
   --bg-body: linear-gradient(135deg, #0a1a1a15 0%, #0d262615 100%);
@@ -313,7 +315,9 @@ body[data-theme="dark"] {
 
 /* ============================================
    LIGHT MODE - Manual Toggle Override
+   Supports both :root (html) for instant load and body for runtime
    ============================================ */
+:root[data-theme="light"],
 body[data-theme="light"] {
   /* Reset all to light mode defaults */
   --bg-body: linear-gradient(135deg, #e0f7fa15 0%, #b2ebf215 100%);

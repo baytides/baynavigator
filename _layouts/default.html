@@ -20,6 +20,15 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
+  <!-- Instant theme application - prevents flash of wrong theme -->
+  <script>
+    (function() {
+      var theme = localStorage.getItem('theme-preference') || 'auto';
+      var isDark = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    })();
+  </script>
+
   <!-- Core styles - Design tokens must load first -->
   <link rel="stylesheet" href="{{ '/assets/css/design-tokens.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
@@ -28,6 +37,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/read-more.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/features.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/flutter-interactions.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/modern-ui.css' | relative_url }}">
 
   <!-- Privacy-friendly analytics by Plausible -->
   <link rel="preconnect" href="https://plausible.baytides.org" crossorigin>

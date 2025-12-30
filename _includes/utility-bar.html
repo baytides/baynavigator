@@ -606,7 +606,9 @@ body[data-font-size="x-large"] {
   function handleColorSchemeChange(event) {
     const currentTheme = themeSelect ? themeSelect.value : (localStorage.getItem('theme-preference') || 'auto');
     if (currentTheme === 'auto') {
-      document.body.setAttribute('data-theme', event.matches ? 'dark' : 'light');
+      var themeValue = event.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', themeValue);
+      document.body.setAttribute('data-theme', themeValue);
     }
   }
 
@@ -628,13 +630,18 @@ body[data-font-size="x-large"] {
     }
   }
 
-  // Apply theme
+  // Apply theme - sync to both html and body for CSS compatibility
   function applyTheme(theme) {
+    var isDark = theme === 'dark' || (theme === 'auto' && colorSchemeMedia.matches);
+    var themeValue = isDark ? 'dark' : 'light';
+
+    // Apply to both html (for instant load) and body (for runtime)
+    document.documentElement.setAttribute('data-theme', themeValue);
+    document.body.setAttribute('data-theme', themeValue);
+
     if (theme === 'auto') {
-      document.body.setAttribute('data-theme', colorSchemeMedia.matches ? 'dark' : 'light');
       attachColorSchemeListener();
     } else {
-      document.body.setAttribute('data-theme', theme);
       detachColorSchemeListener();
     }
   }
