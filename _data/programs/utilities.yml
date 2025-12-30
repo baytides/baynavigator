@@ -1974,9 +1974,24 @@
   area: City of Santa Clara
   eligibility:
   - low-income
+  description: Silicon Valley Power provides substantial solar grants to income-qualified Santa Clara homeowners who have been on the FRAP assistance program, helping low-income residents access renewable energy.
+  what_they_offer: |
+    - Free solar PV system grant
+    - $3.50 per watt incentive
+    - Up to 3 kW system covered
+    - Significant reduction in electricity bills
+    - Access to clean renewable energy
+    - First come, first served basis
+  how_to_get_it: |
+    1. Must be a Silicon Valley Power customer
+    2. Must be on FRAP assistance program for 1+ year
+    3. Must be a homeowner in Santa Clara
+    4. Apply through SVP rebate program
+    5. Wait for approval (funds limited)
+    6. Work with approved solar installer
+  phone: '408-615-2300'
   benefit: Free solar PV system grant of $3.50 per watt up to 3 kW for homeowners
     on FRAP program for 1+ year
-  how_to_use: Apply through SVP; first come, first served
   timeframe: While funds last
   link: https://www.siliconvalleypower.com/residents/rebates
   link_text: Apply
@@ -1987,9 +2002,24 @@
   area: City of Santa Clara
   eligibility:
   - everyone
+  description: Silicon Valley Power offers rebates for Santa Clara residents who upgrade to energy-efficient variable speed pool pumps, reducing electricity consumption for pool maintenance.
+  what_they_offer: |
+    - $100 rebate for pool pump upgrade
+    - Must be ENERGY STAR certified
+    - Variable speed pump required
+    - Qualifying controller included
+    - Significant energy savings over single-speed pumps
+    - Lower pool maintenance costs
+  how_to_get_it: |
+    1. Must be a Silicon Valley Power customer
+    2. Purchase ENERGY STAR variable speed pool pump
+    3. Ensure pump has qualifying controller
+    4. Have pump professionally installed
+    5. Apply online through SVP rebate platform
+    6. Submit proof of purchase and installation
+  phone: '408-615-2300'
   benefit: $100 rebate for ENERGY STAR variable speed pool filtration pump with qualifying
     controller
-  how_to_use: Apply online through SVP rebate platform
   timeframe: Ongoing
   link: https://www.siliconvalleypower.com/residents/rebates
   link_text: Apply
@@ -2000,8 +2030,23 @@
   area: City of Santa Clara
   eligibility:
   - everyone
+  description: Silicon Valley Power offers rebates for Santa Clara residents to have their existing solar PV systems professionally inspected and tuned up, ensuring optimal performance and energy generation.
+  what_they_offer: |
+    - Up to $1,500 rebate for solar tune-up
+    - Professional system inspection
+    - Performance optimization
+    - Identification of issues or degradation
+    - Cleaning and maintenance
+    - Ensures maximum energy production
+  how_to_get_it: |
+    1. Must be a Silicon Valley Power customer
+    2. Must have existing solar PV system
+    3. Hire California licensed contractor
+    4. Have system inspected and tuned up
+    5. Apply online through SVP rebate platform
+    6. Submit contractor invoice and documentation
+  phone: '408-615-2300'
   benefit: Up to $1,500 rebate for solar PV system tune-up by CA licensed contractor
-  how_to_use: Work with licensed contractor and apply online
   timeframe: Ongoing
   link: https://www.siliconvalleypower.com/residents/rebates
   link_text: Apply
@@ -2012,9 +2057,24 @@
   area: City of San Jose
   eligibility:
   - low-income
+  description: San Jose Clean Energy provides an additional 10% discount on electricity charges for income-qualified customers already enrolled in PG&E's CARE or FERA programs, helping reduce energy costs.
+  what_they_offer: |
+    - 10% discount on SJCE electricity charges
+    - Automatic enrollment for CARE/FERA customers
+    - Stacks with existing PG&E discounts
+    - No separate application needed
+    - Applies to monthly electricity bill
+    - Ongoing savings while enrolled
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Enroll in CARE or FERA through PG&E
+    3. Once enrolled, SJ Cares discount is automatic
+    4. No additional application required
+    5. Discount appears on monthly bill
+    6. Maintain CARE/FERA eligibility to keep discount
+  phone: '833-432-2454'
   benefit: 10% discount on SJCE electricity charges; automatic enrollment for CARE
     or FERA customers
-  how_to_use: Enroll in CARE or FERA through PG&E for automatic enrollment
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/discount-programs/
   link_text: Learn More
@@ -2025,8 +2085,23 @@
   area: City of San Jose
   eligibility:
   - low-income
+  description: San Jose Clean Energy's Solar Access Program provides significant electricity bill discounts for income-qualified residents living in Environmental Justice Communities, stackable with other discounts for up to 55% savings.
+  what_they_offer: |
+    - 20% off electricity bill
+    - Stacks with CARE/FERA discounts
+    - Up to 55% total savings possible
+    - Available in Environmental Justice Communities
+    - No solar installation required
+    - Access to community solar benefits
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must live in qualifying Environmental Justice Community
+    3. Must meet income eligibility requirements
+    4. Verify qualification on Solar Access webpage
+    5. Complete enrollment process
+    6. Discount applied to monthly bill
+  phone: '833-432-2454'
   benefit: 20% off electricity bill; stacks with CARE/FERA for up to 55% total savings
-  how_to_use: Verify qualification on Solar Access webpage
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/discount-programs/
   link_text: Check Eligibility
@@ -2037,9 +2112,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy offers substantial rebates for replacing gas water heaters with energy-efficient heat pump water heaters, with enhanced rebates for income-qualified residents and Environmental Justice Communities.
+  what_they_offer: |
+    - $2,000 rebate for heat pump water heater
+    - $3,000 for EJ Community or income-qualified residents
+    - Replaces gas water heater
+    - 3-4x more efficient than traditional water heaters
+    - Significant energy cost savings
+    - Reduces carbon footprint
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Reserve funds online before installation
+    3. Purchase qualifying heat pump water heater
+    4. Have professionally installed within 120 days
+    5. Submit final documentation and receipts
+    6. EJ Community or income-qualified submit additional docs for enhanced rebate
+  phone: '833-432-2454'
   benefit: $2,000 rebate for replacing gas water heater with heat pump water heater;
     Environmental Justice Community or income-qualified residents receive $3,000
-  how_to_use: Reserve funds online, install within 120 days, submit final documentation
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2050,9 +2140,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy offers rebates for replacing gas furnaces with efficient heat pump HVAC systems that provide both heating and cooling, with enhanced rebates for qualifying residents.
+  what_they_offer: |
+    - $1,500 rebate for heat pump HVAC
+    - $2,500 for EJ Community or income-qualified residents
+    - Replaces gas furnace
+    - Single system for heating and cooling
+    - High efficiency operation
+    - Lower energy costs
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Reserve funds online before installation
+    3. Purchase qualifying heat pump HVAC system
+    4. Have professionally installed within 120 days
+    5. Submit final documentation and receipts
+    6. EJ Community or income-qualified submit additional docs for enhanced rebate
+  phone: '833-432-2454'
   benefit: $1,500 rebate for replacing gas furnace with heat pump HVAC; Environmental
     Justice Community or income-qualified residents receive $2,500
-  how_to_use: Reserve funds online, install within 120 days, submit final documentation
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2063,9 +2168,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy provides substantial rebates for home battery storage systems paired with solar PV, with significantly enhanced rebates for income-qualified residents and Environmental Justice Communities.
+  what_they_offer: |
+    - $125 per kWh rebate for battery storage
+    - Up to $3,250 maximum rebate
+    - $400 per kWh for EJ/income-qualified residents
+    - Up to $10,400 maximum for qualifying residents
+    - Must be paired with solar PV
+    - Backup power during outages
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must have or install solar PV system
+    3. Reserve funds online before installation
+    4. Purchase qualifying battery storage system
+    5. Have professionally installed within 120 days
+    6. Submit final documentation and receipts
+  phone: '833-432-2454'
   benefit: $125 per kWh up to $3,250 for battery storage with solar PV; Environmental
     Justice Community or income-qualified residents receive $400 per kWh up to $10,400
-  how_to_use: Reserve funds online, install within 120 days, submit final documentation
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2076,8 +2196,23 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy offers rebates for electrical panel upgrades when done alongside other EcoHome electrification projects, helping homes support additional electric appliances.
+  what_they_offer: |
+    - $1,000 rebate for panel upgrade
+    - Must be add-on to other EcoHome rebate
+    - Supports home electrification
+    - Increased electrical capacity
+    - Enables additional electric appliances
+    - Future-proofs home electrical system
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must be claiming another EcoHome rebate
+    3. Include panel upgrade in project scope
+    4. Have professionally installed within 120 days
+    5. Apply as add-on with primary rebate
+    6. Submit documentation for panel upgrade
+  phone: '833-432-2454'
   benefit: $1,000 rebate for electrical panel upgrade as add-on to other EcoHome rebate
-  how_to_use: Apply as add-on when claiming heat pump or battery rebate
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2088,8 +2223,23 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy offers rebates for attic insulation when done alongside other EcoHome electrification projects, improving home energy efficiency and comfort.
+  what_they_offer: |
+    - $500 rebate for attic insulation
+    - Must be add-on to other EcoHome rebate
+    - Improves home energy efficiency
+    - Better temperature regulation
+    - Reduces heating and cooling costs
+    - Enhances comfort year-round
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must be claiming another EcoHome rebate
+    3. Include attic insulation in project scope
+    4. Have professionally installed within 120 days
+    5. Apply as add-on with primary rebate
+    6. Submit documentation for insulation work
+  phone: '833-432-2454'
   benefit: $500 rebate for attic insulation as add-on to other EcoHome rebate
-  how_to_use: Apply as add-on when claiming heat pump or battery rebate
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2100,8 +2250,23 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy offers rebates for circuit prewiring when done alongside other EcoHome electrification projects, preparing homes for future electric appliance installations.
+  what_they_offer: |
+    - $500 rebate for circuit prewiring
+    - Must be add-on to other EcoHome rebate
+    - Prepares home for future electrification
+    - Enables future appliance installations
+    - Reduces future installation costs
+    - Part of comprehensive electrification support
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must be claiming another EcoHome rebate
+    3. Include circuit prewiring in project scope
+    4. Have professionally installed within 120 days
+    5. Apply as add-on with primary rebate
+    6. Submit documentation for prewiring work
+  phone: '833-432-2454'
   benefit: $500 rebate for circuit prewiring as add-on to other EcoHome rebate
-  how_to_use: Apply as add-on when claiming heat pump or battery rebate
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ecohome-rebate/
   link_text: Apply
@@ -2112,10 +2277,24 @@
   area: City of San Jose
   eligibility:
   - low-income
+  description: San Jose Clean Energy offers substantial instant rebates on new electric vehicles for income-qualified residents, making EV ownership more accessible for lower-income households.
+  what_they_offer: |
+    - $4,000 instant rebate on new EV
+    - Applied at point of sale
+    - Maximum vehicle price $60,000
+    - For battery electric vehicles only
+    - Available at participating dealerships
+    - Immediate savings, no waiting for rebate
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must be within 100% Area Median Income
+    3. Or be enrolled in CARE or FERA program
+    4. Apply online for income verification
+    5. Or present CARE/FERA documentation at dealership
+    6. Purchase new EV at participating dealership
+  phone: '833-432-2454'
   benefit: $4,000 instant rebate on new battery electric vehicle (max vehicle price
     $60,000); must be within 100% Area Median Income or enrolled in CARE/FERA
-  how_to_use: Apply online for income verification or present CARE/FERA documentation
-    at participating dealership
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ev-rebates/
   link_text: Apply
@@ -2126,10 +2305,24 @@
   area: City of San Jose
   eligibility:
   - low-income
+  description: San Jose Clean Energy provides instant rebates on used electric vehicles for income-qualified residents, offering an affordable pathway to EV ownership.
+  what_they_offer: |
+    - $2,000 instant rebate on used EV
+    - Applied at point of sale
+    - Maximum vehicle price $60,000
+    - For battery electric vehicles only
+    - Available at participating dealerships
+    - More affordable entry to EV ownership
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must be within 100% Area Median Income
+    3. Or be enrolled in CARE or FERA program
+    4. Apply online for income verification
+    5. Or present CARE/FERA documentation at dealership
+    6. Purchase used EV at participating dealership
+  phone: '833-432-2454'
   benefit: $2,000 instant rebate on used battery electric vehicle (max vehicle price
     $60,000); must be within 100% Area Median Income or enrolled in CARE/FERA
-  how_to_use: Apply online for income verification or present CARE/FERA documentation
-    at participating dealership
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/ev-rebates/
   link_text: Apply
@@ -2140,9 +2333,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy's Peak Rewards program pays customers to reduce electricity usage during peak demand periods, with no penalty for non-participation.
+  what_they_offer: |
+    - Earn $0.50-$1.00 per kWh reduced
+    - $20 enrollment bonus
+    - Up to 6 earning opportunities per month
+    - No penalty for non-participation
+    - Voluntary response to alerts
+    - Easy money for reducing peak usage
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Create FlexSaver account online
+    3. Enroll in Peak Rewards program
+    4. Receive Peak Rewards Alerts
+    5. Reduce usage during peak events
+    6. Earn rewards based on reduction
+  phone: '833-432-2454'
   benefit: Earn $0.50-$1.00 per kWh reduced during peak hours; $20 enrollment bonus;
     up to 6 earning opportunities monthly with no penalty for non-participation
-  how_to_use: Create FlexSaver account and respond to Peak Rewards Alerts
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/peak-rewards-for-all/
   link_text: Enroll
@@ -2153,9 +2361,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy pays customers annually for enrolling eligible smart thermostats in their demand response program, with automatic adjustments during peak events.
+  what_they_offer: |
+    - $35 per year for thermostat enrollment
+    - Compatible with Google Nest or Sensi
+    - Automatic adjustments during peak events
+    - Option to override any adjustment
+    - Set-and-forget participation
+    - Annual payment for participation
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must have Google Nest or Sensi smart thermostat
+    3. Enroll thermostat through program portal
+    4. Allow thermostat to connect to program
+    5. Thermostat auto-adjusts during peak events
+    6. Override option always available
+  phone: '833-432-2454'
   benefit: $35 per year for enrolling Google Nest or Sensi smart thermostat in demand
     response program; thermostat auto-adjusts during peak events with option to override
-  how_to_use: Enroll eligible thermostat through program portal
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/peak-rewards-for-smart-homes/
   link_text: Enroll
@@ -2166,10 +2389,25 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy pays EV owners for enrolling eligible chargers in their managed charging program, pausing charging during peak events with override option.
+  what_they_offer: |
+    - $25 enrollment bonus
+    - $9 per month ongoing payment
+    - Compatible with Emporia EV charger
+    - Managed charging during peak events
+    - Option to override any pause
+    - Annual earnings of $108+ after bonus
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must have Emporia EV charger
+    3. Enroll charger through program portal
+    4. Allow charger to connect to program
+    5. Charging pauses during peak events
+    6. Override option always available
+  phone: '833-432-2454'
   benefit: $25 enrollment bonus plus $9 per month for enrolling Emporia EV charger
     in managed charging program; charging pauses during peak events with option to
     override
-  how_to_use: Enroll eligible EV charger through program portal
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/peak-rewards-for-smart-homes/
   link_text: Enroll
@@ -2180,9 +2418,24 @@
   area: City of San Jose
   eligibility:
   - everyone
+  description: San Jose Clean Energy rewards battery storage owners for enrolling in their demand response program, providing both upfront bonuses and ongoing quarterly payments.
+  what_they_offer: |
+    - $10 per kWh enrollment bonus
+    - $0.13 per kWh quarterly ongoing payment
+    - Supports grid during peak demand
+    - Battery discharges during peak events
+    - Helps prevent outages
+    - Significant ongoing income from battery
+  how_to_get_it: |
+    1. Must be a San Jose Clean Energy customer
+    2. Must have eligible battery storage system
+    3. Enroll battery through program portal
+    4. Allow battery to connect to program
+    5. Battery responds during demand events
+    6. Receive quarterly payments
+  phone: '833-432-2454'
   benefit: $10 per kWh enrollment bonus plus $0.13 per kWh quarterly for enrolling
     battery storage in demand response program
-  how_to_use: Enroll eligible battery through program portal
   timeframe: Ongoing
   link: https://sanjosecleanenergy.org/peak-rewards-for-smart-homes/
   link_text: Enroll
@@ -2194,9 +2447,24 @@
   eligibility:
   - low-income
   - disability
+  description: The City of Palo Alto Utilities Rate Assistance Program provides significant discounts on utility bills for residents experiencing financial hardship or medical conditions requiring higher utility use.
+  what_they_offer: |
+    - Up to 25% off gas charges
+    - Up to 25% off electricity charges
+    - For financial hardship situations
+    - For medical conditions requiring higher utility use
+    - Applied to monthly utility bills
+    - Ongoing assistance while eligible
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Must demonstrate financial hardship
+    3. Or have medical condition requiring higher utility use
+    4. Complete application form
+    5. Submit supporting documentation
+    6. Discount applied once approved
+  phone: '650-329-2161'
   benefit: Up to 25% off gas and/or electricity charges on monthly utility bills for
     those with financial hardship or medical conditions requiring higher utility use
-  how_to_use: Apply with supporting documentation
   timeframe: Ongoing
   link: https://www.paloalto.gov/rap
   link_text: Apply
@@ -2207,10 +2475,24 @@
   area: City of Palo Alto
   eligibility:
   - low-income
+  description: The City of Palo Alto's REAP program provides free home energy and water efficiency upgrades to income-qualified residents, helping reduce utility costs through improved efficiency.
+  what_they_offer: |
+    - Free weather stripping installation
+    - Free attic insulation
+    - Free heating system upgrades
+    - Free water heater replacement
+    - Free efficient showerheads
+    - Free energy-efficient lighting
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Must be eligible for RAP program
+    3. Or live in deed-restricted affordable housing
+    4. Or participate in other income-qualified programs
+    5. Complete application and home assessment
+    6. Receive free efficiency installations
+  phone: '650-329-2161'
   benefit: Free home energy and water efficiency installations including weather stripping,
     attic insulation, heating systems, water heaters, showerheads, and lighting
-  how_to_use: Must be eligible for RAP, live in deed-restricted affordable housing,
-    or participate in other income-qualified programs
   timeframe: Ongoing
   link: https://www.paloalto.gov/reap
   link_text: Apply
@@ -2221,9 +2503,23 @@
   area: City of Palo Alto
   eligibility:
   - low-income
+  description: ProjectPLEDGE provides one-time utility bill assistance for Palo Alto residents facing financial hardship, helping cover past-due utility balances.
+  what_they_offer: |
+    - One-time utility bill assistance
+    - Up to $750 in assistance
+    - Covers past-due amounts
+    - Credit cannot exceed outstanding balance
+    - Helps prevent service disconnection
+    - Funded through community donations
+  how_to_get_it: |
+    1. Must be a City of Palo Alto Utilities customer
+    2. Must be the customer-of-record on account
+    3. Must have past-due utility balance
+    4. Demonstrate financial hardship
+    5. Complete application process
+    6. Credit applied to account if approved
+  phone: '650-329-2161'
   benefit: One-time utility bill assistance for past-due amounts up to $750
-  how_to_use: Apply as CPAU customer-of-record; credit shall not exceed outstanding
-    balance
   timeframe: While funds last
   link: https://www.paloalto.gov/projectpledge
   link_text: Apply
