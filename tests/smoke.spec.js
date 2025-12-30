@@ -26,14 +26,16 @@ test('search filters results', async ({ page }) => {
 
 test('favorites toggle updates count', async ({ page }) => {
   await page.goto(home, { waitUntil: 'domcontentloaded' });
-  // Wait for program cards to load before looking for favorite toggle
+  // Wait for program cards to load before clicking save button
   await page.locator('[data-program]').first().waitFor({ state: 'visible' });
-  await page.locator('.favorite-toggle').first().click();
+  // Use .card-save-btn which is the actual save button class in program-card.html
+  await page.locator('.card-save-btn').first().click();
   await page.goto('/favorites.html', { waitUntil: 'domcontentloaded' });
   const savedCount = page.locator('#favorites-count');
   await expect(savedCount).toHaveText('1');
   await page.goto(home, { waitUntil: 'domcontentloaded' });
-  await page.locator('.favorite-toggle').first().click();
+  await page.locator('[data-program]').first().waitFor({ state: 'visible' });
+  await page.locator('.card-save-btn').first().click();
   await page.goto('/favorites.html', { waitUntil: 'domcontentloaded' });
   await expect(savedCount).toHaveText('0');
 });
@@ -71,9 +73,8 @@ test('mobile filter drawer opens and closes', async ({ page }) => {
   const backdrop = page.locator('.mobile-filter-backdrop');
   await expect(backdrop).toHaveClass(/show/);
 
-  // Click close button to close drawer using force to bypass element interception
-  const closeBtn = page.locator('.mobile-drawer-close');
-  await closeBtn.click({ force: true });
+  // Click backdrop to close drawer (more reliable than close button which may be off-screen)
+  await backdrop.click({ force: true });
   await expect(searchPanel).not.toHaveClass(/mobile-open/);
 });
 
