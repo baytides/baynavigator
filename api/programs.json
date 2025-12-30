@@ -433,6 +433,7 @@
       "whatTheyOffer": "- Free clothing for all family members\n- Free shoes and accessories\n- Books and toys\n- Baby equipment\n- Maternity items\n- Parent clothing and supplies\n",
       "howToGetIt": "1. Visit BACN Boutique during hours\n2. No appointment necessary\n3. Browse available items\n4. Select needed items for family\n5. Take items home at no cost\n6. Return for future needs\n",
       "groups": [
+        "pregnant",
         "low-income",
         "families",
         "youth",
@@ -582,6 +583,7 @@
       "whatTheyOffer": "- Emergency interim shelter\n- Food and meal services\n- Clothing assistance\n- Intensive case management\n- Employment assistance\n- Specialized veteran support programs\n",
       "howToGetIt": "1. Call LifeMoves hotline\n2. Complete intake assessment\n3. Meet with case manager\n4. Develop housing stability plan\n5. Access shelter and services\n6. Work toward permanent housing\n",
       "groups": [
+        "unhoused",
         "low-income",
         "everyone"
       ],
@@ -607,6 +609,8 @@
       "whatTheyOffer": "- Interim shelter for 23 families\n- Dedicated veteran family capacity (9 families)\n- Supportive services included\n- Case management\n- Housing placement assistance\n- Family-focused environment\n",
       "howToGetIt": "1. Contact LifeMoves for referral\n2. Complete intake assessment\n3. Demonstrate family homelessness\n4. Veterans receive priority placement\n5. Accept shelter placement if available\n6. Work with case manager on housing plan\n",
       "groups": [
+        "unhoused",
+        "families",
         "low-income",
         "veterans"
       ],
@@ -1522,7 +1526,8 @@
       "whatTheyOffer": "- Fabric and textiles\n- Paper and cardboard products\n- Craft and sewing supplies\n- Art materials (paint, brushes, etc.)\n- Classroom resources\n- Unique and unusual materials\n",
       "howToGetIt": "1. Visit SCRAP's retail store in San Francisco\n2. Browse available materials\n3. Pay by the bag or by weight (very affordable)\n4. Teachers and nonprofits may qualify for additional discounts\n5. Membership programs available for frequent users\n",
       "groups": [
-        "nonprofits"
+        "nonprofits",
+        "teachers"
       ],
       "areas": [
         "San Francisco"
@@ -1914,6 +1919,7 @@
       "whatTheyOffer": "- Free career counseling and job search assistance\n- Skills training and certification programs\n- Resume and interview preparation\n- Job placement services\n- Connections to employers\n- Programs for youth, adults, and dislocated workers\n",
       "howToGetIt": "1. Visit the NOVA Workforce website or office\n2. Complete an orientation session\n3. Meet with a career counselor\n4. Access training and job search services\n5. Get connected to employment opportunities\n",
       "groups": [
+        "unemployed",
         "everyone"
       ],
       "areas": [
@@ -2062,6 +2068,7 @@
       "whatTheyOffer": "- Use CalFresh EBT to buy prepared meals\n- Available at participating restaurants (fast food and sit-down)\n- Hot, ready-to-eat meals\n- Includes chains like Subway, Denny's, and local restaurants\n- Available in most Bay Area counties\n",
       "howToGetIt": "You must be a CalFresh recipient who is 60+, disabled, or homeless. Check if your county participates, then use the CDSS Restaurant Locator to find participating restaurants. Show your EBT card and ID when ordering.",
       "groups": [
+        "unhoused",
         "low-income",
         "seniors",
         "disability"
@@ -2489,6 +2496,7 @@
       "whatTheyOffer": "- Monthly benefits for healthy foods (fruits, vegetables, whole grains, milk, eggs)\n- Infant formula and baby food\n- WIC card accepted at most grocery stores\n- Nutrition counseling\n- Breastfeeding support and free breast pumps\n- Farmers market benefits\n- Referrals to healthcare and social services\n",
       "howToGetIt": "Apply online or contact your local WIC office. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.",
       "groups": [
+        "pregnant",
         "low-income",
         "families",
         "youth"
@@ -2858,6 +2866,7 @@
       "whatTheyOffer": "- Monthly benefits for nutritious foods (fruits, vegetables, whole grains, milk, eggs)\n- Infant formula and baby food\n- Nutrition education and counseling\n- Breastfeeding support and breast pumps\n- Health screenings and referrals\n- Farmers' market benefits\n- WIC card accepted at most grocery stores\n",
       "howToGetIt": "Contact your local WIC office or call 1-888-942-9675. You'll need proof of income (up to 185% of poverty level), residency, and identity. Pregnant women, new mothers, infants, and children under 5 may qualify.",
       "groups": [
+        "pregnant",
         "low-income",
         "families"
       ],
@@ -2907,6 +2916,7 @@
       "whatTheyOffer": "- Adult Protective Services (abuse prevention)\n- In-Home Supportive Services (IHSS)\n- Public Guardian/Conservator services\n- Congregate and home-delivered meals\n- Senior centers and activities\n- Health insurance counseling (HICAP)\n- Long-term care ombudsman\n",
       "howToGetIt": "Call Aging and Adult Services at (650) 573-3900 for information and referrals. For abuse reports, call the 24-hour hotline at 1-800-675-8437. Services available to adults 60+ and adults with disabilities.",
       "groups": [
+        "caregivers",
         "seniors",
         "disability"
       ],
@@ -2932,6 +2942,7 @@
       "whatTheyOffer": "- Free home visits for pregnant women and new parents\n- Black Infant Health program\n- Nurse-Family Partnership\n- Child health and disability prevention\n- Immunization services\n- School-based health centers\n- Dental services for children\n- Services in English, Spanish, and other languages\n",
       "howToGetIt": "Call (650) 573-2501 for program information. Free for Medi-Cal recipients; sliding fee scale for other county residents based on income.",
       "groups": [
+        "pregnant",
         "low-income",
         "families"
       ],
@@ -3053,6 +3064,7 @@
       "whatTheyOffer": "- Weekly group sessions during pregnancy\n- Postpartum support groups\n- Life skills and stress management\n- Health education and resources\n- Social support and community building\n- Connection to prenatal care\n- Baby supplies and incentives\n- Available in 18+ California counties\n",
       "howToGetIt": "Contact your local Black Infant Health program through the state website. Programs are free and open to Black women and birthing people age 18+ who are pregnant or recently gave birth.",
       "groups": [
+        "pregnant",
         "families"
       ],
       "areas": [
@@ -3077,6 +3089,7 @@
       "whatTheyOffer": "- Regular home visits by trained nurses or family specialists\n- Parenting education and support\n- Child development monitoring\n- Breastfeeding support\n- Connections to healthcare and social services\n- Goal setting and life skills\n- Support from pregnancy through age 5\n- Services in multiple languages\n",
       "howToGetIt": "Contact your local health department or use the state website to find programs in your area. Priority given to first-time parents, low-income families, and families with risk factors.",
       "groups": [
+        "pregnant",
         "low-income",
         "families"
       ],
@@ -3176,6 +3189,7 @@
       "whatTheyOffer": "- Enhanced prenatal care visits\n- Nutrition counseling and education\n- Psychosocial assessment and support\n- Health education classes\n- Care coordination\n- Postpartum care through 60 days after delivery\n- Breastfeeding support\n- Referrals to community resources\n",
       "howToGetIt": "If you're pregnant and have Medi-Cal, ask your prenatal care provider if they're a CPSP provider. CPSP services are covered at no additional cost through Medi-Cal.",
       "groups": [
+        "pregnant",
         "low-income",
         "families"
       ],
@@ -3348,6 +3362,7 @@
       "whatTheyOffer": "- Free or low-cost immigration legal consultations\n- Help with citizenship and naturalization applications\n- DACA renewal assistance\n- Green card and visa support\n- Know Your Rights information\n- Referrals to trusted legal providers\n",
       "howToGetIt": "1. Visit immigrants.sfgov.org for list of legal service providers\n2. Call 311 for referrals to immigration legal help\n3. Attend a free immigration legal clinic\n4. Complete intake and eligibility screening with provider\n5. Receive legal assistance based on your needs\n",
       "groups": [
+        "immigrants",
         "low-income",
         "everyone"
       ],
@@ -3373,6 +3388,7 @@
       "whatTheyOffer": "- Waiver of filing fees for certain immigration forms\n- Available for naturalization (N-400), green card renewal (I-90), and other forms\n- Based on income, receipt of means-tested benefits, or financial hardship\n- Does not affect your immigration case or chances of approval\n",
       "howToGetIt": "1. Download Form I-912 from uscis.gov\n2. Determine your basis for fee waiver (means-tested benefit, income below 150% FPL, or hardship)\n3. Gather supporting documents (benefit letters, tax returns, pay stubs)\n4. Submit I-912 with your immigration application\n5. USCIS will review and notify you of approval or denial\n6. If denied, you must pay the fee to continue your application\n",
       "groups": [
+        "immigrants",
         "low-income",
         "everyone"
       ],
@@ -3398,6 +3414,8 @@
       "whatTheyOffer": "- Immigration legal services (family petitions, DACA, citizenship)\n- Housing and tenant rights assistance\n- Workers' rights and wage theft claims\n- Criminal record clearance (expungement)\n- Consumer protection\n- Community education workshops\n",
       "howToGetIt": "1. Call CLSEPA or visit their website to schedule an appointment\n2. Complete intake and financial eligibility screening\n3. Must meet income guidelines (generally 200% FPL or below)\n4. Attend initial consultation with staff attorney\n5. Receive ongoing representation if case is accepted\n",
       "groups": [
+        "immigrants",
+        "reentry",
         "low-income"
       ],
       "areas": [
@@ -4466,6 +4484,7 @@
       "whatTheyOffer": "- Free veterinary care through participating providers\n- Free pet food at distribution sites\n- Emergency veterinary assistance\n- Directory of homeless-friendly pet resources\n- No proof of homelessness required at most sites\n",
       "howToGetIt": "1. Visit petsofthehomeless.org\n2. Use the locator to find participating providers near you\n3. Contact the provider directly for services\n4. Bring your pet during operating hours\n5. Most services are first come, first served\n",
       "groups": [
+        "unhoused",
         "low-income"
       ],
       "areas": [
@@ -4885,9 +4904,11 @@
       "category": "recreation",
       "description": "The Bay Area Discovery Museum is a hands-on children's museum nestled at the foot of the Golden Gate Bridge in Sausalito, featuring indoor and outdoor exhibits designed to spark creativity and curiosity in children ages 0-10.",
       "fullDescription": "The Bay Area Discovery Museum is a hands-on children's museum nestled at the foot of the Golden Gate Bridge in Sausalito, featuring indoor and outdoor exhibits designed to spark creativity and curiosity in children ages 0-10.",
-      "whatTheyOffer": "- EBT/WIC cardholders: $5 admission per person\n- Pay-What-You-Can days: Admission at any price you choose\n- Members: Unlimited free visits year-round\n- Children under 1: Free admission\n- Regular admission: $18 per person\n",
+      "whatTheyOffer": "- EBT/WIC cardholders: $5 admission per person\n- Caregivers of visitors with disabilities: Free admission\n- Pay-What-You-Can days: Admission at any price you choose\n- Members: Unlimited free visits year-round\n- Children under 1: Free admission\n- Regular admission: $18 per person\n",
       "howToGetIt": "For EBT/WIC discount, show your benefits card at the admissions desk. Check the museum website for scheduled Pay-What-You-Can days. Advance reservations recommended for all visits.",
       "groups": [
+        "caregivers",
+        "disability",
         "low-income",
         "families",
         "youth",
@@ -5068,9 +5089,10 @@
       "category": "recreation",
       "description": "The Exploratorium is San Francisco's world-renowned museum of science, art, and human perception. Located on Pier 15, it features over 650 interactive exhibits that encourage hands-on exploration and discovery.",
       "fullDescription": "The Exploratorium is San Francisco's world-renowned museum of science, art, and human perception. Located on Pier 15, it features over 650 interactive exhibits that encourage hands-on exploration and discovery.",
-      "whatTheyOffer": "- Museums for All: $3 admission for up to 4 people\n- Valid with EBT/SNAP, Medi-Cal, WIC, or Lifeline Pass\n- After Dark (18+): $3 admission with qualifying card\n- Discounted memberships: $39 Family, $19 Dual After Dark\n- Must purchase at ticket window (not available online)\n",
-      "howToGetIt": "Visit the ticket window in person with your EBT, SNAP, Medi-Cal, WIC card, or Lifeline Pass. This discount is not available for online purchases. Reservations recommended for all visits.",
+      "whatTheyOffer": "- California PreK-12 public school teachers: Free admission\n- Museums for All: $3 admission for up to 4 people\n- Valid with EBT/SNAP, Medi-Cal, WIC, or Lifeline Pass\n- After Dark (18+): $3 admission with qualifying card\n- Discounted memberships: $39 Family, $19 Dual After Dark\n- Must purchase at ticket window (not available online)\n",
+      "howToGetIt": "California PreK-12 public school teachers can apply for free admission online and bring teacher ID. For low-income discounts, visit the ticket window with your EBT, SNAP, Medi-Cal, WIC card, or Lifeline Pass. These discounts are not available for online purchases.",
       "groups": [
+        "teachers",
         "low-income"
       ],
       "areas": [
@@ -5211,6 +5233,7 @@
         "seniors",
         "veterans",
         "families",
+        "first-responders",
         "everyone"
       ],
       "areas": [
@@ -5997,7 +6020,7 @@
       "whatTheyOffer": "- Reimbursement for emergency rides home\n- Up to $125 per ride\n- Maximum $500 per year\n- Covers taxi, Uber/Lyft, or rental car costs\n",
       "howToGetIt": "1. Register with Marin Commutes before needing the service\n2. Use alternative transportation (carpool, transit, bike, walk) regularly\n3. When emergency occurs, take taxi/rideshare/rental car home\n4. Submit reimbursement request online within 5 business days\n5. Include receipt and reason for emergency\n",
       "groups": [
-        "college-students"
+        "everyone"
       ],
       "areas": [
         "Marin County"

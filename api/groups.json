@@ -26,7 +26,7 @@
       "name": "College Students",
       "description": "For enrolled college students",
       "icon": "🎓",
-      "programCount": 18
+      "programCount": 17
     },
     {
       "id": "veterans",
@@ -40,14 +40,14 @@
       "name": "Families",
       "description": "For families with children",
       "icon": "👨‍👩‍👧",
-      "programCount": 32
+      "programCount": 33
     },
     {
       "id": "disability",
       "name": "People with Disabilities",
       "description": "For individuals with disabilities",
       "icon": "🧑‍🦽",
-      "programCount": 23
+      "programCount": 24
     },
     {
       "id": "lgbtq",
@@ -61,49 +61,49 @@
       "name": "First Responders",
       "description": "For police, firefighters, EMTs, nurses",
       "icon": "🚒",
-      "programCount": 0
+      "programCount": 1
     },
     {
       "id": "teachers",
       "name": "Teachers/Educators",
       "description": "For K-12 teachers and school staff",
       "icon": "👩‍🏫",
-      "programCount": 0
+      "programCount": 2
     },
     {
       "id": "unemployed",
       "name": "Unemployed/Job Seekers",
       "description": "For people actively seeking employment",
       "icon": "💼",
-      "programCount": 0
+      "programCount": 1
     },
     {
       "id": "immigrants",
       "name": "Immigrants/Refugees",
       "description": "For new arrivals, undocumented, DACA",
       "icon": "🌍",
-      "programCount": 0
+      "programCount": 3
     },
     {
       "id": "unhoused",
       "name": "Unhoused",
       "description": "For people experiencing homelessness",
       "icon": "🏠",
-      "programCount": 0
+      "programCount": 4
     },
     {
       "id": "pregnant",
       "name": "Pregnant Women",
       "description": "For prenatal and maternal care",
       "icon": "🤰",
-      "programCount": 0
+      "programCount": 7
     },
     {
       "id": "caregivers",
       "name": "Caregivers",
       "description": "For people caring for elderly or disabled family",
       "icon": "🤲",
-      "programCount": 0
+      "programCount": 2
     },
     {
       "id": "foster-youth",
@@ -117,7 +117,7 @@
       "name": "Formerly Incarcerated",
       "description": "For reentry support programs",
       "icon": "🔓",
-      "programCount": 0
+      "programCount": 1
     },
     {
       "id": "nonprofits",
@@ -131,7 +131,7 @@
       "name": "Everyone",
       "description": "Available to all residents",
       "icon": "🌎",
-      "programCount": 188
+      "programCount": 189
     }
   ]
 }
