@@ -257,6 +257,7 @@
   category: Health
   area: Statewide
   groups:
+  - pregnant
   - low-income
   - families
   description: WIC is a nutrition program providing healthy food, nutrition education,
@@ -311,6 +312,7 @@
   category: Health
   area: San Mateo County
   groups:
+  - caregivers
   - seniors
   - disability
   description: San Mateo County Aging and Adult Services provides protective services,
@@ -338,6 +340,7 @@
   category: Health
   area: San Mateo County
   groups:
+  - pregnant
   - low-income
   - families
   description: San Mateo County's Family Health Services provides prenatal care, home
@@ -463,6 +466,7 @@
   category: Health
   area: Statewide
   groups:
+  - pregnant
   - families
   description: The Black Infant Health Program is California's community-based program
     providing group support and education to Black women and birthing people during
@@ -489,6 +493,7 @@
   category: Health
   area: Statewide
   groups:
+  - pregnant
   - low-income
   - families
   description: The California Home Visiting Program provides free, voluntary home
@@ -593,6 +598,7 @@
   category: Health
   area: Statewide
   groups:
+  - pregnant
   - low-income
   - families
   description: The Comprehensive Perinatal Services Program provides enhanced prenatal

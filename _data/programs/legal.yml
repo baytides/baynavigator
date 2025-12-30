@@ -114,6 +114,7 @@
   category: Legal Services
   area: San Francisco
   groups:
+  - immigrants
   - low-income
   - everyone
   description: San Francisco provides resources and support for immigrants, including connections to free and low-cost immigration legal services regardless of immigration status.
@@ -142,6 +143,7 @@
   category: Legal Services
   area: Nationwide
   groups:
+  - immigrants
   - low-income
   - everyone
   description: U.S. Citizenship and Immigration Services (USCIS) offers fee waivers for certain immigration applications for individuals who cannot afford the filing fees.
@@ -168,6 +170,8 @@
   category: Legal Services
   area: San Mateo County
   groups:
+  - immigrants
+  - reentry
   - low-income
   description: Community Legal Services in East Palo Alto (CLSEPA) provides free legal assistance to low-income families in San Mateo County and surrounding areas.
   what_they_offer: |

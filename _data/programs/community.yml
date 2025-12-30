@@ -483,6 +483,7 @@
   category: Clothing Assistance
   area: Contra Costa County
   groups:
+  - pregnant
   - low-income
   - families
   - youth
@@ -658,6 +659,7 @@
   category: Community Services
   area: San Mateo County
   groups:
+  - unhoused
   - low-income
   - everyone
   description: LifeMoves provides comprehensive services to help individuals and families experiencing homelessness transition to stable housing through shelter, case management, and supportive programs.
@@ -687,6 +689,8 @@
   category: Community Services
   area: City of Menlo Park
   groups:
+  - unhoused
+  - families
   - low-income
   - veterans
   description: Haven Family House is a LifeMoves interim housing facility in Menlo Park providing shelter and comprehensive services for families experiencing homelessness, with dedicated capacity for veteran families.

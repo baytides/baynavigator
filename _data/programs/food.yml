@@ -108,6 +108,7 @@
   category: Food
   area: Bay Area-wide
   groups:
+  - unhoused
   - low-income
   - seniors
   - disability
@@ -538,6 +539,7 @@
   category: Food
   area: Statewide
   groups:
+  - pregnant
   - low-income
   - families
   - youth

@@ -438,6 +438,7 @@
   category: Pet Resources
   area: Nationwide
   groups:
+  - unhoused
   - low-income
   description: Pets of the Homeless is a nonprofit providing free veterinary care and pet food to pets of people experiencing homelessness.
   what_they_offer: |

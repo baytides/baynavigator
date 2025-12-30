@@ -402,6 +402,7 @@
   category: Finance
   area: San Mateo County
   groups:
+  - unemployed
   - everyone
   description: NOVA Workforce connects job seekers with employment opportunities and training services, and helps businesses find qualified workers in Silicon Valley.
   what_they_offer: |

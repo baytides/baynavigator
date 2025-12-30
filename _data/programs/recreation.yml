@@ -225,6 +225,8 @@
   area: Marin County
   city: Sausalito
   groups:
+  - caregivers
+  - disability
   - low-income
   - families
   - youth
@@ -234,6 +236,7 @@
     exhibits designed to spark creativity and curiosity in children ages 0-10.
   what_they_offer: |
     - EBT/WIC cardholders: $5 admission per person
+    - Caregivers of visitors with disabilities: Free admission
     - Pay-What-You-Can days: Admission at any price you choose
     - Members: Unlimited free visits year-round
     - Children under 1: Free admission
@@ -425,19 +428,22 @@
   area: San Francisco
   city: San Francisco
   groups:
+  - teachers
   - low-income
   description: The Exploratorium is San Francisco's world-renowned museum of science,
     art, and human perception. Located on Pier 15, it features over 650 interactive
     exhibits that encourage hands-on exploration and discovery.
   what_they_offer: |
+    - California PreK-12 public school teachers: Free admission
     - Museums for All: $3 admission for up to 4 people
     - Valid with EBT/SNAP, Medi-Cal, WIC, or Lifeline Pass
     - After Dark (18+): $3 admission with qualifying card
     - Discounted memberships: $39 Family, $19 Dual After Dark
     - Must purchase at ticket window (not available online)
-  how_to_get_it: Visit the ticket window in person with your EBT, SNAP, Medi-Cal,
-    WIC card, or Lifeline Pass. This discount is not available for online purchases.
-    Reservations recommended for all visits.
+  how_to_get_it: California PreK-12 public school teachers can apply for free admission
+    online and bring teacher ID. For low-income discounts, visit the ticket window
+    with your EBT, SNAP, Medi-Cal, WIC card, or Lifeline Pass. These discounts are
+    not available for online purchases.
   phone: '415-528-4444'
   address: Pier 15, The Embarcadero, San Francisco, CA 94111
   timeframe: Ongoing
@@ -580,6 +586,7 @@
   - seniors
   - veterans
   - families
+  - first-responders
   - everyone
   description: The Museum of Craft and Design (MCD) in San Francisco's Dogpatch
     neighborhood explores the creative process through contemporary craft and design.
