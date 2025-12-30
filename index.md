@@ -26,6 +26,8 @@ actions: true
 
 {% include search-filter-ui.html %}
 
+{% include print-export.html %}
+
 <div id="search-results" class="programs-container" role="region" aria-live="polite" aria-label="Search results">
 {% assign all_programs = "" | split: "" %}
 {% for category in site.data.programs %}

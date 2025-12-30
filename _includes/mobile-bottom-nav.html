@@ -1,0 +1,529 @@
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav" role="navigation" aria-label="Mobile navigation">
+  <button type="button" class="bottom-nav-item active" data-nav="home" aria-current="page">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    <span>Home</span>
+  </button>
+
+  <button type="button" class="bottom-nav-item" data-nav="categories" aria-label="Browse by category">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    <span>Categories</span>
+  </button>
+
+  <button type="button" class="bottom-nav-item" data-nav="saved" aria-label="View saved programs">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+    <span>Saved</span>
+    <span class="nav-badge saved-count" aria-label="saved programs count"></span>
+  </button>
+
+  <button type="button" class="bottom-nav-item" data-nav="search" aria-label="Search programs">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <span>Search</span>
+  </button>
+</nav>
+
+<!-- Categories Quick Panel (slides up when Categories tab is tapped) -->
+<div class="categories-panel" id="categories-panel" hidden>
+  <div class="categories-panel-header">
+    <h2>Browse by Category</h2>
+    <button type="button" class="categories-close" aria-label="Close categories">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="categories-grid">
+    <button type="button" class="category-quick-btn" data-category="Food">🍎 Food</button>
+    <button type="button" class="category-quick-btn" data-category="Health">🏥 Health</button>
+    <button type="button" class="category-quick-btn" data-category="Public Transit">🚌 Transit</button>
+    <button type="button" class="category-quick-btn" data-category="Finance">💰 Finance</button>
+    <button type="button" class="category-quick-btn" data-category="Utilities">💡 Utilities</button>
+    <button type="button" class="category-quick-btn" data-category="Education">📚 Education</button>
+    <button type="button" class="category-quick-btn" data-category="Childcare Assistance">👶 Childcare</button>
+    <button type="button" class="category-quick-btn" data-category="Recreation">⚽ Recreation</button>
+    <button type="button" class="category-quick-btn" data-category="Museums">🏛️ Museums</button>
+    <button type="button" class="category-quick-btn" data-category="Technology">💻 Technology</button>
+    <button type="button" class="category-quick-btn" data-category="Legal Services">⚖️ Legal</button>
+    <button type="button" class="category-quick-btn" data-category="Pet Resources">🐾 Pets</button>
+  </div>
+</div>
+
+<style>
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.5rem 0;
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  /* Add padding to body to prevent content from hiding behind nav */
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+
+  /* Adjust mobile filter toggle position */
+  .mobile-filter-toggle {
+    bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex: 1;
+  padding: 0.5rem 0.25rem;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 48px;
+}
+
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.2s ease;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item:focus {
+  color: #2563eb;
+}
+
+.bottom-nav-item:focus {
+  outline: none;
+}
+
+.bottom-nav-item:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.bottom-nav-item.active {
+  color: #2563eb;
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
+}
+
+/* Badge for saved count */
+.nav-badge {
+  position: absolute;
+  top: 0.25rem;
+  right: calc(50% - 18px);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-badge:empty {
+  display: none;
+}
+
+/* Categories Panel */
+.categories-panel {
+  position: fixed;
+  bottom: calc(56px + env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.categories-panel:not([hidden]) {
+  transform: translateY(0);
+}
+
+.categories-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.categories-panel-header h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.categories-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.categories-close:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.category-quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 60px;
+}
+
+.category-quick-btn:hover {
+  background: #dbeafe;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.category-quick-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .mobile-bottom-nav {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .bottom-nav-item {
+    color: #9ca3af;
+  }
+
+  .bottom-nav-item:hover,
+  .bottom-nav-item.active {
+    color: #60a5fa;
+  }
+
+  .categories-panel {
+    background: #1f2937;
+  }
+
+  .categories-panel-header {
+    border-color: #374151;
+  }
+
+  .categories-panel-header h2 {
+    color: #f3f4f6;
+  }
+
+  .categories-close {
+    background: #374151;
+    color: #9ca3af;
+  }
+
+  .categories-close:hover {
+    background: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .category-quick-btn {
+    background: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  .category-quick-btn:hover {
+    background: #1e3a8a;
+    border-color: #3b82f6;
+    color: #93c5fd;
+  }
+}
+
+body[data-theme="dark"] .mobile-bottom-nav {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+body[data-theme="dark"] .bottom-nav-item {
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .bottom-nav-item:hover,
+body[data-theme="dark"] .bottom-nav-item.active {
+  color: #60a5fa;
+}
+
+body[data-theme="dark"] .categories-panel {
+  background: #1f2937;
+}
+
+body[data-theme="dark"] .categories-panel-header {
+  border-color: #374151;
+}
+
+body[data-theme="dark"] .categories-panel-header h2 {
+  color: #f3f4f6;
+}
+
+body[data-theme="dark"] .categories-close {
+  background: #374151;
+  color: #9ca3af;
+}
+
+body[data-theme="dark"] .categories-close:hover {
+  background: #4b5563;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .category-quick-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #e5e7eb;
+}
+
+body[data-theme="dark"] .category-quick-btn:hover {
+  background: #1e3a8a;
+  border-color: #3b82f6;
+  color: #93c5fd;
+}
+</style>
+
+<script>
+(function() {
+  const nav = document.querySelector('.mobile-bottom-nav');
+  const items = document.querySelectorAll('.bottom-nav-item');
+  const categoriesPanel = document.getElementById('categories-panel');
+  const categoriesClose = document.querySelector('.categories-close');
+  const savedCountBadge = document.querySelector('.saved-count');
+
+  if (!nav) return;
+
+  // Update saved count badge
+  function updateSavedCount() {
+    if (!savedCountBadge) return;
+    try {
+      const favorites = JSON.parse(localStorage.getItem('bayarea_favorites') || '[]');
+      savedCountBadge.textContent = favorites.length > 0 ? favorites.length : '';
+    } catch (e) {
+      savedCountBadge.textContent = '';
+    }
+  }
+
+  // Handle navigation item clicks
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.getAttribute('data-nav');
+
+      // Update active state
+      items.forEach(i => {
+        i.classList.remove('active');
+        i.removeAttribute('aria-current');
+      });
+      item.classList.add('active');
+      item.setAttribute('aria-current', 'page');
+
+      // Handle navigation actions
+      switch (target) {
+        case 'home':
+          // Reset filters and scroll to top
+          if (window.searchFilter) {
+            window.searchFilter.resetFilters();
+          }
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          closeCategoriesPanel();
+          break;
+
+        case 'categories':
+          toggleCategoriesPanel();
+          break;
+
+        case 'saved':
+          closeCategoriesPanel();
+          // Filter to show only saved programs
+          showSavedPrograms();
+          break;
+
+        case 'search':
+          closeCategoriesPanel();
+          // Open mobile filter drawer or focus search input
+          const filterToggle = document.getElementById('mobile-filter-toggle');
+          if (filterToggle && window.innerWidth <= 768) {
+            filterToggle.click();
+          } else {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+              searchInput.focus();
+              searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
+          break;
+      }
+    });
+  });
+
+  // Toggle categories panel
+  function toggleCategoriesPanel() {
+    if (categoriesPanel.hidden) {
+      categoriesPanel.hidden = false;
+    } else {
+      closeCategoriesPanel();
+    }
+  }
+
+  function closeCategoriesPanel() {
+    if (categoriesPanel) {
+      categoriesPanel.hidden = true;
+    }
+  }
+
+  // Close categories panel
+  if (categoriesClose) {
+    categoriesClose.addEventListener('click', closeCategoriesPanel);
+  }
+
+  // Category quick buttons
+  document.querySelectorAll('.category-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+      if (!category || !window.searchFilter) return;
+
+      // Reset and apply category filter
+      window.searchFilter.resetFilters();
+
+      const categoryBtn = document.querySelector(`[data-filter-type="category"][data-filter-value="${category}"]`);
+      if (categoryBtn) {
+        categoryBtn.click();
+      }
+
+      closeCategoriesPanel();
+
+      // Scroll to results
+      const results = document.getElementById('search-results');
+      if (results) {
+        setTimeout(() => {
+          results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+
+      // Update nav state
+      items.forEach(i => {
+        i.classList.remove('active');
+        i.removeAttribute('aria-current');
+      });
+      document.querySelector('[data-nav="home"]')?.classList.add('active');
+    });
+  });
+
+  // Show saved programs
+  function showSavedPrograms() {
+    try {
+      const favorites = JSON.parse(localStorage.getItem('bayarea_favorites') || '[]');
+
+      if (favorites.length === 0) {
+        alert('You haven\'t saved any programs yet. Click the heart icon on a program to save it.');
+        return;
+      }
+
+      // Hide all programs first
+      document.querySelectorAll('.program-card').forEach(card => {
+        const programId = card.getAttribute('data-program-id');
+        if (favorites.includes(programId)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update results count
+      const countEl = document.querySelector('.results-count');
+      if (countEl) {
+        countEl.textContent = `Showing ${favorites.length} saved program${favorites.length !== 1 ? 's' : ''}`;
+      }
+
+      // Scroll to results
+      const results = document.getElementById('search-results');
+      if (results) {
+        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (e) {
+      console.error('Error showing saved programs:', e);
+    }
+  }
+
+  // Initial saved count
+  updateSavedCount();
+
+  // Listen for favorite changes
+  window.addEventListener('storage', updateSavedCount);
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.favorite-toggle')) {
+      setTimeout(updateSavedCount, 100);
+    }
+  });
+})();
+</script>

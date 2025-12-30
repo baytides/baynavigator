@@ -94,11 +94,13 @@
   </main>
 
   {% include footer.html %}
+  {% include mobile-bottom-nav.html %}
 
   <!-- Search/Filter JavaScript - exclude from students page -->
   {% if page.url != '/students.html' %}
     <script src="{{ '/assets/js/search-filter.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/filter-presets.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/program-modal.js' | relative_url }}"></script>
   {% endif %}
 
   <!-- Feedback System -->

@@ -158,7 +158,89 @@ class DiscountSearchFilter {
       }
     });
 
+    // Set up quick filter chips
+    this.initQuickFilters();
+
     this.buildSearchIndex();
+  }
+
+  /**
+   * Initialize quick filter chip functionality
+   */
+  initQuickFilters() {
+    const quickFilters = {
+      'seniors-health': { eligibility: ['seniors'], category: ['Health'] },
+      'snap-food': { eligibility: ['low-income'], category: ['Food'] },
+      'families-food': { eligibility: ['families'], category: ['Food'] },
+      'veterans-health': { eligibility: ['veterans'], category: ['Health'] },
+      'students-transit': { eligibility: ['college-students'], category: ['Public Transit'] },
+      'everyone-free': { eligibility: ['everyone'], category: [] }
+    };
+
+    document.addEventListener('click', (e) => {
+      const chip = e.target.closest('.quick-filter-chip');
+      if (!chip) return;
+
+      const filterId = chip.getAttribute('data-quick-filter');
+      const config = quickFilters[filterId];
+      if (!config) return;
+
+      // Reset all filters first
+      this.resetFilters();
+
+      // Apply eligibility filters
+      config.eligibility.forEach(elig => {
+        const btn = document.querySelector(`[data-filter-type="eligibility"][data-filter-value="${elig}"]`);
+        if (btn && !btn.classList.contains('active')) {
+          btn.click();
+        }
+      });
+
+      // Apply category filters
+      config.category.forEach(cat => {
+        const btn = document.querySelector(`[data-filter-type="category"][data-filter-value="${cat}"]`);
+        if (btn && !btn.classList.contains('active')) {
+          btn.click();
+        }
+      });
+
+      // Update active state on chips
+      document.querySelectorAll('.quick-filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+  }
+
+  /**
+   * Update filter count badges
+   */
+  updateFilterCounts() {
+    // Count programs per category
+    const categoryCounts = {};
+    const eligibilityCounts = {};
+
+    this.programs.forEach(program => {
+      // Category counts
+      if (program.category) {
+        categoryCounts[program.category] = (categoryCounts[program.category] || 0) + 1;
+      }
+
+      // Eligibility counts
+      if (program.eligibility) {
+        const eligList = program.eligibility.split(' ');
+        eligList.forEach(elig => {
+          if (elig.trim()) {
+            eligibilityCounts[elig.trim()] = (eligibilityCounts[elig.trim()] || 0) + 1;
+          }
+        });
+      }
+    });
+
+    // Update category count badges
+    document.querySelectorAll('.filter-count[data-count-for]').forEach(badge => {
+      const countFor = badge.getAttribute('data-count-for');
+      const count = categoryCounts[countFor] || eligibilityCounts[countFor] || 0;
+      badge.textContent = count > 0 ? count : '';
+    });
   }
 
   /**
@@ -360,6 +442,9 @@ class DiscountSearchFilter {
     });
 
     this.filteredPrograms = [...this.programs];
+
+    // Update filter count badges after building index
+    this.updateFilterCounts();
   }
 
   /**
@@ -549,7 +634,18 @@ class DiscountSearchFilter {
                    program.area.includes('Statewide') ||
                    program.area.includes('Nationwide');
           }
-          return program.area.includes(area);
+          // For specific counties, also include Bay Area-wide, Statewide, and Nationwide programs
+          // since those apply to everyone in that county
+          if (program.area.includes(area)) {
+            return true;
+          }
+          // Also show broader programs that apply to all counties
+          if (program.area.includes('Bay Area') ||
+              program.area.includes('Statewide') ||
+              program.area.includes('Nationwide')) {
+            return true;
+          }
+          return false;
         });
         match = match && hasArea;
       }

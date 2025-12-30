@@ -168,6 +168,40 @@
     }
   }
 
+  // Get wizard progress from localStorage
+  function getWizardProgress() {
+    try {
+      const raw = localStorage.getItem('bad_wizard_progress');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  // Save wizard progress to localStorage
+  function saveWizardProgress(step, eligValues, countyValue) {
+    const progress = {
+      step: step,
+      eligibility: eligValues || [],
+      county: countyValue || null,
+      ts: Date.now()
+    };
+    try {
+      localStorage.setItem('bad_wizard_progress', JSON.stringify(progress));
+    } catch (err) {
+      // Ignore storage errors
+    }
+  }
+
+  // Clear wizard progress
+  function clearWizardProgress() {
+    try {
+      localStorage.removeItem('bad_wizard_progress');
+    } catch (err) {
+      // Ignore
+    }
+  }
+
   // Focus trap for modal
   function trapFocus(element) {
     const focusableElements = element.querySelectorAll(
@@ -227,11 +261,75 @@
       return;
     }
 
+    // Check for saved wizard progress (user abandoned mid-wizard)
+    const savedProgress = getWizardProgress();
+    if (savedProgress && savedProgress.step && !forceStep) {
+      // Only restore if progress is less than 24 hours old
+      const progressAge = Date.now() - (savedProgress.ts || 0);
+      const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+
+      if (progressAge < maxAge) {
+        // Restore eligibility selections
+        if (savedProgress.eligibility && savedProgress.eligibility.length > 0) {
+          qsa('input[name="eligibility"]').forEach(i => {
+            i.checked = savedProgress.eligibility.includes(i.value);
+          });
+        }
+
+        // Restore county selection
+        if (savedProgress.county) {
+          qsa('input[name="county"]').forEach(i => {
+            i.checked = (savedProgress.county === i.value);
+          });
+        }
+
+        // Resume at saved step
+        showStep(savedProgress.step);
+      }
+    }
+
     // Skip buttons
     const skipBtns = qsa('.step-flow-skip');
     skipBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         closeWizard();
+      });
+    });
+
+    // Quick jump to category buttons
+    qsa('.quick-jump-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        if (!category) return;
+
+        // Close wizard
+        closeWizard();
+
+        // Wait for searchFilter to be ready, then apply category filter
+        waitForSearchFilter(() => {
+          try {
+            // Reset filters first
+            if (window.searchFilter && typeof window.searchFilter.resetFilters === 'function') {
+              window.searchFilter.resetFilters();
+            }
+
+            // Click the category filter
+            const categoryBtn = qs(`[data-filter-type="category"][data-filter-value="${category}"]`);
+            if (categoryBtn) {
+              categoryBtn.click();
+            }
+
+            // Scroll to results
+            const results = qs('#search-results');
+            if (results) {
+              setTimeout(() => {
+                results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 300);
+            }
+          } catch (e) {
+            console.error('Quick jump error:', e);
+          }
+        });
       });
     });
 
@@ -249,6 +347,12 @@
           }
         }
 
+        // Save progress
+        const eligValues = qsa('input[name="eligibility"]:checked').map(i => i.value);
+        const countyInput = qs('input[name="county"]:checked');
+        const countyValue = countyInput ? countyInput.value : null;
+        saveWizardProgress(nextStep, eligValues, countyValue);
+
         showStep(nextStep);
 
         // Scroll to top of wizard
@@ -260,6 +364,13 @@
     qsa('.step-back').forEach(btn => {
       btn.addEventListener('click', () => {
         const backStep = parseInt(btn.getAttribute('data-back'));
+
+        // Save progress
+        const eligValues = qsa('input[name="eligibility"]:checked').map(i => i.value);
+        const countyInput = qs('input[name="county"]:checked');
+        const countyValue = countyInput ? countyInput.value : null;
+        saveWizardProgress(backStep, eligValues, countyValue);
+
         showStep(backStep);
 
         // Scroll to top of wizard
@@ -293,8 +404,9 @@
           return;
         }
 
-        // Save preferences
+        // Save preferences and clear progress
         savePrefs(eligValues, countyValue);
+        clearWizardProgress();
 
         // Apply selections
         applySelections(eligValues, countyValue);

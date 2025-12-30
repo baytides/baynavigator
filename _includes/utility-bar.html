@@ -44,6 +44,19 @@
           </button>
         </div>
 
+        <!-- Clear Data -->
+        <div class="utility-item">
+          <button type="button" id="clear-data-btn" class="utility-btn utility-btn-danger" aria-label="Clear saved data">
+            <svg class="utility-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+            <span>Clear Data</span>
+          </button>
+        </div>
+
         <!-- Update Filters (opens step flow) -->
         <div class="utility-item">
           <button type="button" id="update-filters-btn" class="utility-btn" aria-label="Update your filters">
@@ -222,6 +235,22 @@
   outline: 3px solid #00acc1;
 }
 
+/* Danger button styling (for Clear Data) */
+.utility-btn-danger {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.utility-btn-danger:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+  color: #b91c1c;
+}
+
+.utility-btn-danger:focus {
+  outline: 3px solid #dc2626;
+}
+
 /* Toggle Button */
 .utility-bar-toggle {
   position: absolute;
@@ -302,6 +331,18 @@
     background: linear-gradient(135deg, #0097a7 0%, #00acc1 100%);
     border-color: #0097a7;
     color: white;
+  }
+
+  .utility-btn-danger {
+    color: #f87171;
+    border-color: #7f1d1d;
+    background: #450a0a;
+  }
+
+  .utility-btn-danger:hover {
+    background: #7f1d1d;
+    border-color: #dc2626;
+    color: #fecaca;
   }
 }
 
@@ -429,6 +470,18 @@ body[data-theme="dark"] .utility-btn-install:hover {
   color: white;
 }
 
+body[data-theme="dark"] .utility-btn-danger {
+  color: #f87171;
+  border-color: #7f1d1d;
+  background: #450a0a;
+}
+
+body[data-theme="dark"] .utility-btn-danger:hover {
+  background: #7f1d1d;
+  border-color: #dc2626;
+  color: #fecaca;
+}
+
 /* Font Size Applied Styles */
 body[data-font-size="large"] {
   font-size: 1.125rem;
@@ -468,6 +521,8 @@ body[data-font-size="x-large"] {
 .utility-item:nth-child(3) { animation-delay: 0.2s; }
 .utility-item:nth-child(4) { animation-delay: 0.25s; }
 .utility-item:nth-child(5) { animation-delay: 0.3s; }
+.utility-item:nth-child(6) { animation-delay: 0.35s; }
+.utility-item:nth-child(7) { animation-delay: 0.4s; }
 
 @keyframes utilityItemFadeIn {
   from {
@@ -686,6 +741,53 @@ body[data-font-size="x-large"] {
         }
       } catch (err) {
         console.log('Error sharing:', err);
+      }
+    });
+  }
+
+  // Clear Data button
+  const clearDataBtn = document.getElementById('clear-data-btn');
+  if (clearDataBtn) {
+    clearDataBtn.addEventListener('click', () => {
+      // Show a friendly confirmation dialog
+      const confirmed = confirm(
+        'This will clear all your saved data including:\n\n' +
+        '• Saved/bookmarked programs\n' +
+        '• Your filter preferences\n' +
+        '• Theme and display settings\n' +
+        '• Any reported issues\n\n' +
+        'Are you sure you want to clear all data?'
+      );
+
+      if (confirmed) {
+        try {
+          // Clear all localStorage data
+          localStorage.clear();
+
+          // Reset theme to auto
+          document.body.setAttribute('data-theme', 'light');
+          if (themeSelect) {
+            themeSelect.value = 'auto';
+          }
+
+          // Reset text spacing
+          document.body.removeAttribute('data-text-spacing');
+          if (spacingToggle) {
+            spacingToggle.setAttribute('aria-pressed', 'false');
+            spacingToggle.style.background = '';
+            spacingToggle.style.color = '';
+            spacingToggle.style.borderColor = '';
+          }
+
+          // Show success message
+          alert('All saved data has been cleared successfully!\n\nThe page will now reload.');
+
+          // Reload to apply fresh state
+          window.location.reload();
+        } catch (err) {
+          console.error('Error clearing data:', err);
+          alert('There was an error clearing your data. Please try again.');
+        }
       }
     });
   }
