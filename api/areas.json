@@ -4,13 +4,13 @@
       "id": "san-francisco",
       "name": "San Francisco",
       "type": "county",
-      "programCount": 49
+      "programCount": 59
     },
     {
       "id": "alameda-county",
       "name": "Alameda County",
       "type": "county",
-      "programCount": 22
+      "programCount": 25
     },
     {
       "id": "contra-costa-county",
@@ -64,13 +64,13 @@
       "id": "statewide",
       "name": "Statewide",
       "type": "state",
-      "programCount": 65
+      "programCount": 68
     },
     {
       "id": "nationwide",
       "name": "Nationwide",
       "type": "nationwide",
-      "programCount": 42
+      "programCount": 48
     }
   ]
 }

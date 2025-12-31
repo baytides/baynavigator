@@ -1997,3 +1997,831 @@
   link: https://www.glbthistory.org/
   link_text: Plan Visit
   verified_date: '2025-12-30'
+
+# First Responder Resources
+
+- id: id-me-first-responders
+  name: ID.me First Responder Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+  - first-responders
+  - everyone
+  description: ID.me provides verified identity for first responders (firefighters, EMTs, paramedics, police) to unlock exclusive discounts at hundreds of retailers, restaurants, and service providers.
+  what_they_offer: |
+    - One-time identity verification
+    - Access to 100+ retailer discounts
+    - 10-25% off at major brands
+    - Tech discounts (Apple, Samsung, Dell)
+    - Travel discounts (hotels, car rentals)
+    - Entertainment and subscription savings
+  how_to_get_it: |
+    1. Create free ID.me account
+    2. Verify first responder status with credentials
+    3. Upload employment verification if needed
+    4. Once verified, access discounts through ID.me Shop
+    5. Verification transfers across all participating retailers
+  benefit: 10-25% discounts at 100+ major retailers after one-time verification
+  timeframe: Ongoing
+  link: https://www.id.me/government
+  link_text: Verify Status
+  verified_date: '2025-12-30'
+
+- id: govx-first-responder
+  name: GovX First Responder Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+  - first-responders
+  - veterans
+  - everyone
+  description: GovX is an exclusive online shopping platform offering discounts up to 60% off for verified first responders, military, and law enforcement on apparel, gear, and everyday essentials.
+  what_they_offer: |
+    - Up to 60% off major brands
+    - Tactical and outdoor gear
+    - Apparel and footwear
+    - Electronics and tech
+    - Travel and entertainment
+    - Home and auto products
+  how_to_get_it: |
+    1. Register at govx.com
+    2. Verify first responder status
+    3. Provide department or agency info
+    4. Access exclusive member pricing
+    5. Shop and save on every order
+  benefit: Up to 60% off on gear, apparel, electronics, and more for verified first responders
+  timeframe: Ongoing
+  link: https://www.govx.com/
+  link_text: Join Free
+  verified_date: '2025-12-30'
+
+- id: verizon-first-responders
+  name: Verizon First Responders Discount
+  category: Technology
+  area: Nationwide
+  groups:
+  - first-responders
+  description: Verizon offers ongoing monthly discounts on wireless plans for verified first responders including firefighters, police officers, EMTs, and paramedics.
+  what_they_offer: |
+    - 25% off select Verizon Unlimited plans
+    - Monthly recurring discount
+    - Available for new and existing customers
+    - Stackable with device promotions
+    - Applies to phone, tablet, and watch lines
+  how_to_get_it: |
+    1. Visit Verizon store or website
+    2. Verify first responder status through ID.me
+    3. Provide department credentials
+    4. Discount applied to eligible plans
+    5. Renew verification annually
+  benefit: 25% off monthly Verizon Unlimited phone plans
+  timeframe: Ongoing
+  link: https://www.verizon.com/featured/first-responders/
+  link_text: Get Discount
+  verified_date: '2025-12-30'
+
+- id: tmobile-first-responders
+  name: T-Mobile First Responders Discount
+  category: Technology
+  area: Nationwide
+  groups:
+  - first-responders
+  description: T-Mobile offers special pricing on wireless plans for first responders including firefighters, police, EMTs, paramedics, and 911 dispatchers.
+  what_they_offer: |
+    - 50% off family lines (up to 6 lines on Magenta)
+    - 20% off Magenta MAX plans
+    - Netflix included on some plans
+    - No annual service contract
+    - 5G network access
+  how_to_get_it: |
+    1. Visit T-Mobile store or website
+    2. Select First Responders plan option
+    3. Verify employment status
+    4. Provide proof of first responder role
+    5. Discount applied automatically
+  benefit: Up to 50% off family lines, 20% off Magenta MAX plans
+  timeframe: Ongoing
+  link: https://www.t-mobile.com/cell-phone-plans/first-responders-background
+  link_text: Learn More
+  verified_date: '2025-12-30'
+
+- id: apple-first-responders
+  name: Apple First Responders Store
+  category: Technology
+  area: Nationwide
+  groups:
+  - first-responders
+  description: Apple offers special pricing for verified first responders on Mac computers, iPads, and accessories through their First Responders store.
+  what_they_offer: |
+    - Discounted Mac computers
+    - iPad discounts
+    - AppleCare+ savings
+    - Accessories at reduced prices
+    - Same warranty and service as regular purchases
+  how_to_get_it: |
+    1. Visit Apple's First Responders store online
+    2. Sign in with ID.me verification
+    3. Verify first responder employment
+    4. Access exclusive pricing
+    5. Purchase with standard Apple checkout
+  benefit: Discounted pricing on Mac, iPad, and accessories for verified first responders
+  timeframe: Ongoing
+  link: https://www.apple.com/us-gov/
+  link_text: Shop Now
+  verified_date: '2025-12-30'
+
+# Teacher and Educator Resources
+
+- id: exploratorium-teacher-free
+  name: Exploratorium Free Teacher Admission
+  category: Museums
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - teachers
+  - everyone
+  description: The Exploratorium offers free admission to K-12 teachers, allowing educators to explore exhibits and develop ideas for classroom activities.
+  what_they_offer: |
+    - Free general admission for K-12 teachers
+    - Access to all museum exhibits
+    - Teacher professional development programs
+    - Free After Dark admission (Thursdays)
+    - Curriculum resources and ideas
+  how_to_get_it: |
+    1. Visit the Exploratorium with valid teacher ID
+    2. Show school-issued ID or pay stub
+    3. Register at admissions desk
+    4. Receive free entry to museum
+    5. Access available year-round
+  address: Pier 15, San Francisco, CA 94111
+  phone: '415-528-4444'
+  benefit: Free general admission for K-12 teachers with valid ID
+  timeframe: Ongoing
+  link: https://www.exploratorium.edu/visit/admission
+  link_text: Plan Visit
+  verified_date: '2025-12-30'
+
+- id: bay-area-writing-project
+  name: Bay Area Writing Project
+  category: Education
+  area: Alameda County
+  city: Berkeley
+  groups:
+  - teachers
+  description: The Bay Area Writing Project at UC Berkeley provides professional development programs for teachers, helping educators improve writing instruction and student outcomes.
+  what_they_offer: |
+    - Summer Invitational Institute (4-week program)
+    - Yearlong professional development
+    - Teacher leadership development
+    - Writing workshops and coaching
+    - Classroom-tested strategies
+    - Community of teacher-writers
+  how_to_get_it: |
+    1. Visit BAWP website for program information
+    2. Apply for Summer Invitational Institute or other programs
+    3. Describe your teaching context and goals
+    4. Attend program sessions
+    5. Join network of teacher-consultants
+  phone: '510-642-0963'
+  address: UC Berkeley, Graduate School of Education
+  benefit: Professional development for teachers in writing instruction and leadership
+  timeframe: Applications in spring
+  link: https://bawp.berkeley.edu/
+  link_text: Apply Now
+  verified_date: '2025-12-30'
+
+- id: teacher-id-me-discounts
+  name: ID.me Teacher Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+  - teachers
+  description: ID.me provides verified identity for teachers and educators to unlock exclusive discounts at hundreds of retailers on classroom supplies, technology, and personal items.
+  what_they_offer: |
+    - 10-25% off at major retailers
+    - Classroom supply discounts (Staples, Office Depot)
+    - Technology discounts (Apple, Dell, HP)
+    - Entertainment and subscription savings
+    - One-time verification for all retailers
+  how_to_get_it: |
+    1. Create free ID.me account
+    2. Verify teacher/educator status
+    3. Upload school ID or employment verification
+    4. Once verified, access discounts through ID.me Shop
+    5. Verification works across all participating stores
+  benefit: 10-25% discounts at 100+ retailers after one-time teacher verification
+  timeframe: Ongoing
+  link: https://www.id.me/teacher-military-discounts
+  link_text: Verify Status
+  verified_date: '2025-12-30'
+
+# Unemployed and Job Seeker Resources
+
+- id: sf-jobsnow
+  name: SF JobsNOW!
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unemployed
+  - low-income
+  - everyone
+  description: SF JobsNOW! is San Francisco's subsidized employment program, providing wage subsidies to employers who hire unemployed San Francisco residents, making it easier for job seekers to find work.
+  what_they_offer: |
+    - Wage subsidies for employers who hire you
+    - Job placement assistance
+    - Training opportunities
+    - Career coaching and support
+    - Connections to Bay Area employers
+    - Follow-up support after placement
+  how_to_get_it: |
+    1. Visit OEWD website or local One-Stop Career Center
+    2. Complete intake and assessment
+    3. Meet with employment specialist
+    4. Receive job placement assistance
+    5. Employer receives wage subsidy when you're hired
+  phone: '415-701-4817'
+  benefit: Subsidized employment program helping unemployed residents find jobs
+  timeframe: Ongoing
+  link: https://sf.gov/information/jobsnow-employers
+  link_text: Get Started
+  verified_date: '2025-12-30'
+
+- id: the-job-forum
+  name: The Job Forum
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unemployed
+  - everyone
+  description: The Job Forum is a free networking and job search support group in San Francisco providing workshops, networking events, and career coaching for job seekers.
+  what_they_offer: |
+    - Free weekly networking meetings
+    - Resume and LinkedIn workshops
+    - Interview preparation coaching
+    - Career transition support
+    - Employer connections and referrals
+    - Peer support community
+  how_to_get_it: |
+    1. Visit The Job Forum website
+    2. Register for weekly meetings (free)
+    3. Attend workshops and networking events
+    4. Connect with career coaches
+    5. Access job leads and referrals
+  benefit: Free weekly job search support, networking, and career coaching
+  timeframe: Ongoing
+  link: https://thejobforum.org/
+  link_text: Join Meetings
+  verified_date: '2025-12-30'
+
+- id: oewd-citybuild
+  name: CityBuild Academy
+  category: Education
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unemployed
+  - low-income
+  - reentry
+  description: CityBuild Academy is San Francisco's pre-apprenticeship construction training program, providing free job training and placement into union construction careers.
+  what_they_offer: |
+    - Free 18-week construction training
+    - Union apprenticeship placement
+    - OSHA and safety certifications
+    - Math and blueprint reading
+    - Supportive services (transportation, tools)
+    - Placement into trades (electrical, plumbing, carpentry)
+  how_to_get_it: |
+    1. Attend CityBuild orientation session
+    2. Complete application and interview
+    3. Pass assessment tests
+    4. Commit to full 18-week program
+    5. Graduate and enter union apprenticeship
+  phone: '415-701-4817'
+  benefit: Free construction job training with union apprenticeship placement
+  timeframe: Multiple cohorts annually
+  link: https://sf.gov/citybuild
+  link_text: Apply Now
+  verified_date: '2025-12-30'
+
+- id: oewd-techsf
+  name: TechSF
+  category: Education
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unemployed
+  - low-income
+  - everyone
+  description: TechSF provides free technology job training and placement services for San Francisco residents seeking careers in the tech industry.
+  what_they_offer: |
+    - Free tech skills training
+    - Coding bootcamp scholarships
+    - IT support certifications
+    - Job placement assistance
+    - Internship connections
+    - Career mentorship
+  how_to_get_it: |
+    1. Visit TechSF website
+    2. Complete interest form
+    3. Attend orientation session
+    4. Apply for training programs
+    5. Receive job placement support
+  phone: '415-701-4817'
+  benefit: Free technology job training and tech industry career placement
+  timeframe: Ongoing
+  link: https://techsf.org/
+  link_text: Get Started
+  verified_date: '2025-12-30'
+
+- id: meda-workforce
+  name: MEDA Workforce Development
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unemployed
+  - immigrants
+  - low-income
+  description: Mission Economic Development Agency (MEDA) provides workforce development, job training, and career services with a focus on Latino and low-income communities in San Francisco's Mission District.
+  what_they_offer: |
+    - Job readiness training
+    - Skills development workshops
+    - Job placement assistance
+    - Career coaching and planning
+    - Digital literacy training
+    - Financial coaching integration
+  how_to_get_it: |
+    1. Visit MEDA office in the Mission
+    2. Complete intake assessment
+    3. Meet with career coach
+    4. Enroll in training programs
+    5. Receive ongoing job search support
+  phone: '415-282-3334'
+  address: 2301 Mission St, Suite 301, San Francisco, CA 94110
+  benefit: Free job training, career coaching, and placement services
+  timeframe: Ongoing
+  link: https://medasf.org/programs/workforce-development/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+# Immigrant Resources
+
+- id: iiba-immigration
+  name: Immigration Institute of the Bay Area
+  category: Legal Services
+  area: Bay Area-wide
+  groups:
+  - immigrants
+  - low-income
+  description: The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.
+  what_they_offer: |
+    - Low-cost immigration legal consultations
+    - Citizenship and naturalization assistance
+    - Green card and family petition services
+    - DACA renewal support
+    - Deportation defense referrals
+    - Legal workshops and Know Your Rights
+  how_to_get_it: |
+    1. Call IIBA to schedule appointment
+    2. Complete intake and eligibility screening
+    3. Attend consultation with immigration specialist
+    4. Receive case assessment and options
+    5. Proceed with legal services if eligible
+  phone: '415-554-2444'
+  address: 1063 Market St, Suite 400, San Francisco, CA 94103
+  benefit: Affordable immigration legal services and consultations
+  timeframe: Ongoing
+  link: https://iibayarea.org/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+- id: eblc-immigration
+  name: East Bay Community Law Center - Immigration
+  category: Legal Services
+  area: Alameda County
+  city: Berkeley
+  groups:
+  - immigrants
+  - low-income
+  description: East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and community education.
+  what_they_offer: |
+    - Free immigration legal consultations
+    - Representation in immigration court
+    - Asylum application assistance
+    - Family-based petitions
+    - Naturalization and citizenship
+    - Community education workshops
+  how_to_get_it: |
+    1. Call EBCLC intake line
+    2. Complete screening for services
+    3. Must be low-income Alameda County resident
+    4. Attend appointment with immigration attorney
+    5. Receive representation or referrals
+  phone: '510-548-4040'
+  address: 2921 Adeline St, Berkeley, CA 94703
+  benefit: Free immigration legal representation for low-income Alameda County residents
+  timeframe: Ongoing
+  link: https://ebclc.org/immigration/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+# Unhoused Resources
+
+- id: sf-hsh
+  name: SF Homelessness and Supportive Housing
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unhoused
+  - low-income
+  description: San Francisco's Department of Homelessness and Supportive Housing (HSH) coordinates the city's response to homelessness, providing shelter, housing, and supportive services.
+  what_they_offer: |
+    - Emergency shelter access
+    - Navigation centers with services
+    - Permanent supportive housing
+    - Rapid rehousing assistance
+    - Street outreach teams
+    - Connection to services
+  how_to_get_it: |
+    1. Call SF Homeless Outreach Team at 415-734-4233
+    2. Or call 311 for shelter information
+    3. Connect with street outreach if unsheltered
+    4. Complete intake at navigation center
+    5. Receive housing and service referrals
+  phone: '415-734-4233'
+  benefit: Emergency shelter, navigation centers, and permanent housing assistance
+  timeframe: Ongoing
+  link: https://hsh.sfgov.org/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+- id: project-homeless-connect
+  name: Project Homeless Connect
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unhoused
+  - low-income
+  - everyone
+  description: Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care.
+  what_they_offer: |
+    - Large community resource events
+    - Ongoing care coordination
+    - Free haircuts and hygiene items
+    - Medical and dental care referrals
+    - Legal services
+    - Benefits enrollment assistance
+    - Housing navigation
+  how_to_get_it: |
+    1. Attend Project Homeless Connect events
+    2. Visit their service hub for ongoing support
+    3. Access free services without appointment
+    4. Connect with case managers
+    5. Receive referrals to housing and benefits
+  phone: '415-503-2100'
+  address: 121 7th St, San Francisco, CA 94103
+  benefit: Free one-stop access to services, care coordination, and housing navigation
+  timeframe: Ongoing
+  link: https://www.projecthomelessconnect.org/
+  link_text: Get Services
+  verified_date: '2025-12-30'
+
+- id: st-anthonys-dining
+  name: St. Anthony's Free Dining Room
+  category: Food
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - unhoused
+  - low-income
+  - everyone
+  description: St. Anthony's operates San Francisco's largest free dining room, serving nutritious meals daily to anyone in need without questions or requirements.
+  what_they_offer: |
+    - Free hot meals daily
+    - No ID or documentation required
+    - Vegetarian options available
+    - Served with dignity and respect
+    - Clean, welcoming environment
+    - Additional social services on-site
+  how_to_get_it: |
+    1. Visit St. Anthony's Dining Room
+    2. No reservation or registration needed
+    3. Meals served during posted hours
+    4. All are welcome regardless of status
+    5. Access other services as needed
+  phone: '415-241-2600'
+  address: 150 Golden Gate Ave, San Francisco, CA 94102
+  benefit: Free nutritious meals served daily with dignity to anyone in need
+  timeframe: Daily
+  link: https://www.stanthonysf.org/services/dining-room/
+  link_text: View Hours
+  verified_date: '2025-12-30'
+
+# Caregiver Resources
+
+- id: family-caregiver-alliance
+  name: Family Caregiver Alliance / Bay Area Caregiver Resource Center
+  category: Community Services
+  area: Bay Area-wide
+  groups:
+  - caregivers
+  - seniors
+  - disability
+  description: Family Caregiver Alliance operates the Bay Area Caregiver Resource Center, providing support, education, and services to family caregivers of adults with chronic or disabling conditions.
+  what_they_offer: |
+    - Free caregiver support groups
+    - Respite care grants
+    - Individual caregiver coaching
+    - Educational workshops
+    - Legal and financial consultations
+    - Care planning assistance
+    - Short-term counseling
+  how_to_get_it: |
+    1. Call Family Caregiver Alliance
+    2. Complete intake assessment
+    3. Meet with care consultant
+    4. Develop personalized care plan
+    5. Access respite grants and services
+  phone: '415-434-3388'
+  address: 785 Market St, Suite 750, San Francisco, CA 94103
+  benefit: Free caregiver support groups, respite grants, and care planning
+  timeframe: Ongoing
+  link: https://www.caregiver.org/
+  link_text: Get Support
+  verified_date: '2025-12-30'
+
+- id: ihss
+  name: In-Home Supportive Services (IHSS)
+  category: Community Services
+  area: Statewide
+  groups:
+  - caregivers
+  - seniors
+  - disability
+  - low-income
+  description: In-Home Supportive Services (IHSS) is California's program that pays family members or others to provide in-home care for aged, blind, or disabled individuals who qualify for Medi-Cal.
+  what_they_offer: |
+    - Paid caregiving by family members
+    - Personal care assistance
+    - Housekeeping and meal preparation
+    - Medical accompaniment
+    - Protective supervision
+    - Respite for family caregivers
+  how_to_get_it: |
+    1. Apply through county social services
+    2. Must be on Medi-Cal
+    3. Home assessment conducted
+    4. Care hours determined by needs
+    5. Choose caregiver (can be family member)
+    6. Caregiver receives hourly payment
+  phone: 'Contact your county social services'
+  benefit: Paid caregiving hours for family members caring for elderly or disabled loved ones
+  timeframe: Ongoing
+  link: https://www.cdss.ca.gov/in-home-supportive-services
+  link_text: Apply
+  verified_date: '2025-12-30'
+
+# Foster Youth Resources
+
+- id: beyond-emancipation
+  name: Beyond Emancipation
+  category: Community Services
+  area: Alameda County
+  groups:
+  - foster-youth
+  - youth
+  description: Beyond Emancipation helps current and former foster youth in Alameda County transition to successful adulthood through housing, education, employment, and wellness support.
+  what_they_offer: |
+    - Housing assistance and placement
+    - Education support and tutoring
+    - Employment training and job placement
+    - Life skills development
+    - Mental health services
+    - Financial coaching
+    - Ongoing case management
+  how_to_get_it: |
+    1. Contact Beyond Emancipation
+    2. Must be current or former foster youth ages 16-24
+    3. Must have connection to Alameda County
+    4. Complete intake assessment
+    5. Develop personalized success plan
+    6. Access comprehensive services
+  phone: '510-667-7694'
+  address: 505 14th St, Suite 900, Oakland, CA 94612
+  benefit: Housing, education, employment, and life skills support for foster youth ages 16-24
+  timeframe: Ongoing
+  link: https://www.beyondemancipation.org/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+- id: first-place-for-youth
+  name: First Place for Youth
+  category: Community Services
+  area: Bay Area-wide
+  groups:
+  - foster-youth
+  - youth
+  description: First Place for Youth helps foster youth ages 18-24 build the skills they need to successfully transition to adulthood through housing, education, and employment programs.
+  what_they_offer: |
+    - Transitional housing placement
+    - Education coaching and support
+    - Employment training and placement
+    - Life skills workshops
+    - Financial literacy education
+    - Mental health resources
+    - Long-term case management
+  how_to_get_it: |
+    1. Contact First Place for Youth
+    2. Must be current or former foster youth ages 18-24
+    3. Complete application and interview
+    4. Participate in intake assessment
+    5. Access housing and comprehensive services
+  phone: '510-272-0979'
+  address: 426 17th St, Suite 200, Oakland, CA 94612
+  benefit: Transitional housing and comprehensive support for foster youth ages 18-24
+  timeframe: Ongoing
+  link: https://www.firstplaceforyouth.org/
+  link_text: Apply Now
+  verified_date: '2025-12-30'
+
+- id: chafee-grant
+  name: Chafee Grant for Foster Youth
+  category: Education
+  area: Statewide
+  groups:
+  - foster-youth
+  - youth
+  description: The Chafee Grant provides up to $5,000 per year for current and former foster youth to pay for career and technical training or college expenses.
+  what_they_offer: |
+    - Up to $5,000 per academic year
+    - Covers tuition, fees, books, supplies
+    - Can cover living expenses
+    - Available through age 26
+    - For vocational training or college
+    - Does not have to be repaid
+  how_to_get_it: |
+    1. Must be current or former foster youth
+    2. Must be age 16-26
+    3. Complete FAFSA or CA Dream Act application
+    4. Check box for foster youth status
+    5. Enroll in eligible school or training program
+    6. Grant automatically considered
+  benefit: Up to $5,000/year for college or vocational training for foster youth through age 26
+  timeframe: Academic year
+  link: https://www.csac.ca.gov/chafee-grant
+  link_text: Apply Now
+  verified_date: '2025-12-30'
+
+- id: sf-casa
+  name: San Francisco CASA
+  category: Community Services
+  area: San Francisco
+  city: San Francisco
+  groups:
+  - foster-youth
+  - youth
+  - families
+  description: San Francisco Court Appointed Special Advocates (CASA) trains volunteers to advocate for children and youth in the foster care system, ensuring their voices are heard in court.
+  what_they_offer: |
+    - Trained volunteer advocates for foster youth
+    - Court advocacy and monitoring
+    - Educational advocacy
+    - Connection to services and resources
+    - Consistent supportive adult relationship
+    - Voice for child's best interests
+  how_to_get_it: |
+    1. Foster youth referred by court or social worker
+    2. CASA volunteer assigned to case
+    3. Advocate meets regularly with child
+    4. Advocate reports to court
+    5. Support continues through case
+  phone: '415-398-8001'
+  address: 870 Market St, Suite 1065, San Francisco, CA 94102
+  benefit: Free trained volunteer advocates for children and youth in foster care
+  timeframe: Ongoing
+  link: https://sfcasa.org/
+  link_text: Learn More
+  verified_date: '2025-12-30'
+
+# Reentry Resources
+
+- id: five-keys
+  name: Five Keys Schools and Programs
+  category: Education
+  area: Bay Area-wide
+  groups:
+  - reentry
+  - low-income
+  - everyone
+  description: Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry support in the Bay Area.
+  what_they_offer: |
+    - Free high school diploma programs
+    - GED preparation
+    - Career technical education
+    - Job placement assistance
+    - Workforce readiness training
+    - Wraparound support services
+    - Programs in jails and community
+  how_to_get_it: |
+    1. Contact Five Keys enrollment
+    2. Complete intake assessment
+    3. Enroll in education or training program
+    4. Attend classes (in-person or hybrid)
+    5. Receive supportive services
+    6. Graduate and access job placement
+  phone: '415-734-3310'
+  address: 70 Oak Grove St, San Francisco, CA 94107
+  benefit: Free high school diploma, GED prep, and career training for justice-involved individuals
+  timeframe: Ongoing
+  link: https://www.fivekeyscharter.org/
+  link_text: Enroll
+  verified_date: '2025-12-30'
+
+- id: project-rebound
+  name: Project Rebound
+  category: Education
+  area: Statewide
+  groups:
+  - reentry
+  description: Project Rebound helps formerly incarcerated individuals earn college degrees at California State University campuses, providing support services and a community of peers.
+  what_they_offer: |
+    - CSU admission support
+    - Financial aid navigation
+    - Academic advising and tutoring
+    - Peer mentorship from formerly incarcerated students
+    - Career development
+    - Community and belonging
+    - Available at multiple CSU campuses
+  how_to_get_it: |
+    1. Contact Project Rebound at your desired CSU
+    2. Complete intake and assessment
+    3. Receive application support
+    4. Enroll at CSU campus
+    5. Access ongoing support services
+    6. Join peer community
+  benefit: College enrollment support and peer mentorship for formerly incarcerated students at CSU
+  timeframe: Ongoing
+  link: https://www.calstate.edu/impact-of-the-csu/student-success/project-rebound
+  link_text: Find Campus
+  verified_date: '2025-12-30'
+
+- id: anti-recidivism-coalition
+  name: Anti-Recidivism Coalition (ARC)
+  category: Community Services
+  area: Bay Area-wide
+  groups:
+  - reentry
+  description: The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently incarcerated people in California.
+  what_they_offer: |
+    - Reentry support and case management
+    - Housing assistance
+    - Employment support and job training
+    - Education navigation
+    - Policy advocacy
+    - Community and peer support
+    - Leadership development
+  how_to_get_it: |
+    1. Contact ARC intake line
+    2. Must be currently or formerly incarcerated
+    3. Complete intake assessment
+    4. Meet with case manager
+    5. Develop reentry plan
+    6. Access services and join community
+  phone: '213-955-5885'
+  benefit: Comprehensive reentry support including housing, employment, and education assistance
+  timeframe: Ongoing
+  link: https://antirecidivism.org/
+  link_text: Get Help
+  verified_date: '2025-12-30'
+
+- id: centerforce-reentry
+  name: Centerforce Reentry Services
+  category: Community Services
+  area: Bay Area-wide
+  groups:
+  - reentry
+  - families
+  description: Centerforce provides reentry services and family support for incarcerated individuals and their families, helping maintain connections and prepare for successful reintegration.
+  what_they_offer: |
+    - Reentry planning and case management
+    - Family visiting programs
+    - Children's services and support
+    - Housing assistance
+    - Employment readiness
+    - Connection to community resources
+  how_to_get_it: |
+    1. Contact Centerforce for intake
+    2. Currently or formerly incarcerated individuals welcome
+    3. Family members also eligible
+    4. Complete assessment
+    5. Access services and support
+  phone: '415-456-9980'
+  benefit: Reentry planning, family support, and connections to housing and employment
+  timeframe: Ongoing
+  link: https://centerforce.org/
+  link_text: Get Help
+  verified_date: '2025-12-30'

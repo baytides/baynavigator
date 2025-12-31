@@ -5,21 +5,21 @@
       "name": "SNAP/EBT/Medi-Cal",
       "description": "For public benefit recipients",
       "icon": "💳",
-      "programCount": 156
+      "programCount": 167
     },
     {
       "id": "seniors",
       "name": "Seniors (65+)",
       "description": "For adults age 65 and older",
       "icon": "👵",
-      "programCount": 39
+      "programCount": 41
     },
     {
       "id": "youth",
       "name": "Youth",
       "description": "For children and young adults",
       "icon": "🧒",
-      "programCount": 34
+      "programCount": 38
     },
     {
       "id": "college-students",
@@ -33,21 +33,21 @@
       "name": "Veterans / Active Duty",
       "description": "For military veterans and active duty",
       "icon": "🎖️",
-      "programCount": 17
+      "programCount": 18
     },
     {
       "id": "families",
       "name": "Families",
       "description": "For families with children",
       "icon": "👨‍👩‍👧",
-      "programCount": 36
+      "programCount": 38
     },
     {
       "id": "disability",
       "name": "People with Disabilities",
       "description": "For individuals with disabilities",
       "icon": "🧑‍🦽",
-      "programCount": 24
+      "programCount": 26
     },
     {
       "id": "lgbtq",
@@ -61,35 +61,35 @@
       "name": "First Responders",
       "description": "For police, firefighters, EMTs, nurses",
       "icon": "🚒",
-      "programCount": 1
+      "programCount": 6
     },
     {
       "id": "teachers",
       "name": "Teachers/Educators",
       "description": "For K-12 teachers and school staff",
       "icon": "👩‍🏫",
-      "programCount": 2
+      "programCount": 5
     },
     {
       "id": "unemployed",
       "name": "Unemployed/Job Seekers",
       "description": "For people actively seeking employment",
       "icon": "💼",
-      "programCount": 2
+      "programCount": 7
     },
     {
       "id": "immigrants",
       "name": "Immigrants/Refugees",
       "description": "For new arrivals, undocumented, DACA",
       "icon": "🌍",
-      "programCount": 6
+      "programCount": 9
     },
     {
       "id": "unhoused",
       "name": "Unhoused",
       "description": "For people experiencing homelessness",
       "icon": "🏠",
-      "programCount": 4
+      "programCount": 7
     },
     {
       "id": "pregnant",
@@ -103,21 +103,21 @@
       "name": "Caregivers",
       "description": "For people caring for elderly or disabled family",
       "icon": "🤲",
-      "programCount": 2
+      "programCount": 4
     },
     {
       "id": "foster-youth",
       "name": "Foster Youth",
       "description": "For current and former foster youth",
       "icon": "🏡",
-      "programCount": 0
+      "programCount": 4
     },
     {
       "id": "reentry",
       "name": "Formerly Incarcerated",
       "description": "For reentry support programs",
       "icon": "🔓",
-      "programCount": 2
+      "programCount": 7
     },
     {
       "id": "nonprofits",
@@ -131,7 +131,7 @@
       "name": "Everyone",
       "description": "Available to all residents",
       "icon": "🌎",
-      "programCount": 203
+      "programCount": 212
     }
   ]
 }
