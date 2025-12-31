@@ -6,12 +6,28 @@ on:
   pull_request:
     branches: [ main ]
 
+# Prevent concurrent CI runs on same ref
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies and generate API
+        run: |
+          npm ci
+          node scripts/generate-api.js
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -24,16 +40,8 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Playwright deps
-        run: |
-          npm ci
-          npx playwright install --with-deps
+      - name: Install Playwright
+        run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: |
-          npx playwright test
+        run: npx playwright test
