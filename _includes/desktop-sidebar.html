@@ -215,20 +215,21 @@
     </ul>
   </nav>
 
-  <!-- Keyboard Shortcuts Hint -->
-  <div class="sidebar-shortcuts">
+  <!-- Keyboard Shortcuts Hint (dynamically updated by JS) -->
+  <div class="sidebar-shortcuts" id="sidebar-shortcuts">
     <div class="sidebar-shortcuts-title">Keyboard Shortcuts</div>
-    <div class="sidebar-shortcut">
+    <div class="sidebar-shortcut" data-shortcut="search">
       <span class="sidebar-shortcut-label">Search</span>
-      <kbd class="sidebar-shortcut-key"><span class="kbd-cmd"></span>K</kbd>
+      <kbd class="sidebar-shortcut-key"></kbd>
     </div>
-    <div class="sidebar-shortcut">
+    <div class="sidebar-shortcut" data-shortcut="darkmode">
       <span class="sidebar-shortcut-label">Dark Mode</span>
-      <kbd class="sidebar-shortcut-key"><span class="kbd-cmd"></span><span class="kbd-shift"></span>D</kbd>
+      <kbd class="sidebar-shortcut-key"></kbd>
     </div>
-    <div class="sidebar-shortcut">
+    <div class="sidebar-shortcut" data-shortcut="help">
       <span class="sidebar-shortcut-label">Help</span>
-      <kbd class="sidebar-shortcut-key">?</kbd>
+      <kbd class="sidebar-shortcut-key"></kbd>
     </div>
+    <div class="sidebar-shortcuts-note" id="shortcuts-browser-note"></div>
   </div>
 </aside>

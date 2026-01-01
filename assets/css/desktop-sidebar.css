@@ -314,13 +314,41 @@ body[data-theme="dark"] .sidebar-logo-img {
   border: none;
 }
 
-/* Command key symbol for macOS */
-.kbd-cmd::before {
-  content: "\2318"; /* ⌘ */
+/* Keyboard shortcut styling (dynamic based on OS) */
+.kbd-symbol {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 11px;
 }
 
-.kbd-shift::before {
-  content: "\21E7"; /* ⇧ */
+.kbd-text {
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.kbd-key {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.kbd-plus {
+  opacity: 0.5;
+  font-size: 9px;
+  margin: 0 1px;
+}
+
+.sidebar-shortcut.has-conflict .sidebar-shortcut-key {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.sidebar-shortcuts-note {
+  display: none;
+  font-size: 9px;
+  color: var(--text-muted, #9ca3af);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  line-height: 1.4;
 }
 
 /* ============================================
