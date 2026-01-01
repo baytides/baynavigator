@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Terms of Service - Bay Area Discounts
-description: Terms of service for Bay Area Discounts website and resources
+title: Terms of Service - Bay Navigator
+description: Terms of service for Bay Navigator website and resources
 ---
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
@@ -15,13 +15,13 @@ description: Terms of service for Bay Area Discounts website and resources
   This website and app are not affiliated with, endorsed by, or connected to any government agency. We do not charge fees, we do not get paid for listings, and we link out to official program sites. Verify details with each program, and contact us if you need help understanding anything.
 </div>
 
-These Terms of Service ("Terms") govern your access to and use of the Bay Area Discounts website (bayareadiscounts.com) and all associated resources, including program information, guides, and tools (collectively, the "Website"). By accessing or using this Website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Website.
+These Terms of Service ("Terms") govern your access to and use of the Bay Navigator website (baynavigator.org) and all associated resources, including program information, guides, and tools (collectively, the "Website"). By accessing or using this Website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Website.
 
 ---
 
 ## Quick Navigation
 
-1. [About Bay Area Discounts](#about-bay-area-discounts)
+1. [About Bay Navigator](#about-bay-area-discounts)
 2. [Use License](#use-license)
 3. [Content Accuracy and Disclaimers](#content-accuracy-and-disclaimers)
 4. [Limitation of Liability](#limitation-of-liability)
@@ -38,15 +38,15 @@ These Terms of Service ("Terms") govern your access to and use of the Bay Area D
 
 ---
 
-## 1. About Bay Area Discounts {#about-bay-area-discounts}
+## 1. About Bay Navigator {#about-bay-area-discounts}
 
-**Important Disclaimer**: This website and associated mobile applications are **not affiliated with, endorsed by, or connected to any government agency**. Bay Area Discounts is an independent community resource.
+**Important Disclaimer**: This website and associated mobile applications are **not affiliated with, endorsed by, or connected to any government agency**. Bay Navigator is an independent community resource.
 
-**Operator**: Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) based in Redwood City, California.
+**Operator**: Bay Navigator is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) based in Redwood City, California.
 
 **Contact Information**: For inquiries regarding these Terms or our services, you may contact us at privacy [at] baytides [dot] org.
 
-**Organization**: Bay Tides is a qualified tax-exempt nonprofit organization under Section 501(c)(3) of the Internal Revenue Code. Our mission is to empower communities to access resources and support. Bay Area Discounts is one of our community education initiatives.
+**Organization**: Bay Tides is a qualified tax-exempt nonprofit organization under Section 501(c)(3) of the Internal Revenue Code. Our mission is to empower communities to access resources and support. Bay Navigator is one of our community education initiatives.
 
 ---
 
@@ -115,7 +115,7 @@ While we strive to maintain accurate information, **we do not warrant that all i
 
 ### No Compensation Disclosure
 
-**Bay Area Discounts does not receive any form of compensation, payment, commission, referral fees, or other financial benefit for including, linking to, or directing users to any discount program, government agency, nonprofit organization, or service provider listed on this Website.** Our mission is purely charitable and educational. We provide links to external programs as a public service to help Bay Area residents find assistance and discount opportunities. The inclusion of any program, service, or organization on this Website is not based on payments or incentives of any kind. We operate independently and our program listings are not influenced by financial considerations. If you have questions about our independence or our linkage practices, please contact us at privacy [at] baytides [dot] org.
+**Bay Navigator does not receive any form of compensation, payment, commission, referral fees, or other financial benefit for including, linking to, or directing users to any discount program, government agency, nonprofit organization, or service provider listed on this Website.** Our mission is purely charitable and educational. We provide links to external programs as a public service to help Bay Area residents find assistance and discount opportunities. The inclusion of any program, service, or organization on this Website is not based on payments or incentives of any kind. We operate independently and our program listings are not influenced by financial considerations. If you have questions about our independence or our linkage practices, please contact us at privacy [at] baytides [dot] org.
 
 ---
 
@@ -168,7 +168,7 @@ Inclusion of any third-party program, service, website, or resource on this Webs
 
 ### External Websites
 
-When you click a link to an external website, you leave the Bay Area Discounts Website and are subject to the terms of service, privacy policies, and practices of the external website. Bay Tides does not control external websites and is not responsible for their content, accuracy, availability, or security.
+When you click a link to an external website, you leave the Bay Navigator Website and are subject to the terms of service, privacy policies, and practices of the external website. Bay Tides does not control external websites and is not responsible for their content, accuracy, availability, or security.
 
 ### Changes to Third-Party Programs
 
@@ -189,7 +189,7 @@ Except as otherwise noted, the Website and all content, features, functionality,
 - Adapt (remix, transform, and build upon) the material for any purpose, even commercially
 
 **Provided that you:**
-- **Give appropriate credit** to Bay Tides by providing a link to https://bayareadiscounts.com and prominently displaying the notice "Program information from Bay Area Discounts"
+- **Give appropriate credit** to Bay Tides by providing a link to https://baynavigator.org and prominently displaying the notice "Program information from Bay Navigator"
 - **Indicate if changes were made** to the original content
 - **Maintain the same license** if you distribute the adapted content
 
@@ -204,11 +204,11 @@ The following content is NOT covered by the Creative Commons License and may not
 
 ### Open Source
 
-The Website source code is available on GitHub at https://github.com/baytides/bayareadiscounts under the MIT License. The MIT License permits broad use of the code for any purpose, commercial or non-commercial, provided that you include a copy of the license and any copyright notice.
+The Website source code is available on GitHub at https://github.com/baytides/baynavigator under the MIT License. The MIT License permits broad use of the code for any purpose, commercial or non-commercial, provided that you include a copy of the license and any copyright notice.
 
 ### Trademark Usage
 
-"Bay Area Discounts" and "Bay Tides" are trademarks and service marks of Bay Tides. You may not use these marks without express written permission from Bay Tides. Government agency names and program names are trademarks of their respective owners and are used for identification purposes only.
+"Bay Navigator" and "Bay Tides" are trademarks and service marks of Bay Tides. You may not use these marks without express written permission from Bay Tides. Government agency names and program names are trademarks of their respective owners and are used for identification purposes only.
 
 ---
 
@@ -333,14 +333,14 @@ Redwood City, CA 94065
 
 Email: privacy [at] baytides [dot] org
 
-**GitHub Issues**: For technical issues or feature requests: https://github.com/baytides/bayareadiscounts/issues
+**GitHub Issues**: For technical issues or feature requests: https://github.com/baytides/baynavigator/issues
 
 ---
 
 ## 14. Acknowledgment {#acknowledgment}
 
-**By accessing and using the Bay Area Discounts Website, you acknowledge that you have read these Terms of Service, understand them, and agree to be bound by them.** If you do not agree to these Terms, you should not use the Website.
+**By accessing and using the Bay Navigator Website, you acknowledge that you have read these Terms of Service, understand them, and agree to be bound by them.** If you do not agree to these Terms, you should not use the Website.
 
-Thank you for using Bay Area Discounts. We're committed to providing accurate, accessible information about community resources to help Bay Area residents thrive.
+Thank you for using Bay Navigator. We're committed to providing accurate, accessible information about community resources to help Bay Area residents thrive.
 
 </div>

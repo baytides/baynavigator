@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Low-Income Utility Programs - Eligibility Guide - Bay Area Discounts
+title: Low-Income Utility Programs - Eligibility Guide - Bay Navigator
 description: Learn about CARE, FERA, LIHEAP, and other programs that reduce utility bills for qualifying households in the Bay Area.
 ---
 

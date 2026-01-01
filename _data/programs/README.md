@@ -1,6 +1,6 @@
-# Bay Area Discounts - Program Data
+# Bay Navigator - Program Data
 
-This directory contains all program data for BayAreaDiscounts.com.
+This directory contains all program data for BayNavigator.com.
 
 ## 🔄 YAML + Cosmos DB Architecture
 
@@ -31,7 +31,7 @@ All data files in this directory are licensed under **Creative Commons Attributi
 - Adapt, remix, and build upon the data (even commercially)
 
 **You must:**
-- Give appropriate credit to Bay Area Discounts
+- Give appropriate credit to Bay Navigator
 - Provide a link to the license: https://creativecommons.org/licenses/by/4.0/
 - Indicate if changes were made
 
@@ -41,13 +41,13 @@ When using this data, please use one of these attribution formats:
 
 **For unmodified use:**
 ```
-Program data from Bay Area Discounts (https://bayareadiscounts.com)
+Program data from Bay Navigator (https://baynavigator.org)
 licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 ```
 
 **For modified/derivative works:**
 ```
-Based on data from Bay Area Discounts (https://bayareadiscounts.com),
+Based on data from Bay Navigator (https://baynavigator.org),
 modified by [Your Name]. Original data licensed under CC BY 4.0.
 ```
 
@@ -91,5 +91,5 @@ This is a community-maintained dataset. While we verify programs periodically:
 ---
 
 **Full license:** [LICENSE-DATA](../../LICENSE-DATA)
-**Project homepage:** [BayAreaDiscounts.com](https://bayareadiscounts.com)
+**Project homepage:** [BayNavigator.com](https://baynavigator.org)
 **GitHub repository:** [github.com/baytides/bayareadiscounts](https://github.com/baytides/bayareadiscounts)

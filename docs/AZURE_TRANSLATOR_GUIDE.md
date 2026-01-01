@@ -1,6 +1,6 @@
 # Azure AI Translator Integration Guide
 
-This guide explains how to integrate Azure AI Translator with Bay Area Discounts.
+This guide explains how to integrate Azure AI Translator with Bay Navigator.
 
 ## 🎯 Current Implementation
 
@@ -8,7 +8,7 @@ The utility bar now uses a **clean language selection modal** that redirects to 
 
 ### Why This Approach?
 
-For **static Jekyll sites** like Bay Area Discounts, full Azure AI Translator integration requires:
+For **static Jekyll sites** like Bay Navigator, full Azure AI Translator integration requires:
 - Server-side rendering or middleware
 - API key management 
 - Translating all content on every page load
@@ -55,16 +55,16 @@ For a **more Azure-native solution**, you can use Azure AI Translator API with s
    ```bash
    # Create Azure Translator resource
    az cognitiveservices account create \
-     --name bayareadiscounts-translator \
-     --resource-group bayareadiscounts-rg \
+     --name baynavigator-translator \
+     --resource-group baynavigator-rg \
      --kind TextTranslation \
      --sku F0 \
      --location westus2
    
    # Get API key
    az cognitiveservices account keys list \
-     --name bayareadiscounts-translator \
-     --resource-group bayareadiscounts-rg
+     --name baynavigator-translator \
+     --resource-group baynavigator-rg
    ```
 
 2. **Add to local.settings.json**
@@ -190,7 +190,7 @@ For **true multi-language support**, use Azure Static Web Apps with pre-translat
 ### Folder Structure
 
 ```
-bayareadiscounts/
+baynavigator/
 ├── en/
 │   ├── index.html
 │   └── programs.html
@@ -257,7 +257,7 @@ exclude_from_localization: ["images", "css", "js"]
 
 ## 🎯 Recommendation
 
-**For Bay Area Discounts, stick with the current solution** because:
+**For Bay Navigator, stick with the current solution** because:
 
 1. **Free forever** - No API costs
 2. **Zero maintenance** - No API keys to manage

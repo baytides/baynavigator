@@ -1,15 +1,15 @@
-# Bay Area Discounts - Static JSON API Documentation
+# Bay Navigator - Static JSON API Documentation
 
-> Source of truth: [openapi/bayareadiscounts-api.yaml](../openapi/bayareadiscounts-api.yaml). The summary below is for quick reference. For client code, see the shared helpers in [shared/](../shared/).
+> Source of truth: [openapi/baynavigator-api.yaml](../openapi/baynavigator-api.yaml). The summary below is for quick reference. For client code, see the shared helpers in [shared/](../shared/).
 
 ## Base URL
 ```
-https://bayareadiscounts.com/api
+https://baynavigator.org/api
 ```
 
 ## Overview
 
-Bay Area Discounts uses a **static JSON API** generated from YAML program data. The API files are:
+Bay Navigator uses a **static JSON API** generated from YAML program data. The API files are:
 - Automatically generated via `scripts/generate-api.js`
 - Cached globally via Azure Static Web Apps CDN
 - Updated automatically when program data changes (via GitHub Actions)
@@ -23,7 +23,7 @@ Returns all programs with metadata.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/programs.json
+curl https://baynavigator.org/api/programs.json
 ```
 
 **Response:**
@@ -56,7 +56,7 @@ Returns a single program by its ID.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/programs/alameda-food-bank.json
+curl https://baynavigator.org/api/programs/alameda-food-bank.json
 ```
 
 **Response:**
@@ -82,7 +82,7 @@ Returns all categories with program counts.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/categories.json
+curl https://baynavigator.org/api/categories.json
 ```
 
 **Response:**
@@ -114,7 +114,7 @@ Returns all geographic areas with program counts.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/areas.json
+curl https://baynavigator.org/api/areas.json
 ```
 
 **Response:**
@@ -146,7 +146,7 @@ Returns all eligibility types with program counts.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/eligibility.json
+curl https://baynavigator.org/api/eligibility.json
 ```
 
 **Response:**
@@ -180,7 +180,7 @@ Returns API version and available endpoints.
 
 **Example:**
 ```bash
-curl https://bayareadiscounts.com/api/metadata.json
+curl https://baynavigator.org/api/metadata.json
 ```
 
 **Response:**
@@ -212,7 +212,7 @@ Since this is a static JSON API, filtering is done client-side. The website uses
 **Example JavaScript:**
 ```javascript
 // Fetch all programs and filter client-side
-fetch('https://bayareadiscounts.com/api/programs.json')
+fetch('https://baynavigator.org/api/programs.json')
   .then(res => res.json())
   .then(data => {
     // Filter by category
@@ -259,14 +259,14 @@ This script:
 ## Open Source
 
 All API code and data is open source:
-https://github.com/baytides/bayareadiscounts
+https://github.com/baytides/baynavigator
 
 License: MIT (code) + CC BY 4.0 (data)
 
 ## Support
 
-- **Issues**: https://github.com/baytides/bayareadiscounts/issues
-- **Discussions**: https://github.com/baytides/bayareadiscounts/discussions
+- **Issues**: https://github.com/baytides/baynavigator/issues
+- **Discussions**: https://github.com/baytides/baynavigator/discussions
 
 ---
 

@@ -9,9 +9,9 @@ const https = require('https');
 const http = require('http');
 
 // Configuration
-const PROGRAMS_API_URL = 'https://bayareadiscounts.com/api/programs.json';
+const PROGRAMS_API_URL = 'https://baynavigator.org/api/programs.json';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_REPO = 'baytides/bayareadiscounts';
+const GITHUB_REPO = 'baytides/baynavigator';
 
 // Slack configuration (Bot Token approach - not webhooks)
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN; // xoxb-... token from Slack App
@@ -52,7 +52,7 @@ function checkUrl(url, timeout = 10000) {
       const req = client.get(url, {
         timeout,
         headers: {
-          'User-Agent': 'BayAreaDiscounts-LinkChecker/1.0'
+          'User-Agent': 'BayNavigator-LinkChecker/1.0'
         }
       }, (res) => {
         const duration = Date.now() - startTime;
@@ -195,7 +195,7 @@ ${brokenLinks.map(link =>
       method: 'POST',
       headers: {
         'Authorization': `token ${GITHUB_TOKEN}`,
-        'User-Agent': 'BayAreaDiscounts-LinkChecker',
+        'User-Agent': 'BayNavigator-LinkChecker',
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(payload),
         'Accept': 'application/vnd.github.v3+json'
@@ -291,7 +291,7 @@ module.exports = async function (context, timer) {
 
       // Slack notification
       await sendSlackNotification(
-        `🔗 *${brokenLinks.length} broken links* found on bayareadiscounts.com`,
+        `🔗 *${brokenLinks.length} broken links* found on baynavigator.org`,
         [
           {
             type: 'header',

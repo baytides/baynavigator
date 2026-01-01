@@ -1,4 +1,4 @@
-# Bay Area Discounts - Project Roadmap
+# Bay Navigator - Project Roadmap
 
 ## Current State Summary
 
@@ -19,7 +19,7 @@
 ### Documentation Updates
 - [x] Updated README.md to reflect static JSON API (removed Azure Functions references)
 - [x] Updated API_ENDPOINTS.md with correct static API documentation
-- [x] Updated OpenAPI spec (openapi/bayareadiscounts-api.yaml)
+- [x] Updated OpenAPI spec (openapi/baynavigator-api.yaml)
 - [x] Fixed translation.js endpoint (disabled deprecated Azure Functions endpoint)
 
 ### Technical Debt Addressed
@@ -141,7 +141,7 @@ az cdn profile list --resource-group baytides-discounts-rg
 ```bash
 # Create Application Insights resource
 az monitor app-insights component create \
-  --app bayareadiscounts-insights \
+  --app baynavigator-insights \
   --location westus2 \
   --resource-group baytides-discounts-rg \
   --kind web
@@ -264,5 +264,5 @@ See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines on:
 
 ---
 
-**Maintained by:** Bay Area Discounts Community
+**Maintained by:** Bay Navigator Community
 **License:** MIT (code) + CC BY 4.0 (data)

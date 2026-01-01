@@ -1,6 +1,6 @@
 # Getting Started with Azure Integration
 
-This quick start guide will help you deploy Bay Area Discounts to Azure in under 30 minutes.
+This quick start guide will help you deploy Bay Navigator to Azure in under 30 minutes.
 
 ## ✅ Prerequisites Checklist
 
@@ -17,8 +17,8 @@ Before you begin, make sure you have:
 ### Step 1: Clone the Repository (2 minutes)
 
 ```bash
-git clone https://github.com/baytides/bayareadiscounts.git
-cd bayareadiscounts
+git clone https://github.com/baytides/baynavigator.git
+cd baynavigator
 ```
 
 ### Step 2: Login to Azure (1 minute)
@@ -36,7 +36,7 @@ This will open a browser window for authentication.
 # Options: westus2, eastus, centralus, westeurope, etc.
 
 az group create \
-  --name bayareadiscounts-rg \
+  --name baynavigator-rg \
   --location westus2
 ```
 
@@ -45,7 +45,7 @@ az group create \
 ```bash
 # This creates all Azure resources
 az deployment group create \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --template-file infrastructure/bicep/main.bicep \
   --parameters infrastructure/bicep/parameters.json.example
 ```
@@ -73,7 +73,7 @@ Your Function App has been automatically assigned:
 # Set environment variables (use values from Step 5)
 export COSMOS_DB_ENDPOINT="https://your-cosmos-account.documents.azure.com:443/"
 export AZURE_TRANSLATOR_ENDPOINT="https://your-translator.cognitiveservices.azure.com/"
-export COSMOS_DB_DATABASE_NAME="bayareadiscounts"
+export COSMOS_DB_DATABASE_NAME="baynavigator"
 export COSMOS_DB_CONTAINER_NAME="programs"
 
 # Install migration script dependencies
@@ -91,7 +91,7 @@ npm run migrate
 ```bash
 # Get your Function App name
 az functionapp list \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --query "[].{Name:name}" -o table
 
 # Install Azure Functions Core Tools (if not already installed)
@@ -110,7 +110,7 @@ func azure functionapp publish <your-function-app-name>
 ```bash
 # Get your Function App URL
 az functionapp show \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --name <your-function-app-name> \
   --query defaultHostName -o tsv
 
@@ -126,7 +126,7 @@ You should see JSON responses with your program data!
 1. **Get Function App Publish Profile:**
    ```bash
    az functionapp deployment list-publishing-profiles \
-     --resource-group bayareadiscounts-rg \
+     --resource-group baynavigator-rg \
      --name <your-function-app-name> \
      --xml
    ```
@@ -140,7 +140,7 @@ You should see JSON responses with your program data!
    |-------------|-------|
    | `AZURE_FUNCTION_APP_NAME` | Your function app name |
    | `AZURE_FUNCTION_APP_PUBLISH_PROFILE` | XML output from command above |
-   | `AZURE_RESOURCE_GROUP` | `bayareadiscounts-rg` |
+   | `AZURE_RESOURCE_GROUP` | `baynavigator-rg` |
 
 3. **Test GitHub Actions:**
    - Go to Actions tab in GitHub
@@ -197,7 +197,7 @@ Or visit: [Azure Portal](https://portal.azure.com) → Your Function App → Mon
    # Get notified if monthly cost exceeds $1
    az monitor metrics alert create \
      --name "High Cost Alert" \
-     --resource-group bayareadiscounts-rg \
+     --resource-group baynavigator-rg \
      --condition "total Cost > 1"
    ```
 
@@ -217,7 +217,7 @@ Or visit: [Azure Portal](https://portal.azure.com) → Your Function App → Mon
 ```bash
 # View deployment errors
 az deployment group show \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --name main \
   --query properties.error
 ```
@@ -232,7 +232,7 @@ az deployment group show \
 ```bash
 # Verify connection
 az cosmosdb show \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --name <cosmos-account-name>
 ```
 
@@ -241,7 +241,7 @@ az cosmosdb show \
 ```bash
 # Restart function app
 az functionapp restart \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --name <function-app-name>
 
 # Check logs
@@ -254,7 +254,7 @@ Update allowed origins in `infrastructure/bicep/main.bicep`:
 ```bicep
 cors: {
   allowedOrigins: [
-    'https://bayareadiscounts.com'
+    'https://baynavigator.org'
     'https://your-domain.com'  // Add your domain
     'http://localhost:4000'
   ]
@@ -274,7 +274,7 @@ az consumption usage list \
 
 # Set up cost alert
 az consumption budget create \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --budget-name "Monthly Budget" \
   --amount 5 \
   --time-grain Monthly
@@ -312,13 +312,13 @@ Before going to production:
 ## 🆘 Need Help?
 
 - **Documentation**: See `infrastructure/README.md` and `azure-functions/README.md`
-- **Issues**: [Open a GitHub issue](https://github.com/baytides/bayareadiscounts/issues)
-- **Discussions**: [Ask the community](https://github.com/baytides/bayareadiscounts/discussions)
+- **Issues**: [Open a GitHub issue](https://github.com/baytides/baynavigator/issues)
+- **Discussions**: [Ask the community](https://github.com/baytides/baynavigator/discussions)
 - **Azure Support**: [Azure Community](https://docs.microsoft.com/answers/products/azure)
 
 ## 🎉 Success!
 
-You've successfully deployed Bay Area Discounts to Azure! Your app is now:
+You've successfully deployed Bay Navigator to Azure! Your app is now:
 - ✅ Scalable (handles any traffic)
 - ✅ Fast (global CDN + serverless)
 - ✅ Reliable (99.9% uptime SLA)

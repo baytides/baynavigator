@@ -1,5 +1,5 @@
 /**
- * Bay Area Discounts - Shared Utilities
+ * Bay Navigator - Shared Utilities
  *
  * Common utility functions used across multiple JavaScript modules.
  * This consolidates duplicate code and provides a single source of truth.

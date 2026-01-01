@@ -1,7 +1,7 @@
 ---
 layout: default
-title: About Bay Area Discounts - Bay Tides
-description: Learn why Bay Tides created Bay Area Discounts and how this resource supports our mission to protect the San Francisco Bay through community empowerment.
+title: About Bay Navigator - Bay Tides
+description: Learn why Bay Tides created Bay Navigator and how this resource supports our mission to protect the San Francisco Bay through community empowerment.
 ---
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
@@ -10,15 +10,15 @@ description: Learn why Bay Tides created Bay Area Discounts and how this resourc
 This website lists free and discounted programs in the Bay Area. It's made by Bay Tides, a nonprofit that protects the San Francisco Bay. We don't charge anything, we don't sell your information, and we don't get paid for any listings. Everything is free to use.
 </div>
 
-# About Bay Area Discounts
+# About Bay Navigator
 
-**Bay Area Discounts** is a community resource project of [Bay Tides](https://baytides.org), a 501(c)(3) nonprofit organization dedicated to protecting the San Francisco Bay through education, advocacy, and action.
+**Bay Navigator** is a community resource project of [Bay Tides](https://baytides.org), a 501(c)(3) nonprofit organization dedicated to protecting the San Francisco Bay through education, advocacy, and action.
 
 ---
 
 ## Why We Built This
 
-We started Bay Area Discounts because we see a direct connection between **financial barriers and environmental harm**.
+We started Bay Navigator because we see a direct connection between **financial barriers and environmental harm**.
 
 When cost is the deciding factor, the cheapest option is often the most damaging—to the environment, to wildlife, and to public health. Driving an old car is cheaper than transit fares. Fast fashion costs less than durable clothing. Processed food is more affordable than local produce. Inefficient appliances stay in use because replacements are out of reach.
 
@@ -28,7 +28,7 @@ The programs listed here change that calculus. They make sustainable choices fin
 
 ## The Environmental Case
 
-Much of what Bay Area Discounts promotes is inherently environmental:
+Much of what Bay Navigator promotes is inherently environmental:
 
 ### Transit Over Cars
 
@@ -58,7 +58,7 @@ When a family visits Crissy Field, Coyote Hills, or Point Reyes because a transi
 This is for anyone who lives in the Bay Area and wants to save money. It doesn't matter how much money you make - there are programs for everyone.
 </div>
 
-Bay Area Discounts serves anyone in the nine-county San Francisco Bay Area looking to stretch their resources—low-income households, seniors, veterans and military families, students, people with disabilities, families looking for free activities, or anyone who wants to reduce expenses and live more sustainably.
+Bay Navigator serves anyone in the nine-county San Francisco Bay Area looking to stretch their resources—low-income households, seniors, veterans and military families, students, people with disabilities, families looking for free activities, or anyone who wants to reduce expenses and live more sustainably.
 
 As we built out the discount listings, we realized many visitors didn't know if they qualified for the programs we were listing. Someone might discover that EBT cardholders get discounted museum admission—but if they don't have an EBT card and don't know how to apply, that information isn't useful.
 
@@ -74,7 +74,7 @@ We focus on the Bay Area because that's where we live and work, and because loca
 
 ### Privacy by Design
 
-We don't collect personal information, set cookies, or track users. People seeking assistance deserve privacy. Our entire codebase is [open source on GitHub](https://github.com/baytides/bayareadiscounts) so anyone can verify our claims.
+We don't collect personal information, set cookies, or track users. People seeking assistance deserve privacy. Our entire codebase is [open source on GitHub](https://github.com/baytides/baynavigator) so anyone can verify our claims.
 
 ### No Compensation for Listings
 
@@ -102,7 +102,7 @@ This is a living resource. Programs change, new discounts emerge, and eligibilit
 - **Advocate**: Engaging with local leaders and collaborating with environmental organizations to champion policies that protect the Bay
 - **Action**: Habitat restoration, volunteer-led conservation efforts, shoreline cleanups, and native species planting
 
-Bay Area Discounts is part of our education mission—providing accessible information that empowers residents to engage with their community and environment.
+Bay Navigator is part of our education mission—providing accessible information that empowers residents to engage with their community and environment.
 
 ---
 
@@ -114,11 +114,11 @@ Want to help? You can tell us about a program we missed, report a mistake, or do
 
 ### Report an Issue or Suggest a Program
 
-Found an error? Know of a discount we're missing? [Open an issue on GitHub](https://github.com/baytides/bayareadiscounts/issues) or email us at hello [at] baytides [dot] org.
+Found an error? Know of a discount we're missing? [Open an issue on GitHub](https://github.com/baytides/baynavigator/issues) or email us at hello [at] baytides [dot] org.
 
 ### Support Bay Tides
 
-Bay Area Discounts is free to use and will remain free. If you'd like to support this work and Bay Tides' broader conservation mission, visit [baytides.org/donate](https://baytides.org/donate).
+Bay Navigator is free to use and will remain free. If you'd like to support this work and Bay Tides' broader conservation mission, visit [baytides.org/donate](https://baytides.org/donate).
 
 ### Join a Cleanup or Restoration Event
 

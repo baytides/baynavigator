@@ -1,6 +1,6 @@
 # Azure Services Guide
 
-Complete guide to all Azure services used by Bay Area Discounts.
+Complete guide to all Azure services used by Bay Navigator.
 
 ## 🏗️ Architecture Overview
 
@@ -24,7 +24,7 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 **Purpose:** Host Jekyll static website  
 **SKU:** Free  
 **Endpoint:** https://wonderful-coast-09041e01e.2.azurestaticapps.net  
-**Custom Domain:** bayareadiscounts.com (configured separately)
+**Custom Domain:** baynavigator.org (configured separately)
 
 **Features:**
 - Automatic deployment from GitHub
@@ -36,8 +36,8 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 
 ### 2. Azure Front Door (Standard)
 **Purpose:** Global CDN and traffic acceleration  
-**Endpoint:** https://bayareadiscounts-web-b9gzhvbpdedgc2hn.z02.azurefd.net  
-**Resource:** `bayareadiscounts-fd`
+**Endpoint:** https://baynavigator-web-b9gzhvbpdedgc2hn.z02.azurefd.net  
+**Resource:** `baynavigator-fd`
 
 **Configuration:**
 - Origin: Static Web App
@@ -58,7 +58,7 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 ### 3. Azure Functions (Consumption)
 **Purpose:** Serverless REST API backend  
 **Runtime:** Node.js 20  
-**Resource:** `bayareadiscounts-func-prod-clx32fwtnzehq`
+**Resource:** `baynavigator-func-prod-clx32fwtnzehq`
 
 **Endpoints:**
 - `/api/programs` - Get all programs (with filters)
@@ -82,10 +82,10 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 ### 4. Azure Cosmos DB (Serverless)
 **Purpose:** NoSQL database for program data  
 **API:** Core (SQL)  
-**Resource:** `bayareadiscounts-cosmos-prod-clx32fwtnzehq`
+**Resource:** `baynavigator-cosmos-prod-clx32fwtnzehq`
 
 **Configuration:**
-- Database: `bayareadiscounts`
+- Database: `baynavigator`
 - Container: `programs`
 - Partition Key: `/category`
 - Consistency: Session
@@ -97,8 +97,8 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 ### 5. Azure Cache for Redis (Basic C0)
 **Purpose:** Server-side caching for API responses  
 **SKU:** Basic C0 (250MB)  
-**Resource:** `bayareadiscounts-redis`  
-**Endpoint:** `bayareadiscounts-redis.redis.cache.windows.net:6380`
+**Resource:** `baynavigator-redis`  
+**Endpoint:** `baynavigator-redis.redis.cache.windows.net:6380`
 
 **Cache Strategy:**
 - Programs listings: 1 hour TTL
@@ -116,8 +116,8 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 
 ### 6. Azure Key Vault (Standard)
 **Purpose:** Centralized secret management  
-**Resource:** `bayareadiscounts-kv-prod`  
-**URL:** https://bayareadiscounts-kv-prod.vault.azure.net/
+**Resource:** `baynavigator-kv-prod`  
+**URL:** https://baynavigator-kv-prod.vault.azure.net/
 
 **Secrets Stored:**
 - Cosmos DB connection strings
@@ -133,7 +133,7 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 
 ### 7. Application Insights
 **Purpose:** Application monitoring and analytics  
-**Resource:** `bayareadiscounts-insights-prod`
+**Resource:** `baynavigator-insights-prod`
 
 **Metrics Tracked:**
 - API response times
@@ -154,7 +154,7 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 
 ### 8. API Management (Consumption)
 **Purpose:** API gateway with rate limiting and analytics  
-**Resource:** `bayareadiscounts-api`  
+**Resource:** `baynavigator-api`  
 **Status:** Deploying (30-45 minutes)
 
 **Planned Features:**
@@ -246,16 +246,16 @@ Users → Front Door (CDN) → Static Web Apps (Jekyll)
 ### Required Environment Variables:
 ```bash
 # Cosmos DB
-COSMOS_DB_ENDPOINT=https://bayareadiscounts-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/
-COSMOS_DB_DATABASE_NAME=bayareadiscounts
+COSMOS_DB_ENDPOINT=https://baynavigator-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/
+COSMOS_DB_DATABASE_NAME=baynavigator
 COSMOS_DB_CONTAINER_NAME=programs
 
 # Redis Cache (optional for local dev)
-REDIS_HOST=bayareadiscounts-redis.redis.cache.windows.net
+REDIS_HOST=baynavigator-redis.redis.cache.windows.net
 REDIS_KEY=<from Azure Portal>
 
 # Key Vault (optional for local dev)
-KEY_VAULT_URL=https://bayareadiscounts-kv-prod.vault.azure.net/
+KEY_VAULT_URL=https://baynavigator-kv-prod.vault.azure.net/
 
 # Application Insights
 APPLICATIONINSIGHTS_CONNECTION_STRING=<from Functions app settings>
@@ -275,14 +275,14 @@ func start
 - [AZURE_INTEGRATION.md](AZURE_INTEGRATION.md) - Integration overview
 - [API_ENDPOINTS.md](API_ENDPOINTS.md) - API documentation
 - [DEPLOYMENT_STATUS.md](DEPLOYMENT_STATUS.md) - Deployment details
-- [OpenAPI Spec](../openapi/bayareadiscounts-api.yaml) - API specification
+- [OpenAPI Spec](../openapi/baynavigator-api.yaml) - API specification
 
 ---
 
 ## 🎯 Next Steps
 
 1. **Configure Custom Domain on Front Door**
-   - Point bayareadiscounts.com to Front Door endpoint
+   - Point baynavigator.org to Front Door endpoint
    - Configure SSL certificate
 
 2. **Complete API Management Setup**

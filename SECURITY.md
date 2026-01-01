@@ -122,7 +122,7 @@ Security updates are released as soon as fixes are available:
 
 This project is fully open source. You can verify our security claims by:
 
-1. **Reviewing our code**: [github.com/baytides/bayareadiscounts](https://github.com/baytides/bayareadiscounts)
+1. **Reviewing our code**: [github.com/baytides/baynavigator](https://github.com/baytides/baynavigator)
 2. **Inspecting network traffic**: Use browser developer tools (F12) to verify no tracking
 3. **Checking for cookies**: Browser settings will confirm zero cookies
 4. **Auditing dependencies**: Run `npm audit` to check for vulnerabilities

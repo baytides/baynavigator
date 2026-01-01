@@ -24,7 +24,7 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     // Check logo is present in sidebar
     const logo = page.locator('.sidebar-logo');
     await expect(logo).toBeVisible();
-    await expect(logo).toHaveAttribute('aria-label', /Bay Area Discounts Home/i);
+    await expect(logo).toHaveAttribute('aria-label', /Bay Navigator Home/i);
 
     // Check navigation is present
     const nav = page.locator('#desktop-sidebar nav');

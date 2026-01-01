@@ -1,6 +1,6 @@
 # Documentation
 
-This directory contains technical and process documentation for Bay Area Discounts.
+This directory contains technical and process documentation for Bay Navigator.
 
 ## Accessibility & WCAG Compliance
 - [ACCESSIBILITY.md](ACCESSIBILITY.md) - Accessibility features and testing
@@ -20,6 +20,6 @@ This directory contains technical and process documentation for Bay Area Discoun
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Contribution guidelines
 
 ## Quick Links
-- OpenAPI Spec: `/openapi/bayareadiscounts-api.yaml`
+- OpenAPI Spec: `/openapi/baynavigator-api.yaml`
 - Shared Client Libraries: `/shared/`
 - Utility Scripts: `/scripts/`

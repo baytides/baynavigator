@@ -1,0 +1,50 @@
+name: baynavigator
+description: "Bay Navigator - Your guide to local savings & benefits"
+publish_to: 'none'
+
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.17
+  cached_network_image: ^3.4.1
+
+  # Navigation
+  go_router: ^16.1.0
+
+  # State Management
+  provider: ^6.1.5
+
+  # HTTP & Data
+  http: ^1.3.0
+  shared_preferences: ^2.5.3
+
+  # Utilities
+  url_launcher: ^6.3.1
+  share_plus: ^12.0.1
+  package_info_plus: ^9.0.0
+  path_provider: ^2.1.5
+
+  # Desktop
+  window_manager: ^0.5.1
+
+  # Crash Reporting (optional - can be disabled for FOSS builds)
+  sentry_flutter: ^9.9.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/favicons/

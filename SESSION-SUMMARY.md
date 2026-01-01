@@ -1,13 +1,13 @@
 # Session Summary: Complete Site Overhaul & Mobile App Preparation
 **Date:** December 22, 2025
-**Project:** Bay Area Discounts
+**Project:** Bay Navigator
 **Scope:** WCAG Compliance, UX Improvements, Mobile App Infrastructure
 
 ---
 
 ## Overview
 
-This session delivered a comprehensive overhaul of the Bay Area Discounts platform, focusing on:
+This session delivered a comprehensive overhaul of the Bay Navigator platform, focusing on:
 1. **Accessibility compliance** (WCAG 2.2 AAA + WCAG 3.0 draft)
 2. **User experience redesign** (step-flow wizard, responsive layout)
 3. **Mobile app preparation** (API infrastructure, documentation, repository setup)
@@ -202,7 +202,7 @@ This session delivered a comprehensive overhaul of the Bay Area Discounts platfo
 2. GitHub Actions builds site (Jekyll)
 3. Artifact stored in GitHub
 4. Run `./deploy.sh` to deploy latest build
-5. Site live at `https://bayareadiscounts.com`
+5. Site live at `https://baynavigator.org`
 
 **Files Created/Modified:**
 - `deploy.sh` - Enhanced deployment script
@@ -370,7 +370,7 @@ This session delivered a comprehensive overhaul of the Bay Area Discounts platfo
 - **Resource Group:** `baytides-discounts-rg`
 - **Static Web App:** `baytides-discounts-app`
 - **Tier:** Free (no cost)
-- **Custom Domain:** `bayareadiscounts.com`
+- **Custom Domain:** `baynavigator.org`
 - **Default Host:** `blue-pebble-00a40d41e.4.azurestaticapps.net`
 
 ### Recommended Upgrades (When Scaling):
@@ -448,7 +448,7 @@ az staticwebapp usage show \
 
 ## Accessibility Statement
 
-Bay Area Discounts is committed to providing an accessible website for all users.
+Bay Navigator is committed to providing an accessible website for all users.
 
 **Compliance Level:** WCAG 2.2 Level AAA
 
@@ -580,7 +580,7 @@ None currently blocking user experience.
 
 ## Conclusion
 
-This session delivered a complete transformation of the Bay Area Discounts platform:
+This session delivered a complete transformation of the Bay Navigator platform:
 
 1. **Accessibility:** Now WCAG 2.2 AAA compliant with WCAG 3.0 draft support
 2. **User Experience:** Professional wizard and responsive layout
@@ -610,5 +610,5 @@ The platform is now production-ready and prepared for native mobile app developm
 *Files Modified: 13*
 *Lines of Code: ~3,500+*
 
-**Team:** Bay Area Discounts Development
+**Team:** Bay Navigator Development
 **Powered by:** Claude Code (Anthropic)

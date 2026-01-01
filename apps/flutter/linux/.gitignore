@@ -1,0 +1,22 @@
+# Flutter ephemeral files
+flutter/ephemeral/
+
+# Generated plugin files
+flutter/generated_plugin_registrant.cc
+flutter/generated_plugin_registrant.h
+flutter/generated_plugins.cmake
+
+# Build artifacts
+build/
+[Bb]uild/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Misc
+.DS_Store

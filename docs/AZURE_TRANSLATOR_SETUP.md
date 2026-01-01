@@ -1,6 +1,6 @@
 # Azure AI Translator Setup Guide
 
-This guide will help you configure Azure AI Translator for Bay Area Discounts.
+This guide will help you configure Azure AI Translator for Bay Navigator.
 
 ## 🎯 Benefits of Azure AI Translator
 
@@ -16,7 +16,7 @@ This guide will help you configure Azure AI Translator for Bay Area Discounts.
 
 - Azure account (create free account at [azure.microsoft.com](https://azure.microsoft.com/free/))
 - Azure CLI installed (optional, but recommended)
-- Bay Area Discounts Azure Functions deployed
+- Bay Navigator Azure Functions deployed
 - Function App system-assigned managed identity enabled
 
 ---
@@ -32,8 +32,8 @@ We now use Azure AD (managed identity) instead of keys. Disable local/auth keys 
 ```bash
 export SUBSCRIPTION_ID="<your-subscription-id>"
 export RG="<your-resource-group>"
-export TRANSLATOR="<your-translator-name>"          # e.g., bayareadiscounts-translator
-export FUNCAPP="<your-function-app-name>"           # e.g., bayareadiscounts-api
+export TRANSLATOR="<your-translator-name>"          # e.g., baynavigator-translator
+export FUNCAPP="<your-function-app-name>"           # e.g., baynavigator-api
 
 # Disable local (key) auth on Translator
 az cognitiveservices account update \
@@ -108,7 +108,7 @@ Use `AzureWebJobsStorage` and `FUNCTIONS_WORKER_RUNTIME` as usual. To run Transl
 # Set app settings in Azure Function App
 az functionapp config appsettings set \
   --name YOUR_FUNCTION_APP_NAME \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --settings \
     AZURE_TRANSLATOR_KEY="YOUR_KEY_HERE" \
     AZURE_TRANSLATOR_REGION="westus2" \
@@ -128,7 +128,7 @@ az functionapp config appsettings set \
 
 **Example:**
 ```javascript
-this.apiEndpoint = apiEndpoint || 'https://bayareadiscounts-api.azurewebsites.net/api/translate';
+this.apiEndpoint = apiEndpoint || 'https://baynavigator-api.azurewebsites.net/api/translate';
 ```
 
 ---
@@ -148,7 +148,7 @@ this.apiEndpoint = apiEndpoint || 'https://bayareadiscounts-api.azurewebsites.ne
    curl -X POST http://localhost:7071/api/translate \
      -H "Content-Type: application/json" \
      -d '{
-       "texts": ["Hello", "Welcome to Bay Area Discounts"],
+       "texts": ["Hello", "Welcome to Bay Navigator"],
        "targetLang": "es",
        "sourceLang": "en"
      }'
@@ -160,7 +160,7 @@ this.apiEndpoint = apiEndpoint || 'https://bayareadiscounts-api.azurewebsites.ne
      "success": true,
      "sourceLang": "en",
      "targetLang": "es",
-     "translations": ["Hola", "Bienvenido a Bay Area Discounts"],
+     "translations": ["Hola", "Bienvenido a Bay Navigator"],
      "count": 2
    }
    ```
@@ -217,7 +217,7 @@ For a typical page with ~5,000 characters:
 - **Free tier**: 400 page translations per month
 - **Standard tier**: Unlimited for ~$10/month + overages
 
-**Note**: Bay Area Discounts caches translations, so repeat visitors in the same language don't count against your quota.
+**Note**: Bay Navigator caches translations, so repeat visitors in the same language don't count against your quota.
 
 ---
 
@@ -242,14 +242,14 @@ If you need to rotate keys (recommended every 90 days):
 ```bash
 # Regenerate keys
 az cognitiveservices account keys regenerate \
-  --name bayareadiscounts-translator \
-  --resource-group bayareadiscounts-rg \
+  --name baynavigator-translator \
+  --resource-group baynavigator-rg \
   --key-name key1
 
 # Get new key
 az cognitiveservices account keys list \
-  --name bayareadiscounts-translator \
-  --resource-group bayareadiscounts-rg
+  --name baynavigator-translator \
+  --resource-group baynavigator-rg
 ```
 
 Then update your Function App settings with the new key.
@@ -284,7 +284,7 @@ Then update your Function App settings with the new key.
 # Stream logs from Azure
 az webapp log tail \
   --name YOUR_FUNCTION_APP_NAME \
-  --resource-group bayareadiscounts-rg
+  --resource-group baynavigator-rg
 ```
 
 ---

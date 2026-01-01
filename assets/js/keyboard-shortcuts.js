@@ -1,4 +1,4 @@
-// Keyboard Shortcuts for Bay Area Discounts
+// Keyboard Shortcuts for Bay Navigator
 // Adapts to OS and browser
 
 class KeyboardShortcuts {

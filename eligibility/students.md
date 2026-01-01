@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Students - Eligibility Guide - Bay Area Discounts
+title: Students - Eligibility Guide - Bay Navigator
 description: Find out what counts as valid student status for discount programs, including enrollment verification and ID requirements.
 ---
 

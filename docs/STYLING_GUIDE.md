@@ -1,6 +1,6 @@
 # Styling Guide
 
-This document explains the standardized styling system for Bay Area Discounts, ensuring consistent appearance across all pages without requiring custom CSS for each page.
+This document explains the standardized styling system for Bay Navigator, ensuring consistent appearance across all pages without requiring custom CSS for each page.
 
 ## Quick Start
 
@@ -184,8 +184,8 @@ All standard classes are mobile-first and responsive:
 ```markdown
 ---
 layout: default
-title: Terms of Service - Bay Area Discounts
-description: Terms and conditions for using Bay Area Discounts
+title: Terms of Service - Bay Navigator
+description: Terms and conditions for using Bay Navigator
 ---
 
 <div class="content-wrapper" markdown="1">

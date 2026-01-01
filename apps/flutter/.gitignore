@@ -1,0 +1,139 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/.gradle/
+/android/build/
+/android/captures/
+# Gradle wrapper scripts are needed for CI
+# /android/gradlew
+# /android/gradlew.bat
+/android/local.properties
+/android/GeneratedPluginRegistrant.java
+
+# iOS/XCode
+**/ios/Flutter/.last_build_id
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+
+# visionOS/XCode
+**/visionos/build/
+**/visionos/*.xcworkspace/xcuserdata/
+**/visionos/*.xcodeproj/xcuserdata/
+**/visionos/*.xcodeproj/project.xcworkspace/xcuserdata/
+**/visionos/DerivedData/
+
+# macOS
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/.symlinks/
+**/macos/build/
+**/macos/*.xcworkspace/xcuserdata/
+**/macos/*.xcodeproj/xcuserdata/
+**/macos/*.xcodeproj/project.xcworkspace/xcuserdata/
+**/macos/DerivedData/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Windows
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+
+# Linux
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+
+# Secrets
+*.jks
+*.keystore
+*.p12
+*.pem
+google-services.json
+
+# Environment files
+.env
+.env.*
+
+# Claude
+.claude/
+
+# Node (legacy from React Native)
+node_modules/
+
+# Test coverage
+coverage/
+screenshots/ios/test.png
+screenshots/ios/debug_saved.png
+screenshots/ios/02_program_detail.png
+screenshots/ios/01_home_screen.png
+screenshots/ios/01_home.png
+
+# Web build
+**/web/flutter_bootstrap.js
+
+# Fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Signing
+key.properties
+**/android/key.properties
+
+# FVM (Flutter Version Manager)
+.fvm/
+
+# Melos
+.melos/
+
+# Pubspec lock (uncomment to ignore)
+# pubspec.lock

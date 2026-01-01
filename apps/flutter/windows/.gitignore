@@ -1,0 +1,42 @@
+# Flutter ephemeral files
+flutter/ephemeral/
+
+# Generated plugin files
+flutter/generated_plugin_registrant.cc
+flutter/generated_plugin_registrant.h
+flutter/generated_plugins.cmake
+
+# Visual Studio user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio build-related files
+x64/
+x86/
+[Dd]ebug/
+[Rr]elease/
+[Bb]uild/
+[Oo]ut/
+
+# Visual Studio cache files
+*.[Cc]ache
+!*.[Cc]ache/
+.vs/
+
+# MSBuild output
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.obj
+*.iobj
+*.ipdb
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Misc
+.DS_Store

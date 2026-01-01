@@ -26,7 +26,7 @@
     const announcement = qs('#step-announcement');
     if (announcement) {
       const stepTitles = {
-        1: 'Step 1 of 3: Introduction. Learn about Bay Area Discounts.',
+        1: 'Step 1 of 3: Introduction. Learn about Bay Navigator.',
         2: 'Step 2 of 3: Eligibility. Select which groups apply to you.',
         3: 'Step 3 of 3: Location. Select your county.'
       };

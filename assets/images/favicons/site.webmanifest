@@ -1,6 +1,6 @@
 {
-  "name": "Bay Area Discounts",
-  "short_name": "BA Discounts",
+  "name": "Bay Navigator",
+  "short_name": "Bay Nav",
   "description": "Community-maintained guide to free and discounted benefits across the San Francisco Bay Area",
   "start_url": "/",
   "display": "standalone",
@@ -24,9 +24,9 @@
   "categories": ["finance", "lifestyle", "utilities", "reference"],
   "shortcuts": [
     {
-      "name": "Bay Area Discounts",
-      "short_name": "Discounts",
-      "description": "View the main discount guide",
+      "name": "Bay Navigator",
+      "short_name": "Navigator",
+      "description": "View the main resource guide",
       "url": "/",
       "icons": [{ "src": "/assets/images/favicons/favicon-96x96.png", "sizes": "96x96" }]
     },

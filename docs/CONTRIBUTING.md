@@ -1,4 +1,4 @@
-# Contributing to Bay Area Discounts
+# Contributing to Bay Navigator
 
 Thank you for your interest in contributing! This guide will help you add programs, fix issues, and improve the site.
 
@@ -72,7 +72,7 @@ Thank you for your interest in contributing! This guide will help you add progra
 - No promotional or marketing language
 - No personal opinions or recommendations
 - Write as if documenting, not advertising
-- Use clean, canonical links only (no affiliate codes or tracking parameters). The site automatically appends standard `utm_source=bayareadiscounts` referrals to program links for anonymous impact reporting.
+- Use clean, canonical links only (no affiliate codes or tracking parameters). The site automatically appends standard `utm_source=baynavigator` referrals to program links for anonymous impact reporting.
 
 #### ✅ Community-Focused
 - Programs must benefit the community, not individuals or businesses
@@ -213,8 +213,8 @@ benefit: "Three-day financial literacy workshop"  # No recurring schedule
 # 1. Fork the repository on GitHub
 
 # 2. Clone your fork
-git clone https://github.com/YOUR-USERNAME/bayareadiscounts.git
-cd bayareadiscounts
+git clone https://github.com/YOUR-USERNAME/baynavigator.git
+cd baynavigator
 
 # 3. Install dependencies
 bundle install
@@ -587,7 +587,7 @@ Added [Program Name] to [Category]
 ## 📁 Project Structure
 
 ```
-bayareadiscounts/
+baynavigator/
 ├── _data/
 │   ├── cities.yml             # 📍 City-to-county mapping
 │   └── programs/              # 📊 Program data (YAML files)
@@ -697,7 +697,7 @@ Run `bundle exec jekyll build`. If it succeeds, your YAML is valid. If there are
 
 ### Static Site with JSON API
 
-Bay Area Discounts uses a simple, efficient static architecture:
+Bay Navigator uses a simple, efficient static architecture:
 
 **YAML Files (`_data/programs/*.yml`)** - Source of Truth
 - ✅ Version control - Track all changes via Git

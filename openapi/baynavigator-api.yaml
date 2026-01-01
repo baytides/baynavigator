@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  title: Bay Area Discounts Static JSON API
+  title: Bay Navigator Static JSON API
   version: 1.0.0
   description: Static JSON API for programs, categories, areas, and eligibility types. All endpoints return pre-generated JSON files served via Azure Static Web Apps CDN.
 servers:
-  - url: https://bayareadiscounts.com/api
+  - url: https://baynavigator.org/api
     description: Production (CDN-cached static files)
 paths:
   /programs.json:

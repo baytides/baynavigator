@@ -1,7 +1,7 @@
-# Bay Area Discounts API Documentation
+# Bay Navigator API Documentation
 ## For Mobile App Development
 
-This document outlines the API endpoints needed for the mobile app to interact with the Bay Area Discounts platform.
+This document outlines the API endpoints needed for the mobile app to interact with the Bay Navigator platform.
 
 ---
 
@@ -29,7 +29,7 @@ The mobile app needs a **REST API** to fetch this data dynamically. We'll need t
 
 ### Base URL
 ```
-Production: https://bayareadiscounts.com/api
+Production: https://baynavigator.org/api
 Development: http://localhost:7071/api
 ```
 
@@ -74,7 +74,7 @@ Retrieves all programs across all categories.
 
 **Example Request:**
 ```bash
-curl "https://bayareadiscounts.com/api/programs?eligibility=low-income&area=San%20Francisco&limit=20"
+curl "https://baynavigator.org/api/programs?eligibility=low-income&area=San%20Francisco&limit=20"
 ```
 
 ---
@@ -110,7 +110,7 @@ Retrieves details for a specific program.
 
 **Example Request:**
 ```bash
-curl "https://bayareadiscounts.com/api/programs/sfmta-muni-lifeline"
+curl "https://baynavigator.org/api/programs/sfmta-muni-lifeline"
 ```
 
 **Error Response:**
@@ -527,7 +527,7 @@ export default httpTrigger;
 
 ```typescript
 // mobile-apps/src/services/api.ts
-const API_BASE = 'https://bayareadiscounts.com/api';
+const API_BASE = 'https://baynavigator.org/api';
 
 export interface ProgramFilters {
   search?: string;
@@ -538,7 +538,7 @@ export interface ProgramFilters {
   offset?: number;
 }
 
-export class BayAreaDiscountsAPI {
+export class BayNavigatorAPI {
   private baseUrl: string;
 
   constructor(baseUrl: string = API_BASE) {
@@ -594,7 +594,7 @@ export class BayAreaDiscountsAPI {
 }
 
 // Singleton instance
-export const api = new BayAreaDiscountsAPI();
+export const api = new BayNavigatorAPI();
 ```
 
 ### Usage in React Native
@@ -656,7 +656,7 @@ export function ProgramsScreen() {
 // Client-side caching
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-class CachedAPI extends BayAreaDiscountsAPI {
+class CachedAPI extends BayNavigatorAPI {
   private cache = new Map();
 
   async getPrograms(filters?: ProgramFilters) {
@@ -710,7 +710,7 @@ class CachedAPI extends BayAreaDiscountsAPI {
 {
   "cors": {
     "allowedOrigins": [
-      "https://bayareadiscounts.com",
+      "https://baynavigator.org",
       "https://*.azurestaticapps.net",
       "capacitor://localhost",
       "http://localhost:*"
@@ -775,4 +775,4 @@ describe('Programs API', () => {
 
 **Last Updated:** 2025-12-22
 **Version:** 1.0.0
-**Maintained By:** Bay Area Discounts Development Team
+**Maintained By:** Bay Navigator Development Team

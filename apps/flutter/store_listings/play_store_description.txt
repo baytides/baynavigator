@@ -1,0 +1,57 @@
+DISCLAIMER: Bay Navigator is NOT a government app. This is an independent project by Bay Tides, a 501(c)(3) nonprofit organization. We are not affiliated with, endorsed by, or connected to any government agency.
+
+Bay Navigator helps residents discover financial assistance programs available throughout the San Francisco Bay Area. Whether you're looking to reduce utility bills, save on transit, access affordable food, or find discounts on internet service, this app connects you with programs you may qualify for.
+
+PROGRAM SOURCES
+
+All program information is compiled from publicly available websites. Each program listing links directly to its official source. Sources include:
+
+Government Sources (.gov domains):
+• California Public Utilities Commission (cpuc.ca.gov) - LifeLine, Medical Baseline
+• California Dept. of Social Services (cdss.ca.gov) - CalFresh, CalWorks
+• California Dept. of Community Services (csd.ca.gov) - LIHEAP, Weatherization
+• California Dept. of Health Care Services (dhcs.ca.gov) - Medi-Cal, Dental
+• California DMV (dmv.ca.gov) - Vehicle programs
+• California State Parks (parks.ca.gov) - Park passes
+• National Park Service (nps.gov) - America the Beautiful passes
+• IRS (irs.gov) - VITA tax preparation
+• San Francisco City (sfgov.org) - Local assistance programs
+• USCIS (uscis.gov) - Fee waivers
+
+Transit Agencies:
+• BART (bart.gov) - Clipper START discounts
+• SF Muni (sfmta.com) - Lifeline passes
+• Caltrain (caltrain.com) - Youth fares
+• SamTrans (samtrans.com) - Discount passes
+• AC Transit, VTA, and other Bay Area transit agencies
+
+Utility Companies:
+• PG&E (pge.com) - CARE, FERA, ESA programs
+• EBMUD (ebmud.com) - Customer Assistance Program
+• SFPUC (sfpuc.org) - Water assistance
+• Peninsula Clean Energy, San Jose Clean Energy, CleanPowerSF
+
+Nonprofit Organizations:
+• Second Harvest Food Bank, SF-Marin Food Bank, Alameda County Food Bank
+• United Way Bay Area - 211 services, tax help
+• Meals on Wheels programs (multiple counties)
+• Legal Aid Society, Bay Area Legal Aid
+• YMCA, Salvation Army, St. Vincent de Paul
+
+Telecommunications:
+• AT&T Access (att.com)
+• Xfinity Internet Essentials (xfinity.com)
+• T-Mobile Project 10 Million (t-mobile.com)
+• Spectrum Internet Assist (spectrum.com)
+
+KEY FEATURES
+• Browse programs by category, county, or search
+• View eligibility requirements before applying
+• Direct links to official program websites
+• No account or personal information required
+
+WHO THIS IS FOR
+Bay Navigator serves income-eligible individuals and families, seniors, people with disabilities, veterans, and anyone experiencing financial hardship.
+
+ABOUT BAY TIDES
+Bay Navigator is a project of Bay Tides (baytides.org), a 501(c)(3) nonprofit dedicated to San Francisco Bay environmental conservation. EIN: 93-3889081

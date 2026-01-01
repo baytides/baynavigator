@@ -1,6 +1,6 @@
 # Scripts
 
-Utility scripts for maintaining Bay Area Discounts.
+Utility scripts for maintaining Bay Navigator.
 
 ## generate-api.js
 
@@ -55,5 +55,5 @@ python3 scripts/add_verification_dates.py
 
 ## License
 
-These scripts are part of Bay Area Discounts and licensed under MIT.
+These scripts are part of Bay Navigator and licensed under MIT.
 See [LICENSE](../LICENSE) for details.

@@ -1,4 +1,4 @@
-# Bay Area Discounts
+# Bay Navigator
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Data License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -10,7 +10,7 @@
      alt="Level AAA conformance, W3C WAI Web Content Accessibility Guidelines 2.2">
 </a>
 
-**[BayAreaDiscounts.com](https://bayareadiscounts.com)** — A searchable directory of free and low-cost programs across the San Francisco Bay Area.
+**[BayNavigator.com](https://baynavigator.org)** — A searchable directory of free and low-cost programs across the San Francisco Bay Area.
 
 Find benefits and discounts for:
 - 💳 SNAP/EBT/Medi-Cal recipients
@@ -46,7 +46,7 @@ This community-driven resource aims to:
 - 🌐 **PWA with Offline Support** - Install as an app from the utility bar; service worker caching for offline access
 - 🎨 **Theme Support** - Light, dark, and auto modes with manual override
 - 🔒 **Privacy-First** - No personal data or cookies; self-hosted Plausible with aggregate metrics only
-- 🔗 **Transparent Referrals** - External program links carry `utm_source=bayareadiscounts` for anonymous impact tracking; no compensation or referral fees
+- 🔗 **Transparent Referrals** - External program links carry `utm_source=baynavigator` for anonymous impact tracking; no compensation or referral fees
 - 🧭 **Step Flow + Local Preferences** - Set eligibility and county in a guided overlay; preferences are saved only in your browser (local storage). No accounts or email subscriptions
 - ⌨️ **Keyboard Shortcuts** - Ctrl/Cmd+K for search, full keyboard navigation support
 
@@ -54,9 +54,9 @@ This community-driven resource aims to:
 
 ## 🔌 Static JSON API
 
-Bay Area Discounts provides static JSON API files for accessing program data:
+Bay Navigator provides static JSON API files for accessing program data:
 
-**Base URL:** `https://bayareadiscounts.com/api/`
+**Base URL:** `https://baynavigator.org/api/`
 
 **Endpoints:**
 - `/api/programs.json` - All programs (237 total)
@@ -75,7 +75,7 @@ Bay Area Discounts provides static JSON API files for accessing program data:
 
 **Example:**
 ```javascript
-fetch('https://bayareadiscounts.com/api/programs.json')
+fetch('https://baynavigator.org/api/programs.json')
   .then(res => res.json())
   .then(data => console.log(`Found ${data.total} programs`));
 ```
@@ -85,7 +85,7 @@ fetch('https://bayareadiscounts.com/api/programs.json')
 ## � Documentation
 
 - **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute
-- **[API Documentation](docs/API_ENDPOINTS.md)** - Static JSON API endpoints (see also [OpenAPI spec](openapi/bayareadiscounts-api.yaml))
+- **[API Documentation](docs/API_ENDPOINTS.md)** - Static JSON API endpoints (see also [OpenAPI spec](openapi/baynavigator-api.yaml))
 - **[Accessibility](docs/ACCESSIBILITY.md)** - WCAG 2.2 AAA compliance details
 - **[All Documentation](docs/)** - Complete docs directory
 
@@ -115,7 +115,7 @@ fetch('https://bayareadiscounts.com/api/programs.json')
 ## 📂 Repository Structure
 
 ```
-bayareadiscounts/
+baynavigator/
 ├── _data/
 │   ├── cities.yml         # City-to-county mapping for auto-derivation
 │   └── programs/          # Program data files (YAML)
@@ -191,13 +191,13 @@ Access all program data via our static JSON API:
 
 ```bash
 # Get all programs
-curl https://bayareadiscounts.com/api/programs.json
+curl https://baynavigator.org/api/programs.json
 
 # Get categories
-curl https://bayareadiscounts.com/api/categories.json
+curl https://baynavigator.org/api/categories.json
 
 # Get a specific program
-curl https://bayareadiscounts.com/api/programs/alameda-food-bank.json
+curl https://baynavigator.org/api/programs/alameda-food-bank.json
 ```
 
 See **[API_ENDPOINTS.md](./docs/API_ENDPOINTS.md)** for complete API documentation.
@@ -206,8 +206,8 @@ See **[API_ENDPOINTS.md](./docs/API_ENDPOINTS.md)** for complete API documentati
 
 ```bash
 # Clone the repository
-git clone https://github.com/baytides/bayareadiscounts.git
-cd bayareadiscounts
+git clone https://github.com/baytides/baynavigator.git
+cd baynavigator
 
 # Install Ruby dependencies
 bundle install
@@ -297,7 +297,7 @@ This is a **community-maintained project**. Programs are verified periodically, 
 
 - **No personal data, no cookies**: The site does not collect or store personal information and sets zero cookies.
 - **Self-hosted Plausible (aggregate only)**: We use a self-hosted Plausible Analytics instance that records aggregate metrics (utm/source, country, browser, OS, visit counts) without IPs, cookies, or user identifiers.
-- **Standardized UTMs for impact**: External program links include `utm_source=bayareadiscounts&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
+- **Standardized UTMs for impact**: External program links include `utm_source=baynavigator&utm_medium=referral&utm_campaign=directory` so program partners can see anonymous referral volume; no per-user tracking.
 - **No compensation or paid placement**: We do not receive fees, commissions, or referral payments for any listings or links.
 - **Security**: Cloudflare provides TLS and DDoS protection; hosting and API run on Azure.
 
@@ -327,7 +327,7 @@ All code, including HTML, CSS, JavaScript, Jekyll templates, and configuration f
 
 **Requirements:**
 - Include the MIT license and copyright notice
-- Provide attribution to Bay Area Discounts
+- Provide attribution to Bay Navigator
 
 See [LICENSE](./LICENSE) for full details.
 
@@ -340,13 +340,13 @@ All program data in `_data/programs/` is licensed under **Creative Commons Attri
 - Adapt and build upon the data
 
 **Requirements:**
-- Give appropriate credit to Bay Area Discounts
+- Give appropriate credit to Bay Navigator
 - Provide a link to the license
 - Indicate if changes were made
 
 **Suggested attribution:**
 ```
-Program data from Bay Area Discounts (https://bayareadiscounts.com)
+Program data from Bay Navigator (https://baynavigator.org)
 licensed under CC BY 4.0
 ```
 

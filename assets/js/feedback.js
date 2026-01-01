@@ -1,11 +1,11 @@
 /**
- * Bay Area Discounts - Simple Feedback System
+ * Bay Navigator - Simple Feedback System
  * Allows users to submit feedback via pre-filled GitHub Issues
  */
 (function() {
   'use strict';
 
-  const GITHUB_REPO = 'baytides/bayareadiscounts';
+  const GITHUB_REPO = 'baytides/baynavigator';
 
   const feedbackTypes = {
     'general': { label: 'General Feedback', ghLabel: 'feedback' },
@@ -140,7 +140,7 @@ ${text}
 **Timestamp:** ${new Date().toISOString()}
 
 ---
-*Submitted via Bay Area Discounts feedback form*`;
+*Submitted via Bay Navigator feedback form*`;
 
       // Build GitHub issue URL
       const params = new URLSearchParams({

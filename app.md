@@ -1,24 +1,24 @@
 ---
 layout: default
-title: Mobile App - Bay Area Discounts
-description: Download the Bay Area Discounts app for offline access to free and low-cost programs across the San Francisco Bay Area.
+title: Mobile App - Bay Navigator
+description: Download the Bay Navigator app for offline access to free and low-cost programs across the San Francisco Bay Area.
 ---
 
 <div class="content-wrapper heading-dark-adjust" markdown="1">
 
 # Mobile App
 
-Take Bay Area Discounts with you. The app gives you offline access to all the programs and resources on this site.
+Take Bay Navigator with you. The app gives you offline access to all the programs and resources on this site.
 
 ---
 
 ## Download
 
 <p>
-  <a href="https://github.com/baytides/bayareadiscounts-app/releases/latest/download/bay-area-discounts.apk" class="button">Download APK</a>
+  <a href="https://github.com/baytides/baynavigator/releases/latest/download/bay-navigator.apk" class="button">Download APK</a>
 </p>
 
-Or view all releases and release notes on [GitHub Releases](https://github.com/baytides/bayareadiscounts-app/releases).
+Or view all releases and release notes on [GitHub Releases](https://github.com/baytides/baynavigator/releases).
 
 ---
 
@@ -56,7 +56,7 @@ The app follows the same privacy principles as the website:
 
 ## Source Code
 
-The app is open source. View the code, report issues, or contribute on [GitHub](https://github.com/baytides/bayareadiscounts-app).
+The app is open source. View the code, report issues, or contribute on [GitHub](https://github.com/baytides/baynavigator).
 
 ---
 

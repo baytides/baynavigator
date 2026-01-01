@@ -40,7 +40,7 @@ jobs:
           resourceGroupName: ${{ secrets.AZURE_RESOURCE_GROUP }}
           template: infrastructure/bicep/main.bicep
           parameters: |
-            appName=bayareadiscounts
+            appName=baynavigator
             environmentName=${{ github.event.inputs.environment }}
             location=westus2
           failOnStdErr: false

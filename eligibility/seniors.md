@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Seniors - Eligibility Guide - Bay Area Discounts
+title: Seniors - Eligibility Guide - Bay Navigator
 description: Learn about age thresholds for senior discounts, how to verify your age, and senior-specific benefit programs in the Bay Area.
 ---
 

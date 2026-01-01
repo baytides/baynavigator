@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Public Assistance Programs - Eligibility Guide - Bay Area Discounts
+title: Public Assistance Programs - Eligibility Guide - Bay Navigator
 description: Learn about Medi-Cal, CalFresh (EBT/SNAP), and CalWORKs eligibility, how to apply, and find your Bay Area county office.
 ---
 
@@ -12,7 +12,7 @@ These are government programs that help people with low income. If you get Medi-
 
 # Public Assistance Programs
 
-This guide covers California's major public assistance programs that qualify you for many discounts listed on Bay Area Discounts. If you receive benefits from any of these programs, you may be eligible for reduced rates on utilities, transit, internet, museum admission, and more.
+This guide covers California's major public assistance programs that qualify you for many discounts listed on Bay Navigator. If you receive benefits from any of these programs, you may be eligible for reduced rates on utilities, transit, internet, museum admission, and more.
 
 **Last Updated:** December 2025
 

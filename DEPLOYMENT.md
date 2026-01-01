@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This document explains how to deploy the Bay Area Discounts website to Azure Static Web Apps.
+This document explains how to deploy the Bay Navigator website to Azure Static Web Apps.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ To re-enable automatic deployment, edit `.github/workflows/deploy.yml` and chang
 - **Static Web App**: `baytides-discounts-app`
 - **Resource Group**: `baytides-discounts-rg`
 - **Region**: West US 2
-- **Production URL**: https://bayareadiscounts.com
+- **Production URL**: https://baynavigator.org
 - **Azure URL**: https://blue-pebble-00a40d41e.4.azurestaticapps.net
 
 ## Troubleshooting
@@ -88,7 +88,7 @@ The static JSON API files are generated automatically by the `generate-api.yml` 
 ## Post-Deployment Verification
 
 After deployment, verify:
-1. Site loads: https://bayareadiscounts.com
+1. Site loads: https://baynavigator.org
 2. APCA checker works: Open browser console and run `window.APCA.scanPage()`
 3. Accessibility toolbar: Click the ♿ button in top-left
 4. Theme toggle: Test auto/light/dark modes in utility bar

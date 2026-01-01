@@ -103,9 +103,9 @@
 
     // Update page title
     const titles = {
-      'for-you': 'For You - Bay Area Discounts',
-      'directory': 'Directory - Bay Area Discounts',
-      'saved': 'Saved Programs - Bay Area Discounts'
+      'for-you': 'For You - Bay Navigator',
+      'directory': 'Directory - Bay Navigator',
+      'saved': 'Saved Programs - Bay Navigator'
     };
     if (titles[view]) {
       document.title = titles[view];
@@ -323,8 +323,8 @@
         }
 
         const shareData = {
-          title: document.title || 'Bay Area Discounts',
-          text: 'Check out Bay Area Discounts for local discount programs!',
+          title: document.title || 'Bay Navigator',
+          text: 'Check out Bay Navigator for local discount programs!',
           url: shareUrl
         };
 

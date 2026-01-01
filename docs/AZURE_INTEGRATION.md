@@ -1,16 +1,16 @@
 # Azure Integration Guide
 
-This document explains how Bay Area Discounts integrates with Microsoft Azure while remaining fully open source.
+This document explains how Bay Navigator integrates with Microsoft Azure while remaining fully open source.
 
 ## 🎯 Overview
 
-Bay Area Discounts uses Azure services for hosting and backend infrastructure while keeping **all code open source on GitHub**. This is a reference implementation showing how to build a modern, scalable web application using Azure's generous free tiers.
+Bay Navigator uses Azure services for hosting and backend infrastructure while keeping **all code open source on GitHub**. This is a reference implementation showing how to build a modern, scalable web application using Azure's generous free tiers.
 
 ## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     Bay Area Discounts                          │
+│                     Bay Navigator                          │
 │                  Complete Architecture                          │
 └─────────────────────────────────────────────────────────────────┘
 
@@ -170,8 +170,8 @@ Run everything on your own server:
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/baytides/bayareadiscounts.git
-cd bayareadiscounts
+git clone https://github.com/baytides/baynavigator.git
+cd baynavigator
 ```
 
 ### 2. Deploy Infrastructure
@@ -180,11 +180,11 @@ cd bayareadiscounts
 az login
 
 # Create resource group
-az group create --name bayareadiscounts-rg --location westus2
+az group create --name baynavigator-rg --location westus2
 
 # Deploy resources
 az deployment group create \
-  --resource-group bayareadiscounts-rg \
+  --resource-group baynavigator-rg \
   --template-file infrastructure/bicep/main.bicep
 ```
 
@@ -367,9 +367,9 @@ Want to create "Seattle Discounts" or "NYC Benefits"?
 
 ## 🆘 Support
 
-- **Technical issues**: [Open a GitHub issue](https://github.com/baytides/bayareadiscounts/issues)
+- **Technical issues**: [Open a GitHub issue](https://github.com/baytides/baynavigator/issues)
 - **Azure questions**: [Azure Community Support](https://docs.microsoft.com/answers/products/azure)
-- **General questions**: [Start a discussion](https://github.com/baytides/bayareadiscounts/discussions)
+- **General questions**: [Start a discussion](https://github.com/baytides/baynavigator/discussions)
 
 ## 📝 License
 

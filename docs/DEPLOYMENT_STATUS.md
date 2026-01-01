@@ -24,14 +24,14 @@ See [AZURE_SERVICES_GUIDE.md](AZURE_SERVICES_GUIDE.md) for complete documentatio
 - ✅ Added license notice to data directory
 
 ### 2. Infrastructure Deployment
-- ✅ Created Azure Resource Group: `bayareadiscounts-rg`
+- ✅ Created Azure Resource Group: `baynavigator-rg`
 - ✅ Deployed all Azure resources via Bicep:
-  - Cosmos DB Account: `bayareadiscounts-cosmos-prod-clx32fwtnzehq`
-  - Cosmos DB Database: `bayareadiscounts`
+  - Cosmos DB Account: `baynavigator-cosmos-prod-clx32fwtnzehq`
+  - Cosmos DB Database: `baynavigator`
   - Cosmos DB Container: `programs`
-  - Function App: `bayareadiscounts-func-prod-clx32fwtnzehq`
-  - Storage Account: `bayareadiscountsstoragep`
-  - Application Insights: `bayareadiscounts-insights-prod`
+  - Function App: `baynavigator-func-prod-clx32fwtnzehq`
+  - Storage Account: `baynavigatorstoragep`
+  - Application Insights: `baynavigator-insights-prod`
 
 ### 3. Data Migration
 - ✅ Migrated all 237 programs from YAML to Cosmos DB
@@ -50,7 +50,7 @@ See [AZURE_SERVICES_GUIDE.md](AZURE_SERVICES_GUIDE.md) for complete documentatio
 
 ### Infrastructure Recreation (Dec 21, 2025)
 - ✅ Created Cosmos DB: `baytides-discounts-cosmos` 
-  - Database: `bayareadiscounts`
+  - Database: `baynavigator`
   - Container: `programs` (partition key: `/category`)
   - Tier: Free (1000 RU/s free, 25GB free storage)
   - Cost: $0/month
@@ -85,13 +85,13 @@ See [AZURE_SERVICES_GUIDE.md](AZURE_SERVICES_GUIDE.md) for complete documentatio
 **Next steps:**
 1. Check function logs in Azure Portal:
    - Portal → Function App → Monitor → Logs
-   - Or use: `func azure functionapp logstream bayareadiscounts-func-prod-clx32fwtnzehq`
+   - Or use: `func azure functionapp logstream baynavigator-func-prod-clx32fwtnzehq`
 
 2. Verify environment variables in Azure:
    ```bash
    az functionapp config appsettings list \
-     --resource-group bayareadiscounts-rg \
-     --name bayareadiscounts-func-prod-clx32fwtnzehq
+     --resource-group baynavigator-rg \
+     --name baynavigator-func-prod-clx32fwtnzehq
    ```
 
 3. Test locally first:
@@ -108,14 +108,14 @@ Once basic endpoints are working, add:
 ## 📊 Azure Resources
 
 ### Cosmos DB
-- **Endpoint:** `https://bayareadiscounts-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/`
-- **Database:** `bayareadiscounts`
+- **Endpoint:** `https://baynavigator-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/`
+- **Database:** `baynavigator`
 - **Container:** `programs` (237 items)
 - **Partition Key:** `/category`
 - **Cost:** $0.00/month (within free tier)
 
 ### Azure Functions
-- **URL:** `https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net`
+- **URL:** `https://baynavigator-func-prod-clx32fwtnzehq.azurewebsites.net`
 - **Runtime:** Node.js 24
 - **Model:** Programming Model v3 (function.json)
 - **Cost:** $0.00/month (within free tier)
@@ -129,7 +129,7 @@ Once basic endpoints are working, add:
 
 ### Option 1: Azure Portal (Easiest)
 1. Go to https://portal.azure.com
-2. Navigate to Function App: `bayareadiscounts-func-prod-clx32fwtnzehq`
+2. Navigate to Function App: `baynavigator-func-prod-clx32fwtnzehq`
 3. Click on a function (e.g., GetCategories)
 4. Click "Code + Test"
 5. Click "Test/Run" to test the function
@@ -146,11 +146,11 @@ cat > local.settings.json <<'EOF'
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "COSMOS_DB_ENDPOINT": "https://bayareadiscounts-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/",
-    "COSMOS_DB_ENDPOINT": "https://bayareadiscounts-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/",
-    "COSMOS_DB_DATABASE_NAME": "bayareadiscounts",
+    "COSMOS_DB_ENDPOINT": "https://baynavigator-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/",
+    "COSMOS_DB_ENDPOINT": "https://baynavigator-cosmos-prod-clx32fwtnzehq.documents.azure.com:443/",
+    "COSMOS_DB_DATABASE_NAME": "baynavigator",
     "COSMOS_DB_CONTAINER_NAME": "programs"
-    "COSMOS_DB_DATABASE_NAME": "bayareadiscounts",
+    "COSMOS_DB_DATABASE_NAME": "baynavigator",
     "COSMOS_DB_CONTAINER_NAME": "programs"
   }
 }
@@ -165,12 +165,12 @@ curl http://localhost:7071/api/categories
 
 ### Option 3: Stream Live Logs
 ```bash
-func azure functionapp logstream bayareadiscounts-func-prod-clx32fwtnzehq
+func azure functionapp logstream baynavigator-func-prod-clx32fwtnzehq
 ```
 
 Then in another terminal:
 ```bash
-curl https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api/categories
+curl https://baynavigator-func-prod-clx32fwtnzehq.azurewebsites.net/api/categories
 ```
 
 ## 📝 Files Created
@@ -224,8 +224,8 @@ curl https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api/cate
 ## 📞 Support Resources
 
 - **Azure Portal:** https://portal.azure.com
-- **Function App:** Search for "bayareadiscounts-func"
-- **Cosmos DB:** Search for "bayareadiscounts-cosmos"
+- **Function App:** Search for "baynavigator-func"
+- **Cosmos DB:** Search for "baynavigator-cosmos"
 - **Documentation:** See files listed above
 
 ## � Authentication & Security
@@ -260,7 +260,7 @@ curl https://bayareadiscounts-func-prod-clx32fwtnzehq.azurewebsites.net/api/cate
 ## 🔧 Infrastructure Consolidation Complete (Dec 21)
 
 **Cleaned up duplicate Azure resources:**
-- ✅ Deleted old Cosmos DB (bayareadiscounts-cosmos-db)
+- ✅ Deleted old Cosmos DB (baynavigator-cosmos-db)
 - ✅ Deleted old Function App (baytides-discounts-functions-app)  
 - ✅ Deleted old Application Insights (baytides-discounts-functions)
 

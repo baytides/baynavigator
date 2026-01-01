@@ -1,6 +1,6 @@
 # Accessibility Features
 
-This document outlines the accessibility features implemented in the Bay Area Discounts website to ensure WCAG 2.2 AAA compliance and progressive adoption of WCAG 3.0 draft standards.
+This document outlines the accessibility features implemented in the Bay Navigator website to ensure WCAG 2.2 AAA compliance and progressive adoption of WCAG 3.0 draft standards.
 
 ## WCAG 2.2 AAA Compliance
 
@@ -170,7 +170,7 @@ Progressive enhancement ensures graceful degradation in older browsers.
 ## Reporting Accessibility Issues
 
 If you encounter any accessibility barriers, please report them via:
-- GitHub Issues: [github.com/baytides/bayareadiscounts/issues](https://github.com/baytides/bayareadiscounts/issues)
+- GitHub Issues: [github.com/baytides/baynavigator/issues](https://github.com/baytides/baynavigator/issues)
 - Email: [accessibility contact through the site]
 
 We are committed to maintaining WCAG 2.2 AAA compliance and continuously improving accessibility.

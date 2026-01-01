@@ -152,7 +152,7 @@ document.addEventListener('click', function(e) {
 // Console command for maintainers to view analytics
 // Type in browser console: viewAnalytics()
 window.viewAnalytics = function() {
-  console.log('📊 Bay Area Discounts Analytics');
+  console.log('📊 Bay Navigator Analytics');
   console.log('================================');
   console.log('\n🔍 Top Searches:');
   console.table(window.analytics.getTopSearches(10));

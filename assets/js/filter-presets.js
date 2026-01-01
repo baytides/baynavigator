@@ -1,5 +1,5 @@
 /**
- * Bay Area Discounts - Saved Filter Presets
+ * Bay Navigator - Saved Filter Presets
  * Allows users to save and quickly apply filter combinations
  */
 (function() {

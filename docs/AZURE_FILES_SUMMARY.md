@@ -5,7 +5,7 @@ This document lists all files created for Azure integration.
 ## 📁 File Structure
 
 ```
-bayareadiscounts/
+baynavigator/
 ├── azure-functions/                  # Serverless API backend
 │   ├── GetPrograms/
 │   │   ├── function.json            # GET /api/programs endpoint config
@@ -119,7 +119,7 @@ Anyone can:
 - ✅ Contribute improvements
 
 Must:
-- ✅ Provide attribution to Bay Area Discounts
+- ✅ Provide attribution to Bay Navigator
 - ✅ Include license notices
 
 ## 🚀 Key Features
@@ -192,8 +192,8 @@ Must:
 ## 🆘 Getting Help
 
 - **Documentation**: All README files in this repo
-- **Issues**: [GitHub Issues](https://github.com/baytides/bayareadiscounts/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/baytides/bayareadiscounts/discussions)
+- **Issues**: [GitHub Issues](https://github.com/baytides/baynavigator/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/baytides/baynavigator/discussions)
 - **Azure Support**: [Azure Community](https://docs.microsoft.com/answers/products/azure)
 
 ## 🌟 Benefits of This Integration
@@ -224,4 +224,4 @@ Must:
 
 **Created**: December 17, 2025
 **License**: MIT (code) + CC BY 4.0 (data)
-**Maintained by**: Bay Area Discounts community
+**Maintained by**: Bay Navigator community

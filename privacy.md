@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Privacy Policy - Bay Area Discounts
+title: Privacy Policy - Bay Navigator
 description: Our commitment to protecting your privacy while helping you access community resources
 ---
 
@@ -15,7 +15,7 @@ description: Our commitment to protecting your privacy while helping you access 
   We do not collect personal information, set cookies, or sell data. We host our code openly, use privacy-friendly analytics (aggregate only), and link to external programs without compensation. Our mobile apps include optional crash reporting that you can turn off in Settings.
 </div>
 
-Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) committed to helping Bay Area residents access discount programs and community resources. We take your privacy seriously and have designed this website with privacy-by-design principles.
+Bay Navigator is operated by **Bay Tides**, a 501(c)(3) nonprofit organization (EIN: 93-3889081) committed to helping Bay Area residents access discount programs and community resources. We take your privacy seriously and have designed this website with privacy-by-design principles.
 
 ---
 
@@ -44,7 +44,7 @@ Bay Area Discounts is operated by **Bay Tides**, a 501(c)(3) nonprofit organizat
 
 **Our Mission**: Bay Tides empowers communities to protect and preserve the beauty of the San Francisco Bay through education, advocacy, and hands-on action.
 
-Bay Area Discounts is one of Bay Tides' community education initiatives, providing accessible information about discount programs and resources to Bay Area residents.
+Bay Navigator is one of Bay Tides' community education initiatives, providing accessible information about discount programs and resources to Bay Area residents.
 
 **Organization Details**: Bay Tides is a 501(c)(3) Nonprofit Organization located at 274 Redwood Shores Pkwy #619, Redwood City, CA 94065. For privacy-related inquiries, please contact us at privacy [at] baytides [dot] org.
 
@@ -108,7 +108,7 @@ We do not offer user accounts, sign-in features, or email subscription services.
 
 ### Overview
 
-The Bay Area Discounts mobile apps for iOS and Android include optional crash reporting to help us identify and fix bugs. This feature uses **Sentry**, a third-party error tracking service, to collect anonymous technical diagnostics when the app crashes or encounters an error.
+The Bay Navigator mobile apps for iOS and Android include optional crash reporting to help us identify and fix bugs. This feature uses **Sentry**, a third-party error tracking service, to collect anonymous technical diagnostics when the app crashes or encounters an error.
 
 ### Your Control: Opt-Out Available
 
@@ -177,7 +177,7 @@ Keyboard navigation is handled by browser HTML semantics. The website uses prope
 
 Our services contain links to external resources including government benefit program websites (such as the California Department of Social Services for CalFresh), utility company websites (such as Pacific Gas & Electric for the CARE program), community organization websites, and application portals for discount programs or services.
 
-**Important Notice**: When you click an external link, you leave bayareadiscounts.com and are directed to a third-party website. At that point, you become subject to the privacy policy of the destination website, not ours. We are not responsible for the privacy practices of external sites. We do not control or endorse the content of external websites. Different organizations have different privacy policies, and some may collect personal information, use cookies, or track visitors. We strongly recommend reviewing the privacy policy of any external site you visit before providing any personal information.
+**Important Notice**: When you click an external link, you leave baynavigator.org and are directed to a third-party website. At that point, you become subject to the privacy policy of the destination website, not ours. We are not responsible for the privacy practices of external sites. We do not control or endorse the content of external websites. Different organizations have different privacy policies, and some may collect personal information, use cookies, or track visitors. We strongly recommend reviewing the privacy policy of any external site you visit before providing any personal information.
 
 The inclusion of a link to an external website does not imply our endorsement of that website, its operator, or its privacy practices. We provide these links as a public service to help you find information about discount programs, but we cannot and do not guarantee the privacy practices of external organizations.
 
@@ -193,7 +193,7 @@ Cookies are small text files stored on your device by websites. Traditional cook
 
 ### Why We Don't Use Cookies
 
-Many websites use hundreds of tracking cookies. **Bay Area Discounts does not use cookies** for several important reasons. First, cookies can track users across sessions and websites, creating privacy concerns. Second, cookies are unnecessary for our purposes as our services utilize your browser or device's local storage for essential functionality. Third, people seeking assistance deserve privacy without tracking, and cookies can undermine that privacy. Fourth, not using cookies means no cookie consent requirements, simplifying the user experience and eliminating complex consent management systems. Fifth, fewer HTTP requests from cookie exchanges improve page load times and performance.
+Many websites use hundreds of tracking cookies. **Bay Navigator does not use cookies** for several important reasons. First, cookies can track users across sessions and websites, creating privacy concerns. Second, cookies are unnecessary for our purposes as our services utilize your browser or device's local storage for essential functionality. Third, people seeking assistance deserve privacy without tracking, and cookies can undermine that privacy. Fourth, not using cookies means no cookie consent requirements, simplifying the user experience and eliminating complex consent management systems. Fifth, fewer HTTP requests from cookie exchanges improve page load times and performance.
 
 ### Third-Party Cookies
 
@@ -237,7 +237,7 @@ Under the **California Consumer Privacy Act (CCPA)** and **California Privacy Ri
 
 **Rights You Have Under California Law**: California residents have the right to know what personal information is collected about them and the categories and specific pieces of personal information we have collected. They have the right to delete and request deletion of personal information we have collected. They have the right to opt-out of the sale or sharing of personal information. They have the right to correct inaccurate personal information in our records. They have the right to limit the use and disclosure of sensitive personal information. They have the right to non-discrimination, meaning we cannot discriminate against you for exercising your privacy rights.
 
-**Our Position**: Since Bay Area Discounts **does not collect, store, or process any personal information**, these rights are not applicable in the traditional sense because there is no personal information to access, delete, correct, or port. However, we respect the spirit and intent of these laws. If you wish to verify that we hold no personal information about you, you may contact privacy [at] baytides [dot] org and we will provide written confirmation that we maintain no personal information database and have no records associated with you.
+**Our Position**: Since Bay Navigator **does not collect, store, or process any personal information**, these rights are not applicable in the traditional sense because there is no personal information to access, delete, correct, or port. However, we respect the spirit and intent of these laws. If you wish to verify that we hold no personal information about you, you may contact privacy [at] baytides [dot] org and we will provide written confirmation that we maintain no personal information database and have no records associated with you.
 
 **Verification Process**: Because we have no personal information, there is nothing to verify in the traditional sense. However, we encourage Californians to examine our open-source code, inspect browser network traffic using browser developer tools, or conduct independent security audits to verify our claims.
 
@@ -287,7 +287,7 @@ This website uses minimal third-party services, and we are transparent about eac
 
 **Service**: Crash and error reporting for mobile applications
 **Provider**: Functional Software, Inc. (Sentry)
-**Applies To**: Bay Area Discounts mobile apps for iOS and Android only (not the website)
+**Applies To**: Bay Navigator mobile apps for iOS and Android only (not the website)
 
 For complete details about what data is collected, how it's protected, and how to opt out, see the [Mobile App Crash Reporting](#mobile-app-crash-reporting) section above.
 
@@ -405,7 +405,7 @@ We encourage you to review this privacy policy periodically. Your continued use 
 
 ### Version History
 
-All versions of this privacy policy are available in our public GitHub repository (github.com/baytides/bayareadiscounts) for transparency and accountability. You can view the complete history of changes, including what was changed and when, by reviewing the Git commit history for this file.
+All versions of this privacy policy are available in our public GitHub repository (github.com/baytides/baynavigator) for transparency and accountability. You can view the complete history of changes, including what was changed and when, by reviewing the Git commit history for this file.
 
 ---
 
@@ -437,9 +437,9 @@ As of the date of this privacy policy, we have not received any national securit
 
 ### No Compensation for External Links
 
-**Bay Area Discounts does not receive any form of compensation, payment, commission, referral fees, donations, or other financial benefit for including or linking to external programs, services, government agencies, nonprofits, or organizations.** All external links are provided as a public service to help Bay Area residents access community resources. We operate independently with no financial incentives or conflicts of interest influencing our program listings.
+**Bay Navigator does not receive any form of compensation, payment, commission, referral fees, donations, or other financial benefit for including or linking to external programs, services, government agencies, nonprofits, or organizations.** All external links are provided as a public service to help Bay Area residents access community resources. We operate independently with no financial incentives or conflicts of interest influencing our program listings.
 
-**UTM Parameters**: To track the effectiveness of our referrals and demonstrate the value of our work to our community, we add standardized tracking parameters (UTM codes) to external links. These parameters show the source, medium, and campaign of referrals (e.g., "utm_source=bayareadiscounts"). **These UTM parameters enable us to report on community impact without collecting any personal information about you.** The tracking is aggregate and anonymous - we can see that visitors were referred from Bay Area Discounts, but we cannot identify who those visitors are or track their individual journeys. This data helps us understand which programs are most valuable to the community, but it does not involve personal data collection.
+**UTM Parameters**: To track the effectiveness of our referrals and demonstrate the value of our work to our community, we add standardized tracking parameters (UTM codes) to external links. These parameters show the source, medium, and campaign of referrals (e.g., "utm_source=baynavigator"). **These UTM parameters enable us to report on community impact without collecting any personal information about you.** The tracking is aggregate and anonymous - we can see that visitors were referred from Bay Navigator, but we cannot identify who those visitors are or track their individual journeys. This data helps us understand which programs are most valuable to the community, but it does not involve personal data collection.
 
 ---
 
@@ -461,7 +461,7 @@ Since we collect no personal information on our website, cross-border data trans
 
 ### Contact Information
 
-If you have questions about this privacy policy or concerns about your privacy while using Bay Area Discounts, please contact us:
+If you have questions about this privacy policy or concerns about your privacy while using Bay Navigator, please contact us:
 
 **Bay Tides**
 Attn: Privacy Officer
@@ -486,7 +486,7 @@ If you believe your privacy rights have been violated, you may contact us at pri
 
 ### Our Philosophy
 
-Bay Area Discounts was intentionally designed with **privacy-by-design** principles because we believe in several core values. First, people seeking assistance programs deserve privacy and respect. Looking for help should not mean surrendering your privacy. Second, community trust is earned through actions, not promises. We demonstrate our commitment to privacy through our technical architecture, not just policy statements. Third, data minimization is the ethical choice for nonprofits serving the community. Collecting less data reduces risk and respects dignity. Fourth, the best way to protect data is not to collect it in the first place. This eliminates the risk of data breaches, unauthorized access, or misuse. Fifth, privacy should be accessible to everyone, not just technical users who know how to use ad blockers or VPNs. Finally, as part of Bay Tides' mission to empower communities through education, we believe people should be able to access educational resources without mass surveillance or tracking.
+Bay Navigator was intentionally designed with **privacy-by-design** principles because we believe in several core values. First, people seeking assistance programs deserve privacy and respect. Looking for help should not mean surrendering your privacy. Second, community trust is earned through actions, not promises. We demonstrate our commitment to privacy through our technical architecture, not just policy statements. Third, data minimization is the ethical choice for nonprofits serving the community. Collecting less data reduces risk and respects dignity. Fourth, the best way to protect data is not to collect it in the first place. This eliminates the risk of data breaches, unauthorized access, or misuse. Fifth, privacy should be accessible to everyone, not just technical users who know how to use ad blockers or VPNs. Finally, as part of Bay Tides' mission to empower communities through education, we believe people should be able to access educational resources without mass surveillance or tracking.
 
 ### Technical Choices
 
@@ -498,7 +498,7 @@ We made deliberate technical choices to ensure privacy. We built a static site w
 
 ### Open Source Commitment
 
-Bay Area Discounts is **open source**, meaning our entire codebase is publicly available at github.com/baytides/bayareadiscounts. Every line of code can be inspected and audited. There is no hidden code or proprietary tracking. Anyone can verify our privacy claims by reading the source code.
+Bay Navigator is **open source**, meaning our entire codebase is publicly available at github.com/baytides/baynavigator. Every line of code can be inspected and audited. There is no hidden code or proprietary tracking. Anyone can verify our privacy claims by reading the source code.
 
 ### How to Verify Our Claims
 
@@ -560,11 +560,11 @@ For clarity, we define key terms used in this privacy policy.
 
 ### What This Policy Covers
 
-This privacy policy applies to the bayareadiscounts.com website, all subdomains of bayareadiscounts.com (if any), mobile-responsive versions of the website (the same website viewed on mobile devices), Progressive Web App (PWA) version if installed on your device, Bay Area Discounts mobile app for iOS (available on the App Store), and Bay Area Discounts mobile app for Android (available on Google Play).
+This privacy policy applies to the baynavigator.org website, all subdomains of baynavigator.org (if any), mobile-responsive versions of the website (the same website viewed on mobile devices), Progressive Web App (PWA) version if installed on your device, Bay Navigator mobile app for iOS (available on the App Store), and Bay Navigator mobile app for Android (available on Google Play).
 
 ### What This Policy Does NOT Cover
 
-This privacy policy does not cover external websites linked from bayareadiscounts.com (which have their own privacy policies), third-party services such as GitHub Pages and Microsoft Azure (which have their own privacy policies linked in this document), offline interactions with Bay Tides (such as in-person meetings or phone calls), or other Bay Tides websites or services (if any), which would have their own privacy policies.
+This privacy policy does not cover external websites linked from baynavigator.org (which have their own privacy policies), third-party services such as GitHub Pages and Microsoft Azure (which have their own privacy policies linked in this document), offline interactions with Bay Tides (such as in-person meetings or phone calls), or other Bay Tides websites or services (if any), which would have their own privacy policies.
 
 ---
 
@@ -599,7 +599,7 @@ We respect General Data Protection Regulation (GDPR) principles for internationa
 
 ### The Bottom Line
 
-**Bay Area Discounts** is a community resource operated by Bay Tides, a 501(c)(3) nonprofit (EIN: 93-3889081), designed to help you find assistance programs while **respecting your absolute privacy**.
+**Bay Navigator** is a community resource operated by Bay Tides, a 501(c)(3) nonprofit (EIN: 93-3889081), designed to help you find assistance programs while **respecting your absolute privacy**.
 
 **Simple Truth**: We collect **ZERO personal information**. We use **ZERO cookies**. We do **ZERO tracking**. We sell **ZERO data** (we have none to sell).
 
@@ -609,7 +609,7 @@ We respect General Data Protection Regulation (GDPR) principles for internationa
 
 ---
 
-**Bay Area Discounts**
+**Bay Navigator**
 Operated by Bay Tides (501(c)(3) Nonprofit)
 Privacy Policy Version 2.3
 Effective Date: December 18, 2025

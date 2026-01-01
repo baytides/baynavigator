@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Eligibility Guides - Bay Area Discounts
+title: Eligibility Guides - Bay Navigator
 description: Learn about eligibility requirements for discount programs and how to enroll in public assistance, verify military status, and more.
 ---
 

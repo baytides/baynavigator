@@ -3,7 +3,7 @@
 const translations = {
   en: {
     // Header
-    'site.title': 'Bay Area Discounts',
+    'site.title': 'Bay Navigator',
     'nav.all_programs': 'All Programs',
     'nav.student_resources': 'Student Resources',
     'nav.saved': 'Saved',
@@ -188,7 +188,7 @@ class I18n {
     if (this.currentLang === 'es') {
       document.title = 'Descuentos del Área de la Bahía';
     } else {
-      document.title = 'Bay Area Discounts';
+      document.title = 'Bay Navigator';
     }
   }
   

@@ -19,7 +19,7 @@ The `sync-github-ips.sh` script:
 ### Manual Run
 
 ```bash
-cd /path/to/bayareadiscounts
+cd /path/to/baynavigator
 ./scripts/sync-github-ips.sh
 ```
 
@@ -31,7 +31,7 @@ cd /path/to/bayareadiscounts
 crontab -e
 
 # Add this line (runs every Sunday at 3 AM):
-0 3 * * 0 cd /Users/steven/Documents/Github/bayareadiscounts && ./scripts/sync-github-ips.sh >> /tmp/github-ip-sync.log 2>&1
+0 3 * * 0 cd /Users/steven/Documents/Github/baynavigator && ./scripts/sync-github-ips.sh >> /tmp/github-ip-sync.log 2>&1
 ```
 
 **Option 2: GitHub Actions (self-updating)**
@@ -84,7 +84,7 @@ tail -f /tmp/github-ip-sync.log
 Verify current rules:
 ```bash
 az storage account network-rule list \
-  -g bayareadiscounts-rg \
+  -g baynavigator-rg \
   --account-name badfuncstoragepe \
   --query "ipRules[].value"
 ```
@@ -95,13 +95,13 @@ If managing 200 IP rules becomes burdensome, consider the automated workflow app
 
 ```yaml
 - name: Unlock storage
-  run: az storage account update -g bayareadiscounts-rg -n badfuncstoragepe --default-action Allow
+  run: az storage account update -g baynavigator-rg -n badfuncstoragepe --default-action Allow
 
 - name: Deploy
   # ... deploy steps
 
 - name: Lock storage
-  run: az storage account update -g bayareadiscounts-rg -n badfuncstoragepe --default-action Deny
+  run: az storage account update -g baynavigator-rg -n badfuncstoragepe --default-action Deny
 ```
 
 ## Notes

@@ -2,7 +2,7 @@
 
 ## ✅ All Resources Secured
 
-Your Bay Area Discounts infrastructure is now hardened against attacks and abuse. Here's what was implemented:
+Your Bay Navigator infrastructure is now hardened against attacks and abuse. Here's what was implemented:
 
 ---
 
@@ -99,14 +99,14 @@ Your Bay Area Discounts infrastructure is now hardened against attacks and abuse
 **For Website Use:**
 ```
 Primary Key: cac137c0e27f43b0b8cdb356b75cb087
-Subscription ID: bayareadiscounts-website
+Subscription ID: baynavigator-website
 Daily Limit: 10,000 requests
 ```
 
 **How to Use:**
 ```javascript
 // Add to your website's API calls
-fetch('https://bayareadiscounts-api.azure-api.net/programs', {
+fetch('https://baynavigator-api.azure-api.net/programs', {
   headers: {
     'Ocp-Apim-Subscription-Key': 'cac137c0e27f43b0b8cdb356b75cb087'
   }
@@ -219,14 +219,14 @@ fetch('https://bayareadiscounts-api.azure-api.net/programs', {
 
 ### Test 1: Try API Without Key (Should Fail)
 ```bash
-curl https://bayareadiscounts-api.azure-api.net/programs
+curl https://baynavigator-api.azure-api.net/programs
 # Expected: 401 Unauthorized with "Missing subscription key"
 ```
 
 ### Test 2: Try API With Key (Should Work)
 ```bash
 curl -H "Ocp-Apim-Subscription-Key: cac137c0e27f43b0b8cdb356b75cb087" \
-  https://bayareadiscounts-api.azure-api.net/programs
+  https://baynavigator-api.azure-api.net/programs
 # Expected: 200 OK with program data
 ```
 
@@ -238,7 +238,7 @@ curl -I https://wonderful-coast-09041e01e.2.azurestaticapps.net
 
 ### Test 4: Verify HTTPS Redirect
 ```bash
-curl -I http://bayareadiscounts-web-b9gzhvbpdedgc2hn.z02.azurefd.net
+curl -I http://baynavigator-web-b9gzhvbpdedgc2hn.z02.azurefd.net
 # Expected: 301/302 redirect to HTTPS
 ```
 

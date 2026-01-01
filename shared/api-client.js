@@ -1,5 +1,5 @@
 // Minimal API client with ETag support and optional caching
-const DEFAULT_BASE_URL = 'https://bayareadiscounts.com/api';
+const DEFAULT_BASE_URL = 'https://baynavigator.org/api';
 
 function buildQuery(params = {}) {
   const search = new URLSearchParams();

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Military, Veterans & Families - Eligibility Guide - Bay Area Discounts
+title: Military, Veterans & Families - Eligibility Guide - Bay Navigator
 description: Understand who qualifies as active duty, veteran, National Guard, Reserve, or eligible family member for military discounts.
 ---
 
@@ -255,7 +255,7 @@ Many discount programs extend eligibility to family members of service members a
     </svg>
   </div>
   <div class="callout-content">
-    <p>While Bay Area Discounts focuses on civilian discount programs, veterans should be aware of federal VA benefits listed below.</p>
+    <p>While Bay Navigator focuses on civilian discount programs, veterans should be aware of federal VA benefits listed below.</p>
   </div>
 </div>
 

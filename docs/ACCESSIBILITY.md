@@ -1,8 +1,8 @@
-# Accessibility Statement for Bay Area Discounts
+# Accessibility Statement for Bay Navigator
 
 ## Conformance Status
 
-Bay Area Discounts is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
+Bay Navigator is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
 
 ### WCAG 2.2 AAA Compliance
 
@@ -99,16 +99,16 @@ We are actively working to address any accessibility issues. If you encounter an
 
 ## Feedback
 
-We welcome your feedback on the accessibility of Bay Area Discounts. Please let us know if you encounter accessibility barriers:
+We welcome your feedback on the accessibility of Bay Navigator. Please let us know if you encounter accessibility barriers:
 
-- **GitHub Issues**: [https://github.com/baytides/bayareadiscounts/issues](https://github.com/baytides/bayareadiscounts/issues)
+- **GitHub Issues**: [https://github.com/baytides/baynavigator/issues](https://github.com/baytides/baynavigator/issues)
 - **Email**: accessibility [at] baytides [dot] org
 
 We try to respond to feedback within 5 business days.
 
 ## Technical Specifications
 
-Bay Area Discounts's accessibility relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:
+Bay Navigator's accessibility relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:
 
 - HTML5
 - CSS3
@@ -119,7 +119,7 @@ These technologies are relied upon for conformance with the accessibility standa
 
 ## Assessment Approach
 
-Bay Area Discounts assessed the accessibility of this website by the following approaches:
+Bay Navigator assessed the accessibility of this website by the following approaches:
 
 - Self-evaluation
 - Automated testing with Playwright and accessibility tools

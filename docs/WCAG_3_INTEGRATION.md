@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines how Bay Area Discounts integrates emerging WCAG 3.0 (W3C Accessibility Guidelines) requirements while maintaining full WCAG 2.2 AAA compliance.
+This document outlines how Bay Navigator integrates emerging WCAG 3.0 (W3C Accessibility Guidelines) requirements while maintaining full WCAG 2.2 AAA compliance.
 
 **Status:** WCAG 3.0 is currently in Working Draft (as of September 2025) with requirements at "Developing" maturity level. We are proactively implementing applicable guidelines to future-proof our accessibility.
 
@@ -305,7 +305,7 @@ Following ARIA Authoring Practices Guide 1.2:
 ## Contact
 
 For accessibility feedback or questions about WCAG 3.0 implementation:
-- **GitHub Issues**: https://github.com/baytides/bayareadiscounts/issues
+- **GitHub Issues**: https://github.com/baytides/baynavigator/issues
 - **Email**: accessibility [at] baytides [dot] org
 
 ---

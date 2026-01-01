@@ -1,6 +1,6 @@
 ---
 layout: default
-title: People with Disabilities - Eligibility Guide - Bay Area Discounts
+title: People with Disabilities - Eligibility Guide - Bay Navigator
 description: Understand eligibility for disability-related discounts, including SSI/SSDI recipients, Regional Center clients, and ADA accommodations.
 ---
 

@@ -21,7 +21,7 @@
 - Error messages sanitized (no stack traces leaked)
 
 **CORS Restrictions**
-- Only allowed origins: bayareadiscounts.com domains + Azure endpoints
+- Only allowed origins: baynavigator.org domains + Azure endpoints
 - Strict method allowlist: GET, POST, OPTIONS only
 - Limited headers: Content-Type, Accept, Accept-Language
 
@@ -159,8 +159,8 @@
 ```bash
 # Create subscription for your static web app
 az apim subscription create \
-  --resource-group bayareadiscounts-rg \
-  --service-name bayareadiscounts-api \
+  --resource-group baynavigator-rg \
+  --service-name baynavigator-api \
   --product-id free-tier \
   --name "static-web-app" \
   --state active \
@@ -168,8 +168,8 @@ az apim subscription create \
 
 # Get the subscription key
 az apim subscription show \
-  --resource-group bayareadiscounts-rg \
-  --service-name bayareadiscounts-api \
+  --resource-group baynavigator-rg \
+  --service-name baynavigator-api \
   --subscription-id "static-web-app" \
   --query "primaryKey" -o tsv
 ```
@@ -184,7 +184,7 @@ az apim subscription show \
 
 ```javascript
 // In your website's JavaScript
-fetch('https://bayareadiscounts-api.azure-api.net/programs', {
+fetch('https://baynavigator-api.azure-api.net/programs', {
   headers: {
     'Ocp-Apim-Subscription-Key': 'YOUR_SUBSCRIPTION_KEY'
   }
@@ -196,20 +196,20 @@ fetch('https://bayareadiscounts-api.azure-api.net/programs', {
 ```bash
 # List all subscriptions
 az apim subscription list \
-  --resource-group bayareadiscounts-rg \
-  --service-name bayareadiscounts-api
+  --resource-group baynavigator-rg \
+  --service-name baynavigator-api
 
 # Revoke a subscription
 az apim subscription update \
-  --resource-group bayareadiscounts-rg \
-  --service-name bayareadiscounts-api \
+  --resource-group baynavigator-rg \
+  --service-name baynavigator-api \
   --subscription-id "<id>" \
   --state suspended
 
 # Regenerate keys
 az apim subscription regenerate-primary-key \
-  --resource-group bayareadiscounts-rg \
-  --service-name bayareadiscounts-api \
+  --resource-group baynavigator-rg \
+  --service-name baynavigator-api \
   --subscription-id "<id>"
 ```
 
@@ -235,8 +235,8 @@ az apim subscription regenerate-primary-key \
 # Add alert for high API usage (potential abuse)
 az monitor metrics alert create \
   --name "APIM-HighUsage" \
-  --resource-group bayareadiscounts-rg \
-  --scopes /subscriptions/7848d90a-1826-43f6-a54e-090c2d18946f/resourceGroups/bayareadiscounts-rg/providers/Microsoft.ApiManagement/service/bayareadiscounts-api \
+  --resource-group baynavigator-rg \
+  --scopes /subscriptions/7848d90a-1826-43f6-a54e-090c2d18946f/resourceGroups/baynavigator-rg/providers/Microsoft.ApiManagement/service/baynavigator-api \
   --condition "total Requests > 5000" \
   --window-size 5m \
   --evaluation-frequency 1m \
@@ -249,7 +249,7 @@ az consumption budget create \
   --time-grain monthly \
   --start-date $(date -u +%Y-%m-01) \
   --category cost \
-  --resource-group bayareadiscounts-rg
+  --resource-group baynavigator-rg
 ```
 
 ---
@@ -260,21 +260,21 @@ az consumption budget create \
 
 ```bash
 # Check for open network access
-az cosmosdb show --name bayareadiscounts-cosmos-prod-clx32fwtnzehq --resource-group bayareadiscounts-rg --query publicNetworkAccess
+az cosmosdb show --name baynavigator-cosmos-prod-clx32fwtnzehq --resource-group baynavigator-rg --query publicNetworkAccess
 # Should be: "Disabled"
 
-az keyvault show --name bayareadiscounts-kv-prod --query properties.networkAcls.defaultAction
+az keyvault show --name baynavigator-kv-prod --query properties.networkAcls.defaultAction
 # Should be: "Deny"
 
-az redis show --name bayareadiscounts-redis --resource-group bayareadiscounts-rg --query publicNetworkAccess
+az redis show --name baynavigator-redis --resource-group baynavigator-rg --query publicNetworkAccess
 # Should be: "Disabled" or have firewall rules
 
 # Check HTTPS enforcement
-az functionapp show --name bayareadiscounts-func-prod-clx32fwtnzehq --resource-group bayareadiscounts-rg --query httpsOnly
+az functionapp show --name baynavigator-func-prod-clx32fwtnzehq --resource-group baynavigator-rg --query httpsOnly
 # Should be: true
 
 # List all RBAC assignments
-az role assignment list --resource-group bayareadiscounts-rg --output table
+az role assignment list --resource-group baynavigator-rg --output table
 ```
 
 ### Vulnerability Scanning
@@ -288,7 +288,7 @@ npm audit --production
 npm outdated
 
 # Security scan (if GitHub Advanced Security enabled)
-# View at: https://github.com/baytides/bayareadiscounts/security
+# View at: https://github.com/baytides/baynavigator/security
 ```
 
 ---
@@ -307,7 +307,7 @@ npm outdated
 2. **Review access logs:**
    ```bash
    az monitor app-insights query \
-     --app bayareadiscounts-insights-prod \
+     --app baynavigator-insights-prod \
      --analytics-query "requests | where timestamp > ago(24h) | summarize count() by client_IP"
    ```
 

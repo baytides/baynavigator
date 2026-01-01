@@ -1,7 +1,7 @@
 {
-  "name": "@bayareadiscounts/shared",
+  "name": "@baynavigator/shared",
   "version": "0.1.0",
-  "description": "Shared client utilities for Bay Area Discounts (web + mobile)",
+  "description": "Shared client utilities for Bay Navigator (web + mobile)",
   "private": true,
   "main": "./index.js",
   "types": "./index.d.ts",

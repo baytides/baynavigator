@@ -50,7 +50,7 @@ This document summarizes the accessibility improvements made based on the IBM Eq
 **Status**: Properly structured
 
 **Verification**:
-- Page has single `<h1>` element (visually hidden for SEO): "Bay Area Discounts"
+- Page has single `<h1>` element (visually hidden for SEO): "Bay Navigator"
 - Filter groups use proper `<h3>` headings: "Eligibility", "Category", "Area / County"
 - Program cards use `<h3>` for program names
 - No skipped heading levels
@@ -58,7 +58,7 @@ This document summarizes the accessibility improvements made based on the IBM Eq
 
 **Structure**:
 ```
-h1 (hidden): Bay Area Discounts
+h1 (hidden): Bay Navigator
   h2: Content sections
     h3: Filter groups
     h3: Program names
@@ -332,7 +332,7 @@ Document the existing keyboard shortcuts (e.g., Ctrl/Cmd+K for search) in a help
 
 ## ✅ Compliance Statement
 
-Bay Area Discounts strives to meet **WCAG 2.1 Level AA** standards. All critical accessibility issues identified in the IBM Equal Access Toolkit scan have been addressed. The site is designed to be usable by people with disabilities using assistive technologies.
+Bay Navigator strives to meet **WCAG 2.1 Level AA** standards. All critical accessibility issues identified in the IBM Equal Access Toolkit scan have been addressed. The site is designed to be usable by people with disabilities using assistive technologies.
 
 **Last Updated**: December 18, 2025
 **Scan Tool**: IBM Equal Access Toolkit

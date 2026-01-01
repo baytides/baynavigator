@@ -1,7 +1,7 @@
 # Mobile App Development Roadmap
-## Bay Area Discounts - iOS & Android Native Apps
+## Bay Navigator - iOS & Android Native Apps
 
-This document outlines the path to converting the Bay Area Discounts web application into native iOS and Android mobile apps.
+This document outlines the path to converting the Bay Navigator web application into native iOS and Android mobile apps.
 
 ---
 
@@ -10,7 +10,7 @@ This document outlines the path to converting the Bay Area Discounts web applica
 ### ✅ Strengths (Ready for Mobile)
 - **Progressive Web App (PWA)** - Already has service worker (`sw.js`) and offline capabilities
 - **Mobile-First Design** - Responsive CSS with touch-friendly UI
-- **Static JSON API** - Fast, CDN-cached API at `https://bayareadiscounts.com/api/`
+- **Static JSON API** - Fast, CDN-cached API at `https://baynavigator.org/api/`
 - **API Client Library** - Pre-built `shared/api-client.js` with caching support
 - **Static Assets** - All resources (images, CSS, JS) are well-organized
 - **Clean Data Model** - 237 programs with structured schema (categories, eligibility, areas)
@@ -124,7 +124,7 @@ Pre-built API client available at `shared/api-client.js`:
 import APIClient from '../shared/api-client.js';
 
 const client = new APIClient({
-  baseURL: 'https://bayareadiscounts.com/api',
+  baseURL: 'https://baynavigator.org/api',
   cache: true,
   cacheTTL: 3600000 // 1 hour
 });
@@ -242,17 +242,17 @@ jobs:
 
 ```bash
 # Create mobile app repository
-gh repo create bayareadiscounts-mobile --public
+gh repo create baynavigator-mobile --public
 
 # Set up branch protection for releases
-gh api repos/baytides/bayareadiscounts-mobile/branches/main/protection \
+gh api repos/baytides/baynavigator-mobile/branches/main/protection \
   --method PUT \
   --field required_status_checks[strict]=true \
   --field required_pull_request_reviews[required_approving_review_count]=1
 
 # Automated changelog generation
 gh release create mobile-v1.0.0 \
-  --title "Bay Area Discounts Mobile v1.0.0" \
+  --title "Bay Navigator Mobile v1.0.0" \
   --notes-file CHANGELOG.md \
   --target main
 
@@ -269,7 +269,7 @@ gh issue list --label "mobile-bug" --state open
 ```bash
 # 1. Enable Application Insights for better monitoring
 az monitor app-insights component create \
-  --app bayareadiscounts-insights \
+  --app baynavigator-insights \
   --location westus2 \
   --resource-group baytides-discounts-rg \
   --application-type web
@@ -284,7 +284,7 @@ az staticwebapp environment create \
 az staticwebapp hostname set \
   --name baytides-discounts-app \
   --resource-group baytides-discounts-rg \
-  --hostname api.bayareadiscounts.com
+  --hostname api.baynavigator.org
 
 # 4. Enable diagnostic logs
 az monitor diagnostic-settings create \
@@ -324,11 +324,11 @@ az staticwebapp usage show \
 set -e
 
 # Configuration
-REPO="baytides/bayareadiscounts"
+REPO="baytides/baynavigator"
 WORKFLOW="deploy.yml"
 ENVIRONMENT="${1:-production}"  # Allow staging/production
 
-echo "🚀 Bay Area Discounts Deployment"
+echo "🚀 Bay Navigator Deployment"
 echo "Environment: $ENVIRONMENT"
 
 # Validate environment
@@ -373,10 +373,10 @@ swa deploy "$DEPLOY_DIR" \
 
 # Verify deployment
 echo "✅ Verifying deployment..."
-RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://bayareadiscounts.com)
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://baynavigator.org)
 if [ "$RESPONSE" = "200" ]; then
   echo "✅ Deployment successful!"
-  echo "🌐 Site: https://bayareadiscounts.com"
+  echo "🌐 Site: https://baynavigator.org"
 else
   echo "⚠️  Warning: Site returned HTTP $RESPONSE"
 fi
@@ -481,7 +481,7 @@ self.addEventListener('push', event => {
 
 ### Recommended: Separate Repository
 
-Create a new repository `bayareadiscounts-mobile` for the mobile app:
+Create a new repository `baynavigator-mobile` for the mobile app:
 
 **Why Separate?**
 - ✅ Clean separation of web and mobile code
@@ -493,14 +493,14 @@ Create a new repository `bayareadiscounts-mobile` for the mobile app:
 
 **Repository Structure:**
 ```
-baytides/bayareadiscounts/    # Current web repo (keep as-is)
+baytides/baynavigator/    # Current web repo (keep as-is)
 baytides/mobile-apps/         # Mobile apps repo ✅ Created
 ```
 
 **Sharing Code Between Repos:**
-- Mobile app calls web API endpoints (https://bayareadiscounts.com/api)
+- Mobile app calls web API endpoints (https://baynavigator.org/api)
 - Types and constants copied to mobile (minimal duplication)
-- OR: Create optional `bayareadiscounts-shared` npm package later if needed
+- OR: Create optional `baynavigator-shared` npm package later if needed
 
 **Mobile Repo Setup:**
 ```bash
@@ -527,7 +527,7 @@ git push origin main
 ### Immediate (Week 1-2)
 1. ✅ **Decide on mobile framework** - React Native recommended
 2. ✅ **Set up mobile repository** - ✅ Created at `baytides/mobile-apps`
-3. ✅ **API infrastructure ready** - Static JSON API at `https://bayareadiscounts.com/api/`
+3. ✅ **API infrastructure ready** - Static JSON API at `https://baynavigator.org/api/`
 4. ⏳ **Create app mockups** - Design mobile-specific screens
 
 ### Short-term (Week 3-6)
@@ -640,7 +640,7 @@ describe('Favorites Flow', () => {
 *This roadmap is a living document. Update it as decisions are made and progress is achieved.*
 
 **Last Updated**: 2025-12-22
-**Author**: Bay Area Discounts Development Team
+**Author**: Bay Navigator Development Team
 
 ---
 

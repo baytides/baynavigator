@@ -1,7 +1,7 @@
 {
   "name": "baytides-link-checker",
   "version": "1.0.0",
-  "description": "Azure Functions for Bay Area Discounts link checking and monitoring",
+  "description": "Azure Functions for Bay Navigator link checking and monitoring",
   "main": "link-checker/index.js",
   "scripts": {
     "start": "func start",
