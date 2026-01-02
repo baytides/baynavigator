@@ -13,7 +13,7 @@
 **[BayNavigator.org](https://baynavigator.org)** — A searchable directory of free and low-cost programs across the San Francisco Bay Area.
 
 Find benefits and discounts for:
-- 💳 SNAP/EBT/Medi-Cal recipients
+- 💳 Income-eligible (e.g., SNAP/EBT and Medi-Cal recipients)
 - 👵 Seniors (65+)
 - 🧒 Youth
 - 🎓 College students
