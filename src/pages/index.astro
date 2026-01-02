@@ -80,41 +80,92 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     </div>
   </section>
 
-  <!-- Quick Links -->
+  <!-- Category Tiles - SMC Connect style -->
   <section class="section bg-neutral-50 dark:bg-neutral-800">
     <div class="container-page">
-      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 text-center">
-        Popular Resources
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2 text-center">
+        Browse by Category
       </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <a href="#food" class="card text-center group no-underline hover:no-underline">
-          <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-green-700 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Food Assistance</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">Food banks, CalFresh, meal programs</p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-center mb-8">
+        Select a category to find programs and services
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Food -->
+        <a href="/directory?category=Food" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">🍎</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Food</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Food banks, meals, CalFresh</p>
         </a>
 
-        <a href="#utilities" class="card text-center group no-underline hover:no-underline">
-          <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-yellow-700 dark:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Utility Assistance</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">CARE, FERA, LIHEAP, bill assistance</p>
+        <!-- Housing -->
+        <a href="/directory?category=Housing" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">🏠</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Housing</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Rental help, shelters, affordable housing</p>
         </a>
 
-        <a href="/eligibility" class="card text-center group no-underline hover:no-underline">
-          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-blue-700 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Eligibility Guides</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">Learn what you qualify for</p>
+        <!-- Health -->
+        <a href="/directory?category=Health" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">🏥</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Health</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Medi-Cal, clinics, mental health</p>
+        </a>
+
+        <!-- Utilities -->
+        <a href="/directory?category=Utilities" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">💡</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Utilities</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">CARE, FERA, bill assistance</p>
+        </a>
+
+        <!-- Transit -->
+        <a href="/directory?category=Transit" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">🚌</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Transit</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Clipper discounts, paratransit</p>
+        </a>
+
+        <!-- Education -->
+        <a href="/directory?category=Education" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">📚</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Education</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Job training, college programs</p>
+        </a>
+
+        <!-- Legal -->
+        <a href="/directory?category=Legal" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow">
+          <div class="text-4xl mb-3" aria-hidden="true">⚖️</div>
+          <h3 class="text-base font-semibold text-neutral-900 dark:text-white group-hover:text-primary-700 dark:group-hover:text-primary-400">Legal</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Free legal aid, immigration help</p>
+        </a>
+
+        <!-- View All -->
+        <a href="/directory" class="card text-center group no-underline hover:no-underline hover:shadow-lg transition-shadow bg-primary-50 dark:bg-primary-900/30 border-primary-200 dark:border-primary-800">
+          <div class="text-4xl mb-3" aria-hidden="true">📋</div>
+          <h3 class="text-base font-semibold text-primary-700 dark:text-primary-400 group-hover:text-primary-800 dark:group-hover:text-primary-300">View All</h3>
+          <p class="text-xs text-primary-600 dark:text-primary-400 mt-1">Browse full directory</p>
+        </a>
+      </div>
+
+      <!-- Quick Links Row -->
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/eligibility" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors">
+          <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Eligibility Guides
+        </a>
+        <a href="/directory?group=seniors" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors">
+          <span aria-hidden="true">👵</span>
+          Seniors (60+)
+        </a>
+        <a href="/directory?group=veterans" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors">
+          <span aria-hidden="true">🎖️</span>
+          Veterans
+        </a>
+        <a href="/directory?group=families" class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-600 no-underline transition-colors">
+          <span aria-hidden="true">👨‍👩‍👧</span>
+          Families
         </a>
       </div>
     </div>

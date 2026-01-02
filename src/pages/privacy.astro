@@ -58,18 +58,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
 
           <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Smart Assistant
+            AI-Powered Search
           </h2>
           <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            The Smart Assistant feature uses Azure OpenAI to help you find programs. When you use it:
+            Bay Navigator includes an optional AI-powered search feature that helps you find programs using natural language queries (e.g., "I'm a senior who needs help with utility bills"). Here's how it works:
           </p>
           <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
-            <li>Your questions are sent to our Azure Function to process your request</li>
-            <li>We do not store your conversation history on our servers</li>
-            <li>Conversations are not linked to any personal identifier</li>
-            <li>Azure OpenAI processes the request and responses are returned directly to you</li>
-            <li>Microsoft Azure processes data in accordance with their privacy policies</li>
+            <li><strong>When AI is used:</strong> Complex or natural language queries are sent to our Azure Function for processing. Simple keyword searches (like "food" or "healthcare") use local fuzzy search and never contact any server.</li>
+            <li><strong>Offline mode:</strong> When you're offline, AI search is automatically disabled. All searches use local fuzzy matching instead—no failed requests, no errors.</li>
+            <li><strong>No storage:</strong> We do not store your search queries on our servers. Queries are processed and immediately discarded.</li>
+            <li><strong>No identifiers:</strong> Searches are not linked to any personal identifier, account, or session.</li>
+            <li><strong>Third-party processing:</strong> AI queries are processed by Azure OpenAI. Microsoft Azure processes data in accordance with their privacy policies.</li>
           </ul>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+            <strong>To avoid AI entirely:</strong> Use simple keyword searches, or use Bay Navigator offline. When offline, all data is served from your device's cache and no network requests are made.
+          </p>
 
           <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
             Hosting and Infrastructure

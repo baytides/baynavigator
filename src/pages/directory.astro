@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import SearchBar from '../components/SearchBar.astro';
+import CategoryFilter from '../components/CategoryFilter.astro';
+import LocationFilter from '../components/LocationFilter.astro';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Load groups data
+const groupsPath = path.join(process.cwd(), 'src/data/groups.yml');
+const groupsData = yaml.load(fs.readFileSync(groupsPath, 'utf-8')) as {
+  groups: Array<{ id: string; name: string; icon: string; description: string }>;
+  categories: Array<{ id: string; name: string; icon: string }>;
+};
+
+// Load all program YAML files
+const dataDir = path.join(process.cwd(), 'src/data');
+const programFiles = [
+  'food.yml',
+  'health.yml',
+  'housing.yml',
+  'utilities.yml',
+  'transportation.yml',
+  'education.yml',
+  'legal.yml',
+  'finance.yml',
+  'technology.yml',
+  'recreation.yml',
+  'community.yml',
+  'federal-benefits.yml',
+];
+
+interface Program {
+  id: string;
+  name: string;
+  category: string;
+  area: string;
+  description: string;
+  what_they_offer?: string;
+  how_to_get_it?: string;
+  phone?: string;
+  link?: string;
+  link_text?: string;
+  groups?: string[];
+  verified_by?: string;
+  verified_date?: string;
+}
+
+let allPrograms: Program[] = [];
+
+for (const file of programFiles) {
+  const filePath = path.join(dataDir, file);
+  if (fs.existsSync(filePath)) {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const programs = yaml.load(content) as Program[];
+    if (Array.isArray(programs)) {
+      allPrograms = [...allPrograms, ...programs];
+    }
+  }
+}
+
+// Get unique categories
+const categories = [...new Set(allPrograms.map(p => p.category))].sort();
+
+// Sort programs by name
+allPrograms.sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<BaseLayout title="Directory" description="Browse the full directory of free and low-cost programs across the San Francisco Bay Area.">
+  <!-- Header Section -->
+  <section class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8">
+    <div class="container-page">
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Program Directory
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-6 max-w-2xl">
+        Browse all {allPrograms.length} programs and services available in the Bay Area.
+      </p>
+      <div class="max-w-2xl">
+        <SearchBar
+          placeholder="Search programs..."
+          size="large"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters & Groups Section -->
+  <section class="bg-neutral-50 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700 py-6">
+    <div class="container-page">
+      <!-- Group Pills -->
+      <div class="mb-6">
+        <h2 class="text-sm font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-3">
+          Filter by Group
+        </h2>
+        <div class="flex flex-wrap gap-2" id="group-filters">
+          {groupsData.groups.slice(0, 12).map((group) => (
+            <button
+              type="button"
+              class="group-filter-btn inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+              data-group={group.id}
+            >
+              <span aria-hidden="true">{group.icon}</span>
+              {group.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Category & Location Filters -->
+      <div class="flex flex-wrap items-center gap-4">
+        <LocationFilter />
+        <CategoryFilter categories={categories} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs List -->
+  <section class="section" id="programs">
+    <div class="container-page">
+      <div class="flex items-center justify-between mb-6">
+        <p id="results-count" class="text-neutral-600 dark:text-neutral-400">
+          {allPrograms.length} programs found
+        </p>
+        <button
+          type="button"
+          id="clear-filters"
+          class="hidden text-sm text-primary-600 dark:text-primary-400 hover:underline"
+        >
+          Clear all filters
+        </button>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="programs-grid">
+        {allPrograms.map((program) => (
+          <ProgramCard
+            id={program.id}
+            name={program.name}
+            category={program.category}
+            area={program.area}
+            description={program.description}
+            whatTheyOffer={program.what_they_offer}
+            howToGetIt={program.how_to_get_it}
+            phone={program.phone}
+            link={program.link}
+            linkText={program.link_text}
+            groups={program.groups}
+            verifiedBy={program.verified_by}
+            verifiedDate={program.verified_date}
+          />
+        ))}
+      </div>
+
+      {allPrograms.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-neutral-600 dark:text-neutral-400">No programs found. Check back soon!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Handle URL parameters for initial filtering
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+    const groupParam = urlParams.get('group');
+
+    // Apply category filter from URL
+    if (categoryParam) {
+      const categorySelect = document.querySelector('[data-category-filter]') as HTMLSelectElement;
+      if (categorySelect) {
+        // Find and select the matching option
+        const options = categorySelect.options;
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value.toLowerCase() === categoryParam.toLowerCase() ||
+              options[i].text.toLowerCase() === categoryParam.toLowerCase()) {
+            categorySelect.selectedIndex = i;
+            categorySelect.dispatchEvent(new Event('change'));
+            break;
+          }
+        }
+      }
+    }
+
+    // Apply group filter from URL
+    if (groupParam) {
+      const groupBtn = document.querySelector(`[data-group="${groupParam}"]`) as HTMLButtonElement;
+      if (groupBtn) {
+        groupBtn.click();
+      }
+    }
+
+    // Group filter button handling
+    const groupBtns = document.querySelectorAll('.group-filter-btn');
+    const clearBtn = document.getElementById('clear-filters');
+    let activeGroup: string | null = groupParam;
+
+    groupBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = (btn as HTMLElement).dataset.group;
+
+        if (activeGroup === group) {
+          // Deselect
+          activeGroup = null;
+          btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600');
+          btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+          clearBtn?.classList.add('hidden');
+
+          // Update URL
+          const url = new URL(window.location.href);
+          url.searchParams.delete('group');
+          window.history.replaceState({}, '', url);
+        } else {
+          // Deselect previous
+          groupBtns.forEach(b => {
+            b.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600');
+            b.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+          });
+
+          // Select new
+          activeGroup = group || null;
+          btn.classList.remove('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+          btn.classList.add('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600');
+          clearBtn?.classList.remove('hidden');
+
+          // Update URL
+          const url = new URL(window.location.href);
+          url.searchParams.set('group', group || '');
+          window.history.replaceState({}, '', url);
+        }
+
+        // Filter programs (dispatch custom event)
+        window.dispatchEvent(new CustomEvent('groupFilterChange', { detail: { group: activeGroup } }));
+      });
+
+      // Apply initial styling if group matches URL param
+      if (groupParam && (btn as HTMLElement).dataset.group === groupParam) {
+        btn.classList.remove('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+        btn.classList.add('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600');
+        clearBtn?.classList.remove('hidden');
+      }
+    });
+
+    // Clear all filters
+    clearBtn?.addEventListener('click', () => {
+      activeGroup = null;
+      groupBtns.forEach(btn => {
+        btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600');
+        btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+      });
+      clearBtn.classList.add('hidden');
+
+      // Clear URL params
+      const url = new URL(window.location.href);
+      url.searchParams.delete('group');
+      url.searchParams.delete('category');
+      window.history.replaceState({}, '', url);
+
+      // Reset filters
+      window.dispatchEvent(new CustomEvent('groupFilterChange', { detail: { group: null } }));
+
+      // Reset category select
+      const categorySelect = document.querySelector('[data-category-filter]') as HTMLSelectElement;
+      if (categorySelect) {
+        categorySelect.selectedIndex = 0;
+        categorySelect.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+</script>

@@ -16,50 +16,70 @@ const sizeClasses = size === 'large'
   : 'py-3 pl-10 pr-10';
 ---
 
-<div class="relative search-container">
-  <label for="search-input" class="sr-only">Search programs</label>
+<div class="search-container">
+  <div class="relative">
+    <label for="search-input" class="sr-only">Search programs</label>
 
-  <!-- Search icon -->
-  <svg
-    class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
-
-  <!-- AI indicator (shows when AI is processing) -->
-  <div id="ai-indicator" class={`hidden absolute top-1/2 -translate-y-1/2 ${size === 'large' ? 'right-4' : 'right-3'}`}>
-    <span class="inline-flex items-center gap-1 text-xs text-primary-600 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/50 px-2 py-0.5 rounded-full">
-      <svg class="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-      <span id="ai-status-text">AI</span>
-    </span>
-  </div>
-
-  <!-- Loading spinner -->
-  <div id="search-loading" class={`hidden absolute top-1/2 -translate-y-1/2 ${size === 'large' ? 'right-4' : 'right-3'}`}>
-    <svg class="w-5 h-5 animate-spin text-primary-600" fill="none" viewBox="0 0 24 24">
-      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    <!-- Search icon -->
+    <svg
+      class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
     </svg>
+
+    <!-- AI indicator (shows when AI is processing) -->
+    <div id="ai-indicator" class={`hidden absolute top-1/2 -translate-y-1/2 ${size === 'large' ? 'right-4' : 'right-3'}`}>
+      <span class="inline-flex items-center gap-1 text-xs text-primary-600 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/50 px-2 py-0.5 rounded-full">
+        <svg class="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <span id="ai-status-text">AI</span>
+      </span>
+    </div>
+
+    <!-- Loading spinner -->
+    <div id="search-loading" class={`hidden absolute top-1/2 -translate-y-1/2 ${size === 'large' ? 'right-4' : 'right-3'}`}>
+      <svg class="w-5 h-5 animate-spin text-primary-600" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+
+    <input
+      type="search"
+      id="search-input"
+      class={`search-input ${sizeClasses}`}
+      placeholder={placeholder}
+      autocomplete="off"
+    />
   </div>
 
-  <input
-    type="search"
-    id="search-input"
-    class={`search-input ${sizeClasses}`}
-    placeholder={placeholder}
-    autocomplete="off"
-  />
+  <!-- AI Toggle Pill -->
+  <div class="relative flex items-center justify-end mt-2 gap-2">
+    <span class="text-xs text-neutral-500 dark:text-neutral-400">Smart search</span>
+    <button
+      type="button"
+      id="ai-toggle"
+      class="ai-toggle-btn"
+      role="switch"
+      aria-checked="true"
+      aria-label="Toggle AI-powered search"
+      title="AI-powered search helps find programs using natural language. Turn off to use keyword search only."
+    >
+      <span class="ai-toggle-track">
+        <span class="ai-toggle-thumb"></span>
+      </span>
+    </button>
+  </div>
 
   <!-- Search hints -->
   <div id="search-hints" class="hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-3 z-50">
@@ -137,12 +157,100 @@ const sizeClasses = size === 'large'
   const aiIndicator = document.getElementById('ai-indicator');
   const aiStatusText = document.getElementById('ai-status-text');
   const searchLoading = document.getElementById('search-loading');
+  const aiToggle = document.getElementById('ai-toggle');
   const hintButtons = document.querySelectorAll('.search-hint-btn');
 
   let activeCategory = 'all';
   let debounceTimer: ReturnType<typeof setTimeout>;
   let isAISearching = false;
   let lastAIQuery = '';
+  let isOffline = !navigator.onLine;
+
+  // Load AI preference from localStorage (defaults to true when online, false when offline)
+  let aiEnabled = !isOffline && localStorage.getItem('aiSearchEnabled') !== 'false';
+
+  // Initialize toggle state
+  function updateToggleState() {
+    if (aiToggle) {
+      // When offline, always show as off and disabled
+      const effectiveEnabled = aiEnabled && !isOffline;
+      aiToggle.setAttribute('aria-checked', String(effectiveEnabled));
+
+      if (isOffline) {
+        aiToggle.classList.add('ai-toggle-disabled');
+      } else {
+        aiToggle.classList.remove('ai-toggle-disabled');
+      }
+
+      if (effectiveEnabled) {
+        aiToggle.classList.add('ai-toggle-on');
+        aiToggle.classList.remove('ai-toggle-off');
+      } else {
+        aiToggle.classList.remove('ai-toggle-on');
+        aiToggle.classList.add('ai-toggle-off');
+      }
+    }
+  }
+  updateToggleState();
+
+  // Show offline notice
+  function showOfflineNotice() {
+    // Remove any existing notice
+    const existingNotice = document.getElementById('offline-notice');
+    if (existingNotice) existingNotice.remove();
+
+    // Create and show notice
+    const notice = document.createElement('div');
+    notice.id = 'offline-notice';
+    notice.className = 'offline-notice';
+    notice.innerHTML = `
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m-2.829-2.829a5 5 0 010-7.07m-2.829 2.829a1 1 0 010 1.414"/>
+      </svg>
+      <span>You're offline. Connect to the internet to use smart search.</span>
+    `;
+    aiToggle?.parentElement?.appendChild(notice);
+
+    // Auto-remove after 3 seconds
+    setTimeout(() => notice.remove(), 3000);
+  }
+
+  // Handle toggle click
+  aiToggle?.addEventListener('click', () => {
+    // If offline, show notice and don't toggle
+    if (isOffline) {
+      showOfflineNotice();
+      return;
+    }
+
+    aiEnabled = !aiEnabled;
+    localStorage.setItem('aiSearchEnabled', String(aiEnabled));
+    updateToggleState();
+
+    // If AI is now disabled, hide any AI indicators
+    if (!aiEnabled) {
+      hideAIIndicator();
+    }
+
+    // Re-run search with new setting
+    if (searchInput?.value) {
+      performSearch();
+    }
+  });
+
+  // Track online/offline status
+  window.addEventListener('online', () => {
+    isOffline = false;
+    // Restore AI enabled state from localStorage when coming back online
+    aiEnabled = localStorage.getItem('aiSearchEnabled') !== 'false';
+    updateToggleState();
+  });
+  window.addEventListener('offline', () => {
+    isOffline = true;
+    // If we were showing AI indicator, hide it
+    hideAIIndicator();
+    updateToggleState();
+  });
 
   // Detect if query needs AI assistance
   function isComplexQuery(query: string): boolean {
@@ -368,8 +476,14 @@ const sizeClasses = size === 'large'
       hideAIIndicator();
     }
 
+    // Skip AI when offline or disabled - always use fuzzy search
+    if (isOffline || !aiEnabled) {
+      performFuzzySearch(query);
+      return;
+    }
+
     if (isComplexQuery(query)) {
-      // Use AI for complex queries
+      // Use AI for complex queries (only when online and enabled)
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => performAISearch(query), 500);
     } else {
@@ -383,8 +497,8 @@ const sizeClasses = size === 'large'
     clearTimeout(debounceTimer);
     const query = searchInput.value.trim();
 
-    // Immediate fuzzy search for simple queries
-    if (!isComplexQuery(query)) {
+    // When offline, AI disabled, or simple queries, use short delay
+    if (isOffline || !aiEnabled || !isComplexQuery(query)) {
       debounceTimer = setTimeout(performSearch, 150);
     } else {
       // Longer delay for AI queries to avoid too many API calls
@@ -440,5 +554,58 @@ const sizeClasses = size === 'large'
 
   .search-hint-btn.ai-hint:hover {
     @apply bg-primary-50 dark:bg-primary-900/50 border-primary-300 dark:border-primary-600 text-primary-700 dark:text-primary-300;
+  }
+
+  /* AI Toggle Pill Styles */
+  .ai-toggle-btn {
+    @apply relative inline-flex items-center cursor-pointer;
+  }
+
+  .ai-toggle-track {
+    @apply relative w-9 h-5 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors duration-200;
+  }
+
+  .ai-toggle-on .ai-toggle-track {
+    @apply bg-primary-600 dark:bg-primary-500;
+  }
+
+  .ai-toggle-off .ai-toggle-track {
+    @apply bg-neutral-300 dark:bg-neutral-600;
+  }
+
+  .ai-toggle-thumb {
+    @apply absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200;
+  }
+
+  .ai-toggle-on .ai-toggle-thumb {
+    @apply translate-x-4;
+  }
+
+  .ai-toggle-off .ai-toggle-thumb {
+    @apply translate-x-0;
+  }
+
+  .ai-toggle-btn:focus-visible .ai-toggle-track {
+    @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900;
+  }
+
+  .ai-toggle-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .ai-toggle-disabled .ai-toggle-track {
+    @apply bg-neutral-200 dark:bg-neutral-700;
+  }
+
+  .offline-notice {
+    @apply absolute right-0 top-full mt-1 flex items-center gap-1.5 text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2 shadow-sm z-50 whitespace-nowrap;
+    animation: fadeInOut 3s ease-in-out forwards;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-4px); }
+    10% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-4px); }
   }
 </style>
