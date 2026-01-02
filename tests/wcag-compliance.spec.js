@@ -1,17 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-// Helper to expand utility bar on mobile (collapsed by default)
-async function expandUtilityBar(page) {
-  const toggle = page.locator('#utility-bar-toggle');
-  const content = page.locator('#utility-bar-content');
-
-  // Check if content is hidden
-  const isHidden = await content.evaluate(el => el.classList.contains('hidden'));
-  if (isHidden) {
-    await toggle.click();
-    await expect(content).not.toHaveClass(/hidden/);
-  }
-}
+// Note: Utility bar is now hidden on mobile (< 768px) - controls are in bottom nav and sidebar
 
 test.describe('WCAG 2.2 AAA Compliance Verification', () => {
   test('back-to-top button meets WCAG requirements (mobile)', async ({ page }) => {
@@ -39,34 +28,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
     await expect(svg).toBeVisible();
   });
 
-  test('utility bar controls are accessible (mobile)', async ({ page }) => {
-    // Utility bar is only visible on mobile/tablet
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    // Theme select should be visible on mobile after expanding
-    const themeSelect = page.locator('#theme-select');
-    await expect(themeSelect).toBeVisible();
-    const themeBox = await themeSelect.boundingBox();
-    // Controls are now 32px (compact layout)
-    expect(Math.round(themeBox.height)).toBeGreaterThanOrEqual(32);
-
-    // All visible utility buttons (skip hidden ones like install button when PWA not available)
-    const buttons = page.locator('.utility-btn:visible');
-    const buttonCount = await buttons.count();
-    for (let i = 0; i < buttonCount; i++) {
-      const btn = buttons.nth(i);
-      const box = await btn.boundingBox();
-      // Compact layout uses 32px height
-      expect(Math.round(box.height)).toBeGreaterThanOrEqual(32);
-
-      // WCAG 4.1.2: Has aria-label
-      const ariaLabel = await btn.getAttribute('aria-label');
-      expect(ariaLabel).toBeTruthy();
-    }
-  });
-
   test('sidebar controls are accessible (desktop)', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
@@ -82,37 +43,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
     // Check it has proper accessibility attributes
     await expect(themeToggle).toHaveAttribute('type', 'button');
     await expect(themeToggle).toHaveAttribute('aria-label', 'Toggle dark mode');
-
-    // Spacing toggle button in sidebar
-    const spacingToggle = page.locator('#sidebar-spacing-toggle');
-    await expect(spacingToggle).toBeVisible();
-    await expect(spacingToggle).toHaveAttribute('type', 'button');
-    await expect(spacingToggle).toHaveAttribute('aria-label', 'Toggle enhanced text spacing');
-  });
-
-  test('all interactive elements have focus indicators (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    // Test theme select focus
-    const themeSelect = page.locator('#theme-select');
-    await themeSelect.focus();
-
-    const focusStyle = await themeSelect.evaluate((el) => {
-      const style = window.getComputedStyle(el);
-      return {
-        outline: style.outline,
-        outlineWidth: style.outlineWidth,
-        boxShadow: style.boxShadow
-      };
-    });
-
-    // Should have either outline or box-shadow for focus
-    const hasFocusIndicator =
-      focusStyle.outlineWidth !== '0px' ||
-      focusStyle.boxShadow !== 'none';
-    expect(hasFocusIndicator).toBeTruthy();
   });
 
   test('all interactive elements have focus indicators (desktop sidebar)', async ({ page }) => {
@@ -135,65 +65,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
       navFocusStyle.outlineWidth !== '0px' ||
       navFocusStyle.boxShadow !== 'none';
     expect(hasNavFocus).toBeTruthy();
-  });
-
-  test('color contrast meets WCAG AAA (7:1) - mobile utility bar', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-
-    // Test utility bar background contrast
-    const utilityBar = page.locator('.utility-bar');
-    const utilityBarStyles = await utilityBar.evaluate((el) => {
-      const style = window.getComputedStyle(el);
-      return {
-        background: style.background,
-        color: style.color
-      };
-    });
-
-    // Utility bar should have visible background
-    expect(utilityBarStyles.background).toBeTruthy();
-
-    // Test that text is readable
-    const utilityLabel = page.locator('.utility-label').first();
-    if (await utilityLabel.count() > 0) {
-      const labelStyles = await utilityLabel.evaluate((el) => {
-        const style = window.getComputedStyle(el);
-        return {
-          color: style.color,
-          fontSize: style.fontSize
-        };
-      });
-
-      // Should have defined color
-      expect(labelStyles.color).toBeTruthy();
-      expect(labelStyles.color).not.toBe('rgba(0, 0, 0, 0)');
-    }
-  });
-
-  test('dark mode maintains WCAG AAA contrast (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    // Set dark mode via utility bar (visible on mobile)
-    const themeSelect = page.locator('#theme-select');
-    await themeSelect.selectOption('dark');
-
-    // Check body has dark theme
-    const body = page.locator('body');
-    await expect(body).toHaveAttribute('data-theme', 'dark');
-
-    // Test utility bar in dark mode
-    const utilityBar = page.locator('.utility-bar');
-    const utilityStyles = await utilityBar.evaluate((el) => {
-      const style = window.getComputedStyle(el);
-      return {
-        background: style.background
-      };
-    });
-
-    expect(utilityStyles.background).toBeTruthy();
   });
 
   test('dark mode maintains WCAG AAA contrast (desktop sidebar)', async ({ page }) => {
@@ -220,23 +91,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
     expect(sidebarStyles.background).toBeTruthy();
   });
 
-  test('keyboard navigation works for all controls (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    // Theme select should be focusable and visible after expanding
-    const themeSelect = page.locator('#theme-select');
-    await expect(themeSelect).toBeVisible();
-    await themeSelect.focus();
-    await expect(themeSelect).toBeFocused();
-
-    // Spacing toggle should be focusable
-    const spacingToggle = page.locator('#spacing-toggle');
-    await spacingToggle.focus();
-    await expect(spacingToggle).toBeFocused();
-  });
-
   test('keyboard navigation works for sidebar controls (desktop)', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
@@ -246,11 +100,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
     await expect(themeToggle).toBeVisible();
     await themeToggle.focus();
     await expect(themeToggle).toBeFocused();
-
-    // Sidebar spacing toggle should be focusable
-    const spacingToggle = page.locator('#sidebar-spacing-toggle');
-    await spacingToggle.focus();
-    await expect(spacingToggle).toBeFocused();
   });
 
   test('reduced motion preference is respected', async ({ page }) => {
@@ -266,39 +115,6 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
 
     // Verify the back-to-top.html includes prefers-reduced-motion check
     // (this is tested by code inspection - the actual file has this check at line 100)
-  });
-
-  test('content wrapper maintains readability in dark mode (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/privacy.html');
-    await expandUtilityBar(page);
-
-    // Set dark mode via utility bar (visible on mobile)
-    const themeSelect = page.locator('#theme-select');
-    await themeSelect.selectOption('dark');
-
-    // Check content wrapper
-    const contentWrapper = page.locator('.content-wrapper');
-    await expect(contentWrapper).toBeVisible();
-
-    // Check heading color
-    const h1 = contentWrapper.locator('h1').first();
-    const h1Color = await h1.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-
-    // Should not be black (which would be invisible on dark background)
-    expect(h1Color).not.toBe('rgb(0, 0, 0)');
-    expect(h1Color).toBeTruthy();
-
-    // Check paragraph color
-    const p = contentWrapper.locator('p').first();
-    const pColor = await p.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-
-    expect(pColor).not.toBe('rgb(0, 0, 0)');
-    expect(pColor).toBeTruthy();
   });
 
   test('content wrapper maintains readability in dark mode (desktop)', async ({ page }) => {
@@ -326,31 +142,23 @@ test.describe('WCAG 2.2 AAA Compliance Verification', () => {
     expect(h1Color).toBeTruthy();
   });
 
-  test('mobile: no overlapping touch targets', async ({ page }) => {
+  test('mobile bottom nav meets target size requirements', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/');
 
-    // Get position of utility bar
-    const utilityBar = page.locator('#utility-bar');
-    const utilityBox = await utilityBar.boundingBox();
+    const bottomNav = page.locator('.mobile-bottom-nav');
+    await expect(bottomNav).toBeVisible();
 
-    // Scroll to show back-to-top button
-    await page.evaluate(() => window.scrollTo(0, 500));
-    await page.waitForTimeout(500);
+    // Check nav items have adequate touch target size
+    const navButtons = page.locator('.mobile-bottom-nav a, .mobile-bottom-nav button');
+    const buttonCount = await navButtons.count();
 
-    const backToTop = page.locator('#back-to-top');
-    const backToTopBox = await backToTop.boundingBox();
-
-    // They should not overlap
-    // Utility bar is at top, back-to-top is at bottom right
-    const overlap = !(
-      utilityBox.y + utilityBox.height < backToTopBox.y ||
-      backToTopBox.y + backToTopBox.height < utilityBox.y ||
-      utilityBox.x + utilityBox.width < backToTopBox.x ||
-      backToTopBox.x + backToTopBox.width < utilityBox.x
-    );
-
-    expect(overlap).toBeFalsy();
+    for (let i = 0; i < buttonCount; i++) {
+      const btn = navButtons.nth(i);
+      const box = await btn.boundingBox();
+      // WCAG AA requires 24x24, AAA requires 44x44
+      expect(box.height).toBeGreaterThanOrEqual(44);
+    }
   });
 
   test('footer links meet WCAG 2.5.5 target size', async ({ page }) => {

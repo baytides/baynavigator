@@ -1,89 +1,69 @@
 const { test, expect } = require('@playwright/test');
 
-// Helper to expand utility bar on mobile (collapsed by default)
-async function expandUtilityBar(page) {
-  const toggle = page.locator('#utility-bar-toggle');
-  const content = page.locator('#utility-bar-content');
+// Note: Utility bar is now hidden on mobile (< 768px) - controls are in bottom nav and sidebar
+// These tests focus on desktop behavior where utility bar is visible (768px-1023px)
+// and sidebar tests for larger screens
 
-  // Check if content is hidden
-  const isHidden = await content.evaluate(el => el.classList.contains('hidden'));
-  if (isHidden) {
-    await toggle.click();
-    await expect(content).not.toHaveClass(/hidden/);
-  }
-}
+test.describe('Utility Bar (Tablet - 768px to 1023px)', () => {
+  // Utility bar is only visible in tablet range (768-1023px)
+  // On mobile (<768px) it's hidden, on desktop (1024px+) sidebar is used
 
-test.describe('Utility Bar (Mobile)', () => {
-  test.beforeEach(async ({ page }) => {
-    // Set mobile viewport - utility bar is hidden on desktop (controls in sidebar)
+  test('utility bar is hidden on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    // Use ?no-step=1 to skip the onboarding wizard
     await page.goto('/?no-step=1');
-    // Expand utility bar (collapsed by default on mobile)
-    await expandUtilityBar(page);
-  });
 
-  test('utility bar is visible on mobile', async ({ page }) => {
-    // Check utility bar is visible
     const utilityBar = page.locator('#utility-bar');
-    await expect(utilityBar).toBeVisible();
-
-    // Utility bar content should be visible after expanding
-    const content = page.locator('#utility-bar-content');
-    await expect(content).toBeVisible();
+    await expect(utilityBar).not.toBeVisible();
   });
 
-  test('theme selector works on mobile', async ({ page }) => {
-    const themeSelect = page.locator('#theme-select');
+  test('sidebar appears on desktop instead of utility bar', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/?no-step=1');
 
-    // Check theme select is visible
-    await expect(themeSelect).toBeVisible();
+    // Utility bar should be hidden on desktop
+    const utilityBar = page.locator('#utility-bar');
+    await expect(utilityBar).not.toBeVisible();
 
-    // Check options exist
-    await expect(themeSelect).toHaveValue('auto');
+    // Sidebar should be visible instead
+    const sidebar = page.locator('#desktop-sidebar');
+    await expect(sidebar).toBeVisible();
 
-    // Change to dark mode
-    await themeSelect.selectOption('dark');
-    await expect(page.locator('body')).toHaveAttribute('data-theme', 'dark');
-
-    // Change to light mode
-    await themeSelect.selectOption('light');
-    await expect(page.locator('body')).toHaveAttribute('data-theme', 'light');
+    // Sidebar theme toggle should work
+    const themeToggle = page.locator('#sidebar-theme-toggle');
+    await expect(themeToggle).toBeVisible();
   });
 
-  test('utility buttons are accessible on mobile', async ({ page }) => {
-    // Check spacing toggle button
-    const spacingToggle = page.locator('#spacing-toggle');
-    await expect(spacingToggle).toBeVisible();
-    await expect(spacingToggle).toHaveAttribute('aria-label', /toggle enhanced text spacing/i);
+  test('sidebar theme toggle works on desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/?no-step=1');
 
-    // Check share button
-    const shareBtn = page.locator('#share-btn');
-    await expect(shareBtn).toBeVisible();
-    await expect(shareBtn).toHaveAttribute('aria-label', /share/i);
+    const body = page.locator('body');
+    const themeToggle = page.locator('#sidebar-theme-toggle');
+    const themeLabel = page.locator('#theme-label');
+
+    // Initial state should be System/Auto
+    await expect(themeLabel).toHaveText('System');
+
+    // Click to cycle to Light
+    await themeToggle.click();
+    await expect(themeLabel).toHaveText('Light');
+    await expect(body).toHaveAttribute('data-theme', 'light');
+
+    // Click to cycle to Dark
+    await themeToggle.click();
+    await expect(themeLabel).toHaveText('Dark');
+    await expect(body).toHaveAttribute('data-theme', 'dark');
   });
 
-  test('keyboard navigation works on mobile', async ({ page }) => {
-    // Focus on the theme select directly
-    const themeSelect = page.locator('#theme-select');
-    await themeSelect.focus();
-    await expect(themeSelect).toBeFocused();
+  test('theme preferences persist after page reload', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/?no-step=1');
 
-    // Tab to next control (spacing toggle)
-    await page.keyboard.press('Tab');
-    const spacingToggle = page.locator('#spacing-toggle');
-    await expect(spacingToggle).toBeFocused();
-
-    // Tab to next control (share button)
-    await page.keyboard.press('Tab');
-    const shareBtn = page.locator('#share-btn');
-    await expect(shareBtn).toBeFocused();
-  });
-
-  test('preferences persist after page reload on mobile', async ({ page }) => {
-    // Set dark theme
-    const themeSelect = page.locator('#theme-select');
-    await themeSelect.selectOption('dark');
+    // Set dark theme via sidebar
+    const themeToggle = page.locator('#sidebar-theme-toggle');
+    // Click twice: auto -> light -> dark
+    await themeToggle.click();
+    await themeToggle.click();
 
     // Wait for localStorage to be set
     await page.waitForTimeout(100);

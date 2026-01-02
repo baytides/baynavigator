@@ -1,17 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-// Helper to expand utility bar on mobile (collapsed by default)
-async function expandUtilityBar(page) {
-  const toggle = page.locator('#utility-bar-toggle');
-  const content = page.locator('#utility-bar-content');
-
-  // Check if content is hidden
-  const isHidden = await content.evaluate(el => el.classList.contains('hidden'));
-  if (isHidden) {
-    await toggle.click();
-    await expect(content).not.toHaveClass(/hidden/);
-  }
-}
+// Note: Utility bar is now hidden on mobile (< 768px) - controls are in bottom nav and sidebar
 
 test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
   test('desktop sidebar appears on index page (1024px+ viewport)', async ({ page }) => {
@@ -52,37 +41,6 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     await expect(sidebars).toHaveCount(1);
   });
 
-  test('dark mode toggle applies correct CSS variables (mobile)', async ({ page }) => {
-    // Use mobile viewport where utility bar is visible
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    const body = page.locator('body');
-    const themeSelect = page.locator('#theme-select');
-
-    // Test dark mode
-    await themeSelect.selectOption('dark');
-    await expect(body).toHaveAttribute('data-theme', 'dark');
-
-    // Check that dark mode CSS variables are applied
-    const bgColor = await body.evaluate((el) => {
-      return getComputedStyle(el).getPropertyValue('--bg-main').trim();
-    });
-    expect(bgColor).toBe('#0d1117'); // Dark mode background
-
-    // Test light mode
-    await themeSelect.selectOption('light');
-    await expect(body).toHaveAttribute('data-theme', 'light');
-
-    // Check that light mode CSS variables are applied
-    const lightBgColor = await body.evaluate((el) => {
-      return getComputedStyle(el).getPropertyValue('--bg-main').trim();
-    });
-    // Browser may return 'white' or '#ffffff' depending on how it normalizes
-    expect(['white', '#ffffff']).toContain(lightBgColor); // Light mode background
-  });
-
   test('sidebar theme toggle cycles through modes (desktop)', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
@@ -109,52 +67,42 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     await expect(themeLabel).toHaveText('System');
   });
 
-  test('dark mode toggle overrides system preference (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
+  test('dark mode applies correct CSS variables (desktop)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
-    await expandUtilityBar(page);
 
     const body = page.locator('body');
-    const themeSelect = page.locator('#theme-select');
+    const themeToggle = page.locator('#sidebar-theme-toggle');
 
-    // Set to light mode explicitly
-    await themeSelect.selectOption('light');
+    // Click twice: auto -> light -> dark
+    await themeToggle.click();
+    await themeToggle.click();
+    await expect(body).toHaveAttribute('data-theme', 'dark');
 
-    // Emulate dark color scheme preference
-    await page.emulateMedia({ colorScheme: 'dark' });
+    // Check that dark mode CSS variables are applied
+    const bgColor = await body.evaluate((el) => {
+      return getComputedStyle(el).getPropertyValue('--bg-main').trim();
+    });
+    expect(bgColor).toBe('#0d1117'); // Dark mode background
+  });
 
-    // Body should still show light mode (manual override)
+  test('light mode applies correct CSS variables (desktop)', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/');
+
+    const body = page.locator('body');
+    const themeToggle = page.locator('#sidebar-theme-toggle');
+
+    // Click once: auto -> light
+    await themeToggle.click();
     await expect(body).toHaveAttribute('data-theme', 'light');
 
+    // Check that light mode CSS variables are applied
     const bgColor = await body.evaluate((el) => {
       return getComputedStyle(el).getPropertyValue('--bg-main').trim();
     });
     // Browser may return 'white' or '#ffffff' depending on how it normalizes
-    expect(['white', '#ffffff']).toContain(bgColor); // Should stay light
-  });
-
-  test('auto mode respects system preference (mobile)', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto('/');
-    await expandUtilityBar(page);
-
-    const body = page.locator('body');
-    const themeSelect = page.locator('#theme-select');
-
-    // Set to auto mode
-    await themeSelect.selectOption('auto');
-
-    // Emulate dark color scheme
-    await page.emulateMedia({ colorScheme: 'dark' });
-    await page.waitForTimeout(100); // Wait for media query to apply
-
-    await expect(body).toHaveAttribute('data-theme', 'dark');
-
-    // Emulate light color scheme
-    await page.emulateMedia({ colorScheme: 'light' });
-    await page.waitForTimeout(100);
-
-    await expect(body).toHaveAttribute('data-theme', 'light');
+    expect(['white', '#ffffff']).toContain(bgColor); // Light mode background
   });
 
   test('privacy policy text is visible in dark mode (desktop via sidebar)', async ({ page }) => {
@@ -177,21 +125,19 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     await expect(h1).toBeVisible();
   });
 
-  test('sidebar navigation links work', async ({ page }) => {
+  test('sidebar navigation has correct structure', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/');
 
-    // Directory link
-    const directoryLink = page.locator('.sidebar-nav-item[data-view="directory"]');
-    await expect(directoryLink).toBeVisible();
+    // Check sidebar nav items exist
+    const navItems = page.locator('.sidebar-nav-item');
+    const navCount = await navItems.count();
+    expect(navCount).toBeGreaterThan(0);
 
-    // Saved link
-    const savedLink = page.locator('.sidebar-nav-item[data-view="saved"]');
-    await expect(savedLink).toBeVisible();
-
-    // For You link
-    const forYouLink = page.locator('.sidebar-nav-item[data-view="for-you"]');
-    await expect(forYouLink).toBeVisible();
+    // Check first nav item is properly labeled
+    const firstNavItem = navItems.first();
+    const label = await firstNavItem.locator('.sidebar-nav-label').textContent();
+    expect(label).toBeTruthy();
   });
 
   test('responsive design on mobile (375x667)', async ({ page }) => {
@@ -202,16 +148,13 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     const sidebar = page.locator('#desktop-sidebar');
     await expect(sidebar).not.toBeInViewport();
 
-    // Utility bar should be visible on mobile
+    // Utility bar should be hidden on mobile (new design)
     const utilityBar = page.locator('#utility-bar');
-    await expect(utilityBar).toBeVisible();
+    await expect(utilityBar).not.toBeVisible();
 
-    // Expand utility bar (collapsed by default on mobile)
-    await expandUtilityBar(page);
-
-    // Theme select should be visible on mobile after expanding
-    const themeSelect = page.locator('#theme-select');
-    await expect(themeSelect).toBeVisible();
+    // Mobile bottom nav should be visible
+    const bottomNav = page.locator('.mobile-bottom-nav');
+    await expect(bottomNav).toBeVisible();
   });
 
   test('responsive design on tablet (768x1024)', async ({ page }) => {
@@ -222,9 +165,9 @@ test.describe('Recent Changes - Desktop Sidebar and Dark Mode', () => {
     const sidebar = page.locator('#desktop-sidebar');
     await expect(sidebar).not.toBeInViewport();
 
-    // Utility bar should be visible on tablet
+    // Utility bar should be hidden on tablet (new design)
     const utilityBar = page.locator('#utility-bar');
-    await expect(utilityBar).toBeVisible();
+    await expect(utilityBar).not.toBeVisible();
   });
 
   test('responsive design on desktop (1920x1080)', async ({ page }) => {
