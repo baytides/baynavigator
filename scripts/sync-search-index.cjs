@@ -75,8 +75,8 @@ function transformProgram(program) {
     website: program.link || '',
     phone: program.phone || null,
     requirements: program.requirements || null,
-    source: program.source || 'local', // 'federal' for USAGov programs
-    agency: program.agency || null, // Federal agency name if applicable
+    // Note: source and agency fields exist in data but not yet in Azure index
+    // These would need the index schema updated to include them
   };
 }
 
