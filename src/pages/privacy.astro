@@ -71,14 +71,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li><strong>Third-party processing:</strong> AI queries are processed by Azure OpenAI. Microsoft Azure processes data in accordance with their privacy policies.</li>
           </ul>
           <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            <strong>To avoid AI entirely:</strong> Use simple keyword searches, or use Bay Navigator offline. When offline, all data is served from your device's cache and no network requests are made.
+            <strong>To avoid AI entirely:</strong> Switch the "Smart Search" toggle to off, or use Bay Navigator offline. When offline, all data is served from your device's cache and no network requests are made.
           </p>
 
           <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
             Hosting and Infrastructure
           </h2>
           <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            Bay Navigator is hosted on Microsoft Azure Static Web Apps. Standard server logs may include:
+            Bay Navigator is hosted on Microsoft Azure Static Web Apps and uses Cloudflare for content delivery and security. Standard server logs may include:
           </p>
           <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
             <li>IP addresses (for security and rate limiting)</li>
@@ -86,7 +86,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li>Pages visited and timestamps</li>
           </ul>
           <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            These logs are used for security purposes only and are not used to identify or track individuals. Logs are retained according to Microsoft Azure's standard retention policies.
+            These logs are used for security purposes only and are not used to identify or track individuals. Logs are retained according to Microsoft Azure and Cloudflare's standard retention policies.
+          </p>
+
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
+            Analytics
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+            We use a self-hosted instance of Plausible Analytics to collect de-identified, aggregate usage data. This helps us understand how Bay Navigator is used without tracking individuals. We collect only:
+          </p>
+          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
+            <li>Country accessed from</li>
+            <li>Device type (desktop, mobile, tablet)</li>
+            <li>Operating system and version</li>
+            <li>Browser type and version</li>
+          </ul>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+            Plausible does not use cookies, does not collect personal data, and does not track users across sites. All data is aggregated and cannot be used to identify individuals.
           </p>
 
           <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
