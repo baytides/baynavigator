@@ -60,6 +60,9 @@ playwright-report/
 # Generated data
 _data/git.yml
 
+# Data exports (for review before import)
+data-exports/
+
 # Tool history
 .aider.chat.history.md
 baynavigator.code-workspace
