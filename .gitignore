@@ -114,3 +114,4 @@ apps/windows/flutter/ephemeral/
 *.keystore
 key.properties
 ExportOptions.plist
+scripts/filter-bay-area-schools.cjs
