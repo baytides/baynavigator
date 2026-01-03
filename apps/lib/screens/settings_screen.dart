@@ -11,6 +11,7 @@ import '../providers/theme_provider.dart';
 import '../providers/settings_provider.dart';
 import '../providers/user_prefs_provider.dart';
 import '../config/theme.dart';
+import 'profiles_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -209,7 +210,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
 
-            // Profile Section
+            // Profiles Section (Family profiles with saved lists)
+            _buildSection(
+              context,
+              title: 'Family Profiles',
+              children: [
+                _buildButton(
+                  context,
+                  icon: '👥',
+                  label: 'Manage Profiles',
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilesScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+
+            // Your Preferences Section
             Consumer2<UserPrefsProvider, ProgramsProvider>(
               builder: (context, userPrefs, programsProvider, child) {
                 final groups = userPrefs.selectedGroups;
@@ -228,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 return _buildSection(
                   context,
-                  title: 'Your Profile',
+                  title: 'Your Preferences',
                   children: [
                     if (userPrefs.hasPreferences) ...[
                       if (groupNames.isNotEmpty)
@@ -242,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildButton(
                       context,
                       icon: '✏️',
-                      label: userPrefs.hasPreferences ? 'Edit Profile' : 'Set Up Profile',
+                      label: userPrefs.hasPreferences ? 'Edit Preferences' : 'Set Up Preferences',
                       onTap: () {
                         HapticFeedback.lightImpact();
                         userPrefs.reopenOnboarding();
@@ -252,16 +275,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       _buildDivider(context),
                       _buildButton(
                         context,
-                        label: 'Clear Profile',
+                        label: 'Clear Preferences',
                         isDanger: true,
                         onTap: () async {
                           HapticFeedback.lightImpact();
                           final confirmed = await showDialog<bool>(
                             context: context,
                             builder: (dialogContext) => AlertDialog(
-                              title: const Text('Clear Profile'),
+                              title: const Text('Clear Preferences'),
                               content: const Text(
-                                'This will remove your profile preferences. You can set them up again anytime.',
+                                'This will remove your preferences. You can set them up again anytime.',
                               ),
                               actions: [
                                 TextButton(
@@ -283,7 +306,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             await userPrefs.clearPreferences();
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Profile cleared')),
+                                const SnackBar(content: Text('Preferences cleared')),
                               );
                             }
                           }
