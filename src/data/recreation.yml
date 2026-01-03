@@ -2455,793 +2455,860 @@
   verified_by: San Mateo County
   verified_date: '2026-01-03'
 - id: imls-aircraft-carrier-hornet-foundation
-  name: AIRCRAFT CARRIER HORNET FOUNDATION
+  name: Aircraft Carrier Hornet Foundation
   category: Museums
   area: Bay Area
-  city: ALAMEDA
+  city: Alameda
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602451'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 707 W HORNET AVE
-  map_link: https://www.google.com/maps?q=37.77442,-122.28445
+  address: 707 W Hornet Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=707%20W%20Hornet%20Ave%2C%20Alameda%2C%20CA
   phone: (510) 521-8448
 - id: imls-alexander-f-morrison-planetarium
-  name: ALEXANDER F. MORRISON PLANETARIUM
+  name: Alexander F. Morrison Planetarium
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500243'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 55 MUSIC CONCOURSE DRIVE
-  map_link: https://www.google.com/maps?q=37.77025,-122.46932
+  address: 55 Music Concourse Drive
+  map_link: https://www.google.com/maps/search/?api=1&query=55%20Music%20Concourse%20Drive%2C%20San%20Francisco%2C%20CA
   phone: (415) 750-7127
 - id: imls-american-bookbinders-museum
-  name: AMERICAN BOOKBINDERS MUSEUM
+  name: American Bookbinders Museum
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601022'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 856 FOLSOM ST
-  map_link: https://www.google.com/maps?q=37.78098,-122.40262
+  address: 856 Folsom St
+  map_link: https://www.google.com/maps/search/?api=1&query=856%20Folsom%20St%2C%20San%20Francisco%2C%20CA
   phone: (415) 824-9754
 - id: imls-anderson-art-collection
-  name: ANDERSON ART COLLECTION
+  name: Anderson Art Collection
   category: Museums
   area: Bay Area
-  city: MENLO PARK
+  city: Menlo Park
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600569'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 2440 SAND HILL RD
-  map_link: https://www.google.com/maps?q=37.42185,-122.2006
+  address: 2440 Sand Hill Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=2440%20Sand%20Hill%20Rd%2C%20Menlo%20Park%2C%20CA
   phone: (650) 854-5160
 - id: imls-art-works-downtown
-  name: ART WORKS DOWNTOWN
+  name: Art Works Downtown
   category: Museums
   area: Bay Area
-  city: SAN RAFAEL
+  city: San Rafael
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601764'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1337 4TH ST
-  map_link: https://www.google.com/maps?q=37.97333,-122.53102
+  address: 1337 4th St
+  map_link: https://www.google.com/maps/search/?api=1&query=1337%204th%20St%2C%20San%20Rafael%2C%20CA
   phone: (415) 451-8119
 - id: imls-arts-benicia
-  name: ARTS BENICIA
+  name: Arts Benicia
   category: Museums
   area: Bay Area
-  city: BENICIA
+  city: Benicia
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601693'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: '991 TYLER STREET #114'
-  map_link: https://www.google.com/maps?q=38.04516,-122.13687
+  address: '991 Tyler Street #114'
+  map_link: https://www.google.com/maps/search/?api=1&query=991%20Tyler%20Street%20%23114%2C%20Benicia%2C%20CA
   phone: (707) 747-0131
 - id: imls-bolinas-museum
-  name: BOLINAS MUSEUM
+  name: Bolinas Museum
   category: Museums
   area: Bay Area
-  city: BOLINAS
+  city: Bolinas
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601651'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 48 WHARF RD
-  map_link: https://www.google.com/maps?q=37.90937,-122.70111
+  address: 48 Wharf Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=48%20Wharf%20Rd%2C%20Bolinas%2C%20CA
   phone: (415) 868-0330
 - id: imls-c-e-smith-museum-of-anthropology
-  name: C. E. SMITH MUSEUM OF ANTHROPOLOGY
+  name: C. E. Smith Museum of Anthropology
   category: Museums
   area: Bay Area
-  city: HAYWARD
+  city: Hayward
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600546'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 25800 CARLOS BEE BLVD
-  map_link: https://www.google.com/maps?q=37.65885,-122.06218
+  address: 25800 Carlos Bee Blvd
+  map_link: https://www.google.com/maps/search/?api=1&query=25800%20Carlos%20Bee%20Blvd%2C%20Hayward%2C%20CA
   phone: (510) 885-3104
 - id: imls-charles-m-schulz-museum-and-research-center
-  name: CHARLES M SCHULZ MUSEUM AND RESEARCH CENTER
+  name: Charles M Schulz Museum and Research Center
   category: Museums
   area: Bay Area
-  city: SANTA ROSA
+  city: Santa Rosa
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601783'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 2301 HARDIES LN
-  map_link: https://www.google.com/maps?q=38.46106,-122.73514
+  address: 2301 Hardies Ln
+  map_link: https://www.google.com/maps/search/?api=1&query=2301%20Hardies%20Ln%2C%20Santa%20Rosa%2C%20CA
   phone: (707) 579-4452
 - id: imls-children-s-museum-of-sonoma-county
-  name: CHILDREN'S MUSEUM OF SONOMA COUNTY
+  name: Children's Museum of Sonoma County
   category: Museums
   area: Bay Area
-  city: SANTA ROSA
+  city: Santa Rosa
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600771'
   description: Interactive museum designed for children and families with hands-on exhibits.
-  verified: false
-  address: PO BOX 12323
-  map_link: https://www.google.com/maps?q=38.45793,-122.73062
+  address: Po Box 12323
+  map_link: https://www.google.com/maps/search/?api=1&query=Po%20Box%2012323%2C%20Santa%20Rosa%2C%20CA
   phone: (707) 546-4069
 - id: imls-di-rosa-preserve
-  name: DI ROSA PRESERVE
+  name: Di Rosa Preserve
   category: Museums
   area: Bay Area
-  city: NAPA
+  city: Napa
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602492'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 5200 CARNEROS HWY
-  map_link: https://www.google.com/maps?q=38.25646,-122.35062
+  address: 5200 Carneros Hwy
+  map_link: https://www.google.com/maps/search/?api=1&query=5200%20Carneros%20Hwy%2C%20Napa%2C%20CA
   phone: (707) 226-5991
 - id: imls-dutra-museum-foundation
-  name: DUTRA MUSEUM FOUNDATION
+  name: Dutra Museum Foundation
   category: Museums
   area: Bay Area
-  city: RIO VISTA
+  city: Rio Vista
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601034'
   description: Museum featuring natural history exhibits including geology, biology, and paleontology.
-  verified: false
-  address: 345 ST GERTRUDE AVENUE
-  map_link: https://www.google.com/maps?q=38.154,-121.69586
+  address: 345 St Gertrude Avenue
+  map_link: https://www.google.com/maps/search/?api=1&query=345%20St%20Gertrude%20Avenue%2C%20Rio%20Vista%2C%20CA
   phone: (650) 207-6489
 - id: imls-emeryville-center-for-the-arts
-  name: EMERYVILLE CENTER FOR THE ARTS
+  name: Emeryville Center for the Arts
   category: Museums
   area: Bay Area
-  city: EMERYVILLE
+  city: Emeryville
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601079'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 5710 HOLLIS ST
-  map_link: https://www.google.com/maps?q=37.83948,-122.28911
+  address: 5710 Hollis St
+  map_link: https://www.google.com/maps/search/?api=1&query=5710%20Hollis%20St%2C%20Emeryville%2C%20CA
   phone: (510) 601-0520
 - id: imls-falkirk-cultural-center
-  name: FALKIRK CULTURAL CENTER
+  name: Falkirk Cultural Center
   category: Museums
   area: Bay Area
-  city: SAN RAFAEL
+  city: San Rafael
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600508'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1408 MISSION AVENUE AT E STREET
-  map_link: https://www.google.com/maps?q=37.97262,-122.53204
+  address: 1408 Mission Avenue at E Street
+  map_link: https://www.google.com/maps/search/?api=1&query=1408%20Mission%20Avenue%20at%20E%20Street%2C%20San%20Rafael%2C%20CA
   phone: (415) 485-3328
 - id: imls-gallery-route-one
-  name: GALLERY ROUTE ONE
+  name: Gallery Route One
   category: Museums
   area: Bay Area
-  city: POINT REYES STATION
+  city: Point Reyes Station
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601675'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 11101 CALFIORNIA 1
-  map_link: https://www.google.com/maps?q=38.03375,-122.98412
+  address: 11101 Calfiornia 1
+  map_link: https://www.google.com/maps/search/?api=1&query=11101%20Calfiornia%201%2C%20Point%20Reyes%20Station%2C%20CA
   phone: (415) 663-1347
 - id: imls-gardens-at-heather-farms
-  name: GARDENS AT HEATHER FARMS
+  name: Gardens at Heather Farms
   category: Parks & Open Space
   area: Bay Area
-  city: WALNUT CREEK
+  city: Walnut Creek
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409502150'
   description: Botanical garden or nature center featuring plants and natural habitats.
-  verified: false
-  address: 1540 MARCHBANKS DRIVE
-  map_link: https://www.google.com/maps?q=37.91795,-122.04517
+  address: 1540 Marchbanks Drive
+  map_link: https://www.google.com/maps/search/?api=1&query=1540%20Marchbanks%20Drive%2C%20Walnut%20Creek%2C%20CA
 - id: imls-golden-state-model-railroad-museum
-  name: GOLDEN STATE MODEL RAILROAD MUSEUM
+  name: Golden State Model Railroad Museum
   category: Museums
   area: Bay Area
-  city: RICHMOND
+  city: Richmond
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601673'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 900 DORNAN DR
-  map_link: https://www.google.com/maps?q=37.91467,-122.38598
+  address: 900 Dornan Dr
+  map_link: https://www.google.com/maps/search/?api=1&query=900%20Dornan%20Dr%2C%20Richmond%2C%20CA
   phone: (510) 234-4884
 - id: imls-happy-hollow-park-zoo
-  name: HAPPY HOLLOW PARK & ZOO
+  name: Happy Hollow Park & Zoo
   category: Museums
   area: Bay Area
-  city: SAN JOSE
+  city: San Jose
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500502'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 1300 SENTER ROAD
-  map_link: https://www.google.com/maps?q=37.32384,-121.86386
+  address: 1300 Senter Road
+  map_link: https://www.google.com/maps/search/?api=1&query=1300%20Senter%20Road%2C%20San%20Jose%2C%20CA
   phone: (408) 794-6403
 - id: imls-headlands-center-for-the-arts
-  name: HEADLANDS CENTER FOR THE ARTS
+  name: Headlands Center for the Arts
   category: Museums
   area: Bay Area
-  city: SAUSALITO
+  city: Sausalito
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602361'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 944 SIMMONDS RD
-  map_link: https://www.google.com/maps?q=37.83182,-122.5126
+  address: 944 Simmonds Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=944%20Simmonds%20Rd%2C%20Sausalito%2C%20CA
   phone: (415) 331-2787
 - id: imls-heritage-museum-of-san-francisco
-  name: HERITAGE MUSEUM OF SAN FRANCISCO
+  name: Heritage Museum of San Francisco
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602255'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 608 COMMERCIAL STREET
-  map_link: https://www.google.com/maps?q=37.79415,-122.40437
+  address: 608 Commercial Street
+  map_link: https://www.google.com/maps/search/?api=1&query=608%20Commercial%20Street%2C%20San%20Francisco%2C%20CA
   phone: (415) 399-1124
 - id: imls-historic-ships-memorial-at-pacific-square
-  name: HISTORIC SHIPS MEMORIAL AT PACIFIC SQUARE
+  name: Historic Ships Memorial at Pacific Square
   category: Museums
   area: Bay Area
-  city: VALLEJO
+  city: Vallejo
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602125'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 375 G STREET
-  map_link: https://www.google.com/maps?q=38.09078,-122.25755
+  address: 375 G Street
+  map_link: https://www.google.com/maps/search/?api=1&query=375%20G%20Street%2C%20Vallejo%2C%20CA
   phone: (707) 643-4692
 - id: imls-international-art-museum-of-america
-  name: INTERNATIONAL ART MUSEUM OF AMERICA
+  name: International Art Museum of America
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601631'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 1025 MARKET STREET
-  map_link: https://www.google.com/maps?q=37.78133,-122.4112
+  address: 1025 Market Street
+  map_link: https://www.google.com/maps/search/?api=1&query=1025%20Market%20Street%2C%20San%20Francisco%2C%20CA
   phone: (415) 376-6344
 - id: imls-international-museum-of-women
-  name: INTERNATIONAL MUSEUM OF WOMEN
+  name: International Museum of Women
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601885'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 101 HOWARD ST STE 480
-  map_link: https://www.google.com/maps?q=37.79123,-122.39247
+  address: 101 Howard St Ste 480
+  map_link: https://www.google.com/maps/search/?api=1&query=101%20Howard%20St%20Ste%20480%2C%20San%20Francisco%2C%20CA
   phone: (415) 543-4669
 - id: imls-jack-london-state-historic-park
-  name: JACK LONDON STATE HISTORIC PARK
+  name: Jack London State Historic Park
   category: Parks & Open Space
   area: Bay Area
-  city: GLEN ELLEN
+  city: Glen Ellen
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600344'
   description: Botanical garden or nature center featuring plants and natural habitats.
-  verified: false
-  address: 2400 LONDON RANCH ROAD
-  map_link: https://www.google.com/maps?q=38.35475,-122.54405
+  address: 2400 London Ranch Road
+  map_link: https://www.google.com/maps/search/?api=1&query=2400%20London%20Ranch%20Road%2C%20Glen%20Ellen%2C%20CA
   phone: (707) 938-5216
 - id: imls-kimbookai-children-s-edutainment-museum
-  name: KIMBOOKAI CHILDREN'S EDUTAINMENT MUSEUM
+  name: Kimbookai Children's Edutainment Museum
   category: Museums
   area: Bay Area
-  city: FREMONT
+  city: Fremont
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601857'
   description: Interactive museum designed for children and families with hands-on exhibits.
-  verified: false
-  address: 52 ZACATE PL FREMONT
-  map_link: https://www.google.com/maps?q=37.55569,-122.01733
+  address: 52 Zacate Pl Fremont
+  map_link: https://www.google.com/maps/search/?api=1&query=52%20Zacate%20Pl%20Fremont%2C%20Fremont%2C%20CA
 - id: imls-lamorinda-arts-alliance
-  name: LAMORINDA ARTS ALLIANCE
+  name: Lamorinda Arts Alliance
   category: Museums
   area: Bay Area
-  city: LAFAYETTE
+  city: Lafayette
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601812'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 3506A MOUNT DIABLO BOULEVARD
-  map_link: https://www.google.com/maps?q=37.89227,-122.11742
+  address: 3506a Mount Diablo Boulevard
+  map_link: https://www.google.com/maps/search/?api=1&query=3506a%20Mount%20Diablo%20Boulevard%2C%20Lafayette%2C%20CA
   phone: (925) 376-5407
 - id: imls-lawson-galleries
-  name: LAWSON GALLERIES
+  name: Lawson Galleries
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602395'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 315 POTRERO AVE
-  map_link: https://www.google.com/maps?q=37.76549,-122.40741
+  address: 315 Potrero Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=315%20Potrero%20Ave%2C%20San%20Francisco%2C%20CA
   phone: (415) 703-4400
 - id: imls-livermore-heritage-guild
-  name: LIVERMORE HERITAGE GUILD
+  name: Livermore Heritage Guild
   category: Museums
   area: Bay Area
-  city: LIVERMORE
+  city: Livermore
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600933'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 2155 THIRD STREET
-  map_link: https://www.google.com/maps?q=37.67995,-121.76855
+  address: 2155 Third Street
+  map_link: https://www.google.com/maps/search/?api=1&query=2155%20Third%20Street%2C%20Livermore%2C%20CA
   phone: (925) 449-9927
 - id: imls-marin-womens-hall-of-fame
-  name: MARIN WOMENS HALL OF FAME
+  name: Marin Womens Hall of Fame
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601699'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 940 POWELL STREET
-  map_link: https://www.google.com/maps?q=37.79363,-122.40941
+  address: 940 Powell Street
+  map_link: https://www.google.com/maps/search/?api=1&query=940%20Powell%20Street%2C%20San%20Francisco%2C%20CA
   phone: (415) 397-6886
 - id: imls-maritime-museum-san-francisco
-  name: MARITIME MUSEUM-SAN FRANCISCO
+  name: Maritime Museum-San Francisco
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600232'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 2 MARINA BOULEVARD BUILDING E
-  map_link: https://www.google.com/maps?q=37.80529,-122.4321
+  address: 2 Marina Boulevard Building E
+  map_link: https://www.google.com/maps/search/?api=1&query=2%20Marina%20Boulevard%20Building%20E%2C%20San%20Francisco%2C%20CA
   phone: (415) 561-6662
 - id: imls-markham-arboretum
-  name: MARKHAM ARBORETUM
+  name: Markham Arboretum
   category: Parks & Open Space
   area: Bay Area
-  city: CONCORD
+  city: Concord
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602246'
   description: Botanical garden or nature center featuring plants and natural habitats.
-  verified: false
-  address: 1202 LA VISTA AVE
-  map_link: https://www.google.com/maps?q=37.96346,-122.00434
+  address: 1202 La Vista Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=1202%20La%20Vista%20Ave%2C%20Concord%2C%20CA
   phone: (925) 681-2968
 - id: imls-mexican-museum
-  name: MEXICAN MUSEUM
+  name: Mexican Museum
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600920'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 2 MARINA BOULEVARD BUILDING D
-  map_link: https://www.google.com/maps?q=37.80529,-122.4321
+  address: 2 Marina Boulevard Building D
+  map_link: https://www.google.com/maps/search/?api=1&query=2%20Marina%20Boulevard%20Building%20D%2C%20San%20Francisco%2C%20CA
   phone: (415) 202-9700
 - id: imls-musee-mecanique
-  name: MUSEE MECANIQUE
+  name: Musee Mecanique
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600306'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: PIER 45 AT THE END OF TAYLOR STREET FISHERMANS WHARF
-  map_link: https://www.google.com/maps?q=37.78069,-122.4174
+  address: Pier 45 at the End of Taylor Street Fishermans Wharf
+  map_link: https://www.google.com/maps/search/?api=1&query=Pier%2045%20at%20the%20End%20of%20Taylor%20Street%20Fishermans%20Wharf%2C%20San%20Francisco%2C%20CA
   phone: (415) 346-2000
 - id: imls-museo-italo-americano
-  name: MUSEO ITALO AMERICANO
+  name: Museo Italo Americano
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600280'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 2 MARINA BLVD BUILDING C
-  map_link: https://www.google.com/maps?q=37.80529,-122.4321
+  address: 2 Marina Blvd Building C
+  map_link: https://www.google.com/maps/search/?api=1&query=2%20Marina%20Blvd%20Building%20C%2C%20San%20Francisco%2C%20CA
   phone: (415) 673-2200
 - id: imls-museum-of-performance-design
-  name: MUSEUM OF PERFORMANCE & DESIGN
+  name: Museum of Performance & Design
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601568'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 893 FOLSOM STREET
-  map_link: https://www.google.com/maps?q=37.78101,-122.40228
+  address: 893 Folsom Street
+  map_link: https://www.google.com/maps/search/?api=1&query=893%20Folsom%20Street%2C%20San%20Francisco%2C%20CA
   phone: (415) 255-4800
 - id: imls-museum-of-russian-culture
-  name: MUSEUM OF RUSSIAN CULTURE
+  name: Museum of Russian Culture
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602530'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 2450 SUTTER STREET
-  map_link: https://www.google.com/maps?q=37.78516,-122.44127
+  address: 2450 Sutter Street
+  map_link: https://www.google.com/maps/search/?api=1&query=2450%20Sutter%20Street%2C%20San%20Francisco%2C%20CA
   phone: (415) 921-4082
 - id: imls-museum-of-the-san-ramon-valley
-  name: MUSEUM OF THE SAN RAMON VALLEY
+  name: Museum of the San Ramon Valley
   category: Museums
   area: Bay Area
-  city: DANVILLE
+  city: Danville
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601660'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 205 RAILROAD AVE
-  map_link: https://www.google.com/maps?q=37.82044,-121.99929
+  address: 205 Railroad Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=205%20Railroad%20Ave%2C%20Danville%2C%20CA
   phone: (925) 837-3750
 - id: imls-napa-auto-museum
-  name: NAPA AUTO MUSEUM
+  name: Napa Auto Museum
   category: Museums
   area: Bay Area
-  city: GLEN ELLEN
+  city: Glen Ellen
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601469'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 6449 CAVEDALE RD
-  map_link: https://www.google.com/maps?q=38.39328,-122.4757
+  address: 6449 Cavedale Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=6449%20Cavedale%20Rd%2C%20Glen%20Ellen%2C%20CA
 - id: imls-napa-valley-museum
-  name: NAPA VALLEY MUSEUM
+  name: Napa Valley Museum
   category: Museums
   area: Bay Area
-  city: YOUNTVILLE
+  city: Yountville
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600886'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 55 PRESIDENTS CIRCLE
-  map_link: https://www.google.com/maps?q=38.40412,-122.36092
+  address: 55 Presidents Circle
+  map_link: https://www.google.com/maps/search/?api=1&query=55%20Presidents%20Circle%2C%20Yountville%2C%20CA
   phone: (707) 944-0500
 - id: imls-natalie-and-james-thompson-art-gallery
-  name: NATALIE AND JAMES THOMPSON ART GALLERY
+  name: Natalie and James Thompson Art Gallery
   category: Museums
   area: Bay Area
-  city: SAN JOSE
+  city: San Jose
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409503768'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: DEPARTMENT OF ART AND ART HISTORY SAN JOSE STATE UNIVERSITY ONE WASHINGTON SQUARE
-  map_link: https://www.google.com/maps?q=37.34189,-121.89021
+  address: Department of Art and Art History San Jose State University One Washington Square
+  map_link: https://www.google.com/maps/search/?api=1&query=Department%20of%20Art%20and%20Art%20History%20San%20Jose%20State%20University%20One%20Washington%20Square%2C%20San%20Jose%2C%20CA
   phone: (408) 924-4327
 - id: imls-national-liberty-ship-memorial
-  name: NATIONAL LIBERTY SHIP MEMORIAL
+  name: National Liberty Ship Memorial
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602293'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: PIER 45 FISHERMANS WHARF
-  map_link: https://www.google.com/maps?q=37.80032,-122.4104
+  address: Pier 45 Fishermans Wharf
+  map_link: https://www.google.com/maps/search/?api=1&query=Pier%2045%20Fishermans%20Wharf%2C%20San%20Francisco%2C%20CA
   phone: (415) 544-0100
 - id: imls-naturebridge
-  name: NATUREBRIDGE
+  name: Naturebridge
   category: Parks & Open Space
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602966'
   description: Botanical garden or nature center featuring plants and natural habitats.
-  verified: false
-  address: 28 GEARY STREET SUITE 650
-  map_link: https://www.google.com/maps?q=37.78799,-122.40392
+  address: 28 Geary Street Suite 650
+  map_link: https://www.google.com/maps/search/?api=1&query=28%20Geary%20Street%20Suite%20650%2C%20San%20Francisco%2C%20CA
   phone: (415) 992-4789
 - id: imls-oakland-zoo
-  name: OAKLAND ZOO
+  name: Oakland Zoo
   category: Recreation
   area: Bay Area
-  city: OAKLAND
+  city: Oakland
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500138'
   description: Wildlife facility dedicated to animal conservation and education.
-  verified: false
-  address: 9777 GOLF LINKS ROAD
-  map_link: https://www.google.com/maps?q=37.75329,-122.14999
+  address: 9777 Golf Links Road
+  map_link: https://www.google.com/maps/search/?api=1&query=9777%20Golf%20Links%20Road%2C%20Oakland%2C%20CA
   phone: (510) 632-9525
 - id: imls-pacific-bus-museum
-  name: PACIFIC BUS MUSEUM
+  name: Pacific Bus Museum
   category: Museums
   area: Bay Area
-  city: FREMONT
+  city: Fremont
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602801'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 37974 SHINN STREET
-  map_link: https://www.google.com/maps?q=37.56665,-121.9835
+  address: 37974 Shinn Street
+  map_link: https://www.google.com/maps/search/?api=1&query=37974%20Shinn%20Street%2C%20Fremont%2C%20CA
 - id: imls-peninsula-museum-of-art
-  name: PENINSULA MUSEUM OF ART
+  name: Peninsula Museum of Art
   category: Museums
   area: Bay Area
-  city: BURLINGAME
+  city: Burlingame
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600713'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 1777 CALIFORNIA DRIVE
-  map_link: https://www.google.com/maps?q=37.59454,-122.38015
+  address: 1777 California Drive
+  map_link: https://www.google.com/maps/search/?api=1&query=1777%20California%20Drive%2C%20Burlingame%2C%20CA
 - id: imls-philippine-folklife-museum-foundation
-  name: PHILIPPINE FOLKLIFE MUSEUM FOUNDATION
+  name: Philippine Folklife Museum Foundation
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602488'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 447 SUTTER STREET; 5TH FLOOR SOCIAL HALL
-  map_link: https://www.google.com/maps?q=37.91967,-122.02775
+  address: 447 Sutter Street; 5th Floor Social Hall
+  map_link: https://www.google.com/maps/search/?api=1&query=447%20Sutter%20Street%3B%205th%20Floor%20Social%20Hall%2C%20San%20Francisco%2C%20CA
   phone: (925) 933-4284
 - id: imls-planetarium
-  name: PLANETARIUM
+  name: Planetarium
   category: Museums
   area: Bay Area
-  city: OAKLAND
+  city: Oakland
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500763'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 10000 SKYLINE BLVD
-  map_link: https://www.google.com/maps?q=37.81972,-122.1841
+  address: 10000 Skyline Blvd
+  map_link: https://www.google.com/maps/search/?api=1&query=10000%20Skyline%20Blvd%2C%20Oakland%2C%20CA
 - id: imls-playland-not-at-the-beach
-  name: PLAYLAND-NOT-AT-THE-BEACH
+  name: Playland-Not-At-The-Beach
   category: Museums
   area: Bay Area
-  city: EL CERRITO
+  city: El Cerrito
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600672'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 10979 SAN PABLO AVE
-  map_link: https://www.google.com/maps?q=37.91655,-122.31233
+  address: 10979 San Pablo Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=10979%20San%20Pablo%20Ave%2C%20El%20Cerrito%2C%20CA
   phone: (510) 592-3002
 - id: imls-portuguese-heritage-society-of-california
-  name: PORTUGUESE HERITAGE SOCIETY OF CALIFORNIA
+  name: Portuguese Heritage Society of California
   category: Museums
   area: Bay Area
-  city: SAN JOSE
+  city: San Jose
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601966'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 133 WILLIS AVENUE MINEOLA
-  map_link: https://www.google.com/maps?q=37.25931,-121.8768
+  address: 133 Willis Avenue Mineola
+  map_link: https://www.google.com/maps/search/?api=1&query=133%20Willis%20Avenue%20Mineola%2C%20San%20Jose%2C%20CA
   phone: (408) 272-1222
 - id: imls-redwood-empire-live-steamers
-  name: REDWOOD EMPIRE LIVE STEAMERS
+  name: Redwood Empire Live Steamers
   category: Museums
   area: Bay Area
-  city: SANTA ROSA
+  city: Santa Rosa
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600680'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1500 FULTON RD
-  map_link: https://www.google.com/maps?q=38.45603,-122.76954
+  address: 1500 Fulton Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=1500%20Fulton%20Rd%2C%20Santa%20Rosa%2C%20CA
 - id: imls-rosicrucian-egyptian-museum
-  name: ROSICRUCIAN EGYPTIAN MUSEUM
+  name: Rosicrucian Egyptian Museum
   category: Museums
   area: Bay Area
-  city: SAN JOSE
+  city: San Jose
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600199'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1660 PARK AVE
-  map_link: https://www.google.com/maps?q=37.33295,-121.9227
+  address: 1660 Park Ave
+  map_link: https://www.google.com/maps/search/?api=1&query=1660%20Park%20Ave%2C%20San%20Jose%2C%20CA
   phone: (408) 947-3630
 - id: imls-rosicrucian-planetarium
-  name: ROSICRUCIAN PLANETARIUM
+  name: Rosicrucian Planetarium
   category: Museums
   area: Bay Area
-  city: SAN JOSE
+  city: San Jose
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500847'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 1342 NAGLEE AVENUE
-  map_link: https://www.google.com/maps?q=37.32407,-121.91723
+  address: 1342 Naglee Avenue
+  map_link: https://www.google.com/maps/search/?api=1&query=1342%20Naglee%20Avenue%2C%20San%20Jose%2C%20CA
 - id: imls-san-francisco-jewelry-museum
-  name: SAN FRANCISCO JEWELRY MUSEUM
+  name: San Francisco Jewelry Museum
   category: Museums
   area: Bay Area
-  city: RICHMOND
+  city: Richmond
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600105'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: '401 1ST ST #205'
-  map_link: https://www.google.com/maps?q=37.93683,-122.36877
+  address: '401 1st St #205'
+  map_link: https://www.google.com/maps/search/?api=1&query=401%201st%20St%20%23205%2C%20Richmond%2C%20CA
   phone: (510) 237-8828
 - id: imls-san-francisco-zoological-gardens
-  name: SAN FRANCISCO ZOOLOGICAL GARDENS
+  name: San Francisco Zoological Gardens
   category: Recreation
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500173'
   description: Wildlife facility dedicated to animal conservation and education.
-  verified: false
-  address: 1 ZOO ROAD
-  map_link: https://www.google.com/maps?q=37.73122,-122.50111
+  address: 1 Zoo Road
+  map_link: https://www.google.com/maps/search/?api=1&query=1%20Zoo%20Road%2C%20San%20Francisco%2C%20CA
   phone: (415) 753-7080
 - id: imls-sanchez-art-center
-  name: SANCHEZ ART CENTER
+  name: Sanchez Art Center
   category: Museums
   area: Bay Area
-  city: PACIFICA
+  city: Pacifica
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602474'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 1220-B LINDA MAR BLVD
-  map_link: https://www.google.com/maps?q=37.58492,-122.48767
+  address: 1220-B Linda Mar Blvd
+  map_link: https://www.google.com/maps/search/?api=1&query=1220-B%20Linda%20Mar%20Blvd%2C%20Pacifica%2C%20CA
   phone: (650) 355-1894
 - id: imls-secession-gallery
-  name: SECESSION GALLERY
+  name: Secession Gallery
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602187'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 3361 MISSION ST
-  map_link: https://www.google.com/maps?q=37.74288,-122.42152
+  address: 3361 Mission St
+  map_link: https://www.google.com/maps/search/?api=1&query=3361%20Mission%20St%2C%20San%20Francisco%2C%20CA
   phone: (415) 279-3058
 - id: imls-sonoma-museum-of-visual-art
-  name: SONOMA MUSEUM OF VISUAL ART
+  name: Sonoma Museum of Visual Art
   category: Museums
   area: Bay Area
-  city: SONOMA
+  city: Sonoma
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600100'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 50 MARK WEST SPRINGS RD
-  map_link: https://www.google.com/maps?q=38.29336,-122.47206
+  address: 50 Mark West Springs Rd
+  map_link: https://www.google.com/maps/search/?api=1&query=50%20Mark%20West%20Springs%20Rd%2C%20Sonoma%2C%20CA
   phone: (707) 939-7862
 - id: imls-sonoma-valley-museum-of-art
-  name: SONOMA VALLEY MUSEUM OF ART
+  name: Sonoma Valley Museum of Art
   category: Museums
   area: Bay Area
-  city: SONOMA
+  city: Sonoma
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601770'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 551 BROADWA
-  map_link: https://www.google.com/maps?q=38.29099,-122.45809
+  address: 551 Broadwa
+  map_link: https://www.google.com/maps/search/?api=1&query=551%20Broadwa%2C%20Sonoma%2C%20CA
   phone: (707) 939-7862
 - id: imls-starab-planetarium
-  name: STARAB PLANETARIUM
+  name: Starab Planetarium
   category: Museums
   area: Bay Area
-  city: PALO ALTO
+  city: Palo Alto
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409500927'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 1451 MIDDLEFIELD
-  map_link: https://www.google.com/maps?q=37.44335,-122.14493
+  address: 1451 Middlefield
+  map_link: https://www.google.com/maps/search/?api=1&query=1451%20Middlefield%2C%20Palo%20Alto%2C%20CA
 - id: imls-sunnyvale-heritage-park-museum
-  name: SUNNYVALE HERITAGE PARK MUSEUM
+  name: Sunnyvale Heritage Park Museum
   category: Museums
   area: Bay Area
-  city: SUNNYVALE
+  city: Sunnyvale
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602299'
   description: Museum dedicated to preserving and presenting local and regional history.
-  verified: false
-  address: 570 EAST REMINGTON DRIVE
-  map_link: https://www.google.com/maps?q=37.35885,-122.02793
+  address: 570 East Remington Drive
+  map_link: https://www.google.com/maps/search/?api=1&query=570%20East%20Remington%20Drive%2C%20Sunnyvale%2C%20CA
   phone: (408) 749-0220
 - id: imls-treasure-island-museum-association
-  name: TREASURE ISLAND MUSEUM ASSOCIATION
+  name: Treasure Island Museum Association
   category: Museums
   area: Bay Area
-  city: SAN FRANCISCO
+  city: San Francisco
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400601570'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: ONE AVENUE OF THE PALMS RM 111
-  map_link: https://www.google.com/maps?q=37.81609,-122.37157
+  address: One Avenue of the Palms Rm 111
+  map_link: https://www.google.com/maps/search/?api=1&query=One%20Avenue%20of%20the%20Palms%20Rm%20111%2C%20San%20Francisco%2C%20CA
   phone: (415) 413-8462
 - id: imls-u-s-army-corps-of-engineers-bay-model-visitor-cent
-  name: U.S. ARMY CORPS OF ENGINEERS - BAY MODEL VISITOR CENTER
+  name: U.s. Army Corps of Engineers - Bay Model Visitor Center
   category: Museums
   area: Bay Area
-  city: SAUSALITO
+  city: Sausalito
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8409501017'
   description: Science and technology museum with interactive exhibits and educational programs.
-  verified: false
-  address: 2100 BRIDGEWAY
-  map_link: https://www.google.com/maps?q=37.86347,-122.49693
+  address: 2100 Bridgeway
+  map_link: https://www.google.com/maps/search/?api=1&query=2100%20Bridgeway%2C%20Sausalito%2C%20CA
 - id: imls-uc-berkeley-art-museum
-  name: UC BERKELEY ART MUSEUM
+  name: UC Berkeley Art Museum
   category: Museums
   area: Bay Area
-  city: BERKELEY
+  city: Berkeley
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600025'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 2626 BANCROFT WAY
-  map_link: https://www.google.com/maps?q=37.86917,-122.25501
+  address: 2626 Bancroft Way
+  map_link: https://www.google.com/maps/search/?api=1&query=2626%20Bancroft%20Way%2C%20Berkeley%2C%20CA
   phone: (510) 642-0808
 - id: imls-valle-del-sur
-  name: VALLE DEL SUR
+  name: Valle Del Sur
   category: Museums
   area: Bay Area
-  city: MORGAN HILL
+  city: Morgan Hill
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400600952'
   description: Art museum featuring collections and exhibitions.
-  verified: false
-  address: 2500 HUSTON CT
-  map_link: https://www.google.com/maps?q=37.13988,-121.60834
+  address: 2500 Huston Ct
+  map_link: https://www.google.com/maps/search/?api=1&query=2500%20Huston%20Ct%2C%20Morgan%20Hill%2C%20CA
 - id: imls-valley-children-s-museum
-  name: VALLEY CHILDREN'S MUSEUM
+  name: Valley Children's Museum
   category: Museums
   area: Bay Area
-  city: DUBLIN
+  city: Dublin
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400602484'
   description: Interactive museum designed for children and families with hands-on exhibits.
-  verified: false
-  address: 4201B CENTRAL PARKWAY
-  map_link: https://www.google.com/maps?q=37.71391,-121.86699
+  address: 4201b Central Parkway
+  map_link: https://www.google.com/maps/search/?api=1&query=4201b%20Central%20Parkway%2C%20Dublin%2C%20CA
 - id: imls-mountain-bike-hall-of-fame
-  name: MOUNTAIN BIKE HALL OF FAME
+  name: Mountain Bike Hall of Fame
   category: Museums
   area: Bay Area
-  city: FAIRFAX
+  city: Fairfax
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400800051'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1966 SIR FRANCIS DRAKE BLVD
-  map_link: https://www.google.com/maps?q=37.98743,-122.58873
+  address: 1966 Sir Francis Drake Blvd
+  map_link: https://www.google.com/maps/search/?api=1&query=1966%20Sir%20Francis%20Drake%20Blvd%2C%20Fairfax%2C%20CA
   phone: (415) 450-8000
 - id: imls-mountain-bike-hall-of-fame-and-museum
-  name: MOUNTAIN BIKE HALL OF FAME AND MUSEUM
+  name: Mountain Bike Hall of Fame and Museum
   category: Museums
   area: Bay Area
-  city: FAIRFAX
+  city: Fairfax
+  groups:
+    - everyone
   sync_source: imls-museums
   imls_id: '8400800494'
   description: Museum with diverse collections and exhibits.
-  verified: false
-  address: 1966 SIR FRANCIS DRAKE BLVD
-  map_link: https://www.google.com/maps?q=37.98743,-122.58873
+  address: 1966 Sir Francis Drake Blvd
+  map_link: https://www.google.com/maps/search/?api=1&query=1966%20Sir%20Francis%20Drake%20Blvd%2C%20Fairfax%2C%20CA

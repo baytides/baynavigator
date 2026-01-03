@@ -92,6 +92,47 @@ function formatPhone(phone) {
   return phone;
 }
 
+// Convert to Title Case
+function toTitleCase(str) {
+  if (!str) return str;
+
+  // Words that should stay lowercase (unless first word)
+  const lowercase = new Set(['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in', 'nor', 'of', 'on', 'or', 'so', 'the', 'to', 'up', 'yet']);
+
+  // Acronyms and special cases to preserve
+  const preserve = new Set(['UC', 'SFO', 'SFMOMA', 'NASA', 'USS', 'USA', 'US', 'SF', 'CA', 'II', 'III', 'IV']);
+
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => {
+      // Check for acronyms (all caps in original)
+      const upperWord = word.toUpperCase();
+      if (preserve.has(upperWord)) return upperWord;
+
+      // Handle hyphenated words
+      if (word.includes('-')) {
+        return word.split('-').map(part =>
+          part.charAt(0).toUpperCase() + part.slice(1)
+        ).join('-');
+      }
+
+      // Handle apostrophes (like "children's")
+      if (word.includes("'")) {
+        const parts = word.split("'");
+        return parts[0].charAt(0).toUpperCase() + parts[0].slice(1) + "'" + parts.slice(1).join("'");
+      }
+
+      // Keep articles lowercase unless first word
+      if (index > 0 && lowercase.has(word)) {
+        return word;
+      }
+
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+}
+
 // Create slug from name
 function createSlug(name) {
   return name
@@ -262,26 +303,27 @@ async function main() {
 
       // New entry
       const slug = createSlug(museum.name);
+      const titleName = toTitleCase(museum.name);
+      const titleCity = toTitleCase(museum.city);
       const entry = {
         id: `imls-${slug}`,
-        name: museum.name,
+        name: titleName,
         category: getCategory(museum.type),
         area: 'Bay Area',
-        city: museum.city,
+        city: titleCity,
+        groups: ['everyone'],
         sync_source: 'imls-museums',
         imls_id: museum.museumId,
-        description: getDescription(museum.type, museum.name),
-        verified: false // Dataset is from 2014, needs verification
+        description: getDescription(museum.type, titleName)
       };
 
       // Add address if available
       if (museum.address && museum.address !== '0') {
-        entry.address = museum.address;
-      }
-
-      // Add map link if coordinates available
-      if (museum.lat && museum.lng && museum.lat !== '0' && museum.lng !== '0') {
-        entry.map_link = `https://www.google.com/maps?q=${museum.lat},${museum.lng}`;
+        const titleAddress = toTitleCase(museum.address);
+        entry.address = titleAddress;
+        // Use address-based Google Maps link (more reliable than 2014 GPS coordinates)
+        const fullAddress = `${titleAddress}, ${titleCity}, CA`;
+        entry.map_link = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
       }
 
       // Add phone if available
