@@ -607,81 +607,68 @@ const sizeClasses = size === 'large'
     return null;
   }
 
-  function showCrisisModal(type: 'emergency' | 'mental-health') {
-    // Remove existing modal if any
-    const existingModal = document.getElementById('crisis-modal');
-    if (existingModal) existingModal.remove();
+  function showCrisisBanner(type: 'emergency' | 'mental-health') {
+    // Remove existing banner if any
+    const existingBanner = document.getElementById('crisis-banner');
+    if (existingBanner) existingBanner.remove();
 
     const isEmergency = type === 'emergency';
 
-    const modal = document.createElement('div');
-    modal.id = 'crisis-modal';
-    modal.className = 'crisis-modal-overlay';
-    modal.innerHTML = `
-      <div class="crisis-modal">
-        <button class="crisis-modal-close" aria-label="Close">&times;</button>
+    const banner = document.createElement('div');
+    banner.id = 'crisis-banner';
+    banner.className = `crisis-banner ${isEmergency ? 'emergency' : 'mental-health'}`;
+    banner.innerHTML = `
+      <div class="crisis-banner-content">
         ${isEmergency ? `
-          <div class="crisis-icon emergency">🚨</div>
-          <h2>Emergency Help</h2>
-          <p>If you or someone else is in immediate danger, please call emergency services right away.</p>
-          <a href="tel:911" class="crisis-btn emergency">
-            <span class="crisis-btn-number">Call 911</span>
-            <span class="crisis-btn-label">Emergency Services</span>
-          </a>
-          <p class="crisis-note">For police, fire, or medical emergencies</p>
-        ` : `
-          <div class="crisis-icon mental-health">💙</div>
-          <h2>You're Not Alone</h2>
-          <p>If you're having thoughts of suicide or self-harm, please reach out for support. Help is available 24/7.</p>
-          <a href="tel:988" class="crisis-btn mental-health">
-            <span class="crisis-btn-number">Call or Text 988</span>
-            <span class="crisis-btn-label">Suicide & Crisis Lifeline</span>
-          </a>
-          <p class="crisis-note">Free, confidential support 24/7</p>
-          <div class="crisis-additional">
-            <p>You can also:</p>
-            <a href="sms:988" class="crisis-link">Text 988</a>
-            <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener" class="crisis-link">Chat Online</a>
+          <div class="crisis-banner-text">
+            <strong>🚨 Need immediate help?</strong>
+            <span>If you or someone is in danger, call emergency services.</span>
           </div>
+          <a href="tel:911" class="crisis-banner-btn emergency">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call 911
+          </a>
+        ` : `
+          <div class="crisis-banner-text">
+            <strong>💙 You're not alone.</strong>
+            <span>Free, confidential support is available 24/7.</span>
+          </div>
+          <a href="tel:988" class="crisis-banner-btn mental-health">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            Call/Text 988
+          </a>
+          <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener" class="crisis-banner-link">
+            Chat Online
+          </a>
         `}
-        <button class="crisis-continue">Continue to search</button>
+        <button class="crisis-banner-close" aria-label="Dismiss">&times;</button>
       </div>
     `;
 
-    document.body.appendChild(modal);
+    // Insert at the top of the page, after the header
+    const main = document.querySelector('main');
+    if (main) {
+      main.insertBefore(banner, main.firstChild);
+      // Scroll to top to ensure banner is visible
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Close handlers
-    const closeBtn = modal.querySelector('.crisis-modal-close');
-    const continueBtn = modal.querySelector('.crisis-continue');
-
-    closeBtn?.addEventListener('click', () => modal.remove());
-    continueBtn?.addEventListener('click', () => modal.remove());
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.remove();
-    });
-
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-    modal.addEventListener('click', () => {}, { once: true });
-
-    // Restore scroll on close
-    const observer = new MutationObserver(() => {
-      if (!document.getElementById('crisis-modal')) {
-        document.body.style.overflow = '';
-        observer.disconnect();
-      }
-    });
-    observer.observe(document.body, { childList: true });
+    // Close handler
+    const closeBtn = banner.querySelector('.crisis-banner-close');
+    closeBtn?.addEventListener('click', () => banner.remove());
   }
 
   function performSearch() {
     const query = searchInput?.value.trim() || '';
 
-    // Check for crisis keywords first
+    // Check for crisis keywords first - show banner but continue with search
     const crisisType = checkForCrisis(query);
     if (crisisType) {
-      showCrisisModal(crisisType);
-      // Still perform the search after showing the modal
+      showCrisisBanner(crisisType);
     }
 
     // Clear AI state for new searches
@@ -841,80 +828,58 @@ const sizeClasses = size === 'large'
     100% { opacity: 0; transform: translateY(-4px); }
   }
 
-  /* Crisis Modal Styles */
-  .crisis-modal-overlay {
-    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4;
-    animation: fadeIn 0.2s ease-out;
+  /* Crisis Banner Styles */
+  .crisis-banner {
+    @apply w-full py-3 px-4;
+    animation: slideDown 0.3s ease-out;
   }
 
-  .crisis-modal {
-    @apply bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl max-w-md w-full p-6 text-center relative;
-    animation: slideUp 0.3s ease-out;
+  .crisis-banner.emergency {
+    @apply bg-red-600 text-white;
   }
 
-  .crisis-modal-close {
-    @apply absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 text-2xl leading-none rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors;
+  .crisis-banner.mental-health {
+    @apply bg-blue-600 text-white;
   }
 
-  .crisis-icon {
-    @apply text-5xl mb-4;
+  .crisis-banner-content {
+    @apply container mx-auto flex flex-wrap items-center justify-center gap-3 md:gap-4;
   }
 
-  .crisis-modal h2 {
-    @apply text-2xl font-bold text-neutral-900 dark:text-white mb-3;
+  .crisis-banner-text {
+    @apply flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-center sm:text-left;
   }
 
-  .crisis-modal p {
-    @apply text-neutral-600 dark:text-neutral-300 mb-4;
+  .crisis-banner-text strong {
+    @apply text-base font-bold;
   }
 
-  .crisis-btn {
-    @apply flex flex-col items-center justify-center w-full py-4 px-6 rounded-xl text-white font-bold no-underline transition-transform hover:scale-105 mb-3;
+  .crisis-banner-text span {
+    @apply text-sm opacity-90;
   }
 
-  .crisis-btn.emergency {
-    @apply bg-red-600 hover:bg-red-700;
+  .crisis-banner-btn {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold text-base no-underline transition-all hover:scale-105;
   }
 
-  .crisis-btn.mental-health {
-    @apply bg-blue-600 hover:bg-blue-700;
+  .crisis-banner-btn.emergency {
+    @apply bg-white text-red-700 hover:bg-red-50;
   }
 
-  .crisis-btn-number {
-    @apply text-2xl;
+  .crisis-banner-btn.mental-health {
+    @apply bg-white text-blue-700 hover:bg-blue-50;
   }
 
-  .crisis-btn-label {
-    @apply text-sm font-normal opacity-90;
+  .crisis-banner-link {
+    @apply text-sm text-white/90 hover:text-white underline underline-offset-2;
   }
 
-  .crisis-note {
-    @apply text-sm text-neutral-500 dark:text-neutral-400 mb-4;
+  .crisis-banner-close {
+    @apply ml-2 w-8 h-8 flex items-center justify-center text-white/70 hover:text-white text-2xl leading-none rounded-full hover:bg-white/10 transition-colors bg-transparent border-none cursor-pointer;
   }
 
-  .crisis-additional {
-    @apply border-t border-neutral-200 dark:border-neutral-700 pt-4 mt-4;
-  }
-
-  .crisis-additional p {
-    @apply text-sm text-neutral-500 dark:text-neutral-400 mb-2;
-  }
-
-  .crisis-link {
-    @apply inline-block px-4 py-2 mx-1 bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-lg text-sm font-medium no-underline hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors;
-  }
-
-  .crisis-continue {
-    @apply mt-4 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline cursor-pointer bg-transparent border-none;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-100%); }
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
