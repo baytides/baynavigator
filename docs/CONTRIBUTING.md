@@ -204,8 +204,7 @@ benefit: "Three-day financial literacy workshop"  # No recurring schedule
 
 ### Prerequisites
 - Git
-- Ruby (2.7+)
-- Bundler
+- Node.js (18+)
 
 ### Setup
 
@@ -217,13 +216,13 @@ git clone https://github.com/YOUR-USERNAME/baynavigator.git
 cd baynavigator
 
 # 3. Install dependencies
-bundle install
+npm install
 
 # 4. Run local server
-bundle exec jekyll serve
+npm run dev
 
 # 5. Open in browser
-# Navigate to http://localhost:4000
+# Navigate to http://localhost:4321
 ```
 
 ---
@@ -232,11 +231,10 @@ bundle exec jekyll serve
 
 ### Step 1: Choose the Right File
 
-Programs are organized by category in `_data/programs/`:
+Programs are organized by category in `src/data/`:
 
 ```
-_data/programs/
-├── college-university.yml  # College/university-specific programs
+src/data/
 ├── community.yml           # Community services, meeting spaces
 ├── education.yml           # Educational programs, scholarships
 ├── equipment.yml           # Equipment donations, surplus property
@@ -246,7 +244,7 @@ _data/programs/
 ├── legal.yml               # Legal services
 ├── library_resources.yml   # Library cards, services
 ├── pet_resources.yml       # Pet care, veterinary
-├── recreation.yml          # Parks, activities
+├── recreation.yml          # Parks, museums, activities
 ├── technology.yml          # Internet, devices, software
 ├── transportation.yml      # Transportation assistance
 └── utilities.yml           # Utility assistance
@@ -259,17 +257,21 @@ _data/programs/
 Open the appropriate YAML file and add your program following this structure:
 
 ```yaml
-- id: "unique-program-id"
-  name: "Official Program Name"
-  category: "Category Name"
-  area: "Geographic Coverage"    # County, "Bay Area-wide", "Statewide", or "Nationwide"
-  city: "City Name"              # Optional: specific city (county auto-derived)
-  eligibility:
-    - "emoji"
-  benefit: "Clear description of what the program provides"
-  timeframe: "Ongoing"
-  link: "https://official-website.com"
-  link_text: "Apply"
+- id: unique-program-id
+  name: Official Program Name
+  category: Category Name
+  area: Geographic Coverage      # County, "Bay Area", "Statewide", or "Nationwide"
+  city: City Name                # Optional: specific city
+  groups:
+    - group-id                   # See eligibility groups below
+  description: Brief description of the program
+  what_they_offer: |             # Optional: detailed benefits
+    - Benefit 1
+    - Benefit 2
+  how_to_get_it: Steps to access the program  # Optional
+  timeframe: Ongoing
+  link: https://official-website.com
+  link_text: Apply
 ```
 
 ### Step 3: Follow the Data Standards
@@ -278,21 +280,26 @@ Open the appropriate YAML file and add your program following this structure:
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| `id` | Unique identifier (lowercase, hyphenated) | `"sf-library-card"` |
-| `name` | Official program name | `"San Francisco Public Library Card"` |
-| `category` | Category name (must match existing category) | `"Library Resources"` |
-| `area` | Geographic area served | `"San Francisco"` |
-| `eligibility` | Array of emoji codes | `["💳", "🌎"]` |
-| `benefit` | What the program provides | `"Free library card with access to books, digital resources, and community programs"` |
-| `timeframe` | When available | `"Ongoing"` |
-| `link` | Official URL | `"https://sfpl.org"` |
-| `link_text` | Call to action text | `"Get Library Card"` |
+| `id` | Unique identifier (lowercase, hyphenated) | `sf-library-card` |
+| `name` | Official program name | `San Francisco Public Library Card` |
+| `category` | Category name (must match existing category) | `Library Resources` |
+| `area` | Geographic area served | `San Francisco` |
+| `groups` | Array of eligibility group IDs | `[income-eligible, everyone]` |
+| `description` | Brief description of what the program provides | `Free library card with access to books and digital resources` |
+| `timeframe` | When available | `Ongoing` |
+| `link` | Official URL | `https://sfpl.org` |
+| `link_text` | Call to action text | `Get Library Card` |
 
 #### Optional Fields
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| `city` | Specific city (county auto-derived) | `"Oakland"` |
+| `city` | Specific city | `Oakland` |
+| `what_they_offer` | Detailed list of benefits | Multi-line YAML |
+| `how_to_get_it` | Steps to access the program | Text description |
+| `phone` | Contact phone number | `(415) 555-1234` |
+| `address` | Physical address | `100 Larkin St, San Francisco, CA` |
+| `map_link` | Google Maps link | `https://www.google.com/maps/...` |
 
 #### Area Options
 
@@ -325,28 +332,36 @@ For programs specific to a city, you can use the optional `city` field. The coun
   # area field can be omitted when city is specified
 ```
 
-All Bay Area cities are mapped in `_data/cities.yml`. If you add a program for a city not in the list, add the city mapping first.
+All Bay Area cities are mapped in `src/data/cities.yml`. If you add a program for a city not in the list, add the city mapping first.
 
-#### Eligibility Emojis
+#### Eligibility Groups
 
-| Emoji | Meaning | Code |
-|-------|---------|------|
-| 💳 | SNAP/EBT/Medi-Cal recipients | `"💳"` |
-| 👵 | Seniors (65+) | `"👵"` |
-| 🧒 | Youth | `"🧒"` |
-| 🎓 | College students | `"🎓"` |
-| 🎖️ | Veterans/Active duty | `"🎖️"` |
-| 👨‍👩‍👧 | Families & caregivers | `"👨‍👩‍👧"` |
-| 🧑‍🦽 | People with disabilities | `"🧑‍🦽"` |
-| 🤝 | Nonprofit organizations | `"🤝"` |
-| 🌎 | Everyone | `"🌎"` |
+| Group ID | Icon | Description |
+|----------|------|-------------|
+| `income-eligible` | 💳 | SNAP/EBT/Medi-Cal recipients |
+| `seniors` | 👵 | Seniors (60+) |
+| `youth` | 🧒 | Youth |
+| `college-students` | 🎓 | College students |
+| `veterans` | 🎖️ | Veterans/Active duty |
+| `families` | 👨‍👩‍👧 | Families |
+| `disability` | 🧑‍🦽 | People with disabilities |
+| `lgbtq` | 🌈 | LGBT+ community |
+| `first-responders` | 🚒 | First responders |
+| `teachers` | 👩‍🏫 | Teachers/Educators |
+| `unemployed` | 💼 | Job seekers |
+| `immigrants` | 🌍 | Immigrants/Refugees |
+| `unhoused` | 🏠 | Unhoused |
+| `caregivers` | 🤲 | Caregivers |
+| `foster-youth` | 🏡 | Foster youth |
+| `nonprofits` | 🤝 | Nonprofit organizations |
+| `everyone` | 🌎 | Everyone |
 
-**Multiple eligibilities:** List all that apply:
+**Multiple groups:** List all that apply:
 ```yaml
-eligibility:
-  - "💳"
-  - "👵"
-  - "🧒"
+groups:
+  - income-eligible
+  - seniors
+  - youth
 ```
 
 #### Writing Good Benefits
@@ -382,16 +397,21 @@ Common link text phrases:
 ### Step 4: Example - Complete Program Entry
 
 ```yaml
-- id: "sf-lifeline-phone"
-  name: "California LifeLine Program"
-  category: "Technology"
-  area: "Statewide"
-  eligibility:
-    - "💳"
-  benefit: "Discounted home phone service or free wireless service for income-eligible California residents; must qualify through Medi-Cal, SNAP, SSI, or income verification"
-  timeframe: "Ongoing"
-  link: "https://www.californialifeline.com"
-  link_text: "Apply"
+- id: sf-lifeline-phone
+  name: California LifeLine Program
+  category: Technology
+  area: Statewide
+  groups:
+    - income-eligible
+  description: Discounted home phone service or free wireless service for income-eligible California residents.
+  what_they_offer: |
+    - Discounted home phone service
+    - Free wireless service with monthly minutes
+    - Must qualify through Medi-Cal, SNAP, SSI, or income verification
+  how_to_get_it: Apply online or by phone. You'll need to verify eligibility through a qualifying program or income documentation.
+  timeframe: Ongoing
+  link: https://www.californialifeline.com
+  link_text: Apply
 ```
 
 ---
@@ -402,31 +422,31 @@ If none of the existing categories fit:
 
 ### Step 1: Create the Data File
 
-Create a new file in `_data/programs/`:
+Create a new file in `src/data/`:
 
 ```bash
-touch _data/programs/your-new-category.yml
+touch src/data/your-new-category.yml
 ```
 
-### Step 2: Add Category Header
+### Step 2: Add Programs
 
 ```yaml
-# Your New Category Name
-
-- id: "first-program-id"
-  name: "First Program"
-  category: "Your New Category Name"
+- id: first-program-id
+  name: First Program
+  category: Your New Category Name
   # ... rest of fields
 ```
 
-### Step 3: Update the Filter UI
+### Step 3: Update Groups Configuration
 
-Edit `_includes/search-filter-ui.html` and add your category to the filter buttons (in alphabetical order):
+Edit `src/data/groups.yml` and add your category to the `categories` section:
 
-```html
-<button class="filter-btn" data-filter-type="category" data-filter-value="Your New Category Name">
-  Your New Category Name
-</button>
+```yaml
+categories:
+  # ... existing categories
+  - id: your-category
+    name: Your New Category Name
+    icon: "🆕"
 ```
 
 ### Step 4: Update README
@@ -439,7 +459,7 @@ Add your new category to the list in `README.md`.
 
 ### Fixing Outdated Information
 
-1. Find the program in the appropriate `_data/programs/*.yml` file
+1. Find the program in the appropriate `src/data/*.yml` file
 2. Update the relevant fields
 3. Add a note in your commit message: `"Update [program-name]: [what changed]"`
 
@@ -508,22 +528,22 @@ Examples:
 
 1. **Run locally:**
    ```bash
-   bundle exec jekyll serve
+   npm run dev
    ```
 
 2. **Test these scenarios:**
    - ✅ Your program appears on the homepage
    - ✅ Search finds your program by name
    - ✅ Category filter works
-   - ✅ Area filter works  
+   - ✅ Area filter works
    - ✅ Eligibility filter works
    - ✅ Link opens correctly
    - ✅ No JavaScript errors in console (F12 → Console tab)
 
-3. **Check YAML syntax:**
+3. **Check build:**
    ```bash
-   # The build will fail if YAML is invalid
-   bundle exec jekyll build
+   # The build will fail if there are errors
+   npm run build
    ```
 
 4. **Test on mobile:**
@@ -544,7 +564,7 @@ git checkout -b add-program-name
 ### Step 2: Commit Your Changes
 
 ```bash
-git add _data/programs/category.yml
+git add src/data/category.yml
 git commit -m "Add [Program Name] to [Category]"
 ```
 
@@ -588,74 +608,64 @@ Added [Program Name] to [Category]
 
 ```
 baynavigator/
-├── _data/
-│   ├── cities.yml             # 📍 City-to-county mapping
-│   └── programs/              # 📊 Program data (YAML files)
-│       ├── community.yml
-│       ├── technology.yml
-│       └── ...
+├── src/
+│   ├── data/                  # 📊 Program data (YAML files)
+│   │   ├── cities.yml         # City-to-county mapping
+│   │   ├── groups.yml         # Eligibility groups & categories
+│   │   ├── community.yml
+│   │   ├── recreation.yml
+│   │   └── ...
+│   │
+│   ├── components/            # 🧩 Astro components
+│   │   ├── ProgramCard.astro
+│   │   ├── SearchFilter.astro
+│   │   └── ...
+│   │
+│   ├── layouts/               # 📄 Page layouts
+│   │   └── Layout.astro
+│   │
+│   ├── pages/                 # 📄 Page routes
+│   │   └── index.astro
+│   │
+│   └── styles/                # 🎨 CSS stylesheets
 │
-├── _includes/                 # 🧩 Reusable components
-│   ├── footer.html
-│   ├── utility-bar.html      # Theme, spacing, share, install controls
-│   ├── program-card.html     # Individual program display
-│   └── search-filter-ui.html # Search and filter interface
-│
-├── _layouts/                  # 📄 Page templates
-│   └── default.html          # Main layout with PWA and scripts
+├── public/
+│   └── assets/                # 🖼️ Static assets (images, favicons)
 │
 ├── api/                       # 📡 Static JSON API (auto-generated)
 │
-├── assets/
-│   ├── css/                   # 🎨 Stylesheets
-│   │   ├── design-tokens.css
-│   │   ├── base.css
-│   │   ├── responsive-optimized.css
-│   │   └── accessibility-toolbar.css
-│   │
-│   ├── js/                    # ⚙️ JavaScript
-│   │   ├── search-filter.js       # Fuzzy search/filter
-│   │   ├── accessibility-toolbar.js
-│   │   ├── step-flow.js           # Onboarding wizard
-│   │   └── apca-contrast.js       # WCAG 3.0 contrast
-│   │
-│   └── images/                # 🖼️ Logos, icons, favicons
+├── scripts/                   # 🔧 Build and sync scripts
+│   ├── generate-api.cjs      # API generation from YAML
+│   ├── sync-nps-parks.cjs    # NPS data sync
+│   ├── sync-imls-museums.cjs # Museum data sync
+│   └── ...
 │
-├── scripts/                   # 🔧 Build scripts
-│   └── generate-api.js       # API generation from YAML
+├── apps/                      # 📱 Mobile apps (iOS, Android)
 │
 ├── tests/                     # 🧪 Playwright E2E tests
 │
-├── index.md                   # 🏠 Homepage
-├── students.md                # 🎓 Student-specific page
-├── README.md                  # 📖 Project documentation
-├── _config.yml                # ⚙️ Jekyll configuration
-└── sw.js                      # 📱 Service worker for PWA
+├── docs/                      # 📖 Documentation
+│
+└── README.md
 ```
 
 ### Key Files to Know
 
 **Data Files:**
-- `_data/programs/*.yml` - All program data (14 category files)
-- `_data/cities.yml` - City-to-county mapping for auto-derivation
+- `src/data/*.yml` - All program data (15+ category files)
+- `src/data/cities.yml` - City-to-county mapping
+- `src/data/groups.yml` - Eligibility groups, categories, and sync sources
 
-**Templates:**
-- `_includes/program-card.html` - How each program displays
-- `_includes/search-filter-ui.html` - Search and filter interface
-- `_includes/utility-bar.html` - Theme selector, text spacing, share, PWA install
-- `_layouts/default.html` - Main page template with PWA handling
+**Components:**
+- `src/components/ProgramCard.astro` - How each program displays
+- `src/components/SearchFilter.astro` - Search and filter interface
 
 **Scripts:**
-- `assets/js/search-filter.js` - Powers fuzzy search and filtering
-- `assets/js/accessibility-toolbar.js` - Accessibility features
-- `assets/js/step-flow.js` - Onboarding wizard for preferences
-- `scripts/generate-api.js` - Generates static JSON API from YAML
+- `scripts/generate-api.cjs` - Generates static JSON API from YAML
+- `scripts/sync-*.cjs` - Data sync scripts for various sources
 
 **Styles:**
-- `assets/css/design-tokens.css` - CSS custom properties for theming
-- `assets/css/base.css` - Core styles
-- `assets/css/responsive-optimized.css` - Mobile/tablet/desktop optimizations
-- `assets/css/accessibility-toolbar.css` - Accessibility toolbar styles
+- `src/styles/` - CSS stylesheets with Tailwind
 
 ---
 
@@ -689,7 +699,7 @@ Use `"Nationwide"` for the area.
 
 ### "How do I know if my YAML is valid?"
 
-Run `bundle exec jekyll build`. If it succeeds, your YAML is valid. If there are errors, Jekyll will tell you the line number.
+Run `npm run build`. If it succeeds, your YAML is valid. If there are errors, the build will show you what's wrong.
 
 ---
 
@@ -699,11 +709,11 @@ Run `bundle exec jekyll build`. If it succeeds, your YAML is valid. If there are
 
 Bay Navigator uses a simple, efficient static architecture:
 
-**YAML Files (`_data/programs/*.yml`)** - Source of Truth
+**YAML Files (`src/data/*.yml`)** - Source of Truth
 - ✅ Version control - Track all changes via Git
 - ✅ Open source transparency - Anyone can view/download data
 - ✅ Easy contributions - Submit PRs to update programs
-- ✅ Jekyll integration - Powers the static site directly
+- ✅ Astro integration - Powers the static site directly
 
 **Static JSON API (`api/`)** - Auto-Generated
 - ✅ Fast API access - Pre-built JSON files served statically
@@ -719,10 +729,10 @@ Contributors → YAML Files (PR) → Merged → GitHub Actions → Static JSON A
 
 ### How It Works
 
-1. Program data lives in `_data/programs/*.yml` files
-2. When changes are pushed to `main`, GitHub Actions runs `scripts/generate-api.js`
+1. Program data lives in `src/data/*.yml` files
+2. When changes are pushed to `main`, GitHub Actions runs `scripts/generate-api.cjs`
 3. The script generates static JSON files in the `api/` directory
-4. Jekyll builds the site and everything deploys to Azure Static Web Apps
+4. Astro builds the site and everything deploys to Azure Static Web Apps
 
 No manual sync or database management required!
 

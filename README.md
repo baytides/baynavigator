@@ -59,7 +59,7 @@ Bay Navigator provides static JSON API files for accessing program data:
 **Base URL:** `https://baynavigator.org/api/`
 
 **Endpoints:**
-- `/api/programs.json` - All programs (237 total)
+- `/api/programs.json` - All programs (600+ total)
 - `/api/programs/{id}.json` - Individual program by ID
 - `/api/categories.json` - All categories
 - `/api/areas.json` - Geographic service areas
@@ -94,21 +94,22 @@ fetch('https://baynavigator.org/api/programs.json')
 ## Tech Stack
 
 **Built with:**
-- [Jekyll](https://jekyllrb.com/) - Static site generator
+- [Astro](https://astro.build/) - Static site generator
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/) - Hosting and deployment
 - YAML - Structured data storage for programs
 - Static JSON API - Generated from YAML via Node.js script
-- Vanilla JavaScript - Search, filters, and accessibility features
-- Responsive CSS - Mobile-first design optimized for all devices including Apple Vision Pro
+- [Fuse.js](https://fusejs.io/) - Fuzzy search
+- Responsive design - Mobile-first, optimized for all devices including Apple Vision Pro
 
 **Key Components:**
-- `_data/programs/` - Program data organized by category (YAML files)
+- `src/data/` - Program data organized by category (YAML files)
 - `api/` - Static JSON API endpoints (auto-generated)
-- `scripts/` - Build scripts including API generator
-- `_includes/` - Reusable components (search UI, program cards, etc.)
-- `_layouts/` - Page templates
-- `assets/js/` - JavaScript for search/filter functionality
-- `assets/css/` - Styling and responsive design
+- `scripts/` - Build scripts including API generator and data sync scripts
+- `src/components/` - Astro components (search UI, program cards, etc.)
+- `src/layouts/` - Page layouts
+- `src/pages/` - Page routes
+- `public/assets/` - Static assets (images, favicons)
 
 ---
 
@@ -116,34 +117,28 @@ fetch('https://baynavigator.org/api/programs.json')
 
 ```
 baynavigator/
-├── _data/
-│   ├── cities.yml         # City-to-county mapping for auto-derivation
-│   └── programs/          # Program data files (YAML)
-│       ├── college-university.yml
-│       ├── community.yml
-│       ├── education.yml
-│       ├── equipment.yml
-│       ├── finance.yml
-│       ├── food.yml
-│       ├── health.yml
-│       ├── legal.yml
-│       ├── library_resources.yml
-│       ├── pet_resources.yml
-│       ├── recreation.yml
-│       ├── technology.yml
-│       ├── transportation.yml
-│       └── utilities.yml
-├── _includes/             # Reusable components
-│   ├── program-card.html
-│   └── search-filter-ui.html
-├── _layouts/              # Page templates
-│   └── default.html
-├── assets/
-│   ├── css/              # Stylesheets
-│   ├── js/               # JavaScript
-│   └── images/           # Logos, favicons
-├── index.md              # Homepage
-├── students.md           # Student-specific page
+├── src/
+│   ├── data/              # Program data files (YAML)
+│   │   ├── cities.yml     # City-to-county mapping
+│   │   ├── groups.yml     # Eligibility group definitions
+│   │   ├── community.yml
+│   │   ├── education.yml
+│   │   ├── food.yml
+│   │   ├── health.yml
+│   │   ├── recreation.yml # Parks, museums, activities
+│   │   ├── technology.yml
+│   │   └── ...            # 15+ category files
+│   ├── components/        # Astro components
+│   ├── layouts/           # Page layouts
+│   ├── pages/             # Page routes
+│   └── styles/            # CSS stylesheets
+├── public/
+│   └── assets/            # Static assets (images, favicons)
+├── api/                   # Static JSON API (auto-generated)
+├── scripts/               # Build and sync scripts
+├── apps/                  # Mobile app projects (iOS, Android)
+├── docs/                  # Documentation
+├── tests/                 # Playwright E2E tests
 └── README.md
 ```
 
@@ -209,23 +204,20 @@ See **[API_ENDPOINTS.md](./docs/API_ENDPOINTS.md)** for complete API documentati
 git clone https://github.com/baytides/baynavigator.git
 cd baynavigator
 
-# Install Ruby dependencies
-bundle install
-
-# Install Node dependencies (for API generation)
+# Install dependencies
 npm install
 
 # Run local server
-bundle exec jekyll serve
+npm run dev
 
-# View at http://localhost:4000
+# View at http://localhost:4321
 ```
 
 ### Regenerating the API
 
 ```bash
-# After modifying YAML files in _data/programs/
-node scripts/generate-api.js
+# After modifying YAML files in src/data/
+npm run generate-api
 
 # API files are generated in /api/ directory
 ```
@@ -234,26 +226,30 @@ node scripts/generate-api.js
 
 ## 📊 Data Structure
 
-Programs are stored in YAML files under `_data/programs/`. Each program follows this format:
+Programs are stored in YAML files under `src/data/`. Each program follows this format:
 
 ```yaml
-- id: "unique-program-id"
-  name: "Program Name"
-  category: "Category Name"
-  area: "Geographic Area"      # County, "Bay Area-wide", "Statewide", or "Nationwide"
-  city: "City Name"            # Optional: specific city (county auto-derived)
-  eligibility:
-    - "💳"  # SNAP/EBT/Medi-Cal
-    - "👵"  # Seniors
-  benefit: "Description of what the program provides"
-  timeframe: "Ongoing"
-  link: "https://official-website.com"
-  link_text: "Apply"
+- id: unique-program-id
+  name: Program Name
+  category: Category Name
+  area: Geographic Area        # County, "Bay Area", "Statewide", or "Nationwide"
+  city: City Name              # Optional: specific city
+  groups:
+    - income-eligible          # Eligibility groups
+    - seniors
+    - everyone
+  description: Brief description of the program
+  what_they_offer: |           # Detailed benefits (optional)
+    - Benefit 1
+    - Benefit 2
+  how_to_get_it: Steps to access the program (optional)
+  timeframe: Ongoing
+  link: https://official-website.com
+  link_text: Apply
 ```
 
 ### Available Categories:
-- Childcare Assistance
-- Clothing Assistance
+- Childcare
 - Community Services
 - Education
 - Equipment
@@ -263,24 +259,32 @@ Programs are stored in YAML files under `_data/programs/`. Each program follows 
 - Legal Services
 - Library Resources
 - Museums
+- Parks & Open Space
 - Pet Resources
-- Public Transit
 - Recreation
 - Tax Preparation
 - Technology
 - Transportation
 - Utilities
 
-### Eligibility Emojis:
-- 💳 = SNAP/EBT/Medi-Cal recipients
-- 👵 = Seniors (65+)
-- 🧒 = Youth
-- 🎓 = College students
-- 🎖️ = Veterans/Active duty
-- 👨‍👩‍👧 = Families & caregivers
-- 🧑‍🦽 = People with disabilities
-- 🤝 = Nonprofit organizations
-- 🌎 = Everyone
+### Eligibility Groups:
+- `income-eligible` - 💳 SNAP/EBT/Medi-Cal recipients
+- `seniors` - 👵 Seniors (60+)
+- `youth` - 🧒 Youth
+- `college-students` - 🎓 College students
+- `veterans` - 🎖️ Veterans/Active duty
+- `families` - 👨‍👩‍👧 Families
+- `disability` - 🧑‍🦽 People with disabilities
+- `lgbtq` - 🌈 LGBT+ community
+- `first-responders` - 🚒 First responders
+- `teachers` - 👩‍🏫 Teachers/Educators
+- `unemployed` - 💼 Job seekers
+- `immigrants` - 🌍 Immigrants/Refugees
+- `unhoused` - 🏠 Unhoused
+- `caregivers` - 🤲 Caregivers
+- `foster-youth` - 🏡 Foster youth
+- `nonprofits` - 🤝 Nonprofit organizations
+- `everyone` - 🌎 Everyone
 
 ---
 
@@ -333,7 +337,7 @@ See [LICENSE](./LICENSE) for full details.
 
 ### Data License: CC BY 4.0
 
-All program data in `_data/programs/` is licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
+All program data in `src/data/` is licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
 
 **You are free to:**
 - Share and redistribute the data
@@ -372,5 +376,5 @@ This approach ensures:
 
 ---
 
-**Last Updated:** December 24, 2025
+**Last Updated:** January 2, 2026
 **Hosted on:** Azure Static Web Apps
