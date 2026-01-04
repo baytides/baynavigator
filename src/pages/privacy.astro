@@ -70,6 +70,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <li><strong>No identifiers:</strong> Searches are not linked to any personal identifier, account, or session.</li>
             <li><strong>Third-party processing:</strong> AI queries are processed by Azure OpenAI. Microsoft Azure processes data in accordance with their privacy policies.</li>
           </ul>
+
+          <h3 class="text-xl font-bold text-neutral-900 dark:text-white mt-6 mb-4">
+            Azure OpenAI Data Handling
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+            When you use the AI-powered search, your queries are processed by <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy">Azure OpenAI</a>. Microsoft provides the following guarantees:
+          </p>
+          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
+            <li><strong>Not used for training:</strong> Your prompts and responses are never used to train, retrain, or improve OpenAI's foundation models.</li>
+            <li><strong>Not shared:</strong> Your data is not available to other customers, OpenAI, or other model providers.</li>
+            <li><strong>Model is stateless:</strong> No prompts or completions are stored in the AI model itself.</li>
+            <li><strong>Encrypted:</strong> All data is encrypted at rest using AES-256 encryption.</li>
+            <li><strong>Geographic residency:</strong> Data is stored within Microsoft's designated Azure geography (United States).</li>
+          </ul>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+            For more details, see <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/responsible-ai/openai/data-privacy">Microsoft's Azure OpenAI Data Privacy documentation</a>.
+          </p>
+
           <p class="text-neutral-600 dark:text-neutral-300 mb-6">
             <strong>To avoid AI entirely:</strong> Switch the "Smart Search" toggle to off, or use Bay Navigator offline. When offline, all data is served from your device's cache and no network requests are made.
           </p>
