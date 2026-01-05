@@ -110,8 +110,10 @@ struct SettingsView: View {
                     Button {
                         Task {
                             isRefreshing = true
+                            AccessibilityAnnouncement.announce("Refreshing database")
                             await programsViewModel.loadData(forceRefresh: true)
                             isRefreshing = false
+                            AccessibilityAnnouncement.announce("Database refresh complete")
                         }
                     } label: {
                         HStack {
@@ -119,12 +121,15 @@ struct SettingsView: View {
                             Spacer()
                             if isRefreshing {
                                 ProgressView()
+                                    .accessibilityLabel("Refreshing")
                             } else {
                                 Image(systemName: "arrow.clockwise")
+                                    .accessibilityHidden(true)
                             }
                         }
                     }
                     .disabled(isRefreshing)
+                    .accessibilityHint(isRefreshing ? "Currently refreshing" : "Double tap to check for updates")
                 } header: {
                     Text("App Info")
                 }
@@ -163,12 +168,15 @@ struct SettingsView: View {
 
                     Button(role: .destructive) {
                         Task {
+                            AccessibilityAnnouncement.announce("Clearing cache")
                             await settingsViewModel.clearCache()
                             await updateCacheSize()
+                            AccessibilityAnnouncement.announce("Cache cleared successfully")
                         }
                     } label: {
                         Text("Clear Cache")
                     }
+                    .accessibilityHint("Double tap to clear cached data")
                 } header: {
                     Text("Storage")
                 } footer: {
@@ -253,7 +261,10 @@ struct LinkRow: View {
             Spacer()
             Image(systemName: "arrow.up.right")
                 .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
         }
+        .accessibilityLabel("\(title), opens in browser")
+        .accessibilityHint("Double tap to open external link")
     }
 }
 

@@ -6,9 +6,17 @@ import '../models/program.dart';
 import '../config/theme.dart';
 import '../utils/category_icons.dart';
 import '../services/export_service.dart';
+import '../services/accessibility_service.dart';
 
 /// Program card widget matching web design
 /// Clean, minimal card with category badge and essential info
+///
+/// WCAG 2.2 AAA Accessibility Features:
+/// - Full semantic labeling for screen readers
+/// - Reduced motion support for animations
+/// - Minimum 48x48dp touch targets
+/// - High contrast color support
+/// - Live region announcements for state changes
 class ProgramCard extends StatefulWidget {
   final Program program;
   final bool isFavorite;
@@ -131,11 +139,17 @@ class _ProgramCardState extends State<ProgramCard> {
     final isDark = theme.brightness == Brightness.dark;
     final isDesktop = Platform.isMacOS || Platform.isWindows || Platform.isLinux;
 
+    // Use accessibility-aware animation duration
+    final animationDuration = AccessibilityService.getAnimationDuration(
+      context,
+      const Duration(milliseconds: 200),
+    );
+
     Widget card = MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: animationDuration,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
@@ -253,13 +267,25 @@ class _ProgramCardState extends State<ProgramCard> {
                             ),
                           ),
                         const SizedBox(width: 8),
-                        // Save button
+                        // Save button - WCAG 2.2 AAA: 48x48dp minimum touch target
                         if (widget.onFavoriteToggle != null)
                           Semantics(
                             button: true,
                             label: widget.isFavorite
-                                ? 'Remove from saved programs'
-                                : 'Save program',
+                                ? SemanticLabels.unsaveProgram(widget.program.name)
+                                : SemanticLabels.saveProgram(widget.program.name),
+                            hint: widget.isFavorite
+                                ? 'Double tap to remove from saved list'
+                                : 'Double tap to save to your list',
+                            onTap: () {
+                              HapticFeedback.lightImpact();
+                              widget.onFavoriteToggle!();
+                              // Announce state change to screen readers
+                              AccessibilityService.announceSaveAction(
+                                !widget.isFavorite,
+                                widget.program.name,
+                              );
+                            },
                             child: Material(
                               color: Colors.transparent,
                               child: InkWell(
@@ -273,21 +299,21 @@ class _ProgramCardState extends State<ProgramCard> {
                                       ? 'Remove from saved'
                                       : 'Save program',
                                   child: Container(
-                                    width: 40,
-                                    height: 40,
+                                    width: 48, // WCAG 2.2 AAA minimum touch target
+                                    height: 48, // WCAG 2.2 AAA minimum touch target
                                     decoration: BoxDecoration(
                                       color: widget.isFavorite
                                           ? AppColors.dangerLight
                                           : (isDark
                                               ? AppColors.darkNeutral100
                                               : AppColors.lightNeutral100),
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(24),
                                     ),
                                     child: Icon(
                                       widget.isFavorite
                                           ? Icons.bookmark
                                           : Icons.bookmark_border,
-                                      size: 20,
+                                      size: 24,
                                       color: widget.isFavorite
                                           ? AppColors.danger
                                           : (isDark

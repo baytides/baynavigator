@@ -8,6 +8,7 @@ struct ProgramCardView: View {
     let onFavoriteToggle: () -> Void
 
     @State private var isHovered = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var categoryColor: Color {
         Color.categoryColor(for: program.category)
@@ -52,6 +53,22 @@ struct ProgramCardView: View {
         }
     }
 
+    // MARK: - Accessibility
+
+    private var cardAccessibilityLabel: String {
+        AccessibilityLabels.programCard(program.name, category: program.category, location: program.locationText)
+    }
+
+    private var favoriteAccessibilityLabel: String {
+        isFavorite
+            ? AccessibilityLabels.unsaveProgram(program.name)
+            : AccessibilityLabels.saveProgram(program.name)
+    }
+
+    private var animationDuration: Double {
+        reduceMotion ? 0 : 0.2
+    }
+
     var body: some View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: 12) {
@@ -91,17 +108,23 @@ struct ProgramCardView: View {
                     // Favorite button
                     Button {
                         onFavoriteToggle()
+                        // Announce state change for VoiceOver users
+                        AccessibilityAnnouncement.announceSaveAction(isSaved: !isFavorite, programName: program.name)
                     } label: {
                         Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
                             .foregroundStyle(isFavorite ? Color.appDanger : .secondary)
                             .font(.title3)
-                            .frame(width: 36, height: 36)
+                            .frame(width: 44, height: 44) // WCAG 2.5.5: 44pt minimum touch target
                             .background(
                                 RoundedRectangle(cornerRadius: 8)
                                     .fill(isFavorite ? Color.appDanger.opacity(0.1) : Color.secondary.opacity(0.08))
                             )
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(favoriteAccessibilityLabel)
+                    .accessibilityHint(isFavorite
+                        ? "Double tap to remove from saved programs"
+                        : "Double tap to save to your list")
                 }
 
                 // Description
@@ -143,12 +166,15 @@ struct ProgramCardView: View {
                 effect.scaleEffect(isActive ? 1.02 : 1.0)
             }
             .shadow(color: .black.opacity(0.1), radius: isHovered ? 20 : 10, y: isHovered ? 10 : 5)
-            .animation(.easeInOut(duration: 0.2), value: isHovered)
+            .animation(reduceMotion ? nil : .easeInOut(duration: animationDuration), value: isHovered)
             .onHover { hovering in
                 isHovered = hovering
             }
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(cardAccessibilityLabel)
+        .accessibilityHint("Double tap to view program details")
     }
 }
 
@@ -175,6 +201,7 @@ struct TagView: View {
                     .fill(tagColor.opacity(style == .primary ? 0.12 : 0.08))
             }
             .foregroundStyle(style == .primary ? tagColor : .secondary)
+            .accessibilityLabel(style == .primary ? text.categoryAccessibilityLabel : text)
     }
 }
 
@@ -211,6 +238,7 @@ struct GroupBadge: View {
             .font(.system(size: 14))
             .frame(width: 28, height: 28)
             .background(Color.secondary.opacity(0.08), in: Circle())
+            .accessibilityLabel(GroupLabels.label(for: group))
     }
 }
 

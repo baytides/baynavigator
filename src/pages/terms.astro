@@ -9,242 +9,669 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 >
   <section class="section">
     <div class="container-page">
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <Breadcrumb items={[{ label: 'Terms of Service', href: '/terms' }]} />
-        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
-          Terms of Service
-        </h1>
 
-        <p class="text-neutral-600 dark:text-neutral-300 mb-8">
-          Last updated: January 2, 2026
-        </p>
-
-        <div class="prose dark:prose-invert max-w-none">
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Summary
-          </h2>
-          <div class="bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 p-4 rounded-r-lg mb-6">
-            <p class="text-neutral-700 dark:text-neutral-300">
-              Bay Navigator is a free resource listing programs in the Bay Area. We try to keep information accurate, but always verify details with the program directly. Don't rely solely on this site for important decisions. By using this Service, you agree to resolve disputes through binding arbitration in San Mateo County, California.
-            </p>
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl mb-6 shadow-lg">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
           </div>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Acceptance of Terms
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            By accessing or using Bay Navigator (the "Service"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, you must not access or use the Service. Your continued use of the Service constitutes your acceptance of any modifications to these terms.
+          <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            Terms of Service
+          </h1>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Last updated: January 2, 2026
           </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Description of Service
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            Bay Navigator is a free, community-maintained directory of programs offering free or discounted services in the San Francisco Bay Area. The Service is provided by Bay Tides, a California 501(c)(3) nonprofit organization.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            The Service includes:
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
-            <li>A searchable directory of programs</li>
-            <li>Eligibility guides for common benefit programs</li>
-            <li>Mobile applications for iOS and Android</li>
-            <li>An AI-powered assistant to help find relevant programs</li>
-          </ul>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Disclaimer of Warranties
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, BAY TIDES DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
-            <li>IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT</li>
-            <li>WARRANTIES THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE</li>
-            <li>WARRANTIES REGARDING THE ACCURACY, RELIABILITY, COMPLETENESS, OR TIMELINESS OF ANY INFORMATION</li>
-            <li>WARRANTIES THAT ANY PROGRAMS LISTED ARE CURRENTLY AVAILABLE OR ACCEPTING APPLICATIONS</li>
-            <li>WARRANTIES THAT YOU WILL QUALIFY FOR ANY PARTICULAR PROGRAM</li>
-          </ul>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            <strong>IMPORTANT: Always verify program details, eligibility requirements, and application procedures directly with the program provider before making any decisions or taking any actions based on information provided through the Service.</strong>
-          </p>
-
-          <!-- Limitation of Liability -->
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Limitation of Liability
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL BAY TIDES, ITS OFFICERS, DIRECTORS, EMPLOYEES, VOLUNTEERS, AGENTS, AFFILIATES, OR LICENSORS BE LIABLE FOR ANY:
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4">
-            <li>INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES</li>
-            <li>LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES</li>
-            <li>DAMAGES RESULTING FROM YOUR ACCESS TO OR USE OF (OR INABILITY TO ACCESS OR USE) THE SERVICE</li>
-            <li>DAMAGES RESULTING FROM ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE</li>
-            <li>DAMAGES RESULTING FROM UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT</li>
-            <li>DAMAGES ARISING FROM MISSED PROGRAM DEADLINES, INCORRECT ELIGIBILITY INFORMATION, OR DENIAL OF BENEFITS</li>
-          </ul>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>BAY TIDES' TOTAL LIABILITY FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE GREATER OF: (A) THE AMOUNT YOU PAID BAY TIDES TO USE THE SERVICE IN THE TWELVE (12) MONTHS PRIOR TO THE CLAIM, OR (B) ONE HUNDRED DOLLARS ($100.00).</strong>
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            Since the Service is provided free of charge, you acknowledge that Bay Tides' maximum liability shall not exceed $100.00. This limitation applies regardless of the theory of liability (contract, tort, strict liability, or otherwise) and even if Bay Tides has been advised of the possibility of such damages.
-          </p>
-
-          <!-- Financial Liability -->
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Financial Liability Conditions
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            <strong>Bay Tides shall have no financial liability to you unless and until you prevail in a final, binding arbitration proceeding conducted in accordance with these Terms.</strong> Any monetary award or damages shall only be payable after the arbitrator issues a final decision in your favor. Bay Tides shall not be required to pay any costs, fees, damages, or other amounts unless such payment is ordered by the arbitrator in a final, non-appealable decision.
-          </p>
-
-          <!-- Mandatory Arbitration -->
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Mandatory Binding Arbitration
-          </h2>
-          <div class="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 rounded-r-lg mb-6">
-            <p class="text-neutral-700 dark:text-neutral-300">
-              <strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT AND TO HAVE A JURY TRIAL.</strong>
-            </p>
-          </div>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Agreement to Arbitrate:</strong> You and Bay Tides agree that any dispute, claim, or controversy arising out of or relating to these Terms, the Service, or your use of the Service (collectively, "Disputes") will be resolved exclusively through final and binding arbitration, rather than in court, except that you may assert claims in small claims court if your claims qualify.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Waiver of Jury Trial:</strong> BY AGREEING TO THESE TERMS, YOU AND BAY TIDES ARE EACH WAIVING THE RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Arbitration Procedures:</strong>
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4">
-            <li>Arbitration shall be administered by JAMS (Judicial Arbitration and Mediation Services) pursuant to its Comprehensive Arbitration Rules and Procedures, or by another mutually agreed-upon arbitration provider.</li>
-            <li>The arbitration shall be conducted by a single neutral arbitrator.</li>
-            <li><strong>Location:</strong> All arbitration proceedings shall take place in San Mateo County, California, unless the parties mutually agree otherwise in writing.</li>
-            <li>The arbitrator shall apply California law consistent with the Federal Arbitration Act.</li>
-            <li>The arbitrator's decision shall be final and binding, and judgment on the award may be entered in any court of competent jurisdiction.</li>
-          </ul>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Arbitration Costs:</strong> Payment of all filing, administration, and arbitrator fees will be governed by the JAMS rules. If your claim is for $10,000 or less, Bay Tides will reimburse your filing fee and pay for the arbitrator's fees if you prevail. If your claim exceeds $10,000, each party shall bear its own arbitration costs unless the arbitrator determines otherwise.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Class Action Waiver:</strong> YOU AND BAY TIDES AGREE THAT EACH PARTY MAY BRING DISPUTES AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING. The arbitrator may not consolidate more than one person's claims or otherwise preside over any form of representative or class proceeding.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            <strong>Opt-Out:</strong> You may opt out of this arbitration agreement by sending written notice of your decision to opt out to: Bay Tides, Legal Department, San Mateo County, California, or by email to hello [at] baytides [dot] org, within 30 days of first accessing the Service. Your notice must include your name, address, and a clear statement that you wish to opt out of this arbitration agreement.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            <strong>Severability:</strong> If any portion of this arbitration agreement is found to be unenforceable, the remaining portions shall remain in full force and effect. If the class action waiver is found to be unenforceable, then the entirety of this arbitration agreement shall be null and void, and the dispute shall proceed in court.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            AI Assistant Disclaimer
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            The Smart Assistant feature uses artificial intelligence to help you find programs. AI responses are suggestions only and may contain errors, inaccuracies, or outdated information. The AI assistant does not provide legal, medical, financial, or professional advice. Always verify information with official program sources before making any decisions or taking any actions.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            User Conduct
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            You agree not to:
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
-            <li>Use the Service for any unlawful purpose or in violation of any applicable laws</li>
-            <li>Attempt to gain unauthorized access to our systems or networks</li>
-            <li>Scrape, crawl, or collect data in bulk without express written permission</li>
-            <li>Interfere with or disrupt the proper operation of the Service</li>
-            <li>Use the AI assistant for purposes unrelated to finding community programs</li>
-            <li>Transmit any viruses, malware, or other malicious code</li>
-            <li>Impersonate any person or entity or misrepresent your affiliation</li>
-          </ul>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Indemnification
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            You agree to indemnify, defend, and hold harmless Bay Tides and its officers, directors, employees, volunteers, agents, and affiliates from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from: (a) your use of the Service; (b) your violation of these Terms; (c) your violation of any third-party right, including any intellectual property or privacy right; or (d) any claim that your use of the Service caused damage to a third party.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Intellectual Property
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            The Bay Navigator codebase is open source under the MIT License. You may use, modify, and distribute the code according to that license.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            The program data is provided under a separate license (see LICENSE-DATA in our repository). The Bay Navigator name, logo, and all related trademarks are the property of Bay Tides and may not be used without express written permission.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Third-Party Links
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            The Service contains links to external websites. Bay Tides is not responsible for the content, policies, practices, or availability of any third-party sites. Linking to a site does not imply endorsement. Your interactions with third-party websites are solely between you and such third parties.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Modifications to Terms
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            Bay Tides reserves the right to modify these Terms at any time. We will provide notice of material changes by updating the "Last updated" date and posting the revised terms on the Service. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Termination
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            Bay Tides reserves the right to terminate or suspend your access to the Service at any time, for any reason, without prior notice or liability. Upon termination, your right to use the Service will immediately cease. All provisions of these Terms which by their nature should survive termination shall survive, including limitations of liability, indemnification, and the arbitration agreement.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Governing Law and Jurisdiction
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            These Terms shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law principles. The United Nations Convention on Contracts for the International Sale of Goods shall not apply.
-          </p>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            Subject to the mandatory arbitration provisions above, any legal action or proceeding that is not subject to arbitration shall be brought exclusively in the state or federal courts located in San Mateo County, California, and you consent to the personal jurisdiction of such courts.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            California Residents
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            If you are a California resident, in accordance with California Civil Code Section 1789.3, you may contact the Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs in writing at 1625 North Market Blvd., Suite N 112, Sacramento, California 95834, or by telephone at (800) 952-5210.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Severability
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            If any provision of these Terms is held to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect. The invalid or unenforceable provision shall be modified to the minimum extent necessary to make it valid and enforceable while preserving the parties' original intent.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Entire Agreement
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
-            These Terms, together with the Privacy Policy, constitute the entire agreement between you and Bay Tides regarding the Service and supersede all prior agreements and understandings, whether written or oral.
-          </p>
-
-          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mt-8 mb-4">
-            Contact
-          </h2>
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-            Questions about these Terms can be directed to:
-          </p>
-          <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-6">
-            <li>Email: hello [at] baytides [dot] org</li>
-            <li>GitHub: <a href="https://github.com/baytides/baynavigator/issues">github.com/baytides/baynavigator/issues</a></li>
-            <li>Address: Bay Tides, San Mateo County, California, USA</li>
-          </ul>
         </div>
 
-        <div class="mt-12">
-          <a href="/" class="btn-secondary">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- TL;DR Summary Card -->
+        <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/30 dark:to-blue-900/30 rounded-2xl p-6 mb-12 border border-primary-200 dark:border-primary-800">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-800 rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">TL;DR — The Quick Version</h2>
+              <p class="text-neutral-700 dark:text-neutral-300">
+                Bay Navigator is a <strong>free resource</strong> listing programs in the Bay Area. We try to keep information accurate, but <strong>always verify details</strong> with the program directly. Don't rely solely on this site for important decisions. By using this Service, you agree to resolve disputes through <strong>binding arbitration</strong> in San Mateo County, California.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Points Stats Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="text-2xl font-bold text-green-600 dark:text-green-400">Free</div>
+            <div class="text-sm text-neutral-600 dark:text-neutral-400">Service Cost</div>
+          </div>
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">501(c)(3)</div>
+            <div class="text-sm text-neutral-600 dark:text-neutral-400">Nonprofit Status</div>
+          </div>
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">MIT</div>
+            <div class="text-sm text-neutral-600 dark:text-neutral-400">Open Source License</div>
+          </div>
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="text-2xl font-bold text-amber-600 dark:text-amber-400">CA</div>
+            <div class="text-sm text-neutral-600 dark:text-neutral-400">Governing Law</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Acceptance of Terms -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">Acceptance of Terms</h2>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>By using Bay Navigator, you agree to these terms</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Terms may be updated — continued use means acceptance</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Don't agree? Please don't use the Service</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>By accessing or using Bay Navigator (the "Service"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree to these terms, you must not access or use the Service. Your continued use of the Service constitutes your acceptance of any modifications to these terms.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 2: Description of Service -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">What is Bay Navigator?</h2>
+                <p class="text-neutral-700 dark:text-neutral-300 mb-4">A free, community-maintained directory by Bay Tides, a California 501(c)(3) nonprofit.</p>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <span class="text-sm">Searchable directory</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    <span class="text-sm">Eligibility guides</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="text-sm">Mobile apps</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <span class="text-sm">Smart Search AI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p>Bay Navigator is a free, community-maintained directory of programs offering free or discounted services in the San Francisco Bay Area. The Service is provided by Bay Tides, a California 501(c)(3) nonprofit organization.</p>
+              <p>The Service includes:</p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>A searchable directory of programs</li>
+                <li>Eligibility guides for common benefit programs</li>
+                <li>Mobile applications for iOS and Android</li>
+                <li>An AI-powered assistant to help find relevant programs</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 3: Disclaimer of Warranties -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-amber-200 dark:border-amber-800 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">Important Disclaimers</h2>
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-4 mb-4">
+                  <p class="text-amber-800 dark:text-amber-200 font-medium">
+                    Always verify program details directly with the provider before making decisions.
+                  </p>
+                </div>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Service provided "as is" without warranties</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Information may be incomplete or outdated</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>No guarantee of program availability or eligibility</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p>THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, BAY TIDES DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT</li>
+                <li>WARRANTIES THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE</li>
+                <li>WARRANTIES REGARDING THE ACCURACY, RELIABILITY, COMPLETENESS, OR TIMELINESS OF ANY INFORMATION</li>
+                <li>WARRANTIES THAT ANY PROGRAMS LISTED ARE CURRENTLY AVAILABLE OR ACCEPTING APPLICATIONS</li>
+                <li>WARRANTIES THAT YOU WILL QUALIFY FOR ANY PARTICULAR PROGRAM</li>
+              </ul>
+              <p><strong>IMPORTANT: Always verify program details, eligibility requirements, and application procedures directly with the program provider before making any decisions or taking any actions based on information provided through the Service.</strong></p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 4: Limitation of Liability -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">Limitation of Liability</h2>
+                <div class="flex items-center gap-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg p-4 mb-4">
+                  <div class="text-3xl font-bold text-neutral-900 dark:text-white">$100</div>
+                  <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                    Maximum liability<br/>
+                    <span class="text-xs">(since the service is free)</span>
+                  </div>
+                </div>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-neutral-400">•</span>
+                    <span>Not liable for indirect, incidental, or consequential damages</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-neutral-400">•</span>
+                    <span>Not liable for missed deadlines or benefit denials</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-neutral-400">•</span>
+                    <span>Liability only payable after binding arbitration</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL BAY TIDES, ITS OFFICERS, DIRECTORS, EMPLOYEES, VOLUNTEERS, AGENTS, AFFILIATES, OR LICENSORS BE LIABLE FOR ANY:</p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES</li>
+                <li>LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES</li>
+                <li>DAMAGES RESULTING FROM YOUR ACCESS TO OR USE OF (OR INABILITY TO ACCESS OR USE) THE SERVICE</li>
+                <li>DAMAGES RESULTING FROM ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE</li>
+                <li>DAMAGES RESULTING FROM UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT</li>
+                <li>DAMAGES ARISING FROM MISSED PROGRAM DEADLINES, INCORRECT ELIGIBILITY INFORMATION, OR DENIAL OF BENEFITS</li>
+              </ul>
+              <p><strong>BAY TIDES' TOTAL LIABILITY FOR ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE GREATER OF: (A) THE AMOUNT YOU PAID BAY TIDES TO USE THE SERVICE IN THE TWELVE (12) MONTHS PRIOR TO THE CLAIM, OR (B) ONE HUNDRED DOLLARS ($100.00).</strong></p>
+              <p>Since the Service is provided free of charge, you acknowledge that Bay Tides' maximum liability shall not exceed $100.00. This limitation applies regardless of the theory of liability (contract, tort, strict liability, or otherwise) and even if Bay Tides has been advised of the possibility of such damages.</p>
+              <p><strong>Financial Liability Conditions:</strong> Bay Tides shall have no financial liability to you unless and until you prevail in a final, binding arbitration proceeding conducted in accordance with these Terms. Any monetary award or damages shall only be payable after the arbitrator issues a final decision in your favor. Bay Tides shall not be required to pay any costs, fees, damages, or other amounts unless such payment is ordered by the arbitrator in a final, non-appealable decision.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 5: Mandatory Arbitration -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border-2 border-amber-300 dark:border-amber-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-2">Mandatory Binding Arbitration</h2>
+                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 mb-4 text-sm">
+                  <p class="text-amber-800 dark:text-amber-200 font-medium">
+                    ⚠️ This affects your legal rights, including your right to sue in court.
+                  </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div class="bg-neutral-50 dark:bg-neutral-700/50 rounded-lg p-3">
+                    <div class="font-medium text-neutral-900 dark:text-white mb-1">Location</div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400">San Mateo County, CA</div>
+                  </div>
+                  <div class="bg-neutral-50 dark:bg-neutral-700/50 rounded-lg p-3">
+                    <div class="font-medium text-neutral-900 dark:text-white mb-1">Provider</div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400">JAMS Arbitration</div>
+                  </div>
+                </div>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2">
+                    <span class="text-amber-500 font-bold">!</span>
+                    <span>No jury trials — disputes resolved by arbitrator</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-amber-500 font-bold">!</span>
+                    <span>No class actions — individual claims only</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>Small claims court still available</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>30-day opt-out window available</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p><strong>Agreement to Arbitrate:</strong> You and Bay Tides agree that any dispute, claim, or controversy arising out of or relating to these Terms, the Service, or your use of the Service (collectively, "Disputes") will be resolved exclusively through final and binding arbitration, rather than in court, except that you may assert claims in small claims court if your claims qualify.</p>
+              <p><strong>Waiver of Jury Trial:</strong> BY AGREEING TO THESE TERMS, YOU AND BAY TIDES ARE EACH WAIVING THE RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION.</p>
+              <p><strong>Arbitration Procedures:</strong></p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>Arbitration shall be administered by JAMS (Judicial Arbitration and Mediation Services) pursuant to its Comprehensive Arbitration Rules and Procedures, or by another mutually agreed-upon arbitration provider.</li>
+                <li>The arbitration shall be conducted by a single neutral arbitrator.</li>
+                <li><strong>Location:</strong> All arbitration proceedings shall take place in San Mateo County, California, unless the parties mutually agree otherwise in writing.</li>
+                <li>The arbitrator shall apply California law consistent with the Federal Arbitration Act.</li>
+                <li>The arbitrator's decision shall be final and binding, and judgment on the award may be entered in any court of competent jurisdiction.</li>
+              </ul>
+              <p><strong>Arbitration Costs:</strong> Payment of all filing, administration, and arbitrator fees will be governed by the JAMS rules. If your claim is for $10,000 or less, Bay Tides will reimburse your filing fee and pay for the arbitrator's fees if you prevail. If your claim exceeds $10,000, each party shall bear its own arbitration costs unless the arbitrator determines otherwise.</p>
+              <p><strong>Class Action Waiver:</strong> YOU AND BAY TIDES AGREE THAT EACH PARTY MAY BRING DISPUTES AGAINST THE OTHER ONLY IN AN INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING. The arbitrator may not consolidate more than one person's claims or otherwise preside over any form of representative or class proceeding.</p>
+              <p><strong>Opt-Out:</strong> You may opt out of this arbitration agreement by sending written notice of your decision to opt out to: Bay Tides, Legal Department, San Mateo County, California, or by email to hello [at] baytides [dot] org, within 30 days of first accessing the Service. Your notice must include your name, address, and a clear statement that you wish to opt out of this arbitration agreement.</p>
+              <p><strong>Severability:</strong> If any portion of this arbitration agreement is found to be unenforceable, the remaining portions shall remain in full force and effect. If the class action waiver is found to be unenforceable, then the entirety of this arbitration agreement shall be null and void, and the dispute shall proceed in court.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 6: AI Assistant -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">Smart Search AI</h2>
+                <ul class="space-y-2 text-neutral-700 dark:text-neutral-300">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>AI suggestions may contain errors or outdated info</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Not a substitute for legal, medical, or financial advice</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Always verify with official program sources</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>The Smart Search feature uses artificial intelligence to help you find programs. AI responses are suggestions only and may contain errors, inaccuracies, or outdated information. The AI assistant does not provide legal, medical, financial, or professional advice. Always verify information with official program sources before making any decisions or taking any actions.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 7: User Conduct -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">User Conduct</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-3 text-sm">Please don't:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Use for unlawful purposes</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Hack or attack our systems</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Scrape data without permission</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Transmit malware or viruses</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Misuse the AI assistant</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>Impersonate others</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p>You agree not to:</p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>Use the Service for any unlawful purpose or in violation of any applicable laws</li>
+                <li>Attempt to gain unauthorized access to our systems or networks</li>
+                <li>Scrape, crawl, or collect data in bulk without express written permission</li>
+                <li>Interfere with or disrupt the proper operation of the Service</li>
+                <li>Use the AI assistant for purposes unrelated to finding community programs</li>
+                <li>Transmit any viruses, malware, or other malicious code</li>
+                <li>Impersonate any person or entity or misrepresent your affiliation</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- Section 8: Intellectual Property -->
+        <section class="mb-10">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-3">Intellectual Property</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4">
+                    <div class="flex items-center gap-2 mb-2">
+                      <svg class="w-5 h-5 text-teal-600 dark:text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      <span class="font-medium text-teal-800 dark:text-teal-200">Code</span>
+                    </div>
+                    <p class="text-sm text-teal-700 dark:text-teal-300">Open source under MIT License</p>
+                  </div>
+                  <div class="bg-neutral-50 dark:bg-neutral-700/50 rounded-lg p-4">
+                    <div class="flex items-center gap-2 mb-2">
+                      <svg class="w-5 h-5 text-neutral-600 dark:text-neutral-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/>
+                      </svg>
+                      <span class="font-medium text-neutral-800 dark:text-neutral-200">Data</span>
+                    </div>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Separate license (see LICENSE-DATA)</p>
+                  </div>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-3">
+                  Bay Navigator name and logo are trademarks of Bay Tides.
+                </p>
+              </div>
+            </div>
+          </div>
+          <details class="group mt-3">
+            <summary class="flex items-center gap-2 text-sm text-primary-700 dark:text-primary-400 cursor-pointer hover:text-primary-800 dark:hover:text-primary-300 font-medium">
+              <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Read full legal text
+            </summary>
+            <div class="mt-4 pl-6 border-l-2 border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 space-y-3">
+              <p>The Bay Navigator codebase is open source under the MIT License. You may use, modify, and distribute the code according to that license.</p>
+              <p>The program data is provided under a separate license (see LICENSE-DATA in our repository). The Bay Navigator name, logo, and all related trademarks are the property of Bay Tides and may not be used without express written permission.</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- Additional Sections (Collapsible) -->
+        <div class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-6 mb-10">
+          <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Additional Legal Provisions</h2>
+
+          <!-- Indemnification -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Indemnification</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>You agree to indemnify, defend, and hold harmless Bay Tides and its officers, directors, employees, volunteers, agents, and affiliates from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from: (a) your use of the Service; (b) your violation of these Terms; (c) your violation of any third-party right, including any intellectual property or privacy right; or (d) any claim that your use of the Service caused damage to a third party.</p>
+            </div>
+          </details>
+
+          <!-- Third-Party Links -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Third-Party Links</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>The Service contains links to external websites. Bay Tides is not responsible for the content, policies, practices, or availability of any third-party sites. Linking to a site does not imply endorsement. Your interactions with third-party websites are solely between you and such third parties.</p>
+            </div>
+          </details>
+
+          <!-- Modifications to Terms -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Modifications to Terms</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>Bay Tides reserves the right to modify these Terms at any time. We will provide notice of material changes by updating the "Last updated" date and posting the revised terms on the Service. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms. It is your responsibility to review these Terms periodically.</p>
+            </div>
+          </details>
+
+          <!-- Termination -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Termination</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>Bay Tides reserves the right to terminate or suspend your access to the Service at any time, for any reason, without prior notice or liability. Upon termination, your right to use the Service will immediately cease. All provisions of these Terms which by their nature should survive termination shall survive, including limitations of liability, indemnification, and the arbitration agreement.</p>
+            </div>
+          </details>
+
+          <!-- Governing Law -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Governing Law & Jurisdiction</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
+              <p>These Terms shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law principles. The United Nations Convention on Contracts for the International Sale of Goods shall not apply.</p>
+              <p>Subject to the mandatory arbitration provisions above, any legal action or proceeding that is not subject to arbitration shall be brought exclusively in the state or federal courts located in San Mateo County, California, and you consent to the personal jurisdiction of such courts.</p>
+            </div>
+          </details>
+
+          <!-- California Residents -->
+          <details class="group mb-4">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">California Residents</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400">
+              <p>If you are a California resident, in accordance with California Civil Code Section 1789.3, you may contact the Complaint Assistance Unit of the Division of Consumer Services of the California Department of Consumer Affairs in writing at 1625 North Market Blvd., Suite N 112, Sacramento, California 95834, or by telephone at (800) 952-5210.</p>
+            </div>
+          </details>
+
+          <!-- Severability & Entire Agreement -->
+          <details class="group">
+            <summary class="flex items-center justify-between w-full p-3 bg-white dark:bg-neutral-800 rounded-lg cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700">
+              <span class="font-medium text-neutral-900 dark:text-white">Severability & Entire Agreement</span>
+              <svg class="w-5 h-5 text-neutral-500 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <div class="mt-2 p-4 text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
+              <p>If any provision of these Terms is held to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect. The invalid or unenforceable provision shall be modified to the minimum extent necessary to make it valid and enforceable while preserving the parties' original intent.</p>
+              <p>These Terms, together with the Privacy Policy, constitute the entire agreement between you and Bay Tides regarding the Service and supersede all prior agreements and understandings, whether written or oral.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl p-8 text-center text-white mb-10">
+          <h2 class="text-2xl font-bold mb-4">Questions About These Terms?</h2>
+          <p class="text-primary-100 mb-6">We're happy to clarify anything. Reach out anytime.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:hello@baytides.org" class="inline-flex items-center justify-center gap-2 bg-white text-primary-700 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              Email Us
+            </a>
+            <a href="https://github.com/baytides/baynavigator/issues" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-white/20 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/30 transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Open an Issue
+            </a>
+          </div>
+        </div>
+
+        <!-- Open Source Badge -->
+        <div class="flex justify-center mb-10">
+          <a href="https://github.com/baytides/baynavigator" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-800 rounded-full text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            View Source on GitHub
+          </a>
+        </div>
+
+        <div class="text-center">
+          <a href="/" class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
             </svg>
             Back to Programs

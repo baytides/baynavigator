@@ -5,6 +5,7 @@ struct SmartAssistantView: View {
     @State private var viewModel = SmartAssistantViewModel()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var onProgramSelected: ((AIProgram) -> Void)?
 
@@ -69,12 +70,15 @@ struct SmartAssistantView: View {
                     Menu {
                         Button(role: .destructive) {
                             viewModel.clearConversation()
+                            AccessibilityAnnouncement.announce("Conversation cleared")
                         } label: {
                             Label("Clear Chat", systemImage: "trash")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
                     }
+                    .accessibilityLabel("Chat options")
+                    .accessibilityHint("Double tap to open menu")
                 }
 
                 ToolbarItem(placement: .topBarLeading) {
@@ -84,6 +88,9 @@ struct SmartAssistantView: View {
                         Image(systemName: "xmark.circle.fill")
                             .symbolRenderingMode(.hierarchical)
                     }
+                    .accessibilityLabel("Close Smart Assistant")
+                    .accessibilityHint("Double tap to close")
+                    .frame(minWidth: 44, minHeight: 44) // WCAG 2.5.5
                 }
             }
             .alert(
@@ -136,6 +143,10 @@ private struct MessageBubble: View {
     let message: ChatMessage
     var onProgramTap: ((AIProgram) -> Void)?
 
+    private var roleLabel: String {
+        message.role == .user ? "You said" : "Smart Assistant said"
+    }
+
     var body: some View {
         HStack {
             if message.role == .user { Spacer(minLength: 60) }
@@ -149,6 +160,7 @@ private struct MessageBubble: View {
                             .fill(backgroundColor)
                     }
                     .foregroundStyle(message.role == .user ? .white : .primary)
+                    .accessibilityLabel("\(roleLabel): \(message.content)")
 
                 // Program cards
                 if let programs = message.programs, !programs.isEmpty {
@@ -164,13 +176,17 @@ private struct MessageBubble: View {
                             Text("+\(programs.count - 3) more programs")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
+                                .accessibilityLabel("\(programs.count - 3) additional programs available")
                         }
                     }
+                    .accessibilityElement(children: .contain)
+                    .accessibilityLabel("Recommended programs")
                 }
             }
 
             if message.role == .assistant { Spacer(minLength: 60) }
         }
+        .accessibilityElement(children: .contain)
     }
 
     private var backgroundColor: Color {
@@ -236,6 +252,7 @@ private struct MiniProgramCard: View {
                     .font(.system(size: 16))
                     .foregroundStyle(categoryColor)
             }
+            .accessibilityHidden(true)
 
             // Program info
             VStack(alignment: .leading, spacing: 2) {
@@ -261,14 +278,20 @@ private struct MiniProgramCard: View {
             Image(systemName: "chevron.right")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
         }
         .padding(12)
+        .frame(minHeight: 44) // WCAG 2.5.5: 44pt minimum
         .background {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.regularMaterial)
         }
         .contentShape(RoundedRectangle(cornerRadius: 12))
         .hoverEffect(.highlight)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(program.name), \(program.category) program")
+        .accessibilityHint("Double tap to view program details")
+        .accessibilityAddTraits(.isButton)
     }
 }
 
@@ -289,16 +312,21 @@ private struct QuickPromptsSection: View {
                             .font(.subheadline)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)
+                            .frame(minHeight: 44) // WCAG 2.5.5: 44pt minimum
                             .background(.regularMaterial, in: Capsule())
                     }
                     .buttonStyle(.plain)
                     .hoverEffect(.highlight)
+                    .accessibilityLabel("Ask: \(prompt)")
+                    .accessibilityHint("Double tap to send this question")
                 }
             }
             .padding(.horizontal)
             .padding(.vertical, 8)
         }
         .background(.bar)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Suggested questions")
     }
 }
 
@@ -324,6 +352,8 @@ private struct InputSection: View {
                         onSend()
                     }
                 }
+                .accessibilityLabel("Message input")
+                .accessibilityHint("Enter your question about programs")
 
             Button {
                 onSend()
@@ -334,6 +364,9 @@ private struct InputSection: View {
             }
             .disabled(!canSend)
             .buttonStyle(.plain)
+            .frame(minWidth: 44, minHeight: 44) // WCAG 2.5.5: 44pt minimum
+            .accessibilityLabel("Send message")
+            .accessibilityHint(canSend ? "Double tap to send your question" : "Enter a message first")
         }
         .padding(.horizontal)
         .padding(.vertical, 12)
@@ -349,6 +382,7 @@ private struct InputSection: View {
 
 private struct LoadingIndicator: View {
     @State private var animationPhase: CGFloat = 0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         HStack {
@@ -357,7 +391,7 @@ private struct LoadingIndicator: View {
                     Circle()
                         .fill(.secondary)
                         .frame(width: 8, height: 8)
-                        .opacity(animationOpacity(for: index))
+                        .opacity(reduceMotion ? 0.7 : animationOpacity(for: index))
                 }
             }
             .padding(14)
@@ -369,10 +403,14 @@ private struct LoadingIndicator: View {
             Spacer()
         }
         .onAppear {
-            withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
-                animationPhase = 1
+            if !reduceMotion {
+                withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+                    animationPhase = 1
+                }
             }
         }
+        .accessibilityLabel(AccessibilityLabels.loadingPrograms)
+        .accessibilityAddTraits(.updatesFrequently)
     }
 
     private func animationOpacity(for index: Int) -> Double {

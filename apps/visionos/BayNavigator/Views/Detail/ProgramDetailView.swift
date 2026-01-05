@@ -5,9 +5,22 @@ struct ProgramDetailView: View {
     let program: Program
     @Environment(ProgramsViewModel.self) private var viewModel
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var categoryColor: Color {
         Color.categoryColor(for: program.category)
+    }
+
+    // MARK: - Accessibility
+
+    private var isFavorite: Bool {
+        viewModel.isFavorite(program.id)
+    }
+
+    private var favoriteAccessibilityLabel: String {
+        isFavorite
+            ? AccessibilityLabels.unsaveProgram(program.name)
+            : AccessibilityLabels.saveProgram(program.name)
     }
 
     var body: some View {
@@ -63,14 +76,20 @@ struct ProgramDetailView: View {
                         // Favorite button
                         Button {
                             viewModel.toggleFavorite(program.id)
+                            AccessibilityAnnouncement.announceSaveAction(isSaved: !isFavorite, programName: program.name)
                         } label: {
-                            Image(systemName: viewModel.isFavorite(program.id) ? "bookmark.fill" : "bookmark")
+                            Image(systemName: isFavorite ? "bookmark.fill" : "bookmark")
                                 .font(.title2)
-                                .foregroundStyle(viewModel.isFavorite(program.id) ? Color.appDanger : .secondary)
+                                .foregroundStyle(isFavorite ? Color.appDanger : .secondary)
                                 .padding(12)
+                                .frame(minWidth: 44, minHeight: 44) // WCAG 2.5.5: 44pt minimum
                                 .background(.regularMaterial, in: Circle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityLabel(favoriteAccessibilityLabel)
+                        .accessibilityHint(isFavorite
+                            ? "Double tap to remove from saved programs"
+                            : "Double tap to save to your list")
                     }
 
                     // Description
@@ -421,12 +440,14 @@ struct InfoCard<Content: View>: View {
                 Image(systemName: icon)
                     .foregroundStyle(Color.appPrimary)
                     .font(.subheadline)
+                    .accessibilityHidden(true)
 
                 Text(title.uppercased())
                     .font(.caption)
                     .fontWeight(.semibold)
                     .tracking(0.5)
                     .foregroundStyle(.secondary)
+                    .accessibilityAddTraits(.isHeader)
             }
 
             content()
@@ -434,6 +455,7 @@ struct InfoCard<Content: View>: View {
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+        .accessibilityElement(children: .contain)
     }
 }
 
@@ -450,33 +472,45 @@ struct QuickActionsOrnament: View {
             // Favorite button
             OrnamentButton(
                 icon: isFavorite ? "bookmark.fill" : "bookmark",
-                label: isFavorite ? "Saved" : "Save",
+                label: isFavorite
+                    ? AccessibilityLabels.programSaved(program.name)
+                    : AccessibilityLabels.saveProgram(program.name),
                 color: isFavorite ? .red : .secondary,
-                action: onFavoriteToggle
+                action: {
+                    onFavoriteToggle()
+                    AccessibilityAnnouncement.announceSaveAction(isSaved: !isFavorite, programName: program.name)
+                },
+                accessibilityHintText: isFavorite
+                    ? "Double tap to remove from saved programs"
+                    : "Double tap to save to your list"
             )
 
             // Website button
             if program.website != nil && !program.website!.isEmpty {
                 OrnamentButton(
                     icon: "globe",
-                    label: "Website",
+                    label: AccessibilityLabels.openWebsite(program.name),
                     color: .blue,
-                    action: onWebsite
+                    action: onWebsite,
+                    accessibilityHintText: "Double tap to open in browser"
                 )
             }
 
             // Call button
-            if program.phone != nil && !program.phone!.isEmpty {
+            if let phone = program.phone, !phone.isEmpty {
                 OrnamentButton(
                     icon: "phone.fill",
-                    label: "Call",
+                    label: AccessibilityLabels.callPhone(phone),
                     color: .green,
-                    action: onCall
+                    action: onCall,
+                    accessibilityHintText: "Double tap to call"
                 )
             }
         }
         .padding(12)
         .glassBackgroundEffect()
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Quick actions for \(program.name)")
     }
 }
 
@@ -485,6 +519,7 @@ struct OrnamentButton: View {
     let label: String
     let color: Color
     let action: () -> Void
+    var accessibilityHintText: String = ""
 
     var body: some View {
         Button(action: action) {
@@ -492,7 +527,7 @@ struct OrnamentButton: View {
                 Image(systemName: icon)
                     .font(.title2)
                     .foregroundStyle(color)
-                    .frame(width: 44, height: 44)
+                    .frame(width: 44, height: 44) // WCAG 2.5.5: 44pt minimum
                     .background(color.opacity(0.15), in: Circle())
 
                 Text(label)
@@ -502,6 +537,8 @@ struct OrnamentButton: View {
         }
         .buttonStyle(.plain)
         .hoverEffect(.highlight)
+        .accessibilityLabel(label)
+        .accessibilityHint(accessibilityHintText)
     }
 }
 
@@ -512,13 +549,17 @@ struct ContactButton: View {
     let subtitle: String
     let action: () -> Void
 
+    private var accessibilityLabelText: String {
+        "\(title): \(subtitle)"
+    }
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
                 Image(systemName: icon)
                     .font(.title3)
                     .foregroundStyle(Color.appPrimary)
-                    .frame(width: 40, height: 40)
+                    .frame(width: 44, height: 44) // WCAG 2.5.5: 44pt minimum
                     .background(Color.appPrimary.opacity(0.1), in: Circle())
 
                 VStack(alignment: .leading, spacing: 2) {
@@ -538,12 +579,16 @@ struct ContactButton: View {
                 Image(systemName: "chevron.right")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
+                    .accessibilityHidden(true)
             }
             .padding(12)
+            .frame(minHeight: 44) // WCAG 2.5.5: 44pt minimum
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
         }
         .buttonStyle(.plain)
         .hoverEffect(.lift)
+        .accessibilityLabel(accessibilityLabelText)
+        .accessibilityHint("Double tap to \(title.lowercased())")
     }
 }
 

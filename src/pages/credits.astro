@@ -205,6 +205,46 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           </div>
         </section>
 
+        <!-- Accessibility -->
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            Accessibility
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+            We're committed to WCAG 2.2 AAA compliance and follow emerging WCAG 3.0 draft guidelines. These resources guide our accessibility work.
+          </p>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">WCAG 2.2</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Web Content Accessibility Guidelines</p>
+            </a>
+            <a href="https://www.w3.org/TR/wcag-3.0/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">WCAG 3.0 (Draft)</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Next-gen accessibility guidelines</p>
+            </a>
+            <a href="https://www.deque.com/axe/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">axe-core</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Automated accessibility testing</p>
+            </a>
+            <a href="https://developer.apple.com/accessibility/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Apple Accessibility</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">VoiceOver, Dynamic Type guidelines</p>
+            </a>
+            <a href="https://docs.flutter.dev/ui/accessibility-and-internationalization/accessibility" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Flutter Accessibility</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Semantics and screen reader support</p>
+            </a>
+            <a href="https://www.section508.gov/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Section 508</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">Federal accessibility standards</p>
+            </a>
+          </div>
+        </section>
+
         <!-- Security & DevOps -->
         <section class="mb-12">
           <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
@@ -222,9 +262,9 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">CodeQL</h3>
               <p class="text-sm text-neutral-600 dark:text-neutral-300">Code security analysis</p>
             </a>
-            <a href="https://www.deque.com/axe/" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
-              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">axe-core</h3>
-              <p class="text-sm text-neutral-600 dark:text-neutral-300">Accessibility testing</p>
+            <a href="https://github.com/features/actions" target="_blank" rel="noopener" class="block bg-white dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
+              <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">GitHub Actions</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">CI/CD automation</p>
             </a>
           </div>
         </section>

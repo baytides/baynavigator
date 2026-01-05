@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(ProgramsViewModel.self) private var viewModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showingFilters = false
     @State private var showingSort = false
     @State private var selectedProgram: Program?
@@ -42,6 +43,10 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .accessibilityLabel(viewModel.filterState.filterCount > 0
+                        ? AccessibilityLabels.filterActive(viewModel.filterState.filterCount)
+                        : AccessibilityLabels.filter)
+                    .accessibilityHint("Double tap to open filter options")
                 }
 
                 ToolbarItem(placement: .secondaryAction) {
@@ -54,6 +59,8 @@ struct HomeView: View {
                     } label: {
                         Label("Sort", systemImage: "arrow.up.arrow.down")
                     }
+                    .accessibilityLabel(AccessibilityLabels.sort)
+                    .accessibilityHint("Double tap to change sort order")
                 }
             }
             .sheet(isPresented: $showingFilters) {
@@ -83,18 +90,23 @@ struct HomeView: View {
                     Text("\(viewModel.filteredPrograms.count) program\(viewModel.filteredPrograms.count == 1 ? "" : "s")")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                        .accessibilityLabel(AccessibilityLabels.resultsCount(viewModel.filteredPrograms.count))
 
                     Spacer()
 
                     if viewModel.filterState.hasFilters {
                         Button("Clear") {
                             viewModel.clearFilters()
+                            AccessibilityAnnouncement.announce("Filters cleared")
                         }
                         .font(.subheadline)
+                        .accessibilityLabel("Clear all filters")
+                        .accessibilityHint("Double tap to remove all active filters")
                     }
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 16)
+                .accessibilityElement(children: .contain)
 
                 if viewModel.filteredPrograms.isEmpty {
                     emptyState
@@ -127,18 +139,25 @@ struct HomeView: View {
         return HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
 
             TextField("Search programs...", text: $viewModel.filterState.searchQuery)
                 .textFieldStyle(.plain)
+                .accessibilityLabel(AccessibilityLabels.search)
+                .accessibilityHint("Enter keywords to search programs")
 
             if !viewModel.filterState.searchQuery.isEmpty {
                 Button {
                     viewModel.filterState.searchQuery = ""
+                    AccessibilityAnnouncement.announce("Search cleared")
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
+                .frame(minWidth: 44, minHeight: 44) // WCAG 2.5.5: 44pt minimum touch target
+                .accessibilityLabel("Clear search")
+                .accessibilityHint("Double tap to clear search text")
             }
         }
         .padding(12)
