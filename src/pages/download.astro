@@ -114,20 +114,30 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
           Other Options
         </h2>
 
-        <div class="grid gap-4 sm:grid-cols-2 mb-8">
-          <!-- Google Play (coming soon) -->
-          <div class="bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4">
-            <div class="flex flex-col items-start gap-3">
-              <!-- Official Google Play badge - greyscale for coming soon -->
-              <img
-                src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                alt="Get it on Google Play"
-                class="h-[60px] w-auto grayscale opacity-60"
-              />
-              <p class="text-sm text-neutral-500 dark:text-neutral-400">Coming soon</p>
-            </div>
+        <!-- App Store Badges (horizontal, same height) -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-6">
+          <!-- App Store badge -->
+          <div class="flex flex-col items-center gap-2">
+            <img
+              src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+              alt="Download on the App Store"
+              class="h-[40px] w-auto grayscale opacity-60"
+            />
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">Coming soon</p>
           </div>
+          <!-- Google Play badge -->
+          <div class="flex flex-col items-center gap-2">
+            <img
+              src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+              alt="Get it on Google Play"
+              class="h-[40px] w-auto grayscale opacity-60"
+            />
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">Coming soon</p>
+          </div>
+        </div>
 
+        <!-- Other options -->
+        <div class="grid gap-4 sm:grid-cols-3 mb-8">
           <!-- F-Droid (coming soon) -->
           <div class="bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 opacity-60">
             <div class="flex items-center gap-3 mb-2">
@@ -137,19 +147,6 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
               <span class="font-medium text-neutral-700 dark:text-neutral-300">F-Droid</span>
             </div>
             <p class="text-sm text-neutral-500 dark:text-neutral-400">Coming soon</p>
-          </div>
-
-          <!-- iOS App Store (coming soon) -->
-          <div class="bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg p-4">
-            <div class="flex flex-col items-start gap-3">
-              <!-- Official App Store badge - greyscale for coming soon -->
-              <img
-                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
-                alt="Download on the App Store"
-                class="h-[40px] w-auto grayscale opacity-60"
-              />
-              <p class="text-sm text-neutral-500 dark:text-neutral-400">Coming soon</p>
-            </div>
           </div>
 
           <!-- Apple Vision Pro (coming soon) -->
