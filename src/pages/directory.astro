@@ -25,7 +25,7 @@ if (fs.existsSync(suppressedPath)) {
 
 // Load all program YAML files dynamically
 const dataDir = path.join(process.cwd(), 'src/data');
-const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml'];
+const NON_PROGRAM_FILES = ['cities.yml', 'groups.yml', 'zipcodes.yml', 'suppressed.yml', 'search-config.yml'];
 const programFiles = fs.readdirSync(dataDir)
   .filter(f => f.endsWith('.yml') && !NON_PROGRAM_FILES.includes(f));
 
@@ -364,5 +364,54 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     if (categoryParam || groupParam) {
       filterPrograms();
     }
+
+    // Handle hash fragment to scroll to specific program (from map)
+    function handleHashNavigation() {
+      const hash = window.location.hash;
+      if (hash && hash.length > 1) {
+        const programId = hash.substring(1); // Remove the #
+        const targetCard = document.querySelector(`[data-program-id="${programId}"]`);
+
+        if (targetCard) {
+          // Make sure the card is visible (clear any filters that might hide it)
+          const cardCategory = targetCard.getAttribute('data-category') || '';
+          if (activeCategory !== 'all' && cardCategory.toLowerCase() !== activeCategory.toLowerCase()) {
+            // Reset category filter to show all
+            activeCategory = 'all';
+            if (categorySelect) categorySelect.value = 'all';
+          }
+
+          // Clear group filter if it would hide the card
+          const cardGroups = (targetCard.getAttribute('data-groups') || '').split(',').filter(Boolean);
+          if (activeGroup && !cardGroups.includes(activeGroup)) {
+            activeGroup = null;
+            groupBtns.forEach(btn => {
+              btn.classList.remove('bg-primary-100', 'dark:bg-primary-900/50', 'border-primary-400', 'dark:border-primary-600', 'text-primary-700', 'dark:text-primary-300');
+              btn.classList.add('bg-white', 'dark:bg-neutral-700', 'border-neutral-200', 'dark:border-neutral-600');
+            });
+          }
+
+          // Apply filters to ensure card is visible
+          filterPrograms();
+
+          // Scroll to the card with some offset for the header
+          setTimeout(() => {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Highlight the card temporarily
+            targetCard.classList.add('ring-2', 'ring-primary-500', 'ring-offset-2');
+            setTimeout(() => {
+              targetCard.classList.remove('ring-2', 'ring-primary-500', 'ring-offset-2');
+            }, 3000);
+          }, 100);
+        }
+      }
+    }
+
+    // Handle hash on page load
+    handleHashNavigation();
+
+    // Handle hash changes (e.g., back/forward navigation)
+    window.addEventListener('hashchange', handleHashNavigation);
   });
 </script>
