@@ -20,6 +20,11 @@ class Program {
   final String? requirements;
   final String? howToApply;
   final String lastUpdated;
+  final double? latitude;
+  final double? longitude;
+
+  // Calculated at runtime (not persisted)
+  double? distanceFromUser;
 
   Program({
     required this.id,
@@ -40,6 +45,9 @@ class Program {
     this.requirements,
     this.howToApply,
     required this.lastUpdated,
+    this.latitude,
+    this.longitude,
+    this.distanceFromUser,
   });
 
   factory Program.fromJson(Map<String, dynamic> json) {
@@ -62,6 +70,8 @@ class Program {
       requirements: json['requirements'] as String?,
       howToApply: json['howToApply'] as String?,
       lastUpdated: json['lastUpdated'] as String,
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
     );
   }
 
@@ -85,8 +95,13 @@ class Program {
       'requirements': requirements,
       'howToApply': howToApply,
       'lastUpdated': lastUpdated,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
+
+  /// Check if program has valid coordinates
+  bool get hasCoordinates => latitude != null && longitude != null;
 
   /// Get display description (prefer fullDescription, fallback to description)
   String get displayDescription => fullDescription ?? description;

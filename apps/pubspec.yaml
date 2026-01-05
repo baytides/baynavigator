@@ -32,6 +32,9 @@ dependencies:
   package_info_plus: ^9.0.0
   path_provider: ^2.1.5
 
+  # Location (privacy-first, on-device only)
+  geolocator: ^14.0.0
+
   # Desktop
   window_manager: ^0.5.1
 

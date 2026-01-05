@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import '../models/program.dart';
 import '../services/api_service.dart';
@@ -8,6 +9,7 @@ enum SortOption {
   nameAsc,
   nameDesc,
   categoryAsc,
+  distanceAsc, // Sort by distance from user (requires location)
 }
 
 class ProgramsProvider extends ChangeNotifier {
@@ -119,6 +121,14 @@ class ProgramsProvider extends ChangeNotifier {
           final categoryCompare = a.category.compareTo(b.category);
           if (categoryCompare != 0) return categoryCompare;
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        break;
+      case SortOption.distanceAsc:
+        // Sort by distance (programs without distance go to end)
+        result.sort((a, b) {
+          final distA = a.distanceFromUser ?? double.infinity;
+          final distB = b.distanceFromUser ?? double.infinity;
+          return distA.compareTo(distB);
         });
         break;
     }
@@ -384,6 +394,50 @@ class ProgramsProvider extends ChangeNotifier {
     final favoritePrograms = _programs.where((p) => _favorites.contains(p.id)).toList();
     IMessageService.syncFavorites(favoritePrograms);
   }
+
+  // Location methods (all calculations on-device, privacy-first)
+  void updateDistancesFromLocation(double userLat, double userLng) {
+    for (final program in _programs) {
+      if (program.latitude != null && program.longitude != null) {
+        program.distanceFromUser = _calculateDistance(
+          userLat, userLng,
+          program.latitude!, program.longitude!,
+        );
+      } else {
+        program.distanceFromUser = null;
+      }
+    }
+    notifyListeners();
+  }
+
+  void clearDistances() {
+    for (final program in _programs) {
+      program.distanceFromUser = null;
+    }
+    // Reset sort to default if was distance-based
+    if (_sortOption == SortOption.distanceAsc) {
+      _sortOption = SortOption.recentlyVerified;
+    }
+    notifyListeners();
+  }
+
+  // Haversine formula for distance calculation (on-device, privacy-first)
+  double _calculateDistance(double lat1, double lng1, double lat2, double lng2) {
+    const double earthRadiusMiles = 3959;
+
+    final dLat = _toRadians(lat2 - lat1);
+    final dLng = _toRadians(lng2 - lng1);
+
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_toRadians(lat1)) * cos(_toRadians(lat2)) *
+        sin(dLng / 2) * sin(dLng / 2);
+
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+    return earthRadiusMiles * c;
+  }
+
+  double _toRadians(double degrees) => degrees * pi / 180;
 
   // Cache methods
   Future<void> clearCache() async {

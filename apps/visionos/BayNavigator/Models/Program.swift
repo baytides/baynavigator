@@ -19,6 +19,33 @@ struct Program: Codable, Identifiable, Hashable {
     let requirements: String?
     let howToApply: String?
     let lastUpdated: String
+    let latitude: Double?
+    let longitude: Double?
+
+    // Calculated at runtime (not persisted)
+    var distanceFromUser: Double?
+
+    var hasCoordinates: Bool {
+        latitude != nil && longitude != nil
+    }
+
+    // Custom Hashable conformance (exclude distanceFromUser)
+    static func == (lhs: Program, rhs: Program) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    // Custom Codable keys (exclude distanceFromUser from JSON)
+    enum CodingKeys: String, CodingKey {
+        case id, name, category, description, fullDescription
+        case whatTheyOffer, howToGetIt, groups, areas, city
+        case website, cost, phone, email, address
+        case requirements, howToApply, lastUpdated
+        case latitude, longitude
+    }
 
     var lastUpdatedDate: Date? {
         // Try simple date format first (yyyy-MM-dd)
@@ -209,6 +236,7 @@ enum SortOption: String, CaseIterable, Identifiable {
     case nameAsc = "Name (A-Z)"
     case nameDesc = "Name (Z-A)"
     case categoryAsc = "Category"
+    case distanceAsc = "Distance (Nearest)"
 
     var id: String { rawValue }
 }

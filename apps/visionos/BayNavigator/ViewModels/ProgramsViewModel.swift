@@ -99,6 +99,13 @@ final class ProgramsViewModel {
             result.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedDescending }
         case .categoryAsc:
             result.sort { $0.category.localizedCaseInsensitiveCompare($1.category) == .orderedAscending }
+        case .distanceAsc:
+            // Sort by distance (programs without distance go to end)
+            result.sort {
+                let dist0 = $0.distanceFromUser ?? .infinity
+                let dist1 = $1.distanceFromUser ?? .infinity
+                return dist0 < dist1
+            }
         }
 
         return result
@@ -286,5 +293,49 @@ final class ProgramsViewModel {
                 await cache.addFavorite(id)
             }
         }
+    }
+
+    // MARK: - Location (Privacy-First, All On-Device)
+
+    /// Update program distances from user location
+    func updateDistances(from location: (latitude: Double, longitude: Double)) {
+        for index in programs.indices {
+            if let lat = programs[index].latitude,
+               let lng = programs[index].longitude {
+                programs[index].distanceFromUser = Self.calculateDistance(
+                    lat1: location.latitude, lng1: location.longitude,
+                    lat2: lat, lng2: lng
+                )
+            } else {
+                programs[index].distanceFromUser = nil
+            }
+        }
+    }
+
+    /// Clear all program distances
+    func clearDistances() {
+        for index in programs.indices {
+            programs[index].distanceFromUser = nil
+        }
+        // Reset sort if was distance-based
+        if sortOption == .distanceAsc {
+            sortOption = .recentlyVerified
+        }
+    }
+
+    /// Haversine distance calculation (on-device, privacy-first)
+    private static func calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double) -> Double {
+        let earthRadiusMiles = 3959.0
+
+        let dLat = (lat2 - lat1) * .pi / 180
+        let dLng = (lng2 - lng1) * .pi / 180
+
+        let a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(lat1 * .pi / 180) * cos(lat2 * .pi / 180) *
+                sin(dLng / 2) * sin(dLng / 2)
+
+        let c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        return earthRadiusMiles * c
     }
 }
