@@ -220,6 +220,10 @@ struct SettingsView: View {
                     Link(destination: SettingsViewModel.privacyURL) {
                         LinkRow(title: "Privacy Policy", icon: "hand.raised")
                     }
+
+                    Link(destination: SettingsViewModel.creditsURL) {
+                        LinkRow(title: "Credits & Acknowledgments", icon: "heart.text.square")
+                    }
                 } header: {
                     Text("Legal")
                 } footer: {

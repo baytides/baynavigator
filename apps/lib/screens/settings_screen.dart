@@ -616,6 +616,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   label: 'Privacy Policy',
                   onTap: () => _launchUrl('https://baynavigator.org/privacy'),
                 ),
+                _buildDivider(context),
+                _buildButton(
+                  context,
+                  icon: '🙏',
+                  label: 'Credits & Acknowledgments',
+                  onTap: () => _launchUrl('https://baynavigator.org/credits'),
+                ),
               ],
             ),
 

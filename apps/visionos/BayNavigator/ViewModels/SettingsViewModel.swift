@@ -78,6 +78,7 @@ extension SettingsViewModel {
     static let parentOrgURL = URL(string: "https://baytides.org")!
     static let termsURL = URL(string: "https://baynavigator.org/terms")!
     static let privacyURL = URL(string: "https://baynavigator.org/privacy")!
+    static let creditsURL = URL(string: "https://baynavigator.org/credits")!
     static let githubURL = URL(string: "https://github.com/baytides/baynavigator")!
     static let feedbackURL = URL(string: "https://github.com/baytides/baynavigator/issues")!
 }

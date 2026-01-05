@@ -41,7 +41,8 @@ class ProgramDetailScreen extends StatelessWidget {
 
   Future<void> _launchMaps(String address) async {
     final encoded = Uri.encodeComponent(address);
-    final uri = Uri.parse('https://www.google.com/maps/search/?api=1&query=$encoded');
+    // Use DuckDuckGo Maps (powered by Apple Maps) for privacy
+    final uri = Uri.parse('https://duckduckgo.com/?q=$encoded&iaxm=maps');
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
