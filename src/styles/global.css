@@ -25,17 +25,54 @@ main,
   word-spacing: var(--text-word-spacing);
 }
 
-/* Ensure headings scale proportionally */
-main h1 { font-size: calc(2.25rem * var(--text-size-scale)); }
-main h2 { font-size: calc(1.875rem * var(--text-size-scale)); }
-main h3 { font-size: calc(1.5rem * var(--text-size-scale)); }
-main h4 { font-size: calc(1.25rem * var(--text-size-scale)); }
+/*
+ * Ensure ALL text elements inherit text settings
+ * This includes headings with Tailwind classes that would override defaults
+ * Using !important to override inline Tailwind classes
+ */
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main p,
+main li,
+main span,
+main a,
+main label,
+main strong,
+main em,
+.text-customizable h1,
+.text-customizable h2,
+.text-customizable h3,
+.text-customizable h4,
+.text-customizable h5,
+.text-customizable h6,
+.text-customizable p,
+.text-customizable li,
+.text-customizable span,
+.text-customizable a {
+  line-height: var(--text-line-height) !important;
+  letter-spacing: var(--text-letter-spacing) !important;
+  word-spacing: var(--text-word-spacing) !important;
+}
+
+/* Ensure headings scale proportionally with !important to override Tailwind */
+main h1 { font-size: calc(2.25rem * var(--text-size-scale)) !important; }
+main h2 { font-size: calc(1.875rem * var(--text-size-scale)) !important; }
+main h3 { font-size: calc(1.5rem * var(--text-size-scale)) !important; }
+main h4 { font-size: calc(1.25rem * var(--text-size-scale)) !important; }
+main h5 { font-size: calc(1.125rem * var(--text-size-scale)) !important; }
+main h6 { font-size: calc(1rem * var(--text-size-scale)) !important; }
 
 @media (min-width: 768px) {
-  main h1 { font-size: calc(3rem * var(--text-size-scale)); }
-  main h2 { font-size: calc(2.25rem * var(--text-size-scale)); }
-  main h3 { font-size: calc(1.875rem * var(--text-size-scale)); }
-  main h4 { font-size: calc(1.5rem * var(--text-size-scale)); }
+  main h1 { font-size: calc(3rem * var(--text-size-scale)) !important; }
+  main h2 { font-size: calc(2.25rem * var(--text-size-scale)) !important; }
+  main h3 { font-size: calc(1.875rem * var(--text-size-scale)) !important; }
+  main h4 { font-size: calc(1.5rem * var(--text-size-scale)) !important; }
+  main h5 { font-size: calc(1.25rem * var(--text-size-scale)) !important; }
+  main h6 { font-size: calc(1.125rem * var(--text-size-scale)) !important; }
 }
 
 @layer base {

@@ -107,7 +107,7 @@ const categories = Object.keys(glossaryData);
       <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto mb-4">
         Definitions of {totalTerms} common abbreviations and terms used in government benefit programs.
       </p>
-      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      <p class="text-sm text-neutral-600 dark:text-neutral-300">
         WCAG 2.2 AAA: 3.1.4 Abbreviations - Providing mechanisms for identifying expanded forms of abbreviations.
       </p>
     </div>
@@ -126,7 +126,7 @@ const categories = Object.keys(glossaryData);
           class="w-full pl-10 pr-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
         />
       </div>
-      <p id="search-results-count" class="mt-2 text-sm text-neutral-500 dark:text-neutral-400 hidden">
+      <p id="search-results-count" class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 hidden">
         Showing <span id="visible-count">0</span> of {totalTerms} terms
       </p>
     </div>
@@ -153,7 +153,7 @@ const categories = Object.keys(glossaryData);
           <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2 sticky top-16 bg-white dark:bg-neutral-900 py-2 -mx-2 px-2 z-10">
             <span class="w-2 h-2 rounded-full bg-primary-500"></span>
             {category}
-            <span class="text-sm font-normal text-neutral-500 dark:text-neutral-400">
+            <span class="text-sm font-normal text-neutral-600 dark:text-neutral-300">
               ({Object.keys(terms).length} terms)
             </span>
           </h2>
@@ -180,7 +180,7 @@ const categories = Object.keys(glossaryData);
       <svg class="w-16 h-16 mx-auto text-neutral-300 dark:text-neutral-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <p class="text-neutral-500 dark:text-neutral-400">No terms found matching your search.</p>
+      <p class="text-neutral-600 dark:text-neutral-300">No terms found matching your search.</p>
       <button id="clear-search" class="mt-4 text-primary-600 dark:text-primary-400 hover:underline">
         Clear search
       </button>
