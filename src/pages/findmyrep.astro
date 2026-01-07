@@ -173,7 +173,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
         </div>
 
         <!-- Disclaimer -->
-        <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-6">
+        <p class="text-xs text-neutral-600 dark:text-neutral-300 text-center mt-6">
           This tool is for informational purposes only. To accurately determine your district, please contact your local
           <a href="https://www.sos.ca.gov/elections/voting-resources/county-elections-offices/" target="_blank" rel="noopener" class="underline hover:text-primary-600">county registrar or elections department</a>.
         </p>
@@ -255,7 +255,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
       return `
         <div class="p-4">
-          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">${districtLabel}</div>
           <div class="flex gap-4">
             ${member.imageUrl ? `
               <img
@@ -277,12 +277,12 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 <span class="text-xs px-2 py-0.5 rounded-full ${partyClass}">${member.partyAbbrev}</span>
               </div>
               ${member.officialWebsite ? `
-                <a href="${member.officialWebsite}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1 truncate">
+                <a href="${member.officialWebsite}" target="_blank" rel="noopener" class="text-sm text-primary-700 dark:text-primary-300 hover:underline block mt-1 truncate">
                   ${member.officialWebsite.replace('https://', '').replace('http://', '')}
                 </a>
               ` : ''}
               ${termInfo || electionInfo ? `
-                <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 space-y-0.5">
+                <div class="text-sm text-neutral-600 dark:text-neutral-300 mt-2 space-y-0.5">
                   ${termInfo ? `<div>${termInfo}</div>` : ''}
                   ${electionInfo ? `<div>${electionInfo}</div>` : ''}
                 </div>
@@ -352,7 +352,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
       return `
         <div class="p-4">
-          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${data.county} - District ${data.district}</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">${data.county} - District ${data.district}</div>
           <div class="flex gap-4">
             <div class="w-20 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-lg flex-shrink-0 flex items-center justify-center">
               <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -364,7 +364,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 <span class="font-semibold text-neutral-900 dark:text-white">${data.name}</span>
               </div>
               ${data.website ? `
-                <a href="${data.website}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1">
+                <a href="${data.website}" target="_blank" rel="noopener" class="text-sm text-primary-700 dark:text-primary-300 hover:underline block mt-1">
                   Official Website
                 </a>
               ` : ''}
@@ -391,7 +391,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
       return `
         <div class="p-4">
-          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${member.seat}</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">${member.seat}</div>
           <div class="flex gap-4">
             ${member.photoUrl ? `
               <img
@@ -406,7 +406,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 <span class="font-semibold text-neutral-900 dark:text-white">${member.name}</span>
               </div>
               ${member.website ? `
-                <a href="${member.website}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1">
+                <a href="${member.website}" target="_blank" rel="noopener" class="text-sm text-primary-700 dark:text-primary-300 hover:underline block mt-1">
                   Official Website
                 </a>
               ` : ''}
@@ -440,7 +440,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       // Add note if present
       if (data.note) {
         html += `
-          <div class="p-4 bg-neutral-50 dark:bg-neutral-900/50 text-sm text-neutral-500 dark:text-neutral-400">
+          <div class="p-4 bg-neutral-50 dark:bg-neutral-900/50 text-sm text-neutral-600 dark:text-neutral-300">
             ${data.note}
           </div>
         `;
@@ -456,7 +456,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       if (data.error) {
         return `
           <div class="p-4">
-            <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+            <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">${districtLabel}</div>
             <div class="text-neutral-600 dark:text-neutral-300">Representative information not available</div>
           </div>
         `;
@@ -475,7 +475,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 
       return `
         <div class="p-4">
-          <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">${districtLabel}</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">${districtLabel}</div>
           <div class="flex gap-4">
             ${data.photoUrl ? `
               <img
@@ -491,10 +491,10 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 <span class="font-semibold text-neutral-900 dark:text-white">${data.name}</span>
                 <span class="text-xs px-2 py-0.5 rounded-full ${partyClass}">${data.partyAbbrev}</span>
               </div>
-              <a href="${data.officialWebsite}" target="_blank" rel="noopener" class="text-sm text-primary-600 dark:text-primary-400 hover:underline block mt-1">
+              <a href="${data.officialWebsite}" target="_blank" rel="noopener" class="text-sm text-primary-700 dark:text-primary-300 hover:underline block mt-1">
                 Official Website
               </a>
-              <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
+              <div class="text-sm text-neutral-600 dark:text-neutral-300 mt-2">
                 ${data.termLength}
               </div>
             </div>
@@ -610,7 +610,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
         } else {
           congressHtml += `
             <div class="p-4">
-              <div class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">U.S. House - District ${congressDistrict}</div>
+              <div class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">U.S. House - District ${congressDistrict}</div>
               <div class="text-neutral-600 dark:text-neutral-300">Representative information not available</div>
             </div>
           `;
