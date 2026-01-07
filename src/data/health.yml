@@ -77,6 +77,233 @@
   link_text: Text HOME to 741741
   verified_date: '2025-12-16'
 
+- id: sf-suicide-prevention
+  name: San Francisco Suicide Prevention
+  category: Health
+  area: San Francisco County
+  groups:
+    - everyone
+  description: San Francisco Suicide Prevention provides 24/7 confidential emotional support and crisis intervention through their hotline, operated by Felton Institute.
+  what_they_offer: |
+    - 24/7 crisis phone support
+    - Compassionate, judgment-free listening
+    - Crisis intervention and de-escalation
+    - Referrals to local mental health resources
+    - Support for anyone in emotional distress
+  how_to_get_it: Call 415-781-0500 anytime, day or night. Free and confidential. No appointment needed.
+  phone: '415-781-0500'
+  timeframe: 24/7
+  link: https://felton.org/social-services/adult/san-francisco-suicide-prevention-sfsp/
+  link_text: Call 415-781-0500
+  verified_date: '2026-01-06'
+
+- id: sf-behavioral-health-access
+  name: SF Behavioral Health Access Line
+  category: Health
+  area: San Francisco County
+  groups:
+    - everyone
+  description: San Francisco's 24-hour behavioral health access line provides crisis support and helps connect residents to mental health and substance use services.
+  what_they_offer: |
+    - 24/7 phone crisis support
+    - Mental health service referrals
+    - Substance use treatment referrals
+    - Help scheduling counseling appointments within 48 hours
+    - Information about SF behavioral health services
+  how_to_get_it: Call 415-255-3737 or toll-free 888-246-3333 anytime. Available to San Francisco residents.
+  phone: '415-255-3737'
+  timeframe: 24/7
+  link: https://www.sf.gov/information--crisis-counseling-hotlines
+  link_text: Call 415-255-3737
+  verified_date: '2026-01-06'
+
+- id: sf-mobile-crisis-team
+  name: SF Mobile Crisis Team
+  category: Health
+  area: San Francisco County
+  groups:
+    - everyone
+  description: San Francisco's Mobile Crisis Team provides on-site mental health crisis intervention as an alternative to police response, sending trained clinicians to help people experiencing psychiatric emergencies.
+  what_they_offer: |
+    - On-site crisis intervention
+    - Mental health assessment
+    - De-escalation support
+    - Connection to appropriate services
+    - Alternative to law enforcement response
+  how_to_get_it: Call 415-970-4000 to request a mobile crisis team response. Available for mental health emergencies in San Francisco.
+  phone: '415-970-4000'
+  timeframe: 24/7
+  link: https://www.sf.gov/information--crisis-counseling-hotlines
+  link_text: Call 415-970-4000
+  verified_date: '2026-01-06'
+
+- id: alameda-crisis-support
+  name: Crisis Support Services of Alameda County
+  category: Health
+  area: Alameda County
+  groups:
+    - everyone
+  description: Crisis Support Services of Alameda County provides 24/7 crisis intervention, suicide prevention, and grief support through phone and text services.
+  what_they_offer: |
+    - 24/7 crisis phone line
+    - Text support (text SAFE to 20121, 4-11pm)
+    - Suicide prevention counseling
+    - Grief support services
+    - Warm line for emotional support
+  how_to_get_it: Call 510-891-5600 anytime for crisis support. Text SAFE to 20121 between 4pm-11pm. Free and confidential.
+  phone: '510-891-5600'
+  timeframe: 24/7 phone; text 4-11pm
+  link: https://www.crisissupport.org/
+  link_text: Call 510-891-5600
+  verified_date: '2026-01-06'
+
+- id: contra-costa-crisis-center
+  name: Contra Costa Crisis Center
+  category: Health
+  area: Contra Costa County
+  groups:
+    - everyone
+  description: The Contra Costa Crisis Center provides 24/7 crisis intervention, suicide prevention, and grief counseling services to Contra Costa County residents.
+  what_they_offer: |
+    - 24/7 crisis and suicide hotline
+    - Crisis text line (text HOPE to 20121)
+    - Grief counseling line (800-837-1818)
+    - Referrals to local resources
+    - Confidential support
+  how_to_get_it: Call 800-833-2900 anytime for crisis support. Text HOPE to 20121 (M-F 3-11pm). Grief line 800-837-1818.
+  phone: '800-833-2900'
+  timeframe: 24/7
+  link: https://www.crisis-center.org/
+  link_text: Call 800-833-2900
+  verified_date: '2026-01-06'
+
+- id: santa-clara-suicide-crisis
+  name: Santa Clara County Crisis Line
+  category: Health
+  area: Santa Clara County
+  groups:
+    - everyone
+  description: Santa Clara County's 24/7 suicide and crisis hotline provides immediate support and connects callers to behavioral health services throughout the county.
+  what_they_offer: |
+    - 24/7 suicide and crisis support
+    - Mental health crisis intervention
+    - Referrals to county behavioral health services
+    - Support in multiple languages
+    - Connection to mobile crisis teams
+  how_to_get_it: Call 855-278-4204 anytime for crisis support. For general behavioral health services, call 800-704-0900.
+  phone: '855-278-4204'
+  timeframe: 24/7
+  link: https://www.sccgov.org/sites/bhd/Pages/home.aspx
+  link_text: Call 855-278-4204
+  verified_date: '2026-01-06'
+
+- id: marin-suicide-hotline
+  name: Marin County Suicide Prevention Hotline
+  category: Health
+  area: Marin County
+  groups:
+    - everyone
+  description: Family Service Agency of Marin operates a 24/7 suicide prevention hotline and grief counseling line for Marin County residents in crisis.
+  what_they_offer: |
+    - 24/7 suicide prevention hotline
+    - 24/7 grief counseling line
+    - Crisis intervention
+    - Referrals to local services
+    - Confidential support
+  how_to_get_it: Call 415-499-1100 for suicide crisis support. Call 415-499-1195 for grief counseling. Both lines available 24/7.
+  phone: '415-499-1100'
+  timeframe: 24/7
+  link: https://www.familyserviceagency.org/
+  link_text: Call 415-499-1100
+  verified_date: '2026-01-06'
+
+- id: napa-crisis-hotline
+  name: Napa County Mental Health Crisis Line
+  category: Health
+  area: Napa County
+  groups:
+    - everyone
+  description: Napa County's 24-hour mental health crisis hotline provides immediate support for adults and youth experiencing mental health emergencies.
+  what_they_offer: |
+    - 24/7 adult crisis support
+    - Youth crisis line (1-800-843-5200)
+    - Mental health crisis intervention
+    - Referrals to county services
+    - Mobile crisis response
+  how_to_get_it: Adults call 707-253-4711. Youth call 1-800-843-5200. Both lines available 24/7.
+  phone: '707-253-4711'
+  timeframe: 24/7
+  link: https://www.countyofnapa.org/
+  link_text: Call 707-253-4711
+  verified_date: '2026-01-06'
+
+- id: solano-crisis-line
+  name: Solano County Crisis Line
+  category: Health
+  area: Solano County
+  groups:
+    - everyone
+  description: Solano County's 24-hour crisis line provides immediate mental health support and crisis intervention for county residents.
+  what_they_offer: |
+    - 24/7 crisis phone support
+    - Mental health crisis intervention
+    - Suicide prevention
+    - Referrals to county services
+    - Connection to mobile crisis teams
+  how_to_get_it: Call 707-428-1131 anytime for crisis support. Free and confidential for Solano County residents.
+  phone: '707-428-1131'
+  timeframe: 24/7
+  link: https://www.solanocounty.com/
+  link_text: Call 707-428-1131
+  verified_date: '2026-01-06'
+
+- id: sf-women-against-rape
+  name: San Francisco Women Against Rape (SFWAR)
+  category: Health
+  area: San Francisco County
+  groups:
+    - everyone
+  description: SFWAR provides a 24-hour crisis hotline and support services for survivors of rape and sexual assault in San Francisco.
+  what_they_offer: |
+    - 24/7 crisis hotline
+    - Emotional support for survivors
+    - Hospital accompaniment
+    - Legal advocacy
+    - Support groups
+    - Counseling referrals
+  how_to_get_it: Call 415-647-7273 anytime for immediate support. Services available to all survivors regardless of gender.
+  phone: '415-647-7273'
+  timeframe: 24/7
+  link: https://www.sfwar.org/
+  link_text: Call 415-647-7273
+  verified_date: '2026-01-06'
+  keywords:
+    - rape
+    - sexual assault
+    - sexual violence
+    - survivor
+
+- id: friendship-line-elderly
+  name: Institute on Aging Friendship Line
+  category: Health
+  area: Nationwide
+  groups:
+    - seniors
+  description: The Friendship Line is the only accredited 24/7 crisis line specifically for older adults, providing emotional support, crisis intervention, and friendly conversation.
+  what_they_offer: |
+    - 24/7 crisis support for seniors
+    - Friendly conversation and companionship calls
+    - Grief support
+    - Elder abuse reporting assistance
+    - Referrals to local services
+    - Support for loneliness and isolation
+  how_to_get_it: Call 415-752-3778 or toll-free 1-800-971-0016 anytime. Free and confidential for adults 60+.
+  phone: '415-752-3778'
+  timeframe: 24/7
+  link: https://www.ioaging.org/services/friendship-line
+  link_text: Call 415-752-3778
+  verified_date: '2026-01-06'
+
 - id: denti-cal
   name: Denti-Cal
   category: Health
