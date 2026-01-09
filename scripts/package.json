@@ -1,0 +1,20 @@
+{
+  "name": "baynavigator-scripts",
+  "version": "1.0.0",
+  "description": "Build and data processing scripts for Bay Navigator",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "generate-api": "node --loader ts-node/esm src/generate-api.ts",
+    "validate-data": "node --loader ts-node/esm src/validate-data.ts"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.1"
+  }
+}

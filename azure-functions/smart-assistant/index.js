@@ -4,6 +4,8 @@
  * Searches Azure AI Search for relevant programs
  */
 
+const { createLogger, createTimer, extractErrorInfo } = require('../shared/logger');
+
 // Cloudflare Workers AI configuration
 const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
 const CF_API_TOKEN = process.env.CF_API_TOKEN;
@@ -449,6 +451,9 @@ Return ONLY the keywords separated by spaces, nothing else:`;
 
 
 module.exports = async function (context, req) {
+  const logger = createLogger(context, 'smart-assistant');
+  const timer = createTimer();
+
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     context.res = {
@@ -470,11 +475,14 @@ module.exports = async function (context, req) {
   };
 
   try {
+    logger.logRequest(req);
+
     // Validate configuration (Cloudflare Workers AI for LLM, Azure Search for retrieval)
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
-      console.log('Cloudflare Workers AI not configured, will use synonym expansion fallback');
+      logger.warn('Cloudflare Workers AI not configured, using synonym expansion fallback');
     }
     if (!AZURE_SEARCH_KEY) {
+      logger.error('Azure Search not configured', { status: 503 });
       context.res = {
         status: 503,
         headers: corsHeaders,
@@ -489,6 +497,7 @@ module.exports = async function (context, req) {
     const { message, conversationHistory = [] } = req.body || {};
 
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
+      logger.warn('Invalid request: missing message', { status: 400 });
       context.res = {
         status: 400,
         headers: corsHeaders,
@@ -500,35 +509,55 @@ module.exports = async function (context, req) {
     }
 
     const userMessage = message.trim().slice(0, 500);
+    logger.info('Processing query', {
+      queryLength: userMessage.length,
+      wordCount: userMessage.split(/\s+/).length,
+      hasHistory: conversationHistory.length > 0,
+    });
 
     // Extract location from query (zip code, city, or county) - no AI needed
     const location = extractLocation(userMessage);
     if (location) {
-      context.log(`Location detected: ${JSON.stringify(location)}`);
+      logger.info('Location detected', { location });
     }
 
     // Search for relevant programs using AI-extracted keywords (for >3 word queries)
     const searchQuery = await extractSearchQuery(userMessage, conversationHistory);
-    const programs = await searchPrograms(searchQuery, location);
+    logger.debug('Search query extracted', {
+      original: userMessage,
+      expanded: searchQuery,
+    });
 
-    context.log(`Found ${programs.length} programs for query: "${searchQuery}"`);
+    const programs = await searchPrograms(searchQuery, location);
+    logger.info('Search completed', {
+      programsFound: programs.length,
+      searchQuery,
+      hasLocation: !!location,
+    });
 
     // Return structured program cards directly (no AI response formatting needed)
     const programCards = formatProgramsAsCards(programs);
 
+    const responseBody = {
+      programs: programCards,
+      programsFound: programs.length,
+      searchQuery: searchQuery,
+      location: location || null,
+    };
+
     context.res = {
       status: 200,
       headers: corsHeaders,
-      body: JSON.stringify({
-        programs: programCards,
-        programsFound: programs.length,
-        searchQuery: searchQuery, // Include for debugging/transparency
-        location: location || null,
-      })
+      body: JSON.stringify(responseBody)
     };
 
+    logger.logResponse(200, responseBody, timer.elapsed());
+
   } catch (error) {
-    context.log.error('Smart assistant error:', error);
+    logger.error('Smart assistant error', {
+      ...extractErrorInfo(error),
+      durationMs: timer.elapsed(),
+    });
 
     context.res = {
       status: 500,

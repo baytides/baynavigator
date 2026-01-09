@@ -828,6 +828,95 @@ const websiteSchema = {
       initSimpleLanguage();
     </script>
 
+    <!-- Core Web Vitals Monitoring (privacy-first, no external services) -->
+    <script is:inline>
+      (function() {
+        // Only run in production and modern browsers
+        if (location.hostname === 'localhost' || !('PerformanceObserver' in window)) return;
+
+        const vitals = { lcp: 0, fid: 0, cls: 0, ttfb: 0, fcp: 0 };
+
+        // Largest Contentful Paint (LCP)
+        try {
+          new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            vitals.lcp = Math.round(lastEntry.startTime);
+          }).observe({ type: 'largest-contentful-paint', buffered: true });
+        } catch (e) {}
+
+        // First Input Delay (FID)
+        try {
+          new PerformanceObserver((list) => {
+            const entry = list.getEntries()[0];
+            vitals.fid = Math.round(entry.processingStart - entry.startTime);
+          }).observe({ type: 'first-input', buffered: true });
+        } catch (e) {}
+
+        // Cumulative Layout Shift (CLS)
+        try {
+          let clsValue = 0;
+          new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+              if (!entry.hadRecentInput) {
+                clsValue += entry.value;
+              }
+            }
+            vitals.cls = Math.round(clsValue * 1000) / 1000;
+          }).observe({ type: 'layout-shift', buffered: true });
+        } catch (e) {}
+
+        // Time to First Byte (TTFB) and First Contentful Paint (FCP)
+        try {
+          const navEntry = performance.getEntriesByType('navigation')[0];
+          if (navEntry) {
+            vitals.ttfb = Math.round(navEntry.responseStart);
+          }
+          const paintEntries = performance.getEntriesByType('paint');
+          for (const entry of paintEntries) {
+            if (entry.name === 'first-contentful-paint') {
+              vitals.fcp = Math.round(entry.startTime);
+            }
+          }
+        } catch (e) {}
+
+        // Report vitals when page is hidden (user navigates away)
+        function reportVitals() {
+          // Log to console in development
+          const isDev = location.search.includes('debug=vitals');
+          if (isDev) {
+            console.log('Core Web Vitals:', vitals);
+            console.log('LCP:', vitals.lcp + 'ms', vitals.lcp <= 2500 ? '(Good)' : vitals.lcp <= 4000 ? '(Needs Improvement)' : '(Poor)');
+            console.log('FID:', vitals.fid + 'ms', vitals.fid <= 100 ? '(Good)' : vitals.fid <= 300 ? '(Needs Improvement)' : '(Poor)');
+            console.log('CLS:', vitals.cls, vitals.cls <= 0.1 ? '(Good)' : vitals.cls <= 0.25 ? '(Needs Improvement)' : '(Poor)');
+          }
+
+          // Store locally for aggregation (no external reporting - privacy first)
+          try {
+            const stored = JSON.parse(localStorage.getItem('webVitals') || '[]');
+            stored.push({
+              url: location.pathname,
+              timestamp: Date.now(),
+              ...vitals
+            });
+            // Keep only last 20 entries
+            if (stored.length > 20) stored.shift();
+            localStorage.setItem('webVitals', JSON.stringify(stored));
+          } catch (e) {}
+        }
+
+        // Report on page hide
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'hidden') {
+            reportVitals();
+          }
+        });
+
+        // Also report before unload as fallback
+        window.addEventListener('pagehide', reportVitals);
+      })();
+    </script>
+
     <!-- Service Worker Registration -->
     <script is:inline>
       if ('serviceWorker' in navigator) {

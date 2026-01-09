@@ -5,10 +5,13 @@ import '../models/program.dart';
 
 /// API Service for Bay Navigator
 /// Fetches data from static JSON API endpoints
-/// Implements caching and offline support
+/// Implements offline-first caching with background sync
 class ApiService {
   static const String _apiBaseUrl = 'https://baynavigator.org/api';
   static const Duration _cacheDuration = Duration(hours: 24);
+  static const Duration _staleCacheDuration = Duration(days: 7); // Extended offline cache
+  static const String _lastSyncKey = 'bay_area_discounts:last_sync';
+  static const String _offlineModeKey = 'bay_area_discounts:offline_mode';
 
   static const String _programsCacheKey = 'bay_area_discounts:programs';
   static const String _categoriesCacheKey = 'bay_area_discounts:categories';
@@ -807,4 +810,154 @@ class ApiService {
       return 0;
     }
   }
+
+  // ============================================
+  // OFFLINE-FIRST SYNC
+  // ============================================
+
+  /// Check if we have valid cached data (can work offline)
+  Future<bool> hasValidCache() async {
+    try {
+      final cached = await _getListFromCache<Program>(
+        _programsCacheKey,
+        Program.fromJson,
+        allowStale: true,
+      );
+      return cached != null && cached.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Get the last sync timestamp
+  Future<DateTime?> getLastSyncTime() async {
+    try {
+      final prefs = await _preferences;
+      final timestamp = prefs.getInt(_lastSyncKey);
+      if (timestamp == null) return null;
+      return DateTime.fromMillisecondsSinceEpoch(timestamp);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Update the last sync timestamp
+  Future<void> _updateLastSyncTime() async {
+    try {
+      final prefs = await _preferences;
+      await prefs.setInt(_lastSyncKey, DateTime.now().millisecondsSinceEpoch);
+    } catch (e) {
+      // Silently fail
+    }
+  }
+
+  /// Check if a background sync is needed
+  Future<bool> needsSync() async {
+    final lastSync = await getLastSyncTime();
+    if (lastSync == null) return true;
+
+    final age = DateTime.now().difference(lastSync);
+    return age > _cacheDuration;
+  }
+
+  /// Perform a background sync of all data
+  /// Returns true if sync was successful
+  Future<bool> performBackgroundSync() async {
+    try {
+      // Sync all data types in parallel
+      await Future.wait([
+        getPrograms(forceRefresh: true),
+        getCategories(forceRefresh: true),
+        getGroups(forceRefresh: true),
+        getAreas(forceRefresh: true),
+        getMetadata(forceRefresh: true),
+      ]);
+
+      await _updateLastSyncTime();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Get sync status for UI display
+  Future<SyncStatus> getSyncStatus() async {
+    final hasCache = await hasValidCache();
+    final lastSync = await getLastSyncTime();
+    final needsUpdate = await needsSync();
+
+    if (!hasCache) {
+      return SyncStatus(
+        status: SyncState.noData,
+        lastSync: null,
+        message: 'No data cached. Connect to internet to load programs.',
+      );
+    }
+
+    if (needsUpdate) {
+      return SyncStatus(
+        status: SyncState.stale,
+        lastSync: lastSync,
+        message: lastSync != null
+            ? 'Data from ${_formatLastSync(lastSync)}. Pull to refresh.'
+            : 'Data may be outdated. Pull to refresh.',
+      );
+    }
+
+    return SyncStatus(
+      status: SyncState.fresh,
+      lastSync: lastSync,
+      message: 'Data up to date',
+    );
+  }
+
+  String _formatLastSync(DateTime lastSync) {
+    final now = DateTime.now();
+    final diff = now.difference(lastSync);
+
+    if (diff.inMinutes < 60) {
+      return '${diff.inMinutes} minutes ago';
+    } else if (diff.inHours < 24) {
+      return '${diff.inHours} hours ago';
+    } else if (diff.inDays == 1) {
+      return 'yesterday';
+    } else if (diff.inDays < 7) {
+      return '${diff.inDays} days ago';
+    } else {
+      return '${lastSync.month}/${lastSync.day}';
+    }
+  }
+
+  /// Prefetch all data for offline use
+  /// Useful when user has good connectivity
+  Future<void> prefetchForOffline() async {
+    await performBackgroundSync();
+  }
+
+  /// Check if the app is in offline mode
+  Future<bool> isOfflineMode() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_offlineModeKey) ?? false;
+  }
+
+  /// Set offline mode (user preference)
+  Future<void> setOfflineMode(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_offlineModeKey, enabled);
+  }
+}
+
+/// Sync status for UI display
+enum SyncState { fresh, stale, noData, syncing }
+
+class SyncStatus {
+  final SyncState status;
+  final DateTime? lastSync;
+  final String message;
+
+  SyncStatus({
+    required this.status,
+    this.lastSync,
+    required this.message,
+  });
 }

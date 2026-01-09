@@ -10,6 +10,8 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
   <!-- Pass PMTiles URL to client-side script -->
   <script is:inline define:vars={{ pmtilesUrl }}>
     window.__PMTILES_URL__ = pmtilesUrl;
+    // Detect if accessing via Tor (.onion)
+    window.__IS_ONION__ = window.location.hostname.endsWith('.onion');
   </script>
   <!-- Map Container -->
   <div id="map-container" class="relative w-full" style="height: calc(100vh - 180px); min-height: 500px;">
@@ -18,6 +20,36 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
       <div class="text-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
         <p class="text-neutral-600 dark:text-neutral-300">Loading map...</p>
+      </div>
+    </div>
+
+    <!-- Tor/Onion Notice (shown when map can't load via Tor) -->
+    <div id="tor-notice" class="hidden absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10">
+      <div class="text-center max-w-md px-6">
+        <svg class="w-16 h-16 mx-auto mb-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Map Not Available via Tor</h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+          The interactive map requires external resources that cannot be loaded through the Tor network for privacy and security reasons.
+        </p>
+        <div class="space-y-3">
+          <a
+            href="/directory"
+            class="block bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg font-medium no-underline"
+          >
+            Browse Programs in Directory
+          </a>
+          <a
+            href="https://baynavigator.org/map"
+            class="block border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 px-4 py-3 rounded-lg font-medium no-underline"
+            target="_blank"
+            rel="noopener"
+          >
+            Open Map on Main Site
+            <span class="text-xs text-neutral-500 dark:text-neutral-400">(non-Tor)</span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -642,11 +674,23 @@ const pmtilesUrl = import.meta.env.PUBLIC_PMTILES_URL || 'https://baytidesstorag
   // Initialize map
   async function initMap() {
     const loadingEl = document.getElementById('map-loading');
+    const torNoticeEl = document.getElementById('tor-notice');
     const programCountEl = document.getElementById('program-count');
     const legendToggle = document.getElementById('legend-toggle');
     const legendPanel = document.getElementById('legend-panel');
     const legendItems = document.getElementById('legend-items');
     const directoryLink = document.getElementById('directory-link');
+
+    // Check if accessing via Tor (.onion)
+    const isOnion = (window as any).__IS_ONION__ || window.location.hostname.endsWith('.onion');
+
+    // Show Tor notice immediately if on .onion domain
+    // The map likely won't work due to mixed content and CORS restrictions
+    if (isOnion) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (torNoticeEl) torNoticeEl.classList.remove('hidden');
+      return; // Don't attempt to load the map
+    }
 
     // Track interaction state for hiding UI elements
     let interactionTimeout: ReturnType<typeof setTimeout> | null = null;

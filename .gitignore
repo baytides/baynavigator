@@ -19,6 +19,7 @@ azure-functions/local.settings.json
 azure-functions/bin/
 azure-functions/obj/
 azure-functions/.python_packages/
+azure-functions/node_modules/
 
 # Azure Bicep compiled files
 infrastructure/bicep/*.json
