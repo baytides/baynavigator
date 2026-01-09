@@ -297,6 +297,31 @@ const websiteSchema = {
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
               >About</a
             >
+            <a
+              href="/favorites"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium inline-flex items-center gap-1"
+              title="View saved programs"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                ></path>
+              </svg>
+              <span
+                id="nav-favorites-count"
+                class="hidden text-xs bg-red-500 text-white rounded-full min-w-[1.25rem] h-5 px-1 flex items-center justify-center font-medium"
+                >0</span
+              >
+            </a>
 
             <!-- Text Settings -->
             <div class="relative">
@@ -563,6 +588,31 @@ const websiteSchema = {
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
               >About</a
             >
+            <a
+              href="/favorites"
+              class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2 inline-flex items-center gap-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                ></path>
+              </svg>
+              My Favorites
+              <span
+                id="nav-favorites-count-mobile"
+                class="hidden text-xs bg-red-500 text-white rounded-full min-w-[1.25rem] h-5 px-1 flex items-center justify-center font-medium"
+                >0</span
+              >
+            </a>
             <button
               id="theme-toggle-mobile"
               type="button"
@@ -1401,6 +1451,45 @@ const websiteSchema = {
           }
         } catch (e) {}
       })();
+
+      // Update favorites count in navigation
+      function updateNavFavoritesCount() {
+        try {
+          const stored = localStorage.getItem('baynavigator_favorites');
+          const favorites = stored ? JSON.parse(stored) : [];
+          const count = favorites.length;
+
+          // Update desktop badge
+          const desktopBadge = document.getElementById('nav-favorites-count');
+          if (desktopBadge) {
+            if (count > 0) {
+              desktopBadge.textContent = String(count);
+              desktopBadge.classList.remove('hidden');
+            } else {
+              desktopBadge.classList.add('hidden');
+            }
+          }
+
+          // Update mobile badge
+          const mobileBadge = document.getElementById('nav-favorites-count-mobile');
+          if (mobileBadge) {
+            if (count > 0) {
+              mobileBadge.textContent = String(count);
+              mobileBadge.classList.remove('hidden');
+            } else {
+              mobileBadge.classList.add('hidden');
+            }
+          }
+        } catch (e) {
+          // localStorage not available
+        }
+      }
+
+      // Update on page load
+      updateNavFavoritesCount();
+
+      // Listen for favorites changes
+      window.addEventListener('favorites-changed', updateNavFavoritesCount);
 
       // Service Worker Registration
       if ('serviceWorker' in navigator) {

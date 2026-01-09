@@ -1,0 +1,587 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+---
+
+<BaseLayout
+  title="My Favorites"
+  description="View and manage your saved programs. Print or export your favorites list."
+>
+  <section
+    class="bg-gradient-to-b from-primary-50 to-white dark:from-neutral-800 dark:to-neutral-900 py-8"
+  >
+    <div class="container-page">
+      <Breadcrumb items={[{ label: 'My Favorites' }]} />
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-2">
+            My Favorites
+          </h1>
+          <p class="text-lg text-neutral-600 dark:text-neutral-300">
+            <span id="favorites-count">0</span> of 50 saved programs
+          </p>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex flex-wrap gap-2 print:hidden">
+          <button
+            type="button"
+            id="print-favorites-btn"
+            class="btn-secondary inline-flex items-center gap-2"
+            disabled
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+              ></path>
+            </svg>
+            Print
+          </button>
+          <button
+            type="button"
+            id="export-csv-btn"
+            class="btn-secondary inline-flex items-center gap-2"
+            disabled
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+            Export CSV
+          </button>
+          <button
+            type="button"
+            id="clear-all-btn"
+            class="btn-secondary inline-flex items-center gap-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
+            disabled
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+            Clear All
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-page">
+      <!-- Empty state -->
+      <div id="empty-state" class="text-center py-12">
+        <svg
+          class="w-16 h-16 mx-auto text-neutral-400 dark:text-neutral-500 mb-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+          ></path>
+        </svg>
+        <h2 class="text-lg font-medium text-neutral-900 dark:text-white mb-2">No favorites yet</h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4 max-w-md mx-auto">
+          Browse the directory and click the heart icon on any program to save it here. Your
+          favorites are stored locally on your device for privacy.
+        </p>
+        <a href="/directory" class="btn-primary">Browse Directory</a>
+      </div>
+
+      <!-- Favorites list -->
+      <div id="favorites-list" class="hidden">
+        <div class="grid gap-4" id="favorites-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Privacy notice -->
+        <div
+          class="mt-8 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 print:hidden"
+        >
+          <div class="flex items-start gap-3">
+            <svg
+              class="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+              ></path>
+            </svg>
+            <div>
+              <h3 class="font-medium text-neutral-900 dark:text-white mb-1">Privacy First</h3>
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                Your favorites are stored only on this device using your browser's local storage.
+                They are never sent to any server. Clearing your browser data will remove your
+                favorites.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Print-only header -->
+      <div class="hidden print:block mb-4">
+        <h1 class="text-xl font-bold mb-1">My Saved Programs - Bay Navigator</h1>
+        <p class="text-xs text-neutral-600">
+          Printed <span id="print-date"></span> | baynavigator.org
+        </p>
+        <p class="print-eco-notice">Eco-friendly print: No backgrounds, minimal ink usage</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Eco-friendly print styles - minimal ink, no backgrounds */
+  @media print {
+    /* Reset all backgrounds and colors for ink saving */
+    * {
+      background: white !important;
+      color: black !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    /* Compact layout */
+    .favorite-card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      border: 1px solid #ccc !important;
+      border-radius: 0 !important;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    /* Links: underline only, no color fill */
+    .favorite-card a {
+      color: black !important;
+      text-decoration: underline !important;
+    }
+
+    /* Show URLs after links */
+    .favorite-card a[href^='http']::after {
+      content: ' [' attr(href) ']';
+      font-size: 0.65rem;
+      color: #666 !important;
+      word-break: break-all;
+    }
+
+    /* Remove decorative elements */
+    .favorite-card svg {
+      display: none !important;
+    }
+
+    /* Compact text */
+    .favorite-card h3 {
+      font-size: 0.9rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+
+    .favorite-card p {
+      font-size: 0.75rem !important;
+      margin-bottom: 0.25rem !important;
+      line-height: 1.3 !important;
+    }
+
+    /* Category badge - text only, no background */
+    .favorite-card span[class*='bg-'] {
+      background: none !important;
+      border: 1px solid #999 !important;
+      padding: 0 0.25rem !important;
+      font-size: 0.65rem !important;
+    }
+
+    /* Page setup */
+    @page {
+      margin: 0.5in;
+      size: letter;
+    }
+
+    /* Eco-friendly notice in print header */
+    .print-eco-notice {
+      display: block !important;
+      font-size: 0.65rem;
+      color: #666 !important;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+  }
+
+  /* Hide eco notice on screen */
+  .print-eco-notice {
+    display: none;
+  }
+</style>
+
+<script>
+  const FAVORITES_KEY = 'baynavigator_favorites';
+  const MAX_FAVORITES = 50;
+
+  interface Favorite {
+    id: string;
+    name: string;
+    savedAt: string;
+  }
+
+  interface Program {
+    id: string;
+    name: string;
+    category: string;
+    area: string;
+    description?: string;
+    phone?: string;
+    link?: string;
+    link_text?: string;
+    address?: string;
+    city?: string;
+  }
+
+  function getFavorites(): Favorite[] {
+    try {
+      const stored = localStorage.getItem(FAVORITES_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveFavorites(favorites: Favorite[]): void {
+    try {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    } catch {
+      // Storage full or unavailable
+    }
+  }
+
+  function removeFavorite(programId: string): void {
+    const favorites = getFavorites();
+    const filtered = favorites.filter((f) => f.id !== programId);
+    saveFavorites(filtered);
+  }
+
+  async function loadProgramData(): Promise<Map<string, Program>> {
+    const programMap = new Map<string, Program>();
+
+    try {
+      const response = await fetch('/api/programs.json');
+      if (response.ok) {
+        const programs: Program[] = await response.json();
+        programs.forEach((p) => programMap.set(p.id, p));
+      }
+    } catch (e) {
+      console.error('Failed to load program data:', e);
+    }
+
+    return programMap;
+  }
+
+  function createFavoriteCard(favorite: Favorite, program: Program | undefined): HTMLElement {
+    const card = document.createElement('article');
+    card.className =
+      'favorite-card bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 flex flex-col sm:flex-row sm:items-start gap-4';
+    card.dataset.favoriteId = favorite.id;
+
+    const savedDate = new Date(favorite.savedAt).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+
+    if (program) {
+      card.innerHTML = `
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+              ${program.category}
+            </span>
+            <span class="text-xs text-neutral-600 dark:text-neutral-300">${program.city || program.area}</span>
+          </div>
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">
+            <a href="/directory#program-${program.id}" class="hover:text-primary-700 dark:hover:text-primary-300">
+              ${program.name}
+            </a>
+          </h3>
+          ${program.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2 line-clamp-2">${program.description}</p>` : ''}
+          <div class="flex flex-wrap items-center gap-4 text-sm">
+            ${
+              program.link
+                ? `
+              <a href="${program.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary-700 dark:text-primary-300 hover:underline">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                ${program.link_text || 'Visit website'}
+              </a>
+            `
+                : ''
+            }
+            ${
+              program.phone
+                ? `
+              <a href="tel:${program.phone.replace(/\D/g, '')}" class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                ${program.phone}
+              </a>
+            `
+                : ''
+            }
+            ${
+              program.address
+                ? `
+              <span class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                ${program.address}
+              </span>
+            `
+                : ''
+            }
+          </div>
+          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2 print:hidden">Saved ${savedDate}</p>
+        </div>
+        <button
+          type="button"
+          class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden"
+          aria-label="Remove ${program.name} from favorites"
+          data-program-id="${favorite.id}"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      `;
+    } else {
+      // Program not found - show minimal info
+      card.innerHTML = `
+        <div class="flex-1 min-w-0">
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">${favorite.name}</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">Program information not available</p>
+          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2">Saved ${savedDate}</p>
+        </div>
+        <button
+          type="button"
+          class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden"
+          aria-label="Remove ${favorite.name} from favorites"
+          data-program-id="${favorite.id}"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      `;
+    }
+
+    return card;
+  }
+
+  function exportToCSV(favorites: Favorite[], programMap: Map<string, Program>): void {
+    const headers = ['Name', 'Category', 'Location', 'Phone', 'Website', 'Address', 'Saved Date'];
+    const rows = favorites.map((fav) => {
+      const program = programMap.get(fav.id);
+      const savedDate = new Date(fav.savedAt).toLocaleDateString();
+      if (program) {
+        return [
+          `"${program.name.replace(/"/g, '""')}"`,
+          `"${program.category}"`,
+          `"${program.city || program.area}"`,
+          `"${program.phone || ''}"`,
+          `"${program.link || ''}"`,
+          `"${program.address || ''}"`,
+          `"${savedDate}"`,
+        ].join(',');
+      }
+      return [`"${fav.name.replace(/"/g, '""')}"`, '', '', '', '', '', `"${savedDate}"`].join(',');
+    });
+
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `bay-navigator-favorites-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Show toast
+    const toast = (window as any).toast;
+    if (toast) {
+      toast.success('Favorites exported to CSV');
+    }
+  }
+
+  async function initFavoritesPage(): Promise<void> {
+    const favorites = getFavorites();
+    const countEl = document.getElementById('favorites-count');
+    const emptyState = document.getElementById('empty-state');
+    const favoritesList = document.getElementById('favorites-list');
+    const favoritesGrid = document.getElementById('favorites-grid');
+    const printBtn = document.getElementById('print-favorites-btn') as HTMLButtonElement;
+    const exportBtn = document.getElementById('export-csv-btn') as HTMLButtonElement;
+    const clearAllBtn = document.getElementById('clear-all-btn') as HTMLButtonElement;
+    const printDateEl = document.getElementById('print-date');
+
+    // Update count
+    if (countEl) {
+      countEl.textContent = String(favorites.length);
+    }
+
+    // Set print date
+    if (printDateEl) {
+      printDateEl.textContent = new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    }
+
+    if (favorites.length === 0) {
+      emptyState?.classList.remove('hidden');
+      favoritesList?.classList.add('hidden');
+      return;
+    }
+
+    emptyState?.classList.add('hidden');
+    favoritesList?.classList.remove('hidden');
+
+    // Enable buttons
+    if (printBtn) printBtn.disabled = false;
+    if (exportBtn) exportBtn.disabled = false;
+    if (clearAllBtn) clearAllBtn.disabled = false;
+
+    // Load program data
+    const programMap = await loadProgramData();
+
+    // Render favorites
+    if (favoritesGrid) {
+      favoritesGrid.innerHTML = '';
+      favorites.forEach((fav) => {
+        const program = programMap.get(fav.id);
+        const card = createFavoriteCard(fav, program);
+        favoritesGrid.appendChild(card);
+      });
+    }
+
+    // Handle remove buttons
+    favoritesGrid?.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.remove-favorite-btn') as HTMLButtonElement;
+      if (!btn) return;
+
+      const programId = btn.dataset.programId;
+      if (!programId) return;
+
+      // Remove from storage
+      removeFavorite(programId);
+
+      // Remove card with animation
+      const card = btn.closest('.favorite-card');
+      if (card) {
+        card.classList.add('opacity-0', 'scale-95', 'transition-all', 'duration-200');
+        setTimeout(() => {
+          card.remove();
+
+          // Update count
+          const newFavorites = getFavorites();
+          if (countEl) {
+            countEl.textContent = String(newFavorites.length);
+          }
+
+          // Show empty state if no favorites left
+          if (newFavorites.length === 0) {
+            emptyState?.classList.remove('hidden');
+            favoritesList?.classList.add('hidden');
+            if (printBtn) printBtn.disabled = true;
+            if (exportBtn) exportBtn.disabled = true;
+            if (clearAllBtn) clearAllBtn.disabled = true;
+          }
+        }, 200);
+      }
+
+      // Show toast
+      const toast = (window as any).toast;
+      if (toast) {
+        toast.info('Removed from favorites');
+      }
+
+      // Dispatch event for other components
+      window.dispatchEvent(
+        new CustomEvent('favorites-changed', {
+          detail: { programId, isFavorite: false, count: getFavorites().length },
+        })
+      );
+    });
+
+    // Print handler
+    printBtn?.addEventListener('click', () => {
+      window.print();
+    });
+
+    // Export CSV handler
+    exportBtn?.addEventListener('click', () => {
+      exportToCSV(favorites, programMap);
+    });
+
+    // Clear all handler
+    clearAllBtn?.addEventListener('click', () => {
+      if (confirm('Are you sure you want to remove all favorites? This cannot be undone.')) {
+        saveFavorites([]);
+
+        // Update UI
+        if (countEl) countEl.textContent = '0';
+        emptyState?.classList.remove('hidden');
+        favoritesList?.classList.add('hidden');
+        printBtn.disabled = true;
+        exportBtn.disabled = true;
+        clearAllBtn.disabled = true;
+
+        // Show toast
+        const toast = (window as any).toast;
+        if (toast) {
+          toast.info('All favorites cleared');
+        }
+
+        // Dispatch event
+        window.dispatchEvent(
+          new CustomEvent('favorites-changed', {
+            detail: { programId: null, isFavorite: false, count: 0 },
+          })
+        );
+      }
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initFavoritesPage);
+  document.addEventListener('astro:page-load', initFavoritesPage);
+
+  // Listen for favorites changes from other pages
+  window.addEventListener('favorites-changed', () => {
+    initFavoritesPage();
+  });
+</script>

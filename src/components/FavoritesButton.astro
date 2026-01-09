@@ -87,6 +87,7 @@ const { programId, programName, className = '' } = Astro.props;
 <script>
   // Favorites management
   const FAVORITES_KEY = 'baynavigator_favorites';
+  const MAX_FAVORITES = 50;
 
   interface Favorite {
     id: string;
@@ -115,7 +116,14 @@ const { programId, programName, className = '' } = Astro.props;
     return getFavorites().some((f) => f.id === programId);
   }
 
-  function toggleFavorite(programId: string, programName: string): boolean {
+  function getFavoritesCount(): number {
+    return getFavorites().length;
+  }
+
+  function toggleFavorite(
+    programId: string,
+    programName: string
+  ): { success: boolean; isFavorite: boolean; message?: string } {
     const favorites = getFavorites();
     const index = favorites.findIndex((f) => f.id === programId);
 
@@ -123,8 +131,16 @@ const { programId, programName, className = '' } = Astro.props;
       // Remove from favorites
       favorites.splice(index, 1);
       saveFavorites(favorites);
-      return false;
+      return { success: true, isFavorite: false };
     } else {
+      // Check limit before adding
+      if (favorites.length >= MAX_FAVORITES) {
+        return {
+          success: false,
+          isFavorite: false,
+          message: `Favorites limit reached (${MAX_FAVORITES} items). Remove some favorites to add more.`,
+        };
+      }
       // Add to favorites
       favorites.push({
         id: programId,
@@ -132,9 +148,17 @@ const { programId, programName, className = '' } = Astro.props;
         savedAt: new Date().toISOString(),
       });
       saveFavorites(favorites);
-      return true;
+      return { success: true, isFavorite: true };
     }
   }
+
+  // Export favorites API for other components
+  (window as any).baynavigatorFavorites = {
+    getFavorites,
+    isFavorite,
+    getFavoritesCount,
+    MAX_FAVORITES,
+  };
 
   // Initialize all favorite buttons
   function initFavoriteButtons(): void {
@@ -156,18 +180,30 @@ const { programId, programName, className = '' } = Astro.props;
 
       // Handle click
       button.addEventListener('click', () => {
-        const nowFavorite = toggleFavorite(programId, programName);
-        button.setAttribute('aria-pressed', String(nowFavorite));
+        const result = toggleFavorite(programId, programName);
+        const toast = (window as any).toast;
+
+        if (!result.success) {
+          // Show error - limit reached
+          if (toast) {
+            toast.error(result.message || 'Could not save to favorites');
+          }
+          return;
+        }
+
+        button.setAttribute('aria-pressed', String(result.isFavorite));
         button.setAttribute(
           'aria-label',
-          nowFavorite ? `Remove ${programName} from favorites` : `Save ${programName} to favorites`
+          result.isFavorite
+            ? `Remove ${programName} from favorites`
+            : `Save ${programName} to favorites`
         );
 
         // Show toast notification
-        const toast = (window as any).toast;
         if (toast) {
-          if (nowFavorite) {
-            toast.success(`${programName} saved to favorites`);
+          if (result.isFavorite) {
+            const count = getFavoritesCount();
+            toast.success(`${programName} saved to favorites (${count}/${MAX_FAVORITES})`);
           } else {
             toast.info(`${programName} removed from favorites`);
           }
@@ -176,7 +212,7 @@ const { programId, programName, className = '' } = Astro.props;
         // Dispatch custom event for other components
         window.dispatchEvent(
           new CustomEvent('favorites-changed', {
-            detail: { programId, isFavorite: nowFavorite },
+            detail: { programId, isFavorite: result.isFavorite, count: getFavoritesCount() },
           })
         );
       });
