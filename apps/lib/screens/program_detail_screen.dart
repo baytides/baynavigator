@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import '../models/program.dart';
 import '../providers/programs_provider.dart';
+import '../providers/settings_provider.dart';
+import '../services/privacy_service.dart';
 import '../config/theme.dart';
 import '../utils/category_icons.dart';
 import '../widgets/depth_effects.dart';
@@ -24,11 +26,29 @@ class ProgramDetailScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _launchPhone(String phone) async {
-    final cleanPhone = phone.replaceAll(RegExp(r'[^0-9+]'), '');
-    final uri = Uri.parse('tel:$cleanPhone');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+  Future<void> _launchPhone(BuildContext context, String phone) async {
+    final settings = context.read<SettingsProvider>();
+    final result = await settings.makeCall(phone);
+
+    if (!context.mounted) return;
+
+    // Show feedback to user
+    if (result.method == CallMethod.clipboard) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result.message ?? 'Phone number copied to clipboard'),
+          duration: const Duration(seconds: 4),
+          action: SnackBarAction(
+            label: 'OK',
+            onPressed: () {},
+          ),
+        ),
+      );
+    } else if (result.message != null) {
+      // Show fallback message if preferred app wasn't available
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result.message!)),
+      );
     }
   }
 
@@ -332,7 +352,7 @@ Shared from Bay Navigator
                               context,
                               Icons.phone_outlined,
                               program.phone!,
-                              () => _launchPhone(program.phone!),
+                              () => _launchPhone(context, program.phone!),
                             ),
                           if (program.email != null && program.email!.isNotEmpty)
                             _buildContactRow(
@@ -607,7 +627,7 @@ Shared from Bay Navigator
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () => _launchPhone(program.phone!),
+              onPressed: () => _launchPhone(context, program.phone!),
               icon: const Icon(Icons.phone),
               label: const Text('Call Now'),
               style: ElevatedButton.styleFrom(

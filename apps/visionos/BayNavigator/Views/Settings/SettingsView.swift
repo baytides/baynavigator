@@ -11,6 +11,16 @@ struct SettingsView: View {
     @State private var isRefreshing = false
     @State private var isImmersiveSpaceOpen = false
 
+    // Privacy state
+    @State private var showTorRequiredAlert = false
+    @State private var showProxyConfigSheet = false
+    @State private var isTestingConnection = false
+    @State private var showConnectionTestResult = false
+    @State private var connectionTestResult: PrivacyTestResult?
+    @State private var proxyHost = ""
+    @State private var proxyPort = "9050"
+    @State private var proxyType: ProxyType = .socks5
+
     var body: some View {
         @Bindable var settings = settingsViewModel
 
@@ -157,6 +167,94 @@ struct SettingsView: View {
                     Text("Warm Mode applies a sepia tint to reduce eye strain. This is an in-app alternative since visionOS doesn't include Night Shift.")
                 }
 
+                // Advanced Privacy Section
+                Section {
+                    // Privacy status indicator
+                    if let status = settings.privacyStatus {
+                        HStack {
+                            Image(systemName: status.level.systemImage)
+                                .foregroundStyle(status.isActive ? .green : .secondary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(status.description)
+                                if let warning = status.warning {
+                                    Text(warning)
+                                        .font(.caption)
+                                        .foregroundStyle(.orange)
+                                }
+                            }
+                        }
+                    }
+
+                    // Tor/Onion toggle
+                    Toggle(isOn: $settings.useOnion) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Use Tor Network")
+                            Text("Route traffic through Tor hidden service")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .onChange(of: settings.useOnion) { _, newValue in
+                        if newValue && !settings.torAvailable {
+                            showTorRequiredAlert = true
+                        }
+                    }
+
+                    // Custom proxy toggle
+                    Toggle(isOn: $settings.proxyEnabled) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Use Custom Proxy")
+                            Text("Route traffic through SOCKS5 or HTTP proxy")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .onChange(of: settings.proxyEnabled) { _, newValue in
+                        if newValue && settings.proxyConfig == nil {
+                            showProxyConfigSheet = true
+                        }
+                    }
+
+                    // Show proxy config if enabled
+                    if settings.proxyEnabled, let config = settings.proxyConfig {
+                        HStack {
+                            Text("Proxy")
+                            Spacer()
+                            Text(config.description)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    // Test connection button
+                    Button {
+                        Task {
+                            isTestingConnection = true
+                            AccessibilityAnnouncement.announce("Testing privacy connection")
+                            let result = await settings.testPrivacyConnection()
+                            isTestingConnection = false
+                            connectionTestResult = result
+                            showConnectionTestResult = true
+                            AccessibilityAnnouncement.announce(result.success ? "Connection successful" : "Connection failed")
+                        }
+                    } label: {
+                        HStack {
+                            Label("Test Privacy Connection", systemImage: "network")
+                            Spacer()
+                            if isTestingConnection {
+                                ProgressView()
+                            } else {
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
+                    }
+                    .disabled(isTestingConnection)
+                } header: {
+                    Text("Advanced Privacy")
+                } footer: {
+                    Text("Optional features to access Bay Navigator through Tor or a proxy for enhanced privacy. Similar to Signal's censorship circumvention.")
+                }
+
                 // Cache Section
                 Section {
                     HStack {
@@ -241,6 +339,82 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .task {
                 await updateCacheSize()
+            }
+            // Tor required alert
+            .alert("Tor Client Required", isPresented: $showTorRequiredAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("To use Tor, you need a Tor client running on your Mac or network. The app will use the default SOCKS5 proxy at 127.0.0.1:9050.")
+            }
+            // Connection test result alert
+            .alert(
+                connectionTestResult?.success == true ? "Connection Successful" : "Connection Failed",
+                isPresented: $showConnectionTestResult
+            ) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                if let result = connectionTestResult {
+                    if result.success {
+                        Text(result.usedOnion
+                            ? "Connected via Tor (\(result.latencyMs)ms)"
+                            : "Connection successful (\(result.latencyMs)ms)")
+                    } else {
+                        Text(result.message)
+                    }
+                }
+            }
+            // Proxy configuration sheet
+            .sheet(isPresented: $showProxyConfigSheet) {
+                NavigationStack {
+                    Form {
+                        Section {
+                            Picker("Type", selection: $proxyType) {
+                                ForEach(ProxyType.allCases) { type in
+                                    Text(type.displayName).tag(type)
+                                }
+                            }
+
+                            TextField("Host", text: $proxyHost)
+                                .textContentType(.URL)
+                                .autocorrectionDisabled()
+
+                            TextField("Port", text: $proxyPort)
+                                .keyboardType(.numberPad)
+                        } header: {
+                            Text("Proxy Configuration")
+                        } footer: {
+                            Text("Configure a SOCKS5 or HTTP proxy to route app traffic through.")
+                        }
+                    }
+                    .navigationTitle("Configure Proxy")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                showProxyConfigSheet = false
+                                // Reset proxy enabled if cancelled without config
+                                if settingsViewModel.proxyConfig == nil {
+                                    settingsViewModel.proxyEnabled = false
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Save") {
+                                guard !proxyHost.isEmpty,
+                                      let port = Int(proxyPort),
+                                      port > 0 && port <= 65535 else {
+                                    return
+                                }
+
+                                let config = ProxyConfig(host: proxyHost, port: port, type: proxyType)
+                                Task {
+                                    await settingsViewModel.setProxyConfig(config)
+                                }
+                                showProxyConfigSheet = false
+                            }
+                            .disabled(proxyHost.isEmpty || Int(proxyPort) == nil)
+                        }
+                    }
+                }
             }
         }
     }

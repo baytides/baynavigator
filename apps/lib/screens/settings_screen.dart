@@ -10,6 +10,7 @@ import '../providers/programs_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/settings_provider.dart';
 import '../providers/user_prefs_provider.dart';
+import '../services/privacy_service.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
 
@@ -566,6 +567,225 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ],
             ),
 
+            // Advanced Privacy Section (similar to Signal's censorship circumvention)
+            _buildSection(
+              context,
+              title: 'Advanced Privacy',
+              children: [
+                Consumer<SettingsProvider>(
+                  builder: (context, settings, child) {
+                    final status = settings.privacyStatus;
+                    return Column(
+                      children: [
+                        // Privacy status indicator
+                        if (status != null) ...[
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Row(
+                              children: [
+                                Text(status.icon, style: const TextStyle(fontSize: 24)),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        status.description,
+                                        style: theme.textTheme.bodyMedium,
+                                      ),
+                                      if (status.warning != null)
+                                        Text(
+                                          status.warning!,
+                                          style: theme.textTheme.bodySmall?.copyWith(
+                                            color: AppColors.warning,
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          _buildDivider(context),
+                        ],
+
+                        // Tor/Onion toggle
+                        _buildSwitchRow(
+                          context,
+                          label: 'Use Tor Network',
+                          subtitle: Platform.isAndroid || Platform.isIOS
+                              ? 'Route traffic through Tor (requires Orbot app)'
+                              : 'Route traffic through Tor hidden service',
+                          value: settings.useOnion,
+                          onChanged: (value) async {
+                            HapticFeedback.lightImpact();
+                            await settings.setUseOnion(value);
+
+                            if (value && !settings.orbotAvailable && mounted) {
+                              _showOrbotRequiredDialog(context);
+                            }
+                          },
+                        ),
+                        _buildDivider(context),
+
+                        // Custom proxy toggle
+                        _buildSwitchRow(
+                          context,
+                          label: 'Use Custom Proxy',
+                          subtitle: 'Route traffic through a SOCKS5 or HTTP proxy',
+                          value: settings.proxyEnabled,
+                          onChanged: (value) async {
+                            HapticFeedback.lightImpact();
+                            if (value) {
+                              _showProxyConfigDialog(context);
+                            } else {
+                              await settings.setProxyEnabled(false);
+                            }
+                          },
+                        ),
+
+                        // Show proxy config if enabled
+                        if (settings.proxyEnabled && settings.proxyConfig != null) ...[
+                          _buildDivider(context),
+                          _buildRow(
+                            context,
+                            'Proxy',
+                            settings.proxyConfig.toString(),
+                          ),
+                        ],
+
+                        _buildDivider(context),
+
+                        // Test connection button
+                        _buildButton(
+                          context,
+                          icon: '🔍',
+                          label: 'Test Privacy Connection',
+                          onTap: () => _testPrivacyConnection(context),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
+
+            // Private Calling Section
+            _buildSection(
+              context,
+              title: 'Private Calling',
+              children: [
+                Consumer<SettingsProvider>(
+                  builder: (context, settings, child) {
+                    return Column(
+                      children: [
+                        // Info text
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            'Choose how to make calls from the app. Using a VoIP app can help keep calls off your carrier logs.',
+                            style: theme.textTheme.bodySmall,
+                          ),
+                        ),
+                        _buildDivider(context),
+
+                        // Calling app selector
+                        _buildButton(
+                          context,
+                          icon: '📞',
+                          label: 'Calling App',
+                          value: settings.preferredCallingApp.displayName,
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            _showCallingAppDialog(context);
+                          },
+                        ),
+
+                        // Show privacy note for selected app
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.info_outline,
+                                size: 16,
+                                color: theme.colorScheme.secondary,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  settings.preferredCallingApp.privacyDescription,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.secondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // Show clipboard explanation when "Other" is selected
+                        if (settings.preferredCallingApp == CallingApp.other)
+                          Container(
+                            margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: AppColors.warning.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: AppColors.warning.withValues(alpha: 0.3),
+                              ),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.content_copy,
+                                  size: 18,
+                                  color: AppColors.warning,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Text(
+                                    'For apps that don\'t support click-to-call, pressing a call link will copy the phone number to your clipboard. Paste it in your preferred app. The clipboard auto-clears after 2 minutes for your privacy.',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: isDark ? AppColors.darkText : AppColors.lightText,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        _buildDivider(context),
+
+                        // Refresh available apps button
+                        _buildButton(
+                          context,
+                          icon: '🔄',
+                          label: 'Refresh Available Apps',
+                          onTap: () async {
+                            HapticFeedback.lightImpact();
+                            await settings.refreshAvailableCallingApps();
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Found ${settings.availableCallingApps.length} calling apps',
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
+
             // Legal Section
             _buildSection(
               context,
@@ -856,5 +1076,299 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (e) {
       return isoDate;
     }
+  }
+
+  // ============================================
+  // PRIVACY DIALOGS
+  // ============================================
+
+  void _showOrbotRequiredDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Tor Client Required'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'To use Tor, you need a Tor client running on your device.\n',
+            ),
+            if (Platform.isAndroid || Platform.isIOS) ...[
+              const Text(
+                'We recommend Orbot, the official Tor client for mobile devices.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                '1. Install Orbot from your app store\n'
+                '2. Open Orbot and tap "Start"\n'
+                '3. Wait for the connection to establish\n'
+                '4. Return here and the setting will work',
+                style: TextStyle(fontSize: 13),
+              ),
+            ] else ...[
+              const Text(
+                'Install and start Tor on your computer. The app will use the default SOCKS5 proxy at 127.0.0.1:9050.',
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('OK'),
+          ),
+          if (Platform.isAndroid)
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+                _launchUrl('https://play.google.com/store/apps/details?id=org.torproject.android');
+              },
+              child: const Text('Get Orbot'),
+            ),
+          if (Platform.isIOS)
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+                _launchUrl('https://apps.apple.com/app/orbot/id1609461599');
+              },
+              child: const Text('Get Orbot'),
+            ),
+        ],
+      ),
+    );
+  }
+
+  void _showProxyConfigDialog(BuildContext context) {
+    final settings = context.read<SettingsProvider>();
+    final hostController = TextEditingController(
+      text: settings.proxyConfig?.host ?? '',
+    );
+    final portController = TextEditingController(
+      text: settings.proxyConfig?.port.toString() ?? '9050',
+    );
+    var selectedType = settings.proxyConfig?.type ?? ProxyType.socks5;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: const Text('Configure Proxy'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Configure a SOCKS5 or HTTP proxy to route app traffic through.',
+                style: TextStyle(fontSize: 13),
+              ),
+              const SizedBox(height: 16),
+
+              // Proxy type selector
+              Row(
+                children: [
+                  const Text('Type: '),
+                  const SizedBox(width: 8),
+                  ChoiceChip(
+                    label: const Text('SOCKS5'),
+                    selected: selectedType == ProxyType.socks5,
+                    onSelected: (selected) {
+                      if (selected) {
+                        setDialogState(() => selectedType = ProxyType.socks5);
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  ChoiceChip(
+                    label: const Text('HTTP'),
+                    selected: selectedType == ProxyType.http,
+                    onSelected: (selected) {
+                      if (selected) {
+                        setDialogState(() => selectedType = ProxyType.http);
+                      }
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Host field
+              TextField(
+                controller: hostController,
+                decoration: const InputDecoration(
+                  labelText: 'Host',
+                  hintText: '127.0.0.1',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.url,
+              ),
+              const SizedBox(height: 12),
+
+              // Port field
+              TextField(
+                controller: portController,
+                decoration: const InputDecoration(
+                  labelText: 'Port',
+                  hintText: '9050',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(dialogContext);
+                // Don't enable proxy if cancelled
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                final host = hostController.text.trim();
+                final port = int.tryParse(portController.text.trim());
+
+                if (host.isEmpty || port == null || port < 1 || port > 65535) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please enter a valid host and port')),
+                  );
+                  return;
+                }
+
+                final config = ProxyConfig(
+                  host: host,
+                  port: port,
+                  type: selectedType,
+                );
+
+                await settings.setProxyConfig(config);
+                await settings.setProxyEnabled(true);
+
+                if (dialogContext.mounted) {
+                  Navigator.pop(dialogContext);
+                }
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _testPrivacyConnection(BuildContext context) async {
+    final settings = context.read<SettingsProvider>();
+    final messenger = ScaffoldMessenger.of(context);
+
+    // Show loading
+    messenger.showSnackBar(
+      const SnackBar(
+        content: Row(
+          children: [
+            SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+            SizedBox(width: 12),
+            Text('Testing connection...'),
+          ],
+        ),
+        duration: Duration(seconds: 30),
+      ),
+    );
+
+    final result = await settings.testPrivacyConnection();
+
+    // Hide loading snackbar
+    messenger.hideCurrentSnackBar();
+
+    // Show result
+    if (result.success) {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            result.usedOnion
+                ? '✓ Connected via Tor (${result.latencyMs}ms)'
+                : '✓ Connection successful (${result.latencyMs}ms)',
+          ),
+          backgroundColor: AppColors.success,
+        ),
+      );
+    } else {
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('✗ Connection failed: ${result.message}'),
+          backgroundColor: AppColors.danger,
+        ),
+      );
+    }
+  }
+
+  // ============================================
+  // VOIP CALLING APP DIALOGS
+  // ============================================
+
+  void _showCallingAppDialog(BuildContext context) {
+    final settings = context.read<SettingsProvider>();
+    final theme = Theme.of(context);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Choose Calling App'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: settings.availableCallingApps.length,
+            itemBuilder: (context, index) {
+              final app = settings.availableCallingApps[index];
+              final isSelected = settings.preferredCallingApp == app;
+
+              return ListTile(
+                leading: Icon(
+                  isSelected
+                      ? Icons.radio_button_checked
+                      : Icons.radio_button_unchecked,
+                  color: isSelected ? AppColors.primary : null,
+                ),
+                title: Text(app.displayName),
+                subtitle: Text(
+                  app.privacyDescription,
+                  style: theme.textTheme.bodySmall,
+                ),
+                onTap: () async {
+                  HapticFeedback.lightImpact();
+                  await settings.setPreferredCallingApp(app);
+                  if (dialogContext.mounted) {
+                    Navigator.pop(dialogContext);
+                  }
+
+                  // Show explanation for "Other" option
+                  if (app == CallingApp.other && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'When you tap Call, the number will be copied to your clipboard and auto-cleared after 2 minutes.',
+                        ),
+                        duration: Duration(seconds: 4),
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
   }
 }

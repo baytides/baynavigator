@@ -1,14 +1,40 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/privacy_service.dart';
 
 class SettingsProvider extends ChangeNotifier {
   static const String _crashReportingKey = 'bay_area_discounts:crash_reporting';
 
+  final PrivacyService _privacyService = PrivacyService();
+
   bool _crashReportingEnabled = true;
   bool _initialized = false;
 
+  // Privacy settings
+  bool _useOnion = false;
+  bool _proxyEnabled = false;
+  ProxyConfig? _proxyConfig;
+  bool _orbotAvailable = false;
+  PrivacyStatus? _privacyStatus;
+
+  // VoIP calling settings
+  CallingApp _preferredCallingApp = CallingApp.system;
+  List<CallingApp> _availableCallingApps = [CallingApp.system, CallingApp.other];
+
   bool get crashReportingEnabled => _crashReportingEnabled;
   bool get initialized => _initialized;
+
+  // Privacy getters
+  bool get useOnion => _useOnion;
+  bool get proxyEnabled => _proxyEnabled;
+  ProxyConfig? get proxyConfig => _proxyConfig;
+  bool get orbotAvailable => _orbotAvailable;
+  PrivacyStatus? get privacyStatus => _privacyStatus;
+  PrivacyService get privacyService => _privacyService;
+
+  // VoIP calling getters
+  CallingApp get preferredCallingApp => _preferredCallingApp;
+  List<CallingApp> get availableCallingApps => _availableCallingApps;
 
   Future<void> initialize() async {
     if (_initialized) return;
@@ -16,8 +42,19 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       _crashReportingEnabled = prefs.getBool(_crashReportingKey) ?? true;
+
+      // Load privacy settings
+      _useOnion = await _privacyService.isOnionEnabled();
+      _proxyEnabled = await _privacyService.isProxyEnabled();
+      _proxyConfig = await _privacyService.getProxyConfig();
+      _orbotAvailable = await _privacyService.isOrbotAvailable();
+      _privacyStatus = await _privacyService.getPrivacyStatus();
+
+      // Load VoIP calling settings
+      _preferredCallingApp = await _privacyService.getPreferredCallingApp();
+      _availableCallingApps = await _privacyService.getAvailableCallingApps();
     } catch (e) {
-      // Use default
+      // Use defaults
     }
 
     _initialized = true;
@@ -34,5 +71,77 @@ class SettingsProvider extends ChangeNotifier {
     } catch (e) {
       // Continue without persistence
     }
+  }
+
+  // ============================================
+  // PRIVACY SETTINGS
+  // ============================================
+
+  /// Enable or disable Tor/Onion routing
+  /// Requires Orbot (Android/iOS) or Tor client (desktop) to be running
+  Future<void> setUseOnion(bool enabled) async {
+    _useOnion = enabled;
+    await _privacyService.setOnionEnabled(enabled);
+    _privacyStatus = await _privacyService.getPrivacyStatus();
+    notifyListeners();
+  }
+
+  /// Enable or disable custom proxy
+  Future<void> setProxyEnabled(bool enabled) async {
+    _proxyEnabled = enabled;
+    await _privacyService.setProxyEnabled(enabled);
+    _privacyStatus = await _privacyService.getPrivacyStatus();
+    notifyListeners();
+  }
+
+  /// Set proxy configuration
+  Future<void> setProxyConfig(ProxyConfig config) async {
+    _proxyConfig = config;
+    await _privacyService.setProxyConfig(config);
+    _privacyStatus = await _privacyService.getPrivacyStatus();
+    notifyListeners();
+  }
+
+  /// Clear proxy configuration
+  Future<void> clearProxyConfig() async {
+    _proxyConfig = null;
+    _proxyEnabled = false;
+    await _privacyService.clearProxyConfig();
+    _privacyStatus = await _privacyService.getPrivacyStatus();
+    notifyListeners();
+  }
+
+  /// Refresh Orbot/Tor availability status
+  Future<void> refreshOrbotStatus() async {
+    _orbotAvailable = await _privacyService.isOrbotAvailable();
+    _privacyStatus = await _privacyService.getPrivacyStatus();
+    notifyListeners();
+  }
+
+  /// Test the current privacy connection
+  Future<PrivacyTestResult> testPrivacyConnection() async {
+    return await _privacyService.testPrivacyConnection();
+  }
+
+  // ============================================
+  // VOIP CALLING SETTINGS
+  // ============================================
+
+  /// Set the preferred calling app
+  Future<void> setPreferredCallingApp(CallingApp app) async {
+    _preferredCallingApp = app;
+    await _privacyService.setPreferredCallingApp(app);
+    notifyListeners();
+  }
+
+  /// Refresh available calling apps (e.g., after installing a new app)
+  Future<void> refreshAvailableCallingApps() async {
+    _availableCallingApps = await _privacyService.getAvailableCallingApps();
+    notifyListeners();
+  }
+
+  /// Make a call using the preferred calling app
+  Future<CallResult> makeCall(String phoneNumber) async {
+    return await _privacyService.makeCall(phoneNumber);
   }
 }
