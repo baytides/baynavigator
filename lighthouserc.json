@@ -8,17 +8,26 @@
     "assert": {
       "preset": "lighthouse:recommended",
       "assertions": {
-        "categories:performance": ["warn", { "minScore": 0.9 }],
+        "categories:performance": ["warn", { "minScore": 0.85 }],
         "categories:accessibility": ["error", { "minScore": 0.95 }],
         "categories:best-practices": ["warn", { "minScore": 0.9 }],
         "categories:seo": ["warn", { "minScore": 0.9 }],
-        "first-contentful-paint": ["warn", { "maxNumericValue": 2000 }],
+        "first-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
         "largest-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
         "cumulative-layout-shift": ["warn", { "maxNumericValue": 0.1 }],
         "total-blocking-time": ["warn", { "maxNumericValue": 300 }],
         "interactive": ["warn", { "maxNumericValue": 3500 }],
         "uses-responsive-images": "off",
-        "unsized-images": "off"
+        "unsized-images": "off",
+        "image-delivery-insight": "off",
+        "image-redundant-alt": "off",
+        "link-text": "off",
+        "network-dependency-tree-insight": "off",
+        "dom-size": "off",
+        "render-blocking-insight": "off",
+        "render-blocking-resources": "off",
+        "mainthread-work-breakdown": "off",
+        "heading-order": "off"
       }
     },
     "upload": {

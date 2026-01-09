@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import OfflineBanner from '../components/OfflineBanner.astro';
+import SkipLinks from '../components/SkipLinks.astro';
+import Toast from '../components/Toast.astro';
 import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
@@ -199,8 +201,8 @@ const websiteSchema = {
     </script>
   </head>
   <body class="min-h-screen flex flex-col overflow-x-hidden">
-    <!-- Skip link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Skip links for accessibility (WCAG 2.4.1) -->
+    <SkipLinks />
 
     <!-- Official Banner -->
     <div class="official-banner">
@@ -1291,6 +1293,9 @@ const websiteSchema = {
     <OfflineBanner />
 
     <!-- Service Worker Registration -->
+    <!-- Toast notifications -->
+    <Toast />
+
     <script is:inline>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
