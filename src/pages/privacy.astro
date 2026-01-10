@@ -17,7 +17,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4">
             Privacy Policy
           </h1>
-          <p class="text-neutral-600 dark:text-neutral-300">Last updated: January 7, 2026</p>
+          <p class="text-neutral-600 dark:text-neutral-300">Last updated: January 10, 2026</p>
         </div>
 
         <!-- TL;DR Summary Card -->
@@ -492,6 +492,41 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   href="https://developers.cloudflare.com/workers-ai/privacy/"
                   class="text-primary-700 dark:text-primary-300"
                   >Cloudflare Workers AI Privacy documentation</a
+                >.
+              </p>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
+                Azure OpenAI (Simple Language Feature)
+              </h4>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                Bay Navigator's optional "Simple Language" accessibility feature uses <a
+                  href="https://azure.microsoft.com/en-us/products/ai-services/openai-service"
+                  class="text-primary-700 dark:text-primary-300">Azure OpenAI Service</a
+                > (GPT-4o-mini) to simplify complex text to an 8th-grade reading level. This feature:
+              </p>
+              <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
+                <li>
+                  <strong>Only activates on request:</strong> Simple Language processing only occurs when
+                  you explicitly enable the feature for a specific piece of text.
+                </li>
+                <li>
+                  <strong>No personal data:</strong> Only the program description text is sent—no user
+                  identifiers, location, or personal information.
+                </li>
+                <li>
+                  <strong>Not stored or trained on:</strong> Microsoft does not use Azure OpenAI customer
+                  data to train models. Data is processed and discarded.
+                </li>
+                <li>
+                  <strong>Enterprise-grade privacy:</strong> Azure OpenAI operates under Microsoft's enterprise
+                  data protection commitments and is SOC 2 compliant.
+                </li>
+              </ul>
+              <p class="text-neutral-600 dark:text-neutral-300">
+                For more details, see <a
+                  href="https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy"
+                  class="text-primary-700 dark:text-primary-300"
+                  >Azure OpenAI Data Privacy documentation</a
                 >.
               </p>
             </div>
