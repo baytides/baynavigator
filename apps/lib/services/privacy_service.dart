@@ -407,8 +407,6 @@ class PrivacyService {
             uri = Uri.parse('googlevoice://call?number=$phoneNumber');
           case CallingApp.textNow:
             uri = Uri.parse('textnow://call?number=$phoneNumber');
-          case CallingApp.skype:
-            uri = Uri.parse('skype:$phoneNumber?call');
           case CallingApp.whatsApp:
             // WhatsApp requires full international format without +
             final intlNumber = phoneNumber.replaceAll('+', '');
@@ -545,7 +543,6 @@ enum CallingApp {
   system('system', 'Phone (Default)', null),
   googleVoice('google_voice', 'Google Voice', 'googlevoice'),
   textNow('textnow', 'TextNow', 'textnow'),
-  skype('skype', 'Skype', 'skype'),
   whatsApp('whatsapp', 'WhatsApp', 'whatsapp'),
   signal('signal', 'Signal', 'sgnl'),
   telegram('telegram', 'Telegram', 'tg'),
@@ -566,8 +563,6 @@ enum CallingApp {
         return 'VoIP service by Google. Uses separate number.';
       case CallingApp.textNow:
         return 'Free VoIP with separate number. Ad-supported.';
-      case CallingApp.skype:
-        return 'VoIP service by Microsoft. Requires account.';
       case CallingApp.whatsApp:
         return 'End-to-end encrypted calls. Requires both parties have app.';
       case CallingApp.signal:

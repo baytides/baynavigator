@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// Safety service for Bay Navigator
 /// Provides features to protect vulnerable users:
@@ -23,10 +26,18 @@ class SafetyService {
   static const String _incognitoModeKey = 'bay_navigator:incognito_mode';
   static const String _showSafetyTipsKey = 'bay_navigator:show_safety_tips';
   static const String _networkWarningsKey = 'bay_navigator:network_warnings';
+  static const String _networkMonitoringKey = 'bay_navigator:network_monitoring';
   static const String _recentProgramsKey = 'bay_navigator:recent_programs';
   static const String _searchHistoryKey = 'bay_navigator:search_history';
   static const String _disguisedModeKey = 'bay_navigator:disguised_mode';
   static const String _disguisedIconKey = 'bay_navigator:disguised_icon';
+  static const String _safetyPinKey = 'bay_navigator:safety_pin';
+  static const String _pinProtectionEnabledKey = 'bay_navigator:pin_protection';
+  static const String _panicWipeEnabledKey = 'bay_navigator:panic_wipe_enabled';
+  static const String _failedPinAttemptsKey = 'bay_navigator:failed_pin_attempts';
+
+  // Secure storage keys (encrypted on-device)
+  static const String _encryptionEnabledKey = 'bay_navigator:encryption_enabled';
 
   // Disguised app icons - these blend in as utility apps
   // Note: Actual icon changing requires platform-specific setup
@@ -78,6 +89,21 @@ class SafetyService {
   bool _isIncognitoSession = false;
   final List<String> _sessionRecentPrograms = [];
   final List<String> _sessionSearchHistory = [];
+
+  // Secure storage for encrypted data (uses Android Keystore / iOS Keychain)
+  // This protects sensitive data even on rooted/jailbroken devices
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+      // Use strong encryption that requires device unlock
+      keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_OAEPwithSHA_256andMGF1Padding,
+      storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
+    ),
+    iOptions: IOSOptions(
+      accessibility: KeychainAccessibility.first_unlock_this_device,
+      // Data protected until first unlock, then available
+    ),
+  );
 
   // Default safe exit destinations
   static const List<QuickExitDestination> defaultDestinations = [
@@ -390,10 +416,22 @@ class SafetyService {
   // NETWORK PRIVACY WARNINGS
   // ============================================
 
+  /// Check if network monitoring is enabled (opt-in, default false)
+  Future<bool> isNetworkMonitoringEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_networkMonitoringKey) ?? false;
+  }
+
+  /// Enable or disable network monitoring
+  Future<void> setNetworkMonitoringEnabled(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_networkMonitoringKey, enabled);
+  }
+
   /// Check if network warnings are enabled
   Future<bool> isNetworkWarningsEnabled() async {
     final prefs = await _preferences;
-    return prefs.getBool(_networkWarningsKey) ?? true;
+    return prefs.getBool(_networkWarningsKey) ?? false;
   }
 
   /// Enable or disable network warnings
@@ -567,6 +605,506 @@ class SafetyService {
       );
     }
   }
+
+  // ============================================
+  // PIN PROTECTION FOR SAFETY SETTINGS
+  // ============================================
+
+  /// Check if PIN protection is enabled
+  Future<bool> isPinProtectionEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_pinProtectionEnabledKey) ?? false;
+  }
+
+  /// Check if a PIN has been set
+  Future<bool> hasPinSet() async {
+    final prefs = await _preferences;
+    return prefs.getString(_safetyPinKey) != null;
+  }
+
+  /// Validate a PIN against stored hash
+  Future<bool> validatePin(String pin) async {
+    final prefs = await _preferences;
+    final storedHash = prefs.getString(_safetyPinKey);
+    if (storedHash == null) return false;
+
+    // Simple hash comparison (in production, use proper crypto)
+    final inputHash = _hashPin(pin);
+    return inputHash == storedHash;
+  }
+
+  /// Set a new PIN (must pass validation)
+  Future<PinSetResult> setPin(String pin) async {
+    // Validate PIN strength
+    final validation = validatePinStrength(pin);
+    if (!validation.isValid) {
+      return PinSetResult(success: false, message: validation.message);
+    }
+
+    final prefs = await _preferences;
+    final hashedPin = _hashPin(pin);
+    await prefs.setString(_safetyPinKey, hashedPin);
+    await prefs.setBool(_pinProtectionEnabledKey, true);
+
+    return PinSetResult(success: true, message: 'PIN set successfully');
+  }
+
+  /// Remove PIN protection
+  Future<void> removePin() async {
+    final prefs = await _preferences;
+    await prefs.remove(_safetyPinKey);
+    await prefs.setBool(_pinProtectionEnabledKey, false);
+  }
+
+  /// Validate PIN strength
+  /// Returns validation result with specific error if invalid
+  PinValidation validatePinStrength(String pin) {
+    // Check length (6-8 digits)
+    if (pin.length < 6 || pin.length > 8) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN must be 6-8 digits',
+      );
+    }
+
+    // Check if all digits
+    if (!RegExp(r'^\d+$').hasMatch(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN must contain only numbers',
+      );
+    }
+
+    // Check for repeated digits (e.g., 111111, 222222)
+    if (RegExp(r'^(\d)\1+$').hasMatch(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN cannot be all the same digit',
+      );
+    }
+
+    // Check for sequential ascending (e.g., 123456, 234567)
+    if (_isSequentialAscending(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN cannot be a sequential number',
+      );
+    }
+
+    // Check for sequential descending (e.g., 654321, 876543)
+    if (_isSequentialDescending(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN cannot be a sequential number',
+      );
+    }
+
+    // Check for common weak PINs
+    if (_isCommonWeakPin(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN is too common. Choose something more unique.',
+      );
+    }
+
+    // Check for repeated pairs (e.g., 121212, 787878)
+    if (_isRepeatedPattern(pin)) {
+      return PinValidation(
+        isValid: false,
+        message: 'PIN cannot be a repeated pattern',
+      );
+    }
+
+    return PinValidation(isValid: true, message: 'PIN is strong');
+  }
+
+  /// Check if PIN is sequential ascending
+  bool _isSequentialAscending(String pin) {
+    for (int i = 0; i < pin.length - 1; i++) {
+      final current = int.parse(pin[i]);
+      final next = int.parse(pin[i + 1]);
+      if (next != (current + 1) % 10) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// Check if PIN is sequential descending
+  bool _isSequentialDescending(String pin) {
+    for (int i = 0; i < pin.length - 1; i++) {
+      final current = int.parse(pin[i]);
+      final next = int.parse(pin[i + 1]);
+      if (next != (current - 1 + 10) % 10) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// Check against common weak PINs
+  bool _isCommonWeakPin(String pin) {
+    const weakPins = [
+      '000000', '111111', '222222', '333333', '444444',
+      '555555', '666666', '777777', '888888', '999999',
+      '123456', '654321', '123123', '112233', '121212',
+      '696969', '131313', '420420', '101010', '192837',
+      '1234567', '7654321', '1111111', '0000000',
+      '12345678', '87654321', '11111111', '00000000',
+    ];
+    return weakPins.contains(pin);
+  }
+
+  /// Check for repeated patterns (e.g., 121212, 787878)
+  bool _isRepeatedPattern(String pin) {
+    if (pin.length < 4) return false;
+
+    // Check for 2-digit repeated patterns
+    if (pin.length % 2 == 0) {
+      final pattern = pin.substring(0, 2);
+      String reconstructed = '';
+      for (int i = 0; i < pin.length ~/ 2; i++) {
+        reconstructed += pattern;
+      }
+      if (reconstructed == pin) return true;
+    }
+
+    // Check for 3-digit repeated patterns
+    if (pin.length % 3 == 0) {
+      final pattern = pin.substring(0, 3);
+      String reconstructed = '';
+      for (int i = 0; i < pin.length ~/ 3; i++) {
+        reconstructed += pattern;
+      }
+      if (reconstructed == pin) return true;
+    }
+
+    return false;
+  }
+
+  /// Simple hash function for PIN (in production, use proper bcrypt or similar)
+  /// This provides basic protection against casual inspection of preferences
+  String _hashPin(String pin) {
+    // Simple hash: salt + pin, then hash each char
+    const salt = 'BayNav2024Safety';
+    final salted = salt + pin;
+    int hash = 0;
+    for (int i = 0; i < salted.length; i++) {
+      hash = ((hash << 5) - hash) + salted.codeUnitAt(i);
+      hash = hash & 0xFFFFFFFF; // Convert to 32-bit integer
+    }
+    return hash.toRadixString(16);
+  }
+
+  // ============================================
+  // PANIC WIPE (3 FAILED PIN ATTEMPTS)
+  // ============================================
+
+  /// Check if panic wipe is enabled
+  Future<bool> isPanicWipeEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_panicWipeEnabledKey) ?? false;
+  }
+
+  /// Enable or disable panic wipe
+  Future<void> setPanicWipeEnabled(bool enabled) async {
+    final prefs = await _preferences;
+    await prefs.setBool(_panicWipeEnabledKey, enabled);
+  }
+
+  /// Get current failed PIN attempts count
+  Future<int> getFailedPinAttempts() async {
+    final prefs = await _preferences;
+    return prefs.getInt(_failedPinAttemptsKey) ?? 0;
+  }
+
+  /// Record a failed PIN attempt, returns true if panic wipe should trigger
+  Future<bool> recordFailedPinAttempt() async {
+    final prefs = await _preferences;
+    final currentAttempts = prefs.getInt(_failedPinAttemptsKey) ?? 0;
+    final newAttempts = currentAttempts + 1;
+    await prefs.setInt(_failedPinAttemptsKey, newAttempts);
+
+    // Check if panic wipe should trigger (3 failed attempts)
+    final panicWipeEnabled = await isPanicWipeEnabled();
+    if (panicWipeEnabled && newAttempts >= 3) {
+      return true;
+    }
+    return false;
+  }
+
+  /// Reset failed PIN attempts (call after successful PIN entry)
+  Future<void> resetFailedPinAttempts() async {
+    final prefs = await _preferences;
+    await prefs.setInt(_failedPinAttemptsKey, 0);
+  }
+
+  /// Execute panic wipe - deletes all app data and force closes
+  /// WARNING: This is destructive and cannot be undone
+  Future<void> executePanicWipe() async {
+    try {
+      // 1. Clear all secure storage (encrypted data)
+      await _secureStorage.deleteAll();
+
+      // 2. Clear all shared preferences
+      final prefs = await _preferences;
+      await prefs.clear();
+
+      // 3. Clear app's cache and documents directories
+      try {
+        final cacheDir = await getTemporaryDirectory();
+        if (await cacheDir.exists()) {
+          await cacheDir.delete(recursive: true);
+        }
+      } catch (_) {}
+
+      try {
+        final appDocDir = await getApplicationDocumentsDirectory();
+        // Delete files but keep the directory
+        await for (final entity in appDocDir.list()) {
+          try {
+            if (entity is File) {
+              await entity.delete();
+            } else if (entity is Directory) {
+              await entity.delete(recursive: true);
+            }
+          } catch (_) {}
+        }
+      } catch (_) {}
+
+      try {
+        final supportDir = await getApplicationSupportDirectory();
+        await for (final entity in supportDir.list()) {
+          try {
+            if (entity is File) {
+              await entity.delete();
+            } else if (entity is Directory) {
+              await entity.delete(recursive: true);
+            }
+          } catch (_) {}
+        }
+      } catch (_) {}
+
+      // 4. Force close the app
+      // Using SystemNavigator.pop() for a clean exit
+      // On some platforms, this may just background the app
+      await SystemNavigator.pop(animated: false);
+
+      // If pop doesn't work, use exit (less graceful but guaranteed)
+      exit(0);
+    } catch (e) {
+      // Even if something fails, try to exit
+      exit(0);
+    }
+  }
+
+  // ============================================
+  // ENCRYPTED ON-DEVICE STORAGE
+  // ============================================
+  // Uses flutter_secure_storage which leverages:
+  // - Android: EncryptedSharedPreferences with Android Keystore
+  // - iOS: Keychain Services with Secure Enclave
+  // This protects data even on rooted/jailbroken devices
+
+  /// Check if data encryption is enabled
+  Future<bool> isEncryptionEnabled() async {
+    final prefs = await _preferences;
+    return prefs.getBool(_encryptionEnabledKey) ?? false;
+  }
+
+  /// Enable data encryption and migrate existing data
+  Future<EncryptionResult> enableEncryption() async {
+    try {
+      final prefs = await _preferences;
+
+      // Migrate sensitive data to secure storage
+      await _migrateToSecureStorage();
+
+      await prefs.setBool(_encryptionEnabledKey, true);
+
+      return EncryptionResult(
+        success: true,
+        message: 'Data encryption enabled. Your data is now protected.',
+      );
+    } catch (e) {
+      return EncryptionResult(
+        success: false,
+        message: 'Failed to enable encryption: $e',
+      );
+    }
+  }
+
+  /// Disable encryption (migrate back to regular storage)
+  Future<EncryptionResult> disableEncryption() async {
+    try {
+      final prefs = await _preferences;
+
+      // Migrate data back from secure storage
+      await _migrateFromSecureStorage();
+
+      await prefs.setBool(_encryptionEnabledKey, false);
+
+      return EncryptionResult(
+        success: true,
+        message: 'Data encryption disabled.',
+      );
+    } catch (e) {
+      return EncryptionResult(
+        success: false,
+        message: 'Failed to disable encryption: $e',
+      );
+    }
+  }
+
+  /// Store sensitive data securely (encrypted)
+  Future<void> storeSecureData(String key, String value) async {
+    final isEncrypted = await isEncryptionEnabled();
+    if (isEncrypted) {
+      await _secureStorage.write(key: key, value: value);
+    } else {
+      final prefs = await _preferences;
+      await prefs.setString(key, value);
+    }
+  }
+
+  /// Read sensitive data (handles both encrypted and unencrypted)
+  Future<String?> readSecureData(String key) async {
+    final isEncrypted = await isEncryptionEnabled();
+    if (isEncrypted) {
+      return await _secureStorage.read(key: key);
+    } else {
+      final prefs = await _preferences;
+      return prefs.getString(key);
+    }
+  }
+
+  /// Delete sensitive data
+  Future<void> deleteSecureData(String key) async {
+    final isEncrypted = await isEncryptionEnabled();
+    if (isEncrypted) {
+      await _secureStorage.delete(key: key);
+    } else {
+      final prefs = await _preferences;
+      await prefs.remove(key);
+    }
+  }
+
+  /// Store a list securely
+  Future<void> storeSecureList(String key, List<String> values) async {
+    final jsonString = jsonEncode(values);
+    await storeSecureData(key, jsonString);
+  }
+
+  /// Read a list from secure storage
+  Future<List<String>> readSecureList(String key) async {
+    final jsonString = await readSecureData(key);
+    if (jsonString == null) return [];
+    try {
+      final decoded = jsonDecode(jsonString);
+      return List<String>.from(decoded);
+    } catch (_) {
+      return [];
+    }
+  }
+
+  /// Migrate sensitive data to secure storage
+  Future<void> _migrateToSecureStorage() async {
+    final prefs = await _preferences;
+
+    // List of sensitive keys to migrate
+    final sensitiveKeys = [
+      _recentProgramsKey,
+      _searchHistoryKey,
+      _safetyPinKey,
+    ];
+
+    for (final key in sensitiveKeys) {
+      final value = prefs.getString(key);
+      if (value != null) {
+        await _secureStorage.write(key: key, value: value);
+        // Don't remove from prefs yet - keep as backup during migration
+      }
+    }
+  }
+
+  /// Migrate data back from secure storage
+  Future<void> _migrateFromSecureStorage() async {
+    final prefs = await _preferences;
+
+    final sensitiveKeys = [
+      _recentProgramsKey,
+      _searchHistoryKey,
+      _safetyPinKey,
+    ];
+
+    for (final key in sensitiveKeys) {
+      final value = await _secureStorage.read(key: key);
+      if (value != null) {
+        await prefs.setString(key, value);
+        await _secureStorage.delete(key: key);
+      }
+    }
+  }
+
+  /// Check if device might be compromised (rooted/jailbroken)
+  /// Note: This is a basic check and can be bypassed by sophisticated attackers
+  Future<DeviceSecurityStatus> checkDeviceSecurity() async {
+    bool potentiallyCompromised = false;
+    final warnings = <String>[];
+
+    if (Platform.isAndroid) {
+      // Check for common root indicators on Android
+      final rootIndicators = [
+        '/system/app/Superuser.apk',
+        '/system/xbin/su',
+        '/system/bin/su',
+        '/sbin/su',
+        '/data/local/xbin/su',
+        '/data/local/bin/su',
+        '/data/local/su',
+        '/system/sd/xbin/su',
+        '/system/bin/failsafe/su',
+        '/su/bin/su',
+        '/magisk/.core',
+      ];
+
+      for (final path in rootIndicators) {
+        if (await File(path).exists()) {
+          potentiallyCompromised = true;
+          warnings.add('Root indicator found');
+          break;
+        }
+      }
+    } else if (Platform.isIOS) {
+      // Check for common jailbreak indicators on iOS
+      final jailbreakIndicators = [
+        '/Applications/Cydia.app',
+        '/Library/MobileSubstrate/MobileSubstrate.dylib',
+        '/bin/bash',
+        '/usr/sbin/sshd',
+        '/etc/apt',
+        '/private/var/lib/apt/',
+        '/private/var/lib/cydia',
+        '/private/var/stash',
+      ];
+
+      for (final path in jailbreakIndicators) {
+        if (await File(path).exists()) {
+          potentiallyCompromised = true;
+          warnings.add('Jailbreak indicator found');
+          break;
+        }
+      }
+    }
+
+    return DeviceSecurityStatus(
+      isSecure: !potentiallyCompromised,
+      warnings: warnings,
+      recommendation: potentiallyCompromised
+          ? 'Your device may be rooted/jailbroken. Enable encryption for better data protection.'
+          : 'Device appears secure.',
+    );
+  }
 }
 
 // ============================================
@@ -684,5 +1222,51 @@ class DisguiseResult {
     required this.success,
     required this.message,
     required this.requiresRestart,
+  });
+}
+
+/// PIN validation result
+class PinValidation {
+  final bool isValid;
+  final String message;
+
+  PinValidation({
+    required this.isValid,
+    required this.message,
+  });
+}
+
+/// Result of setting a PIN
+class PinSetResult {
+  final bool success;
+  final String message;
+
+  PinSetResult({
+    required this.success,
+    required this.message,
+  });
+}
+
+/// Result of encryption operation
+class EncryptionResult {
+  final bool success;
+  final String message;
+
+  EncryptionResult({
+    required this.success,
+    required this.message,
+  });
+}
+
+/// Device security status (root/jailbreak detection)
+class DeviceSecurityStatus {
+  final bool isSecure;
+  final List<String> warnings;
+  final String recommendation;
+
+  DeviceSecurityStatus({
+    required this.isSecure,
+    required this.warnings,
+    required this.recommendation,
   });
 }

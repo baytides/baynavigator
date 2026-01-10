@@ -35,6 +35,7 @@ dependencies:
   # Safety features
   sensors_plus: ^7.0.0
   connectivity_plus: ^6.1.4
+  flutter_secure_storage: ^9.2.4
 
   # Location (privacy-first, on-device only)
   geolocator: ^14.0.0

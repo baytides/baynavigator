@@ -13,6 +13,7 @@ import '../providers/user_prefs_provider.dart';
 import '../providers/safety_provider.dart';
 import '../services/privacy_service.dart';
 import '../services/safety_service.dart';
+import '../widgets/safety_widgets.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
 
@@ -795,6 +796,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Consumer<SafetyProvider>(
                   builder: (context, safety, child) {
+                    // Check if PIN is required to access settings
+                    if (safety.requiresPinToAccess) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(24),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.lock,
+                                  size: 48,
+                                  color: theme.colorScheme.primary,
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'Safety Settings Locked',
+                                  style: theme.textTheme.titleMedium,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'Enter your PIN to view or modify safety settings',
+                                  style: theme.textTheme.bodySmall,
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 16),
+                                ElevatedButton.icon(
+                                  onPressed: () async {
+                                    HapticFeedback.lightImpact();
+                                    await PinEntryDialog.showUnlock(context);
+                                  },
+                                  icon: const Icon(Icons.lock_open),
+                                  label: const Text('Unlock'),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.primary,
+                                    foregroundColor: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+
                     return Column(
                       children: [
                         // Info text
@@ -805,6 +850,111 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: theme.textTheme.bodySmall,
                           ),
                         ),
+                        _buildDivider(context),
+
+                        // Data Encryption
+                        _buildSwitchRow(
+                          context,
+                          label: 'Encrypt Data',
+                          subtitle: 'Protect data on rooted/jailbroken devices',
+                          value: safety.encryptionEnabled,
+                          onChanged: (value) async {
+                            HapticFeedback.lightImpact();
+                            if (value) {
+                              final result = await safety.enableEncryption();
+                              if (mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(result.message)),
+                                );
+                              }
+                            } else {
+                              final result = await safety.disableEncryption();
+                              if (mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(result.message)),
+                                );
+                              }
+                            }
+                          },
+                        ),
+
+                        _buildDivider(context),
+
+                        // PIN Protection
+                        _buildButton(
+                          context,
+                          icon: '🔐',
+                          label: 'PIN Protection',
+                          value: safety.hasPinSet ? 'Enabled' : 'Off',
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            _showPinProtectionDialog(context);
+                          },
+                        ),
+
+                        // Panic Wipe (only show if PIN is set)
+                        if (safety.hasPinSet) ...[
+                          _buildDivider(context),
+                          _buildSwitchRow(
+                            context,
+                            label: 'Panic Wipe',
+                            subtitle: '3 wrong PINs = delete all data & close app',
+                            value: safety.panicWipeEnabled,
+                            onChanged: (value) async {
+                              HapticFeedback.lightImpact();
+                              if (value) {
+                                // Confirm before enabling
+                                final confirmed = await showDialog<bool>(
+                                  context: context,
+                                  builder: (dialogContext) => AlertDialog(
+                                    title: Row(
+                                      children: [
+                                        Icon(Icons.warning, color: AppColors.danger),
+                                        const SizedBox(width: 12),
+                                        const Text('Enable Panic Wipe?'),
+                                      ],
+                                    ),
+                                    content: const Text(
+                                      'If enabled, entering an incorrect PIN 3 times in a row will:\n\n'
+                                      '• Delete ALL app data\n'
+                                      '• Clear encrypted storage\n'
+                                      '• Force close the app\n\n'
+                                      'This CANNOT be undone. Make sure you remember your PIN!',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(dialogContext, false),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () => Navigator.pop(dialogContext, true),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppColors.danger,
+                                          foregroundColor: Colors.white,
+                                        ),
+                                        child: const Text('Enable'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
+                                if (confirmed == true) {
+                                  await safety.setPanicWipeEnabled(true);
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Panic wipe enabled. 3 wrong PINs will delete all data.'),
+                                      ),
+                                    );
+                                  }
+                                }
+                              } else {
+                                await safety.setPanicWipeEnabled(false);
+                              }
+                            },
+                          ),
+                        ],
+
                         _buildDivider(context),
 
                         // Quick Exit toggle
@@ -871,17 +1021,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                         _buildDivider(context),
 
-                        // Network Privacy Warnings toggle
+                        // Network Monitoring toggle (opt-in)
                         _buildSwitchRow(
                           context,
-                          label: 'Network Warnings',
-                          subtitle: 'Warn when on public WiFi or monitored networks',
-                          value: safety.networkWarningsEnabled,
+                          label: 'Network Monitoring',
+                          subtitle: 'Monitor network type for privacy awareness',
+                          value: safety.networkMonitoringEnabled,
                           onChanged: (value) async {
                             HapticFeedback.lightImpact();
-                            await safety.setNetworkWarningsEnabled(value);
+                            await safety.setNetworkMonitoringEnabled(value);
                           },
                         ),
+
+                        // Network Privacy Warnings toggle (only show if monitoring is enabled)
+                        if (safety.networkMonitoringEnabled) ...[
+                          _buildDivider(context),
+                          _buildSwitchRow(
+                            context,
+                            label: 'Network Warnings',
+                            subtitle: 'Show warnings when on public WiFi',
+                            value: safety.networkWarningsEnabled,
+                            onChanged: (value) async {
+                              HapticFeedback.lightImpact();
+                              await safety.setNetworkWarningsEnabled(value);
+                            },
+                          ),
+                        ],
 
                         _buildDivider(context),
 
@@ -941,6 +1106,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             }
                           },
                         ),
+
+                        // Lock settings button (only show if PIN is set)
+                        if (safety.hasPinSet && safety.isUnlocked) ...[
+                          _buildDivider(context),
+                          _buildButton(
+                            context,
+                            icon: '🔒',
+                            label: 'Lock Settings',
+                            onTap: () {
+                              HapticFeedback.lightImpact();
+                              safety.lockSafetySettings();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Safety settings locked')),
+                              );
+                            },
+                          ),
+                        ],
                       ],
                     );
                   },
@@ -1593,6 +1775,151 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showRemovePinDialog(BuildContext context) {
+    final safety = context.read<SafetyProvider>();
+    final theme = Theme.of(context);
+    final pinController = TextEditingController();
+    String? errorMessage;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Row(
+            children: [
+              Icon(Icons.warning, color: AppColors.danger),
+              const SizedBox(width: 12),
+              const Text('Remove PIN'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Enter your current PIN to remove protection. Your safety settings will be accessible without a PIN.',
+                style: theme.textTheme.bodySmall,
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: pinController,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                maxLength: 8,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                decoration: InputDecoration(
+                  labelText: 'Current PIN',
+                  counterText: '',
+                  errorText: errorMessage,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final pin = pinController.text;
+                if (pin.isEmpty) {
+                  setState(() => errorMessage = 'Please enter your PIN');
+                  return;
+                }
+
+                final success = await safety.removePin(pin);
+                if (success) {
+                  if (dialogContext.mounted) {
+                    Navigator.pop(dialogContext);
+                  }
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('PIN protection removed')),
+                    );
+                  }
+                } else {
+                  setState(() => errorMessage = 'Incorrect PIN');
+                  pinController.clear();
+                  HapticFeedback.heavyImpact();
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.danger,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Remove'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showPinProtectionDialog(BuildContext context) {
+    final safety = context.read<SafetyProvider>();
+    final theme = Theme.of(context);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.lock, color: AppColors.primary),
+            const SizedBox(width: 12),
+            const Text('PIN Protection'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Protect your safety settings with a 6-8 digit PIN. This ensures only you can modify these settings.',
+              style: theme.textTheme.bodySmall,
+            ),
+            const SizedBox(height: 16),
+            if (safety.hasPinSet) ...[
+              ListTile(
+                leading: const Icon(Icons.edit),
+                title: const Text('Change PIN'),
+                onTap: () async {
+                  Navigator.pop(dialogContext);
+                  await PinEntryDialog.showChange(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.delete, color: AppColors.danger),
+                title: Text('Remove PIN', style: TextStyle(color: AppColors.danger)),
+                onTap: () async {
+                  Navigator.pop(dialogContext);
+                  // Show confirmation with PIN removal dialog
+                  _showRemovePinDialog(context);
+                },
+              ),
+            ] else ...[
+              ListTile(
+                leading: Icon(Icons.add, color: AppColors.primary),
+                title: const Text('Set PIN'),
+                subtitle: const Text('Create a 6-8 digit PIN'),
+                onTap: () async {
+                  Navigator.pop(dialogContext);
+                  await PinEntryDialog.showSetup(context);
+                },
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('Close'),
           ),
         ],
       ),
