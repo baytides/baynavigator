@@ -179,7 +179,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         </div>
       </div>
 
-      <!-- Legend Toggle -->
+      <!-- Combined Filter & Layers Toggle -->
       <button
         id="legend-toggle"
         type="button"
@@ -187,187 +187,20 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         aria-expanded="false"
         aria-controls="legend-panel"
       >
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
           ></path>
         </svg>
-        Filter
+        Filters & Layers
         <span
           id="filter-count"
           class="hidden bg-primary-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[1.25rem] text-center"
         ></span>
       </button>
-
-      <!-- Layers Toggle (Transit + Traffic combined) -->
-      <div class="relative">
-        <button
-          id="layers-toggle"
-          type="button"
-          class="bg-white dark:bg-neutral-800 px-3 py-2 rounded-lg shadow-lg text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 min-h-[44px]"
-          aria-expanded="false"
-          aria-haspopup="true"
-          title="Toggle map layers"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-            ></path>
-          </svg>
-          Layers
-          <span
-            id="layers-count"
-            class="hidden text-xs bg-primary-600 text-white px-1.5 py-0.5 rounded-full">0</span
-          >
-          <svg
-            class="w-3 h-3 ml-1 transition-transform"
-            id="layers-dropdown-arrow"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </button>
-
-        <!-- Layers Panel -->
-        <div
-          id="layers-panel"
-          class="hidden absolute top-full left-0 mt-2 bg-white dark:bg-neutral-800 rounded-lg shadow-lg w-72 max-h-[70vh] overflow-y-auto z-30"
-          role="menu"
-        >
-          <!-- Transit Section -->
-          <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
-            <div class="flex items-center justify-between mb-2">
-              <span
-                class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide"
-                >Transit</span
-              >
-              <button
-                id="transit-select-none"
-                type="button"
-                class="text-xs text-primary-600 hover:underline">Clear</button
-              >
-            </div>
-            <!-- Rail -->
-            <div class="mb-2">
-              <span
-                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-                >Rail</span
-              >
-              <div id="transit-rail-operators" class="mt-1 space-y-1"></div>
-            </div>
-            <!-- Ferry -->
-            <div class="mb-2">
-              <span
-                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-                >Ferry</span
-              >
-              <div id="transit-ferry-operators" class="mt-1 space-y-1"></div>
-            </div>
-            <!-- Bus -->
-            <div>
-              <span
-                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
-                >Bus</span
-              >
-              <div id="transit-bus-operators" class="mt-1 space-y-1"></div>
-            </div>
-          </div>
-
-          <!-- Traffic Section -->
-          <div class="p-3">
-            <span
-              class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2 block"
-              >Traffic</span
-            >
-            <div class="space-y-1">
-              <label
-                class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-              >
-                <input
-                  type="checkbox"
-                  id="traffic-flow"
-                  class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
-                />
-                <span
-                  class="w-3 h-3 rounded-sm flex-shrink-0"
-                  style="background: linear-gradient(90deg, #22c55e 0%, #eab308 50%, #ef4444 100%);"
-                ></span>
-                <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1"
-                  >Traffic Flow</span
-                >
-              </label>
-              <label
-                class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-              >
-                <input
-                  type="checkbox"
-                  id="traffic-incidents"
-                  class="w-4 h-4 rounded text-red-600 focus:ring-red-500"
-                />
-                <span class="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></span>
-                <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Incidents</span>
-              </label>
-              <label
-                class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-              >
-                <input
-                  type="checkbox"
-                  id="traffic-closures"
-                  class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500"
-                />
-                <span class="w-3 h-3 rounded-full bg-amber-500 flex-shrink-0"></span>
-                <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1"
-                  >Lane Closures</span
-                >
-              </label>
-              <label
-                class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-              >
-                <input
-                  type="checkbox"
-                  id="traffic-cameras"
-                  class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
-                />
-                <span class="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></span>
-                <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Cameras</span>
-              </label>
-              <label
-                class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
-              >
-                <input
-                  type="checkbox"
-                  id="traffic-vistas"
-                  class="w-4 h-4 rounded text-green-600 focus:ring-green-500"
-                />
-                <span class="w-3 h-3 rounded-full bg-green-500 flex-shrink-0"></span>
-                <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1"
-                  >Vista Points</span
-                >
-              </label>
-            </div>
-            <p
-              class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-700"
-            >
-              Data from 511.org & Caltrans
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Fullscreen Toggle (top right, offset to avoid MapLibre zoom controls) -->
@@ -407,53 +240,196 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       </svg>
     </button>
 
-    <!-- Legend Panel (Filter Panel) -->
+    <!-- Combined Filters & Layers Panel -->
     <div
       id="legend-panel"
-      class="hidden absolute top-16 left-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-4 w-72 max-h-[70vh] overflow-hidden flex flex-col"
+      class="hidden absolute top-16 left-4 z-20 bg-white dark:bg-neutral-800 rounded-lg shadow-lg w-72 max-h-[60vh] overflow-hidden flex flex-col"
       role="region"
       aria-labelledby="legend-heading"
     >
-      <div class="flex items-center justify-between mb-3">
-        <h3 id="legend-heading" class="font-semibold text-neutral-900 dark:text-white">
-          Filter Categories
-        </h3>
-        <div class="flex gap-1">
-          <button
-            id="filter-all"
-            type="button"
-            class="text-xs text-primary-600 dark:text-primary-400 hover:underline px-2 py-1"
+      <!-- Scrollable content area -->
+      <div class="overflow-y-auto flex-1">
+        <!-- Categories Section -->
+        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide"
+              >Categories</span
+            >
+            <div class="flex gap-1">
+              <button
+                id="filter-all"
+                type="button"
+                class="text-xs text-primary-600 dark:text-primary-400 hover:underline">All</button
+              >
+              <button
+                id="filter-none"
+                type="button"
+                class="text-xs text-neutral-500 hover:underline">None</button
+              >
+            </div>
+          </div>
+          <div
+            class="space-y-1 text-sm"
+            id="legend-items"
+            role="group"
+            aria-label="Category filters"
           >
-            All
-          </button>
-          <button
-            id="filter-none"
-            type="button"
-            class="text-xs text-neutral-600 dark:text-neutral-400 hover:underline px-2 py-1"
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Transit Section -->
+        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
+          <div class="flex items-center justify-between mb-2">
+            <span
+              class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide"
+              >Transit</span
+            >
+            <button
+              id="transit-select-none"
+              type="button"
+              class="text-xs text-neutral-500 hover:underline">Clear</button
+            >
+          </div>
+          <!-- Rail -->
+          <div class="mb-2">
+            <span
+              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+              >Rail</span
+            >
+            <div id="transit-rail-operators" class="mt-1 space-y-1"></div>
+          </div>
+          <!-- Ferry -->
+          <div class="mb-2">
+            <span
+              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+              >Ferry</span
+            >
+            <div id="transit-ferry-operators" class="mt-1 space-y-1"></div>
+          </div>
+          <!-- Bus -->
+          <div>
+            <span
+              class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+              >Bus</span
+            >
+            <div id="transit-bus-operators" class="mt-1 space-y-1"></div>
+          </div>
+        </div>
+
+        <!-- Traffic Section -->
+        <div class="p-3 border-b border-neutral-200 dark:border-neutral-700">
+          <span
+            class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2 block"
+            >Traffic</span
           >
-            None
-          </button>
+          <div class="space-y-1">
+            <label
+              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+            >
+              <input
+                type="checkbox"
+                id="traffic-flow"
+                class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+              />
+              <span
+                class="w-3 h-3 rounded-sm flex-shrink-0"
+                style="background: linear-gradient(90deg, #22c55e 0%, #eab308 50%, #ef4444 100%);"
+              ></span>
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Traffic Flow</span
+              >
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+            >
+              <input
+                type="checkbox"
+                id="traffic-incidents"
+                class="w-4 h-4 rounded text-red-600 focus:ring-red-500"
+              />
+              <svg
+                class="w-3 h-3 flex-shrink-0 text-red-500"
+                viewBox="0 0 12 12"
+                fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
+              >
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Incidents</span>
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+            >
+              <input
+                type="checkbox"
+                id="traffic-closures"
+                class="w-4 h-4 rounded text-amber-600 focus:ring-amber-500"
+              />
+              <svg
+                class="w-3 h-3 flex-shrink-0 text-amber-500"
+                viewBox="0 0 12 12"
+                fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
+              >
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1"
+                >Lane Closures</span
+              >
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+            >
+              <input
+                type="checkbox"
+                id="traffic-cameras"
+                class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+              />
+              <svg
+                class="w-3 h-3 flex-shrink-0 text-blue-500"
+                viewBox="0 0 12 12"
+                fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
+              >
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Cameras</span>
+            </label>
+            <label
+              class="flex items-center gap-2 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+            >
+              <input
+                type="checkbox"
+                id="traffic-vistas"
+                class="w-4 h-4 rounded text-green-600 focus:ring-green-500"
+              />
+              <svg
+                class="w-3 h-3 flex-shrink-0 text-green-500"
+                viewBox="0 0 12 12"
+                fill="currentColor"><path d="M6 0L12 10.5H0L6 0Z"></path></svg
+              >
+              <span class="text-sm text-neutral-700 dark:text-neutral-300 flex-1">Vista Points</span
+              >
+            </label>
+          </div>
+        </div>
+
+        <!-- Map Options Section -->
+        <div class="p-3">
+          <span
+            class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wide mb-2 block"
+            >Map Options</span
+          >
+          <label
+            class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300 cursor-pointer py-1 px-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+          >
+            <input
+              type="checkbox"
+              id="show-counties"
+              class="w-4 h-4 rounded text-primary-600 focus:ring-primary-500"
+            />
+            <span>Show county boundaries</span>
+          </label>
         </div>
       </div>
+
+      <!-- Footer -->
       <div
-        class="space-y-1 text-sm overflow-y-auto flex-1"
-        id="legend-items"
-        role="group"
-        aria-label="Category filters"
+        class="p-2 border-t border-neutral-200 dark:border-neutral-700 text-xs text-neutral-500 dark:text-neutral-400 text-center"
       >
-        <!-- Populated by JavaScript -->
-      </div>
-      <div class="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-700">
-        <label
-          class="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300 cursor-pointer"
-        >
-          <input
-            type="checkbox"
-            id="show-counties"
-            class="rounded text-primary-600 focus:ring-primary-500"
-          />
-          <span>Show county boundaries</span>
-        </label>
+        Data from 511.org, Caltrans & Azure Maps
       </div>
     </div>
 
@@ -2410,12 +2386,8 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         });
 
         // ========================================
-        // LAYERS PANEL (Transit + Traffic combined)
+        // TRANSIT & TRAFFIC LAYERS (inside combined panel)
         // ========================================
-        const layersToggle = document.getElementById('layers-toggle');
-        const layersPanel = document.getElementById('layers-panel');
-        const layersDropdownArrow = document.getElementById('layers-dropdown-arrow');
-        const layersCountEl = document.getElementById('layers-count');
         const transitSelectNone = document.getElementById('transit-select-none');
         const transitRailContainer = document.getElementById('transit-rail-operators');
         const transitFerryContainer = document.getElementById('transit-ferry-operators');
@@ -2451,7 +2423,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           checkbox.dataset.operatorId = operator.id;
 
           const colorDot = document.createElement('span');
-          colorDot.className = 'w-3 h-3 rounded-full flex-shrink-0';
+          colorDot.className = 'w-3 h-3 rounded-sm flex-shrink-0'; // Square for transit
           colorDot.style.backgroundColor = operator.color;
 
           const text = document.createElement('span');
@@ -2688,34 +2660,23 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           ].filter(Boolean).length;
           const totalCount = transitCount + trafficCount;
 
-          if (layersCountEl) {
-            if (totalCount > 0) {
-              layersCountEl.textContent = String(totalCount);
-              layersCountEl.classList.remove('hidden');
-              layersToggle?.classList.add('ring-2', 'ring-primary-500');
+          // Update combined filter count badge
+          if (filterCountEl) {
+            // Get category filter count
+            const categoryCount = Array.from(
+              document.querySelectorAll('#legend-items input[type="checkbox"]:checked')
+            ).length;
+            const grandTotal = categoryCount + totalCount;
+            if (grandTotal > 0) {
+              filterCountEl.textContent = String(grandTotal);
+              filterCountEl.classList.remove('hidden');
+              legendToggle?.classList.add('ring-2', 'ring-primary-500');
             } else {
-              layersCountEl.classList.add('hidden');
-              layersToggle?.classList.remove('ring-2', 'ring-primary-500');
+              filterCountEl.classList.add('hidden');
+              legendToggle?.classList.remove('ring-2', 'ring-primary-500');
             }
           }
         }
-
-        // Toggle layers panel visibility
-        layersToggle?.addEventListener('click', async () => {
-          const isHidden = layersPanel?.classList.toggle('hidden');
-          layersToggle.setAttribute('aria-expanded', String(!isHidden));
-          layersDropdownArrow?.classList.toggle('rotate-180', !isHidden);
-
-          // Initialize transit on first open
-          if (!isHidden && !transitData) {
-            await initTransitPanel();
-            addTransitLayers();
-          }
-          // Initialize traffic on first open
-          if (!isHidden && !trafficLayersAdded) {
-            await addTrafficLayers();
-          }
-        });
 
         // Clear all transit selections
         transitSelectNone?.addEventListener('click', () => {
@@ -2725,18 +2686,6 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           ) as NodeListOf<HTMLInputElement>;
           checkboxes?.forEach((cb) => (cb.checked = false));
           updateTransitLayers();
-        });
-
-        // Close layers panel when clicking outside
-        document.addEventListener('click', (e) => {
-          if (
-            !layersToggle?.contains(e.target as Node) &&
-            !layersPanel?.contains(e.target as Node)
-          ) {
-            layersPanel?.classList.add('hidden');
-            layersToggle?.setAttribute('aria-expanded', 'false');
-            layersDropdownArrow?.classList.remove('rotate-180');
-          }
         });
 
         // ========================================
@@ -2814,6 +2763,34 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
           }
         }
 
+        // Create triangle marker image for traffic layers
+        function createTriangleImage(color: string, size: number = 24): ImageData {
+          const canvas = document.createElement('canvas');
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext('2d')!;
+
+          // Draw white stroke/background
+          ctx.beginPath();
+          ctx.moveTo(size / 2, 2);
+          ctx.lineTo(size - 2, size - 2);
+          ctx.lineTo(2, size - 2);
+          ctx.closePath();
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+
+          // Draw colored triangle (slightly smaller)
+          ctx.beginPath();
+          ctx.moveTo(size / 2, 5);
+          ctx.lineTo(size - 5, size - 4);
+          ctx.lineTo(5, size - 4);
+          ctx.closePath();
+          ctx.fillStyle = color;
+          ctx.fill();
+
+          return ctx.getImageData(0, 0, size, size);
+        }
+
         // Add traffic layers to map
         async function addTrafficLayers() {
           if (trafficLayersAdded) return;
@@ -2826,64 +2803,74 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
             loadVistas(),
           ]);
 
-          // Add traffic incidents source and layer
+          // Add triangle marker images
+          if (!map.hasImage('triangle-red')) {
+            map.addImage('triangle-red', createTriangleImage('#EF4444', 24));
+          }
+          if (!map.hasImage('triangle-amber')) {
+            map.addImage('triangle-amber', createTriangleImage('#F59E0B', 20));
+          }
+          if (!map.hasImage('triangle-blue')) {
+            map.addImage('triangle-blue', createTriangleImage('#3B82F6', 18));
+          }
+          if (!map.hasImage('triangle-green')) {
+            map.addImage('triangle-green', createTriangleImage('#22C55E', 22));
+          }
+
+          // Add traffic incidents source and layer (triangle)
           map.addSource('traffic-incidents', { type: 'geojson', data: events });
           map.addLayer({
             id: 'traffic-incidents',
-            type: 'circle',
+            type: 'symbol',
             source: 'traffic-incidents',
-            paint: {
-              'circle-color': '#EF4444',
-              'circle-radius': 8,
-              'circle-stroke-width': 2,
-              'circle-stroke-color': '#ffffff',
+            layout: {
+              'icon-image': 'triangle-red',
+              'icon-size': 1,
+              'icon-allow-overlap': true,
+              visibility: 'none',
             },
-            layout: { visibility: 'none' },
           });
 
-          // Add lane closures source and layer
+          // Add lane closures source and layer (triangle)
           map.addSource('lane-closures', { type: 'geojson', data: closures });
           map.addLayer({
             id: 'lane-closures',
-            type: 'circle',
+            type: 'symbol',
             source: 'lane-closures',
-            paint: {
-              'circle-color': '#F59E0B',
-              'circle-radius': 6,
-              'circle-stroke-width': 1.5,
-              'circle-stroke-color': '#ffffff',
+            layout: {
+              'icon-image': 'triangle-amber',
+              'icon-size': 1,
+              'icon-allow-overlap': true,
+              visibility: 'none',
             },
-            layout: { visibility: 'none' },
           });
 
-          // Add cameras source and layer
+          // Add cameras source and layer (triangle)
           map.addSource('traffic-cameras', { type: 'geojson', data: cameras });
           map.addLayer({
             id: 'traffic-cameras',
-            type: 'circle',
+            type: 'symbol',
             source: 'traffic-cameras',
-            paint: {
-              'circle-color': '#3B82F6',
-              'circle-radius': 5,
-              'circle-stroke-width': 1,
-              'circle-stroke-color': '#ffffff',
+            layout: {
+              'icon-image': 'triangle-blue',
+              'icon-size': 1,
+              'icon-allow-overlap': true,
+              visibility: 'none',
             },
-            layout: { visibility: 'none' },
           });
 
-          // Add vista points source and layer
+          // Add vista points source and layer (triangle)
           map.addSource('vista-points', { type: 'geojson', data: vistas });
           map.addLayer({
             id: 'vista-points',
-            type: 'circle',
+            type: 'symbol',
             source: 'vista-points',
-            paint: {
-              'circle-color': '#22C55E',
-              'circle-radius': 7,
-              'circle-stroke-width': 2,
-              'circle-stroke-color': '#ffffff',
+            layout: {
+              'icon-image': 'triangle-green',
+              'icon-size': 1,
+              'icon-allow-overlap': true,
+              visibility: 'none',
             },
-            layout: { visibility: 'none' },
           });
 
           // Click handlers for traffic layers
@@ -3111,10 +3098,20 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       }
     });
 
-    // Legend toggle
-    legendToggle?.addEventListener('click', () => {
+    // Legend toggle (combined filters & layers panel)
+    legendToggle?.addEventListener('click', async () => {
       const isHidden = legendPanel?.classList.toggle('hidden');
       legendToggle.setAttribute('aria-expanded', String(!isHidden));
+
+      // Initialize transit on first open
+      if (!isHidden && !transitData) {
+        await initTransitPanel();
+        addTransitLayers();
+      }
+      // Initialize traffic on first open
+      if (!isHidden && !trafficLayersAdded) {
+        await addTrafficLayers();
+      }
     });
 
     // Fullscreen toggle
