@@ -21,17 +21,25 @@ const railAgencies = agencies.filter((a) => a.type === 'rail');
 const ferryAgencies = agencies.filter((a) => a.type === 'ferry');
 const busAgencies = agencies.filter((a) => a.type === 'bus');
 
-// Agency logo mappings (id -> SVG filename without extension)
-// Note: SM (SamTrans) and SC (VTA) removed due to font/rendering issues
-const agencyLogos: Record<string, string> = {
-  BA: 'bart',
-  CT: 'caltrain',
-  SF: 'muni',
-  AC: 'actransit',
-  SA: 'smart',
-  SB: 'sfbayferry',
-  CE: 'ace',
-  AM: 'capitolcorridor',
+// Agency logo mappings (id -> filename without extension, with format)
+const agencyLogos: Record<string, { file: string; format: 'svg' | 'webp' }> = {
+  BA: { file: 'bart', format: 'svg' },
+  CT: { file: 'caltrain', format: 'svg' },
+  SF: { file: 'muni', format: 'svg' },
+  AC: { file: 'actransit', format: 'svg' },
+  SC: { file: 'vta', format: 'svg' },
+  SM: { file: 'samtrans', format: 'svg' },
+  GG: { file: 'goldengate', format: 'svg' },
+  SA: { file: 'smart', format: 'svg' },
+  GF: { file: 'goldengate', format: 'svg' }, // Same as GG
+  SB: { file: 'sfbayferry', format: 'svg' },
+  CC: { file: 'countyconnection', format: 'webp' },
+  WH: { file: 'wheels', format: 'webp' },
+  MA: { file: 'marintransit', format: 'webp' },
+  '3D': { file: 'tridelta', format: 'svg' },
+  WC: { file: 'westcat', format: 'webp' },
+  CE: { file: 'ace', format: 'svg' },
+  AM: { file: 'capitolcorridor', format: 'svg' },
 };
 
 // Agency website links
@@ -228,7 +236,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                 {agencyLogos[agency.id] ? (
                   <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
-                      src={`/images/transit/${agencyLogos[agency.id]}.svg`}
+                      src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
                     />
@@ -324,7 +332,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                 {agencyLogos[agency.id] ? (
                   <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
-                      src={`/images/transit/${agencyLogos[agency.id]}.svg`}
+                      src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
                     />
@@ -420,7 +428,7 @@ const agencyLinks: Record<string, { website: string; alerts: string; fares: stri
                 {agencyLogos[agency.id] ? (
                   <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 bg-white dark:bg-neutral-700 p-1.5">
                     <img
-                      src={`/images/transit/${agencyLogos[agency.id]}.svg`}
+                      src={`/images/transit/${agencyLogos[agency.id].file}.${agencyLogos[agency.id].format}`}
                       alt={`${agency.name} logo`}
                       class="w-full h-full object-contain"
                     />
