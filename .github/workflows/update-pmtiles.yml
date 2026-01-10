@@ -134,6 +134,27 @@ jobs:
               --data '{"files":["https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles"]}'
           fi
 
+      - name: Setup Node.js
+        if: steps.check-update.outputs.needs_update == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync Caltrans reference data
+        if: steps.check-update.outputs.needs_update == 'true'
+        run: |
+          echo "Syncing Caltrans highway and bridge data for validation..."
+          node scripts/sync-caltrans-highways.cjs
+          node scripts/sync-caltrans-bridges.cjs
+          echo "Caltrans data synced successfully"
+
+      - name: Validate coordinates against Caltrans
+        if: steps.check-update.outputs.needs_update == 'true'
+        continue-on-error: true
+        run: |
+          echo "Validating map coordinates against official Caltrans data..."
+          node scripts/validate-map-coordinates.cjs
+
       - name: Summary
         run: |
           echo "## PMTiles Update Summary" >> $GITHUB_STEP_SUMMARY
@@ -142,5 +163,7 @@ jobs:
           echo "- **Build URL**: ${{ steps.find-build.outputs.build_url }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Updated**: ${{ steps.check-update.outputs.needs_update }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The PMTiles file contains OpenStreetMap data for the San Francisco Bay Area." >> $GITHUB_STEP_SUMMARY
-          echo "Source: [Protomaps Basemaps](https://protomaps.com)" >> $GITHUB_STEP_SUMMARY
+          echo "### Data Sources" >> $GITHUB_STEP_SUMMARY
+          echo "- **Base Map**: [Protomaps Basemaps](https://protomaps.com) (OpenStreetMap data)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Highway Validation**: [Caltrans GIS](https://caltrans-gis.dot.ca.gov/) (Official California highway geometry)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Bridge Data**: Caltrans Structure Maintenance & Investigations Database" >> $GITHUB_STEP_SUMMARY

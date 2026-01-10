@@ -1,0 +1,80 @@
+{
+  "description": "Official Caltrans coordinates for Bay Area toll bridges",
+  "source": "California Department of Transportation (Caltrans) SM&I Database",
+  "generated": "2026-01-10",
+  "license": "Public Domain - California Government Data",
+  "bridges": [
+    {
+      "name": "Golden Gate Bridge",
+      "route": "US 101",
+      "coordinates": [-122.47640278, 37.80816667],
+      "lengthFeet": 2742.3,
+      "yearBuilt": 1937,
+      "tollAuthority": "Golden Gate Bridge Highway & Transportation District"
+    },
+    {
+      "name": "San Francisco-Oakland Bay Bridge",
+      "route": "I-80",
+      "coordinates": [-122.3778, 37.7983],
+      "lengthFeet": 23556,
+      "yearBuilt": 1936,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Richmond-San Rafael Bridge",
+      "route": "I-580",
+      "coordinates": [-122.405325, 37.932625],
+      "lengthFeet": 6506,
+      "yearBuilt": 1956,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "San Mateo-Hayward Bridge",
+      "route": "SR 92",
+      "coordinates": [-122.26234722, 37.57355278],
+      "lengthFeet": 10993.8,
+      "yearBuilt": 1967,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Dumbarton Bridge",
+      "route": "SR 84",
+      "coordinates": [-122.12838333, 37.49915],
+      "lengthFeet": 2621.3,
+      "yearBuilt": 1981,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Carquinez Bridge (Original)",
+      "route": "I-80",
+      "coordinates": [-122.22490833, 38.05472222],
+      "lengthFeet": 1587.7,
+      "yearBuilt": 1958,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Al Zampa Memorial Bridge (New Carquinez)",
+      "route": "I-80",
+      "coordinates": [-122.22595833, 38.05595556],
+      "lengthFeet": 1056,
+      "yearBuilt": 2003,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Benicia-Martinez Bridge",
+      "route": "I-680",
+      "coordinates": [-122.11663889, 38.03181667],
+      "lengthFeet": 2265.9,
+      "yearBuilt": 2007,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    },
+    {
+      "name": "Antioch Bridge",
+      "route": "SR 160",
+      "coordinates": [-121.75147778, 38.0168],
+      "lengthFeet": 2876.4,
+      "yearBuilt": 1978,
+      "tollAuthority": "Bay Area Toll Authority (BATA)"
+    }
+  ]
+}
