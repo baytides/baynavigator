@@ -481,7 +481,7 @@ const websiteSchema = {
                 </div>
 
                 <!-- Simple Language Toggle (WCAG 3.1.5) -->
-                <div class="mb-2 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                <div class="mb-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
                   <div class="flex items-center justify-between">
                     <label
                       for="simple-language-toggle"
@@ -510,6 +510,39 @@ const websiteSchema = {
                   <div id="simple-language-desc" class="sr-only">
                     Toggle simple language mode for easier reading. When enabled, complex terms are
                     replaced with simpler alternatives.
+                  </div>
+                </div>
+
+                <!-- Quick Exit Toggle (Safety Feature) -->
+                <div class="mb-2">
+                  <div class="flex items-center justify-between">
+                    <label
+                      for="quick-exit-toggle"
+                      class="text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                    >
+                      Quick Exit
+                      <span
+                        class="block text-xs text-neutral-600 dark:text-neutral-300 font-normal mt-0.5"
+                      >
+                        Press Esc to leave site quickly
+                      </span>
+                    </label>
+                    <button
+                      id="quick-exit-toggle"
+                      type="button"
+                      role="switch"
+                      aria-checked="false"
+                      class="toggle-switch relative w-11 h-6 bg-neutral-300 dark:bg-neutral-600 rounded-full transition-colors"
+                      aria-describedby="quick-exit-desc"
+                    >
+                      <span
+                        class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"
+                      ></span>
+                    </button>
+                  </div>
+                  <div id="quick-exit-desc" class="sr-only">
+                    Enable quick exit mode. When enabled, pressing Escape will immediately leave
+                    this site and go to a safe page.
                   </div>
                 </div>
 
@@ -1230,6 +1263,39 @@ const websiteSchema = {
           }
         });
 
+        // Quick exit toggle
+        const quickExitToggle = document.getElementById('quick-exit-toggle');
+        const QUICK_EXIT_KEY = 'baynavigator_quick_exit_enabled';
+
+        function updateQuickExitToggle() {
+          const isEnabled = localStorage.getItem(QUICK_EXIT_KEY) === 'true';
+          if (quickExitToggle) {
+            quickExitToggle.setAttribute('aria-checked', String(isEnabled));
+            if (isEnabled) {
+              quickExitToggle.classList.add('bg-primary-600');
+              quickExitToggle.classList.remove('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = quickExitToggle.querySelector('span');
+              if (thumb) (thumb as HTMLElement).style.transform = 'translateX(1.25rem)';
+            } else {
+              quickExitToggle.classList.remove('bg-primary-600');
+              quickExitToggle.classList.add('bg-neutral-300', 'dark:bg-neutral-600');
+              const thumb = quickExitToggle.querySelector('span');
+              if (thumb) (thumb as HTMLElement).style.transform = 'translateX(0)';
+            }
+          }
+        }
+
+        quickExitToggle?.addEventListener('click', () => {
+          const isEnabled = localStorage.getItem(QUICK_EXIT_KEY) === 'true';
+          localStorage.setItem(QUICK_EXIT_KEY, String(!isEnabled));
+          updateQuickExitToggle();
+          // Notify the SafetyExit component
+          window.dispatchEvent(new Event('quick-exit-setting-changed'));
+        });
+
+        // Initialize quick exit toggle state
+        updateQuickExitToggle();
+
         // Reset button
         resetBtn?.addEventListener('click', () => {
           if (textSizeSlider) textSizeSlider.value = '100';
@@ -1238,6 +1304,7 @@ const websiteSchema = {
           if (wordSpacingSlider) wordSpacingSlider.value = '1';
           document.documentElement.classList.remove('simple-language');
           updateSimpleLanguageToggle();
+          // Don't reset quick exit - it's a safety feature
           applySettings();
           saveSettings();
         });
@@ -1378,7 +1445,18 @@ const websiteSchema = {
           // Store the event for later use
           deferredPrompt = e;
 
-          // Show custom install button if on homepage or about page
+          // Check if already dismissed or installed before showing
+          try {
+            if (
+              localStorage.getItem('pwaInstallDismissed') ||
+              localStorage.getItem('pwaInstalled')
+            ) {
+              console.log('PWA install prompt available but previously dismissed');
+              return;
+            }
+          } catch (err) {}
+
+          // Show custom install button
           const installBanner = document.getElementById('pwa-install-banner');
           if (installBanner) {
             installBanner.classList.remove('hidden');
@@ -1436,18 +1514,15 @@ const websiteSchema = {
             installBanner.classList.add('hidden');
           }
 
-          // Remember dismissal for this session
+          // Remember dismissal permanently (localStorage persists)
           try {
-            sessionStorage.setItem('pwaInstallDismissed', 'true');
+            localStorage.setItem('pwaInstallDismissed', 'true');
           } catch (e) {}
         });
 
-        // Check if already dismissed this session
+        // Check if already dismissed or installed
         try {
-          if (
-            sessionStorage.getItem('pwaInstallDismissed') ||
-            localStorage.getItem('pwaInstalled')
-          ) {
+          if (localStorage.getItem('pwaInstallDismissed') || localStorage.getItem('pwaInstalled')) {
             const installBanner = document.getElementById('pwa-install-banner');
             if (installBanner) {
               installBanner.classList.add('hidden');

@@ -3,7 +3,8 @@
  * SafetyExit Component
  *
  * Provides a quick exit mechanism for users who need to leave the site immediately.
- * - Floating button appears after scrolling or on sensitive pages
+ * - MUST BE ENABLED in site settings first (opt-in for privacy)
+ * - Floating button appears after enabling
  * - Escape key triggers immediate exit
  * - Redirects to a safe, innocuous website
  * - Clears this page from browser history
@@ -11,13 +12,6 @@
  * Privacy note: This feature is designed for users in unsafe situations
  * who may need to quickly hide their browsing activity.
  */
-
-interface Props {
-  /** Always show the exit button, not just on scroll */
-  alwaysVisible?: boolean;
-}
-
-const { alwaysVisible = false } = Astro.props;
 
 // Safe exit destinations - innocuous websites
 const safeDestinations = [
@@ -28,14 +22,10 @@ const safeDestinations = [
 ];
 ---
 
-<!-- Quick Exit Button -->
+<!-- Quick Exit Button (hidden by default, shown when enabled in settings) -->
 <div
   id="safety-exit-container"
-  class:list={[
-    'fixed bottom-20 right-4 z-50 transition-opacity duration-300',
-    alwaysVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
-  ]}
-  data-always-visible={alwaysVisible}
+  class="fixed bottom-20 right-4 z-50 transition-opacity duration-300 opacity-0 pointer-events-none hidden"
 >
   <button
     id="safety-exit-btn"
@@ -67,12 +57,40 @@ const safeDestinations = [
 </div>
 
 <script define:vars={{ safeDestinations }}>
-  // Quick exit functionality
+  // Quick exit functionality - OPT-IN only
   (function () {
+    const STORAGE_KEY = 'baynavigator_quick_exit_enabled';
     const container = document.getElementById('safety-exit-container');
     const exitBtn = document.getElementById('safety-exit-btn');
     const overlay = document.getElementById('safety-exit-overlay');
-    const alwaysVisible = container?.dataset.alwaysVisible === 'true';
+
+    // Check if quick exit is enabled
+    function isQuickExitEnabled() {
+      try {
+        return localStorage.getItem(STORAGE_KEY) === 'true';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // Show/hide the exit button based on setting
+    function updateVisibility() {
+      if (!container) return;
+
+      if (isQuickExitEnabled()) {
+        container.classList.remove('hidden');
+        // Small delay then fade in
+        setTimeout(() => {
+          container.classList.remove('opacity-0', 'pointer-events-none');
+          container.classList.add('opacity-100');
+        }, 100);
+      } else {
+        container.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          container.classList.add('hidden');
+        }, 300);
+      }
+    }
 
     // Random safe destination
     function getRandomDestination() {
@@ -81,6 +99,9 @@ const safeDestinations = [
 
     // Perform quick exit
     function quickExit() {
+      // Only if enabled
+      if (!isQuickExitEnabled()) return;
+
       // Show white overlay immediately to hide content
       if (overlay) {
         overlay.classList.remove('hidden');
@@ -90,7 +111,6 @@ const safeDestinations = [
       const destination = getRandomDestination();
 
       // Try to clear this page from history
-      // Replace current history entry with the safe site
       try {
         // Clear any stored state
         sessionStorage.clear();
@@ -108,9 +128,9 @@ const safeDestinations = [
     // Button click handler
     exitBtn?.addEventListener('click', quickExit);
 
-    // Escape key handler
+    // Escape key handler - only when enabled
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isQuickExitEnabled()) {
         // Don't trigger if user is in an input field
         const activeElement = document.activeElement;
         if (
@@ -131,44 +151,18 @@ const safeDestinations = [
       }
     });
 
-    // Show button after scrolling (unless always visible)
-    if (!alwaysVisible) {
-      let lastScrollTop = 0;
-      let isVisible = false;
-
-      function checkScroll() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Show button after scrolling down 200px
-        if (scrollTop > 200 && !isVisible) {
-          container?.classList.remove('opacity-0', 'pointer-events-none');
-          container?.classList.add('opacity-100');
-          isVisible = true;
-        } else if (scrollTop <= 200 && isVisible) {
-          container?.classList.add('opacity-0', 'pointer-events-none');
-          container?.classList.remove('opacity-100');
-          isVisible = false;
-        }
-
-        lastScrollTop = scrollTop;
+    // Listen for setting changes (from other tabs or settings page)
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) {
+        updateVisibility();
       }
+    });
 
-      // Throttled scroll handler
-      let ticking = false;
-      window.addEventListener(
-        'scroll',
-        () => {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              checkScroll();
-              ticking = false;
-            });
-            ticking = true;
-          }
-        },
-        { passive: true }
-      );
-    }
+    // Custom event for same-page updates
+    window.addEventListener('quick-exit-setting-changed', updateVisibility);
+
+    // Initialize visibility on page load
+    updateVisibility();
 
     // Keyboard shortcut hint for screen readers
     exitBtn?.setAttribute('aria-describedby', 'safety-exit-desc');

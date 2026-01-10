@@ -9,7 +9,8 @@ import '../models/program.dart';
 class ApiService {
   static const String _apiBaseUrl = 'https://baynavigator.org/api';
   static const Duration _cacheDuration = Duration(hours: 24);
-  static const Duration _staleCacheDuration = Duration(days: 7); // Extended offline cache
+  // ignore: unused_field - reserved for stale-while-revalidate pattern
+  static const Duration _staleCacheDuration = Duration(days: 7);
   static const String _lastSyncKey = 'bay_area_discounts:last_sync';
   static const String _offlineModeKey = 'bay_area_discounts:offline_mode';
 

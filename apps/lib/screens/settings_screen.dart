@@ -624,7 +624,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             HapticFeedback.lightImpact();
                             await settings.setUseOnion(value);
 
-                            if (value && !settings.orbotAvailable && mounted) {
+                            if (value && !settings.orbotAvailable && context.mounted) {
                               _showOrbotRequiredDialog(context);
                             }
                           },
@@ -771,7 +771,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onTap: () async {
                             HapticFeedback.lightImpact();
                             await settings.refreshAvailableCallingApps();
-                            if (mounted) {
+                            if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -862,14 +862,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             HapticFeedback.lightImpact();
                             if (value) {
                               final result = await safety.enableEncryption();
-                              if (mounted) {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(result.message)),
                                 );
                               }
                             } else {
                               final result = await safety.disableEncryption();
-                              if (mounted) {
+                              if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(result.message)),
                                 );
@@ -940,7 +940,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                                 if (confirmed == true) {
                                   await safety.setPanicWipeEnabled(true);
-                                  if (mounted) {
+                                  if (context.mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text('Panic wipe enabled. 3 wrong PINs will delete all data.'),
@@ -995,7 +995,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onChanged: (value) async {
                             HapticFeedback.lightImpact();
                             await safety.setIncognitoModeEnabled(value);
-                            if (value && mounted) {
+                            if (value && context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Incognito mode enabled. History will not be saved.'),
