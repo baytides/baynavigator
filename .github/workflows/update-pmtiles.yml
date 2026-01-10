@@ -1,0 +1,146 @@
+name: Update PMTiles Map Data
+
+on:
+  schedule:
+    # Run every other day at 6:00 AM UTC (10:00 PM PST previous day)
+    # Days 1,3,5,7,9... of month - effectively every other day
+    - cron: '0 6 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31 * *'
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no new build'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  update-pmtiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pmtiles CLI
+        run: |
+          # Download latest pmtiles CLI
+          curl -L -o pmtiles.tar.gz https://github.com/protomaps/go-pmtiles/releases/latest/download/go-pmtiles_Linux_x86_64.tar.gz
+          tar -xzf pmtiles.tar.gz
+          chmod +x pmtiles
+          sudo mv pmtiles /usr/local/bin/
+          pmtiles --version
+
+      - name: Find latest Protomaps build
+        id: find-build
+        run: |
+          # Try recent dates to find latest build
+          for i in 0 1 2 3 4 5 6; do
+            DATE=$(date -d "-$i days" +%Y%m%d)
+            BUILD_URL="https://build.protomaps.com/${DATE}.pmtiles"
+
+            if curl -s --head "$BUILD_URL" | grep -q "200"; then
+              echo "Found build: $DATE"
+              echo "build_date=$DATE" >> $GITHUB_OUTPUT
+              echo "build_url=$BUILD_URL" >> $GITHUB_OUTPUT
+              break
+            fi
+          done
+
+      - name: Check if update needed
+        id: check-update
+        run: |
+          # Get current file's last modified date from Azure
+          CURRENT_DATE=$(az storage blob show \
+            --account-name baytidesstorage \
+            --container-name tiles \
+            --name bayarea.pmtiles \
+            --query "properties.lastModified" \
+            --output tsv 2>/dev/null || echo "")
+
+          if [ -z "$CURRENT_DATE" ] || [ "${{ inputs.force_update }}" == "true" ]; then
+            echo "needs_update=true" >> $GITHUB_OUTPUT
+          else
+            # Compare dates (update if build is newer than current file)
+            BUILD_TS=$(date -d "${{ steps.find-build.outputs.build_date }}" +%s)
+            CURRENT_TS=$(date -d "$CURRENT_DATE" +%s 2>/dev/null || echo "0")
+
+            if [ "$BUILD_TS" -gt "$CURRENT_TS" ]; then
+              echo "needs_update=true" >> $GITHUB_OUTPUT
+            else
+              echo "needs_update=false" >> $GITHUB_OUTPUT
+              echo "PMTiles is already up to date"
+            fi
+          fi
+        env:
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+
+      - name: Extract Bay Area PMTiles
+        if: steps.check-update.outputs.needs_update == 'true'
+        run: |
+          echo "Extracting Bay Area tiles from ${{ steps.find-build.outputs.build_url }}..."
+
+          # Bay Area bounding box (expanded for edge coverage)
+          # West: Pacific coast, East: Livermore/Tracy, North: Napa/Sonoma, South: Santa Cruz
+          BBOX="-123.6,36.7,-121.0,39.0"
+
+          pmtiles extract \
+            "${{ steps.find-build.outputs.build_url }}" \
+            bayarea.pmtiles \
+            --bbox="$BBOX" \
+            --maxzoom=16
+
+          ls -lh bayarea.pmtiles
+
+      - name: Login to Azure
+        if: steps.check-update.outputs.needs_update == 'true'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to Azure Blob Storage
+        if: steps.check-update.outputs.needs_update == 'true'
+        run: |
+          az storage blob upload \
+            --account-name baytidesstorage \
+            --container-name tiles \
+            --name bayarea.pmtiles \
+            --file bayarea.pmtiles \
+            --overwrite \
+            --content-type "application/octet-stream" \
+            --content-cache-control "public, max-age=86400"
+
+          echo "Uploaded bayarea.pmtiles to Azure Blob Storage"
+
+          # Get the new file info
+          az storage blob show \
+            --account-name baytidesstorage \
+            --container-name tiles \
+            --name bayarea.pmtiles \
+            --query "{size: properties.contentLength, modified: properties.lastModified}"
+
+      - name: Purge CDN cache (if using Cloudflare)
+        if: steps.check-update.outputs.needs_update == 'true'
+        continue-on-error: true
+        run: |
+          # If Cloudflare is caching the tiles, purge the cache
+          if [ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              --data '{"files":["https://baytidesstorage.blob.core.windows.net/tiles/bayarea.pmtiles"]}'
+          fi
+
+      - name: Summary
+        run: |
+          echo "## PMTiles Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build Date**: ${{ steps.find-build.outputs.build_date }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build URL**: ${{ steps.find-build.outputs.build_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Updated**: ${{ steps.check-update.outputs.needs_update }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The PMTiles file contains OpenStreetMap data for the San Francisco Bay Area." >> $GITHUB_STEP_SUMMARY
+          echo "Source: [Protomaps Basemaps](https://protomaps.com)" >> $GITHUB_STEP_SUMMARY
