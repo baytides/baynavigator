@@ -40,12 +40,18 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
     <div class="container-page">
       <div class="max-w-3xl mx-auto">
         <Breadcrumb items={[{ label: 'Download', href: '/download' }]} />
-        <h1 class="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+        <h1
+          class="text-4xl font-bold text-neutral-900 dark:text-white mb-6"
+          data-i18n="download.title"
+        >
           Download Bay Navigator
         </h1>
 
-        <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-8">
-          Get the Bay Navigator app for Android. Free, open source, and works offline.
+        <p
+          class="text-lg text-neutral-600 dark:text-neutral-300 mb-8"
+          data-i18n="download.directDownload"
+        >
+          Direct download for Android devices. No Google Play required.
         </p>
 
         <!-- FOSS APK Download Card -->
@@ -71,6 +77,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 </h2>
                 <span
                   class="bg-green-100 dark:bg-green-900/50 text-green-900 dark:text-green-100 text-xs font-medium px-2 py-0.5 rounded"
+                  data-i18n="download.openSource"
                 >
                   Open Source
                 </span>
@@ -136,7 +143,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                     stroke-width="2"
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
-                Download APK
+                <span data-i18n="download.downloadApk">Download APK</span>
               </a>
             </div>
           </div>
@@ -146,20 +153,30 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
         <div
           class="bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 p-4 rounded-r-lg mb-8"
         >
-          <h3 class="font-semibold text-neutral-900 dark:text-white mb-2">
+          <h3
+            class="font-semibold text-neutral-900 dark:text-white mb-2"
+            data-i18n="download.installInstructions"
+          >
             Installation Instructions
           </h3>
           <ol class="text-neutral-700 dark:text-neutral-300 space-y-1 list-decimal list-inside">
-            <li>Download the APK file to your Android device</li>
-            <li>Open the file (you may need to allow installation from unknown sources)</li>
-            <li>Follow the on-screen prompts to install</li>
+            <li data-i18n="download.installStep1">Download the APK file to your Android device</li>
+            <li data-i18n="download.installStep2">
+              Open the file (you may need to allow installation from unknown sources)
+            </li>
+            <li data-i18n="download.installStep3">Follow the on-screen prompts to install</li>
           </ol>
         </div>
 
         <hr class="my-8 border-neutral-200 dark:border-neutral-700" />
 
         <!-- Other Download Options -->
-        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Other Options</h2>
+        <h2
+          class="text-2xl font-bold text-neutral-900 dark:text-white mb-4"
+          data-i18n="download.otherOptions"
+        >
+          Other Options
+        </h2>
 
         <div class="grid gap-4 sm:grid-cols-2 mb-8">
           <!-- App Store (coming soon) -->
@@ -178,7 +195,12 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
               </svg>
               <span class="font-medium text-neutral-700 dark:text-neutral-300">App Store</span>
             </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">Coming soon</p>
+            <p
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="download.comingSoon"
+            >
+              Coming soon
+            </p>
           </div>
 
           <!-- Google Play (coming soon) -->
@@ -197,7 +219,12 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
               </svg>
               <span class="font-medium text-neutral-700 dark:text-neutral-300">Google Play</span>
             </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">Coming soon</p>
+            <p
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="download.comingSoon"
+            >
+              Coming soon
+            </p>
           </div>
 
           <!-- F-Droid (coming soon) -->
@@ -216,7 +243,12 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
               </svg>
               <span class="font-medium text-neutral-700 dark:text-neutral-300">F-Droid</span>
             </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">Coming soon</p>
+            <p
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="download.comingSoon"
+            >
+              Coming soon
+            </p>
           </div>
 
           <!-- Apple Vision Pro (coming soon) -->
@@ -237,14 +269,24 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 >Apple Vision Pro</span
               >
             </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">Coming soon</p>
+            <p
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="download.comingSoon"
+            >
+              Coming soon
+            </p>
           </div>
         </div>
 
         <hr class="my-8 border-neutral-200 dark:border-neutral-700" />
 
         <!-- Why FOSS -->
-        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">Why Open Source?</h2>
+        <h2
+          class="text-2xl font-bold text-neutral-900 dark:text-white mb-4"
+          data-i18n="download.whyOpenSource"
+        >
+          Why Open Source?
+        </h2>
         <ul class="text-neutral-600 dark:text-neutral-300 space-y-3 mb-8">
           <li class="flex items-start gap-2">
             <svg
@@ -257,7 +299,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span
+            <span data-i18n="download.noTracking"
               ><strong>No tracking</strong> - The FOSS version has no analytics or crash reporting</span
             >
           </li>
@@ -272,10 +314,8 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span
-              ><strong>Transparent</strong> - <a href="https://github.com/baytides/baynavigator"
-                >View the source code</a
-              > and verify what the app does</span
+            <span data-i18n="download.transparent"
+              ><strong>Transparent</strong> - View the source code and verify what the app does</span
             >
           </li>
           <li class="flex items-start gap-2">
@@ -289,7 +329,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span
+            <span data-i18n="download.noGoogleServices"
               ><strong>No Google services</strong> - Works without Google Play Services installed</span
             >
           </li>
@@ -304,7 +344,9 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"></path>
             </svg>
-            <span><strong>Community maintained</strong> - Anyone can contribute improvements</span>
+            <span data-i18n="download.communityMaintained"
+              ><strong>Community maintained</strong> - Anyone can contribute improvements</span
+            >
           </li>
         </ul>
 
@@ -314,7 +356,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
             href="https://github.com/baytides/baynavigator/releases"
             class="text-primary-700 dark:text-primary-300 hover:underline inline-flex items-center gap-1"
           >
-            View all releases on GitHub
+            <span data-i18n="download.viewAllReleases">View all releases on GitHub</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
@@ -335,7 +377,7 @@ const downloadSize = fossApk?.size ? (fossApk.size / 1024 / 1024).toFixed(1) : n
                 stroke-width="2"
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
-            Back to Home
+            <span data-i18n="download.backToHome">Back to Home</span>
           </a>
         </div>
 

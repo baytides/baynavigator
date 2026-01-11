@@ -187,8 +187,10 @@ const displayLocation = city || area;
                 clip-rule="evenodd"
               />
             </svg>
-            <span class="sr-only">Data may be outdated:</span>
-            Needs review
+            <span class="sr-only" data-i18n="program.dataOutdated">
+              Data may be outdated:
+            </span>
+            <span data-i18n="program.needsReview">Needs review</span>
           </span>
         )
       }
@@ -303,7 +305,10 @@ const displayLocation = city || area;
   {
     whatTheyOffer && (
       <details class="mb-4">
-        <summary class="cursor-pointer text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline">
+        <summary
+          class="cursor-pointer text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline"
+          data-i18n="program.whatTheyOffer"
+        >
           What they offer
         </summary>
         <div class="mt-2 pl-4 text-sm text-neutral-600 dark:text-neutral-300 prose-width whitespace-pre-line">
@@ -316,7 +321,10 @@ const displayLocation = city || area;
   {
     howToGetIt && (
       <details class="mb-4">
-        <summary class="cursor-pointer text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline">
+        <summary
+          class="cursor-pointer text-sm font-medium text-primary-700 dark:text-primary-300 hover:underline"
+          data-i18n="program.howToGetIt"
+        >
           How to get it
         </summary>
         <div class="mt-2 pl-4 text-sm text-neutral-600 dark:text-neutral-300">{howToGetIt}</div>

@@ -14,11 +14,15 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       <Breadcrumb items={[{ label: 'My Favorites' }]} />
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-2">
+          <h1
+            class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-2"
+            data-i18n="favorites.title"
+          >
             My Favorites
           </h1>
           <p class="text-lg text-neutral-600 dark:text-neutral-300">
-            <span id="favorites-count">0</span> of 50 saved programs
+            <span id="favorites-count">0</span>
+            <span data-i18n="favorites.savedCount">of 50 saved programs</span>
           </p>
         </div>
 
@@ -38,7 +42,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
               ></path>
             </svg>
-            Print
+            <span data-i18n="favorites.print">Print</span>
           </button>
           <button
             type="button"
@@ -54,7 +58,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               ></path>
             </svg>
-            Export CSV
+            <span data-i18n="favorites.exportCsv">Export CSV</span>
           </button>
           <button
             type="button"
@@ -70,7 +74,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
               ></path>
             </svg>
-            Clear All
+            <span data-i18n="favorites.clearAll">Clear All</span>
           </button>
         </div>
       </div>
@@ -94,12 +98,21 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
           ></path>
         </svg>
-        <h2 class="text-lg font-medium text-neutral-900 dark:text-white mb-2">No favorites yet</h2>
-        <p class="text-neutral-600 dark:text-neutral-300 mb-4 max-w-md mx-auto">
-          Browse the directory and click the heart icon on any program to save it here. Your
-          favorites are stored locally on your device for privacy.
+        <h2
+          class="text-lg font-medium text-neutral-900 dark:text-white mb-2"
+          data-i18n="favorites.noFavorites"
+        >
+          No favorites yet
+        </h2>
+        <p
+          class="text-neutral-600 dark:text-neutral-300 mb-4 max-w-md mx-auto"
+          data-i18n="favorites.noFavoritesDesc"
+        >
+          Save programs you're interested in by clicking the heart icon on any program card.
         </p>
-        <a href="/directory" class="btn-primary">Browse Directory</a>
+        <a href="/directory" class="btn-primary" data-i18n="favorites.browseDirectory"
+          >Browse Directory</a
+        >
       </div>
 
       <!-- Favorites list -->
@@ -127,11 +140,18 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               ></path>
             </svg>
             <div>
-              <h3 class="font-medium text-neutral-900 dark:text-white mb-1">Privacy First</h3>
-              <p class="text-sm text-neutral-600 dark:text-neutral-300">
-                Your favorites are stored only on this device using your browser's local storage.
-                They are never sent to any server. Clearing your browser data will remove your
-                favorites.
+              <h3
+                class="font-medium text-neutral-900 dark:text-white mb-1"
+                data-i18n="favorites.privacyFirst"
+              >
+                Privacy First
+              </h3>
+              <p
+                class="text-sm text-neutral-600 dark:text-neutral-300"
+                data-i18n="favorites.privacyNotice"
+              >
+                Your favorites are stored only on this device in your browser's local storage. We
+                never send this data to any server.
               </p>
             </div>
           </div>
