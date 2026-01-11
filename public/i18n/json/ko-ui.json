@@ -20,7 +20,8 @@
     "sort": "정렬",
     "share": "공유",
     "print": "인쇄",
-    "download": "다운로드"
+    "download": "다운로드",
+    "clearFilters": "투명 필터"
   },
   "nav": {
     "home": "홈",
@@ -32,7 +33,17 @@
     "settings": "설정",
     "accessibility": "능력SSI능력",
     "privacy": "프리VAcy",
-    "terms": "용어"
+    "terms": "용어",
+    "transit": "대중교통",
+    "myFavorites": "내가 가장 좋아하는 것들",
+    "privacyPolicy": "PriVAcy 정책",
+    "termsOfService": "서비스 약관",
+    "eligibilityGuides": "자격 가이드",
+    "downloadApp": "앱 다운로드",
+    "partnerships": "파트너십",
+    "glossary": "용어집",
+    "credits": "크레딧",
+    "sustainability": "지속 가능성"
   },
   "search": {
     "smartSearch": "스마트 검색",
@@ -56,7 +67,7 @@
     "benefitsCalDesc": "CA 혜택 신청하세요 (CalFresh,Medi-Cal)"
   },
   "categories": {
-    "all": "모두",
+    "all": "모든 카테고리",
     "food": "음식",
     "health": "건강",
     "housing": "주거",
@@ -124,6 +135,44 @@
     "madeWith": "만들어진 재료로",
     "forBayArea": "베이 에어리어를 위해",
     "dataFrom": "511.org,Caltrans및Azure Maps",
-    "copyright": "Bay Navigator"
+    "copyright": "© 2026년 베이 타이드. MIT 라이선스 하에 오픈 소스입니다.",
+    "madeIn": "샌프란시스코 베이 지역에서 제작됨 💚",
+    "description": "Bay Tides에서 제공하는 com[[DNT21]ty의 자료입니다. 베이 지역 주민들을 식품, 주거, 건강CARE, 공과금 등 무료 및 저가 프로그램으로 연결합니다.",
+    "resources": "자료",
+    "legalAndMore": "법률 및 기타"
+  },
+  "home": {
+    "heroTitle": "샌프란시스코 베이 지역에서 프로그램, 서비스 및 자원을 찾아보세요",
+    "heroSubtitle": "식품, 주거, 건강CARE, 공과금 등 무료 및 저렴한 자원을 발견하세요.",
+    "programsFound": "프로그램 발견",
+    "clearSearch": "명확한 수색",
+    "viewAllDirectory": "디렉터리 →에서 모든 프로그램을 보기",
+    "browseByCategory": "카테고리별 탐색",
+    "selectCategory": "프로그램 및 서비스를 찾으려면 카테고리를 선택하세요"
+  },
+  "about": {
+    "title": "Bay Navigator소개",
+    "subtitle": "베이 지역 주민들을 무료 및 저비용 프로그램과 연결하는 comMuni자료",
+    "inPlainEnglish": "쉬운 영어로",
+    "summary": "이 웹사이트는 베이 지역의 무료 및 할인 프로그램을 나열하고 있습니다. 샌프란시스코 만을 보호하는 비영리 단체인 베이 타이즈에서 만든 것입니다. 저희는 아무런 요금도 받지 않고, 귀하의 정보를 판매하지도 않으며, 어떤 리스팅에도 대가를 받지 않습니다.",
+    "stats": {
+      "programsListed": "프로그램 목록",
+      "bayAreaCounties": "베이 에어리어 카운티",
+      "verified": "검증됨",
+      "costToUse": "사용 비용"
+    }
+  },
+  "directory": {
+    "title": "프로그램 디렉토리",
+    "browseAll": "모두 둘러보기",
+    "programsAvailable": "베이 지역에서 이용 가능한 프로그램과 서비스들.",
+    "category": "카테고리:",
+    "authenticatedOnly": "인증된 것만",
+    "filterByGroup": "그룹별 필터:",
+    "noMatchingPrograms": "필터에 맞는 프로그램은 없습니다",
+    "tryAdjusting": "필터나 검색어를 조정해 보세요.",
+    "clearAllFilters": "모든 필터 삭제",
+    "verifyNotice": "프로그램은 바뀌므로, 신청 전에 반드시 공식 출처와 정보를 확인하세요.",
+    "reportOutdated": "오래된 정보를 신고하세요"
   }
 }

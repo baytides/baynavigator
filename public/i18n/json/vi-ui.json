@@ -20,7 +20,8 @@
     "sort": "Sắp xếp",
     "share": "Chia sẻ",
     "print": "In ấn",
-    "download": "Tải về"
+    "download": "Tải về",
+    "clearFilters": "Xóa bộ lọc"
   },
   "nav": {
     "home": "Trang chủ",
@@ -32,7 +33,17 @@
     "settings": "Cài đặt",
     "accessibility": "Khả năng truy cậpSSI",
     "privacy": "PriVAcy",
-    "terms": "Điều khoản"
+    "terms": "Điều khoản",
+    "transit": "Quá cảnh",
+    "myFavorites": "Yêu thích của tôi",
+    "privacyPolicy": "Chính sách PriVAcy",
+    "termsOfService": "Điều khoản dịch vụ",
+    "eligibilityGuides": "Hướng dẫn đủ điều kiện",
+    "downloadApp": "Tải xuống ứng dụng",
+    "partnerships": "Quan hệ đối tác",
+    "glossary": "Thuật ngữ",
+    "credits": "Tín dụng",
+    "sustainability": "Tính bền vững"
   },
   "search": {
     "smartSearch": "Tìm kiếm thông minh",
@@ -56,7 +67,7 @@
     "benefitsCalDesc": "Nộp đơn xin trợ cấp CA (CalFresh,Medi-Cal)"
   },
   "categories": {
-    "all": "Tất cả",
+    "all": "Tất cả danh mục",
     "food": "Món ăn",
     "health": "Sức khỏe",
     "housing": "Nhà ở",
@@ -124,6 +135,44 @@
     "madeWith": "Được làm với",
     "forBayArea": "cho Vùng Vịnh",
     "dataFrom": "Dữ liệu lấy từ511.org,Caltrans&Azure Maps",
-    "copyright": "Bay Navigator"
+    "copyright": "© Thủy triều vịnh năm 2026. Mã nguồn mở theo giấy phép MIT.",
+    "madeIn": "Được sản xuất tại 💚 Khu vực Vịnh San Francisco",
+    "description": "Một tài nguyên comMunicủa Bay Tides. Kết nối cư dân Vùng Vịnh với các chương trình miễn phí và chi phí thấp về thực phẩm, nhà ở, sức khỏeCARE, tiện ích, v.v.",
+    "resources": "Tài nguyên",
+    "legalAndMore": "Pháp lý và hơn thế nữa"
+  },
+  "home": {
+    "heroTitle": "Tìm các chương trình, dịch vụ và tài nguyên trong Khu vực Vịnh San Francisco",
+    "heroSubtitle": "Khám phá các nguồn tài nguyên miễn phí và chi phí thấp cho thực phẩm, nhà ở, sức khỏeCARE, tiện ích, v.v.",
+    "programsFound": "Các chương trình được tìm thấy",
+    "clearSearch": "Tìm kiếm rõ ràng",
+    "viewAllDirectory": "Xem tất cả các chương trình trong thư mục →",
+    "browseByCategory": "Duyệt theo danh mục",
+    "selectCategory": "Chọn một danh mục để tìm các chương trình và dịch vụ"
+  },
+  "about": {
+    "title": "Giới thiệu vềBay Navigator",
+    "subtitle": "Một nguồn tài nguyên kết nối cư dân Vùng Vịnh với các chương trình miễn phí và chi phí thấp",
+    "inPlainEnglish": "Bằng tiếng Anh đơn giản",
+    "summary": "Trang web này liệt kê các chương trình miễn phí và giảm giá ở Vùng Vịnh. Nó được thực hiện bởi Bay Tides, một tổ chức phi lợi nhuận bảo vệ Vịnh San Francisco. Chúng tôi không tính bất kỳ khoản phí nào, chúng tôi không bán thông tin của bạn và chúng tôi không được trả tiền cho bất kỳ danh sách nào.",
+    "stats": {
+      "programsListed": "Các chương trình được liệt kê",
+      "bayAreaCounties": "Các Quận Vùng Vịnh",
+      "verified": "Đã xác minh",
+      "costToUse": "Chi phí sử dụng"
+    }
+  },
+  "directory": {
+    "title": "Danh mục chương trình",
+    "browseAll": "Duyệt qua tất cả",
+    "programsAvailable": "các chương trình và dịch vụ aVAilable trong Vùng Vịnh.",
+    "category": "Thể loại:",
+    "authenticatedOnly": "Chỉ được xác thực",
+    "filterByGroup": "Lọc theo nhóm:",
+    "noMatchingPrograms": "Không có chương trình nào phù hợp với bộ lọc của bạn",
+    "tryAdjusting": "Hãy thử điều chỉnh bộ lọc hoặc cụm từ tìm kiếm của bạn.",
+    "clearAllFilters": "Xóa tất cả các bộ lọc",
+    "verifyNotice": "Chương trình thay đổi — luôn xác minh chi tiết với nguồn chính thức trước khi đăng ký.",
+    "reportOutdated": "Báo cáo thông tin lỗi thời"
   }
 }

@@ -20,7 +20,8 @@
     "sort": "排序",
     "share": "分享",
     "print": "印刷品",
-    "download": "下載"
+    "download": "下載",
+    "clearFilters": "透明濾網"
   },
   "nav": {
     "home": "首頁",
@@ -32,7 +33,17 @@
     "settings": "場景設定",
     "accessibility": "AcceSSI能力",
     "privacy": "PriVAcy",
-    "terms": "條款"
+    "terms": "條款",
+    "transit": "交通",
+    "myFavorites": "我的最愛",
+    "privacyPolicy": "PriVAcy 政策",
+    "termsOfService": "服務條款",
+    "eligibilityGuides": "資格指南",
+    "downloadApp": "下載應用程式",
+    "partnerships": "合作夥伴關係",
+    "glossary": "詞彙表",
+    "credits": "製作人員",
+    "sustainability": "永續性"
   },
   "search": {
     "smartSearch": "智慧搜尋",
@@ -56,7 +67,7 @@
     "benefitsCalDesc": "申請加州福利（CalFresh、Medi-Cal）"
   },
   "categories": {
-    "all": "全部",
+    "all": "所有類別",
     "food": "食物",
     "health": "健康",
     "housing": "住宿",
@@ -124,6 +135,44 @@
     "madeWith": "用",
     "forBayArea": "灣區",
     "dataFrom": "資料來源為511.org、Caltrans及Azure Maps",
-    "copyright": "Bay Navigator"
+    "copyright": "© 2026年灣潮。以 MIT 授權開源。",
+    "madeIn": "在舊金山灣區製造 💚",
+    "description": "由 Bay Tides 提供的 comMuni資源。連結灣區居民與免費及低價的餐飲、住房、健康CARE、公用事業等方案。",
+    "resources": "資源",
+    "legalAndMore": "法律與更多"
+  },
+  "home": {
+    "heroTitle": "在舊金山灣區尋找各種計畫、服務與資源",
+    "heroSubtitle": "探索免費及低價的食物、住房、健康CARE、公共事業等資源。",
+    "programsFound": "發現的節目",
+    "clearSearch": "清晰搜尋",
+    "viewAllDirectory": "在目錄→中查看所有節目",
+    "browseByCategory": "依類別瀏覽",
+    "selectCategory": "選擇分類以尋找計畫與服務"
+  },
+  "about": {
+    "title": "關於Bay Navigator",
+    "subtitle": "一個連結灣區居民與免費及低價方案的資源",
+    "inPlainEnglish": "用淺顯英文",
+    "summary": "本網站列出灣區的免費及折扣課程。這是由Bay Tides製作的，一個保護舊金山灣的非營利組織。我們不收費，不販售你的資訊，也不因任何刊登而獲得報酬。",
+    "stats": {
+      "programsListed": "節目列表",
+      "bayAreaCounties": "灣區縣",
+      "verified": "已驗證",
+      "costToUse": "使用成本"
+    }
+  },
+  "directory": {
+    "title": "節目目錄",
+    "browseAll": "全部瀏覽",
+    "programsAvailable": "在灣區可參與的計畫與服務。",
+    "category": "分類：",
+    "authenticatedOnly": "僅認證",
+    "filterByGroup": "按群組篩選：",
+    "noMatchingPrograms": "沒有任何程式能匹配你的篩選條件",
+    "tryAdjusting": "試著調整你的篩選條件或搜尋關鍵字。",
+    "clearAllFilters": "清除所有過濾器",
+    "verifyNotice": "課程會變動——申請前務必向官方來源核實細節。",
+    "reportOutdated": "回報過時資訊"
   }
 }

@@ -21,6 +21,7 @@ export interface TranslationData {
     cancel: string;
     apply: string;
     clear: string;
+    clearFilters: string;
     filter: string;
     sort: string;
     share: string;
@@ -31,13 +32,23 @@ export interface TranslationData {
     home: string;
     directory: string;
     map: string;
+    transit: string;
     eligibility: string;
     about: string;
     favorites: string;
+    myFavorites: string;
     settings: string;
     accessibility: string;
     privacy: string;
+    privacyPolicy: string;
     terms: string;
+    termsOfService: string;
+    eligibilityGuides: string;
+    downloadApp: string;
+    partnerships: string;
+    glossary: string;
+    credits: string;
+    sustainability: string;
   };
   search: {
     smartSearch: string;
@@ -59,6 +70,40 @@ export interface TranslationData {
     calfreshDesc: string;
     benefitsCal: string;
     benefitsCalDesc: string;
+  };
+  home: {
+    heroTitle: string;
+    heroSubtitle: string;
+    programsFound: string;
+    clearSearch: string;
+    viewAllDirectory: string;
+    browseByCategory: string;
+    selectCategory: string;
+  };
+  about: {
+    title: string;
+    subtitle: string;
+    inPlainEnglish: string;
+    summary: string;
+    stats: {
+      programsListed: string;
+      bayAreaCounties: string;
+      verified: string;
+      costToUse: string;
+    };
+  };
+  directory: {
+    title: string;
+    browseAll: string;
+    programsAvailable: string;
+    category: string;
+    authenticatedOnly: string;
+    filterByGroup: string;
+    noMatchingPrograms: string;
+    tryAdjusting: string;
+    clearAllFilters: string;
+    verifyNotice: string;
+    reportOutdated: string;
   };
   categories: {
     all: string;
@@ -130,6 +175,10 @@ export interface TranslationData {
     forBayArea: string;
     dataFrom: string;
     copyright: string;
+    madeIn: string;
+    description: string;
+    resources: string;
+    legalAndMore: string;
   };
 }
 

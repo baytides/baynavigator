@@ -20,7 +20,8 @@
     "sort": "排序",
     "share": "共享",
     "print": "印刷",
-    "download": "下载"
+    "download": "下载",
+    "clearFilters": "透明滤网"
   },
   "nav": {
     "home": "首页",
@@ -32,7 +33,17 @@
     "settings": "设置",
     "accessibility": "AcceSSI能力",
     "privacy": "PriVAcy",
-    "terms": "条款"
+    "terms": "条款",
+    "transit": "交通",
+    "myFavorites": "我的最爱",
+    "privacyPolicy": "PriVAcy 政策",
+    "termsOfService": "服务条款",
+    "eligibilityGuides": "资格指南",
+    "downloadApp": "下载应用",
+    "partnerships": "合作伙伴关系",
+    "glossary": "术语表",
+    "credits": "制作人员",
+    "sustainability": "可持续性"
   },
   "search": {
     "smartSearch": "智能搜索",
@@ -56,7 +67,7 @@
     "benefitsCalDesc": "申请加州福利（CalFresh，Medi-Cal）"
   },
   "categories": {
-    "all": "全部",
+    "all": "所有类别",
     "food": "食物",
     "health": "健康",
     "housing": "住房",
@@ -124,6 +135,44 @@
     "madeWith": "用",
     "forBayArea": "湾区",
     "dataFrom": "数据来源为511.org、Caltrans和Azure Maps",
-    "copyright": "Bay Navigator"
+    "copyright": "© 2026年湾潮。在MIT许可下的开源。",
+    "madeIn": "在旧金山湾区制造 💚",
+    "description": "由Bay Tides提供的comMuni资源。连接湾区居民与免费和低价的食品、住房、健康CARE、公共事业等项目。",
+    "resources": "资源",
+    "legalAndMore": "法律及更多"
+  },
+  "home": {
+    "heroTitle": "在旧金山湾区寻找项目、服务和资源",
+    "heroSubtitle": "发现免费和低价的食品、住房、健康CARE、公共事业等资源。",
+    "programsFound": "发现的项目",
+    "clearSearch": "清晰搜索",
+    "viewAllDirectory": "在目录→中查看所有程序",
+    "browseByCategory": "按类别浏览",
+    "selectCategory": "选择类别以查找项目和服务"
+  },
+  "about": {
+    "title": "关于Bay Navigator",
+    "subtitle": "一个连接湾区居民与免费和低价项目的comMuni资源",
+    "inPlainEnglish": "通俗英语",
+    "summary": "本网站列出了湾区的免费和折扣项目。它由Bay Tides制作，这是一个保护旧金山湾的非营利组织。我们不收费，不出售你的信息，也不因任何挂牌而获得报酬。",
+    "stats": {
+      "programsListed": "列出的项目",
+      "bayAreaCounties": "湾区县",
+      "verified": "已验证",
+      "costToUse": "使用成本"
+    }
+  },
+  "directory": {
+    "title": "节目目录",
+    "browseAll": "全部浏览",
+    "programsAvailable": "在湾区可实施的项目和服务。",
+    "category": "类别：",
+    "authenticatedOnly": "仅认证",
+    "filterByGroup": "按组筛选：",
+    "noMatchingPrograms": "没有任何程序能匹配你的筛选条件",
+    "tryAdjusting": "试着调整你的筛选条件或搜索词。",
+    "clearAllFilters": "清除所有过滤器",
+    "verifyNotice": "项目会变——申请前请务必向官方来源核实详细信息。",
+    "reportOutdated": "报告过时信息"
   }
 }
