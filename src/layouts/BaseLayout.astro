@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import I18nLoader from '../components/i18n-loader.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
 import OfflineBanner from '../components/OfflineBanner.astro';
 import PrintQR from '../components/PrintQR.astro';
@@ -720,20 +721,77 @@ const websiteSchema = {
             <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-2">
               <span class="text-sm text-neutral-500 dark:text-neutral-400 mb-2 block">Language</span
               >
-              <div class="flex gap-2">
+              <div class="grid grid-cols-2 gap-2" id="mobile-language-grid">
                 <button
                   type="button"
-                  class="mobile-lang-btn flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
                   data-locale="en"
                 >
-                  English
+                  <span>🇺🇸</span> English
                 </button>
                 <button
                   type="button"
-                  class="mobile-lang-btn flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
                   data-locale="es"
                 >
-                  Español
+                  <span>🇪🇸</span> Español
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="zh-Hans"
+                >
+                  <span>🇨🇳</span> 简体中文
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="zh-Hant"
+                >
+                  <span>🇹🇼</span> 繁體中文
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="vi"
+                >
+                  <span>🇻🇳</span> Tiếng Việt
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="fil"
+                >
+                  <span>🇵🇭</span> Filipino
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="ko"
+                >
+                  <span>🇰🇷</span> 한국어
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="ru"
+                >
+                  <span>🇷🇺</span> Русский
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="fr"
+                >
+                  <span>🇫🇷</span> Français
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                  data-locale="ar"
+                  data-rtl="true"
+                >
+                  <span>🇸🇦</span> العربية
                 </button>
               </div>
             </div>
@@ -1428,19 +1486,64 @@ const websiteSchema = {
       // Mobile language selector
       function setupMobileLanguageSelector() {
         const STORAGE_KEY = 'baynavigator_locale';
+        const SUPPORTED_LOCALES = [
+          'en',
+          'es',
+          'zh-Hans',
+          'zh-Hant',
+          'vi',
+          'fil',
+          'ko',
+          'ru',
+          'fr',
+          'ar',
+        ];
         const buttons = document.querySelectorAll('.mobile-lang-btn');
+
+        // Map browser language codes to our locale codes
+        const browserLangMap: Record<string, string> = {
+          en: 'en',
+          es: 'es',
+          zh: 'zh-Hans',
+          'zh-cn': 'zh-Hans',
+          'zh-sg': 'zh-Hans',
+          'zh-hans': 'zh-Hans',
+          'zh-tw': 'zh-Hant',
+          'zh-hk': 'zh-Hant',
+          'zh-mo': 'zh-Hant',
+          'zh-hant': 'zh-Hant',
+          vi: 'vi',
+          fil: 'fil',
+          tl: 'fil',
+          ko: 'ko',
+          ru: 'ru',
+          fr: 'fr',
+          ar: 'ar',
+        };
 
         function getCurrentLocale(): string {
           try {
             const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored && (stored === 'en' || stored === 'es')) {
+            if (stored && SUPPORTED_LOCALES.includes(stored)) {
               return stored;
             }
           } catch {
             // localStorage not available
           }
-          const browserLang = navigator.language?.split('-')[0];
-          if (browserLang === 'es') return 'es';
+
+          // Auto-detect from browser
+          const languages = navigator.languages || [navigator.language];
+          for (const lang of languages) {
+            const normalized = lang.toLowerCase();
+            if (browserLangMap[normalized]) {
+              return browserLangMap[normalized];
+            }
+            const baseLang = normalized.split('-')[0];
+            if (browserLangMap[baseLang]) {
+              return browserLangMap[baseLang];
+            }
+          }
+
           return 'en';
         }
 
@@ -1483,7 +1586,15 @@ const websiteSchema = {
             }
 
             document.documentElement.lang = locale;
+
+            // Handle RTL languages
+            const isRtl = btn.getAttribute('data-rtl') === 'true';
+            document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+
             updateButtonStates(locale);
+
+            // Dispatch event for other components
+            window.dispatchEvent(new CustomEvent('locale-changed', { detail: { locale } }));
 
             // Reload page to apply translations
             window.location.reload();
@@ -1614,6 +1725,9 @@ const websiteSchema = {
     <!-- Service Worker Registration -->
     <!-- Toast notifications -->
     <Toast />
+
+    <!-- i18n translation loader -->
+    <I18nLoader />
 
     <script is:inline>
       // PWA Install Prompt Handler

@@ -52,7 +52,7 @@
     const targetLocale = SUPPORTED_LOCALES.includes(locale) ? locale : 'en';
 
     try {
-      const response = await fetch(`/shared/i18n/json/${targetLocale}-ui.json`);
+      const response = await fetch(`/i18n/json/${targetLocale}-ui.json`);
       if (!response.ok) {
         // Fall back to English if translation file not found
         if (targetLocale !== 'en') {
