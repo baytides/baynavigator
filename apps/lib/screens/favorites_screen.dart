@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/programs_provider.dart';
+import '../models/program.dart';
 import '../widgets/program_card.dart';
 import '../config/theme.dart';
 import '../services/export_service.dart';
@@ -54,6 +55,152 @@ class FavoritesScreenState extends State<FavoritesScreen> {
         ),
       );
     }
+  }
+
+  void _showStatusNotesSheet(BuildContext context, Program program, FavoriteItem? favoriteItem) {
+    final provider = Provider.of<ProgramsProvider>(context, listen: false);
+    final currentStatus = favoriteItem?.status ?? FavoriteStatus.saved;
+    final notesController = TextEditingController(text: favoriteItem?.notes ?? '');
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle bar
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              // Program name
+              Text(
+                program.name,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 20),
+              // Status section
+              Text(
+                'Status',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[600],
+                ),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: FavoriteStatus.values.map((status) {
+                  final isSelected = status == currentStatus;
+                  return ChoiceChip(
+                    label: Text(status.label),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      if (selected) {
+                        provider.updateFavoriteStatus(program.id, status);
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Status updated to "${status.label}"'),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      }
+                    },
+                    selectedColor: Color(status.colorValue).withOpacity(0.2),
+                    labelStyle: TextStyle(
+                      color: isSelected ? Color(status.colorValue) : null,
+                      fontWeight: isSelected ? FontWeight.w600 : null,
+                    ),
+                    side: isSelected
+                        ? BorderSide(color: Color(status.colorValue))
+                        : null,
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+              // Notes section
+              Text(
+                'Private Notes',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[600],
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: notesController,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  hintText: 'Add personal notes (e.g., "Called on 1/10, need to submit docs by Friday")',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  contentPadding: const EdgeInsets.all(12),
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Save button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    provider.updateFavoriteNotes(program.id, notesController.text.isEmpty ? null : notesController.text);
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Notes saved'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Save Notes'),
+                ),
+              ),
+              const SizedBox(height: 8),
+              // Privacy notice
+              Text(
+                'Your notes are stored only on this device and never sent to any server.',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Colors.grey[500],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -174,7 +321,7 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                   crossAxisCount = 2;
                 }
 
-                const cardHeight = 340.0;
+                const cardHeight = 380.0; // Increased for status badge
                 final cardWidth = (constraints.maxWidth - (crossAxisCount - 1) * 16 - 32) / crossAxisCount;
                 final aspectRatio = cardWidth / cardHeight;
 
@@ -189,9 +336,10 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                   itemCount: favorites.length,
                   itemBuilder: (context, index) {
                     final program = favorites[index];
-                    return ProgramCard(
+                    final favoriteItem = provider.getFavoriteItem(program.id);
+                    return _FavoriteCard(
                       program: program,
-                      isFavorite: true,
+                      favoriteItem: favoriteItem,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -204,6 +352,9 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                       onFavoriteToggle: () {
                         provider.toggleFavorite(program.id);
                       },
+                      onStatusNotesTap: () {
+                        _showStatusNotesSheet(context, program, favoriteItem);
+                      },
                     );
                   },
                 );
@@ -215,9 +366,10 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                 itemCount: favorites.length,
                 itemBuilder: (context, index) {
                   final program = favorites[index];
-                  return ProgramCard(
+                  final favoriteItem = provider.getFavoriteItem(program.id);
+                  return _FavoriteCard(
                     program: program,
-                    isFavorite: true,
+                    favoriteItem: favoriteItem,
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -230,6 +382,9 @@ class FavoritesScreenState extends State<FavoritesScreen> {
                     onFavoriteToggle: () {
                       provider.toggleFavorite(program.id);
                     },
+                    onStatusNotesTap: () {
+                      _showStatusNotesSheet(context, program, favoriteItem);
+                    },
                   );
                 },
               );
@@ -238,5 +393,186 @@ class FavoritesScreenState extends State<FavoritesScreen> {
         },
       ),
     );
+  }
+}
+
+/// Custom favorite card with status badge and notes indicator
+class _FavoriteCard extends StatelessWidget {
+  final Program program;
+  final FavoriteItem? favoriteItem;
+  final VoidCallback onTap;
+  final VoidCallback onFavoriteToggle;
+  final VoidCallback onStatusNotesTap;
+
+  const _FavoriteCard({
+    required this.program,
+    this.favoriteItem,
+    required this.onTap,
+    required this.onFavoriteToggle,
+    required this.onStatusNotesTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final status = favoriteItem?.status ?? FavoriteStatus.saved;
+    final hasNotes = favoriteItem?.notes?.isNotEmpty == true;
+
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Category and location row
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.darkPrimary.withOpacity(0.2) : AppColors.lightPrimary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      program.category,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      program.locationText,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  // Favorite toggle button
+                  IconButton(
+                    icon: const Icon(Icons.favorite, color: Colors.red),
+                    iconSize: 20,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    tooltip: 'Remove from favorites',
+                    onPressed: onFavoriteToggle,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              // Program name
+              Text(
+                program.name,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              // Description
+              Text(
+                program.description,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 12),
+              // Status and notes row
+              InkWell(
+                onTap: onStatusNotesTap,
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Color(status.colorValue).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Color(status.colorValue).withOpacity(0.3),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        _getStatusIcon(status),
+                        size: 16,
+                        color: Color(status.colorValue),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        status.label,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: Color(status.colorValue),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (hasNotes) ...[
+                        const SizedBox(width: 8),
+                        Icon(
+                          Icons.note_alt_outlined,
+                          size: 14,
+                          color: Color(status.colorValue),
+                        ),
+                      ],
+                      const Spacer(),
+                      Icon(
+                        Icons.edit_outlined,
+                        size: 14,
+                        color: Color(status.colorValue).withOpacity(0.6),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Show notes preview if available
+              if (hasNotes) ...[
+                const SizedBox(height: 8),
+                Text(
+                  favoriteItem!.notes!,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  IconData _getStatusIcon(FavoriteStatus status) {
+    switch (status) {
+      case FavoriteStatus.saved:
+        return Icons.bookmark_outline;
+      case FavoriteStatus.researching:
+        return Icons.search;
+      case FavoriteStatus.applied:
+        return Icons.send_outlined;
+      case FavoriteStatus.waiting:
+        return Icons.schedule;
+      case FavoriteStatus.approved:
+        return Icons.check_circle_outline;
+      case FavoriteStatus.denied:
+        return Icons.cancel_outlined;
+    }
   }
 }

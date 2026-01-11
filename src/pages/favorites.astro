@@ -150,8 +150,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 class="text-sm text-neutral-600 dark:text-neutral-300"
                 data-i18n="favorites.privacyNotice"
               >
-                Your favorites are stored only on this device in your browser's local storage. We
-                never send this data to any server.
+                Your favorites, status tracking, and notes are stored only on this device in your
+                browser's local storage. We never send this data to any server.
               </p>
             </div>
           </div>
@@ -256,10 +256,25 @@ import Breadcrumb from '../components/Breadcrumb.astro';
   const FAVORITES_KEY = 'baynavigator_favorites';
   const MAX_FAVORITES = 50;
 
+  // Status options for tracking application progress
+  const STATUS_OPTIONS = [
+    { value: 'saved', label: 'Saved', color: 'neutral' },
+    { value: 'researching', label: 'Researching', color: 'blue' },
+    { value: 'applied', label: 'Applied', color: 'yellow' },
+    { value: 'waiting', label: 'Waiting for Response', color: 'purple' },
+    { value: 'approved', label: 'Approved', color: 'green' },
+    { value: 'denied', label: 'Denied', color: 'red' },
+  ] as const;
+
+  type StatusValue = (typeof STATUS_OPTIONS)[number]['value'];
+
   interface Favorite {
     id: string;
     name: string;
     savedAt: string;
+    status?: StatusValue;
+    notes?: string;
+    statusUpdatedAt?: string;
   }
 
   interface Program {
@@ -298,6 +313,39 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     saveFavorites(filtered);
   }
 
+  function updateFavoriteStatus(programId: string, status: StatusValue): void {
+    const favorites = getFavorites();
+    const index = favorites.findIndex((f) => f.id === programId);
+    if (index !== -1) {
+      favorites[index].status = status;
+      favorites[index].statusUpdatedAt = new Date().toISOString();
+      saveFavorites(favorites);
+    }
+  }
+
+  function updateFavoriteNotes(programId: string, notes: string): void {
+    const favorites = getFavorites();
+    const index = favorites.findIndex((f) => f.id === programId);
+    if (index !== -1) {
+      favorites[index].notes = notes;
+      favorites[index].statusUpdatedAt = new Date().toISOString();
+      saveFavorites(favorites);
+    }
+  }
+
+  function getStatusColor(status: StatusValue): string {
+    const option = STATUS_OPTIONS.find((o) => o.value === status);
+    const colorMap: Record<string, string> = {
+      neutral: 'bg-neutral-100 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200',
+      blue: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200',
+      yellow: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200',
+      purple: 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-200',
+      green: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200',
+      red: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200',
+    };
+    return colorMap[option?.color || 'neutral'];
+  }
+
   async function loadProgramData(): Promise<Map<string, Program>> {
     const programMap = new Map<string, Program>();
 
@@ -317,7 +365,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
   function createFavoriteCard(favorite: Favorite, program: Program | undefined): HTMLElement {
     const card = document.createElement('article');
     card.className =
-      'favorite-card bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-4 flex flex-col sm:flex-row sm:items-start gap-4';
+      'favorite-card bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-4';
     card.dataset.favoriteId = favorite.id;
 
     const savedDate = new Date(favorite.savedAt).toLocaleDateString('en-US', {
@@ -326,91 +374,176 @@ import Breadcrumb from '../components/Breadcrumb.astro';
       year: 'numeric',
     });
 
+    const currentStatus = favorite.status || 'saved';
+    const statusColorClass = getStatusColor(currentStatus);
+
+    // Generate status options HTML
+    const statusOptionsHtml = STATUS_OPTIONS.map(
+      (opt) =>
+        `<option value="${opt.value}" ${opt.value === currentStatus ? 'selected' : ''}>${opt.label}</option>`
+    ).join('');
+
     if (program) {
       card.innerHTML = `
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-              ${program.category}
-            </span>
-            <span class="text-xs text-neutral-600 dark:text-neutral-300">${program.city || program.area}</span>
-          </div>
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">
-            <a href="/directory#program-${program.id}" class="hover:text-primary-700 dark:hover:text-primary-300">
-              ${program.name}
-            </a>
-          </h3>
-          ${program.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2 line-clamp-2">${program.description}</p>` : ''}
-          <div class="flex flex-wrap items-center gap-4 text-sm">
-            ${
-              program.link
-                ? `
-              <a href="${program.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary-700 dark:text-primary-300 hover:underline">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                </svg>
-                ${program.link_text || 'Visit website'}
-              </a>
-            `
-                : ''
-            }
-            ${
-              program.phone
-                ? `
-              <a href="tel:${program.phone.replace(/\D/g, '')}" class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                </svg>
-                ${program.phone}
-              </a>
-            `
-                : ''
-            }
-            ${
-              program.address
-                ? `
-              <span class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                ${program.address}
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="inline-block px-2 py-0.5 text-xs font-medium rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                ${program.category}
               </span>
-            `
-                : ''
-            }
+              <span class="text-xs text-neutral-600 dark:text-neutral-300">${program.city || program.area}</span>
+            </div>
+            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">
+              <a href="/directory#program-${program.id}" class="hover:text-primary-700 dark:hover:text-primary-300">
+                ${program.name}
+              </a>
+            </h3>
+            ${program.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2 line-clamp-2">${program.description}</p>` : ''}
+            <div class="flex flex-wrap items-center gap-4 text-sm">
+              ${
+                program.link
+                  ? `
+                <a href="${program.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary-700 dark:text-primary-300 hover:underline">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                  ${program.link_text || 'Visit website'}
+                </a>
+              `
+                  : ''
+              }
+              ${
+                program.phone
+                  ? `
+                <a href="tel:${program.phone.replace(/\D/g, '')}" class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                  ${program.phone}
+                </a>
+              `
+                  : ''
+              }
+              ${
+                program.address
+                  ? `
+                <span class="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-300">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  ${program.address}
+                </span>
+              `
+                  : ''
+              }
+            </div>
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2 print:hidden">Saved ${savedDate}</p>
           </div>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2 print:hidden">Saved ${savedDate}</p>
+          <button
+            type="button"
+            class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden self-start"
+            aria-label="Remove ${program.name} from favorites"
+            data-program-id="${favorite.id}"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
-        <button
-          type="button"
-          class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden"
-          aria-label="Remove ${program.name} from favorites"
-          data-program-id="${favorite.id}"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
+
+        <!-- Status and Notes Section -->
+        <div class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700 print:hidden">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <!-- Status Dropdown -->
+            <div class="flex-shrink-0">
+              <label class="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1" for="status-${favorite.id}">
+                Status
+              </label>
+              <select
+                id="status-${favorite.id}"
+                class="status-select px-3 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                data-program-id="${favorite.id}"
+              >
+                ${statusOptionsHtml}
+              </select>
+            </div>
+
+            <!-- Notes Field -->
+            <div class="flex-1">
+              <label class="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1" for="notes-${favorite.id}">
+                Private Notes
+              </label>
+              <textarea
+                id="notes-${favorite.id}"
+                class="notes-input w-full px-3 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                rows="2"
+                placeholder="Add personal notes (e.g., 'Called on 1/10, need to submit docs by Friday')"
+                data-program-id="${favorite.id}"
+              >${favorite.notes || ''}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Print-only status and notes -->
+        <div class="hidden print:block mt-2 pt-2 border-t border-neutral-300">
+          <p class="text-xs"><strong>Status:</strong> ${STATUS_OPTIONS.find((o) => o.value === currentStatus)?.label || 'Saved'}</p>
+          ${favorite.notes ? `<p class="text-xs mt-1"><strong>Notes:</strong> ${favorite.notes}</p>` : ''}
+        </div>
       `;
     } else {
-      // Program not found - show minimal info
+      // Program not found - show minimal info with status/notes
       card.innerHTML = `
-        <div class="flex-1 min-w-0">
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">${favorite.name}</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-300">Program information not available</p>
-          <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2">Saved ${savedDate}</p>
+        <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-1">${favorite.name}</h3>
+            <p class="text-sm text-neutral-600 dark:text-neutral-300">Program information not available</p>
+            <p class="text-xs text-neutral-600 dark:text-neutral-300 mt-2">Saved ${savedDate}</p>
+          </div>
+          <button
+            type="button"
+            class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden self-start"
+            aria-label="Remove ${favorite.name} from favorites"
+            data-program-id="${favorite.id}"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
-        <button
-          type="button"
-          class="remove-favorite-btn flex-shrink-0 p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 print:hidden"
-          aria-label="Remove ${favorite.name} from favorites"
-          data-program-id="${favorite.id}"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
+
+        <!-- Status and Notes Section -->
+        <div class="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700 print:hidden">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <!-- Status Dropdown -->
+            <div class="flex-shrink-0">
+              <label class="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1" for="status-${favorite.id}">
+                Status
+              </label>
+              <select
+                id="status-${favorite.id}"
+                class="status-select px-3 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                data-program-id="${favorite.id}"
+              >
+                ${statusOptionsHtml}
+              </select>
+            </div>
+
+            <!-- Notes Field -->
+            <div class="flex-1">
+              <label class="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1" for="notes-${favorite.id}">
+                Private Notes
+              </label>
+              <textarea
+                id="notes-${favorite.id}"
+                class="notes-input w-full px-3 py-1.5 text-sm rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                rows="2"
+                placeholder="Add personal notes (e.g., 'Called on 1/10, need to submit docs by Friday')"
+                data-program-id="${favorite.id}"
+              >${favorite.notes || ''}</textarea>
+            </div>
+          </div>
+        </div>
       `;
     }
 
@@ -418,10 +551,23 @@ import Breadcrumb from '../components/Breadcrumb.astro';
   }
 
   function exportToCSV(favorites: Favorite[], programMap: Map<string, Program>): void {
-    const headers = ['Name', 'Category', 'Location', 'Phone', 'Website', 'Address', 'Saved Date'];
+    const headers = [
+      'Name',
+      'Category',
+      'Location',
+      'Phone',
+      'Website',
+      'Address',
+      'Saved Date',
+      'Status',
+      'Notes',
+    ];
     const rows = favorites.map((fav) => {
       const program = programMap.get(fav.id);
       const savedDate = new Date(fav.savedAt).toLocaleDateString();
+      const statusLabel =
+        STATUS_OPTIONS.find((o) => o.value === (fav.status || 'saved'))?.label || 'Saved';
+      const notes = (fav.notes || '').replace(/"/g, '""').replace(/\n/g, ' ');
       if (program) {
         return [
           `"${program.name.replace(/"/g, '""')}"`,
@@ -431,9 +577,21 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           `"${program.link || ''}"`,
           `"${program.address || ''}"`,
           `"${savedDate}"`,
+          `"${statusLabel}"`,
+          `"${notes}"`,
         ].join(',');
       }
-      return [`"${fav.name.replace(/"/g, '""')}"`, '', '', '', '', '', `"${savedDate}"`].join(',');
+      return [
+        `"${fav.name.replace(/"/g, '""')}"`,
+        '',
+        '',
+        '',
+        '',
+        '',
+        `"${savedDate}"`,
+        `"${statusLabel}"`,
+        `"${notes}"`,
+      ].join(',');
     });
 
     const csv = [headers.join(','), ...rows].join('\n');
@@ -555,6 +713,40 @@ import Breadcrumb from '../components/Breadcrumb.astro';
           detail: { programId, isFavorite: false, count: getFavorites().length },
         })
       );
+    });
+
+    // Handle status dropdown changes
+    favoritesGrid?.addEventListener('change', (e) => {
+      const select = e.target as HTMLSelectElement;
+      if (!select.classList.contains('status-select')) return;
+
+      const programId = select.dataset.programId;
+      if (!programId) return;
+
+      updateFavoriteStatus(programId, select.value as StatusValue);
+
+      // Show toast
+      const toast = (window as any).toast;
+      if (toast) {
+        const statusLabel = STATUS_OPTIONS.find((o) => o.value === select.value)?.label;
+        toast.success(`Status updated to "${statusLabel}"`);
+      }
+    });
+
+    // Handle notes input with debounce
+    let notesDebounceTimer: ReturnType<typeof setTimeout>;
+    favoritesGrid?.addEventListener('input', (e) => {
+      const textarea = e.target as HTMLTextAreaElement;
+      if (!textarea.classList.contains('notes-input')) return;
+
+      const programId = textarea.dataset.programId;
+      if (!programId) return;
+
+      // Debounce to avoid too many writes
+      clearTimeout(notesDebounceTimer);
+      notesDebounceTimer = setTimeout(() => {
+        updateFavoriteNotes(programId, textarea.value);
+      }, 500);
     });
 
     // Print handler

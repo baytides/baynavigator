@@ -240,3 +240,74 @@ enum SortOption: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 }
+
+// MARK: - Favorite Status Tracking
+
+/// Status options for tracking application progress
+enum FavoriteStatus: String, Codable, CaseIterable, Identifiable {
+    case saved
+    case researching
+    case applied
+    case waiting
+    case approved
+    case denied
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .saved: return "Saved"
+        case .researching: return "Researching"
+        case .applied: return "Applied"
+        case .waiting: return "Waiting for Response"
+        case .approved: return "Approved"
+        case .denied: return "Denied"
+        }
+    }
+
+    var color: (red: Double, green: Double, blue: Double) {
+        switch self {
+        case .saved: return (0.62, 0.62, 0.62)       // Grey
+        case .researching: return (0.13, 0.59, 0.95) // Blue
+        case .applied: return (1.0, 0.76, 0.03)      // Amber
+        case .waiting: return (0.61, 0.15, 0.69)     // Purple
+        case .approved: return (0.30, 0.69, 0.31)    // Green
+        case .denied: return (0.96, 0.26, 0.21)      // Red
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .saved: return "bookmark"
+        case .researching: return "magnifyingglass"
+        case .applied: return "paperplane"
+        case .waiting: return "clock"
+        case .approved: return "checkmark.circle"
+        case .denied: return "xmark.circle"
+        }
+    }
+}
+
+/// Extended favorite info with status tracking and notes
+struct FavoriteItem: Codable, Identifiable {
+    let programId: String
+    let savedAt: Date
+    var status: FavoriteStatus
+    var notes: String?
+    var statusUpdatedAt: Date?
+
+    var id: String { programId }
+
+    init(programId: String, savedAt: Date = Date(), status: FavoriteStatus = .saved, notes: String? = nil, statusUpdatedAt: Date? = nil) {
+        self.programId = programId
+        self.savedAt = savedAt
+        self.status = status
+        self.notes = notes
+        self.statusUpdatedAt = statusUpdatedAt
+    }
+
+    var hasNotes: Bool {
+        guard let notes = notes else { return false }
+        return !notes.isEmpty
+    }
+}

@@ -330,6 +330,110 @@ class AISearchResult {
   });
 }
 
+/// Status options for tracking application progress
+enum FavoriteStatus {
+  saved,
+  researching,
+  applied,
+  waiting,
+  approved,
+  denied;
+
+  String get label {
+    switch (this) {
+      case FavoriteStatus.saved:
+        return 'Saved';
+      case FavoriteStatus.researching:
+        return 'Researching';
+      case FavoriteStatus.applied:
+        return 'Applied';
+      case FavoriteStatus.waiting:
+        return 'Waiting for Response';
+      case FavoriteStatus.approved:
+        return 'Approved';
+      case FavoriteStatus.denied:
+        return 'Denied';
+    }
+  }
+
+  int get colorValue {
+    switch (this) {
+      case FavoriteStatus.saved:
+        return 0xFF9E9E9E; // Grey
+      case FavoriteStatus.researching:
+        return 0xFF2196F3; // Blue
+      case FavoriteStatus.applied:
+        return 0xFFFFC107; // Amber
+      case FavoriteStatus.waiting:
+        return 0xFF9C27B0; // Purple
+      case FavoriteStatus.approved:
+        return 0xFF4CAF50; // Green
+      case FavoriteStatus.denied:
+        return 0xFFF44336; // Red
+    }
+  }
+
+  static FavoriteStatus fromString(String value) {
+    return FavoriteStatus.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => FavoriteStatus.saved,
+    );
+  }
+}
+
+/// Extended favorite info with status tracking and notes
+class FavoriteItem {
+  final String programId;
+  final DateTime savedAt;
+  FavoriteStatus status;
+  String? notes;
+  DateTime? statusUpdatedAt;
+
+  FavoriteItem({
+    required this.programId,
+    required this.savedAt,
+    this.status = FavoriteStatus.saved,
+    this.notes,
+    this.statusUpdatedAt,
+  });
+
+  factory FavoriteItem.fromJson(Map<String, dynamic> json) {
+    return FavoriteItem(
+      programId: json['programId'] as String,
+      savedAt: DateTime.parse(json['savedAt'] as String),
+      status: FavoriteStatus.fromString(json['status'] as String? ?? 'saved'),
+      notes: json['notes'] as String?,
+      statusUpdatedAt: json['statusUpdatedAt'] != null
+          ? DateTime.parse(json['statusUpdatedAt'] as String)
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'programId': programId,
+      'savedAt': savedAt.toIso8601String(),
+      'status': status.name,
+      'notes': notes,
+      'statusUpdatedAt': statusUpdatedAt?.toIso8601String(),
+    };
+  }
+
+  FavoriteItem copyWith({
+    FavoriteStatus? status,
+    String? notes,
+    DateTime? statusUpdatedAt,
+  }) {
+    return FavoriteItem(
+      programId: programId,
+      savedAt: savedAt,
+      status: status ?? this.status,
+      notes: notes ?? this.notes,
+      statusUpdatedAt: statusUpdatedAt ?? this.statusUpdatedAt,
+    );
+  }
+}
+
 /// Types of crisis situations detected in queries
 enum CrisisType {
   emergency, // Call 911

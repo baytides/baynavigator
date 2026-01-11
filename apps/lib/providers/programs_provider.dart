@@ -21,6 +21,7 @@ class ProgramsProvider extends ChangeNotifier {
   List<Area> _areas = [];
   APIMetadata? _metadata;
   List<String> _favorites = [];
+  List<FavoriteItem> _favoriteItems = [];
 
   bool _isLoading = false;
   String? _error;
@@ -38,6 +39,7 @@ class ProgramsProvider extends ChangeNotifier {
   List<Area> get areas => _areas;
   APIMetadata? get metadata => _metadata;
   List<String> get favorites => _favorites;
+  List<FavoriteItem> get favoriteItems => _favoriteItems;
   bool get isLoading => _isLoading;
   String? get error => _error;
   FilterState get filterState => _filterState;
@@ -237,6 +239,7 @@ class ProgramsProvider extends ChangeNotifier {
         _apiService.getAreas(forceRefresh: forceRefresh),
         _apiService.getMetadata(forceRefresh: forceRefresh),
         _apiService.getFavorites(),
+        _apiService.getFavoriteItems(),
       ]);
 
       _programs = results[0] as List<Program>;
@@ -245,6 +248,7 @@ class ProgramsProvider extends ChangeNotifier {
       _areas = results[3] as List<Area>;
       _metadata = results[4] as APIMetadata;
       _favorites = results[5] as List<String>;
+      _favoriteItems = results[6] as List<FavoriteItem>;
 
       _error = null;
 
@@ -366,9 +370,14 @@ class ProgramsProvider extends ChangeNotifier {
     if (_favorites.contains(programId)) {
       await _apiService.removeFavorite(programId);
       _favorites.remove(programId);
+      _favoriteItems.removeWhere((i) => i.programId == programId);
     } else {
       await _apiService.addFavorite(programId);
       _favorites.add(programId);
+      _favoriteItems.add(FavoriteItem(
+        programId: programId,
+        savedAt: DateTime.now(),
+      ));
     }
     notifyListeners();
     // Sync to iMessage extension
@@ -379,11 +388,43 @@ class ProgramsProvider extends ChangeNotifier {
     return _favorites.contains(programId);
   }
 
+  /// Get the FavoriteItem for a specific program
+  FavoriteItem? getFavoriteItem(String programId) {
+    try {
+      return _favoriteItems.firstWhere((i) => i.programId == programId);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Update the status of a favorite item
+  Future<void> updateFavoriteStatus(String programId, FavoriteStatus status) async {
+    await _apiService.updateFavoriteStatus(programId, status);
+    final index = _favoriteItems.indexWhere((i) => i.programId == programId);
+    if (index != -1) {
+      _favoriteItems[index].status = status;
+      _favoriteItems[index].statusUpdatedAt = DateTime.now();
+      notifyListeners();
+    }
+  }
+
+  /// Update the notes of a favorite item
+  Future<void> updateFavoriteNotes(String programId, String? notes) async {
+    await _apiService.updateFavoriteNotes(programId, notes);
+    final index = _favoriteItems.indexWhere((i) => i.programId == programId);
+    if (index != -1) {
+      _favoriteItems[index].notes = notes;
+      _favoriteItems[index].statusUpdatedAt = DateTime.now();
+      notifyListeners();
+    }
+  }
+
   Future<void> clearAllFavorites() async {
     for (final programId in List.from(_favorites)) {
       await _apiService.removeFavorite(programId);
     }
     _favorites.clear();
+    _favoriteItems.clear();
     notifyListeners();
     // Sync to iMessage extension
     _syncToIMessage();

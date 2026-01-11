@@ -352,6 +352,8 @@ class ApiService {
   // FAVORITES
   // ============================================
 
+  static const String _favoriteItemsCacheKey = 'baynavigator:favorite_items';
+
   Future<List<String>> getFavorites() async {
     try {
       final prefs = await _preferences;
@@ -363,25 +365,91 @@ class ApiService {
     }
   }
 
-  Future<void> addFavorite(String programId) async {
-    final favorites = await getFavorites();
-    if (!favorites.contains(programId)) {
-      favorites.add(programId);
+  /// Get full favorite items with status and notes
+  Future<List<FavoriteItem>> getFavoriteItems() async {
+    try {
       final prefs = await _preferences;
-      await prefs.setString(_favoritesCacheKey, jsonEncode(favorites));
+      final itemsJson = prefs.getString(_favoriteItemsCacheKey);
+      if (itemsJson == null) {
+        // Migrate from old format if needed
+        final legacyFavorites = await getFavorites();
+        if (legacyFavorites.isNotEmpty) {
+          final items = legacyFavorites.map((id) => FavoriteItem(
+            programId: id,
+            savedAt: DateTime.now(),
+          )).toList();
+          await _saveFavoriteItems(items);
+          return items;
+        }
+        return [];
+      }
+      final List<dynamic> items = jsonDecode(itemsJson) as List;
+      return items.map((item) => FavoriteItem.fromJson(item as Map<String, dynamic>)).toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<void> _saveFavoriteItems(List<FavoriteItem> items) async {
+    final prefs = await _preferences;
+    final json = jsonEncode(items.map((i) => i.toJson()).toList());
+    await prefs.setString(_favoriteItemsCacheKey, json);
+    // Keep legacy format in sync for backwards compatibility
+    await prefs.setString(_favoritesCacheKey, jsonEncode(items.map((i) => i.programId).toList()));
+  }
+
+  Future<void> addFavorite(String programId) async {
+    final items = await getFavoriteItems();
+    if (!items.any((i) => i.programId == programId)) {
+      items.add(FavoriteItem(
+        programId: programId,
+        savedAt: DateTime.now(),
+      ));
+      await _saveFavoriteItems(items);
     }
   }
 
   Future<void> removeFavorite(String programId) async {
-    final favorites = await getFavorites();
-    favorites.remove(programId);
-    final prefs = await _preferences;
-    await prefs.setString(_favoritesCacheKey, jsonEncode(favorites));
+    final items = await getFavoriteItems();
+    items.removeWhere((i) => i.programId == programId);
+    await _saveFavoriteItems(items);
   }
 
   Future<bool> isFavorite(String programId) async {
-    final favorites = await getFavorites();
-    return favorites.contains(programId);
+    final items = await getFavoriteItems();
+    return items.any((i) => i.programId == programId);
+  }
+
+  /// Get favorite item for a specific program
+  Future<FavoriteItem?> getFavoriteItem(String programId) async {
+    final items = await getFavoriteItems();
+    try {
+      return items.firstWhere((i) => i.programId == programId);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Update status for a favorite item
+  Future<void> updateFavoriteStatus(String programId, FavoriteStatus status) async {
+    final items = await getFavoriteItems();
+    final index = items.indexWhere((i) => i.programId == programId);
+    if (index != -1) {
+      items[index].status = status;
+      items[index].statusUpdatedAt = DateTime.now();
+      await _saveFavoriteItems(items);
+    }
+  }
+
+  /// Update notes for a favorite item
+  Future<void> updateFavoriteNotes(String programId, String? notes) async {
+    final items = await getFavoriteItems();
+    final index = items.indexWhere((i) => i.programId == programId);
+    if (index != -1) {
+      items[index].notes = notes;
+      items[index].statusUpdatedAt = DateTime.now();
+      await _saveFavoriteItems(items);
+    }
   }
 
   // ============================================

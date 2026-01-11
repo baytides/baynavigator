@@ -17,6 +17,7 @@ final class ProgramsViewModel {
 
     // MARK: - Favorites
     private(set) var favorites: Set<String> = []
+    private(set) var favoriteItems: [FavoriteItem] = []
 
     private let api = APIService.shared
     private let cache = CacheService.shared
@@ -27,6 +28,7 @@ final class ProgramsViewModel {
     init() {
         Task {
             favorites = await cache.getFavorites()
+            favoriteItems = await cache.getFavoriteItems()
         }
     }
 
@@ -284,13 +286,43 @@ final class ProgramsViewModel {
     func toggleFavorite(_ id: String) {
         if favorites.contains(id) {
             favorites.remove(id)
+            favoriteItems.removeAll { $0.programId == id }
             Task {
                 await cache.removeFavorite(id)
             }
         } else {
             favorites.insert(id)
+            let newItem = FavoriteItem(programId: id)
+            favoriteItems.append(newItem)
             Task {
                 await cache.addFavorite(id)
+            }
+        }
+    }
+
+    /// Get the FavoriteItem for a specific program
+    func getFavoriteItem(_ programId: String) -> FavoriteItem? {
+        favoriteItems.first { $0.programId == programId }
+    }
+
+    /// Update the status of a favorite item
+    func updateFavoriteStatus(_ programId: String, status: FavoriteStatus) {
+        if let index = favoriteItems.firstIndex(where: { $0.programId == programId }) {
+            favoriteItems[index].status = status
+            favoriteItems[index].statusUpdatedAt = Date()
+            Task {
+                await cache.updateFavoriteStatus(programId, status: status)
+            }
+        }
+    }
+
+    /// Update the notes of a favorite item
+    func updateFavoriteNotes(_ programId: String, notes: String?) {
+        if let index = favoriteItems.firstIndex(where: { $0.programId == programId }) {
+            favoriteItems[index].notes = notes
+            favoriteItems[index].statusUpdatedAt = Date()
+            Task {
+                await cache.updateFavoriteNotes(programId, notes: notes)
             }
         }
     }

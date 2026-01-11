@@ -64,6 +64,8 @@ actor CacheService {
 
     // MARK: - Favorites (not time-cached)
 
+    private static let favoriteItemsKey = "baynavigator:favorite_items"
+
     func getFavorites() -> Set<String> {
         guard let data = defaults.data(forKey: CacheKey.favorites.rawValue),
               let favorites = try? JSONDecoder().decode(Set<String>.self, from: data) else {
@@ -78,20 +80,71 @@ actor CacheService {
         }
     }
 
+    /// Get all favorite items with status and notes
+    func getFavoriteItems() -> [FavoriteItem] {
+        guard let data = defaults.data(forKey: Self.favoriteItemsKey),
+              let items = try? JSONDecoder().decode([FavoriteItem].self, from: data) else {
+            // Migrate from old format if needed
+            let legacyFavorites = getFavorites()
+            if !legacyFavorites.isEmpty {
+                let items = legacyFavorites.map { FavoriteItem(programId: $0) }
+                saveFavoriteItems(items)
+                return items
+            }
+            return []
+        }
+        return items
+    }
+
+    private func saveFavoriteItems(_ items: [FavoriteItem]) {
+        if let data = try? JSONEncoder().encode(items) {
+            defaults.set(data, forKey: Self.favoriteItemsKey)
+        }
+        // Keep legacy format in sync
+        setFavorites(Set(items.map { $0.programId }))
+    }
+
     func addFavorite(_ id: String) {
-        var favorites = getFavorites()
-        favorites.insert(id)
-        setFavorites(favorites)
+        var items = getFavoriteItems()
+        if !items.contains(where: { $0.programId == id }) {
+            items.append(FavoriteItem(programId: id))
+            saveFavoriteItems(items)
+        }
     }
 
     func removeFavorite(_ id: String) {
-        var favorites = getFavorites()
-        favorites.remove(id)
-        setFavorites(favorites)
+        var items = getFavoriteItems()
+        items.removeAll { $0.programId == id }
+        saveFavoriteItems(items)
     }
 
     func isFavorite(_ id: String) -> Bool {
-        getFavorites().contains(id)
+        getFavoriteItems().contains { $0.programId == id }
+    }
+
+    /// Get favorite item for a specific program
+    func getFavoriteItem(_ programId: String) -> FavoriteItem? {
+        getFavoriteItems().first { $0.programId == programId }
+    }
+
+    /// Update status for a favorite item
+    func updateFavoriteStatus(_ programId: String, status: FavoriteStatus) {
+        var items = getFavoriteItems()
+        if let index = items.firstIndex(where: { $0.programId == programId }) {
+            items[index].status = status
+            items[index].statusUpdatedAt = Date()
+            saveFavoriteItems(items)
+        }
+    }
+
+    /// Update notes for a favorite item
+    func updateFavoriteNotes(_ programId: String, notes: String?) {
+        var items = getFavoriteItems()
+        if let index = items.firstIndex(where: { $0.programId == programId }) {
+            items[index].notes = notes
+            items[index].statusUpdatedAt = Date()
+            saveFavoriteItems(items)
+        }
     }
 
     // MARK: - Theme
