@@ -131,11 +131,18 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
   >
     <div class="container-page">
       <Breadcrumb items={[{ label: 'Directory' }]} />
-      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+      <h1
+        class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4"
+        data-i18n="directory.title"
+      >
         Program Directory
       </h1>
       <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-6 max-w-2xl">
-        Browse all {allPrograms.length} programs and services available in the Bay Area.
+        <span data-i18n="directory.browseAll">Browse all</span>{' '}
+        {allPrograms.length}{' '}
+        <span data-i18n="directory.programsAvailable"
+          >programs and services available in the Bay Area.</span
+        >
       </p>
       <div class="max-w-2xl">
         <SearchBar placeholder="Search programs..." size="large" />
@@ -154,13 +161,14 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         <div class="flex items-center gap-2">
           <label
             for="category-select"
-            class="text-sm font-medium text-neutral-600 dark:text-neutral-300">Category:</label
+            class="text-sm font-medium text-neutral-600 dark:text-neutral-300"
+            data-i18n="directory.category">Category:</label
           >
           <select
             id="category-select"
             class="px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
-            <option value="all">All Categories</option>
+            <option value="all" data-i18n="categories.all">All Categories</option>
             {categories.map((cat) => <option value={cat}>{cat}</option>)}
           </select>
         </div>
@@ -172,7 +180,10 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
             id="verified-only"
             class="w-4 h-4 rounded border-neutral-300 dark:border-neutral-600 text-primary-600 focus:ring-primary-500 dark:bg-neutral-700"
           />
-          <span class="text-sm text-neutral-600 dark:text-neutral-300">Authenticated only</span>
+          <span
+            class="text-sm text-neutral-600 dark:text-neutral-300"
+            data-i18n="directory.authenticatedOnly">Authenticated only</span
+          >
         </label>
 
         <!-- Clear Filters Button -->
@@ -180,6 +191,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
           type="button"
           id="clear-filters"
           class="hidden text-sm text-primary-600 dark:text-primary-300 hover:underline"
+          data-i18n="common.clearFilters"
         >
           Clear filters
         </button>
@@ -187,7 +199,12 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
       <!-- Group Pills -->
       <div>
-        <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">Filter by group:</p>
+        <p
+          class="text-sm text-neutral-600 dark:text-neutral-300 mb-3"
+          data-i18n="directory.filterByGroup"
+        >
+          Filter by group:
+        </p>
         <div class="flex flex-wrap gap-2" id="group-filters">
           {
             groupsData.groups.slice(0, 12).map((group) => (
@@ -260,13 +277,21 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
             d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <h3 class="text-lg font-medium text-neutral-900 dark:text-white mb-2">
+        <h3
+          class="text-lg font-medium text-neutral-900 dark:text-white mb-2"
+          data-i18n="directory.noMatchingPrograms"
+        >
           No programs match your filters
         </h3>
-        <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+        <p class="text-neutral-600 dark:text-neutral-300 mb-4" data-i18n="directory.tryAdjusting">
           Try adjusting your filters or search terms.
         </p>
-        <button id="empty-state-clear" type="button" class="btn-secondary text-sm">
+        <button
+          id="empty-state-clear"
+          type="button"
+          class="btn-secondary text-sm"
+          data-i18n="directory.clearAllFilters"
+        >
           Clear all filters
         </button>
       </div>
@@ -283,7 +308,10 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
       <!-- Data Trust Notice -->
       <div class="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700 text-center">
-        <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-2">
+        <p
+          class="text-sm text-neutral-600 dark:text-neutral-300 mb-2"
+          data-i18n="directory.verifyNotice"
+        >
           Programs change—always verify details with the official source before applying.
         </p>
         <a
@@ -298,7 +326,7 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
               d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
             ></path>
           </svg>
-          Report outdated info
+          <span data-i18n="directory.reportOutdated">Report outdated info</span>
         </a>
       </div>
     </div>

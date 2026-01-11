@@ -283,32 +283,32 @@ const websiteSchema = {
             <a
               href="/"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >Home</a
+              data-i18n="nav.home">Home</a
             >
             <a
               href="/directory"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >Directory</a
+              data-i18n="nav.directory">Directory</a
             >
             <a
               href="/map"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >Map</a
+              data-i18n="nav.map">Map</a
             >
             <a
               href="/transit"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >Transit</a
+              data-i18n="nav.transit">Transit</a
             >
             <a
               href="/eligibility"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >Eligibility</a
+              data-i18n="nav.eligibility">Eligibility</a
             >
             <a
               href="/about"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium"
-              >About</a
+              data-i18n="nav.about">About</a
             >
             <a
               href="/favorites"
@@ -648,32 +648,32 @@ const websiteSchema = {
             <a
               href="/"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >Home</a
+              data-i18n="nav.home">Home</a
             >
             <a
               href="/directory"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >Directory</a
+              data-i18n="nav.directory">Directory</a
             >
             <a
               href="/map"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >Map</a
+              data-i18n="nav.map">Map</a
             >
             <a
               href="/transit"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >Transit</a
+              data-i18n="nav.transit">Transit</a
             >
             <a
               href="/eligibility"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >Eligibility</a
+              data-i18n="nav.eligibility">Eligibility</a
             >
             <a
               href="/about"
               class="text-neutral-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 no-underline font-medium py-2"
-              >About</a
+              data-i18n="nav.about">About</a
             >
             <a
               href="/favorites"
@@ -693,7 +693,7 @@ const websiteSchema = {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
-              My Favorites
+              <span data-i18n="nav.myFavorites">My Favorites</span>
               <span
                 id="nav-favorites-count-mobile"
                 class="hidden text-xs bg-red-500 text-white rounded-full min-w-[1.25rem] h-5 px-1 flex items-center justify-center font-medium"
@@ -820,9 +820,11 @@ const websiteSchema = {
                 height="40"
                 loading="lazy"
               />
-              <span class="text-xl font-bold text-white">Bay Navigator</span>
+              <span class="text-xl font-bold text-white" data-i18n="common.siteName"
+                >Bay Navigator</span
+              >
             </div>
-            <p class="text-neutral-300 max-w-md">
+            <p class="text-neutral-300 max-w-md" data-i18n="footer.description">
               A community resource by Bay Tides. Connecting Bay Area residents with free and
               low-cost programs for food, housing, healthcare, utilities, and more.
             </p>
@@ -830,7 +832,7 @@ const websiteSchema = {
 
           <!-- Quick Links -->
           <div>
-            <h3 class="text-white font-semibold mb-4">Resources</h3>
+            <h3 class="text-white font-semibold mb-4" data-i18n="footer.resources">Resources</h3>
             <ul class="space-y-2 list-none pl-0">
               <li>
                 <a
@@ -849,7 +851,7 @@ const websiteSchema = {
                       d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                     ></path></svg
                   >
-                  Directory
+                  <span data-i18n="nav.directory">Directory</span>
                 </a>
               </li>
               <li>
@@ -869,7 +871,7 @@ const websiteSchema = {
                       d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
                     ></path></svg
                   >
-                  Eligibility Guides
+                  <span data-i18n="nav.eligibilityGuides">Eligibility Guides</span>
                 </a>
               </li>
               <li>
@@ -888,7 +890,7 @@ const websiteSchema = {
                       stroke-width="2"
                       d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
                   >
-                  About
+                  <span data-i18n="nav.about">About</span>
                 </a>
               </li>
               <li>
@@ -908,7 +910,7 @@ const websiteSchema = {
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                     ></path></svg
                   >
-                  Download App
+                  <span data-i18n="nav.downloadApp">Download App</span>
                 </a>
               </li>
               <li>
@@ -928,7 +930,7 @@ const websiteSchema = {
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     ></path></svg
                   >
-                  Partnerships
+                  <span data-i18n="nav.partnerships">Partnerships</span>
                 </a>
               </li>
               <li>
@@ -948,7 +950,7 @@ const websiteSchema = {
                       d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                     ></path></svg
                   >
-                  Glossary
+                  <span data-i18n="nav.glossary">Glossary</span>
                 </a>
               </li>
             </ul>
@@ -956,7 +958,9 @@ const websiteSchema = {
 
           <!-- Legal -->
           <div>
-            <h3 class="text-white font-semibold mb-4">Legal & More</h3>
+            <h3 class="text-white font-semibold mb-4" data-i18n="footer.legalAndMore">
+              Legal & More
+            </h3>
             <ul class="space-y-2 list-none pl-0">
               <li>
                 <a
@@ -975,7 +979,7 @@ const websiteSchema = {
                       d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                     ></path></svg
                   >
-                  Privacy Policy
+                  <span data-i18n="nav.privacyPolicy">Privacy Policy</span>
                 </a>
               </li>
               <li>
@@ -995,7 +999,7 @@ const websiteSchema = {
                       d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                     ></path></svg
                   >
-                  Terms of Service
+                  <span data-i18n="nav.termsOfService">Terms of Service</span>
                 </a>
               </li>
               <li>
@@ -1019,7 +1023,7 @@ const websiteSchema = {
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                     ></path></svg
                   >
-                  Accessibility
+                  <span data-i18n="nav.accessibility">Accessibility</span>
                 </a>
               </li>
               <li>
@@ -1039,7 +1043,7 @@ const websiteSchema = {
                       d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                     ></path></svg
                   >
-                  Credits
+                  <span data-i18n="nav.credits">Credits</span>
                 </a>
               </li>
               <li>
@@ -1059,7 +1063,7 @@ const websiteSchema = {
                       d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path></svg
                   >
-                  Sustainability
+                  <span data-i18n="nav.sustainability">Sustainability</span>
                 </a>
               </li>
               <li>
@@ -1084,10 +1088,12 @@ const websiteSchema = {
         <div
           class="border-t border-neutral-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p class="text-neutral-300 text-sm">
+          <p class="text-neutral-300 text-sm" data-i18n="footer.copyright">
             &copy; {new Date().getFullYear()} Bay Tides. Open source under MIT license.
           </p>
-          <p class="text-neutral-300 text-sm">Made with 💚 in the San Francisco Bay Area</p>
+          <p class="text-neutral-300 text-sm" data-i18n="footer.madeIn">
+            Made with 💚 in the San Francisco Bay Area
+          </p>
         </div>
       </div>
     </footer>

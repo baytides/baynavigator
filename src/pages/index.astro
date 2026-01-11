@@ -71,10 +71,10 @@ for (const file of files) {
   <!-- Hero Section -->
   <section class="hero">
     <div class="container-page text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="home.heroTitle">
         Find programs, services, and resources in the San Francisco Bay Area
       </h1>
-      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto" data-i18n="home.heroSubtitle">
         Discover free and low-cost resources for food, housing, healthcare, utilities, and more.
       </p>
       <div class="max-w-2xl mx-auto">
@@ -91,11 +91,13 @@ for (const file of files) {
     <div class="container-page">
       <div class="flex items-center justify-between mb-6">
         <p id="home-results-count" class="text-neutral-600 dark:text-neutral-300">
-          0 programs found
+          <span id="results-number">0</span>
+          <span data-i18n="home.programsFound">programs found</span>
         </p>
         <button
           id="clear-search"
           class="text-sm text-primary-700 dark:text-primary-300 hover:underline"
+          data-i18n="home.clearSearch"
         >
           Clear search
         </button>
@@ -127,17 +129,22 @@ for (const file of files) {
 
       <div id="no-results" class="hidden py-8">
         <div class="text-center mb-6">
-          <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+          <p class="text-neutral-600 dark:text-neutral-300 mb-4" data-i18n="search.noResults">
             No programs found matching your search.
           </p>
-          <a href="/directory" class="btn-primary">Browse All Programs</a>
+          <a href="/directory" class="btn-primary" data-i18n="search.browseAll"
+            >Browse All Programs</a
+          >
         </div>
 
         <!-- Zero-result fallback resources -->
         <div
           class="mt-6 p-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-xl"
         >
-          <h3 class="font-semibold text-blue-900 dark:text-blue-100 mb-3">
+          <h3
+            class="font-semibold text-blue-900 dark:text-blue-100 mb-3"
+            data-i18n="fallback.cantFind"
+          >
             Can't find what you need? Try these resources:
           </h3>
           <div class="grid gap-3 sm:grid-cols-2">
@@ -152,8 +159,16 @@ for (const file of files) {
                 211
               </div>
               <div>
-                <div class="font-medium text-neutral-900 dark:text-white">Call 2-1-1</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                <div
+                  class="font-medium text-neutral-900 dark:text-white"
+                  data-i18n="fallback.call211"
+                >
+                  Call 2-1-1
+                </div>
+                <div
+                  class="text-sm text-neutral-600 dark:text-neutral-400"
+                  data-i18n="fallback.call211Desc"
+                >
                   Free referrals to local services 24/7
                 </div>
               </div>
@@ -176,8 +191,16 @@ for (const file of files) {
                 </svg>
               </div>
               <div>
-                <div class="font-medium text-neutral-900 dark:text-white">Bay Area Legal Aid</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                <div
+                  class="font-medium text-neutral-900 dark:text-white"
+                  data-i18n="fallback.legalAid"
+                >
+                  Bay Area Legal Aid
+                </div>
+                <div
+                  class="text-sm text-neutral-600 dark:text-neutral-400"
+                  data-i18n="fallback.legalAidDesc"
+                >
                   Free legal help: 1-800-551-5554
                 </div>
               </div>
@@ -202,8 +225,16 @@ for (const file of files) {
                 </svg>
               </div>
               <div>
-                <div class="font-medium text-neutral-900 dark:text-white">GetCalFresh.org</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                <div
+                  class="font-medium text-neutral-900 dark:text-white"
+                  data-i18n="fallback.calfresh"
+                >
+                  GetCalFresh.org
+                </div>
+                <div
+                  class="text-sm text-neutral-600 dark:text-neutral-400"
+                  data-i18n="fallback.calfreshDesc"
+                >
                   Apply for food assistance online
                 </div>
               </div>
@@ -228,8 +259,16 @@ for (const file of files) {
                 </svg>
               </div>
               <div>
-                <div class="font-medium text-neutral-900 dark:text-white">BenefitsCal</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">
+                <div
+                  class="font-medium text-neutral-900 dark:text-white"
+                  data-i18n="fallback.benefitsCal"
+                >
+                  BenefitsCal
+                </div>
+                <div
+                  class="text-sm text-neutral-600 dark:text-neutral-400"
+                  data-i18n="fallback.benefitsCalDesc"
+                >
                   Apply for CA benefits (CalFresh, Medi-Cal)
                 </div>
               </div>
@@ -239,7 +278,11 @@ for (const file of files) {
       </div>
 
       <div class="text-center mt-8">
-        <a href="/directory" class="text-primary-700 dark:text-primary-300 hover:underline">
+        <a
+          href="/directory"
+          class="text-primary-700 dark:text-primary-300 hover:underline"
+          data-i18n="home.viewAllDirectory"
+        >
           View all programs in directory →
         </a>
       </div>
@@ -249,10 +292,16 @@ for (const file of files) {
   <!-- Category Tiles - SMC Connect style -->
   <section class="section bg-neutral-50 dark:bg-neutral-800">
     <div class="container-page">
-      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2 text-center">
+      <h2
+        class="text-2xl font-bold text-neutral-900 dark:text-white mb-2 text-center"
+        data-i18n="home.browseByCategory"
+      >
         Browse by Category
       </h2>
-      <p class="text-neutral-600 dark:text-neutral-300 text-center mb-8">
+      <p
+        class="text-neutral-600 dark:text-neutral-300 text-center mb-8"
+        data-i18n="home.selectCategory"
+      >
         Select a category to find programs and services
       </p>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

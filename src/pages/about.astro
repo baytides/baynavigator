@@ -61,10 +61,16 @@ const displayCount = Math.floor(programCount / 50) * 50;
         <Breadcrumb items={[{ label: 'About' }]} />
         <!-- Hero Section -->
         <div class="text-center mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4">
+          <h1
+            class="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4"
+            data-i18n="about.title"
+          >
             About Bay Navigator
           </h1>
-          <p class="text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+          <p
+            class="text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto"
+            data-i18n="about.subtitle"
+          >
             A community resource connecting Bay Area residents with free and low-cost programs
           </p>
         </div>
@@ -89,10 +95,13 @@ const displayCount = Math.floor(programCount / 50) * 50;
               </svg>
             </div>
             <div>
-              <h2 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+              <h2
+                class="text-lg font-semibold text-neutral-900 dark:text-white mb-2"
+                data-i18n="about.inPlainEnglish"
+              >
                 In Plain English
               </h2>
-              <p class="text-neutral-700 dark:text-neutral-300">
+              <p class="text-neutral-700 dark:text-neutral-300" data-i18n="about.summary">
                 This website lists free and discounted programs in the Bay Area. It's made by Bay
                 Tides, a nonprofit that protects the San Francisco Bay. We don't charge anything, we
                 don't sell your information, and we don't get paid for any listings.
@@ -109,25 +118,45 @@ const displayCount = Math.floor(programCount / 50) * 50;
             <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">
               {displayCount}+
             </div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">Programs Listed</div>
+            <div
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="about.stats.programsListed"
+            >
+              Programs Listed
+            </div>
           </div>
           <div
             class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
           >
             <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">9</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">Bay Area Counties</div>
+            <div
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="about.stats.bayAreaCounties"
+            >
+              Bay Area Counties
+            </div>
           </div>
           <div
             class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
           >
             <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">100%</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">Verified</div>
+            <div
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="about.stats.verified"
+            >
+              Verified
+            </div>
           </div>
           <div
             class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700"
           >
             <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">$0</div>
-            <div class="text-sm text-neutral-600 dark:text-neutral-400">Cost to Use</div>
+            <div
+              class="text-sm text-neutral-600 dark:text-neutral-400"
+              data-i18n="about.stats.costToUse"
+            >
+              Cost to Use
+            </div>
           </div>
         </div>
 
