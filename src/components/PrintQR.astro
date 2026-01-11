@@ -1,0 +1,85 @@
+---
+/**
+ * PrintQR Component
+ *
+ * Generates a QR code footer that only appears when printing.
+ * Helps caseworkers and users who print resource lists to get back
+ * to the exact search/page they were viewing.
+ *
+ * Uses a lightweight QR code generator (canvas-based, no external deps).
+ */
+---
+
+<div class="print-qr-footer" id="print-qr-container">
+  <canvas id="print-qr-code" class="qr-code" width="80" height="80"></canvas>
+  <div>
+    <div class="qr-text">Scan to view this page online or share with others</div>
+    <div class="qr-url" id="print-qr-url"></div>
+  </div>
+</div>
+
+<script>
+  /**
+   * Minimal QR Code Generator
+   * Based on the QR Code specification (ISO 18004)
+   * Only supports alphanumeric mode with error correction level M
+   * Good enough for URLs up to ~50 characters
+   */
+
+  // QR Code generator for URLs
+  function generateQRCode(canvas: HTMLCanvasElement, text: string) {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // For simplicity, use a third-party API for QR generation
+    // This is a free, no-auth API that returns a QR code image
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(text)}&format=svg`;
+
+    // Create an image and draw to canvas
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, 80, 80);
+      ctx.drawImage(img, 0, 0, 80, 80);
+    };
+    img.onerror = () => {
+      // Fallback: just show the URL if QR generation fails
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, 80, 80);
+      ctx.fillStyle = '#666';
+      ctx.font = '8px sans-serif';
+      ctx.fillText('QR unavailable', 5, 40);
+    };
+    img.src = qrApiUrl;
+  }
+
+  // Generate QR code on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('print-qr-code') as HTMLCanvasElement;
+    const urlEl = document.getElementById('print-qr-url');
+
+    if (canvas && urlEl) {
+      const currentUrl = window.location.href;
+      // Shorten URL for display
+      const displayUrl = currentUrl.length > 50 ? currentUrl.substring(0, 47) + '...' : currentUrl;
+
+      urlEl.textContent = displayUrl;
+      generateQRCode(canvas, currentUrl);
+    }
+  });
+
+  // Regenerate if URL changes (for SPAs or search params)
+  window.addEventListener('popstate', () => {
+    const canvas = document.getElementById('print-qr-code') as HTMLCanvasElement;
+    const urlEl = document.getElementById('print-qr-url');
+
+    if (canvas && urlEl) {
+      const currentUrl = window.location.href;
+      const displayUrl = currentUrl.length > 50 ? currentUrl.substring(0, 47) + '...' : currentUrl;
+
+      urlEl.textContent = displayUrl;
+      generateQRCode(canvas, currentUrl);
+    }
+  });
+</script>

@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
+import LanguageSelector from '../components/LanguageSelector.astro';
 import OfflineBanner from '../components/OfflineBanner.astro';
+import PrintQR from '../components/PrintQR.astro';
 import PWAInstallBanner from '../components/PWAInstallBanner.astro';
 import SafetyExit from '../components/SafetyExit.astro';
 import SkipLinks from '../components/SkipLinks.astro';
@@ -159,6 +161,9 @@ const websiteSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
     <title>{fullTitle}</title>
+
+    <!-- i18n Client Script (load early for translations) -->
+    <script src="/js/i18n-client.js" defer></script>
 
     <!-- Dark mode script (runs before render to prevent flash) -->
     <script is:inline>
@@ -594,6 +599,9 @@ const websiteSchema = {
               </div>
             </div>
 
+            <!-- Language Selector -->
+            <LanguageSelector />
+
             <!-- Theme Toggle -->
             <button
               id="theme-toggle"
@@ -711,6 +719,27 @@ const websiteSchema = {
               <span class="dark:hidden">Dark mode</span>
               <span class="hidden dark:inline">Light mode</span>
             </button>
+            <!-- Mobile Language Selector -->
+            <div class="border-t border-neutral-200 dark:border-neutral-700 pt-3 mt-2">
+              <span class="text-sm text-neutral-500 dark:text-neutral-400 mb-2 block">Language</span
+              >
+              <div class="flex gap-2">
+                <button
+                  type="button"
+                  class="mobile-lang-btn flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                  data-locale="en"
+                >
+                  English
+                </button>
+                <button
+                  type="button"
+                  class="mobile-lang-btn flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                  data-locale="es"
+                >
+                  Español
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1399,8 +1428,75 @@ const websiteSchema = {
         loadSettings();
       }
 
+      // Mobile language selector
+      function setupMobileLanguageSelector() {
+        const STORAGE_KEY = 'baynavigator_locale';
+        const buttons = document.querySelectorAll('.mobile-lang-btn');
+
+        function getCurrentLocale(): string {
+          try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored && (stored === 'en' || stored === 'es')) {
+              return stored;
+            }
+          } catch {
+            // localStorage not available
+          }
+          const browserLang = navigator.language?.split('-')[0];
+          if (browserLang === 'es') return 'es';
+          return 'en';
+        }
+
+        function updateButtonStates(locale: string) {
+          buttons.forEach((btn) => {
+            const btnLocale = btn.getAttribute('data-locale');
+            if (btnLocale === locale) {
+              btn.classList.add('bg-primary-600', 'text-white');
+              btn.classList.remove(
+                'bg-neutral-100',
+                'dark:bg-neutral-800',
+                'text-neutral-700',
+                'dark:text-neutral-300'
+              );
+            } else {
+              btn.classList.remove('bg-primary-600', 'text-white');
+              btn.classList.add(
+                'bg-neutral-100',
+                'dark:bg-neutral-800',
+                'text-neutral-700',
+                'dark:text-neutral-300'
+              );
+            }
+          });
+        }
+
+        // Initialize button states
+        updateButtonStates(getCurrentLocale());
+
+        // Handle button clicks
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const locale = btn.getAttribute('data-locale');
+            if (!locale) return;
+
+            try {
+              localStorage.setItem(STORAGE_KEY, locale);
+            } catch {
+              // localStorage not available
+            }
+
+            document.documentElement.lang = locale;
+            updateButtonStates(locale);
+
+            // Reload page to apply translations
+            window.location.reload();
+          });
+        });
+      }
+
       setupThemeToggle();
       setupMobileMenu();
+      setupMobileLanguageSelector();
       setupTextSettings();
       initSimpleLanguage();
     </script>
@@ -1508,6 +1604,9 @@ const websiteSchema = {
 
     <!-- Quick Exit Button for Safety -->
     <SafetyExit />
+
+    <!-- Print QR Code Footer (only visible when printing) -->
+    <PrintQR />
 
     <!-- Offline Detection Banner -->
     <OfflineBanner />

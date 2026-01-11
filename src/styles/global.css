@@ -720,6 +720,40 @@ main h6 {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.5em;
   }
+
+  /* Print QR code footer */
+  .print-qr-footer {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .print-qr-footer .qr-code {
+    width: 80px;
+    height: 80px;
+  }
+
+  .print-qr-footer .qr-text {
+    font-size: 9pt;
+    color: #666;
+    max-width: 200px;
+  }
+
+  .print-qr-footer .qr-url {
+    font-size: 8pt;
+    color: #999;
+    word-break: break-all;
+  }
+}
+
+/* Hide print QR on screen */
+.print-qr-footer {
+  display: none;
 }
 
 /*

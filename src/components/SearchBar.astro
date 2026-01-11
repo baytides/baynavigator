@@ -30,7 +30,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
 <div class="search-container">
   <div class="relative">
-    <label for="search-input" class="sr-only">Search programs</label>
+    <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
 
     <!-- Search icon -->
     <svg
@@ -95,6 +95,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       class="text-xs text-neutral-600 dark:text-neutral-300"
       data-tooltip="Smart Search uses AI to understand your question and find relevant programs. Turn it off for simple keyword matching."
       data-tooltip-position="left"
+      data-i18n="search.smartSearch"
       tabindex="0">Smart search</span
     >
     <button
@@ -118,14 +119,18 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     id="search-hints"
     class="hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-3 z-50"
   >
-    <p class="text-xs text-neutral-600 dark:text-neutral-300 mb-2">Try searching for:</p>
+    <p class="text-xs text-neutral-600 dark:text-neutral-300 mb-2" data-i18n="search.trySearching">
+      Try searching for:
+    </p>
     <div class="flex flex-wrap gap-2 mb-3">
       <button type="button" class="search-hint-btn" data-type="keyword">food assistance</button>
       <button type="button" class="search-hint-btn" data-type="keyword">utility bill help</button>
       <button type="button" class="search-hint-btn" data-type="keyword">healthcare</button>
       <button type="button" class="search-hint-btn" data-type="keyword">senior programs</button>
     </div>
-    <p class="text-xs text-neutral-600 dark:text-neutral-300 mb-2">Or ask a question:</p>
+    <p class="text-xs text-neutral-600 dark:text-neutral-300 mb-2" data-i18n="search.orAskQuestion">
+      Or ask a question:
+    </p>
     <div class="flex flex-wrap gap-2">
       <button type="button" class="search-hint-btn ai-hint" data-type="ai"
         >I'm a senior who needs help with bills</button

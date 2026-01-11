@@ -1,0 +1,228 @@
+---
+/**
+ * Language Selector Component
+ *
+ * Dropdown selector for switching between available languages.
+ * Persists selection to localStorage and updates UI dynamically.
+ */
+---
+
+<div class="relative" id="language-selector-container">
+  <button
+    id="language-selector-btn"
+    type="button"
+    class="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-sm"
+    aria-label="Select language"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+  >
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+      ></path>
+    </svg>
+    <span id="current-language" class="hidden sm:inline">English</span>
+    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+      ></path>
+    </svg>
+  </button>
+
+  <!-- Dropdown menu -->
+  <div
+    id="language-dropdown"
+    class="hidden absolute right-0 top-full mt-1 w-40 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden z-50"
+    role="listbox"
+    aria-labelledby="language-selector-btn"
+  >
+    <button
+      type="button"
+      class="language-option w-full px-4 py-2.5 text-left text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center justify-between transition-colors"
+      data-locale="en"
+      role="option"
+      aria-selected="true"
+    >
+      <span>English</span>
+      <svg
+        class="w-4 h-4 text-primary-600 dark:text-primary-400 check-icon"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      class="language-option w-full px-4 py-2.5 text-left text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 flex items-center justify-between transition-colors"
+      data-locale="es"
+      role="option"
+      aria-selected="false"
+    >
+      <span>Español</span>
+      <svg
+        class="w-4 h-4 text-primary-600 dark:text-primary-400 check-icon hidden"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'baynavigator_locale';
+
+  const localeNames: Record<string, string> = {
+    en: 'English',
+    es: 'Español',
+  };
+
+  function getLocale(): string {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored && stored in localeNames) {
+        return stored;
+      }
+    } catch {
+      // localStorage not available
+    }
+
+    // Check browser language
+    const browserLang = navigator.language?.split('-')[0];
+    if (browserLang && browserLang in localeNames) {
+      return browserLang;
+    }
+
+    return 'en';
+  }
+
+  function setLocale(locale: string): void {
+    if (!(locale in localeNames)) return;
+
+    try {
+      localStorage.setItem(STORAGE_KEY, locale);
+    } catch {
+      // localStorage not available
+    }
+
+    // Update HTML lang attribute
+    document.documentElement.lang = locale;
+
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('locale-changed', { detail: { locale } }));
+
+    // Update UI
+    updateUI(locale);
+
+    // Reload page to apply translations (static site)
+    // Only reload if locale actually changed
+    const prevLocale = document.documentElement.lang;
+    if (prevLocale !== locale) {
+      window.location.reload();
+    }
+  }
+
+  function updateUI(locale: string): void {
+    // Update current language display
+    const currentLangEl = document.getElementById('current-language');
+    if (currentLangEl) {
+      currentLangEl.textContent = localeNames[locale] || 'English';
+    }
+
+    // Update checkmarks
+    const options = document.querySelectorAll('.language-option');
+    options.forEach((option) => {
+      const optionLocale = option.getAttribute('data-locale');
+      const checkIcon = option.querySelector('.check-icon');
+      const isSelected = optionLocale === locale;
+
+      option.setAttribute('aria-selected', String(isSelected));
+      if (checkIcon) {
+        checkIcon.classList.toggle('hidden', !isSelected);
+      }
+    });
+  }
+
+  function setupLanguageSelector(): void {
+    const btn = document.getElementById('language-selector-btn');
+    const dropdown = document.getElementById('language-dropdown');
+    const options = document.querySelectorAll('.language-option');
+
+    if (!btn || !dropdown) return;
+
+    // Initialize with current locale
+    const currentLocale = getLocale();
+    updateUI(currentLocale);
+    document.documentElement.lang = currentLocale;
+
+    // Toggle dropdown
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !dropdown.classList.contains('hidden');
+      dropdown.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    // Handle option selection
+    options.forEach((option) => {
+      option.addEventListener('click', () => {
+        const locale = option.getAttribute('data-locale');
+        if (locale) {
+          setLocale(locale);
+          dropdown.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!btn.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+        dropdown.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !dropdown.classList.contains('hidden')) {
+        dropdown.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
+
+    // Keyboard navigation within dropdown
+    dropdown.addEventListener('keydown', (e) => {
+      const focusedOption = document.activeElement;
+      const optionsList = Array.from(options);
+      const currentIndex = optionsList.indexOf(focusedOption as Element);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = (currentIndex + 1) % optionsList.length;
+        (optionsList[nextIndex] as HTMLElement).focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = (currentIndex - 1 + optionsList.length) % optionsList.length;
+        (optionsList[prevIndex] as HTMLElement).focus();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        (focusedOption as HTMLElement)?.click();
+      }
+    });
+  }
+
+  // Initialize on page load
+  setupLanguageSelector();
+</script>
