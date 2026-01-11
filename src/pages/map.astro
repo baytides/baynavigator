@@ -1938,6 +1938,37 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
 
     // Load GeoJSON data
     map.on('load', async () => {
+      // ========================================
+      // STATE VARIABLES (hoisted to top to avoid reference errors)
+      // ========================================
+
+      // Traffic layer state
+      let trafficFlowLayerAdded = false;
+      let trafficLayersAdded = false;
+      let trafficEventsData: any = null;
+      let laneClosuresData: any = null;
+      let camerasData: any = null;
+      let vistasData: any = null;
+
+      // Transit layer state
+      let transitData: any = null;
+      let transitLayersAdded = false;
+      let activeOperators = new Set<string>();
+
+      // Get traffic checkbox references
+      const trafficIncidentsCheckbox = document.getElementById(
+        'traffic-incidents'
+      ) as HTMLInputElement;
+      const trafficClosuresCheckbox = document.getElementById(
+        'traffic-closures'
+      ) as HTMLInputElement;
+      const trafficCamerasCheckbox = document.getElementById('traffic-cameras') as HTMLInputElement;
+      const trafficVistasCheckbox = document.getElementById('traffic-vistas') as HTMLInputElement;
+      const trafficFlowCheckbox = document.getElementById('traffic-flow') as HTMLInputElement;
+
+      // Azure Maps Traffic Flow API key (passed from server-side)
+      const AZURE_MAPS_KEY = (window as any).__AZURE_MAPS_KEY__ || '';
+
       try {
         const response = await fetch('/api/programs.geojson');
         const geojson = await response.json();
@@ -2574,9 +2605,7 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         const transitFerryContainer = document.getElementById('transit-ferry-operators');
         const transitBusContainer = document.getElementById('transit-bus-operators');
 
-        let transitData: any = null;
-        let transitLayersAdded = false;
-        let activeOperators = new Set<string>();
+        // Note: transitData, transitLayersAdded, activeOperators are hoisted to top of map.on('load')
 
         // Load transit data from API
         async function loadTransitData() {
@@ -2876,28 +2905,8 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
         // ========================================
         // TRAFFIC LAYER DATA (511.org + Caltrans)
         // ========================================
-        const trafficIncidentsCheckbox = document.getElementById(
-          'traffic-incidents'
-        ) as HTMLInputElement;
-        const trafficClosuresCheckbox = document.getElementById(
-          'traffic-closures'
-        ) as HTMLInputElement;
-        const trafficCamerasCheckbox = document.getElementById(
-          'traffic-cameras'
-        ) as HTMLInputElement;
-        const trafficVistasCheckbox = document.getElementById('traffic-vistas') as HTMLInputElement;
-        const trafficFlowCheckbox = document.getElementById('traffic-flow') as HTMLInputElement;
-
-        // Azure Maps Traffic Flow API key (passed from server-side)
-        const AZURE_MAPS_KEY = (window as any).__AZURE_MAPS_KEY__ || '';
-        let trafficFlowLayerAdded = false;
-
-        // Traffic data cache
-        let trafficEventsData: any = null;
-        let laneClosuresData: any = null;
-        let camerasData: any = null;
-        let vistasData: any = null;
-        let trafficLayersAdded = false;
+        // Note: Traffic checkboxes, AZURE_MAPS_KEY, and traffic state variables
+        // are hoisted to top of map.on('load') to avoid reference errors
 
         // Load traffic data
         async function loadTrafficEvents() {
