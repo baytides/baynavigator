@@ -15,6 +15,6 @@
     "API-DOCUMENTATION.md",
     "SESSION-SUMMARY.md",
     "data-exports/**",
-    "openapi/**"
-  ]
+    "openapi/**",
+  ],
 }
