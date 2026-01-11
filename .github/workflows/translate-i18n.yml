@@ -59,6 +59,9 @@ jobs:
           AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
         run: node scripts/translate-i18n.cjs
 
+      - name: Format generated files
+        run: npx prettier --write shared/i18n/
+
       - name: Check for changes
         id: changes
         run: |

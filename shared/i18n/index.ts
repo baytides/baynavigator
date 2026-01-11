@@ -24,7 +24,9 @@ const cache: Partial<Record<Locale, { ui: TranslationData; programs: ProgramTran
 /**
  * Load translations for a locale
  */
-export async function loadTranslations(locale: Locale): Promise<{ ui: TranslationData; programs: ProgramTranslations }> {
+export async function loadTranslations(
+  locale: Locale
+): Promise<{ ui: TranslationData; programs: ProgramTranslations }> {
   if (cache[locale]) {
     return cache[locale]!;
   }
