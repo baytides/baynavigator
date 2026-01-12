@@ -14,7 +14,9 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const http = require('http');
 const zlib = require('zlib');
+const { execSync } = require('child_process');
 
 // 511 API configuration
 const API_KEY = process.env.API_511_KEY;
@@ -47,6 +49,32 @@ const OPERATORS = [
   { id: 'CE', name: 'ACE Rail', type: 'rail', color: '#8b4513' },
   { id: 'AM', name: 'Capitol Corridor', type: 'rail', color: '#00467f' },
 ];
+
+// Intercity operators (fetched from external GTFS feeds)
+const INTERCITY_OPERATORS = [
+  {
+    id: 'AMTRAK',
+    name: 'Amtrak',
+    type: 'intercity-rail',
+    color: '#004990',
+    gtfsUrl: 'https://content.amtrak.com/content/gtfs/GTFS.zip',
+  },
+  {
+    id: 'FLIXBUS',
+    name: 'FlixBus',
+    type: 'intercity-bus',
+    color: '#73d700',
+    gtfsUrl: 'https://gtfs.gis.flix.tech/gtfs_generic_us.zip',
+  },
+];
+
+// Bay Area bounding box for filtering intercity stops
+const BAY_AREA_BOUNDS = {
+  minLat: 36.8,
+  maxLat: 38.5,
+  minLon: -123.0,
+  maxLon: -121.0,
+};
 
 // Output paths
 const OUTPUT_GEOJSON = path.join(__dirname, '../public/api/transit-stops.json');
@@ -219,16 +247,158 @@ function haversineDistance(lat1, lng1, lat2, lng2) {
 }
 
 /**
+ * Download file from URL using curl (more reliable for HTTPS)
+ */
+function downloadFile(url, destPath) {
+  try {
+    execSync(`curl -sL -o "${destPath}" "${url}"`, { stdio: 'pipe' });
+    return true;
+  } catch (error) {
+    console.error(`  Failed to download ${url}: ${error.message}`);
+    return false;
+  }
+}
+
+/**
+ * Parse GTFS stops.txt CSV content
+ */
+function parseGtfsStops(content) {
+  const lines = content.split('\n').filter((l) => l.trim());
+  if (lines.length === 0) return [];
+
+  const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
+  const stops = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    // Handle CSV with quoted fields
+    const values = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (const char of lines[i]) {
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        values.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    values.push(current.trim());
+
+    const row = {};
+    headers.forEach((h, idx) => {
+      row[h] = values[idx] || '';
+    });
+    stops.push(row);
+  }
+
+  return stops;
+}
+
+/**
+ * Fetch intercity transit stops from GTFS feeds (Amtrak, FlixBus)
+ */
+async function fetchIntercityStops(operator) {
+  const tmpDir = '/tmp/baynavigator-gtfs';
+  const zipPath = `${tmpDir}/${operator.id.toLowerCase()}.zip`;
+  const extractDir = `${tmpDir}/${operator.id.toLowerCase()}`;
+
+  // Create temp directory
+  if (!fs.existsSync(tmpDir)) {
+    fs.mkdirSync(tmpDir, { recursive: true });
+  }
+
+  console.log(`  Downloading GTFS from ${operator.gtfsUrl}...`);
+  if (!downloadFile(operator.gtfsUrl, zipPath)) {
+    return [];
+  }
+
+  // Extract stops.txt
+  try {
+    execSync(`unzip -o -q "${zipPath}" stops.txt -d "${extractDir}"`, { stdio: 'pipe' });
+  } catch (error) {
+    console.error(`  Failed to extract stops.txt: ${error.message}`);
+    return [];
+  }
+
+  const stopsPath = `${extractDir}/stops.txt`;
+  if (!fs.existsSync(stopsPath)) {
+    console.error(`  stops.txt not found in GTFS archive`);
+    return [];
+  }
+
+  const content = fs.readFileSync(stopsPath, 'utf8');
+  const allStops = parseGtfsStops(content);
+
+  // Filter to Bay Area stops
+  const bayAreaStops = allStops.filter((stop) => {
+    const lat = parseFloat(stop.stop_lat);
+    const lon = parseFloat(stop.stop_lon);
+    return (
+      lat >= BAY_AREA_BOUNDS.minLat &&
+      lat <= BAY_AREA_BOUNDS.maxLat &&
+      lon >= BAY_AREA_BOUNDS.minLon &&
+      lon <= BAY_AREA_BOUNDS.maxLon
+    );
+  });
+
+  console.log(`  Found ${bayAreaStops.length} Bay Area stops (of ${allStops.length} total)`);
+
+  // Clean up
+  try {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  } catch (e) {
+    // Ignore cleanup errors
+  }
+
+  return bayAreaStops.map((stop) => ({
+    id: stop.stop_id,
+    name: cleanIntercityStopName(stop.stop_name, operator.name),
+    lat: parseFloat(stop.stop_lat),
+    lng: parseFloat(stop.stop_lon),
+    url: stop.stop_url || '',
+  }));
+}
+
+/**
+ * Clean intercity stop name
+ */
+function cleanIntercityStopName(name, operatorName) {
+  if (!name) return name;
+
+  // Remove "Amtrak" suffix and common patterns
+  let cleaned = name
+    .replace(/\s+Amtrak$/i, '')
+    .replace(/\s+Amtrak Station$/i, '')
+    .replace(/\s+Amtrak Bus Stop$/i, '')
+    .replace(/\s+Bus Stop$/i, '')
+    .replace(/\s+Bus Station$/i, '')
+    .trim();
+
+  return cleaned;
+}
+
+/**
  * Consolidate nearby rail/ferry stations from different operators
- * Also identifies bus operators that serve rail/ferry stations
+ * Also identifies bus and intercity operators that serve rail/ferry stations
  * Returns consolidated features and a map of consolidated station info
  */
-function consolidateStations(features, railThreshold = 200, busThreshold = 100) {
-  // Separate rail/ferry from bus
+function consolidateStations(
+  features,
+  railThreshold = 200,
+  busThreshold = 100,
+  intercityThreshold = 300
+) {
+  // Separate by type
   const railFerryFeatures = features.filter(
     (f) => f.properties.type === 'rail' || f.properties.type === 'ferry'
   );
   const busFeatures = features.filter((f) => f.properties.type === 'bus');
+  const intercityFeatures = features.filter(
+    (f) => f.properties.type === 'intercity-rail' || f.properties.type === 'intercity-bus'
+  );
 
   // Group nearby rail/ferry stations
   const consolidated = [];
@@ -292,6 +462,27 @@ function consolidateStations(features, railThreshold = 200, busThreshold = 100) 
       }
     }
 
+    // Find intercity operators (Amtrak, FlixBus) that serve this station
+    // Use a larger threshold since intercity stations may be named differently
+    const intercityOperatorsAtStation = new Set();
+    for (const intercityStop of intercityFeatures) {
+      const [icLng, icLat] = intercityStop.geometry.coordinates;
+      const distance = haversineDistance(lat, lng, icLat, icLng);
+
+      if (distance <= intercityThreshold) {
+        const icOpId = intercityStop.properties.operatorId;
+        if (!intercityOperatorsAtStation.has(icOpId)) {
+          intercityOperatorsAtStation.add(icOpId);
+          operators.push({
+            id: icOpId,
+            name: intercityStop.properties.operator,
+            color: intercityStop.properties.color,
+            type: intercityStop.properties.type,
+          });
+        }
+      }
+    }
+
     usedRailFerry.add(i);
 
     if (operators.length > 1) {
@@ -331,8 +522,38 @@ function consolidateStations(features, railThreshold = 200, busThreshold = 100) 
     }
   }
 
-  // Return consolidated rail/ferry + all bus stops unchanged
-  return [...consolidated, ...busFeatures];
+  // Track which intercity stops were consolidated into transit centers
+  const usedIntercity = new Set();
+  for (const feature of consolidated) {
+    if (feature.properties.isConsolidated && feature.properties.operators) {
+      for (const op of feature.properties.operators) {
+        if (op.type === 'intercity-rail' || op.type === 'intercity-bus') {
+          // Mark this operator as used for this location
+          usedIntercity.add(
+            `${op.id}-${Math.round(feature.geometry.coordinates[0] * 100)}-${Math.round(feature.geometry.coordinates[1] * 100)}`
+          );
+        }
+      }
+    }
+  }
+
+  // Add standalone intercity stops that weren't near any rail/ferry stations
+  const standaloneIntercity = intercityFeatures.filter((f) => {
+    const key = `${f.properties.operatorId}-${Math.round(f.geometry.coordinates[0] * 100)}-${Math.round(f.geometry.coordinates[1] * 100)}`;
+    // Check if this stop is near any consolidated station
+    for (const cons of consolidated) {
+      const [consLng, consLat] = cons.geometry.coordinates;
+      const [icLng, icLat] = f.geometry.coordinates;
+      const distance = haversineDistance(consLat, consLng, icLat, icLng);
+      if (distance <= intercityThreshold) {
+        return false; // Already consolidated
+      }
+    }
+    return true;
+  });
+
+  // Return consolidated rail/ferry + all bus stops + standalone intercity stops
+  return [...consolidated, ...busFeatures, ...standaloneIntercity];
 }
 
 /**
@@ -390,6 +611,48 @@ async function syncTransitData() {
 
     // Small delay to respect rate limits
     await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+
+  // Fetch intercity operators (Amtrak, FlixBus)
+  console.log('\nFetching intercity transit operators...');
+  for (const operator of INTERCITY_OPERATORS) {
+    console.log(`Fetching ${operator.name} (${operator.id})...`);
+
+    const stops = await fetchIntercityStops(operator);
+
+    if (stops.length === 0) {
+      continue;
+    }
+
+    // Convert to GeoJSON features
+    stops.forEach((station) => {
+      if (station.lat && station.lng && station.lat !== 0 && station.lng !== 0) {
+        allFeatures.push({
+          type: 'Feature',
+          properties: {
+            id: `${operator.id}-${station.id}`,
+            name: station.name,
+            operator: operator.name,
+            operatorId: operator.id,
+            type: operator.type,
+            color: operator.color,
+            url: station.url,
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [station.lng, station.lat],
+          },
+        });
+      }
+    });
+
+    agencyStats.push({
+      id: operator.id,
+      name: operator.name,
+      type: operator.type,
+      color: operator.color,
+      stationCount: stops.length,
+    });
   }
 
   // Consolidate overlapping rail/ferry stations (e.g., San Jose Diridon)

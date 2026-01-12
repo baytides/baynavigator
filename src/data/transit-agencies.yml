@@ -1,5 +1,5 @@
 # Bay Area Transit Agencies
-# Generated from 511.org API on 2026-01-11
+# Generated from 511.org API on 2026-01-12
 # Do not edit manually - run scripts/sync-511-transit.cjs to update
 
 agencies:
@@ -93,3 +93,13 @@ agencies:
     type: 'rail'
     color: '#00467f'
     stations: 20
+  - id: 'AMTRAK'
+    name: 'Amtrak'
+    type: 'intercity-rail'
+    color: '#004990'
+    stations: 28
+  - id: 'FLIXBUS'
+    name: 'FlixBus'
+    type: 'intercity-bus'
+    color: '#73d700'
+    stations: 12
