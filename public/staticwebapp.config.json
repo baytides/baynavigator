@@ -28,6 +28,15 @@
       }
     },
     {
+      "route": "/api/programs/*.json",
+      "headers": {
+        "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Max-Age": "86400"
+      }
+    },
+    {
       "route": "/assets/images/*",
       "headers": {
         "Cache-Control": "public, max-age=31536000, immutable"

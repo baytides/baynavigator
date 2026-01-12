@@ -1,6 +1,6 @@
 {
-  "id": "transit-incentives-contra-costa",
-  "name": "Transit Incentives - Contra Costa",
+  "id": "511-transit-incentives-contra-costa",
+  "name": "511 Transit Incentives",
   "category": "transportation",
   "description": "Free $25 Clipper card for taking transit pledge",
   "fullDescription": "511 Contra Costa offers incentives to encourage workers and students to try public transit, providing free Clipper card value when you commit to taking transit.",
@@ -23,5 +23,5 @@
   "keywords": [],
   "lifeEvents": [],
   "agency": null,
-  "lastUpdated": "2026-01-10"
+  "lastUpdated": "2026-01-12"
 }

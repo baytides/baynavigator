@@ -19,7 +19,7 @@
       "name": "Youth",
       "description": "For children and young adults",
       "icon": "🧒",
-      "programCount": 44
+      "programCount": 43
     },
     {
       "id": "college-students",
@@ -54,7 +54,7 @@
       "name": "LGBT+",
       "description": "For LGBTQ+ community members",
       "icon": "🌈",
-      "programCount": 19
+      "programCount": 17
     },
     {
       "id": "first-responders",
@@ -131,7 +131,7 @@
       "name": "Everyone",
       "description": "Available to all residents",
       "icon": "🌎",
-      "programCount": 457
+      "programCount": 454
     }
   ]
 }

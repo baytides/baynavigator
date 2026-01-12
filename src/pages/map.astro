@@ -404,12 +404,65 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
               <div id="transit-ferry-operators" class="mt-1 space-y-0.5"></div>
             </div>
             <!-- Bus -->
-            <div>
+            <div class="mb-3">
               <span
                 class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
                 data-i18n="map.bus">Bus</span
               >
               <div id="transit-bus-operators" class="mt-1 space-y-0.5"></div>
+            </div>
+            <!-- Clipper Card Discounts -->
+            <div class="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+              <span
+                class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wide"
+                >Clipper Discounts</span
+              >
+              <div class="mt-1.5 space-y-0.5">
+                <a
+                  href="/directory#program-clipper-baypass"
+                  class="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 py-1 px-1.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  <span>Clipper BayPass</span>
+                  <span class="text-neutral-400 dark:text-neutral-500">Students</span>
+                </a>
+                <a
+                  href="/directory#program-clipper-start"
+                  class="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 py-1 px-1.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  <span>Clipper START</span>
+                  <span class="text-neutral-400 dark:text-neutral-500">Low-income</span>
+                </a>
+                <a
+                  href="/directory#program-senior-clipper-card"
+                  class="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 py-1 px-1.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  <span>Senior Clipper</span>
+                  <span class="text-neutral-400 dark:text-neutral-500">65+</span>
+                </a>
+                <a
+                  href="/directory#program-clipper-access"
+                  class="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 py-1 px-1.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  <span>Clipper Access</span>
+                  <span class="text-neutral-400 dark:text-neutral-500">Disability</span>
+                </a>
+              </div>
+              <a
+                href="https://www.clippercard.com"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center justify-center gap-1 text-xs text-primary-600 dark:text-primary-400 hover:underline mt-2 py-1"
+              >
+                <span>clippercard.com</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
+                </svg>
+              </a>
             </div>
           </div>
         </details>

@@ -30,7 +30,8 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 const API_BASE = 'https://api.throughlinecare.com';
 
 // Output paths
-const OUTPUT_JSON = path.join(__dirname, '../public/api/helplines.json');
+// Note: ThroughLine data has restricted redistribution license
+// We only output to YAML for website display, NOT to public API
 const OUTPUT_YAML = path.join(__dirname, '../src/data/helplines.yml');
 
 /**
@@ -248,20 +249,7 @@ async function syncHelplines() {
     // Transform to our format
     const helplines = rawHelplines.map(transformHelpline);
 
-    // Create JSON output for API
-    const jsonOutput = {
-      generated: new Date().toISOString(),
-      source: 'ThroughLine Care API',
-      sourceUrl: 'https://findahelpline.com',
-      count: helplines.length,
-      helplines,
-    };
-
-    // Write JSON file
-    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(jsonOutput, null, 2));
-    console.log(`\nWrote ${helplines.length} helplines to ${OUTPUT_JSON}`);
-
-    // Write YAML file
+    // Write YAML file (for website display only - not public API due to license restrictions)
     const yamlContent = generateYaml(helplines);
     fs.writeFileSync(OUTPUT_YAML, yamlContent);
     console.log(`Wrote helplines to ${OUTPUT_YAML}`);

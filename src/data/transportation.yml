@@ -468,31 +468,33 @@
   link: https://transit.cityofpetaluma.net/fares/
   link_text: Learn More
   verified_date: '2025-12-16'
-- id: rtc-clipper-card
-  name: RTC Clipper Card
+- id: clipper-access
+  name: Clipper Access (RTC)
   category: Transportation
   area: Bay Area-wide
   groups:
     - disability
-  description: The Regional Transit Connection (RTC) Clipper Card provides discounted fares for people with disabilities on participating Bay Area transit systems.
+  description: Clipper Access (formerly RTC Clipper Card) provides discounted fares for people with disabilities on participating Bay Area transit systems. The Regional Transit Connection program offers reduced fares across the entire Bay Area transit network.
   what_they_offer: |
     - Reduced fares on most Bay Area transit agencies
     - Typically 50% or more off regular adult fares
-    - Valid on BART, Muni, AC Transit, Caltrain, and more
-    - Discounts automatically applied when using RTC Clipper card
+    - Valid on BART, Muni, AC Transit, Caltrain, VTA, SamTrans, and more
+    - Discounts automatically applied when using Clipper Access card
+    - Works on all Clipper-accepting transit agencies
   how_to_get_it: |
-    1. Complete the RTC application at 511.org
+    1. Complete the RTC/Clipper Access application at clippercard.com
     2. Provide proof of disability (Medicare card, SSI/SSDI documentation, or medical certification)
     3. Submit application online or by mail
-    4. Once approved, receive RTC Clipper card by mail
+    4. Once approved, receive Clipper Access card by mail
     5. Load cash value and ride with automatic discounts
   phone: 877-878-8883
   benefit: Reduced fares for riders with disabilities
   how_to_use: Apply with proof of disability
   timeframe: Ongoing
-  link: https://511.org/transit/rtc-card/eligibility
-  link_text: Apply
-  verified_date: '2025-12-16'
+  link: https://www.clippercard.com/ClipperWeb/discounts.html
+  link_text: Apply for Clipper Access
+  verified_by: 511.org
+  verified_date: '2026-01-11'
 - id: samtrans
   name: SamTrans Way2Go Pass
   category: Transportation

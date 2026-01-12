@@ -161,6 +161,10 @@ if (fs.existsSync(SUPPRESSED_FILE)) {
   }
 }
 
+// Data sources with restricted redistribution licenses
+// These are excluded from the public API but still displayed on the website
+const RESTRICTED_SOURCES = ['ThroughLine'];
+
 // Load all programs from YAML files
 const allPrograms = [];
 // Filter out non-program files (metadata files that don't contain program arrays)
@@ -203,6 +207,12 @@ categoryFiles.forEach((file) => {
     // Skip suppressed programs
     if (suppressedIds.has(id)) {
       console.log(`      ⏭️  Skipping suppressed program: ${program.name}`);
+      return;
+    }
+
+    // Skip programs from restricted data sources (license doesn't allow redistribution)
+    if (program.verified_by && RESTRICTED_SOURCES.includes(program.verified_by)) {
+      console.log(`      🔒 Excluding from API (restricted license): ${program.name}`);
       return;
     }
 
