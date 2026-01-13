@@ -27,8 +27,12 @@ jobs:
 
       - name: Install pmtiles CLI
         run: |
-          # Download latest pmtiles CLI
-          curl -L -o pmtiles.tar.gz https://github.com/protomaps/go-pmtiles/releases/latest/download/go-pmtiles_Linux_x86_64.tar.gz
+          # Get latest version from GitHub API
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/protomaps/go-pmtiles/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+          echo "Installing pmtiles version: $LATEST_VERSION"
+
+          # Download pmtiles CLI with version in filename
+          curl -L -o pmtiles.tar.gz "https://github.com/protomaps/go-pmtiles/releases/download/v${LATEST_VERSION}/go-pmtiles_${LATEST_VERSION}_Linux_x86_64.tar.gz"
           tar -xzf pmtiles.tar.gz
           chmod +x pmtiles
           sudo mv pmtiles /usr/local/bin/
