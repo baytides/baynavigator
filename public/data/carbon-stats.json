@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-13T06:11:32.632Z",
+  "generated": "2026-01-14T06:11:46.634Z",
   "period": "last_30_days",
   "dataFreshness": {
     "cloudflare": "live",
@@ -14,22 +14,22 @@
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 5218,
-    "cdnBytesTransferred": 140112772,
-    "cdnCacheHitRate": "44.2",
+    "cdnRequests": 6386,
+    "cdnBytesTransferred": 161100999,
+    "cdnCacheHitRate": "45.9",
     "aiQueries": 9,
     "functionExecutions": 862,
     "ciRuns": 100,
     "ciMinutes": 200,
     "ciWorkflows": {
-      "Update Carbon Stats": 2,
-      "Update PMTiles Map Data": 1,
-      "Carbon Footprint Tracking": 20,
+      "Update Carbon Stats": 3,
+      "Carbon Footprint Tracking": 19,
       "OSV-Scanner Scheduled": 5,
-      "Lighthouse CI": 14,
       "CI": 14,
-      "Deploy Website (Azure)": 4,
       "CodeQL Security Analysis": 14,
+      "Deploy Website (Azure)": 4,
+      "Lighthouse CI": 14,
+      "Update PMTiles Map Data": 1,
       "All Contributors": 10,
       "OSV-Scanner PR": 10,
       "Test": 3,
@@ -40,16 +40,16 @@
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "0.5",
-      "percent": "0.6"
+      "grams": "0.6",
+      "percent": "0.7"
     },
     "ai": {
       "grams": "13.5",
-      "percent": "14.4"
+      "percent": "14.3"
     },
     "ci": {
       "grams": "80.0",
-      "percent": "85.1"
+      "percent": "85.0"
     }
   },
   "providers": {
