@@ -2,6 +2,7 @@ node_modules
 dist
 .astro
 public/api
+public/data/carbon-stats.json
 apps
 *.min.js
 *.min.css
