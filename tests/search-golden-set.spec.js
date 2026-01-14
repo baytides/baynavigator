@@ -12,7 +12,7 @@ import { test, expect } from '@playwright/test';
 
 // Helper to perform search and get visible program names
 async function searchAndGetResults(page, query) {
-  await page.goto('/directory', { waitUntil: 'networkidle' });
+  await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
   // Wait for programs to load
   await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 15000 });
@@ -319,7 +319,7 @@ test.describe('Category Searches', () => {
 
 test.describe('Zero Results Handling', () => {
   test('search with gibberish shows fallback resources', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
 
     const input = page.locator('#search-input');

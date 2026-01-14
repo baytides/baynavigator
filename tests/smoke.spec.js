@@ -81,7 +81,7 @@ test('home page loads', async ({ page }) => {
 });
 
 test('homepage search shows results', async ({ page }) => {
-  await page.goto('/', { waitUntil: 'networkidle' });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
 
   // Search results should be hidden initially
   const searchResults = page.locator('#search-results');

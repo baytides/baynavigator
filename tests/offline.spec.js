@@ -10,7 +10,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Service Worker & Offline Functionality', () => {
   test('service worker is registered', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Wait for service worker to register (may take a moment)
     await page.waitForTimeout(2000);
@@ -32,7 +32,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // First visit to cache assets
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Wait for service worker to install and cache
     await page.waitForTimeout(3000);
@@ -62,7 +62,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // First visit to cache
-    await page.goto('/directory', { waitUntil: 'networkidle' });
+    await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
     // Wait for service worker and initial data to cache
     await page.waitForTimeout(3000);
@@ -91,7 +91,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // First visit to cache everything
-    await page.goto('/directory', { waitUntil: 'networkidle' });
+    await page.goto('/directory', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Verify initial load
@@ -130,7 +130,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // Visit favorites page first
-    await page.goto('/favorites', { waitUntil: 'networkidle' });
+    await page.goto('/favorites', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000);
 
     // Go offline
@@ -152,7 +152,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // Cache about page
-    await page.goto('/about', { waitUntil: 'networkidle' });
+    await page.goto('/about', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000);
 
     // Go offline
@@ -170,7 +170,7 @@ test.describe('Service Worker & Offline Functionality', () => {
   });
 
   test('AI toggle shows disabled state offline', async ({ page, context }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000);
 
     // AI toggle should exist and be enabled
@@ -198,7 +198,7 @@ test.describe('Service Worker & Offline Functionality', () => {
   });
 
   test('offline banner appears when offline', async ({ page, context }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1000);
 
     // Go offline
@@ -263,7 +263,7 @@ test.describe('Cached API Data', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // Load page to trigger caching
-    await page.goto('/directory', { waitUntil: 'networkidle' });
+    await page.goto('/directory', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Go offline
@@ -296,7 +296,7 @@ test.describe('Cached API Data', () => {
     test.skip(browserName === 'webkit', 'WebKit has internal errors with offline navigation');
 
     // Load page to trigger caching
-    await page.goto('/directory', { waitUntil: 'networkidle' });
+    await page.goto('/directory', { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(3000);
 
     // Go offline
