@@ -1,0 +1,219 @@
+{
+  "generated": "2026-01-13",
+  "description": "Bay Area geographic reference for AI - enables location detection without LLM calls",
+  "service_areas": {
+    "bay_area_wide": {
+      "description": "Programs serving all 9 Bay Area counties",
+      "keywords": ["bay area", "sf bay", "bay region", "nine counties"]
+    },
+    "statewide": {
+      "description": "California state programs",
+      "keywords": ["california", "statewide", "state program", "cal"]
+    },
+    "nationwide": {
+      "description": "Federal programs available everywhere",
+      "keywords": ["federal", "nationwide", "national", "usa", "united states"]
+    }
+  },
+  "counties": {
+    "san-francisco": {
+      "name": "San Francisco",
+      "alias": ["SF", "the city", "san fran"],
+      "cities": ["San Francisco"],
+      "population": 874961,
+      "county_services_phone": "311",
+      "human_services": "SF Human Services Agency",
+      "notable_programs": ["SF Muni", "SF-Marin Food Bank", "SF General Hospital"]
+    },
+    "alameda": {
+      "name": "Alameda County",
+      "alias": ["east bay"],
+      "cities": [
+        "Oakland",
+        "Berkeley",
+        "Fremont",
+        "Hayward",
+        "Alameda",
+        "San Leandro",
+        "Livermore",
+        "Pleasanton",
+        "Dublin",
+        "Newark",
+        "Union City",
+        "Emeryville",
+        "Piedmont",
+        "Albany",
+        "Castro Valley",
+        "San Lorenzo"
+      ],
+      "population": 1671329,
+      "county_services_phone": "510-267-8000",
+      "human_services": "Alameda County Social Services Agency",
+      "notable_programs": ["AC Transit", "Alameda County Food Bank"]
+    },
+    "contra-costa": {
+      "name": "Contra Costa County",
+      "alias": ["east bay", "coco", "cc county"],
+      "cities": [
+        "Concord",
+        "Richmond",
+        "Antioch",
+        "Walnut Creek",
+        "Pittsburg",
+        "San Ramon",
+        "Brentwood",
+        "Danville",
+        "Martinez",
+        "Pleasant Hill",
+        "El Cerrito",
+        "Pinole",
+        "Hercules",
+        "Lafayette",
+        "Orinda",
+        "Clayton",
+        "Oakley"
+      ],
+      "population": 1153526,
+      "county_services_phone": "1-877-505-4630",
+      "human_services": "Contra Costa Employment & Human Services",
+      "notable_programs": ["County Connection transit", "Food Bank of Contra Costa"]
+    },
+    "san-mateo": {
+      "name": "San Mateo County",
+      "alias": ["peninsula", "the peninsula", "SMC"],
+      "cities": [
+        "Daly City",
+        "San Mateo",
+        "Redwood City",
+        "South San Francisco",
+        "San Bruno",
+        "Burlingame",
+        "Menlo Park",
+        "Foster City",
+        "Belmont",
+        "San Carlos",
+        "Pacifica",
+        "Millbrae",
+        "Half Moon Bay",
+        "East Palo Alto",
+        "Atherton",
+        "Portola Valley"
+      ],
+      "population": 766573,
+      "county_services_phone": "1-800-223-8383",
+      "human_services": "San Mateo County Human Services Agency",
+      "notable_programs": ["SamTrans", "Second Harvest Food Bank"]
+    },
+    "santa-clara": {
+      "name": "Santa Clara County",
+      "alias": ["south bay", "silicon valley"],
+      "cities": [
+        "San Jose",
+        "Santa Clara",
+        "Sunnyvale",
+        "Mountain View",
+        "Milpitas",
+        "Palo Alto",
+        "Cupertino",
+        "Campbell",
+        "Los Gatos",
+        "Gilroy",
+        "Morgan Hill",
+        "Saratoga",
+        "Los Altos"
+      ],
+      "population": 1936259,
+      "county_services_phone": "408-758-3800",
+      "human_services": "Santa Clara County Social Services Agency",
+      "notable_programs": ["VTA", "Second Harvest Food Bank Silicon Valley"]
+    },
+    "marin": {
+      "name": "Marin County",
+      "alias": ["north bay"],
+      "cities": [
+        "San Rafael",
+        "Novato",
+        "Mill Valley",
+        "Larkspur",
+        "Sausalito",
+        "Tiburon",
+        "Corte Madera",
+        "Fairfax",
+        "San Anselmo",
+        "Ross",
+        "Belvedere"
+      ],
+      "population": 262321,
+      "county_services_phone": "415-473-7191",
+      "human_services": "Marin County Health & Human Services",
+      "notable_programs": ["Marin Transit", "SF-Marin Food Bank"]
+    },
+    "sonoma": {
+      "name": "Sonoma County",
+      "alias": ["north bay", "wine country"],
+      "cities": [
+        "Santa Rosa",
+        "Petaluma",
+        "Rohnert Park",
+        "Windsor",
+        "Healdsburg",
+        "Cloverdale",
+        "Sonoma",
+        "Sebastopol",
+        "Cotati"
+      ],
+      "population": 488863,
+      "county_services_phone": "707-565-2000",
+      "human_services": "Sonoma County Human Services Department",
+      "notable_programs": ["Sonoma County Transit", "Redwood Empire Food Bank"]
+    },
+    "napa": {
+      "name": "Napa County",
+      "alias": ["wine country", "napa valley"],
+      "cities": ["Napa", "American Canyon", "St. Helena", "Calistoga", "Yountville"],
+      "population": 138019,
+      "county_services_phone": "707-253-4511",
+      "human_services": "Napa County Health & Human Services",
+      "notable_programs": ["VINE Transit", "Community Action Napa Valley"]
+    },
+    "solano": {
+      "name": "Solano County",
+      "alias": ["north bay"],
+      "cities": [
+        "Vallejo",
+        "Fairfield",
+        "Vacaville",
+        "Benicia",
+        "Dixon",
+        "Suisun City",
+        "Rio Vista"
+      ],
+      "population": 453491,
+      "county_services_phone": "707-784-8960",
+      "human_services": "Solano County Health & Social Services",
+      "notable_programs": ["SolTrans", "Food Bank of Contra Costa and Solano"]
+    }
+  },
+  "regional_transit": {
+    "bart": {
+      "name": "Bay Area Rapid Transit",
+      "coverage": ["San Francisco", "Alameda County", "Contra Costa County", "San Mateo County"],
+      "discount_programs": ["Clipper START", "Senior/Disabled discount"]
+    },
+    "caltrain": {
+      "name": "Caltrain",
+      "coverage": ["San Francisco", "San Mateo County", "Santa Clara County"],
+      "discount_programs": ["Clipper START", "Go Pass"]
+    },
+    "golden_gate_transit": {
+      "name": "Golden Gate Transit",
+      "coverage": ["San Francisco", "Marin County", "Sonoma County"],
+      "discount_programs": ["Senior/Disabled discount"]
+    },
+    "ace": {
+      "name": "Altamont Corridor Express",
+      "coverage": ["Alameda County", "Santa Clara County", "San Joaquin County"],
+      "discount_programs": ["Clipper START"]
+    }
+  }
+}

@@ -4,6 +4,7 @@
   area: Statewide
   groups:
     - veterans
+  keywords: CalVet, veteran benefits, California veteran, VA benefits, home loan, college fee waiver, veterans home, employment, claims assistance
   description: The California Department of Veterans Affairs (CalVet) connects California's 1.6 million veterans and their families to state and federal benefits. The CalVet portal helps veterans discover and apply for housing, education, employment, healthcare, and financial assistance.
   what_they_offer: |
     - Personalized benefits eligibility screening
@@ -34,6 +35,7 @@
   groups:
     - veterans
     - disability
+  keywords: DVBE, disabled veteran, business certification, state contracts, government contracts, veteran-owned, procurement, bid preference
   description: The California Disabled Veteran Business Enterprise (DVBE) program helps veteran-owned businesses win state contracts. Certified DVBE businesses receive preference in state purchasing and contracting, with a goal that 3% of state contracts go to DVBEs.
   what_they_offer: |
     - DVBE certification for state contract bidding
@@ -63,6 +65,7 @@
   area: Statewide
   groups:
     - veterans
+  keywords: CalTAP, veteran transition, military transition, separating service member, education, employment, entrepreneurship, benefits navigation
   description: CalTAP connects transitioning service members and veterans with their earned federal and state benefits through five pathways - Core Curriculum, Education, Employment, Entrepreneurship, and Service Providers. Since 2017, CalTAP has served over 12,000 veterans at military installations and college campuses.
   what_they_offer: |
     - Benefits education and navigation
@@ -92,6 +95,7 @@
     - veterans
     - unhoused
     - income-eligible
+  keywords: VHHP, veteran housing, homeless veteran, supportive housing, affordable housing, veteran family, case management, permanent housing
   description: The Veterans Housing and Homelessness Prevention program develops affordable permanent supportive housing for veterans and their families who are experiencing homelessness or have extremely low income. CalVet has awarded $580.5 million to 99 housing projects with over 5,190 units.
   what_they_offer: |
     - Affordable permanent housing for veterans
@@ -119,6 +123,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: 211, 2-1-1, helpline, referral, social services, housing, food, health care, utility assistance, free hotline, 24/7
   description: 2-1-1 Bay Area is a free, confidential helpline connecting residents to essential community services 24 hours a day, 7 days a week, in over 180 languages.
   what_they_offer: |
     - Free 24/7 helpline (dial 2-1-1)
@@ -146,6 +151,7 @@
   area: San Mateo County
   groups:
     - nonprofits
+  keywords: CZI, Chan Zuckerberg, free meeting space, nonprofit venue, Redwood City, conference room, event space, coworking
   description: The Chan Zuckerberg Initiative Community Space provides free meeting and event venues for local nonprofits at their Redwood City headquarters, supporting community organizations with professional facilities.
   what_they_offer: |
     - Free meeting rooms for up to 150 people
@@ -175,6 +181,7 @@
   area: Statewide
   groups:
     - youth
+  keywords: Dolly Parton, free books, children's books, early literacy, birth to five, monthly book, Imagination Library, reading
   description: Dolly Parton's Imagination Library sends a free, high-quality book every month to registered children from birth to age five, building home libraries and fostering early literacy across California.
   what_they_offer: |
     - Free book mailed monthly
@@ -201,6 +208,7 @@
   area: Bay Area-wide
   groups:
     - nonprofits
+  keywords: Generation Thrive, Warriors, Kaiser, free meeting space, nonprofit venue, conference room, coworking, event space
   description: Generation Thrive, a partnership between the Golden State Warriors and Kaiser Permanente, provides free meeting and workspace to Bay Area nonprofits at their state-of-the-art facility.
   what_they_offer: |
     - Free conference rooms
@@ -227,6 +235,7 @@
   area: San Francisco
   groups:
     - nonprofits
+  keywords: Google, free meeting space, nonprofit venue, San Francisco, conference room, event space, Embarcadero, technology
   description: Google Community Space offers free professional event and meeting facilities for Bay Area nonprofits, providing access to Google's technology tools and resources.
   what_they_offer: |
     - Free event and meeting spaces
@@ -256,6 +265,7 @@
   area: San Francisco
   groups:
     - nonprofits
+  keywords: Salesforce, Ohana Floor, free event venue, nonprofit venue, San Francisco, Salesforce Tower, 250 guests, panoramic views
   description: Salesforce offers their stunning 61st-floor Ohana Floor with panoramic city views as a free event venue for Bay Area nonprofits, complete with professional event support.
   what_they_offer: |
     - Free 61st-floor event space
@@ -285,6 +295,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Season of Sharing, emergency assistance, rental assistance, eviction prevention, homelessness prevention, SF Chronicle, basic needs
   description: The Season of Sharing Fund, a partnership of the San Francisco Chronicle and Bay Area community foundations, provides emergency financial assistance to prevent homelessness for families and individuals in crisis.
   what_they_offer: |
     - Emergency rental assistance
@@ -311,6 +322,7 @@
   area: Bay Area-wide
   groups:
     - nonprofits
+  keywords: Sobrato, free meeting space, nonprofit venue, conference room, event space, 200 people, multiple locations
   description: Sobrato Philanthropies provides free meeting and conference facilities at their nonprofit centers throughout the Bay Area, helping organizations save on venue costs.
   what_they_offer: |
     - Free meeting and conference rooms
@@ -337,6 +349,7 @@
   area: San Francisco
   groups:
     - nonprofits
+  keywords: Tides, Presidio, nonprofit campus, coworking, office lease, meeting space, social enterprise, shared workspace
   description: Tides Converge is a shared nonprofit campus in the Presidio providing meeting spaces, affordable coworking, and office leases for nonprofits and social enterprises.
   what_they_offer: |
     - Meeting and event spaces
@@ -366,6 +379,7 @@
   area: Nationwide
   groups:
     - veterans
+  keywords: Vet Center, VA, veteran counseling, PTSD, readjustment, mental health, family counseling, trauma, military
   description: VA Vet Centers provide confidential community-based counseling, outreach, and referral services for eligible veterans, service members, and their families outside of traditional VA medical facilities.
   what_they_offer: |
     - Confidential mental health counseling
@@ -394,6 +408,7 @@
   groups:
     - families
     - youth
+  keywords: YMCA, gym, fitness, swimming, youth programs, childcare, after school, sliding scale, financial assistance, membership
   description: The YMCA provides community programs and facilities focused on youth development, healthy living, and social responsibility, with financial assistance available to ensure access for all.
   what_they_offer: |
     - Sliding-scale membership rates
@@ -422,6 +437,7 @@
     - income-eligible
     - families
     - youth
+  keywords: crisis nursery, emergency childcare, free childcare, birth to 6, family crisis, Concord, respite care, 30 days
   description: Bay Area Crisis Nursery provides free emergency childcare for families in crisis, offering a safe, nurturing environment for young children while parents address urgent situations.
   what_they_offer: |
     - FREE emergency childcare
@@ -454,6 +470,7 @@
     - income-eligible
     - families
     - youth
+  keywords: state preschool, free preschool, pre-K, ages 3-5, kindergarten readiness, early education, low-income, CSPP
   description: The California State Preschool Program provides free, high-quality preschool education to income-eligible families, preparing children ages 3-5 for kindergarten success.
   what_they_offer: |
     - Free part-day preschool
@@ -482,6 +499,7 @@
     - income-eligible
     - families
     - youth
+  keywords: CalWORKs, childcare, subsidized daycare, Stage 1, Stage 2, Stage 3, welfare, work training, free childcare
   description: CalWORKs Child Care provides free or subsidized childcare for families receiving CalWORKs benefits, helping parents participate in work or training activities through three progressive stages.
   what_they_offer: |
     - Free or subsidized child care
@@ -510,6 +528,7 @@
     - income-eligible
     - families
     - youth
+  keywords: Children's Council, childcare subsidy, San Francisco, daycare, ages 0-13, low-income, childcare assistance
   description: Children's Council San Francisco helps income-eligible families access subsidized childcare, providing partial or complete coverage of childcare costs through state-funded programs.
   what_they_offer: |
     - Partial or complete childcare coverage
@@ -542,6 +561,7 @@
     - income-eligible
     - families
     - youth
+  keywords: Choices for Children, childcare subsidy, Santa Clara, daycare, San Jose, low-income, childcare assistance
   description: Choices for Children provides subsidized childcare services to income-eligible families in Santa Clara County, helping parents work or attend school while their children receive quality care.
   what_they_offer: |
     - Subsidized child care services
@@ -572,6 +592,7 @@
     - income-eligible
     - families
     - youth
+  keywords: Head Start, free preschool, ages 3-4, federal program, early childhood, low-income, nutrition, health services
   description: Head Start is a federally-funded program providing free, comprehensive early childhood education, health, nutrition, and family support services to low-income children and families.
   what_they_offer: |
     - Free preschool education
@@ -602,6 +623,7 @@
     - families
     - youth
     - everyone
+  keywords: BACN Boutique, free clothing, free shoes, baby equipment, maternity, Concord, family supplies, Crisis Nursery
   description: BACN Boutique provides free clothing, shoes, and essential items for families in need, operating as a community resource center within Bay Area Crisis Nursery.
   what_they_offer: |
     - Free clothing for all family members
@@ -634,6 +656,7 @@
     - income-eligible
     - families
     - youth
+  keywords: BACN, food pantry, diaper bank, free diapers, free food, Concord, baby supplies, Crisis Nursery
   description: Bay Area Crisis Nursery operates a food pantry and diaper bank providing free groceries and diapers to families with young children in Contra Costa County.
   what_they_offer: |
     - Free food assistance
@@ -664,6 +687,7 @@
   area: San Francisco
   groups:
     - income-eligible
+  keywords: SF Diaper Bank, free diapers, under age two, CalFresh, Medi-Cal, CalWORKs, baby supplies, two cases
   description: The San Francisco Diaper Bank provides free diapers to low-income families enrolled in public assistance programs, helping reduce the financial burden of essential baby supplies.
   what_they_offer: |
     - Free diapers for eligible families
@@ -691,6 +715,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: St. Anthony's, free clothing, San Francisco, men, women, children, shoes, Tenderloin, no income requirement
   description: St. Anthony's Free Clothing Program is San Francisco's largest free clothing resource, providing dignity and essential clothing to over 3,000 people monthly regardless of income or circumstances.
   what_they_offer: |
     - Free clothing for all ages
@@ -721,6 +746,7 @@
   area: California
   groups:
     - nonprofits
+  keywords: grants.ca.gov, state grants, nonprofit funding, grant database, California grants, funding opportunities
   description: The California Grants Portal is a centralized, free searchable database of all state grant opportunities, helping nonprofits and community organizations find and apply for funding.
   what_they_offer: |
     - Free searchable grant database
@@ -747,6 +773,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: HIP Housing, home sharing, roommate matching, shared housing, San Mateo, affordable housing, housemate
   description: HIP Housing's Home Sharing Program is a free matching service that connects homeowners with extra space to compatible individuals seeking affordable housing arrangements in San Mateo County.
   what_they_offer: |
     - Free housing matching service
@@ -779,6 +806,7 @@
     - unhoused
     - income-eligible
     - everyone
+  keywords: LifeMoves, homeless services, shelter, case management, food, clothing, veteran services, housing assistance
   description: LifeMoves provides comprehensive services to help individuals and families experiencing homelessness transition to stable housing through shelter, case management, and supportive programs.
   what_they_offer: |
     - Emergency interim shelter
@@ -809,6 +837,7 @@
     - families
     - income-eligible
     - veterans
+  keywords: Haven Family House, LifeMoves, family shelter, Menlo Park, homeless families, veteran families, interim housing
   description: Haven Family House is a LifeMoves interim housing facility in Menlo Park providing shelter and comprehensive services for families experiencing homelessness, with dedicated capacity for veteran families.
   what_they_offer: |
     - Interim shelter for 23 families
@@ -839,6 +868,7 @@
   area: Statewide
   groups:
     - seniors
+  keywords: Friendly Voices, senior phone calls, loneliness, isolated, homebound, volunteer buddy, 60+, social connection
   description: Friendly Voices connects isolated and homebound seniors with trained volunteer phone buddies for weekly friendly conversations, reducing loneliness and providing social connection.
   what_they_offer: |
     - Weekly volunteer phone calls
@@ -866,6 +896,7 @@
   groups:
     - disability
     - seniors
+  keywords: CID, home modifications, wheelchair ramp, grab bars, accessibility, ADA, disabled, elderly, San Mateo
   description: The Center for Independence of Individuals with Disabilities provides grants for home accessibility modifications, helping seniors and disabled persons remain safely in their homes.
   what_they_offer: |
     - Grants for home modifications
@@ -894,6 +925,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: ECHO, fair housing, housing discrimination, tenant rights, landlord, complaint, equal housing, legal referral
   description: ECHO Housing is a fair housing organization that investigates discrimination complaints, provides housing counseling, and works to ensure equal access to housing for all Bay Area residents.
   what_they_offer: |
     - Housing discrimination investigation
@@ -921,6 +953,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Fixit Clinic, repair, free, electronics, appliance, computer, sewing, toy repair, San Mateo County
   description: San Mateo County's Fixit Clinics are free community repair events where volunteer coaches help residents fix broken items, reducing waste and saving money on replacements.
   what_they_offer: |
     - Free repair assistance
@@ -947,6 +980,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: sewing, mending, library, free, Foster City, Half Moon Bay, Millbrae, Redwood City, San Mateo
   description: San Mateo County Libraries offer free open sewing and mending programs at multiple branches, helping residents repair clothing and learn sewing skills.
   what_they_offer: |
     - Free sewing and mending programs
@@ -973,6 +1007,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: RecycleStuff, recycling, donation, disposal, San Mateo, electronics, clothing, where to recycle
   description: Recyclestuff.org is a free online search tool helping San Mateo County residents find the right place to recycle, donate, or properly dispose of household items.
   what_they_offer: |
     - Free online search engine
@@ -999,6 +1034,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: ReFuel Your Fun, reusable, dishware, utensils, events, San Mateo County, zero waste, party supplies
   description: San Mateo County's ReFuel Your Fun program offers discounted propane refills for reusable cylinders, providing an eco-friendly and cost-effective alternative to disposable propane.
   what_they_offer: |
     - Discounted propane refills
@@ -1025,6 +1061,7 @@
   area: City of Oakland
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Oakland, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Oakland is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1053,6 +1090,7 @@
   area: Napa County
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Napa, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Napa is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1082,6 +1120,7 @@
   area: Marin County
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Novato, Marin, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Novato is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1111,6 +1150,7 @@
   area: City of Pleasanton
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Pleasanton, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Pleasanton has two locations in the same shopping center, selling quality secondhand and vintage items with proceeds supporting cancer research.
   what_they_offer: |
     - Accept clothing donations
@@ -1140,6 +1180,7 @@
   area: City of Walnut Creek
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Walnut Creek, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Walnut Creek is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1169,6 +1210,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, San Jose, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in San Jose is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1197,6 +1239,7 @@
   area: City of Los Altos
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Los Altos, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation, senior discount
   description: The American Cancer Society Discovery Shop in Los Altos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs. Seniors 55+ receive 10% off on Tuesdays.
   what_they_offer: |
     - Accept clothing donations
@@ -1226,6 +1269,7 @@
   area: Town of Los Gatos
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Los Gatos, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Los Gatos is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1255,6 +1299,7 @@
   area: City of Menlo Park
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Menlo Park, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation, military discount, senior discount
   description: The American Cancer Society Discovery Shop in Menlo Park is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs. Military receive 10% off any day; seniors 55+ receive 10% off on Tuesdays.
   what_they_offer: |
     - Accept clothing donations
@@ -1284,6 +1329,7 @@
   area: City of Sunnyvale
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Sunnyvale, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Sunnyvale is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1313,6 +1359,7 @@
   area: Monterey County
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Pacific Grove, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Pacific Grove is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1342,6 +1389,7 @@
   area: Monterey County
   groups:
     - everyone
+  keywords: ACS, American Cancer Society, Discovery Shop, Salinas, Monterey, thrift store, donate clothes, secondhand, vintage, charity shop, clothing donation, furniture donation
   description: The American Cancer Society Discovery Shop in Salinas is a thrift store selling quality secondhand and vintage items, with proceeds supporting cancer research and patient programs.
   what_they_offer: |
     - Accept clothing donations
@@ -1371,6 +1419,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: EHP, Ecumenical Hunger Program, East Palo Alto, donate clothes, donate furniture, household donation, clothing donation, pickup, charity donation, low-income support
   description: The Ecumenical Hunger Program accepts donations of household items and clothing to support their services for low-income families in East Palo Alto and surrounding communities.
   what_they_offer: |
     - Accept clothing donations
@@ -1401,6 +1450,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Family Connections, San Mateo, donate baby items, stroller donation, car seat donation, children clothing, toys donation, books donation, baby supplies, families with children
   description: Family Connections accepts donations of baby and child-related items to support their programs serving families with young children in San Mateo County.
   what_they_offer: |
     - Accept baby item donations
@@ -1431,6 +1481,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Goodwill, thrift store, donate clothes, donate electronics, donate furniture, job training, employment program, San Francisco, San Mateo, Marin, charity shop, secondhand
   description: Goodwill Industries operates thrift stores and donation centers throughout the Bay Area, with proceeds funding job training and employment programs for people facing barriers.
   what_they_offer: |
     - Accept clothing donations
@@ -1457,6 +1508,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Latino Commission, San Mateo, donate clothes, donate furniture, recovery program, drug rehabilitation, alcohol recovery, clothing donation, household donation
   description: The Latino Commission accepts donations of household items and clothing to support their alcohol and drug recovery programs serving the community.
   what_they_offer: |
     - Accept clothing and shoes
@@ -1483,6 +1535,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Nine Lives Foundation, cat rescue, cat adoption, pet supplies donation, blankets donation, San Mateo, animal shelter, feline rescue, cat rehabilitation
   description: Nine Lives Foundation accepts donations of pet supplies and cat-related items to support their cat rescue, rehabilitation, and adoption programs in San Mateo County.
   what_they_offer: |
     - Accept pet supply donations
@@ -1513,6 +1566,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: PARCA, thrift shop, San Bruno, donate clothes, donate furniture, developmental disabilities, charity shop, secondhand, clothing donation, pickup service
   description: PARCA Thrift Shop accepts donations and operates a thrift store with proceeds supporting programs for adults with developmental disabilities in San Mateo County.
   what_they_offer: |
     - Accept clothing donations
@@ -1543,6 +1597,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Peninsula Humane Society, SPCA, PHS, pet supplies donation, animal shelter, Burlingame, animal rescue, adopt pet, donation center
   description: Peninsula Humane Society & SPCA accepts donations of pet supplies and household goods to support their animal rescue, care, and adoption programs in San Mateo County.
   what_they_offer: |
     - Accept pet supply donations
@@ -1573,6 +1628,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Pick of the Litter, used bookstore, donate books, book donation, CDs, DVDs, vinyl records, Burlingame, animal welfare, PHS-SPCA
   description: Pick of the Litter Books is a used bookstore accepting book donations with all proceeds supporting Peninsula Humane Society & SPCA animal welfare programs.
   what_they_offer: |
     - Accept used book donations
@@ -1602,6 +1658,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Puente, Pescadero, South Coast, donate clothes, donate furniture, building materials, rural community, household donation, clothing donation, pickup
   description: Puente de la Costa Sur accepts donations of household items and building materials to support their programs serving rural South Coast San Mateo County communities.
   what_they_offer: |
     - Accept clothing donations
@@ -1632,6 +1689,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: St. Francis Center, Redwood City, donate clothes, donate furniture, donate appliances, clothing donation, household donation, pickup, low-income families
   description: St. Francis Center in Redwood City accepts donations of clothing and household items to support their programs serving low-income families in the Redwood City area.
   what_they_offer: |
     - Accept clothing and shoes
@@ -1662,6 +1720,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: St. Vincent de Paul, SVdP, San Mateo, thrift store, donate clothes, donate furniture, donate appliances, pickup, homeless services, charity shop
   description: St. Vincent de Paul Society operates thrift stores and accepts donations throughout San Mateo County, with proceeds supporting homeless services and low-income assistance programs.
   what_they_offer: |
     - Accept clothing and furniture
@@ -1689,6 +1748,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Samaritan House, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, sporting goods, charity shop, food program, housing program
   description: Samaritan House operates thrift stores throughout San Mateo County, with proceeds supporting their free food, health, and housing programs for low-income residents.
   what_they_offer: |
     - Accept clothing donations
@@ -1716,6 +1776,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Savers, thrift store, donate clothes, donate housewares, donate books, secondhand, charity shop, nonprofit partner, affordable shopping
   description: Savers is a for-profit thrift store chain that partners with local nonprofits, paying them for donated goods based on donation volume.
   what_they_offer: |
     - Accept clothing donations
@@ -1742,6 +1803,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: South Coast, children donation, donate toys, donate books, donate children clothing, Pescadero, Half Moon Bay, family programs, kids items
   description: South Coast Children's Services accepts donations of children's items to support their programs serving families with children on San Mateo County's South Coast.
   what_they_offer: |
     - Accept children's item donations
@@ -1768,6 +1830,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Salvation Army, thrift store, San Mateo, donate clothes, donate furniture, donate electronics, donate appliances, free pickup, charity shop, social services
   description: The Salvation Army operates thrift stores and accepts donations throughout San Mateo County, with proceeds funding their social services, emergency assistance, and community programs.
   what_they_offer: |
     - Accept clothing and furniture
@@ -1795,6 +1858,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: UCPA, United Cerebral Palsy, donate car, vehicle donation, donate furniture, donate clothes, free pickup, developmental disabilities, household donation
   description: United Cerebral Palsy Association of the Golden Gate accepts donations of household items and vehicles, with proceeds supporting services for people with developmental disabilities.
   what_they_offer: |
     - Accept clothing and housewares
@@ -1826,6 +1890,7 @@
     - immigrants
     - unemployed
     - everyone
+  keywords: SF LGBT Center, San Francisco, LGBTQ, gay, lesbian, trans, queer, transgender, job training, immigration, DACA, financial assistance, youth programs, senior services
   description: The San Francisco LGBT Center is a cornerstone of the LGBTQ+ community, providing a wide array of programs and services including financial assistance, immigration services, employment programs, and community events.
   what_they_offer: |
     - Trans Employment Program (job training and placement)
@@ -1860,6 +1925,7 @@
     - seniors
     - youth
     - everyone
+  keywords: Oakland LGBTQ, LGBTQ community center, gay, lesbian, trans, queer, support groups, wellness clinic, seniors, youth, housing assistance, recovery support
   description: The Oakland LGBTQ Community Center provides a safe and affirming space with support groups, wellness services, senior programs, and community events in an alcohol and drug-free environment.
   what_they_offer: |
     - Free support groups and peer counseling
@@ -1895,6 +1961,7 @@
     - seniors
     - youth
     - everyone
+  keywords: Pacific Center, Berkeley, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, couples counseling, family therapy, polyamorous, sliding scale, seniors, youth
   description: The Pacific Center for Human Growth is one of the oldest LGBTQ+ centers in the country, providing culturally responsive mental health services, peer support groups, and community programs in Berkeley.
   what_they_offer: |
     - Low-cost individual, couples, and family therapy
@@ -1929,6 +1996,7 @@
     - seniors
     - youth
     - everyone
+  keywords: Rainbow Community Center, Concord, Contra Costa, LGBTQ, gay, lesbian, trans, queer, HIV testing, mental health, counseling, youth programs, seniors, hate crime support
   description: Rainbow Community Center serves LGBTQ+ individuals and families in Contra Costa County with mental health services, HIV testing, youth programs, and community support resources.
   what_they_offer: |
     - Free HIV testing
@@ -1960,6 +2028,7 @@
     - lgbtq
     - seniors
     - everyone
+  keywords: Billy DeFrank, San Jose, LGBTQ, gay, lesbian, trans, queer, HIV testing, computer lab, library, support groups, seniors, South Bay
   description: The Billy DeFrank LGBTQ+ Community Center in San Jose offers HIV testing, computer access, a lending library, support groups, and community events for South Bay LGBTQ+ residents.
   what_they_offer: |
     - Free HIV testing
@@ -1994,6 +2063,7 @@
     - seniors
     - youth
     - everyone
+  keywords: Spahr Center, San Rafael, Marin, LGBTQ, gay, lesbian, trans, queer, HIV testing, HIV prevention, youth groups, senior programs, support groups
   description: The Spahr Center serves Marin County's LGBTQ+ community with social programs, HIV support and prevention, youth groups, and senior discussions in a welcoming environment.
   what_they_offer: |
     - Free HIV testing and prevention services
@@ -2027,6 +2097,7 @@
     - lgbtq
     - youth
     - everyone
+  keywords: LGBTQ Connection, Napa, LGBTQ, gay, lesbian, trans, queer, trainings, workshops, wellness, leadership development, youth programs, safe space
   description: LGBTQ Connection serves Napa County's LGBTQ+ community with trainings, workshops, wellness programs, leadership development, and community events.
   what_they_offer: |
     - Community events and gatherings
@@ -2059,6 +2130,7 @@
     - lgbtq
     - income-eligible
     - everyone
+  keywords: Queer LifeSpace, San Francisco, LGBTQ, gay, lesbian, trans, queer, mental health, therapy, counseling, substance abuse, sliding scale, $20, group therapy, couples counseling
   description: Queer LifeSpace provides low-cost mental health counseling, substance abuse services, and group therapy for the LGBTQ+ community on a sliding scale fee basis.
   what_they_offer: |
     - Low-fee individual therapy
@@ -2089,6 +2161,7 @@
     - lgbtq
     - youth
     - income-eligible
+  keywords: LYRIC, Lavender Youth, San Francisco, LGBTQ, gay, lesbian, trans, queer, youth, ages 12-24, job training, PrEP, HIV, housing navigation, drop-in
   description: LYRIC provides education, career training, health services, housing navigation, and leadership development for LGBTQQ+ youth ages 12-24 in San Francisco.
   what_they_offer: |
     - Education enhancement programs
@@ -2121,6 +2194,7 @@
     - lgbtq
     - youth
     - families
+  keywords: Outlet, San Mateo, Santa Clara, Redwood City, Mountain View, LGBTQ, gay, lesbian, trans, queer, youth counseling, family support, parent support, ages 13-25
   description: Outlet provides counseling, support groups, and outreach services for LGBTQ+ youth and their families across San Mateo and Santa Clara counties with locations in Redwood City, Mountain View, and San Mateo.
   what_they_offer: |
     - Free youth counseling services
@@ -2151,6 +2225,7 @@
     - lgbtq
     - income-eligible
     - everyone
+  keywords: API Wellness, TRANS:THRIVE, San Francisco, transgender, trans, HIV testing, STD testing, PrEP, primary care, drop-in, trans-affirming healthcare
   description: API Wellness offers primary care, PrEP prescriptions, free HIV/STD testing, and runs TRANS:THRIVE, a drop-in care center specifically for transgender individuals.
   what_they_offer: |
     - Primary care services
@@ -2184,6 +2259,7 @@
     - lgbtq
     - seniors
     - income-eligible
+  keywords: Openhouse, San Francisco, LGBTQ, gay, lesbian, trans, queer, senior housing, seniors, 55+, case management, mental health, aging services
   description: Openhouse provides housing, community programs, case management, and mental health services specifically for LGBTQ+ seniors in San Francisco.
   what_they_offer: |
     - LGBTQ+-affirming senior housing
@@ -2217,6 +2293,7 @@
     - lgbtq
     - families
     - everyone
+  keywords: PFLAG, San Francisco, LGBTQ, gay, lesbian, trans, queer, family support, parents, support group, advocacy, coming out
   description: PFLAG San Francisco provides support, education, and advocacy for LGBTQ+ individuals and their families, with regular support meetings and community resources.
   what_they_offer: |
     - Monthly support group meetings
@@ -2247,6 +2324,7 @@
   groups:
     - lgbtq
     - everyone
+  keywords: Trans Lifeline, transgender, trans, crisis hotline, 877-565-8860, microgrants, name change, emotional support, peer support, trans-operated
   description: Trans Lifeline is a grassroots hotline offering direct emotional and financial support to trans people in crisis, staffed entirely by transgender operators.
   what_they_offer: |
     - 24/7 crisis hotline (staffed by trans people)
@@ -2276,6 +2354,7 @@
   groups:
     - lgbtq
     - youth
+  keywords: Trevor Project, LGBTQ youth, gay, lesbian, trans, queer, crisis hotline, suicide prevention, 1-866-488-7386, text 678-678, TrevorSpace, ages 13-24
   description: The Trevor Project provides 24/7 crisis intervention and suicide prevention services for LGBTQ+ young people ages 13-24 via phone, text, and chat.
   what_they_offer: |
     - 24/7 crisis hotline (1-866-488-7386)
@@ -2305,6 +2384,7 @@
     - lgbtq
     - immigrants
     - income-eligible
+  keywords: LGBT Asylum Project, LGBTQ, gay, lesbian, trans, queer, asylum seeker, refugee, immigration, free legal, persecution, pro bono attorney
   description: The LGBT Asylum Project provides free legal representation and support to LGBTQ+ asylum seekers fleeing persecution based on their sexual orientation or gender identity.
   what_they_offer: |
     - Free legal representation for asylum cases
@@ -2333,6 +2413,7 @@
     - lgbtq
     - reentry
     - income-eligible
+  keywords: TGI Justice Project, TGIJP, transgender, intersex, incarcerated, reentry, formerly incarcerated, housing assistance, name change, gender marker, mutual aid
   description: TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing reentry services, advocacy, and community support.
   what_they_offer: |
     - Reentry support services
@@ -2365,6 +2446,7 @@
     - lgbtq
     - immigrants
     - income-eligible
+  keywords: El/La Para TransLatinas, San Francisco, transgender, trans Latina, Latina, immigration, health navigation, know your rights, leadership, community support
   description: El/La Para TransLatinas provides community building, protection, and support services specifically for transgender Latina women in the Bay Area.
   what_they_offer: |
     - Community support groups
@@ -2397,6 +2479,7 @@
     - seniors
     - income-eligible
     - everyone
+  keywords: GLBT Historical Society, Castro, San Francisco, LGBTQ museum, gay history, lesbian history, free admission, First Sunday, senior discount, student discount
   description: The GLBT Historical Society Museum in the Castro preserves and exhibits LGBTQ+ history, culture, and arts, with free admission days and reduced rates available.
   what_they_offer: |
     - Free First Sundays (free admission monthly)
@@ -2428,6 +2511,7 @@
   groups:
     - first-responders
     - everyone
+  keywords: ID.me, first responder discount, firefighter discount, EMT discount, paramedic discount, police discount, retail discount, 10-25% off, verified identity
   description: ID.me provides verified identity for first responders (firefighters, EMTs, paramedics, police) to unlock exclusive discounts at hundreds of retailers, restaurants, and service providers.
   what_they_offer: |
     - One-time identity verification
@@ -2455,6 +2539,7 @@
     - first-responders
     - veterans
     - everyone
+  keywords: GovX, first responder discount, military discount, law enforcement, 60% off, tactical gear, apparel, electronics, outdoor gear, veteran discount
   description: GovX is an exclusive online shopping platform offering discounts up to 60% off for verified first responders, military, and law enforcement on apparel, gear, and everyday essentials.
   what_they_offer: |
     - Up to 60% off major brands
@@ -2480,6 +2565,7 @@
   area: Nationwide
   groups:
     - first-responders
+  keywords: Verizon, first responder discount, firefighter, police, EMT, paramedic, 25% off, cell phone, wireless plan, phone discount
   description: Verizon offers ongoing monthly discounts on wireless plans for verified first responders including firefighters, police officers, EMTs, and paramedics.
   what_they_offer: |
     - 25% off select Verizon Unlimited plans
@@ -2504,6 +2590,7 @@
   area: Nationwide
   groups:
     - first-responders
+  keywords: T-Mobile, first responder discount, firefighter, police, EMT, paramedic, 911 dispatcher, 50% off, Magenta, cell phone, wireless plan
   description: T-Mobile offers special pricing on wireless plans for first responders including firefighters, police, EMTs, paramedics, and 911 dispatchers.
   what_they_offer: |
     - 50% off family lines (up to 6 lines on Magenta)
@@ -2528,6 +2615,7 @@
   area: Nationwide
   groups:
     - veterans
+  keywords: Apple, military discount, veteran discount, 10% off, Mac, MacBook, iPad, National Guard, Reserve, family discount
   description: Apple offers a 10% discount for current and veteran members of the US Military, National Guard, and Reserve. Discount also extends to immediate family members in the same household.
   what_they_offer: |
     - 10% discount on Mac computers
@@ -2554,6 +2642,7 @@
   groups:
     - teachers
     - everyone
+  keywords: Exploratorium, San Francisco, teacher free admission, K-12, educator, museum, science museum, After Dark, professional development
   description: The Exploratorium offers free admission to K-12 teachers, allowing educators to explore exhibits and develop ideas for classroom activities.
   what_they_offer: |
     - Free general admission for K-12 teachers
@@ -2583,6 +2672,7 @@
   city: Berkeley
   groups:
     - teachers
+  keywords: Bay Area Writing Project, BAWP, UC Berkeley, teacher professional development, writing instruction, Summer Invitational, teacher leadership, writing workshops
   description: The Bay Area Writing Project at UC Berkeley provides professional development programs for teachers, helping educators improve writing instruction and student outcomes.
   what_they_offer: |
     - Summer Invitational Institute (4-week program)
@@ -2610,6 +2700,7 @@
   area: Nationwide
   groups:
     - teachers
+  keywords: ID.me, teacher discount, educator discount, 10-25% off, classroom supplies, Apple, Dell, HP, Staples, Office Depot, teacher verification
   description: ID.me provides verified identity for teachers and educators to unlock exclusive discounts at hundreds of retailers on classroom supplies, technology, and personal items.
   what_they_offer: |
     - 10-25% off at major retailers
@@ -2637,6 +2728,7 @@
     - unemployed
     - income-eligible
     - everyone
+  keywords: SF JobsNOW, San Francisco, job placement, wage subsidy, unemployed, job search, career coaching, employment program, OEWD, One-Stop Career Center
   description: SF JobsNOW! is San Francisco's subsidized employment program, providing wage subsidies to employers who hire unemployed San Francisco residents, making it easier for job seekers to find work.
   what_they_offer: |
     - Wage subsidies for employers who hire you
@@ -2665,6 +2757,7 @@
   groups:
     - unemployed
     - everyone
+  keywords: Job Forum, San Francisco, free networking, job search, resume workshop, LinkedIn, interview prep, career transition, job seeker, peer support
   description: The Job Forum is a free networking and job search support group in San Francisco providing workshops, networking events, and career coaching for job seekers.
   what_they_offer: |
     - Free weekly networking meetings
@@ -2693,6 +2786,7 @@
     - unemployed
     - income-eligible
     - reentry
+  keywords: CityBuild, San Francisco, construction training, free job training, union apprenticeship, electrical, plumbing, carpentry, OSHA, pre-apprenticeship
   description: CityBuild Academy is San Francisco's pre-apprenticeship construction training program, providing free job training and placement into union construction careers.
   what_they_offer: |
     - Free 18-week construction training
@@ -2722,6 +2816,7 @@
     - unemployed
     - income-eligible
     - everyone
+  keywords: TechSF, San Francisco, free tech training, coding bootcamp, IT certifications, tech career, job placement, internship, career mentorship
   description: TechSF provides free technology job training and placement services for San Francisco residents seeking careers in the tech industry.
   what_they_offer: |
     - Free tech skills training
@@ -2751,6 +2846,7 @@
     - unemployed
     - immigrants
     - income-eligible
+  keywords: MEDA, Mission District, San Francisco, job training, workforce development, career coaching, Latino, digital literacy, job placement, financial coaching
   description: Mission Economic Development Agency (MEDA) provides workforce development, job training, and career services with a focus on Latino and low-income communities in San Francisco's Mission District.
   what_they_offer: |
     - Job readiness training
@@ -2779,6 +2875,7 @@
   groups:
     - immigrants
     - income-eligible
+  keywords: IIBA, Immigration Institute, immigration legal, citizenship, naturalization, green card, DACA, family petition, know your rights, deportation
   description: The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.
   what_they_offer: |
     - Low-cost immigration legal consultations
@@ -2808,6 +2905,7 @@
   groups:
     - immigrants
     - income-eligible
+  keywords: EBCLC, East Bay Community Law Center, Berkeley, Alameda County, free immigration, asylum, citizenship, naturalization, family petition, immigration court
   description: East Bay Community Law Center provides free immigration legal services to low-income immigrants in Alameda County, including representation and community education.
   what_they_offer: |
     - Free immigration legal consultations
@@ -2839,6 +2937,7 @@
   groups:
     - unhoused
     - income-eligible
+  keywords: SF HSH, homeless, homelessness, San Francisco, shelter, navigation center, permanent supportive housing, rapid rehousing, street outreach, 415-734-4233
   description: San Francisco's Department of Homelessness and Supportive Housing (HSH) coordinates the city's response to homelessness, providing shelter, housing, and supportive services.
   what_they_offer: |
     - Emergency shelter access
@@ -2868,6 +2967,7 @@
     - unhoused
     - income-eligible
     - everyone
+  keywords: Project Homeless Connect, San Francisco, homeless services, free haircuts, hygiene, medical care, dental care, benefits enrollment, housing navigation, one-stop
   description: Project Homeless Connect organizes community events and ongoing services connecting people experiencing homelessness with essential resources and care.
   what_they_offer: |
     - Large community resource events
@@ -2900,6 +3000,7 @@
     - caregivers
     - seniors
     - disability
+  keywords: Family Caregiver Alliance, caregiver, respite care, support groups, caregiver coaching, care planning, counseling, caregiver grants, chronic illness, disability
   description: Family Caregiver Alliance operates the Bay Area Caregiver Resource Center, providing support, education, and services to family caregivers of adults with chronic or disabling conditions.
   what_they_offer: |
     - Free caregiver support groups
@@ -2931,6 +3032,7 @@
     - seniors
     - disability
     - income-eligible
+  keywords: IHSS, In-Home Supportive Services, paid caregiver, family caregiver, Medi-Cal, elderly care, disabled care, personal care, housekeeping, meal preparation
   description: In-Home Supportive Services (IHSS) is California's program that pays family members or others to provide in-home care for aged, blind, or disabled individuals who qualify for Medi-Cal.
   what_they_offer: |
     - Paid caregiving by family members
@@ -2959,6 +3061,7 @@
   groups:
     - foster-youth
     - youth
+  keywords: Beyond Emancipation, Alameda County, foster youth, former foster youth, ages 16-24, housing, education support, employment training, life skills, mental health
   description: Beyond Emancipation helps current and former foster youth in Alameda County transition to successful adulthood through housing, education, employment, and wellness support.
   what_they_offer: |
     - Housing assistance and placement
@@ -2989,6 +3092,7 @@
   groups:
     - foster-youth
     - youth
+  keywords: First Place for Youth, foster youth, former foster youth, ages 18-24, transitional housing, education support, employment training, life skills, financial literacy
   description: First Place for Youth helps foster youth ages 18-24 build the skills they need to successfully transition to adulthood through housing, education, and employment programs.
   what_they_offer: |
     - Transitional housing placement
@@ -3018,6 +3122,7 @@
   groups:
     - foster-youth
     - youth
+  keywords: Chafee Grant, foster youth, $5000, college grant, vocational training, tuition, living expenses, FAFSA, CA Dream Act, ages 16-26
   description: The Chafee Grant provides up to $5,000 per year for current and former foster youth to pay for career and technical training or college expenses.
   what_they_offer: |
     - Up to $5,000 per academic year
@@ -3047,6 +3152,7 @@
     - foster-youth
     - youth
     - families
+  keywords: SF CASA, Court Appointed Special Advocates, San Francisco, foster care, child advocate, volunteer, court advocacy, education advocacy, child welfare
   description: San Francisco Court Appointed Special Advocates (CASA) trains volunteers to advocate for children and youth in the foster care system, ensuring their voices are heard in court.
   what_they_offer: |
     - Trained volunteer advocates for foster youth
@@ -3076,6 +3182,7 @@
     - reentry
     - income-eligible
     - everyone
+  keywords: Five Keys, free high school diploma, GED, formerly incarcerated, reentry, justice-involved, career training, job placement, San Francisco
   description: Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry support in the Bay Area.
   what_they_offer: |
     - Free high school diploma programs
@@ -3107,6 +3214,7 @@
   area: Statewide
   groups:
     - reentry
+  keywords: Project Rebound, CSU, California State University, formerly incarcerated, college degree, financial aid, peer mentorship, academic support, reentry
   description: Project Rebound helps formerly incarcerated individuals earn college degrees at California State University campuses, providing support services and a community of peers.
   what_they_offer: |
     - CSU admission support
@@ -3134,6 +3242,7 @@
   area: Bay Area-wide
   groups:
     - reentry
+  keywords: Anti-Recidivism Coalition, ARC, reentry, formerly incarcerated, housing assistance, employment support, education, policy advocacy, peer support, case management
   description: The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently incarcerated people in California.
   what_they_offer: |
     - Reentry support and case management
@@ -3163,6 +3272,7 @@
   groups:
     - reentry
     - families
+  keywords: Centerforce, reentry, incarcerated, family support, family visiting, children services, housing assistance, employment readiness, community resources
   description: Centerforce provides reentry services and family support for incarcerated individuals and their families, helping maintain connections and prepare for successful reintegration.
   what_they_offer: |
     - Reentry planning and case management
@@ -3230,6 +3340,7 @@
   groups:
     - survivors
     - families
+  keywords: La Casa de las Madres, San Francisco, crisis line, emergency shelter, counseling, legal advocacy, children programs, transitional housing, Spanish, 877-503-1850
   description: La Casa de las Madres provides comprehensive support services for individuals and families seeking safety, offering a 24/7 crisis line, emergency shelter, counseling, legal advocacy, and children's programs throughout San Francisco.
   what_they_offer: |
     - 24/7 crisis line support
@@ -3263,6 +3374,7 @@
   groups:
     - survivors
     - everyone
+  keywords: WOMAN Inc, San Francisco, crisis intervention, counseling, advocacy, support services, safety, 24/7 hotline, 415-864-4722
   description: W.O.M.A.N., Inc. has served the San Francisco Bay Area since 1978, providing crisis intervention, counseling, advocacy, and support services for individuals experiencing unsafe home situations.
   what_they_offer: |
     - 24-hour crisis line
@@ -3294,6 +3406,7 @@
   groups:
     - survivors
     - families
+  keywords: A Safe Place, Oakland, East Bay, Alameda County, crisis hotline, emergency shelter, legal advocacy, counseling, children services, 510-536-7233
   description: A Safe Place provides comprehensive support services including emergency shelter, legal advocacy, counseling, and community education for individuals and families in the East Bay seeking safety.
   what_they_offer: |
     - 24-hour crisis hotline
@@ -3326,6 +3439,7 @@
     - survivors
     - families
     - unhoused
+  keywords: Building Futures, Alameda County, Sister Me Home, crisis line, emergency shelter, counseling, housing navigation, children programs, 1-866-292-9688
   description: Building Futures provides shelter, support services, and pathways to stability for individuals and families in Alameda County facing homelessness or unsafe home situations.
   what_they_offer: |
     - 24-hour crisis line
@@ -3357,6 +3471,7 @@
   groups:
     - survivors
     - families
+  keywords: STAND, Contra Costa County, crisis line, emergency shelter, family counseling, legal advocacy, youth services, prevention education, 888-215-5555
   description: STAND! provides comprehensive family safety services throughout Contra Costa County, including crisis intervention, emergency shelter, counseling, legal services, and prevention education.
   what_they_offer: |
     - 24-hour crisis line
@@ -3388,6 +3503,7 @@
   groups:
     - survivors
     - families
+  keywords: CORA, San Mateo County, crisis hotline, emergency shelter, counseling, restraining order, children counseling, transitional housing, 800-300-1080
   description: CORA serves San Mateo County with comprehensive support services including a 24-hour hotline, emergency shelter, counseling, legal services, and community education programs.
   what_they_offer: |
     - 24-hour crisis hotline
@@ -3419,6 +3535,7 @@
   groups:
     - survivors
     - families
+  keywords: Next Door Solutions, Santa Clara County, San Jose, crisis line, emergency shelter, counseling, legal advocacy, economic empowerment, multilingual, 408-279-2962
   description: Next Door Solutions provides comprehensive support services in Santa Clara County including crisis intervention, emergency shelter, counseling, legal help, and economic empowerment programs.
   what_they_offer: |
     - 24-hour crisis hotline
@@ -3450,6 +3567,7 @@
   groups:
     - survivors
     - immigrants
+  keywords: Narika, South Asian, Hindi, Urdu, Punjabi, Bengali, Tamil, helpline, case management, legal advocacy, immigration assistance, housing support, 800-215-7308
   description: Narika provides culturally specific support services for South Asian individuals and families, offering a confidential helpline, case management, legal advocacy, and support groups in multiple South Asian languages.
   what_they_offer: |
     - Confidential helpline
@@ -3481,6 +3599,7 @@
   groups:
     - survivors
     - immigrants
+  keywords: Asian Women's Shelter, Asian, Pacific Islander, multilingual, 40+ languages, crisis line, emergency shelter, counseling, legal advocacy, immigration assistance, 877-751-0880
   description: Asian Women's Shelter provides comprehensive, multilingual services including emergency shelter, counseling, legal advocacy, and support programs serving Asian and Pacific Islander communities throughout the Bay Area.
   what_they_offer: |
     - 24-hour multilingual crisis line
@@ -3512,6 +3631,7 @@
   groups:
     - survivors
     - immigrants
+  keywords: Maitri, South Asian, Santa Clara County, Hindi, Gujarati, Tamil, helpline, emergency shelter, case management, legal advocacy, immigration assistance, 888-862-4874
   description: Maitri serves South Asian families in the Bay Area, providing culturally specific support services including a helpline, emergency shelter, counseling, and legal assistance in multiple languages.
   what_they_offer: |
     - 24-hour helpline
@@ -3543,6 +3663,7 @@
   groups:
     - survivors
     - families
+  keywords: Family Justice Center, Alameda County, Oakland, one-stop services, legal assistance, victim advocacy, counseling, restraining order, immigration, children services, 510-267-8800
   description: The Alameda County Family Justice Center brings together multiple agencies under one roof to provide comprehensive services including legal help, counseling, victim advocacy, and support for families seeking safety.
   what_they_offer: |
     - One-stop services center
@@ -3577,6 +3698,7 @@
   groups:
     - survivors
     - families
+  keywords: YWCA, Silicon Valley, San Jose, Sunnyvale, Santa Clara County, emergency shelter, transitional housing, counseling, legal advocacy, children programs, 408-295-4011
   description: YWCA Silicon Valley provides support services including emergency shelter, transitional housing, counseling, and advocacy for individuals and families in Santa Clara County.
   what_they_offer: |
     - Emergency shelter
@@ -3608,6 +3730,7 @@
   groups:
     - survivors
     - youth
+  keywords: Love Is Respect, youth, young people, ages 13-26, peer advocates, relationship help, text LOVEIS 22522, 1-866-331-9474, online chat, safety planning
   description: Love Is Respect provides support for young people ages 13-26 navigating relationships, offering a 24/7 helpline, text support, and online chat with trained peer advocates.
   what_they_offer: |
     - 24/7 phone support

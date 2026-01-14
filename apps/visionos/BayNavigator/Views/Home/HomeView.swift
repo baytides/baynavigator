@@ -2,10 +2,12 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(ProgramsViewModel.self) private var viewModel
+    @Environment(SettingsViewModel.self) private var settingsViewModel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showingFilters = false
     @State private var showingSort = false
     @State private var selectedProgram: Program?
+    @State private var searchText = ""
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -85,12 +87,45 @@ struct HomeView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 12)
 
+                // AI search message banner
+                if let aiMessage = viewModel.aiSearchMessage {
+                    HStack(spacing: 8) {
+                        Image(systemName: "sparkles")
+                            .foregroundStyle(.purple)
+                        Text(aiMessage)
+                            .font(.subheadline)
+                        Spacer()
+                        Button {
+                            viewModel.clearAISearch()
+                            searchText = ""
+                            AccessibilityAnnouncement.announce("AI search cleared")
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(12)
+                    .background(Color.purple.opacity(0.1), in: RoundedRectangle(cornerRadius: 10))
+                    .padding(.horizontal)
+                    .padding(.bottom, 12)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("AI search result: \(aiMessage)")
+                }
+
                 // Results count
                 HStack {
-                    Text("\(viewModel.filteredPrograms.count) program\(viewModel.filteredPrograms.count == 1 ? "" : "s")")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .accessibilityLabel(AccessibilityLabels.resultsCount(viewModel.filteredPrograms.count))
+                    if viewModel.aiSearchResults != nil {
+                        Text("\(viewModel.filteredPrograms.count) AI result\(viewModel.filteredPrograms.count == 1 ? "" : "s")")
+                            .font(.subheadline)
+                            .foregroundStyle(.purple)
+                            .accessibilityLabel("AI found \(viewModel.filteredPrograms.count) results")
+                    } else {
+                        Text("\(viewModel.filteredPrograms.count) program\(viewModel.filteredPrograms.count == 1 ? "" : "s")")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .accessibilityLabel(AccessibilityLabels.resultsCount(viewModel.filteredPrograms.count))
+                    }
 
                     Spacer()
 
@@ -137,18 +172,47 @@ struct HomeView: View {
         @Bindable var viewModel = viewModel
 
         return HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundStyle(.secondary)
-                .accessibilityHidden(true)
+            // Search/AI indicator
+            if viewModel.isAISearching {
+                ProgressView()
+                    .scaleEffect(0.8)
+                    .accessibilityLabel("AI search in progress")
+            } else if settingsViewModel.aiSearchEnabled {
+                Image(systemName: "sparkles")
+                    .foregroundStyle(.purple)
+                    .accessibilityLabel("AI search enabled")
+            } else {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
+            }
 
-            TextField("Search programs...", text: $viewModel.filterState.searchQuery)
-                .textFieldStyle(.plain)
-                .accessibilityLabel(AccessibilityLabels.search)
-                .accessibilityHint("Enter keywords to search programs")
+            TextField(
+                settingsViewModel.aiSearchEnabled ? "Ask anything or search..." : "Search programs...",
+                text: $searchText
+            )
+            .textFieldStyle(.plain)
+            .accessibilityLabel(AccessibilityLabels.search)
+            .accessibilityHint(settingsViewModel.aiSearchEnabled
+                ? "Enter keywords or ask a question to search programs"
+                : "Enter keywords to search programs")
+            .onSubmit {
+                performSearch()
+            }
+            .onChange(of: searchText) { _, newValue in
+                // Clear AI results when user starts typing something new
+                if viewModel.aiSearchResults != nil && newValue.isEmpty {
+                    viewModel.clearAISearch()
+                }
+                // Update regular search as user types
+                viewModel.setSearchQuery(newValue)
+            }
 
-            if !viewModel.filterState.searchQuery.isEmpty {
+            if !searchText.isEmpty {
                 Button {
-                    viewModel.filterState.searchQuery = ""
+                    searchText = ""
+                    viewModel.setSearchQuery("")
+                    viewModel.clearAISearch()
                     AccessibilityAnnouncement.announce("Search cleared")
                 } label: {
                     Image(systemName: "xmark.circle.fill")
@@ -162,6 +226,20 @@ struct HomeView: View {
         }
         .padding(12)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func performSearch() {
+        guard !searchText.isEmpty else { return }
+
+        Task {
+            let usedAI = await viewModel.performAISearch(
+                searchText,
+                aiEnabled: settingsViewModel.aiSearchEnabled
+            )
+            if usedAI {
+                AccessibilityAnnouncement.announce("AI search complete, \(viewModel.filteredPrograms.count) results found")
+            }
+        }
     }
 
     private var emptyState: some View {
@@ -220,4 +298,5 @@ struct ErrorView: View {
     HomeView()
         .environment(ProgramsViewModel())
         .environment(SettingsViewModel())
+        .environment(UserPrefsViewModel())
 }

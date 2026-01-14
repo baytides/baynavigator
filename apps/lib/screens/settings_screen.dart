@@ -7,6 +7,7 @@ import '../providers/theme_provider.dart';
 import '../providers/user_prefs_provider.dart';
 import '../providers/localization_provider.dart';
 import '../providers/safety_provider.dart';
+import '../providers/settings_provider.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
 import 'transit_screen.dart';
@@ -259,6 +260,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       context,
                       MaterialPageRoute(builder: (_) => const SafetySettingsScreen()),
                     ),
+                  );
+                },
+              ),
+              const Divider(height: 1, indent: 16),
+              Consumer<SettingsProvider>(
+                builder: (context, settings, child) {
+                  return SwitchListTile(
+                    secondary: const Text('✨', style: TextStyle(fontSize: 24)),
+                    title: const Text('AI-Powered Search'),
+                    subtitle: Text(
+                      settings.aiSearchEnabled
+                          ? 'Natural language search enabled'
+                          : 'Using basic keyword search only',
+                    ),
+                    value: settings.aiSearchEnabled,
+                    onChanged: (value) {
+                      HapticFeedback.lightImpact();
+                      settings.setAISearchEnabled(value);
+                    },
                   );
                 },
               ),

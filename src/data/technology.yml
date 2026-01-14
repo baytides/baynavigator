@@ -6,6 +6,7 @@
     - income-eligible
     - college-students
     - veterans
+  keywords: 7-Eleven, Gold Pass, EBT, SNAP, military, veteran, college student, discount membership, convenience store, app, community discounts
   description: 7-Eleven is one of the world's largest convenience store chains. Their Gold Pass membership offers exclusive deals, rewards, and discounts on food, drinks, and everyday items.
   what_they_offer: |
     - 40% off Gold Pass membership ($5.99/month instead of regular price)
@@ -29,6 +30,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: Amazon Prime, Prime Access, EBT, SNAP, Medicaid, low-income, discount, free shipping, Prime Video, streaming, online shopping
   description: Amazon is the world's largest online retailer. Prime Access offers a discounted Prime membership for those receiving government assistance, providing free shipping, streaming, and more.
   what_they_offer: |
     - Discounted Prime membership at $6.99/month (regularly $14.99/month)
@@ -53,6 +55,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: AT&T, internet, affordable internet, low-income, SNAP, SSI, WiFi, broadband, no credit check, free installation
   description: AT&T is one of the largest telecommunications companies in the United States. AT&T Access provides affordable high-speed internet service to qualifying low-income households.
   what_they_offer: |
     - Affordable high-speed internet service
@@ -78,6 +81,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: LifeLine, California LifeLine, free phone, cell phone, wireless, Medi-Cal, CalFresh, SSI, low-income, phone service, landline
   description: California LifeLine is a state program that provides discounted home phone and cell phone services to eligible low-income households, ensuring everyone has access to basic communication services.
   what_they_offer: |
     - Discounted or free home phone service
@@ -102,6 +106,7 @@
   area: Nationwide
   groups:
     - nonprofits
+  keywords: Good360, nonprofit donation, donated technology, laptops, tablets, monitors, office equipment, 501c3, charity, donated goods
   description: Good360 is a nonprofit organization that partners with major retailers and manufacturers to distribute donated goods to nonprofits and schools, including technology equipment.
   what_they_offer: |
     - Donated technology including laptops, monitors, tablets
@@ -125,6 +130,7 @@
   area: Nationwide
   groups:
     - nonprofits
+  keywords: Goodstack, Percent, nonprofit software, Zoom discount, Adobe discount, Asana, OpenAI, ChatGPT, SaaS, cloud services, 501c3
   description: Goodstack (formerly Percent) is a platform that helps nonprofits access discounted software and technology tools from major companies like Zoom, Adobe, Asana, and OpenAI.
   what_they_offer: |
     - Discounted access to Zoom, Adobe Acrobat, Asana, and more
@@ -148,6 +154,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: Instacart, EBT, SNAP, grocery delivery, food stamps, Instacart+, food delivery, low-income, free delivery, pickup
   description: Instacart is a grocery delivery and pickup service. They offer special discounts for EBT/SNAP recipients, making grocery delivery more accessible and affordable.
   what_they_offer: |
     - 50% off Instacart+ membership for one year
@@ -171,6 +178,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: Internet Essentials, Xfinity, Comcast, low-cost internet, affordable internet, SNAP, Medicaid, SSI, WiFi, broadband, low-income
   description: Internet Essentials is Comcast/Xfinity's low-cost internet program designed to help connect low-income families to affordable high-speed internet at home.
   what_they_offer: |
     - Affordable high-speed internet (up to 50 Mbps)
@@ -195,6 +203,7 @@
   area: Nationwide
   groups:
     - college-students
+  keywords: Kanopy, streaming, college student, university, library, free movies, documentaries, Criterion Collection, educational videos, film
   description: Kanopy is a video streaming service that partners with libraries and universities to provide free access to thousands of films, documentaries, and educational videos.
   what_they_offer: |
     - Free streaming of thousands of films and documentaries
@@ -218,6 +227,7 @@
   area: Bay Area-wide
   groups:
     - nonprofits
+  keywords: Tech Exchange, refurbished computers, laptops, nonprofit technology, Oakland, digital literacy, e-waste recycling, Bay Area, low-cost computers
   description: Tech Exchange is a Bay Area nonprofit that provides affordable refurbished technology to nonprofits, schools, and community organizations, along with digital training and support.
   what_they_offer: |
     - Refurbished computers and laptops at low cost
@@ -245,6 +255,7 @@
   area: Nationwide
   groups:
     - nonprofits
+  keywords: TechSoup, nonprofit software, Microsoft 365, Adobe Creative Cloud, Dell, Lenovo, AWS, Google Cloud, 501c3, hardware, software discount
   description: TechSoup is the leading nonprofit technology assistance organization, helping nonprofits access donated and discounted software, hardware, and cloud services from major tech companies.
   what_they_offer: |
     - Microsoft 365 and Office products at deep discounts
@@ -269,6 +280,7 @@
   area: Nationwide
   groups:
     - youth
+  keywords: T-Mobile, Project 10Million, free hotspot, student internet, homework gap, K-12, school lunch program, free WiFi, mobile hotspot, low-income student, digital divide
   description: T-Mobile Project 10Million is a $10.7 billion initiative to provide free internet connectivity to millions of underserved student households across America, helping close the homework gap.
   what_they_offer: |
     - Free mobile hotspot device
@@ -293,6 +305,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: Walmart+, Walmart Plus, Assist, EBT, SNAP, Medicaid, SSI, TANF, WIC, free delivery, fuel discount, membership discount, low-income, grocery delivery
   description: Walmart+ is Walmart's membership program offering free delivery, fuel discounts, and more. Walmart+ Assist provides this membership at half price for those receiving government assistance.
   what_they_offer: |
     - 50% off Walmart+ membership ($6.47/month or $49/year)
@@ -317,6 +330,7 @@
   area: Nationwide
   groups:
     - nonprofits
+  keywords: World Computer Exchange, donated computers, refurbished technology, nonprofit computers, school technology, library computers, free computers, e-waste, computer donation
   description: World Computer Exchange is a nonprofit that collects donated computers and distributes them to schools, libraries, and community organizations in developing countries and underserved US communities.
   what_they_offer: |
     - Donated computers and technology equipment
@@ -340,6 +354,7 @@
   groups:
     - income-eligible
     - seniors
+  keywords: Spectrum, Charter, Internet Assist, affordable internet, low-cost internet, SSI, school lunch, seniors, NSLP, free modem, broadband, WiFi
   description: Spectrum Internet Assist is Charter Communications' affordable internet program for qualifying low-income households, including seniors receiving SSI and families with students in free lunch programs.
   what_they_offer: |
     - Affordable high-speed internet service (30 Mbps)
@@ -365,6 +380,7 @@
   area: City of Menlo Park
   groups:
     - everyone
+  keywords: Menlo Park Library, WiFi hotspot, portable internet, free internet, library card, borrow hotspot, mobile WiFi, internet access
   description: The Menlo Park Library offers portable WiFi hotspot devices that library cardholders can borrow, providing free internet access at home or on the go.
   what_they_offer: |
     - Free 7-day checkout of portable WiFi hotspot

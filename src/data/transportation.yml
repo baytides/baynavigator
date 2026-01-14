@@ -4,6 +4,7 @@
   area: Statewide
   groups:
     - veterans
+  keywords: CDL, commercial driver license, truck driver, veteran, military, waiver, trucking, Class A, Class B, DD214, DMV
   description: The California Troops to Trucks program allows qualifying service members and veterans with military driving experience to obtain a commercial driver's license (CDL) without taking the driving skills test. This fast-tracks veterans into high-demand trucking careers.
   what_they_offer: |
     - CDL skills test waiver for qualified veterans
@@ -31,6 +32,7 @@
   area: Alameda County
   groups:
     - youth
+  keywords: AC Transit, student pass, free bus, STPP, middle school, high school, Oakland, Berkeley, East Bay, Clipper, transit
   description: AC Transit (Alameda-Contra Costa Transit District) is the third-largest public bus system in California, serving the East Bay including Oakland, Berkeley, and surrounding cities with local and transbay service.
   what_they_offer: |
     - Student Transit Pass Program (STPP): Free unlimited rides for eligible middle and high school students
@@ -57,6 +59,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: BART, Bay Area Rapid Transit, train, Clipper, Autoload, discount, subway, rail, commute, San Francisco, Oakland
   description: BART (Bay Area Rapid Transit) is a heavy rail rapid transit system serving the San Francisco Bay Area, connecting San Francisco, Oakland, Berkeley, and surrounding suburbs with 50 stations across 131 miles of track.
   what_they_offer: |
     - High-Value Discount: Approximately 6.25% savings when using Clipper Autoload
@@ -80,6 +83,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: BART, Muni, A Pass, Fast Pass, monthly pass, unlimited, San Francisco, Clipper, bus, light rail, cable car
   description: A joint program between BART and SFMTA offering unlimited transit within San Francisco on both systems with a single monthly pass.
   what_they_offer: |
     - "A" Fast Pass: Unlimited Muni rides plus unlimited BART rides within San Francisco
@@ -103,6 +107,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Bay Wheels, bike share, Lyft, bicycle, e-bike, low-income, discount, San Francisco, Oakland, Berkeley, San Jose
   description: Bay Wheels (operated by Lyft) is the Bay Area's bike share system with thousands of bikes available at stations throughout San Francisco, Oakland, Berkeley, and San Jose. Bike Share for All makes it affordable for low-income residents.
   what_they_offer: |
     - Discounted annual membership: $5/year for first year (regularly $149)
@@ -127,6 +132,7 @@
   area: Bay Area-wide
   groups:
     - youth
+  keywords: Caltrain, youth, dollar fare, train, Peninsula, San Francisco, San Jose, Gilroy, Clipper, commuter rail, kids
   description: Caltrain is a commuter rail line running 77 miles along the San Francisco Peninsula, connecting San Francisco to San Jose and Gilroy. The Dollar Fares program makes train travel extremely affordable for young riders.
   what_they_offer: |
     - $1 One-Way fare for youth 18 and under
@@ -151,6 +157,7 @@
   area: Solano County
   groups:
     - college-students
+  keywords: City Coach, Vacaville, Solano Community College, free bus, student, Solano County, transit, bus pass
   description: City Coach is the local public transit service for the City of Vacaville in Solano County, providing fixed-route bus service throughout the city.
   what_they_offer: |
     - Free rides for Solano Community College students
@@ -173,6 +180,7 @@
   area: Bay Area-wide
   groups:
     - college-students
+  keywords: Clipper, BayPass, college, university, student, unlimited transit, BART, Muni, AC Transit, Caltrain, VTA
   description: Clipper BayPass is a pilot program providing unlimited transit access across all 24 Bay Area transit agencies on a single pass, designed primarily for college students at participating institutions.
   what_they_offer: |
     - Unlimited rides on all 24 Bay Area transit agencies
@@ -197,6 +205,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Clipper START, low-income, discount, transit, BART, Muni, AC Transit, Caltrain, SamTrans, reduced fare, poverty
   description: Clipper START is a regional program that provides discounted transit fares for low-income adults on participating Bay Area transit systems, helping make public transportation more accessible.
   what_they_offer: |
     - 50% off single-ride fares on most participating transit agencies
@@ -222,6 +231,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: DMV, ID card, identification, reduced fee, low-income, DL 937, state ID, photo ID, public assistance
   description: The California Department of Motor Vehicles offers reduced-fee identification cards for income-eligible residents, providing an affordable way to obtain government-issued photo ID.
   what_they_offer: |
     - Reduced-fee state ID card (regularly $35, reduced to $8)
@@ -247,6 +257,7 @@
   area: Marin County
   groups:
     - everyone
+  keywords: emergency ride, Marin Commutes, reimbursement, taxi, Uber, Lyft, commuter, carpool, transit, bike, walk
   description: Marin Commutes provides emergency ride home reimbursement for people who use alternative transportation to get to work or school, ensuring you can get home quickly in case of an emergency.
   what_they_offer: |
     - Reimbursement for emergency rides home
@@ -272,6 +283,7 @@
   area: Alameda County
   groups:
     - everyone
+  keywords: Emery Go-Round, Emeryville, free shuttle, MacArthur BART, free bus, transit, shuttle service
   description: Emery Go-Round is a free shuttle bus service operated by the Emeryville Transportation Management Association, connecting Emeryville destinations with the MacArthur BART station.
   what_they_offer: |
     - Completely free shuttle service
@@ -300,6 +312,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: 511, emergency ride, Contra Costa, Lyft, Uber, free, Guaranteed Ride Home, commuter, transit, carpool
   description: 511 Contra Costa provides emergency ride services for commuters who use alternative transportation, ensuring workers and students can get home safely in case of unexpected emergencies.
   what_they_offer: |
     - 6 free emergency Lyft or Uber rides per year
@@ -323,6 +336,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: 511, transit incentive, Contra Costa, free Clipper, $25, pledge, commuter, bus, train, public transit
   description: 511 Contra Costa offers incentives to encourage workers and students to try public transit, providing free Clipper card value when you commit to taking transit.
   what_they_offer: |
     - Free $25 Clipper card for taking the transit pledge
@@ -346,6 +360,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Lime, scooter, e-scooter, bike, electric, low-income, discount, free rides, micromobility, SNAP, Medicaid
   description: Lime is a micromobility company offering electric scooters and bikes for short trips. Lime Access makes these transportation options affordable for low-income riders.
   what_they_offer: |
     - Discounted or free Lime scooter and bike rides
@@ -370,6 +385,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: CLCA, low-cost auto insurance, car insurance, liability, California, low-income, affordable, state-sponsored
   description: California's Low Cost Automobile Insurance Program (CLCA) is a state-sponsored program providing affordable liability insurance for income-eligible drivers who might otherwise go uninsured.
   what_they_offer: |
     - State-sponsored low-cost liability insurance
@@ -396,6 +412,7 @@
   area: Marin County
   groups:
     - college-students
+  keywords: Marin Transit, College of Marin, free bus, student, Marin County, transit, bus pass, COM
   description: Marin Transit provides local bus service throughout Marin County, connecting communities with schools, shopping, and employment centers. The agency partners with College of Marin to offer free rides for students.
   what_they_offer: |
     - Free rides for College of Marin students
@@ -424,6 +441,7 @@
     - veterans
     - disability
     - income-eligible
+  keywords: Muni, SFMTA, San Francisco, free transit, youth, seniors, disability, Lifeline Pass, bus, light rail, cable car
   description: San Francisco Municipal Transportation Agency (SFMTA) operates Muni, the city's public transit system including buses, light rail (Metro), cable cars, and historic streetcars. Multiple free and discounted fare programs are available.
   what_they_offer: |
     - Free Muni for Youth (ages 5-18): Free on all Muni except cable cars
@@ -450,6 +468,7 @@
   area: Sonoma County
   groups:
     - everyone
+  keywords: Petaluma Transit, free bus, Petaluma, Sonoma County, public transit, fare-free, no fare
   description: Petaluma Transit is the local public bus service for the City of Petaluma in Sonoma County, providing fixed-route service throughout the city and connections to regional transit.
   what_they_offer: |
     - All local bus routes are completely free
@@ -474,6 +493,7 @@
   area: Bay Area-wide
   groups:
     - disability
+  keywords: Clipper Access, RTC, disability, disabled, reduced fare, discount, Medicare, SSI, SSDI, transit, BART, Muni
   description: Clipper Access (formerly RTC Clipper Card) provides discounted fares for people with disabilities on participating Bay Area transit systems. The Regional Transit Connection program offers reduced fares across the entire Bay Area transit network.
   what_they_offer: |
     - Reduced fares on most Bay Area transit agencies
@@ -501,6 +521,7 @@
   area: San Mateo County
   groups:
     - college-students
+  keywords: SamTrans, Way2Go, free bus pass, SparkPoint, Skyline College, Cañada, CSM, San Mateo, student, transit
   description: SamTrans is San Mateo County's public transit bus service. The Way2Go Pass program provides free unlimited transit for eligible college students through SparkPoint centers.
   what_they_offer: |
     - FREE unlimited SamTrans bus pass
@@ -525,6 +546,7 @@
   area: San Mateo County
   groups:
     - youth
+  keywords: SamTrans, Summer Youth Pass, youth, San Mateo County, bus, transit, summer, kids, teens
   description: SamTrans offers a special Summer Youth Pass for young riders, making it easy and affordable for youth to travel throughout San Mateo County during summer months.
   what_they_offer: |
     - Summer Youth Pass: Unlimited local bus rides June through August
@@ -553,6 +575,7 @@
     - college-students
     - veterans
     - everyone
+  keywords: Santa Rosa CityBus, free bus, youth, veterans, SRJC, Santa Rosa Junior College, Sonoma County, transit
   description: Santa Rosa CityBus provides local public transit service throughout the City of Santa Rosa in Sonoma County, with multiple routes connecting neighborhoods, schools, shopping, and employment centers.
   what_they_offer: |
     - Free rides for youth 18 and under
@@ -582,6 +605,7 @@
   area: Bay Area-wide
   groups:
     - seniors
+  keywords: Senior Clipper, 65+, elderly, senior discount, reduced fare, BART, Muni, AC Transit, Caltrain, Medicare
   description: The Senior Clipper Card provides discounted fares for riders 65 and older on participating Bay Area transit systems.
   what_they_offer: |
     - Discounted fares on most Bay Area transit agencies
@@ -607,6 +631,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Park and Ride, free parking, BART, Caltrain, transit hub, carpool, vanpool, commuter, 511
   description: Free parking lots located near major transit hubs and freeway on-ramps throughout the Bay Area, allowing commuters to park and continue their trip via transit, carpool, or vanpool.
   what_they_offer: |
     - Free parking at designated lots
@@ -632,6 +657,7 @@
   area: Alameda County
   groups:
     - income-eligible
+  keywords: express lanes, START, I-880, I-80, toll discount, FasTrak, low-income, Alameda County, HOV, carpool
   description: The START (Savings for Tolling and Reduced Traffic) program provides a 50% discount on express lane tolls for income-eligible drivers on I-880 and I-80 express lanes in Alameda County.
   what_they_offer: |
     - 50% discount on express lane tolls
@@ -657,6 +683,7 @@
   area: San Mateo County
   groups:
     - income-eligible
+  keywords: express lanes, 101, toll discount, San Mateo, FasTrak, low-income, equity program, Go Card, Peninsula
   description: The San Mateo 101 Express Lanes equity program provides discounted tolls for low-income drivers using the US-101 express lanes in San Mateo County.
   what_they_offer: |
     - Significant toll discounts for eligible drivers
@@ -680,6 +707,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: casual carpool, slugging, free ride, HOV, bridge toll, Bay Bridge, carpool lane, commute, San Francisco, East Bay
   description: Casual carpooling (also called "slugging") is an informal ridesharing system where drivers pick up passengers at designated locations to meet carpool requirements for bridge tolls and HOV lanes.
   what_they_offer: |
     - Free rides for passengers to San Francisco
@@ -705,6 +733,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: vanpool, 511, commute, rideshare, HOV, carpool, subsidy, employer, group van, shared ride
   description: 511.org helps commuters form and join vanpools, where groups of 5-15 people share a van for their daily commute, splitting costs and reducing traffic.
   what_they_offer: |
     - Help finding or forming a vanpool
@@ -731,6 +760,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: bike map, cycling, bicycle, trails, route planner, 511, bike path, bike lane, commute, recreation
   description: 511.org provides comprehensive biking resources including interactive maps, trail information, and route planning tools for cyclists throughout the Bay Area.
   what_they_offer: |
     - Interactive bike route maps
@@ -757,6 +787,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Guaranteed Ride Home, emergency ride, 511, free taxi, Uber, Lyft, commuter, transit, carpool, bike
   description: County-based programs that provide free or reimbursed emergency rides home for commuters who use alternative transportation (transit, carpool, vanpool, biking, or walking) to get to work.
   what_they_offer: |
     - Free or reimbursed rides home during emergencies
@@ -782,6 +813,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Commute Rewards, 511, incentive, transit, carpool, bike, walk, sustainable commute, prizes, cash rewards
   description: County-level incentive programs that reward Bay Area commuters for using alternatives to driving alone, including transit, carpooling, biking, and walking.
   what_they_offer: |
     - Cash rewards or prizes for sustainable commuting
@@ -808,6 +840,7 @@
   groups:
     - youth
     - families
+  keywords: Safe Routes to School, walking, biking, student, transit pass, crossing guard, school, safety, education
   description: Regional initiative helping students travel safely to and from school through walking, biking, and transit, with programs in all nine Bay Area counties.
   what_they_offer: |
     - Engineering improvements to school routes
@@ -834,6 +867,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: bicycle coalition, bike advocacy, cycling, group rides, bike repair, safety, community, 511
   description: Regional bicycle advocacy organizations providing resources, community support, and advocacy for cyclists throughout the Bay Area.
   what_they_offer: |
     - Bicycle route information and maps
@@ -861,6 +895,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: BikeLink, bike locker, secure bike parking, BART, transit, bicycle storage, 5 cents, e-locker, bike commute
   description: BikeLink operates secure electronic bike lockers at BART stations and transit hubs throughout the Bay Area. These on-demand lockers are available 24/7 and rent for just 5 cents per hour.
   what_they_offer: |
     - Secure electronic bike lockers at BART stations
@@ -887,6 +922,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Bikeep, free bike parking, BART, secure, Clipper, smart rack, bicycle, bike commute, BikeHub
   description: Bikeep smart bike racks at select BART stations provide free secure bike parking. The racks feature industrial-grade steel locking arms and electronic security with zero theft incidents reported across 1 million parking sessions.
   what_they_offer: |
     - Free secure bike parking at select BART stations
@@ -913,6 +949,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Caltrain, commuter rail, Peninsula, San Francisco, San Jose, Gilroy, BikeLink, parking, Clipper, train
   description: Caltrain is a commuter rail line serving the San Francisco Peninsula and Santa Clara Valley, running from San Francisco to Gilroy. Stations offer bike parking, car parking, and transit connections.
   what_they_offer: |
     - Commuter rail service from SF to Gilroy
@@ -940,6 +977,7 @@
   area: Bay Area-wide
   groups:
     - disability
+  keywords: paratransit, ADA, accessible transit, disability transportation, door to door, wheelchair accessible, 511
   description: ADA Paratransit is a shared-ride, door-to-door transportation service for people who cannot use regular public transit due to a disability. Bay Area transit agencies provide coordinated paratransit service with regional certification—eligibility with one operator grants access to all Bay Area paratransit programs.
   what_they_offer: |
     - Door-to-door pickup and drop-off service
@@ -960,13 +998,6 @@
   link: https://511.org/transit/ada-paratransit
   link_text: Learn More
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - accessible transit
-    - disability transportation
-    - door to door
-    - wheelchair accessible
   lifeEvents:
     - disability
 - id: ac-transit-paratransit
@@ -975,6 +1006,7 @@
   area: Alameda County
   groups:
     - disability
+  keywords: paratransit, ADA, East Bay, AC Transit, BART, disability, wheelchair, door to door, Oakland, Berkeley
   description: East Bay Paratransit is a shared-ride, door-to-door service for people who are unable to use AC Transit or BART due to a disability. The service covers Alameda and western Contra Costa counties.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -994,10 +1026,6 @@
   link: https://www.actransit.org/paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - east bay
   lifeEvents:
     - disability
 - id: samtrans-paratransit
@@ -1006,6 +1034,7 @@
   area: San Mateo County
   groups:
     - disability
+  keywords: Redi-Wheels, paratransit, ADA, SamTrans, San Mateo County, disability, wheelchair, door to door
   description: Redi-Wheels is SamTrans' ADA paratransit service providing door-to-door transportation for San Mateo County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1025,10 +1054,6 @@
   link: http://www.samtrans.com/Accessibility/Paratransit.html
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - redi-wheels
-    - ADA
   lifeEvents:
     - disability
 - id: sfmta-paratransit
@@ -1037,6 +1062,7 @@
   area: San Francisco
   groups:
     - disability
+  keywords: SF Paratransit, SF Access, ADA, SFMTA, taxi vouchers, San Francisco, disability, wheelchair, door to door
   description: SF Paratransit provides door-to-door transportation for San Francisco residents who are unable to use Muni due to a disability. Services include van rides, taxi vouchers, and group van service.
   what_they_offer: |
     - SF Access van service (shared-ride, door-to-door)
@@ -1057,11 +1083,6 @@
   link: https://www.sfmta.com/getting-around/accessibility/paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - SF Access
-    - ADA
-    - taxi vouchers
   lifeEvents:
     - disability
 - id: vta-paratransit
@@ -1070,6 +1091,7 @@
   area: Santa Clara County
   groups:
     - disability
+  keywords: VTA ACCESS, paratransit, ADA, Santa Clara County, San Jose, disability, wheelchair, door to door
   description: VTA ACCESS is an ADA paratransit service providing door-to-door transportation for Santa Clara County residents who cannot use regular VTA buses or light rail due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1089,10 +1111,6 @@
   link: http://www.vta.org/getting-around/paratransit/accessibility-paratransit-service
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - VTA ACCESS
-    - ADA
   lifeEvents:
     - disability
 - id: golden-gate-paratransit
@@ -1101,6 +1119,7 @@
   area: Marin County
   groups:
     - disability
+  keywords: Golden Gate, paratransit, ADA, Marin County, Sonoma, disability, wheelchair, door to door, ferry
   description: Golden Gate Transit provides ADA paratransit service for eligible riders who cannot use regular Golden Gate Transit bus or ferry service due to a disability. Service operates in Marin and Sonoma counties.
   what_they_offer: |
     - Door-to-door paratransit service
@@ -1119,10 +1138,6 @@
   link: http://goldengatetransit.org/accessibility/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - golden gate
   lifeEvents:
     - disability
 - id: marin-transit-paratransit
@@ -1131,6 +1146,7 @@
   area: Marin County
   groups:
     - disability
+  keywords: Marin Transit, paratransit, ADA, Marin County, disability, wheelchair, door to door, San Rafael
   description: Marin Transit provides ADA paratransit service for Marin County residents who cannot use regular local bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1150,10 +1166,6 @@
   link: https://marintransit.org/paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - marin
   lifeEvents:
     - disability
 - id: county-connection-paratransit
@@ -1162,6 +1174,7 @@
   area: Contra Costa County
   groups:
     - disability
+  keywords: LINK, County Connection, paratransit, ADA, Contra Costa, Walnut Creek, Concord, disability, wheelchair
   description: LINK is County Connection's ADA paratransit service for Central Contra Costa County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1181,10 +1194,6 @@
   link: https://countyconnection.com/paratransit/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - LINK
-    - ADA
   lifeEvents:
     - disability
 - id: fast-paratransit
@@ -1193,6 +1202,7 @@
   area: Alameda County
   groups:
     - disability
+  keywords: DART, FAST, paratransit, ADA, Fremont, Alameda County, disability, wheelchair, dial-a-ride
   description: DART (Dial-A-Ride Transit) is FAST's paratransit service for Fremont residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1212,11 +1222,6 @@
   link: https://fasttransit.org/services/dart-paratransit-disabled-services/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - DART
-    - ADA
-    - fremont
   lifeEvents:
     - disability
 - id: tri-delta-paratransit
@@ -1225,6 +1230,7 @@
   area: Contra Costa County
   groups:
     - disability
+  keywords: Tri Delta, paratransit, ADA, Antioch, Brentwood, Pittsburg, Oakley, Contra Costa, disability, wheelchair
   description: Tri Delta Transit provides ADA paratransit service for eastern Contra Costa County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1243,11 +1249,6 @@
   link: https://trideltatransit.com/paratransit.aspx?filename=paraintro
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - antioch
-    - brentwood
   lifeEvents:
     - disability
 - id: westcat-paratransit
@@ -1256,6 +1257,7 @@
   area: Contra Costa County
   groups:
     - disability
+  keywords: WestCAT, paratransit, ADA, Pinole, Hercules, Rodeo, Crockett, Contra Costa, disability, wheelchair
   description: WestCAT provides ADA paratransit service for western Contra Costa County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1274,11 +1276,6 @@
   link: https://www.westcat.org/home/ServADAPara
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - pinole
-    - hercules
   lifeEvents:
     - disability
 - id: union-city-paratransit
@@ -1287,6 +1284,7 @@
   area: Alameda County
   groups:
     - disability
+  keywords: Union City, paratransit, ADA, Alameda County, disability, wheelchair, door to door
   description: Union City Transit provides ADA paratransit service for Union City residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1305,10 +1303,6 @@
   link: https://www.unioncity.org/172/Paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - union city
   lifeEvents:
     - disability
 - id: soltrans-paratransit
@@ -1317,6 +1311,7 @@
   area: Solano County
   groups:
     - disability
+  keywords: SolTrans, paratransit, ADA, Vallejo, Benicia, Solano County, disability, wheelchair, door to door
   description: SolTrans provides ADA paratransit service for Vallejo and Benicia residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1335,11 +1330,6 @@
   link: https://soltrans.org/accessibility/ada-paratransit/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - vallejo
-    - benicia
   lifeEvents:
     - disability
 - id: napa-vine-paratransit
@@ -1348,6 +1338,7 @@
   area: Napa County
   groups:
     - disability
+  keywords: Vine Go, Vine Transit, paratransit, ADA, Napa County, disability, wheelchair, door to door
   description: Vine Go is Napa County's ADA paratransit service for residents who cannot use regular Vine bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1366,11 +1357,6 @@
   link: https://vinetransit.com/vine-go/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - Vine Go
-    - ADA
-    - napa
   lifeEvents:
     - disability
 - id: vacaville-city-coach-paratransit
@@ -1379,6 +1365,7 @@
   area: Solano County
   groups:
     - disability
+  keywords: City Coach, paratransit, ADA, Vacaville, Solano County, disability, wheelchair, door to door
   description: City Coach provides door-to-door paratransit service for Vacaville residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1397,10 +1384,6 @@
   link: http://www.citycoach.com/door-to-door-paratransit/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - vacaville
   lifeEvents:
     - disability
 - id: santa-rosa-paratransit
@@ -1409,6 +1392,7 @@
   area: Sonoma County
   groups:
     - disability
+  keywords: Santa Rosa CityBus, paratransit, ADA, Santa Rosa, Sonoma County, disability, wheelchair, door to door
   description: Santa Rosa CityBus provides ADA paratransit service for Santa Rosa residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1427,10 +1411,6 @@
   link: https://srcity.org/1696/Paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - santa rosa
   lifeEvents:
     - disability
 - id: sonoma-county-paratransit
@@ -1439,6 +1419,7 @@
   area: Sonoma County
   groups:
     - disability
+  keywords: Sonoma County Transit, paratransit, ADA, Sonoma County, disability, wheelchair, door to door
   description: Sonoma County Transit provides ADA paratransit service for Sonoma County residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1457,10 +1438,6 @@
   link: http://sctransit.com/paratransit/
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - sonoma
   lifeEvents:
     - disability
 - id: petaluma-paratransit
@@ -1469,6 +1446,7 @@
   area: Sonoma County
   groups:
     - disability
+  keywords: Petaluma Transit, paratransit, ADA, Petaluma, Sonoma County, disability, wheelchair, door to door
   description: Petaluma Transit provides ADA paratransit service for Petaluma residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1487,10 +1465,6 @@
   link: https://transit.cityofpetaluma.net/?s=paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - petaluma
   lifeEvents:
     - disability
 - id: rio-vista-paratransit
@@ -1499,6 +1473,7 @@
   area: Solano County
   groups:
     - disability
+  keywords: Rio Vista, Delta Breeze, paratransit, ADA, Solano County, disability, wheelchair, door to door
   description: Rio Vista Delta Breeze provides ADA paratransit service for Rio Vista residents who cannot use regular bus service due to a disability.
   what_they_offer: |
     - Door-to-door shared ride service
@@ -1517,9 +1492,5 @@
   link: https://www.riovistacity.com/deltabreeze/page/ada-paratransit
   link_text: Apply
   verified_date: '2026-01-10'
-  keywords:
-    - paratransit
-    - ADA
-    - rio vista
   lifeEvents:
     - disability

@@ -4,6 +4,7 @@
   area: Berkeley
   groups:
     - everyone
+  keywords: Berkeley, tool lending library, borrow tools, power tools, hand tools, lawn equipment, garden tools, automotive tools, free tools
   description: The Berkeley Public Library operates the only tool lending library in Northern California, allowing library cardholders to borrow tools for free.
   what_they_offer: |
     - Power tools (drills, saws, sanders)
@@ -33,6 +34,7 @@
   area: California
   groups:
     - everyone
+  keywords: California State Parks, library pass, free park entry, day-use pass, state parks, outdoor, nature, free admission, vehicle pass
   description: California State Library's Parks Pass program allows library patrons to check out day-use passes for free entry to over 200 state parks.
   what_they_offer: |
     - Free vehicle day-use entry to 200+ state parks
@@ -57,6 +59,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Calm, meditation, sleep stories, stress management, relaxation, breathing exercises, mindfulness, mental health, San Mateo Library
   description: San Mateo County Library provides free access to the Calm app, offering guided meditations, sleep stories, and stress management tools.
   what_they_offer: |
     - Full access to Calm premium features
@@ -82,6 +85,7 @@
   area: California
   groups:
     - everyone
+  keywords: Discover & Go, museum pass, free admission, zoo, aquarium, garden, cultural institution, library pass, discounted tickets
   description: Discover & Go connects library cardholders with free and discounted admission to California museums, zoos, aquariums, and cultural institutions.
   what_they_offer: |
     - Free or reduced admission to many cultural institutions
@@ -107,6 +111,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Hoopla, streaming, movies, TV shows, music, ebooks, audiobooks, comics, graphic novels, library digital, no waitlist
   description: Hoopla is a digital media service that allows library cardholders to borrow movies, TV shows, music, ebooks, audiobooks, and comics for free.
   what_they_offer: |
     - Streaming movies and TV shows
@@ -132,6 +137,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Kanopy, streaming, films, documentaries, Criterion Collection, indie films, international cinema, Great Courses, PBS, library video
   description: Kanopy is a free video streaming service for library cardholders offering thoughtful entertainment including films, documentaries, and educational content.
   what_they_offer: |
     - Thousands of films and documentaries
@@ -158,6 +164,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: New York Times, NYT, newspaper, free news, Wordle, crossword, cooking, games, California State Library, digital access
   description: California State Library provides free digital access to The New York Times for all Californians through participating public libraries.
   what_they_offer: |
     - Full access to NYTimes.com
@@ -182,6 +189,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: SFPL, San Francisco Public Library, eLibrary, ebooks, audiobooks, Libby, OverDrive, LinkedIn Learning, Mango Languages, databases
   description: San Francisco Public Library's eLibrary provides free digital access to ebooks, audiobooks, databases, learning courses, and streaming content.
   what_they_offer: |
     - Ebooks and audiobooks (Libby, OverDrive)
@@ -209,6 +217,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: SF Digital Collections, digitalsf, historical photos, San Francisco history, archives, manuscripts, maps, ephemera, audiovisual
   description: San Francisco's digital collections provide free access to digitized historical photos, documents, manuscripts, and audiovisual materials from the city's archives.
   what_they_offer: |
     - Historical photographs of San Francisco
@@ -233,6 +242,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Open Library, Internet Archive, free ebooks, borrow books, online library, digital books, book lending, read online
   description: Open Library is a project of the Internet Archive that provides free access to millions of books, with the goal of creating one web page for every book ever published.
   what_they_offer: |
     - Millions of free ebooks
@@ -259,6 +269,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Libby, OverDrive, ebooks, audiobooks, digital magazines, library app, reading app, free books, no late fees
   description: Libby is the free reading app from OverDrive that connects library cardholders to their library's collection of ebooks, audiobooks, and magazines.
   what_they_offer: |
     - Ebooks from your library's collection
@@ -285,6 +296,7 @@
   area: California
   groups:
     - everyone
+  keywords: California newspapers, historical newspapers, CDNC, digitized, 1846, genealogy, research, archives, newspaper search
   description: The California Digital Newspaper Collection provides free access to digitized California newspapers from 1846 to the present for historical research.
   what_they_offer: |
     - Digitized California newspapers from 1846-present
@@ -309,6 +321,7 @@
   area: California
   groups:
     - everyone
+  keywords: Career Online High School, GED alternative, high school diploma, adult education, career certificate, accredited, online learning, free diploma
   description: Career Online High School is a free program through participating California libraries that allows adults to earn an accredited high school diploma and career certificate.
   what_they_offer: |
     - Accredited high school diploma
@@ -336,6 +349,7 @@
   area: California
   groups:
     - everyone
+  keywords: Online Archive of California, OAC, finding aids, primary sources, archives, historical records, photographs, documents, California history
   description: The Online Archive of California provides free access to finding aids and primary source collections from over 200 California libraries, archives, and museums.
   what_they_offer: |
     - Finding aids to archival collections
@@ -361,6 +375,7 @@
   area: Alameda County
   groups:
     - everyone
+  keywords: Alameda County Library, digital resources, ebooks, audiobooks, Libby, streaming, LinkedIn Learning, databases, language learning
   description: Alameda County Library provides free digital resources including ebooks, audiobooks, databases, and online learning for cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -388,6 +403,7 @@
   area: Alameda County
   groups:
     - everyone
+  keywords: Oakland Public Library, Oakland, digital resources, ebooks, audiobooks, streaming, online courses, databases, magazines
   description: Oakland Public Library provides free digital resources including ebooks, audiobooks, streaming media, and learning platforms for Oakland cardholders.
   what_they_offer: |
     - Ebooks and audiobooks
@@ -415,6 +431,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: San Mateo County Library, digital resources, ebooks, audiobooks, Libby, Kanopy, Calm, LinkedIn Learning, databases, magazines
   description: San Mateo County Library offers free digital resources including ebooks, audiobooks, streaming content, and online learning for all cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -442,6 +459,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Peninsula Library System, PLS, San Mateo County, e-services, digital resources, ebooks, audiobooks, interlibrary loan, databases
   description: Peninsula Library System provides e-services and digital resources for cardholders from member libraries throughout San Mateo County.
   what_they_offer: |
     - Shared digital collections
@@ -468,6 +486,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: Contra Costa County Library, digital resources, ebooks, audiobooks, Libby, streaming, online learning, databases, language learning
   description: Contra Costa County Library provides free digital resources including ebooks, audiobooks, streaming media, and learning platforms for cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -495,6 +514,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: SFPL, San Francisco Public Library, library services, technology lending, laptops, WiFi hotspots, homework help, social worker, job search
   description: San Francisco Public Library offers a wide range of free services and programs beyond just books, including digital resources, programs, and community offerings.
   what_they_offer: |
     - Digital resources (eBooks, streaming, databases)
@@ -522,6 +542,7 @@
   area: Santa Clara County
   groups:
     - everyone
+  keywords: Santa Clara County Library, SCCLD, digital resources, ebooks, audiobooks, Libby, LinkedIn Learning, Coursera, databases, language learning
   description: Santa Clara County Library District offers free digital resources including ebooks, audiobooks, streaming content, and online learning for cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -549,6 +570,7 @@
   area: Marin County
   groups:
     - everyone
+  keywords: Marin County Free Library, Marin, digital resources, ebooks, audiobooks, Libby, streaming, online learning, databases, language learning
   description: Marin County Free Library provides free digital resources including ebooks, audiobooks, streaming media, and learning platforms for cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -576,6 +598,7 @@
   area: Sonoma County
   groups:
     - everyone
+  keywords: Sonoma County Library, Sonoma, eLibrary, digital resources, ebooks, audiobooks, Libby, streaming, homework help, databases
   description: Sonoma County Library provides free eLibrary resources including ebooks, audiobooks, streaming content, and online learning for all cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -603,6 +626,7 @@
   area: Solano County
   groups:
     - everyone
+  keywords: Solano County Library, Solano, 24/7 digital library, ebooks, audiobooks, Libby, streaming, online learning, databases, magazines
   description: Solano County Library provides 24/7 digital library resources including ebooks, audiobooks, streaming media, and online learning for cardholders.
   what_they_offer: |
     - Ebooks and audiobooks via Libby
@@ -630,6 +654,7 @@
   area: Napa County
   groups:
     - everyone
+  keywords: Napa County Library, Napa, databases, research, ebooks, audiobooks, magazines, genealogy, consumer information, business databases
   description: Napa County Library provides free access to research databases and digital resources for all cardholders.
   what_they_offer: |
     - Research databases

@@ -26,7 +26,6 @@ import 'services/keyboard_shortcuts_service.dart';
 import 'services/desktop_menu_service.dart';
 import 'services/export_service.dart';
 import 'services/platform_service.dart';
-import 'widgets/smart_assistant.dart';
 import 'screens/program_detail_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -371,17 +370,21 @@ class MainNavigationState extends State<MainNavigation> {
     final screenHeight = mediaQuery.size.height;
     final isLandscape = screenWidth > screenHeight;
 
-    // Use sidebar layout when:
-    // - Desktop platforms with width >= 800
+    // Use desktop-class sidebar layout when:
+    // - Desktop platforms (macOS, Windows, Linux) with width >= 800
     // - Web with width >= 1024
-    // - Tablets (width >= 600) in landscape mode on iOS/Android
-    final isTabletLandscape = !kIsWeb &&
-                              PlatformService.isMobile &&
-                              isLandscape &&
-                              screenWidth >= 600;
+    // - iPad/tablets (width >= 768) in any orientation for proper desktop-class experience
+    // - Large phones in landscape (width >= 700)
+    final isTablet = !kIsWeb && PlatformService.isMobile && screenWidth >= 768;
+    final isLargePhoneLandscape = !kIsWeb &&
+                                   PlatformService.isMobile &&
+                                   isLandscape &&
+                                   screenWidth >= 700 &&
+                                   screenWidth < 768;
     final useDesktopLayout = (isDesktop && screenWidth >= 800) ||
                              (kIsWeb && screenWidth >= 1024) ||
-                             isTabletLandscape;
+                             isTablet ||
+                             isLargePhoneLandscape;
 
     Widget scaffold;
 
@@ -509,29 +512,8 @@ class MainNavigationState extends State<MainNavigation> {
       );
     }
 
-    // Add SmartAssistant overlay (mobile only)
-    if (!useDesktopLayout) {
-      scaffold = Stack(
-        children: [
-          scaffold,
-          Consumer<ProgramsProvider>(
-            builder: (context, provider, _) => SmartAssistant(
-              onProgramTap: (program) {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => ProgramDetailScreen(program: program),
-                  ),
-                );
-              },
-              onFavoriteToggle: (program) {
-                provider.toggleFavorite(program.id);
-              },
-              isFavorite: (id) => provider.isFavorite(id),
-            ),
-          ),
-        ],
-      );
-    }
+    // SmartAssistant chat panel removed - AI search is now integrated
+    // directly into the Directory search bar (matching website behavior)
 
     // Add incognito mode indicator
     scaffold = Column(

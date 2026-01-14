@@ -167,6 +167,29 @@ struct SettingsView: View {
                     Text("Warm Mode applies a sepia tint to reduce eye strain. This is an in-app alternative since visionOS doesn't include Night Shift.")
                 }
 
+                // Search Section
+                Section {
+                    Toggle(isOn: $settings.aiSearchEnabled) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "sparkles")
+                                    .foregroundStyle(.purple)
+                                Text("AI-Powered Search")
+                            }
+                            Text(settings.aiSearchEnabled
+                                ? "Natural language search enabled"
+                                : "Using basic keyword search only")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .tint(.purple)
+                } header: {
+                    Text("Search")
+                } footer: {
+                    Text("When enabled, you can ask natural language questions like \"What programs help seniors with housing?\" The AI runs in the cloud and requires an internet connection.")
+                }
+
                 // Language Section
                 Section {
                     ForEach(AppLocale.allCases) { locale in

@@ -4,6 +4,7 @@
   area: San Mateo County
   groups:
     - disability
+  keywords: CID, backup battery, PSPS, power shutoff, medical equipment, CPAP, oxygen, Medical Baseline, disability, emergency power
   description: The Center for Independence of Individuals with Disabilities (CID) provides portable backup batteries to individuals who depend on electricity for medical equipment during Public Safety Power Shutoffs (PSPS).
   what_they_offer: |
     - Portable backup battery loans during PSPS events
@@ -30,6 +31,7 @@
   area: San Francisco
   groups:
     - income-eligible
+  keywords: CleanPowerSF, renewable energy, green electricity, San Francisco, CARE, FERA, bill relief, solar, wind, clean energy
   description: CleanPowerSF is San Francisco's community choice energy program that provides 100% renewable electricity to residents and businesses, with additional bill relief options for qualifying low-income customers.
   what_they_offer: |
     - 100% renewable electricity at competitive rates
@@ -55,6 +57,7 @@
   area: Alameda County
   groups:
     - income-eligible
+  keywords: EBMUD, water bill, discount, low-income, East Bay, Alameda County, Contra Costa, wastewater, utility assistance
   description: The East Bay Municipal Utility District (EBMUD) Customer Assistance Program provides significant discounts on water and wastewater bills for income-eligible households in Alameda and Contra Costa counties.
   what_they_offer: |
     - 35% discount on water and wastewater bills (Tier 1)
@@ -83,6 +86,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: LIHEAP, energy bill, utility assistance, low-income, heating, cooling, weatherization, disconnection, crisis assistance, federal
   description: The Low Income Home Energy Assistance Program (LIHEAP) is a federally funded program that helps low-income households pay their energy bills and make energy-efficient home improvements.
   what_they_offer: |
     - Up to $3,000 per year for energy bill assistance
@@ -108,6 +112,7 @@
   area: Statewide
   groups:
     - disability
+  keywords: Medical Baseline, CPAP, BiPAP, oxygen, life support, electric wheelchair, PSPS notification, medical equipment, disability, low-cost energy
   description: The Medical Baseline Allowance program provides additional low-cost energy to customers with qualifying medical conditions that require extra electricity or gas, and includes priority notification before power shutoffs.
   what_they_offer: |
     - Additional baseline energy at lowest tier rates
@@ -133,6 +138,7 @@
   area: San Mateo County
   groups:
     - income-eligible
+  keywords: e-bike, electric bicycle, rebate, Peninsula Clean Energy, PCE, San Mateo, CARE, FERA, clean transportation
   description: Peninsula Clean Energy offers e-bike rebates to help income-qualified San Mateo County residents transition to clean transportation, reducing both costs and carbon emissions.
   what_they_offer: |
     - Up to $1,000 rebate for new electric bicycle
@@ -159,6 +165,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: heat pump, HVAC, rebate, Peninsula Clean Energy, PCE, San Mateo, heating, air conditioning, gas furnace, electrification
   description: Peninsula Clean Energy offers rebates for San Mateo County residents to replace gas furnaces with efficient electric heat pumps that provide both heating and cooling.
   what_they_offer: |
     - $1,500 base rebate for heat pump installation
@@ -186,6 +193,7 @@
   area: San Mateo County
   groups:
     - income-eligible
+  keywords: home upgrade, electrification, free, Peninsula Clean Energy, PCE, San Mateo, heat pump, induction, electric dryer, low-income
   description: Peninsula Clean Energy's Home Upgrade Services provides no-cost electrification for income-eligible homeowners, converting gas appliances to electric with a full-service approach from assessment to installation.
   what_they_offer: |
     - Free in-home energy assessment
@@ -215,6 +223,7 @@
   area: San Mateo County
   groups:
     - income-eligible
+  keywords: electric vehicle, EV, used car, rebate, Peninsula Clean Energy, PCE, San Mateo, plug-in hybrid, clean transportation
   description: Peninsula Clean Energy helps income-qualified San Mateo County residents afford electric vehicles with a $2,000 rebate toward used plug-in hybrids or fully-electric vehicles.
   what_they_offer: |
     - $2,000 rebate for used EV purchase
@@ -243,6 +252,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: water heater, heat pump, rebate, Peninsula Clean Energy, PCE, San Mateo, gas replacement, electrification, hot water
   description: Peninsula Clean Energy offers substantial rebates for San Mateo County residents to replace gas or electric water heaters with efficient heat pump water heaters.
   what_they_offer: |
     - $2,500 rebate for replacing gas water heater
@@ -271,6 +281,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: zero interest loan, financing, Peninsula Clean Energy, PCE, San Mateo, heat pump, electrification, no money down
   description: Peninsula Clean Energy offers zero-interest financing to help San Mateo County residents electrify their homes without upfront costs, with convenient repayment through monthly utility bills.
   what_they_offer: |
     - Up to $10,000 zero-interest loan
@@ -300,6 +311,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: AMP, arrearage, debt forgiveness, PG&E, past due, overdue, utility bill, CARE, payment plan, $8000
   description: PG&E's Arrearage Management Plan helps CARE-enrolled customers reduce their past-due utility debt by forgiving up to $8,000 over 12 months when they make consistent on-time payments.
   what_they_offer: |
     - Up to $8,000 in debt forgiveness
@@ -327,6 +339,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: smart thermostat, Nest, ecobee, Tesla, PG&E, demand response, energy savings, smart home, EV charger, battery
   description: PG&E's Automated Response Technology Program rewards customers for enrolling smart home devices that can automatically adjust energy use during peak demand periods, helping stabilize the grid.
   what_they_offer: |
     - $25 enrollment bonus per device
@@ -354,6 +367,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: CARE, FERA, PG&E, utility discount, electricity, gas, low-income, bill assistance, 35% discount, energy bill
   description: PG&E's CARE (California Alternate Rates for Energy) and FERA (Family Electric Rate Assistance) programs provide significant utility bill discounts for income-qualified households.
   what_they_offer: |
     - CARE: 35% discount on electricity, 20% on natural gas
@@ -381,6 +395,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: ESA, Energy Savings Assistance, free, weatherization, LED, refrigerator, PG&E, insulation, low-income, home upgrade
   description: The Energy Savings Assistance Program provides free home energy upgrades and weatherization services to income-qualified households, helping reduce energy bills and improve comfort.
   what_they_offer: |
     - Free energy assessment of your home
@@ -410,6 +425,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: generator, battery, rebate, PG&E, PSPS, power outage, fire, CARE, FERA, backup power
   description: PG&E provides rebates for generators and portable battery storage to help customers in high fire-threat areas prepare for power outages during Public Safety Power Shutoffs.
   what_they_offer: |
     - $300 rebate on generator purchase
@@ -437,6 +453,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: SGIP, battery, solar, Tesla Powerwall, Enphase, backup power, low-income, rebate, self-generation, storage
   description: The Self-Generation Incentive Program (SGIP) Equity program provides substantial incentives for income-qualified households to install home battery storage, covering up to 85% of the cost.
   what_they_offer: |
     - 85% discount on battery storage systems
@@ -464,6 +481,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: induction cooktop, loaner, free trial, PG&E, electric cooking, stove, gas replacement, try before buy
   description: PG&E's Induction Cooktop Test Drive lets customers try induction cooking at home before making a purchase decision, with a free two-week loaner including everything needed to get started.
   what_they_offer: |
     - Free two-week induction cooktop loan
@@ -491,6 +509,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: Match My Payment, PG&E, past due, debt, utility bill, payment match, low-income, bill assistance, $1000
   description: PG&E's Match My Payment Program helps customers reduce past-due balances by matching every dollar they pay, up to $1,000, effectively cutting their debt in half.
   what_they_offer: |
     - PG&E matches your payments dollar-for-dollar
@@ -518,6 +537,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: battery storage, rebate, PG&E, EPSS, Tesla Powerwall, outage, backup power, $7500, home battery
   description: PG&E offers a substantial rebate for permanent home battery storage to customers who have experienced frequent Enhanced Powerline Safety Settings (EPSS) outages, helping them maintain power reliability.
   what_they_offer: |
     - $7,500 rebate for permanent battery storage
@@ -545,6 +565,7 @@
   area: Statewide
   groups:
     - disability
+  keywords: portable battery, free, PG&E, Medical Baseline, medical equipment, CPAP, oxygen, PSPS, outage, disability
   description: PG&E provides free portable backup batteries to customers who depend on electricity for medical equipment and have experienced power shutoffs, ensuring they can maintain critical care during outages.
   what_they_offer: |
     - Free portable backup battery
@@ -572,6 +593,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: REACH, PG&E, emergency, disconnection, shutoff, utility bill, low-income, bill assistance, $300
   description: The REACH program provides emergency bill assistance for PG&E customers facing disconnection, offering up to $300 to help income-eligible households avoid losing power or gas service.
   what_they_offer: |
     - Up to $300 energy bill credit
@@ -599,6 +621,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: EV charger, rebate, PG&E, electric vehicle, charging, Level 2, CARE, FERA, installation, home charging
   description: PG&E's Residential Charging Solutions Rebate covers up to 100% of the cost of home EV charging equipment and installation for income-qualified customers, making electric vehicle ownership more accessible.
   what_they_offer: |
     - Up to 100% rebate on EV charger cost
@@ -626,6 +649,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: EV rebate, PG&E, used car, electric vehicle, $4000, plug-in hybrid, private party, dealer, clean transportation
   description: PG&E offers a $4,000 rebate for income-qualified customers purchasing pre-owned electric vehicles, making EVs more affordable whether buying from dealers or private sellers.
   what_they_offer: |
     - $4,000 rebate for used EV purchase
@@ -653,6 +677,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: V2X, bidirectional charger, EV, Ford F-150 Lightning, PG&E, backup power, home battery, vehicle to grid
   description: PG&E's V2X pilot program provides rebates for bidirectional EV chargers that can power your home using your electric vehicle's battery during outages or peak demand periods.
   what_they_offer: |
     - $2,500-$4,000 rebate for V2X charger
@@ -680,6 +705,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: WatterSaver, smart water heater, demand response, Rheem, A.O. Smith, Wi-Fi, energy savings, off-peak
   description: WatterSaver is a demand response program that pays customers to enroll their smart electric water heaters, automatically shifting water heating to off-peak times to save money and support the grid.
   what_they_offer: |
     - $50 enrollment bonus
@@ -706,6 +732,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Clean Cars for All, BAAQMD, electric vehicle, EV rebate, $10000, trade-in, used EV, low-income, car replacement
   description: The Bay Area Air Quality Management District's Clean Cars for All program provides substantial incentives for income-qualified residents to replace older polluting vehicles with new or used electric vehicles.
   what_they_offer: |
     - $10,000-$12,000 rebate for EV purchase or lease
@@ -734,6 +761,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Clean Cars for All, BAAQMD, fuel cell, hydrogen, zero emission, trade-in, rebate, low-income, car replacement
   description: The Clean Cars for All program also offers rebates for hydrogen fuel cell vehicles, providing another zero-emission option for Bay Area residents replacing older polluting vehicles.
   what_they_offer: |
     - $10,000 rebate for fuel cell vehicle
@@ -762,6 +790,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Clean Cars for All, BAAQMD, e-bike, transit credit, car-free, trade-in, $7500, sustainable transportation
   description: For those who don't need a car, Clean Cars for All offers a mobility option combining an e-bike and transit credits, providing sustainable transportation alternatives when trading in an older vehicle.
   what_they_offer: |
     - $7,500 total value mobility package
@@ -790,6 +819,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: vehicle buyback, BAAQMD, $2000, scrap car, old car, 2000 or older, air quality, cash for clunker
   description: BAAQMD's Vehicle Buy Back program pays $2,000 for older vehicles to be scrapped, reducing air pollution from high-emitting cars while providing owners compensation for retiring their vehicles.
   what_they_offer: |
     - $2,000 payment for your old vehicle
@@ -819,6 +849,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: wood stove, fireplace, BAAQMD, heat pump, replacement, air quality, $10500, Clean HEET
   description: BAAQMD's Wood Stove Replacement Program helps Bay Area residents replace wood-burning stoves with clean electric heat pumps, improving air quality and reducing home heating costs.
   what_they_offer: |
     - Up to $6,500 base incentive for heat pump replacement
@@ -847,6 +878,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: CARB, e-bike, electric bicycle, rebate, $2000, voucher, low-income, clean transportation, California
   description: The California Air Resources Board (CARB) E-Bike Incentive Project provides substantial point-of-sale discounts for income-qualified residents to purchase new electric bicycles.
   what_they_offer: |
     - Up to $2,000 instant discount on new e-bike
@@ -873,6 +905,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: vehicle retirement, smog check, failed smog, BAR, scrap car, $1500, $2000, Consumer Assistance Program
   description: California's Consumer Assistance Program offers payment to retire vehicles that have failed smog inspections, helping low-income residents get problem vehicles off the road.
   what_they_offer: |
     - $1,500 for vehicles that failed previous smog check
@@ -900,6 +933,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: DCAP, Clean Cars 4 All, electric vehicle, trade-in, $10000, down payment, financing, low-income
   description: The Driving Clean Assistance Program provides comprehensive support for income-qualified Californians to trade in old gas vehicles for clean alternatives, including financial counseling and down payment help.
   what_they_offer: |
     - Up to $10,000 toward clean vehicle purchase
@@ -926,6 +960,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: 30C, EV charger, federal tax credit, 30%, $1000, IRS Form 8911, Rewiring America, installation
   description: The federal 30C tax credit provides a 30% tax credit for installing electric vehicle charging equipment at home, available in eligible low-income and rural census tracts.
   what_they_offer: |
     - 30% tax credit on EV charger installation
@@ -952,6 +987,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: weatherization, free, insulation, air sealing, heating, water heater, low-income, energy efficiency, CSD
   description: California's Weatherization Assistance Program provides free energy efficiency upgrades to help low-income households reduce energy costs and improve home comfort and safety.
   what_they_offer: |
     - Free home energy audit
@@ -979,6 +1015,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: BayREN, EASE, 80%, insulation, duct sealing, low-income, $1000 cap, home upgrade, energy efficiency
   description: BayREN's EASE Home Program covers 80% of home efficiency upgrade costs for income-qualified Bay Area homeowners, with a capped out-of-pocket maximum and vetted contractors.
   what_they_offer: |
     - 80% of upgrade costs covered by BayREN
@@ -1007,6 +1044,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: BayREN, home energy score, energy assessment, $200 rebate, energy audit, home evaluation, efficiency report, electrification planning
   description: BayREN offers rebates for professional home energy assessments, providing homeowners with a comprehensive score and report identifying upgrades that can reduce energy costs.
   what_they_offer: |
     - $200 rebate for energy assessment
@@ -1035,6 +1073,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Cal Water, water rebate, toilet, irrigation, lawn replacement, turf conversion, showerhead, faucet, conservation kit, water savings
   description: Cal Water offers a variety of rebates for water-saving products and landscape improvements, plus free conservation kits to help customers reduce water usage and lower bills.
   what_they_offer: |
     - High-efficiency toilet rebates
@@ -1063,6 +1102,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Energy Smart Homes, electrification, $4250, remove gas, heat pump, induction, electric dryer, all-electric home, ADU, multi-family
   description: The Energy Smart Homes program provides incentives for fully electrifying homes by removing all gas appliances and switching to efficient electric alternatives.
   what_they_offer: |
     - $4,250+ total incentive for full electrification
@@ -1090,6 +1130,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: Golden State Rebates, heat pump water heater, instant discount, $500, $900, gas replacement, no paperwork, Home Depot, Lowes
   description: Golden State Rebates offers instant discounts on heat pump water heaters at participating retailers, making it easy to upgrade from gas or electric tank water heaters.
   what_they_offer: |
     - $500-$900 instant discount at checkout
@@ -1116,6 +1157,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: Golden State Rebates, gas water heater, high efficiency, $75, instant discount, no paperwork, Home Depot, Lowes
   description: For those not ready to switch to electric, Golden State Rebates offers a discount on high-efficiency gas water heaters at participating retailers.
   what_they_offer: |
     - $75 instant discount at checkout
@@ -1142,6 +1184,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: Golden State Rebates, air conditioner, AC, window unit, portable AC, $90, instant discount, Energy Star, cooling
   description: Golden State Rebates provides instant discounts on Energy Star-certified room air conditioners at participating retailers across California.
   what_they_offer: |
     - $90 instant discount at checkout
@@ -1168,6 +1211,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: Golden State Rebates, smart thermostat, Nest, ecobee, Honeywell, $40, $60, instant discount, programmable, energy savings
   description: Golden State Rebates offers instant discounts on smart thermostats at participating retailers, helping Californians save energy with programmable temperature control.
   what_they_offer: |
     - $40-$60 instant discount at checkout
@@ -1194,6 +1238,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: OhmConnect, $50 credit, demand response, peak hours, free thermostat, smart plug, energy rewards, reduce electricity, cash back
   description: OhmConnect is a free program that pays Californians to reduce energy use during peak demand times, while offering bonuses and free smart home devices.
   what_they_offer: |
     - $50 sign-up credit
@@ -1220,6 +1265,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: QuitCarbon, electrification planning, $100, $200, $300, heat pump, solar, battery, induction range, contractor referral
   description: QuitCarbon offers additional rebates when you use their free home electrification planning service and their network of contractors for qualifying projects over $4,000.
   what_they_offer: |
     - $100 rebate for first qualifying upgrade
@@ -1247,6 +1293,7 @@
   area: San Francisco
   groups:
     - income-eligible
+  keywords: Recology, garbage, trash, recycling, compost, 25% discount, low-income, San Francisco, waste bill, refuse
   description: Recology San Francisco offers a 25% discount on garbage collection bills for income-qualified San Francisco residents, helping reduce the cost of essential waste services.
   what_they_offer: |
     - 25% discount on garbage collection bills
@@ -1274,6 +1321,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Redwood City, electrification, heat pump, water heater, HVAC, panel upgrade, $500, CARE, rebate
   description: The City of Redwood City offers rebates to help residents electrify their homes with heat pump water heaters, HVAC systems, and electrical panel upgrades.
   what_they_offer: |
     - $500 rebate for heat pump water heater
@@ -1301,6 +1349,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Redwood City, EV charger, Level 2, electric vehicle, $500, home charging, charging station, rebate
   description: The City of Redwood City offers rebates for residents installing Level 2 EV chargers at home, making electric vehicle ownership more convenient.
   what_they_offer: |
     - $500 rebate for Level 2 EV charger
@@ -1328,6 +1377,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Redwood City, lawn equipment, leaf blower, string trimmer, hedge trimmer, edger, electric, gas trade-in, $150, $300
   description: The City of Redwood City offers rebates for switching from gas-powered lawn equipment to electric, reducing noise and air pollution in the community.
   what_they_offer: |
     - Up to $150 rebate for residents
@@ -1355,6 +1405,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Redwood City, solar, solar panels, PV system, $500, renewable energy, federal tax credit, rebate
   description: The City of Redwood City offers rebates for residents installing solar panels, helping reduce electricity costs and promote renewable energy.
   what_they_offer: |
     - $500 rebate for solar installation
@@ -1382,6 +1433,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: Rising Sun, Green House Call, free LED, free showerhead, free assessment, energy savings, water savings, virtual, shipped to you
   description: Rising Sun Center for Opportunity provides free virtual energy assessments and ships free energy and water-saving products directly to Bay Area residents at no cost.
   what_they_offer: |
     - Free virtual energy assessment
@@ -1409,6 +1461,7 @@
   area: San Francisco
   groups:
     - income-eligible
+  keywords: SFPUC, CAP, water bill, sewer bill, 40% discount, low-income, San Francisco, shutoff protection, no late fees
   description: The San Francisco Public Utilities Commission Customer Assistance Program provides significant discounts on water and sewer bills plus protections from shutoffs for income-qualified San Francisco residents.
   what_they_offer: |
     - 40% discount on water and sewer bills
@@ -1436,6 +1489,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: mercury thermostat, recycling, $30 rebate, hazardous waste, old thermostat, drop-off, Thermostat Recycling Corporation
   description: Thermostat Recycling Corporation pays $30 per mercury thermostat recycled at designated drop-off locations, helping safely dispose of hazardous mercury while rewarding environmentally responsible behavior.
   what_they_offer: |
     - $30 mail-in rebate per thermostat
@@ -1462,6 +1516,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, e-bike, electric bicycle, Santa Clara, $300, $500, rebate, income-qualified
   description: Silicon Valley Power offers rebates for Santa Clara residents purchasing new electric bicycles, with additional incentives for income-qualified customers.
   what_they_offer: |
     - 10% rebate on new e-bike, up to $300
@@ -1489,6 +1544,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, EV charger, Santa Clara, $550, charging station, multi-family, school, nonprofit, business
   description: Silicon Valley Power provides rebates for installing EV charging stations at homes, apartments, schools, nonprofits, and businesses in Santa Clara.
   what_they_offer: |
     - Up to $550 rebate for EV charger installation
@@ -1516,6 +1572,7 @@
   area: City of Santa Clara
   groups:
     - income-eligible
+  keywords: Silicon Valley Power, SVP, used EV, pre-owned, Santa Clara, $1500, $3500, LIHEAP, income-qualified, electric vehicle
   description: Silicon Valley Power offers substantial rebates for income-qualified Santa Clara residents purchasing pre-owned electric vehicles, with bonuses for efficiency and LIHEAP eligibility.
   what_they_offer: |
     - $1,500 rebate for fully electric vehicles
@@ -1543,6 +1600,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, induction, cooktop, range, oven, Santa Clara, $750, $950, gas replacement, electric cooking
   description: Silicon Valley Power offers rebates for Santa Clara residents switching from gas to induction cooking, with enhanced rebates for income-qualified customers.
   what_they_offer: |
     - Up to $750 rebate for induction range
@@ -1570,6 +1628,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, heat pump dryer, clothes dryer, Santa Clara, $250, $350, gas replacement, laundry
   description: Silicon Valley Power provides rebates for Santa Clara residents switching from gas to high-efficiency heat pump dryers, which use less energy than standard electric dryers.
   what_they_offer: |
     - Up to $250 rebate for heat pump dryer
@@ -1597,6 +1656,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, electric dryer, clothes dryer, Santa Clara, $150, $350, gas replacement, laundry
   description: Silicon Valley Power offers rebates for Santa Clara residents switching from gas to standard electric dryers, with enhanced rebates for income-qualified customers.
   what_they_offer: |
     - Up to $150 rebate for electric dryer
@@ -1624,6 +1684,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, heat pump water heater, Santa Clara, $5500, $6500, gas replacement, ENERGY STAR, hot water
   description: Silicon Valley Power offers one of the highest heat pump water heater rebates in California for Santa Clara residents replacing gas water heaters.
   what_they_offer: |
     - Up to $5,500 rebate for heat pump water heater
@@ -1651,6 +1712,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, heat pump water heater, Santa Clara, $500, $1000, electric resistance, ENERGY STAR, upgrade
   description: Silicon Valley Power offers rebates for Santa Clara residents upgrading from inefficient electric resistance water heaters to efficient heat pump models.
   what_they_offer: |
     - $500 rebate for heat pump water heater
@@ -1678,6 +1740,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, heat pump HVAC, Santa Clara, $10000, $11000, gas furnace, heating, cooling, air conditioning
   description: Silicon Valley Power offers one of the most generous heat pump HVAC rebates in California for Santa Clara residents replacing gas furnaces.
   what_they_offer: |
     - Up to $10,000 rebate ($3,000 per ton)
@@ -1705,6 +1768,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, HVAC tune-up, Santa Clara, $75, maintenance, AC service, heating service, efficiency
   description: Silicon Valley Power provides rebates for Santa Clara residents to have their HVAC systems professionally tuned up, improving efficiency and extending equipment life.
   what_they_offer: |
     - Up to $75 rebate for HVAC tune-up
@@ -1732,6 +1796,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, circuit pauser, splitter, Santa Clara, $50, $150, avoid panel upgrade, load management
   description: Silicon Valley Power offers rebates for circuit pausers/splitters that allow Santa Clara residents to add electric appliances without expensive panel upgrades.
   what_they_offer: |
     - Up to $50 rebate for circuit pauser/splitter
@@ -1759,6 +1824,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, smart panel, SPAN, KOBEN, Lumin, Santa Clara, $4000, $6000, electrification, load management
   description: Silicon Valley Power offers significant rebates for smart electric panels that enable home electrification without costly main service upgrades.
   what_they_offer: |
     - $4,000 rebate for smart electric panel
@@ -1786,6 +1852,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, panel upgrade, Santa Clara, $1500, $2500, electrical panel, amperage, electrification
   description: Silicon Valley Power provides rebates for Santa Clara residents upgrading electrical panels to support EV chargers and electric appliances.
   what_they_offer: |
     - Up to $1,500 rebate for panel upgrade
@@ -1813,6 +1880,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, prewire, new circuit, Santa Clara, $500, $2000, future appliances, electrification ready
   description: Silicon Valley Power offers rebates for Santa Clara residents to prewire circuits for future electric appliances, making electrification easier down the road.
   what_they_offer: |
     - Up to $500 per circuit (max 4 circuits)
@@ -1840,6 +1908,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, battery storage, Santa Clara, $2700, $6700, Tesla Powerwall, solar, backup power, FRAP, LIHEAP
   description: Silicon Valley Power provides rebates for battery storage systems paired with solar PV, with enhanced incentives for income-qualified customers.
   what_they_offer: |
     - $0.15 per Wh up to $2,700 base rebate
@@ -1867,6 +1936,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, HOA, grant, Santa Clara, $25000, common area, energy efficiency, condo, apartment
   description: Silicon Valley Power offers substantial grants to HOAs in Santa Clara for energy efficiency upgrades to common areas, reducing shared utility costs for residents.
   what_they_offer: |
     - Up to $25,000 grant for energy efficiency
@@ -1894,6 +1964,7 @@
   area: City of Santa Clara
   groups:
     - income-eligible
+  keywords: Silicon Valley Power, SVP, free solar, Santa Clara, FRAP, low-income, solar panels, $3.50 per watt, 3kW
   description: Silicon Valley Power provides substantial solar grants to income-qualified Santa Clara homeowners who have been on the FRAP assistance program, helping low-income residents access renewable energy.
   what_they_offer: |
     - Free solar PV system grant
@@ -1921,6 +1992,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, pool pump, variable speed, Santa Clara, $100, ENERGY STAR, swimming pool, energy savings
   description: Silicon Valley Power offers rebates for Santa Clara residents who upgrade to energy-efficient variable speed pool pumps, reducing electricity consumption for pool maintenance.
   what_they_offer: |
     - $100 rebate for pool pump upgrade
@@ -1948,6 +2020,7 @@
   area: City of Santa Clara
   groups:
     - everyone
+  keywords: Silicon Valley Power, SVP, solar tune-up, Santa Clara, $1500, solar maintenance, PV inspection, performance optimization
   description: Silicon Valley Power offers rebates for Santa Clara residents to have their existing solar PV systems professionally inspected and tuned up, ensuring optimal performance and energy generation.
   what_they_offer: |
     - Up to $1,500 rebate for solar tune-up
@@ -1975,6 +2048,7 @@
   area: City of San Jose
   groups:
     - income-eligible
+  keywords: SJCE, San Jose Clean Energy, SJ Cares, 10% discount, CARE, FERA, low-income, electricity bill, automatic
   description: San Jose Clean Energy provides an additional 10% discount on electricity charges for income-qualified customers already enrolled in PG&E's CARE or FERA programs, helping reduce energy costs.
   what_they_offer: |
     - 10% discount on SJCE electricity charges
@@ -2002,6 +2076,7 @@
   area: City of San Jose
   groups:
     - income-eligible
+  keywords: SJCE, San Jose Clean Energy, Solar Access, 20%, 55%, Environmental Justice, EJ community, low-income, community solar
   description: San Jose Clean Energy's Solar Access Program provides significant electricity bill discounts for income-qualified residents living in Environmental Justice Communities, stackable with other discounts for up to 55% savings.
   what_they_offer: |
     - 20% off electricity bill
@@ -2029,6 +2104,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, heat pump water heater, $2000, $3000, gas replacement, EJ community
   description: San Jose Clean Energy offers substantial rebates for replacing gas water heaters with energy-efficient heat pump water heaters, with enhanced rebates for income-qualified residents and Environmental Justice Communities.
   what_they_offer: |
     - $2,000 rebate for heat pump water heater
@@ -2056,6 +2132,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, heat pump HVAC, $1500, $2500, gas furnace, heating, cooling, EJ community
   description: San Jose Clean Energy offers rebates for replacing gas furnaces with efficient heat pump HVAC systems that provide both heating and cooling, with enhanced rebates for qualifying residents.
   what_they_offer: |
     - $1,500 rebate for heat pump HVAC
@@ -2083,6 +2160,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, battery storage, $3250, $10400, solar, backup power, EJ community
   description: San Jose Clean Energy provides substantial rebates for home battery storage systems paired with solar PV, with significantly enhanced rebates for income-qualified residents and Environmental Justice Communities.
   what_they_offer: |
     - $125 per kWh rebate for battery storage
@@ -2110,6 +2188,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, panel upgrade, $1000, electrical panel, electrification, add-on
   description: San Jose Clean Energy offers rebates for electrical panel upgrades when done alongside other EcoHome electrification projects, helping homes support additional electric appliances.
   what_they_offer: |
     - $1,000 rebate for panel upgrade
@@ -2137,6 +2216,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, attic insulation, $500, energy efficiency, weatherization, add-on
   description: San Jose Clean Energy offers rebates for attic insulation when done alongside other EcoHome electrification projects, improving home energy efficiency and comfort.
   what_they_offer: |
     - $500 rebate for attic insulation
@@ -2164,6 +2244,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, EcoHome, prewire, circuit, $500, future appliances, electrification ready, add-on
   description: San Jose Clean Energy offers rebates for circuit prewiring when done alongside other EcoHome electrification projects, preparing homes for future electric appliance installations.
   what_they_offer: |
     - $500 rebate for circuit prewiring
@@ -2191,6 +2272,7 @@
   area: City of San Jose
   groups:
     - income-eligible
+  keywords: SJCE, San Jose Clean Energy, new EV, $4000, instant rebate, electric vehicle, CARE, FERA, low-income, dealer
   description: San Jose Clean Energy offers substantial instant rebates on new electric vehicles for income-qualified residents, making EV ownership more accessible for lower-income households.
   what_they_offer: |
     - $4,000 instant rebate on new EV
@@ -2218,6 +2300,7 @@
   area: City of San Jose
   groups:
     - income-eligible
+  keywords: SJCE, San Jose Clean Energy, used EV, $2000, instant rebate, electric vehicle, CARE, FERA, low-income, pre-owned
   description: San Jose Clean Energy provides instant rebates on used electric vehicles for income-qualified residents, offering an affordable pathway to EV ownership.
   what_they_offer: |
     - $2,000 instant rebate on used EV
@@ -2245,6 +2328,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, Peak Rewards, demand response, $20 bonus, earn money, reduce energy, peak hours, FlexSaver
   description: San Jose Clean Energy's Peak Rewards program pays customers to reduce electricity usage during peak demand periods, with no penalty for non-participation.
   what_they_offer: |
     - Earn $0.50-$1.00 per kWh reduced
@@ -2272,6 +2356,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, Peak Rewards, smart thermostat, $35 per year, Nest, Sensi, demand response, automatic
   description: San Jose Clean Energy pays customers annually for enrolling eligible smart thermostats in their demand response program, with automatic adjustments during peak events.
   what_they_offer: |
     - $35 per year for thermostat enrollment
@@ -2299,6 +2384,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, Peak Rewards, EV charger, $25 bonus, $9 per month, Emporia, managed charging, demand response
   description: San Jose Clean Energy pays EV owners for enrolling eligible chargers in their managed charging program, pausing charging during peak events with override option.
   what_they_offer: |
     - $25 enrollment bonus
@@ -2326,6 +2412,7 @@
   area: City of San Jose
   groups:
     - everyone
+  keywords: SJCE, San Jose Clean Energy, Peak Rewards, battery storage, demand response, quarterly payment, grid support, backup power
   description: San Jose Clean Energy rewards battery storage owners for enrolling in their demand response program, providing both upfront bonuses and ongoing quarterly payments.
   what_they_offer: |
     - $10 per kWh enrollment bonus
@@ -2354,6 +2441,7 @@
   groups:
     - income-eligible
     - disability
+  keywords: Palo Alto, CPAU, RAP, 25% discount, gas, electricity, financial hardship, medical condition, low-income
   description: The City of Palo Alto Utilities Rate Assistance Program provides significant discounts on utility bills for residents experiencing financial hardship or medical conditions requiring higher utility use.
   what_they_offer: |
     - Up to 25% off gas charges
@@ -2381,6 +2469,7 @@
   area: City of Palo Alto
   groups:
     - income-eligible
+  keywords: Palo Alto, CPAU, REAP, free upgrades, weatherization, insulation, water heater, lighting, showerhead, low-income
   description: The City of Palo Alto's REAP program provides free home energy and water efficiency upgrades to income-qualified residents, helping reduce utility costs through improved efficiency.
   what_they_offer: |
     - Free weather stripping installation
@@ -2408,6 +2497,7 @@
   area: City of Palo Alto
   groups:
     - income-eligible
+  keywords: Palo Alto, CPAU, ProjectPLEDGE, $750, one-time, past due, utility bill, financial hardship, emergency assistance
   description: ProjectPLEDGE provides one-time utility bill assistance for Palo Alto residents facing financial hardship, helping cover past-due utility balances.
   what_they_offer: |
     - One-time utility bill assistance
@@ -2435,6 +2525,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, heat pump water heater, $3500, payment plan, $20/month, gas replacement, electrification
   description: City of Palo Alto Utilities offers one of the most generous heat pump water heater rebates in the region, with affordable financing options that make the switch accessible for all residents.
   what_they_offer: |
     - $3,500 rebate for heat pump water heater
@@ -2462,6 +2553,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, heat pump HVAC, $2500, gas furnace, heating, cooling, air conditioning, electrification
   description: City of Palo Alto Utilities offers rebates for replacing gas furnaces with efficient heat pump HVAC systems that provide both heating and cooling from a single unit.
   what_they_offer: |
     - $2,500 rebate for heat pump HVAC
@@ -2489,6 +2581,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, gas meter removal, $2500, all-electric, full electrification, zero gas, disconnect gas
   description: City of Palo Alto Utilities rewards residents who fully electrify their homes and disconnect from natural gas service, supporting the city's sustainability goals.
   what_they_offer: |
     - $2,500 incentive for gas meter removal
@@ -2516,6 +2609,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, EV charger, multi-family, nonprofit, school, $80000, charging infrastructure, apartment
   description: City of Palo Alto Utilities provides substantial rebates for installing EV charging infrastructure at multi-family buildings, schools, and non-profit organizations.
   what_they_offer: |
     - Up to $80,000 in rebates
@@ -2543,6 +2637,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, transformer upgrade, $10000, $100000, EV charger, electrical infrastructure, service connection
   description: City of Palo Alto Utilities helps offset the cost of electrical infrastructure upgrades needed for EV charger installations, making charging infrastructure more affordable.
   what_they_offer: |
     - Up to $10,000 for single-family homes
@@ -2570,6 +2665,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, landscape conversion, lawn removal, pool removal, $4 per sq ft, drought tolerant, water savings, Valley Water
   description: City of Palo Alto offers rebates for converting water-intensive lawns and pools to sustainable, drought-tolerant landscaping through a partnership with Valley Water.
   what_they_offer: |
     - Up to $4 per square foot rebate
@@ -2597,6 +2693,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, graywater, laundry to landscape, $400, water reuse, irrigation, washing machine, water conservation
   description: City of Palo Alto offers rebates for installing graywater systems that reuse washing machine water for landscape irrigation, reducing water consumption.
   what_they_offer: |
     - Up to $400 rebate
@@ -2624,6 +2721,7 @@
   area: City of Palo Alto
   groups:
     - everyone
+  keywords: Palo Alto, CPAU, stormwater, rain barrel, cistern, pervious pavement, rain garden, rainwater, water quality
   description: City of Palo Alto offers rebates for various stormwater management features that capture and filter rainwater, reducing runoff and protecting local waterways.
   what_they_offer: |
     - Rebates for rain barrels

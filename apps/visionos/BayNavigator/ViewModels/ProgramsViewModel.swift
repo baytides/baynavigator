@@ -15,6 +15,11 @@ final class ProgramsViewModel {
     var filterState = FilterState()
     var sortOption: SortOption = .recentlyVerified
 
+    // MARK: - AI Search State
+    private(set) var isAISearching = false
+    private(set) var aiSearchResults: [Program]?
+    private(set) var aiSearchMessage: String?
+
     // MARK: - Favorites
     private(set) var favorites: Set<String> = []
     private(set) var favoriteItems: [FavoriteItem] = []
@@ -42,6 +47,11 @@ final class ProgramsViewModel {
     // MARK: - Computed Properties
 
     var filteredPrograms: [Program] {
+        // Return AI search results if available
+        if let aiResults = aiSearchResults {
+            return aiResults
+        }
+
         var result = programs
 
         // Apply search query
@@ -164,7 +174,78 @@ final class ProgramsViewModel {
     // MARK: - Filtering
 
     func setSearchQuery(_ query: String) {
+        // Clear AI search results when query changes
+        aiSearchResults = nil
+        aiSearchMessage = nil
         filterState.searchQuery = query
+    }
+
+    /// Check if query should use AI search (natural language queries)
+    func shouldUseAISearch(_ query: String) -> Bool {
+        guard query.count >= 10 else { return false }
+
+        let lowerQuery = query.lowercased()
+
+        // Demographic/eligibility terms that suggest complex queries
+        let demographicTerms = ["senior", "elderly", "veteran", "disabled", "disability",
+                                "student", "low-income", "homeless", "immigrant", "lgbtq",
+                                "family", "child", "parent", "youth", "teen"]
+
+        // Natural language patterns
+        let naturalPatterns = ["i need", "i'm looking", "help with", "how can i", "where can i",
+                               "looking for", "need help", "can you help", "what programs",
+                               "i am a", "i'm a", "my family", "we need"]
+
+        // Check for demographic terms
+        for term in demographicTerms where lowerQuery.contains(term) {
+            return true
+        }
+
+        // Check for natural language patterns
+        for pattern in naturalPatterns where lowerQuery.contains(pattern) {
+            return true
+        }
+
+        // Multiple words suggest natural language
+        let wordCount = query.split(separator: " ").filter { $0.count > 2 }.count
+        return wordCount >= 4
+    }
+
+    /// Perform AI-powered search for natural language queries
+    @MainActor
+    func performAISearch(_ query: String, aiEnabled: Bool = true) async -> Bool {
+        guard aiEnabled, shouldUseAISearch(query) else {
+            setSearchQuery(query)
+            return false
+        }
+
+        isAISearching = true
+        aiSearchMessage = nil
+
+        do {
+            let result = try await SmartAssistantService.shared.search(query: query)
+            // Convert AIProgram to Program
+            aiSearchResults = result.programs.compactMap { aiProgram in
+                programs.first { $0.id == aiProgram.id }
+            }
+            aiSearchMessage = result.message
+            filterState.searchQuery = "" // Clear regular search
+            isAISearching = false
+            return true
+        } catch {
+            // Fall back to local search on error
+            isAISearching = false
+            aiSearchResults = nil
+            aiSearchMessage = nil
+            setSearchQuery(query)
+            return false
+        }
+    }
+
+    /// Clear AI search results and return to normal filtering
+    func clearAISearch() {
+        aiSearchResults = nil
+        aiSearchMessage = nil
     }
 
     func toggleCategory(_ id: String) {

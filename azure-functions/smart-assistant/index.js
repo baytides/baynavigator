@@ -2,9 +2,35 @@
  * Smart Assistant Azure Function with RAG (Retrieval-Augmented Generation)
  * Uses Cloudflare Workers AI (Llama 3.1 8B) for keyword extraction
  * Searches Azure AI Search for relevant programs
+ *
+ * Cost optimization: Uses reference documents to reduce LLM calls
+ * - common-queries.json: Pre-built responses for frequent questions
+ * - program-categories.json: Category-specific keyword expansion
+ * - eligibility-groups.json: Demographic trigger keywords
  */
 
 const { createLogger, createTimer, extractErrorInfo } = require('../shared/logger');
+const fs = require('fs');
+const path = require('path');
+
+// Load AI reference documents at startup (cost optimization)
+let commonQueries = null;
+let programCategories = null;
+let eligibilityGroups = null;
+
+try {
+  const refPath = path.join(__dirname, '../shared/ai-reference');
+  commonQueries = JSON.parse(fs.readFileSync(path.join(refPath, 'common-queries.json'), 'utf8'));
+  programCategories = JSON.parse(
+    fs.readFileSync(path.join(refPath, 'program-categories.json'), 'utf8')
+  );
+  eligibilityGroups = JSON.parse(
+    fs.readFileSync(path.join(refPath, 'eligibility-groups.json'), 'utf8')
+  );
+  console.log('AI reference documents loaded successfully');
+} catch (err) {
+  console.warn('Could not load AI reference documents:', err.message);
+}
 
 // Cloudflare Workers AI configuration
 const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
@@ -545,21 +571,124 @@ const SYNONYMS = {
 };
 
 /**
- * Expand query with synonyms for better matching
+ * Check if query matches a common query pattern (cost optimization)
+ * Returns { matched: true, keywords } if matched, or { matched: false } if not
+ */
+function matchCommonQuery(query) {
+  if (!commonQueries) return { matched: false };
+
+  const lowerQuery = query.toLowerCase();
+
+  // Check all pattern categories
+  for (const [categoryName, patterns] of Object.entries(commonQueries.query_patterns || {})) {
+    for (const [patternName, patternData] of Object.entries(patterns)) {
+      // Check if any trigger patterns match
+      const triggers = patternData.patterns || [];
+      for (const trigger of triggers) {
+        if (lowerQuery.includes(trigger.toLowerCase())) {
+          console.log(`Common query match: ${categoryName}/${patternName} via "${trigger}"`);
+          return {
+            matched: true,
+            keywords: patternData.keywords_to_search || '',
+          };
+        }
+      }
+    }
+  }
+
+  return { matched: false };
+}
+
+/**
+ * Detect eligibility group from query (cost optimization)
+ * Returns array of detected group IDs with their search keywords
+ */
+function detectEligibilityGroups(query) {
+  if (!eligibilityGroups) return [];
+
+  const lowerQuery = query.toLowerCase();
+  const detected = [];
+
+  for (const [groupId, groupData] of Object.entries(eligibilityGroups.groups || {})) {
+    const triggers = groupData.trigger_keywords || [];
+    for (const trigger of triggers) {
+      if (lowerQuery.includes(trigger.toLowerCase())) {
+        detected.push({
+          id: groupId,
+          name: groupData.name,
+          matchedTrigger: trigger,
+          searchKeywords: groupData.search_keywords || '',
+        });
+        break; // Only need one match per group
+      }
+    }
+  }
+
+  return detected;
+}
+
+/**
+ * Detect program category from query (cost optimization)
+ * Returns array of detected categories with their search keywords
+ */
+function detectProgramCategories(query) {
+  if (!programCategories) return [];
+
+  const lowerQuery = query.toLowerCase();
+  const detected = [];
+
+  for (const [categoryId, categoryData] of Object.entries(programCategories.categories || {})) {
+    const triggers = categoryData.trigger_keywords || [];
+    for (const trigger of triggers) {
+      if (lowerQuery.includes(trigger.toLowerCase())) {
+        detected.push({
+          id: categoryId,
+          name: categoryData.name,
+          matchedKeyword: trigger,
+          searchKeywords: categoryData.search_keywords || '',
+        });
+        break;
+      }
+    }
+  }
+
+  return detected;
+}
+
+/**
+ * Expand query with synonyms and reference document keywords for better matching
  */
 function expandQueryWithSynonyms(query) {
   const lowerQuery = query.toLowerCase();
   const words = lowerQuery.split(/\s+/);
   const expansions = new Set(words);
 
+  // Add synonyms for each word
   for (const word of words) {
     if (SYNONYMS[word]) {
       SYNONYMS[word].forEach((syn) => expansions.add(syn));
     }
   }
 
-  // Return original query plus key expansions
-  const expandedTerms = Array.from(expansions).slice(0, 15).join(' ');
+  // Expand using reference documents (cost optimization)
+  const detectedCategories = detectProgramCategories(query);
+  for (const cat of detectedCategories) {
+    // Add category-specific search keywords
+    if (cat.searchKeywords) {
+      cat.searchKeywords.split(' ').forEach((k) => expansions.add(k));
+    }
+  }
+
+  const detectedGroups = detectEligibilityGroups(query);
+  for (const group of detectedGroups) {
+    // Add group-specific search keywords
+    if (group.searchKeywords) {
+      group.searchKeywords.split(' ').forEach((k) => expansions.add(k));
+    }
+  }
+
+  // Return expanded terms (limit to avoid overly long queries)
+  const expandedTerms = Array.from(expansions).slice(0, 30).join(' ');
   return expandedTerms;
 }
 
@@ -640,20 +769,43 @@ async function searchPrograms(query, location = null) {
  * Use Cloudflare Workers AI (Llama 3.1 8B) to extract search keywords from natural language query
  * This function is ONLY called when Smart Search is enabled by the user.
  * If Smart Search is off (or offline), the client uses local fuzzy search instead.
+ *
+ * Cost optimization: Uses reference documents to skip LLM calls when possible
  */
 async function extractSearchQuery(userMessage, conversationHistory = []) {
-  // For short queries (≤3 words), skip AI and use synonym expansion
+  // Cost optimization #1: Check for common query patterns first
+  // This can completely skip the LLM call for frequent questions
+  const commonMatch = matchCommonQuery(userMessage);
+  if (commonMatch.matched && commonMatch.keywords) {
+    console.log(`Common query matched, skipping LLM. Keywords: "${commonMatch.keywords}"`);
+    return {
+      keywords: commonMatch.keywords,
+      skippedLLM: true,
+    };
+  }
+
+  // Cost optimization #2: For short queries (≤3 words), skip AI and use synonym expansion
   // This saves an API call for simple searches like "food stamps" or "senior transportation"
   const wordCount = userMessage.trim().split(/\s+/).length;
   if (wordCount <= 3) {
     console.log(`Short query (${wordCount} words), using synonym expansion only`);
-    return expandQueryWithSynonyms(userMessage);
+    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
+  }
+
+  // Cost optimization #3: If we detected categories/groups, use those keywords
+  const detectedCategories = detectProgramCategories(userMessage);
+  const detectedGroups = detectEligibilityGroups(userMessage);
+  if (detectedCategories.length > 0 || detectedGroups.length > 0) {
+    console.log(
+      `Detected ${detectedCategories.length} categories, ${detectedGroups.length} groups - using reference keywords`
+    );
+    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
   }
 
   // Fallback if Cloudflare Workers AI not configured
   if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
     console.log('Cloudflare Workers AI not configured, falling back to synonym expansion');
-    return expandQueryWithSynonyms(userMessage);
+    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
   }
 
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/ai/run/${CF_MODEL}`;
@@ -702,7 +854,7 @@ Return ONLY the keywords separated by spaces, nothing else:`;
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Cloudflare Workers AI error:', errorText);
-      return expandQueryWithSynonyms(userMessage);
+      return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
     }
 
     const data = await response.json();
@@ -710,13 +862,13 @@ Return ONLY the keywords separated by spaces, nothing else:`;
 
     if (keywords) {
       console.log(`Llama 3.1 extracted keywords: "${keywords}"`);
-      return keywords;
+      return { keywords, skippedLLM: false };
     }
 
-    return expandQueryWithSynonyms(userMessage);
+    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
   } catch (error) {
     console.error('Keyword extraction error:', error);
-    return expandQueryWithSynonyms(userMessage);
+    return { keywords: expandQueryWithSynonyms(userMessage), skippedLLM: true };
   }
 }
 
@@ -792,10 +944,15 @@ module.exports = async function (context, req) {
     }
 
     // Search for relevant programs using AI-extracted keywords (for >3 word queries)
-    const searchQuery = await extractSearchQuery(userMessage, conversationHistory);
+    // Cost optimization: extractSearchQuery now returns { keywords, skippedLLM, quickAnswer?, ... }
+    const searchResult = await extractSearchQuery(userMessage, conversationHistory);
+    const searchQuery = searchResult.keywords;
+
     logger.debug('Search query extracted', {
       original: userMessage,
       expanded: searchQuery,
+      skippedLLM: searchResult.skippedLLM,
+      hasQuickAnswer: !!searchResult.quickAnswer,
     });
 
     const programs = await searchPrograms(searchQuery, location);
@@ -803,6 +960,7 @@ module.exports = async function (context, req) {
       programsFound: programs.length,
       searchQuery,
       hasLocation: !!location,
+      skippedLLM: searchResult.skippedLLM,
     });
 
     // Return structured program cards directly (no AI response formatting needed)
@@ -813,6 +971,7 @@ module.exports = async function (context, req) {
       programsFound: programs.length,
       searchQuery: searchQuery,
       location: location || null,
+      skippedLLM: searchResult.skippedLLM,
     };
 
     context.res = {

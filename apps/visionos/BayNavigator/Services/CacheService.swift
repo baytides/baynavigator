@@ -19,6 +19,7 @@ actor CacheService {
         case userGroups = "baynavigator:user_groups"
         case userCounty = "baynavigator:user_county"
         case onboardingComplete = "baynavigator:onboarding_complete"
+        case aiSearchEnabled = "baynavigator:ai_search_enabled"
     }
 
     private struct CachedData<T: Codable>: Codable {
@@ -175,6 +176,20 @@ actor CacheService {
 
     func setLocale(_ code: String) {
         defaults.set(code, forKey: CacheKey.locale.rawValue)
+    }
+
+    // MARK: - AI Search
+
+    func getAISearchEnabled() -> Bool {
+        // Default to true if not set
+        if defaults.object(forKey: CacheKey.aiSearchEnabled.rawValue) == nil {
+            return true
+        }
+        return defaults.bool(forKey: CacheKey.aiSearchEnabled.rawValue)
+    }
+
+    func setAISearchEnabled(_ enabled: Bool) {
+        defaults.set(enabled, forKey: CacheKey.aiSearchEnabled.rawValue)
     }
 
     // MARK: - User Preferences (Onboarding)

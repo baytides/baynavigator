@@ -5,6 +5,7 @@
   city: Alameda
   groups:
     - everyone
+  keywords: USS Hornet, aircraft carrier, Alameda, military museum, navy, World War II, WWII, naval history, ship museum
   sync_source: imls-museums
   imls_id: '8400602451'
   description: Museum dedicated to preserving and presenting local and regional history.
@@ -21,6 +22,7 @@
   city: Albany
   groups:
     - everyone
+  keywords: Albany, state park, SMR, hiking, picnicking, nature, outdoors, California State Parks, trails
   address: Buchanan St, Albany, CA, 94710
   link: http://www.parks.ca.gov/?page_id=22880
   link_text: Visit Website
@@ -50,6 +52,7 @@
   city: San Francisco Bay
   groups:
     - everyone
+  keywords: Alcatraz, prison, penitentiary, San Francisco, ferry, island, National Park, historic site, cellhouse tour
   address: Alcatraz Island, San Francisco Bay, CA, 94133
   link: https://www.nps.gov/alca/index.htm
   link_text: Visit Website
@@ -81,6 +84,7 @@
   city: San Francisco
   groups:
     - everyone
+  keywords: Morrison Planetarium, California Academy of Sciences, San Francisco, Golden Gate Park, digital dome, space, astronomy, cosmos, stars
   sync_source: imls-museums
   imls_id: '8409500243'
   description: Part of California Academy of Sciences, Morrison Planetarium is the largest all-digital dome in the world featuring stunning visualizations of the cosmos.
@@ -98,6 +102,7 @@
     - seniors
     - veterans
     - disability
+  keywords: America the Beautiful, National Park pass, senior pass, military pass, Access pass, disability pass, $80 lifetime, annual pass, national parks
   description: The National Park Service offers lifetime and annual passes providing access to over 2,000 federal recreation sites across the United States, including national parks, wildlife refuges, and forests.
   what_they_offer: |
     - Senior Pass (62+): $80 lifetime or $20 annual pass
@@ -116,6 +121,7 @@
   city: San Francisco
   groups:
     - everyone
+  keywords: American Bookbinders Museum, San Francisco, bookbinding, books, printing, history, craft, artistry, SOMA
   sync_source: imls-museums
   imls_id: '8400601022'
   description: The only museum of its kind in North America, showcasing the artistry, history, and craft of bookbinding from the 1600s to present.
@@ -132,6 +138,7 @@
   city: Menlo Park
   groups:
     - everyone
+  keywords: Anderson Art Collection, Menlo Park, art museum, 20th century, American art, private collection, tours
   sync_source: imls-museums
   imls_id: '8400600569'
   description: Private collection of 20th century American art available through tours and loans to museums worldwide.
@@ -146,6 +153,7 @@
   city: Belvedere-Tiburon
   groups:
     - everyone
+  keywords: Angel Island, state park, Tiburon, ferry, hiking, camping, immigration station, San Francisco Bay, history
   address: 21 Main St, Belvedere-Tiburon, CA, 94920
   link: http://www.parks.ca.gov/?page_id=468
   link_text: Visit Website
@@ -175,6 +183,7 @@
   city: Pescadero
   groups:
     - everyone
+  keywords: Ano Nuevo, state park, Pescadero, elephant seals, wildlife, coastal, hiking, guided tours, nature reserve
   address: 1 New Years Creek Road & Hwy 1, Pescadero, CA, 94060
   link: http://www.parks.ca.gov/?page_id=523
   link_text: Visit Website
@@ -203,7 +212,8 @@
   area: Solano County
   groups:
     - everyone
-  description: Antioch Dunes National Wildlife Refuge is the only national wildlife refuge in the country established to protect endangered plants and insects – the Antioch Dunes evening primrose, the Contra Costa wallflower, and the Lange’s metalmark butterfly. Created in 1980, the 55-acre refuge was once part of a larger sand dune system that stretched two miles along the southern bank of the San Joaquin River east of the City of Antioch. The sand dunes were formed by ancient deposits of glacial sands carrie
+  keywords: Antioch Dunes, wildlife refuge, endangered species, butterfly, evening primrose, wallflower, nature, conservation
+  description: Antioch Dunes National Wildlife Refuge is the only national wildlife refuge in the country established to protect endangered plants and insects – the Antioch Dunes evening primrose, the Contra Costa wallflower, and the Lange's metalmark butterfly. Created in 1980, the 55-acre refuge was once part of a larger sand dune system that stretched two miles along the southern bank of the San Joaquin River east of the City of Antioch. The sand dunes were formed by ancient deposits of glacial sands carrie
   what_they_offer: Outdoor recreation including hiking, wildlife viewing, and nature experiences. Some sites offer camping, picnicking, and water activities.
   how_to_get_it: Visit Recreation.gov to check availability, make reservations, and plan your visit. Some areas are free to visit while others may require permits or fees.
   phone: 510-521-9624
@@ -225,6 +235,7 @@
     - veterans
     - families
     - everyone
+  keywords: Aquarium of the Bay, Pier 39, San Francisco, sharks, jellyfish, river otters, marine animals, EBT discount, Museums for All, local discount
   description: Aquarium of the Bay is a nonprofit aquarium located on Pier 39 in San Francisco, dedicated to protecting, restoring, and inspiring conservation of San Francisco Bay and its watershed. The aquarium features over 20,000 local marine animals including sharks, rays, jellyfish, and river otters.
   what_they_offer: |
     - Bay Area residents: $5 off general admission with local ID
@@ -249,6 +260,7 @@
   city: Guerneville
   groups:
     - everyone
+  keywords: Armstrong Redwoods, state park, Guerneville, Sonoma, redwood trees, old growth, hiking, nature, forest
   address: 17150 Armstrong Woods Road, Guerneville, CA, 95446
   link: http://www.parks.ca.gov/?page_id=450
   link_text: Visit Website
@@ -278,6 +290,7 @@
   city: San Rafael
   groups:
     - everyone
+  keywords: Art Works Downtown, San Rafael, Marin, art gallery, art studios, exhibits, artists, nonprofit
   sync_source: imls-museums
   imls_id: '8400601764'
   description: Nonprofit art center featuring 4 galleries, 27 art studios, and rotating exhibits by Bay Area artists.
@@ -292,6 +305,7 @@
   city: Benicia
   groups:
     - everyone
+  keywords: Arts Benicia, Benicia, Solano County, art classes, visual arts, exhibitions, gallery, art center
   sync_source: imls-museums
   imls_id: '8400601693'
   description: Community-based visual arts center providing classes, exhibitions, and networking for artists.
@@ -311,6 +325,7 @@
     - veterans
     - families
     - everyone
+  keywords: Asian Art Museum, San Francisco, Civic Center, free first Sunday, EBT $1, Museums for All, senior discount, student discount, military free, Asia art
   description: The Asian Art Museum of San Francisco houses one of the world's most comprehensive collections of Asian art, spanning 6,000 years of history with over 18,000 artworks from across the Asian continent.
   what_they_offer: |
     - Free admission: First Sundays each month for everyone
@@ -336,6 +351,7 @@
   city: Guerneville
   groups:
     - everyone
+  keywords: Austin Creek, state park, Guerneville, Sonoma, hiking, camping, nature, wilderness, backcountry
   address: 17000 Armstrong Woods Road, Guerneville, CA, 95446
   link: http://www.parks.ca.gov/?page_id=452
   link_text: Visit Website
@@ -365,6 +381,7 @@
   city: St. Helena
   groups:
     - everyone
+  keywords: Bale Grist Mill, state park, St. Helena, Napa, historic mill, water-powered, history, pioneer, wine country
   address: 3369 North St.Helena Highway, St. Helena, CA, 94574
   link: http://www.parks.ca.gov/?page_id=482
   link_text: Visit Website
@@ -399,6 +416,7 @@
     - families
     - youth
     - everyone
+  keywords: Bay Area Discovery Museum, Sausalito, children's museum, kids, Golden Gate Bridge, hands-on, EBT $5, WIC discount, ages 0-10, creativity
   description: The Bay Area Discovery Museum is a hands-on children's museum nestled at the foot of the Golden Gate Bridge in Sausalito, featuring indoor and outdoor exhibits designed to spark creativity and curiosity in children ages 0-10.
   what_they_offer: |
     - EBT/WIC cardholders: $5 admission per person
@@ -424,6 +442,7 @@
   city: Sausalito
   groups:
     - everyone
+  keywords: Bay Model, Sausalito, Army Corps of Engineers, free museum, San Francisco Bay model, Sacramento Delta, hydraulic model
   sync_source: imls-museums
   imls_id: '8409501017'
   description: Free federal visitor center featuring a 1.5-acre hydraulic model of San Francisco Bay and Sacramento-San Joaquin Delta.

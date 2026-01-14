@@ -9,6 +9,7 @@
   groups:
     - veterans
     - seniors
+  keywords: CalVet, Veterans Homes, skilled nursing, memory care, Alzheimer's, dementia, residential care, veteran housing, long-term care
   description: The Veterans Homes of California operate 8 residential care facilities across the state providing housing, healthcare, and supportive services to eligible veterans and their spouses.
   what_they_offer: |
     - Long-term residential care (domiciliary and skilled nursing)
@@ -39,6 +40,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: 988, suicide, crisis, hotline, suicidal, depression, anxiety, mental health, crisis counselor, LGBTQ, veterans, TTY
   description: The 988 Suicide & Crisis Lifeline is a national network of local crisis
     centers providing free, confidential emotional support 24/7 to people in suicidal
     crisis or emotional distress.
@@ -63,6 +65,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Crisis Text Line, text HOME 741741, text crisis support, anxiety, depression, suicidal thoughts, abuse, mental health text
   description: Crisis Text Line is a free, 24/7 text-based mental health support service
     connecting people in crisis with trained volunteer counselors through text messages.
   what_they_offer: |
@@ -85,6 +88,7 @@
   area: San Francisco County
   groups:
     - everyone
+  keywords: San Francisco Suicide Prevention, Felton Institute, crisis hotline, suicide, emotional distress, SF crisis, mental health
   description: San Francisco Suicide Prevention provides 24/7 confidential emotional support and crisis intervention through their hotline, operated by Felton Institute.
   what_they_offer: |
     - 24/7 crisis phone support
@@ -105,6 +109,7 @@
   area: San Francisco County
   groups:
     - everyone
+  keywords: SF Behavioral Health, access line, mental health referral, substance use treatment, crisis support, counseling appointment
   description: San Francisco's 24-hour behavioral health access line provides crisis support and helps connect residents to mental health and substance use services.
   what_they_offer: |
     - 24/7 phone crisis support
@@ -125,6 +130,7 @@
   area: San Francisco County
   groups:
     - everyone
+  keywords: SF Mobile Crisis Team, psychiatric emergency, mental health emergency, crisis intervention, clinicians, alternative to police
   description: San Francisco's Mobile Crisis Team provides on-site mental health crisis intervention as an alternative to police response, sending trained clinicians to help people experiencing psychiatric emergencies.
   what_they_offer: |
     - On-site crisis intervention
@@ -145,6 +151,7 @@
   area: Alameda County
   groups:
     - everyone
+  keywords: Crisis Support Services, Alameda County, suicide prevention, grief support, crisis phone, text SAFE, warm line
   description: Crisis Support Services of Alameda County provides 24/7 crisis intervention, suicide prevention, and grief support through phone and text services.
   what_they_offer: |
     - 24/7 crisis phone line
@@ -165,6 +172,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: Contra Costa Crisis Center, suicide hotline, grief counseling, crisis intervention, text HOPE, mental health crisis
   description: The Contra Costa Crisis Center provides 24/7 crisis intervention, suicide prevention, and grief counseling services to Contra Costa County residents.
   what_they_offer: |
     - 24/7 crisis and suicide hotline
@@ -185,6 +193,7 @@
   area: Santa Clara County
   groups:
     - everyone
+  keywords: Santa Clara County, crisis line, suicide hotline, behavioral health, mobile crisis, multilingual, mental health emergency
   description: Santa Clara County's 24/7 suicide and crisis hotline provides immediate support and connects callers to behavioral health services throughout the county.
   what_they_offer: |
     - 24/7 suicide and crisis support
@@ -205,6 +214,7 @@
   area: Marin County
   groups:
     - everyone
+  keywords: Marin County, suicide prevention, grief counseling, Family Service Agency, crisis intervention, hotline
   description: Family Service Agency of Marin operates a 24/7 suicide prevention hotline and grief counseling line for Marin County residents in crisis.
   what_they_offer: |
     - 24/7 suicide prevention hotline
@@ -225,6 +235,7 @@
   area: Napa County
   groups:
     - everyone
+  keywords: Napa County, mental health crisis, youth crisis, mobile crisis response, psychiatric emergency
   description: Napa County's 24-hour mental health crisis hotline provides immediate support for adults and youth experiencing mental health emergencies.
   what_they_offer: |
     - 24/7 adult crisis support
@@ -245,6 +256,7 @@
   area: Solano County
   groups:
     - everyone
+  keywords: Solano County, crisis line, mental health crisis, suicide prevention, mobile crisis team
   description: Solano County's 24-hour crisis line provides immediate mental health support and crisis intervention for county residents.
   what_they_offer: |
     - 24/7 crisis phone support
@@ -265,6 +277,7 @@
   area: San Francisco County
   groups:
     - everyone
+  keywords: SFWAR, rape, sexual assault, sexual violence, survivor support, hospital accompaniment, legal advocacy
   description: SFWAR provides a 24-hour crisis hotline and support services for survivors of rape and sexual assault in San Francisco.
   what_they_offer: |
     - 24/7 crisis hotline
@@ -279,11 +292,6 @@
   link: https://www.sfwar.org/
   link_text: Call 415-647-7273
   verified_date: '2026-01-06'
-  keywords:
-    - rape
-    - sexual assault
-    - sexual violence
-    - survivor
 
 - id: friendship-line-elderly
   name: Institute on Aging Friendship Line
@@ -291,6 +299,7 @@
   area: Nationwide
   groups:
     - seniors
+  keywords: Friendship Line, Institute on Aging, senior crisis, elder abuse, loneliness, isolation, companionship, grief support, 60+
   description: The Friendship Line is the only accredited 24/7 crisis line specifically for older adults, providing emotional support, crisis intervention, and friendly conversation.
   what_they_offer: |
     - 24/7 crisis support for seniors
@@ -312,6 +321,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: Denti-Cal, Medicaid dental, free dental, Medi-Cal, cleanings, fillings, extractions, dentures, orthodontics, oral surgery
   description: Denti-Cal is California's Medicaid dental program, providing comprehensive
     dental care to Medi-Cal beneficiaries at no cost, helping ensure oral health for
     low-income individuals and families.
@@ -336,6 +346,7 @@
   area: Nationwide
   groups:
     - seniors
+  keywords: EyeCare America, free eye exam, senior eye care, glaucoma, diabetic eye disease, ophthalmologist, vision screening, 65+
   description: EyeCare America is a public service program of the American Academy
     of Ophthalmology providing eye care to seniors through volunteer ophthalmologists
     who donate their services.
@@ -360,6 +371,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: Medi-Cal, Medicaid, free health insurance, low-income, doctor, hospital, prescription, mental health, dental, vision, CoveredCA
   description: Medi-Cal is California's Medicaid program, providing free or low-cost
     health coverage to millions of Californians including low-income adults, families,
     seniors, pregnant women, and people with disabilities.
@@ -387,6 +399,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: NeedyMeds, patient assistance, prescription discount, drug discount card, free medication, affordable medicine, low-cost clinic
   description: NeedyMeds is a nonprofit providing a comprehensive database of patient
     assistance programs, helping people find affordable medications and healthcare
     services regardless of insurance status.
@@ -412,6 +425,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Planned Parenthood, birth control, STI testing, HIV testing, cancer screening, pregnancy test, abortion, transgender hormone, Family PACT
   description: Planned Parenthood is a trusted healthcare provider offering sexual
     and reproductive health services on a sliding fee scale, ensuring care is accessible
     regardless of insurance status or ability to pay.
@@ -439,6 +453,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: Ryan White, HIV, AIDS, HIV medication, case management, uninsured, underinsured, housing assistance, HIV care
   description: The Ryan White HIV/AIDS Program provides comprehensive care and support
     services for people living with HIV who are uninsured or underinsured, filling
     gaps in care not covered by other sources.
@@ -465,6 +480,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: SAMHSA, substance abuse, addiction, mental health, treatment referral, drug treatment, alcohol treatment, free treatment
   description: SAMHSA's National Helpline is a free, confidential, 24/7 treatment
     referral and information service for individuals and families facing mental health
     and/or substance use disorders.
@@ -491,6 +507,7 @@
   area: Nationwide
   groups:
     - veterans
+  keywords: VA Health, veteran healthcare, VA hospital, mental health, prescription, telehealth, women veterans, prosthetics, DD214
   description: VA Health Benefits provide comprehensive healthcare services to eligible
     veterans through the Veterans Health Administration, the nation's largest integrated
     healthcare system.
@@ -520,6 +537,7 @@
     - pregnant
     - income-eligible
     - families
+  keywords: WIC, Women Infants Children, formula, baby food, breastfeeding, pregnant, nutrition, EBT, WIC card, farmers market, free food, prenatal
   description: WIC is a nutrition program providing healthy food, nutrition education,
     breastfeeding support, and healthcare referrals to pregnant and postpartum women,
     infants, and children under 5 in California.
@@ -546,6 +564,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: BHRS, San Mateo, mental health, substance abuse, addiction, drug treatment, alcohol, counseling, therapy, crisis, Medi-Cal, behavioral health
   description: San Mateo County Behavioral Health and Recovery Services provides mental
     health and substance use treatment, prevention, and recovery services to residents
     of all ages in San Mateo County.
@@ -575,6 +594,7 @@
     - caregivers
     - seniors
     - disability
+  keywords: San Mateo, senior services, elder abuse, IHSS, In-Home Support, adult protective services, meals on wheels, HICAP, Medicare counseling, caregiver, aging
   description: San Mateo County Aging and Adult Services provides protective services,
     in-home care, and nutrition programs to help older adults and people with disabilities
     live safely and independently.
@@ -603,6 +623,7 @@
     - pregnant
     - income-eligible
     - families
+  keywords: San Mateo, prenatal, pregnancy, home visiting, Black Infant Health, nurse family partnership, immunization, children's dental, school health, baby
   description: San Mateo County's Family Health Services provides prenatal care, home
     visiting, and child health programs to support healthy pregnancies and child development
     for families throughout the county.
@@ -629,6 +650,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: CalRx, naloxone, Narcan, opioid overdose, fentanyl, overdose reversal, nasal spray, opioid crisis, harm reduction, OTC
   description: CalRx is California's initiative to make naloxone, a life-saving medication
     that reverses opioid overdoses, affordable and accessible to all residents without
     a prescription.
@@ -653,6 +675,7 @@
   area: Statewide
   groups:
     - nonprofits
+  keywords: NDP, naloxone, Narcan, free, nonprofit, fentanyl test strips, harm reduction, overdose prevention, opioid, community distribution
   description: California's Naloxone Distribution Project provides free naloxone and
     fentanyl test strips to eligible nonprofit organizations working to prevent opioid
     overdose deaths in their communities.
@@ -676,6 +699,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: ADAP, AIDS, HIV, antiretroviral, medication, free, insurance assistance, OA-HIPP, Medicare, undocumented, HIV drugs
   description: California's AIDS Drug Assistance Program provides life-saving HIV/AIDS
     medications and health insurance assistance to low-income Californians living
     with HIV who lack adequate coverage.
@@ -700,6 +724,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: Kick It California, quit smoking, tobacco, vaping, nicotine, patches, cessation, cigarettes, e-cigarette, marijuana, quit coach, helpline
   description: Kick It California is the state's free quit smoking and tobacco helpline,
     offering personalized coaching, a mobile app, and resources to help Californians
     quit tobacco, vaping, and marijuana.
@@ -728,6 +753,7 @@
   groups:
     - pregnant
     - families
+  keywords: Black Infant Health, BIH, African American, pregnancy, maternal health, prenatal, postpartum, birth outcomes, support group, Black mothers
   description: The Black Infant Health Program is California's community-based program
     providing group support and education to Black women and birthing people during
     pregnancy and the first year of their baby's life.
@@ -756,6 +782,7 @@
     - pregnant
     - income-eligible
     - families
+  keywords: home visiting, nurse, family specialist, pregnant, parenting, child development, breastfeeding, first-time parents, newborn, infant, free visits
   description: The California Home Visiting Program provides free, voluntary home
     visits to pregnant women and families with young children, offering parenting
     support, health education, and connections to community resources.
@@ -783,6 +810,7 @@
   groups:
     - income-eligible
     - families
+  keywords: VFC, free vaccines, immunization, children, DTaP, MMR, polio, hepatitis, HPV, flu shot, COVID vaccine, Medi-Cal, uninsured, shots
   description: The Vaccines for Children program provides free vaccines to children
     18 and under who might not otherwise be vaccinated because of inability to pay,
     ensuring all children have access to life-saving immunizations.
@@ -808,6 +836,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: PrEP, HIV prevention, Truvada, Descovy, free medication, HIV test, pre-exposure prophylaxis, LGBTQ, uninsured, undocumented
   description: California's PrEP Assistance Program makes HIV prevention medication
     accessible to residents who might not otherwise afford it, covering the cost of
     PrEP medication, doctor visits, and lab tests.
@@ -833,6 +862,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: Every Woman Counts, mammogram, breast cancer, cervical cancer, Pap test, HPV test, free screening, cancer detection, BCCTP, uninsured women
   description: Every Woman Counts provides free breast and cervical cancer screenings
     to uninsured and underinsured California women, helping detect cancer early when
     treatment is most effective.
@@ -861,6 +891,7 @@
     - pregnant
     - income-eligible
     - families
+  keywords: CPSP, prenatal care, Medi-Cal, pregnancy, postpartum, nutrition counseling, breastfeeding, birth outcomes, perinatal, obstetric
   description: The Comprehensive Perinatal Services Program provides enhanced prenatal
     and postpartum care to Medi-Cal recipients, offering additional support services
     beyond standard obstetric care to improve birth outcomes.
@@ -887,6 +918,7 @@
   area: Statewide
   groups:
     - families
+  keywords: lead poisoning, blood test, lead paint, children, developmental delay, learning disability, lead hazard, home inspection, free testing
   description: California's Childhood Lead Poisoning Prevention Program provides screening,
     case management, and environmental investigation to protect children from lead
     exposure, which can cause learning disabilities and developmental delays.
@@ -912,6 +944,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: MyTurn, vaccine appointment, COVID vaccine, flu shot, mpox, immunization record, digital vaccine record, vaccine locator, booster
   description: MyTurn is California's official vaccine scheduling and digital record
     system, making it easy to find vaccine appointments, access your immunization
     records, and stay up to date on recommended vaccines.
@@ -941,6 +974,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: San Francisco, mental health, substance use, provider directory, therapist, counselor, drug treatment, alcohol, psychiatrist, Medi-Cal, clinic
   description: San Francisco's official directory of mental health and substance use disorder treatment providers, maintained by the Department of Public Health Behavioral Health Services.
   what_they_offer: |
     - Searchable mental health provider listings
@@ -961,6 +995,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: San Mateo, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
   description: San Mateo County's official directory of behavioral health providers, including mental health clinics, substance use treatment programs, and crisis services throughout the county.
   what_they_offer: |
     - Mental health provider listings
@@ -981,6 +1016,7 @@
   area: Santa Clara County
   groups:
     - everyone
+  keywords: Santa Clara, San Jose, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
   description: Santa Clara County's official searchable directory of behavioral health providers, updated monthly with mental health clinics, substance use programs, and community services.
   what_they_offer: |
     - Online searchable provider database
@@ -1001,6 +1037,7 @@
   area: Alameda County
   groups:
     - everyone
+  keywords: Alameda, Oakland, East Bay, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
   description: Alameda County Behavioral Health's official provider directory, listing mental health clinics, substance use treatment facilities, and community resources throughout the East Bay.
   what_they_offer: |
     - Mental health provider listings
@@ -1021,6 +1058,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: Contra Costa, Richmond, Concord, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
   description: Contra Costa County's official mental health provider directory, updated weekly with licensed clinics, treatment programs, and crisis services for county residents.
   what_they_offer: |
     - Weekly updated provider listings
@@ -1041,6 +1079,7 @@
   area: Marin County
   groups:
     - everyone
+  keywords: Marin, San Rafael, mental health, substance use, provider directory, therapist, counselor, drug treatment, Medi-Cal, Drug Medi-Cal, clinic
   description: Marin County Behavioral Health and Recovery Services' official provider directory, including Medi-Cal mental health providers and Drug Medi-Cal substance use treatment facilities.
   what_they_offer: |
     - Medi-Cal mental health provider listings
@@ -1061,6 +1100,7 @@
   area: Sonoma County
   groups:
     - everyone
+  keywords: Sonoma, Santa Rosa, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health
   description: Sonoma County's official behavioral health provider directories, listing mental health clinics and substance use disorder treatment providers serving county residents.
   what_they_offer: |
     - Mental health provider directory (PDF)
@@ -1081,6 +1121,7 @@
   area: Napa County
   groups:
     - everyone
+  keywords: Napa, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic, behavioral health, wine country
   description: Napa County's official partners and providers directory for behavioral health services, including mental health treatment facilities and substance use programs.
   what_they_offer: |
     - Mental health provider listings
@@ -1101,6 +1142,7 @@
   area: Solano County
   groups:
     - everyone
+  keywords: Solano, Vallejo, Fairfield, mental health, substance use, provider directory, therapist, counselor, drug treatment, psychiatrist, clinic
   description: Solano County Behavioral Health's official provider directory, listing mental health clinics and substance use treatment facilities serving residents throughout the county.
   what_they_offer: |
     - Mental health provider listings

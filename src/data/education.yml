@@ -5,6 +5,7 @@
   groups:
     - veterans
     - families
+  keywords: veteran, college, tuition waiver, free tuition, UC, CSU, community college, dependent, spouse, child, military, deceased veteran, disabled veteran, service-connected, education, university, enrollment fees, financial aid
   description: The CalVet College Fee Waiver waives enrollment fees and tuition at California public universities (UC, CSU, and Community Colleges) for eligible dependents of disabled or deceased veterans.
   what_they_offer: |
     - Full waiver of enrollment fees at UC, CSU, and Community Colleges
@@ -34,6 +35,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: ACT, test fee waiver, free test, college entrance exam, low-income, student, high school, 11th grade, 12th grade, standardized testing, college admission, score reports, Kaplan prep
   description: The ACT offers fee waivers for students from low-income families, removing financial barriers to college entrance testing.
   what_they_offer: |
     - Two free ACT tests (with or without writing)
@@ -62,6 +64,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: AP, Advanced Placement, exam fee reduction, fee waiver, low-income, student, high school, College Board, free reduced lunch, college credit, test discount
   description: The College Board offers significant fee reductions on AP (Advanced Placement) exams for students with demonstrated financial need.
   what_they_offer: |
     - $37 College Board fee reduction per AP exam
@@ -89,6 +92,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: CCPG, California College Promise Grant, BOG fee waiver, community college, enrollment fees, free tuition, low-income, FAFSA, Dream Act, CalFresh, TANF, financial aid, CCCApply
   description: The California College Promise Grant (formerly BOG Fee Waiver) waives enrollment fees at all 116 California Community Colleges for eligible students.
   what_they_offer: |
     - Waiver of enrollment fees ($46 per unit)
@@ -115,6 +119,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: Common App, Common Application, fee waiver, free college application, university, low-income, student, financial need, admission, 900 colleges, selective schools
   description: The Common Application offers fee waivers that eliminate college application fees at over 900 participating colleges for students with financial need.
   what_they_offer: |
     - Waived application fees at participating colleges
@@ -141,6 +146,7 @@
   area: Nationwide
   groups:
     - income-eligible
+  keywords: SAT, fee waiver, free test, college entrance exam, low-income, student, high school, 11th grade, 12th grade, College Board, score reports, CSS Profile, Khan Academy, college admission
   description: The College Board offers SAT fee waivers for low-income 11th and 12th grade students, covering test fees and providing additional benefits.
   what_they_offer: |
     - Two free SAT tests (with or without Essay)

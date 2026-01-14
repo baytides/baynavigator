@@ -5,6 +5,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Alameda County Community Food Bank, free food, food pantry, groceries, CalFresh, food stamps, produce, mobile pantry, food distribution
   description: The Alameda County Community Food Bank is one of the largest food banks in the nation, distributing millions of pounds of food annually through a network of partner agencies and direct distribution programs.
   what_they_offer: |
     - Free groceries at 350+ distribution sites
@@ -27,6 +28,7 @@
   groups:
     - seniors
     - disability
+  keywords: Alameda Meals on Wheels, home delivered meals, senior meals, homebound, disabled, hot lunch, frozen meals, meal delivery
   description: Alameda Meals on Wheels delivers nutritious meals to homebound seniors and adults with disabilities in the City of Alameda, providing both nourishment and friendly check-ins.
   what_they_offer: |
     - Hot lunch delivered Monday-Friday
@@ -49,6 +51,7 @@
     - seniors
     - income-eligible
     - everyone
+  keywords: Bernal Heights, Brown Bag, senior food, food pantry, San Francisco, free groceries, produce, Mission District
   description: Bernal Heights Neighborhood Center provides food assistance to San Francisco residents, including a weekly Brown Bag program for seniors and a food pantry serving all community members.
   what_they_offer: |
     - Brown Bag Program: Supplemental groceries for seniors 60+ (Thursdays)
@@ -70,6 +73,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: CalFresh, EBT, food stamps, SNAP, online grocery, Amazon, Walmart, Safeway, grocery delivery, EBT online
   description: CalFresh (California's SNAP/food stamps program) now allows beneficiaries to purchase groceries online from select retailers, making food access more convenient for those with transportation or mobility challenges.
   what_they_offer: |
     - Online grocery ordering with EBT card
@@ -91,6 +95,7 @@
     - income-eligible
     - seniors
     - disability
+  keywords: Restaurant Meals Program, RMP, CalFresh, EBT restaurant, Subway, Denny's, homeless, disabled, senior, prepared meals, hot food
   description: The Restaurant Meals Program allows certain CalFresh recipients to use their EBT benefits at participating restaurants, helping those who may not have access to cooking facilities or ability to prepare meals.
   what_they_offer: |
     - Use CalFresh EBT to buy prepared meals
@@ -110,6 +115,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Food Bank Contra Costa, Solano, free food, food pantry, mobile pantry, senior food, produce, CalFresh, food distribution
   description: The Food Bank of Contra Costa and Solano serves two counties with free food distribution, helping fight hunger through a network of partners and direct community programs.
   what_they_offer: |
     - Free groceries at distribution sites
@@ -130,6 +136,7 @@
   area: Alameda County
   groups:
     - seniors
+  keywords: J-Sei, Japanese meals, Asian senior, culturally appropriate, home delivered meals, senior food, Alameda County, ethnic food
   description: J-Sei provides culturally appropriate Japanese-style home-delivered meals to seniors in Alameda County, honoring cultural food traditions while ensuring nutrition and social connection.
   what_they_offer: |
     - Japanese-style hot meals delivered to your home
@@ -149,6 +156,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: Market Match, farmers market, CalFresh, EBT, WIC, double up, fresh produce, fruits vegetables, food stamps, local farm
   description: Market Match doubles the value of CalFresh and WIC benefits at participating farmers markets, making fresh, locally grown fruits and vegetables more affordable for low-income families.
   what_they_offer: |
     - Double your CalFresh/EBT dollars (up to $10-15 match per visit)
@@ -168,6 +176,7 @@
   groups:
     - seniors
     - disability
+  keywords: Meals on Wheels, Contra Costa, home delivered meals, senior meals, homebound, disabled, hot lunch, frozen meals, special diet
   description: Meals on Wheels Contra Costa delivers nutritious meals to homebound seniors and adults with disabilities, providing nutrition, independence, and social connection through daily visits.
   what_they_offer: |
     - Hot meal delivered Monday-Friday
@@ -188,6 +197,7 @@
   groups:
     - seniors
     - disability
+  keywords: Meals on Wheels, Diablo Region, East Contra Costa, home delivered meals, senior meals, homebound, disabled, wellness check
   description: Meals on Wheels Diablo Region serves the eastern Contra Costa County area, delivering meals and providing vital social connections to homebound seniors and adults with disabilities.
   what_they_offer: |
     - Home-delivered meals
@@ -208,6 +218,7 @@
   groups:
     - seniors
     - disability
+  keywords: Meals on Wheels, San Francisco, home delivered meals, senior meals, homebound, disabled, hot lunch, culturally diverse, special diet
   description: Meals on Wheels San Francisco delivers nutritious meals to homebound seniors and adults with disabilities throughout San Francisco, ensuring no one goes hungry due to age, illness, or isolation.
   what_they_offer: |
     - Hot lunch delivered Monday-Friday
@@ -229,6 +240,7 @@
   groups:
     - seniors
     - disability
+  keywords: Meals on Wheels, San Mateo County, Peninsula Volunteers, home delivered meals, senior meals, homebound, disabled, pet food
   description: Peninsula Volunteers operates Meals on Wheels in San Mateo County, delivering nutritious meals to homebound adults 60+ while providing vital social connection and wellness checks.
   what_they_offer: |
     - Hot meal delivered Monday-Friday
@@ -252,6 +264,7 @@
     - seniors
     - disability
     - everyone
+  keywords: Project Open Hand, medically tailored meals, HIV, AIDS, cancer, diabetes, kidney disease, senior meals, nutrition counseling, home delivery
   description: Project Open Hand provides medically tailored meals and groceries to people living with serious illnesses, as well as nutritious meals to seniors. Since 1985, they've served millions of meals with love.
   what_they_offer: |
     - Medically tailored meals for people with critical illnesses
@@ -274,6 +287,7 @@
   groups:
     - income-eligible
     - seniors
+  keywords: Rainbow Grocery, senior discount, EBT discount, organic food, natural food, cooperative, bulk food, vegan, San Francisco
   description: Rainbow Grocery is a worker-owned cooperative grocery store in San Francisco offering natural and organic foods, with discounts for seniors and EBT cardholders.
   what_they_offer: |
     - 10% discount for shoppers 60+
@@ -300,6 +314,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Second Harvest, Silicon Valley, food bank, free food, food pantry, groceries, produce, home delivery, CalFresh, Santa Clara, San Mateo
   description: Second Harvest of Silicon Valley is one of the largest food banks in the nation, providing food to nearly half a million people each month through a network of 900+ partners and direct distribution sites.
   what_they_offer: |
     - Free groceries at 900+ distribution sites
@@ -322,6 +337,7 @@
     - income-eligible
     - seniors
     - everyone
+  keywords: SF-Marin Food Bank, San Francisco, Marin, free food, food pantry, groceries, home delivery, senior food, CalFresh, produce
   description: The SF-Marin Food Bank provides food to 1 in 4 San Francisco and Marin County residents, operating the largest food pantry network in the region with free groceries and nutrition programs.
   what_they_offer: |
     - Free groceries at 275+ pantry sites
@@ -344,6 +360,7 @@
   groups:
     - seniors
     - disability
+  keywords: SOS Meals on Wheels, Oakland, home delivered meals, senior meals, homebound, disabled, hot meal, frozen meals, special diet
   description: SOS Meals on Wheels serves the Oakland and surrounding areas with daily home-delivered meals for homebound seniors, providing nutrition and social connection for over 50 years.
   what_they_offer: |
     - Hot meal delivered daily, Monday-Friday
@@ -364,6 +381,7 @@
   groups:
     - seniors
     - disability
+  keywords: Sourcewise, Meals on Wheels, Santa Clara County, home delivered meals, senior meals, homebound, disabled, two meals daily
   description: Sourcewise provides Meals on Wheels throughout Santa Clara County, delivering two nutritious meals daily to homebound seniors and adults with disabilities.
   what_they_offer: |
     - Two meals per day delivered to your home
@@ -385,6 +403,7 @@
   groups:
     - seniors
     - disability
+  keywords: Spectrum Community Services, Meals on Wheels, Contra Costa, home delivered meals, senior meals, homebound, nutrition
   description: Spectrum Community Services delivers Meals on Wheels to seniors in central and east Contra Costa County, helping older adults maintain independence and nutrition at home.
   what_they_offer: |
     - Home-delivered meals for seniors 60+
@@ -405,6 +424,7 @@
   city: San Francisco
   groups:
     - everyone
+  keywords: St. Anthony's, dining room, free hot meals, Tenderloin, San Francisco, soup kitchen, breakfast, lunch, no ID, walk-in
   description: St. Anthony's Dining Room has served San Francisco's Tenderloin neighborhood since 1950, providing free hot meals daily with dignity and respect to all who are hungry, no questions asked.
   what_they_offer: |
     - Free hot meals served daily
@@ -429,6 +449,7 @@
   groups:
     - youth
     - everyone
+  keywords: universal school meals, free breakfast, free lunch, school food, California, students, K-12, public school, USDA
   description: California became the first state to offer universal free school meals to all public school students regardless of family income, ensuring every child has access to nutritious breakfast and lunch.
   what_they_offer: |
     - Free breakfast for all TK-12 students
@@ -451,6 +472,7 @@
     - income-eligible
     - families
     - youth
+  keywords: WIC, Women Infants Children, pregnant, breastfeeding, baby food, formula, infant, nutrition, fruits, vegetables, farmers market, breast pump
   description: WIC is California's nutrition program for pregnant and postpartum women, infants, and children under 5, providing healthy food, nutrition education, breastfeeding support, and healthcare referrals.
   what_they_offer: |
     - Monthly benefits for healthy foods (fruits, vegetables, whole grains, milk, eggs)
@@ -474,6 +496,7 @@
     - income-eligible
     - families
     - everyone
+  keywords: YMCA, food pantry, free groceries, Bay Area, produce, diapers, family food, San Francisco, community food
   description: The YMCA of San Francisco operates food pantries throughout the Bay Area, providing free groceries to families and individuals facing food insecurity.
   what_they_offer: |
     - Free groceries at 17 Bay Area locations
@@ -495,6 +518,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Ecumenical Hunger Program, East Palo Alto, food boxes, free food, produce, clothing, furniture, San Mateo County
   description: The Ecumenical Hunger Program serves East Palo Alto and surrounding communities with nutritionally balanced food boxes, helping families stretch their food budgets.
   what_they_offer: |
     - Nutritionally balanced food boxes
@@ -520,6 +544,7 @@
     - income-eligible
     - seniors
     - disability
+  keywords: JFCS, Jewish Family, food pantry, kosher food, senior food, disabled, Santa Clara, high protein, culturally sensitive
   description: Jewish Family and Children's Services (JFCS) operates a food pantry providing high-protein, nutritious food to seniors, disabled adults, and low-income families in Santa Clara County.
   what_they_offer: |
     - High-protein nutritious food boxes
@@ -540,6 +565,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Got Groceries, Peninsula Volunteers, free groceries, San Mateo County, produce, proteins, bread, weekly food
   description: Peninsula Volunteers' Got Groceries program provides weekly bags of free groceries to individuals and families facing food insecurity in San Mateo County.
   what_they_offer: |
     - Full bag of groceries weekly
@@ -561,6 +587,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: USDA, farmers market, local food, fresh produce, farm products, SNAP, EBT, market directory, local farm
   description: The USDA's national directory of over 7,000 farmers markets across the United States, searchable by location to find fresh, locally-grown produce and farm products near you.
   what_they_offer: |
     - Searchable database of 7,000+ farmers markets
@@ -580,6 +607,7 @@
   area: Statewide
   groups:
     - everyone
+  keywords: CDFA, California farmers market, certified market, fresh produce, CalFresh, EBT, Market Match, local farm, California grown
   description: The official California Department of Food and Agriculture directory of 750+ certified farmers' markets statewide, where California farmers sell directly to consumers.
   what_they_offer: |
     - 750+ certified farmers' markets in California

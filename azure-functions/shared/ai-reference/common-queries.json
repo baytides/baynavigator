@@ -1,0 +1,413 @@
+{
+  "generated": "2026-01-13",
+  "description": "Query pattern matching for AI search enhancement - maps natural language to search keywords without LLM calls",
+  "query_patterns": {
+    "crisis_searches": {
+      "suicide_crisis": {
+        "patterns": [
+          "suicide",
+          "kill myself",
+          "want to die",
+          "crisis",
+          "hurting myself",
+          "self harm",
+          "end my life",
+          "don't want to live",
+          "feeling hopeless",
+          "mental health crisis"
+        ],
+        "keywords_to_search": "988 crisis mental health emergency suicide prevention hotline"
+      },
+      "domestic_violence": {
+        "patterns": [
+          "abuse",
+          "hitting me",
+          "domestic violence",
+          "scared of partner",
+          "abusive relationship",
+          "partner hits",
+          "spouse abuse",
+          "violent partner",
+          "dv help",
+          "escape abuse"
+        ],
+        "keywords_to_search": "domestic violence shelter safety hotline abuse survivor"
+      },
+      "sexual_assault": {
+        "patterns": ["raped", "sexual assault", "sexually assaulted", "rape", "molested"],
+        "keywords_to_search": "rainn sexual assault survivor support counseling crisis"
+      },
+      "human_trafficking": {
+        "patterns": ["trafficking", "being trafficked", "forced to work", "held against my will"],
+        "keywords_to_search": "human trafficking hotline help"
+      }
+    },
+    "food_searches": {
+      "hungry_urgent": {
+        "patterns": [
+          "hungry",
+          "need food now",
+          "no food",
+          "starving",
+          "where can i eat",
+          "need to eat",
+          "nothing to eat",
+          "feed my family",
+          "kids are hungry",
+          "haven't eaten"
+        ],
+        "keywords_to_search": "food bank food pantry free meals community meals groceries emergency food"
+      },
+      "food_stamps": {
+        "patterns": [
+          "food stamps",
+          "apply for ebt",
+          "get snap",
+          "calfresh",
+          "ebt card",
+          "snap benefits",
+          "food assistance"
+        ],
+        "keywords_to_search": "calfresh snap ebt food stamps application enrollment"
+      },
+      "wic": {
+        "patterns": ["wic", "wic program", "wic for baby", "pregnant wic", "infant formula"],
+        "keywords_to_search": "wic women infants children nutrition pregnant baby formula"
+      },
+      "senior_meals": {
+        "patterns": ["meals on wheels", "senior meals", "elderly food", "food for seniors"],
+        "keywords_to_search": "meals on wheels senior meals congregate dining elderly food 60+"
+      }
+    },
+    "housing_searches": {
+      "homeless_shelter": {
+        "patterns": [
+          "homeless",
+          "unhoused",
+          "need shelter",
+          "nowhere to stay",
+          "sleeping outside",
+          "living in car",
+          "no place to sleep",
+          "kicked out",
+          "on the street",
+          "need a bed",
+          "lost my housing"
+        ],
+        "keywords_to_search": "emergency shelter navigation center homeless services transitional housing"
+      },
+      "rent_help": {
+        "patterns": [
+          "help paying rent",
+          "can't afford rent",
+          "rent assistance",
+          "rental assistance",
+          "behind on rent",
+          "rent money",
+          "emergency rent"
+        ],
+        "keywords_to_search": "rental assistance emergency rent housing assistance"
+      },
+      "eviction": {
+        "patterns": [
+          "facing eviction",
+          "eviction notice",
+          "being evicted",
+          "unlawful detainer",
+          "3 day notice"
+        ],
+        "keywords_to_search": "eviction prevention tenant rights legal aid housing"
+      },
+      "section_8": {
+        "patterns": [
+          "section 8",
+          "housing voucher",
+          "housing choice voucher",
+          "hcv",
+          "public housing"
+        ],
+        "keywords_to_search": "section 8 housing voucher HCV public housing affordable"
+      },
+      "affordable_housing": {
+        "patterns": [
+          "affordable housing",
+          "low income housing",
+          "subsidized housing",
+          "income restricted",
+          "below market rate"
+        ],
+        "keywords_to_search": "affordable housing low income apartment subsidized BMR"
+      }
+    },
+    "utility_searches": {
+      "electric_bill": {
+        "patterns": [
+          "electric bill",
+          "can't pay pge",
+          "power bill",
+          "electricity help",
+          "pg&e assistance",
+          "utility bill"
+        ],
+        "keywords_to_search": "utility assistance CARE LIHEAP FERA electric gas bill PG&E"
+      },
+      "gas_bill": {
+        "patterns": ["gas bill", "heating bill", "can't pay gas", "natural gas help"],
+        "keywords_to_search": "utility assistance CARE gas heating LIHEAP"
+      },
+      "water_bill": {
+        "patterns": ["water bill", "water assistance", "can't pay water"],
+        "keywords_to_search": "water assistance LIHWAP utility bill"
+      },
+      "shutoff_notice": {
+        "patterns": ["shut off notice", "utility shutoff", "disconnect notice", "power being cut"],
+        "keywords_to_search": "utility assistance shutoff prevention CARE LIHEAP emergency"
+      },
+      "care_program": {
+        "patterns": ["care program", "care discount", "pge discount", "utility discount"],
+        "keywords_to_search": "CARE program utility discount PG&E low income energy"
+      },
+      "internet_help": {
+        "patterns": [
+          "free internet",
+          "cheap internet",
+          "internet assistance",
+          "acp",
+          "affordable connectivity",
+          "broadband help"
+        ],
+        "keywords_to_search": "ACP affordable connectivity internet broadband wifi discount"
+      },
+      "phone_help": {
+        "patterns": ["free phone", "lifeline phone", "government phone", "cheap cell phone"],
+        "keywords_to_search": "lifeline free phone cell wireless"
+      }
+    },
+    "health_searches": {
+      "health_insurance": {
+        "patterns": [
+          "health insurance",
+          "medi-cal",
+          "medicaid",
+          "covered california",
+          "medical coverage",
+          "no insurance"
+        ],
+        "keywords_to_search": "medi-cal health insurance covered california enrollment"
+      },
+      "dental": {
+        "patterns": ["dentist", "dental", "denti-cal", "teeth", "tooth"],
+        "keywords_to_search": "denti-cal dental medi-cal dentist teeth oral health"
+      },
+      "vision": {
+        "patterns": ["vision", "eye doctor", "glasses", "optometrist", "eye exam"],
+        "keywords_to_search": "vision eye glasses optometry medi-cal"
+      },
+      "mental_health": {
+        "patterns": [
+          "mental health",
+          "therapy",
+          "counseling",
+          "therapist",
+          "counselor",
+          "depression",
+          "anxiety"
+        ],
+        "keywords_to_search": "mental health therapy counseling behavioral health psychiatry"
+      },
+      "substance_abuse": {
+        "patterns": [
+          "addiction",
+          "substance abuse",
+          "drug",
+          "alcohol",
+          "rehab",
+          "recovery",
+          "sober",
+          "detox"
+        ],
+        "keywords_to_search": "substance abuse addiction recovery treatment detox rehab"
+      },
+      "prescription": {
+        "patterns": ["prescription", "medication", "medicine", "pharmacy", "rx", "drugs"],
+        "keywords_to_search": "prescription assistance medication pharmacy medi-cal"
+      }
+    },
+    "transportation_searches": {
+      "transit_discount": {
+        "patterns": [
+          "transit discount",
+          "cheap bus",
+          "cheap bart",
+          "clipper start",
+          "low income transit"
+        ],
+        "keywords_to_search": "clipper start transit discount BART muni bus"
+      },
+      "paratransit": {
+        "patterns": [
+          "paratransit",
+          "wheelchair van",
+          "disabled transportation",
+          "door to door",
+          "dial a ride"
+        ],
+        "keywords_to_search": "paratransit accessible transit disability transportation"
+      },
+      "senior_transit": {
+        "patterns": ["senior transit", "senior bus", "elderly transportation"],
+        "keywords_to_search": "senior transit discount elderly transportation 65+"
+      }
+    },
+    "childcare_searches": {
+      "childcare": {
+        "patterns": ["childcare", "child care", "daycare", "day care", "babysitter"],
+        "keywords_to_search": "childcare daycare subsidy child care assistance"
+      },
+      "preschool": {
+        "patterns": ["preschool", "pre-school", "head start", "pre-k", "early childhood"],
+        "keywords_to_search": "preschool head start early childhood education state preschool"
+      },
+      "after_school": {
+        "patterns": ["after school", "afterschool", "before school", "summer care"],
+        "keywords_to_search": "after school program youth recreation"
+      }
+    },
+    "financial_searches": {
+      "cash_aid": {
+        "patterns": ["cash aid", "welfare", "calworks", "tanf", "cash assistance"],
+        "keywords_to_search": "calworks cash aid welfare tanf general assistance"
+      },
+      "disability_benefits": {
+        "patterns": [
+          "ssi",
+          "ssdi",
+          "disability benefits",
+          "social security disability",
+          "can't work"
+        ],
+        "keywords_to_search": "ssi ssdi disability social security benefits"
+      },
+      "tax_help": {
+        "patterns": ["free tax", "vita", "tax preparation", "file taxes", "eitc", "earned income"],
+        "keywords_to_search": "VITA free tax preparation EITC CalEITC"
+      }
+    },
+    "employment_searches": {
+      "job_search": {
+        "patterns": ["job", "employment", "work", "hiring", "looking for work", "need a job"],
+        "keywords_to_search": "job employment career workforce hiring"
+      },
+      "unemployment": {
+        "patterns": ["unemployment", "unemployed", "laid off", "lost my job", "edd"],
+        "keywords_to_search": "unemployment edd job loss benefits"
+      },
+      "job_training": {
+        "patterns": ["job training", "career training", "workforce", "skills training"],
+        "keywords_to_search": "job training workforce development career education"
+      },
+      "resume_help": {
+        "patterns": ["resume", "interview", "job application"],
+        "keywords_to_search": "resume interview career center job search"
+      }
+    },
+    "legal_searches": {
+      "legal_aid": {
+        "patterns": [
+          "lawyer",
+          "attorney",
+          "legal help",
+          "legal aid",
+          "need a lawyer",
+          "can't afford lawyer"
+        ],
+        "keywords_to_search": "legal aid lawyer attorney free legal services"
+      },
+      "tenant_rights": {
+        "patterns": ["tenant rights", "landlord", "renter rights", "lease"],
+        "keywords_to_search": "tenant rights renter landlord legal aid housing"
+      },
+      "immigration": {
+        "patterns": [
+          "immigration",
+          "immigrant",
+          "citizenship",
+          "visa",
+          "daca",
+          "asylum",
+          "green card"
+        ],
+        "keywords_to_search": "immigration legal services citizenship visa asylum"
+      },
+      "expungement": {
+        "patterns": ["expungement", "clear record", "criminal record", "background check"],
+        "keywords_to_search": "expungement record clearance criminal reentry"
+      }
+    },
+    "education_searches": {
+      "financial_aid": {
+        "patterns": ["financial aid", "fafsa", "college money", "tuition help", "grants"],
+        "keywords_to_search": "financial aid fafsa cal grant pell grant tuition"
+      },
+      "ged": {
+        "patterns": ["ged", "high school diploma", "adult education", "finish high school"],
+        "keywords_to_search": "ged adult education high school equivalency"
+      },
+      "esl": {
+        "patterns": ["esl", "english class", "learn english", "english as second language"],
+        "keywords_to_search": "esl english adult education language"
+      },
+      "college": {
+        "patterns": ["college", "university", "community college", "higher education"],
+        "keywords_to_search": "college university community college financial aid"
+      }
+    },
+    "demographic_searches": {
+      "senior": {
+        "patterns": ["senior", "elderly", "over 60", "over 65", "retired", "older adult", "aging"],
+        "keywords_to_search": "senior 60+ 65+ elderly aging programs services"
+      },
+      "veteran": {
+        "patterns": [
+          "veteran",
+          "military",
+          "served",
+          "va benefits",
+          "armed forces",
+          "army",
+          "navy",
+          "marines"
+        ],
+        "keywords_to_search": "veteran military va benefits armed forces service"
+      },
+      "disability": {
+        "patterns": ["disabled", "disability", "wheelchair", "blind", "deaf", "special needs"],
+        "keywords_to_search": "disability disabled accessible ssi ssdi services"
+      },
+      "pregnant": {
+        "patterns": ["pregnant", "pregnancy", "expecting", "having a baby", "prenatal"],
+        "keywords_to_search": "pregnant pregnancy prenatal wic medi-cal maternity"
+      },
+      "student": {
+        "patterns": ["student", "college student", "enrolled", "in school"],
+        "keywords_to_search": "student college financial aid education"
+      },
+      "immigrant": {
+        "patterns": ["immigrant", "refugee", "asylum", "newcomer", "undocumented"],
+        "keywords_to_search": "immigrant refugee asylum newcomer services"
+      },
+      "lgbtq": {
+        "patterns": ["lgbtq", "lgbt", "gay", "lesbian", "transgender", "trans", "queer"],
+        "keywords_to_search": "lgbtq lgbt transgender affirming support"
+      },
+      "foster_youth": {
+        "patterns": ["foster", "foster care", "foster youth", "aged out", "emancipated"],
+        "keywords_to_search": "foster youth extended benefits housing education"
+      },
+      "reentry": {
+        "patterns": ["incarcerated", "prison", "jail", "reentry", "parole", "probation", "record"],
+        "keywords_to_search": "reentry formerly incarcerated services expungement"
+      }
+    }
+  }
+}

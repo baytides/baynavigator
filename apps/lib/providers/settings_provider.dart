@@ -4,10 +4,12 @@ import '../services/privacy_service.dart';
 
 class SettingsProvider extends ChangeNotifier {
   static const String _crashReportingKey = 'baynavigator:crash_reporting';
+  static const String _aiSearchEnabledKey = 'baynavigator:ai_search_enabled';
 
   final PrivacyService _privacyService = PrivacyService();
 
   bool _crashReportingEnabled = true;
+  bool _aiSearchEnabled = true;
   bool _initialized = false;
 
   // Privacy settings
@@ -22,6 +24,7 @@ class SettingsProvider extends ChangeNotifier {
   List<CallingApp> _availableCallingApps = [CallingApp.system, CallingApp.other];
 
   bool get crashReportingEnabled => _crashReportingEnabled;
+  bool get aiSearchEnabled => _aiSearchEnabled;
   bool get initialized => _initialized;
 
   // Privacy getters
@@ -42,6 +45,7 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       _crashReportingEnabled = prefs.getBool(_crashReportingKey) ?? true;
+      _aiSearchEnabled = prefs.getBool(_aiSearchEnabledKey) ?? true;
 
       // Load privacy settings
       _useOnion = await _privacyService.isOnionEnabled();
@@ -68,6 +72,18 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_crashReportingKey, enabled);
+    } catch (e) {
+      // Continue without persistence
+    }
+  }
+
+  Future<void> setAISearchEnabled(bool enabled) async {
+    _aiSearchEnabled = enabled;
+    notifyListeners();
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(_aiSearchEnabledKey, enabled);
     } catch (e) {
       // Continue without persistence
     }

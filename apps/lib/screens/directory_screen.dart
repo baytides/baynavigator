@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../providers/programs_provider.dart';
+import '../providers/settings_provider.dart';
 import '../widgets/program_card.dart';
 import '../widgets/filter_presets_dialog.dart';
 import '../widgets/recent_searches_overlay.dart';
@@ -106,11 +107,21 @@ class DirectoryScreenState extends State<DirectoryScreen> {
     }
   }
 
-  void _onSearchSubmitted(String query) {
+  Future<void> _onSearchSubmitted(String query) async {
     if (query.length >= 2) {
       _apiService.addRecentSearch(query);
     }
     _hideRecentSearches();
+
+    // Try AI search for natural language queries (if enabled in settings)
+    final provider = context.read<ProgramsProvider>();
+    final settingsProvider = context.read<SettingsProvider>();
+    if (provider.shouldUseAISearch(query)) {
+      await provider.performAISearch(
+        query,
+        aiEnabled: settingsProvider.aiSearchEnabled,
+      );
+    }
   }
 
   void _showFilterPresetsDialog() {
@@ -139,6 +150,69 @@ class DirectoryScreenState extends State<DirectoryScreen> {
     final provider = context.read<ProgramsProvider>();
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Use dialog on desktop/tablet for better desktop-class experience
+    if (screenWidth >= 768) {
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          backgroundColor: isDark ? AppColors.darkCard : Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 320),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    'Sort By',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const Divider(height: 1),
+                ...SortOption.values.map((option) {
+                  final isSelected = provider.sortOption == option;
+                  return InkWell(
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      provider.setSortOption(option);
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: Row(
+                        children: [
+                          Icon(
+                            isSelected ? Icons.check_circle : Icons.circle_outlined,
+                            color: isSelected ? AppColors.primary : (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
+                            size: 20,
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            _getSortLabel(option),
+                            style: TextStyle(
+                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                              color: isDark ? AppColors.darkText : AppColors.lightText,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+                const SizedBox(height: 8),
+              ],
+            ),
+          ),
+        ),
+      );
+      return;
+    }
 
     showModalBottomSheet(
       context: context,
@@ -187,6 +261,18 @@ class DirectoryScreenState extends State<DirectoryScreen> {
   void _showFilterSheet(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Use dialog on desktop/tablet for better desktop-class experience
+    final useDialog = screenWidth >= 768;
+
+    if (useDialog) {
+      showDialog(
+        context: context,
+        builder: (context) => _buildFilterDialog(context, theme, isDark),
+      );
+      return;
+    }
 
     showModalBottomSheet(
       context: context,
@@ -329,6 +415,141 @@ class DirectoryScreenState extends State<DirectoryScreen> {
           },
         );
       },
+    );
+  }
+
+  // Desktop/tablet filter dialog for better desktop-class experience
+  Widget _buildFilterDialog(BuildContext context, ThemeData theme, bool isDark) {
+    return Dialog(
+      backgroundColor: isDark ? AppColors.darkCard : Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 700),
+        child: Consumer<ProgramsProvider>(
+          builder: (context, provider, child) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Filters',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      if (provider.filterState.filterCount > 0) ...[
+                        const SizedBox(width: 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            '${provider.filterState.filterCount}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                      const Spacer(),
+                      if (provider.filterState.hasFilters)
+                        TextButton(
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            provider.clearFilters();
+                          },
+                          child: const Text('Clear All'),
+                        ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.close),
+                        tooltip: 'Close filters',
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+                Flexible(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildFilterSection(
+                          context,
+                          title: 'Categories',
+                          icon: Icons.category,
+                          items: provider.categories,
+                          selectedIds: provider.filterState.categories,
+                          onToggle: (id) {
+                            HapticFeedback.lightImpact();
+                            provider.toggleCategory(id);
+                          },
+                          getId: (c) => c.id,
+                          getName: (c) => c.name,
+                          getCount: (c) => provider.getCategoryCount(c.id),
+                        ),
+                        const SizedBox(height: 24),
+                        _buildFilterSection(
+                          context,
+                          title: 'Groups',
+                          icon: Icons.check_circle_outline,
+                          items: provider.groups,
+                          selectedIds: provider.filterState.groups,
+                          onToggle: (id) {
+                            HapticFeedback.lightImpact();
+                            provider.toggleGroup(id);
+                          },
+                          getId: (g) => g.id,
+                          getName: (g) => g.name,
+                          getCount: (g) => provider.getGroupCount(g.id),
+                        ),
+                        const SizedBox(height: 24),
+                        _buildAreaFilterSection(
+                          context,
+                          provider: provider,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Icon(Icons.list, color: AppColors.primary),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          '${provider.filteredPrograms.length} programs match',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      FilledButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text('Done'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -793,6 +1014,80 @@ class DirectoryScreenState extends State<DirectoryScreen> {
                     ),
                   ),
 
+                  // AI Search loading indicator
+                  if (provider.isAISearching)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 16,
+                              height: 16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              'Searching with AI...',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                  // AI Search message (when results are from AI)
+                  if (provider.aiSearchMessage != null && !provider.isAISearching)
+                    SliverToBoxAdapter(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? AppColors.primary.withValues(alpha: 0.15)
+                              : AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: AppColors.primary.withValues(alpha: 0.3),
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.auto_awesome,
+                              size: 18,
+                              color: AppColors.primary,
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                provider.aiSearchMessage!,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: isDark ? AppColors.darkText : AppColors.lightText,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.close, size: 18),
+                              onPressed: () {
+                                provider.clearAISearch();
+                                _searchController.clear();
+                              },
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
+                              tooltip: 'Clear AI search',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
                   // Results count and clear filters
                   SliverToBoxAdapter(
                     child: Padding(
@@ -800,17 +1095,20 @@ class DirectoryScreenState extends State<DirectoryScreen> {
                       child: Row(
                         children: [
                           Text(
-                            '${programs.length} program${programs.length == 1 ? '' : 's'}',
+                            provider.aiSearchResults != null
+                                ? '${programs.length} AI result${programs.length == 1 ? '' : 's'}'
+                                : '${programs.length} program${programs.length == 1 ? '' : 's'}',
                             style: theme.textTheme.bodySmall?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          if (provider.filterState.hasFilters) ...[
+                          if (provider.filterState.hasFilters || provider.aiSearchResults != null) ...[
                             const Spacer(),
                             TextButton.icon(
                               onPressed: () {
                                 _searchController.clear();
                                 provider.clearFilters();
+                                provider.clearAISearch();
                               },
                               icon: const Icon(Icons.clear, size: 18),
                               label: const Text('Clear'),

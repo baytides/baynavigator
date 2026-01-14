@@ -4,6 +4,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Banfield Foundation, pet assistance, pet food bank, low-cost vet, emergency pet care, financial assistance, pet resources, keep pet, housing pets
   description: The Banfield Foundation is a nonprofit that helps pets and the people who love them by providing resources, grants, and support to pet owners facing financial hardship.
   what_they_offer: |
     - Comprehensive directory of financial assistance programs
@@ -28,6 +29,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Berkeley Humane, Spay the Bay, spay, neuter, low-cost, vaccinations, microchip, East Bay, cat, dog, pet surgery, fix pet
   description: Berkeley-East Bay Humane Society's Spay the Bay program provides affordable spay/neuter services to help reduce pet overpopulation in the East Bay.
   what_they_offer: |
     - Low-cost spay and neuter surgeries
@@ -56,6 +58,7 @@
   area: Santa Clara County
   groups:
     - income-eligible
+  keywords: HSSV, Humane Society Silicon Valley, pet food, free pet food, pet pantry, dog food, cat food, Milpitas, Santa Clara, keep pet
   description: The Humane Society Silicon Valley's Pet Pantry program helps families keep their pets by providing free pet food during times of financial hardship.
   what_they_offer: |
     - Free dog and cat food
@@ -84,6 +87,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Humane World, pet financial assistance, vet payment plan, pet insurance, low-cost vet clinic, afford pet, pet help directory
   description: Humane World provides a comprehensive directory of resources for pet owners who are struggling to afford their pet's care, helping keep families and pets together.
   what_they_offer: |
     - Directory of pet financial assistance programs
@@ -107,6 +111,7 @@
   area: Contra Costa County
   groups:
     - income-eligible
+  keywords: Joybound, ARF, Tony La Russa, low-cost vet, Contra Costa, veterinary care, pet medical, Walnut Creek, dog, cat, vaccinations
   description: Joybound People & Pets (formerly Tony La Russa's ARF) provides low-cost veterinary care to help Contra Costa County residents keep their pets healthy.
   what_they_offer: |
     - Low-cost medical exams and treatments
@@ -135,6 +140,7 @@
   area: Contra Costa County
   groups:
     - income-eligible
+  keywords: Joybound, free pet food, dog food, cat food, Contra Costa, pet pantry, pet supplies, Walnut Creek, keep pet
   description: Joybound's pet food assistance program helps Contra Costa County families keep their pets by providing free food during financial hardship.
   what_they_offer: |
     - Free dog food
@@ -162,6 +168,7 @@
   area: Contra Costa County
   groups:
     - everyone
+  keywords: Joybound, free vaccinations, rabies, DHPP, FVRCP, microchip, Contra Costa, vaccine clinic, pet shots, walk-in
   description: Joybound holds free vaccination clinics throughout Contra Costa County to help ensure all pets have access to essential preventive care.
   what_they_offer: |
     - Free rabies vaccinations
@@ -186,6 +193,7 @@
   area: Contra Costa County
   groups:
     - income-eligible
+  keywords: Joybound, Pet Safety Net, emergency pet help, vet assistance, pet supplies, foster care, crisis, Contra Costa, prevent surrender
   description: Joybound's Pet Safety Net provides emergency resources to help families keep their pets during times of crisis or financial hardship.
   what_they_offer: |
     - Emergency pet food assistance
@@ -214,6 +222,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Joybound, spay, neuter, low-cost, Contra Costa, Walnut Creek, dog surgery, cat surgery, fix pet, sterilization
   description: Joybound offers low-cost spay and neuter services to help reduce pet overpopulation and keep pets healthy.
   what_they_offer: |
     - Low-cost spay surgeries
@@ -243,6 +252,7 @@
   groups:
     - income-eligible
     - seniors
+  keywords: Marin Humane, pet meals on wheels, vet assistance, pet food pantry, seniors, HIV/AIDS, hospice, Novato, pet care
   description: Marin Humane Society provides pet care assistance to help vulnerable Marin County residents keep and care for their pets.
   what_they_offer: |
     - Pet Meals on Wheels (food delivery for homebound seniors)
@@ -271,6 +281,7 @@
   area: San Francisco
   groups:
     - seniors
+  keywords: Muttville, Cuddle Club, senior dogs, therapy dogs, seniors 62+, dog interaction, animal therapy, San Francisco, free events
   description: Muttville's Cuddle Club brings the joy of dogs to seniors 62+ through free events where they can spend time with gentle senior dogs—no adoption required.
   what_they_offer: |
     - Free cuddle time with senior dogs
@@ -299,6 +310,7 @@
   area: San Francisco
   groups:
     - seniors
+  keywords: Muttville, Seniors for Seniors, free adoption, senior dog, adopt dog, seniors 62+, San Francisco, companion pet, older dog
   description: Muttville's Seniors for Seniors program offers free adoptions of senior dogs (7+ years) to seniors 62 and older, helping both seniors and dogs find companionship.
   what_they_offer: |
     - Free adoption of senior dogs (7 years and older)
@@ -328,6 +340,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Peninsula Humane Society, PHS, mobile van, spay, neuter, San Mateo County, free spay, low-cost, cat, dog, mobile clinic
   description: Peninsula Humane Society's mobile spay/neuter van travels throughout San Mateo County providing accessible, low-cost sterilization services.
   what_they_offer: |
     - Free or low-cost spay/neuter surgeries
@@ -352,6 +365,7 @@
   area: San Mateo County
   groups:
     - everyone
+  keywords: Peninsula Humane Society, PHS SPCA, vaccine clinic, vaccinations, rabies, DHPP, FVRCP, microchip, nail trim, San Mateo
   description: Peninsula Humane Society & SPCA offers regular low-cost vaccine clinics providing essential preventive care for dogs and cats.
   what_they_offer: |
     - Low-cost vaccinations (rabies, DHPP, FVRCP)
@@ -380,6 +394,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Pet Help Finder, low-cost vet, pet financial assistance, pet food bank, emergency pet, vet locator, zip code search
   description: Pet Help Finder is a searchable database that helps pet owners locate low-cost veterinary services and financial assistance programs by zip code.
   what_they_offer: |
     - Searchable database of low-cost vet clinics
@@ -405,6 +420,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: Pets in Need, low-cost vet, Redwood City, spay, neuter, vaccinations, microchip, wellness exam, San Mateo, affordable vet
   description: Pets in Need operates a community veterinary clinic in Redwood City providing affordable care to help families keep their pets healthy.
   what_they_offer: |
     - Low-cost wellness exams
@@ -432,6 +448,7 @@
   groups:
     - unhoused
     - income-eligible
+  keywords: Pets of the Homeless, homeless pet help, free vet care, free pet food, emergency pet, street pet, unhoused, pet assistance
   description: Pets of the Homeless is a nonprofit providing free veterinary care and pet food to pets of people experiencing homelessness.
   what_they_offer: |
     - Free veterinary care through participating providers
@@ -457,6 +474,7 @@
   groups:
     - income-eligible
     - everyone
+  keywords: SF SPCA, San Francisco SPCA, Community Clinic, wellness exam, vaccinations, flea, tick, heartworm, microchip, affordable vet
   description: The SF SPCA's Community Clinic provides affordable preventative care to help all San Francisco pets stay healthy.
   what_they_offer: |
     - Affordable wellness exams
@@ -484,6 +502,7 @@
   area: San Francisco
   groups:
     - everyone
+  keywords: SF SPCA, San Francisco SPCA, spay, neuter, tiered pricing, dog, cat, sterilization, fix pet, affordable surgery
   description: The SF SPCA offers affordable spay and neuter services with tiered pricing to make sterilization accessible to all San Francisco residents.
   what_they_offer: |
     - Tiered pricing based on ability to pay
@@ -512,6 +531,7 @@
   area: Bay Area-wide
   groups:
     - income-eligible
+  keywords: SF Aid for Animals, SFAFA, vet financial assistance, urgent vet care, emergency pet, Bay Area, low-income, prevent euthanasia, pet grant
   description: SF Aid for Animals provides financial assistance for urgent veterinary care to low-income Bay Area residents, helping them avoid having to surrender or euthanize pets due to cost.
   what_they_offer: |
     - Financial grants for urgent veterinary care
@@ -537,6 +557,7 @@
   area: Statewide
   groups:
     - income-eligible
+  keywords: The Pet Fund, vet financial assistance, pet treatment, diabetes, cancer, chronic care, non-emergency, California, afford vet
   description: The Pet Fund provides financial assistance for non-basic, non-emergency veterinary care to pet owners who cannot afford treatment.
   what_they_offer: |
     - Financial assistance for non-emergency vet care
@@ -562,6 +583,7 @@
   area: Nationwide
   groups:
     - everyone
+  keywords: Vet Billing, payment plan, vet financing, pay over time, veterinary credit, afford vet bill, installment
   description: Vet Billing maintains a directory of veterinary practices that offer payment plans or financing options, helping pet owners manage veterinary costs over time.
   what_they_offer: |
     - Directory of vets offering payment plans
@@ -585,6 +607,7 @@
   area: Bay Area-wide
   groups:
     - everyone
+  keywords: VETCO, Petco, vaccinations, microchip, heartworm test, flea, tick, walk-in, affordable, pet shots, no appointment
   description: VETCO operates walk-in vaccination clinics inside Petco stores, providing convenient and affordable preventive care for dogs and cats.
   what_they_offer: |
     - Affordable vaccinations
@@ -610,6 +633,7 @@
   area: Northern California
   groups:
     - everyone
+  keywords: VIP Petcare, walk-in clinic, vaccinations, microchip, heartworm, FeLV, FIV, flea, tick, weekend, no exam fee, affordable
   description: VIP Petcare provides walk-in wellness clinics at pet stores throughout Northern California, offering affordable preventive care without the need for an appointment.
   what_they_offer: |
     - Walk-in vaccination clinics

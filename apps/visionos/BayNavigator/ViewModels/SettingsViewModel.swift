@@ -37,6 +37,15 @@ final class SettingsViewModel {
         }
     }
 
+    /// AI-powered search enabled
+    var aiSearchEnabled: Bool = true {
+        didSet {
+            Task {
+                await CacheService.shared.setAISearchEnabled(aiSearchEnabled)
+            }
+        }
+    }
+
     // MARK: - Privacy Settings
 
     /// Enable Tor/Onion routing for enhanced privacy
@@ -98,6 +107,12 @@ final class SettingsViewModel {
             let savedLocale = await LocalizationService.shared.currentLocale
             await MainActor.run {
                 self.currentLocale = savedLocale
+            }
+
+            // Load AI search setting
+            let aiEnabled = await cache.getAISearchEnabled()
+            await MainActor.run {
+                self.aiSearchEnabled = aiEnabled
             }
 
             // Load privacy settings

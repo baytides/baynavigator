@@ -29,6 +29,15 @@ class ProgramsProvider extends ChangeNotifier {
   FilterState _filterState = FilterState();
   SortOption _sortOption = SortOption.recentlyVerified;
 
+  // AI Search state
+  bool _isAISearching = false;
+  List<Program>? _aiSearchResults;
+  String? _aiSearchMessage;
+
+  bool get isAISearching => _isAISearching;
+  List<Program>? get aiSearchResults => _aiSearchResults;
+  String? get aiSearchMessage => _aiSearchMessage;
+
   ProgramsProvider({ApiService? apiService})
       : _apiService = apiService ?? ApiService();
 
@@ -55,6 +64,11 @@ class ProgramsProvider extends ChangeNotifier {
   static const _otherAreaNames = ['Bay Area', 'Statewide', 'Nationwide'];
 
   List<Program> get filteredPrograms {
+    // If AI search results are available, return those instead
+    if (_aiSearchResults != null) {
+      return _aiSearchResults!;
+    }
+
     var result = _programs;
 
     // Apply search query
@@ -283,7 +297,55 @@ class ProgramsProvider extends ChangeNotifier {
 
   // Filter methods
   void setSearchQuery(String query) {
+    // Clear AI search results when query changes
+    _aiSearchResults = null;
+    _aiSearchMessage = null;
     _filterState = _filterState.copyWith(searchQuery: query);
+    notifyListeners();
+  }
+
+  /// Check if query should use AI search (natural language queries)
+  bool shouldUseAISearch(String query) {
+    return _apiService.shouldUseAISearch(query);
+  }
+
+  /// Perform AI-powered search for natural language queries
+  /// Returns true if AI search was used, false if it fell back to local search
+  /// Pass aiEnabled=false to disable AI (user preference or offline)
+  Future<bool> performAISearch(String query, {bool aiEnabled = true}) async {
+    if (!aiEnabled || !_apiService.shouldUseAISearch(query)) {
+      // Use regular local search
+      setSearchQuery(query);
+      return false;
+    }
+
+    _isAISearching = true;
+    _aiSearchMessage = null;
+    notifyListeners();
+
+    try {
+      final result = await _apiService.performAISearch(query: query);
+      _aiSearchResults = result.programs;
+      _aiSearchMessage = result.message;
+      // Clear regular search to show AI results
+      _filterState = _filterState.copyWith(searchQuery: '');
+      _isAISearching = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      // Fall back to local search on error (likely offline)
+      _isAISearching = false;
+      _aiSearchResults = null;
+      _aiSearchMessage = null;
+      setSearchQuery(query);
+      return false;
+    }
+  }
+
+  /// Clear AI search results and return to normal filtering
+  void clearAISearch() {
+    _aiSearchResults = null;
+    _aiSearchMessage = null;
     notifyListeners();
   }
 

@@ -7,6 +7,7 @@
 helplines:
   - id: 'c8e47108-3f87-4311-ab8f-7a3adf01ba06'
     name: '988 Suicide & Crisis Lifeline'
+    keywords: 988, suicide, crisis, hotline, mental health, depression, suicidal, emergency, lifeline, emotional distress, prevention, intervention, call, text, chat, 24/7
     description: 'The 988 Suicide & Crisis Lifeline is a suicide prevention and crisis intervention service available to anyone in suicidal crisis or emotional distress of any kind in the United States and its terri...'
     website: 'https://988lifeline.org'
     phone: '988'
@@ -33,6 +34,7 @@ helplines:
     verified: true
   - id: '89509dd8-f146-4765-b8f1-54c235b5594b'
     name: 'Crisis Text Line'
+    keywords: crisis text line, 741741, text HOME, mental health, text support, confidential, free, 24/7, emotional support, chat, WhatsApp
     description: "Crisis Text Line is here to help you, whatever you're going through. We provide 24/7, free and confidential support and information by text message (text HOME to 741741), online chat and WhatsApp (..."
     website: 'https://www.crisistextline.org/'
     phone: ''
@@ -59,6 +61,7 @@ helplines:
     verified: true
   - id: 'b97a3d66-84c0-49d9-8f24-1206dab284c1'
     name: 'TrevorLifeline'
+    keywords: Trevor, TrevorLifeline, LGBTQ, LGBT, gay, lesbian, bisexual, transgender, queer, youth, young people, suicide, crisis, hotline, 24/7, confidential
     description: 'TrevorLifeline offers 24/7, free and confidential support by phone, text message (SMS) and online chat. We support LGBTQ+ young people in the U.S. and Mexico who may be experiencing emotional distr...'
     website: 'https://www.thetrevorproject.org/'
     phone: '(866) 488-7386'
@@ -71,6 +74,7 @@ helplines:
     verified: true
   - id: '0318ee03-74c0-4dbc-bba0-653df19436c9'
     name: 'love is respect'
+    keywords: love is respect, dating abuse, relationship abuse, teen dating violence, domestic violence, abusive relationship, healthy relationships, safety, hotline, 24/7
     description: 'love is respect offers 24/7, free and confidential support by phone, text message (SMS) and online chat. We are here for everyone who may be looking for support with dating abuse and who have quest...'
     website: 'https://www.loveisrespect.org/'
     phone: '(866) 331-9474'
@@ -83,6 +87,7 @@ helplines:
     verified: true
   - id: 'a2ceaf96-ade0-4d8d-a9f6-990ca6768824'
     name: 'National Domestic Violence Hotline'
+    keywords: domestic violence, DV, abuse, abusive relationship, intimate partner violence, IPV, hotline, battered, safety, shelter, restraining order, 24/7, confidential
     description: 'The National Domestic Violence Hotline (The Hotline) established in 1996, serves those impacted by relationship abuse in the U.S. 24/7 with free and confidential live services provided via phone, c...'
     website: 'https://www.thehotline.org/'
     phone: '(800) 799-7233'
@@ -95,6 +100,7 @@ helplines:
     verified: true
   - id: 'a4f5ccb3-a841-4d31-8035-9599779f9c11'
     name: 'RAINN National Sexual Assault Hotline'
+    keywords: RAINN, sexual assault, rape, survivor, abuse, sexual violence, hotline, crisis, confidential, 24/7, support, trauma, victim
     description: 'The National Sexual Assault Hotline is a confidential, free, 24/7 support service, available in English and Spanish operated by RAINN, the largest anti-sexual violence organization in the United St...'
     website: 'https://www.rainn.org/'
     phone: '(800) 656-4673'
@@ -107,6 +113,7 @@ helplines:
     verified: true
   - id: '2d8f39f3-64e8-463c-b1c6-d2cbad6722f3'
     name: 'National Alliance on Mental Illness (NAMI) HelpLine'
+    keywords: NAMI, mental illness, mental health, peer support, depression, anxiety, bipolar, schizophrenia, family, caregiver, helpline, support group, resources
     description: 'Wherever you are, the NAMI HelpLine is here for you. We are a free, nationwide peer-support service for people with mental health conditions, their family members and caregivers, mental health prov...'
     website: 'https://nami.org/help'
     phone: '(800) 950-6264'
@@ -130,6 +137,7 @@ helplines:
     verified: true
   - id: 'b92d16ff-ff50-4371-9492-71372478c1bb'
     name: "SAMHSA's National Helpline"
+    keywords: SAMHSA, substance abuse, addiction, mental health, drug, alcohol, rehab, treatment, recovery, referral, hotline, 24/7, confidential, opioid, overdose
     description: 'SAMHSA’s National Helpline is a confidential, free, 24-hour-a-day, 365-day-a-year, information service, in English and Spanish, for individuals and family members facing mental and/or substance use...'
     website: 'https://www.samhsa.gov/find-help/national-helpline'
     phone: '1-800-662-4357'
@@ -156,6 +164,7 @@ helplines:
     verified: true
   - id: '958774cc-8c1f-4862-b070-b7ed745414d7'
     name: 'National Human Trafficking Hotline'
+    keywords: human trafficking, trafficking, forced labor, sex trafficking, exploitation, victim, survivor, hotline, 24/7, tip, report, help, rescue
     description: 'The National Human Trafficking Hotline is a national, toll-free hotline, available to answer calls, texts, and chats from anywhere in the country, 24 hours a day, 7 days a week, every day of the ye...'
     website: 'https://humantraffickinghotline.org/'
     phone: '(888) 373-7888'
@@ -168,6 +177,7 @@ helplines:
     verified: true
   - id: '2773ca93-a8af-4892-9ac3-6b545689b9a5'
     name: 'Trans Lifeline'
+    keywords: Trans Lifeline, transgender, trans, non-binary, gender identity, transition, peer support, hotline, crisis, LGBTQ, questioning, gender dysphoria
     description: "Trans Lifeline's Hotline is a peer support phone service run by trans people for our trans and questioning peers. Call us if you need someone trans to talk to, even if you're not in a crisis or if ..."
     website: 'https://www.translifeline.org/hotline'
     phone: '(877) 565-8860'
@@ -193,6 +203,7 @@ helplines:
     verified: true
   - id: 'a460e958-621e-4804-a82c-5edf6a03a129'
     name: 'National Abortion Hotline'
+    keywords: abortion, reproductive health, NAF, pregnancy, family planning, clinic, confidential, financial assistance, hotline, options
     description: 'The National Abortion Hotline (NAH), operated by the National Abortion Federation (NAF), is a confidential, toll-free helpline dedicated to supporting anyone seeking information or assistance regar...'
     website: 'https://prochoice.org/patients/naf-hotline/'
     phone: '(800) 772-9100'
@@ -205,6 +216,7 @@ helplines:
     verified: true
   - id: 'c5e0c055-26f6-4734-872d-0eac1170ea50'
     name: 'Veterans Crisis Line'
+    keywords: veteran, veterans, crisis, military, VA, suicide, mental health, PTSD, combat, service member, hotline, 24/7, depression, anxiety
     description: 'The Veterans Crisis Line is a toll-free, confidential resource that connects Veterans in crisis and their families and friends with qualified, caring U.S. Department of Veterans Affairs (VA) respon...'
     website: 'https://www.veteranscrisisline.net/'
     phone: ''
@@ -217,6 +229,7 @@ helplines:
     verified: true
   - id: 'ad5fa03c-52c3-47fc-98ed-38dd4cc5050d'
     name: 'National Maternal Mental Health Hotline'
+    keywords: maternal, postpartum, pregnancy, new mom, depression, anxiety, baby, birth, mental health, perinatal, prenatal, PPD, breastfeeding, parent
     description: 'Pregnancy and a new baby can bring a range of emotions. Many new moms feel overwhelmed, sad, anxious, or exhausted at different times during their pregnancy or after the baby is born. Sometimes the...'
     website: 'https://mchb.hrsa.gov/national-maternal-mental-health-hotline'
     phone: '1-833-852-6262'
@@ -230,6 +243,7 @@ helplines:
     verified: true
   - id: '67db9ebc-23ff-4207-b0fd-59134cad0437'
     name: 'National Problem Gambling Helpline'
+    keywords: gambling, problem gambling, addiction, casino, betting, sports betting, lottery, compulsive, helpline, 24/7, treatment, recovery
     description: 'National Problem Gambling Helpline offers 24/7, free and confidential support by phone, text message (SMS) and online chat. We are here for everyone in the United States who may be looking for supp...'
     website: 'https://www.ncpgambling.org/help-treatment/'
     phone: '1-800-426-2537'
@@ -242,6 +256,7 @@ helplines:
     verified: true
   - id: 'de4973ac-6ebb-42ff-94a4-fe014368c872'
     name: 'StrongHearts Native Helpline'
+    keywords: Native American, indigenous, tribal, domestic violence, sexual violence, abuse, culturally appropriate, hotline, 24/7, confidential, two-spirit
     description: 'StrongHearts Native Helpline is a 24/7 confidential and anonymous culturally-appropriate domestic and sexual violence helpline for Native Americans. We exist to restore power to Native Americans im...'
     website: 'https://strongheartshelpline.org/'
     phone: '(844) 762-8483'
@@ -264,6 +279,7 @@ helplines:
     verified: true
   - id: '3a76d277-fcaf-42bb-a834-0d7b90765533'
     name: 'National Center for Missing & Exploited Children 24-Hour Hotline'
+    keywords: missing child, exploited child, NCMEC, amber alert, runaway, abducted, kidnapped, child safety, hotline, 24/7, report, parent
     description: 'National Center for Missing & Exploited Children 24-Hour Hotline provides 24/7 free and confidential support by phone. We help the youth in the United States who may need emotional support with fam...'
     website: 'https://www.missingkids.org'
     phone: '(800) 843-5678'
@@ -276,6 +292,7 @@ helplines:
     verified: true
   - id: '82694841-e560-475b-a79a-7ac928e71227'
     name: 'National Parent and Youth Helpline'
+    keywords: parent, youth, child, caregiver, family, parenting, teen, helpline, emotional support, resources, 24/7, confidential
     description: 'National Parent and Youth Helpline provides free and confidential emotional support and resources to diverse Parents, Caregivers, Children and Youth of all Ages by phone, text and live chat and con...'
     website: 'http://www.nationalparentyouthhelpline.org/'
     phone: '(855) 427-2736'
@@ -302,6 +319,7 @@ helplines:
     verified: true
   - id: 'd3ae2b25-c6f1-4a42-953c-bee021334290'
     name: 'National Grad Crisis Line'
+    keywords: graduate student, grad school, PhD, masters, doctoral, academic stress, crisis, mental health, university, college, hotline, 24/7, dissertation
     description: 'National Grad Crisis Line is dedicated to providing 24/7, free, compassionate and confidential support over phone. We exist to help people in United States who may need emotional support with abuse...'
     website: 'https://gradresources.org/'
     phone: '(877) 472-3457'
@@ -327,6 +345,7 @@ helplines:
     verified: true
   - id: 'a17b3756-baa7-41f9-9020-c185d6a395c0'
     name: 'Disaster Distress Helpline'
+    keywords: disaster, emergency, earthquake, fire, flood, hurricane, wildfire, natural disaster, crisis, trauma, PTSD, emotional support, 24/7, SAMHSA
     description: 'The national Disaster Distress Helpline (call or text 1-800-985-5990 ; press 2 for Spanish) providers 24/7/365 crisis and emotional support for anyone in the United States/territories experiencing ...'
     website: 'https://www.samhsa.gov/find-help/disaster-distress-helpline'
     phone: '800-985-5990'
@@ -348,6 +367,7 @@ helplines:
     verified: true
   - id: 'a98584c4-e659-458a-8e56-9640932dec19'
     name: 'Safe Place® TXT 4 HELP'
+    keywords: Safe Place, TXT 4 HELP, youth, teen, runaway, homeless, abuse, bullying, domestic violence, anxiety, depression, text, 24/7, confidential
     description: 'TXT 4 HELP is a free, confidential, 24/7 text-based support service for youth nationwide. It offers assistance for challenges such as abuse, domestic violence, trafficking, anxiety, bullying, depre...'
     website: 'https://www.nationalsafeplace.org/txt-4-help'
     phone: ''
