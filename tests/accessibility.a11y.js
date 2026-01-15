@@ -282,6 +282,11 @@ test.describe('Accessibility - Legal Pages', () => {
   test('privacy page should have no critical violations', async ({ page }) => {
     await page.goto('/privacy');
     await page.waitForLoadState('domcontentloaded');
+    // Wait for main content to be visible before running accessibility checks
+    await page
+      .locator('main, #main-content, h1')
+      .first()
+      .waitFor({ state: 'visible', timeout: 30000 });
 
     const { violations } = await checkAccessibility(page, 'Privacy');
 
@@ -293,6 +298,11 @@ test.describe('Accessibility - Legal Pages', () => {
   test('terms page should have no critical violations', async ({ page }) => {
     await page.goto('/terms');
     await page.waitForLoadState('domcontentloaded');
+    // Wait for main content to be visible before running accessibility checks
+    await page
+      .locator('main, #main-content, h1')
+      .first()
+      .waitFor({ state: 'visible', timeout: 30000 });
 
     const { violations } = await checkAccessibility(page, 'Terms');
 
@@ -304,6 +314,11 @@ test.describe('Accessibility - Legal Pages', () => {
   test('credits page should have no critical violations', async ({ page }) => {
     await page.goto('/credits');
     await page.waitForLoadState('domcontentloaded');
+    // Wait for main content to be visible before running accessibility checks
+    await page
+      .locator('main, #main-content, h1')
+      .first()
+      .waitFor({ state: 'visible', timeout: 30000 });
 
     const { violations } = await checkAccessibility(page, 'Credits');
 

@@ -7,11 +7,12 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   retries: process.env.CI ? 2 : 0,
-  timeout: 60000,
+  // Longer timeout in CI due to slower GitHub Actions runners
+  timeout: process.env.CI ? 90000 : 60000,
   // Run tests in parallel for better CI performance
   fullyParallel: true,
-  // Use multiple workers in CI for faster execution
-  workers: process.env.CI ? 2 : undefined,
+  // Single worker in CI to reduce resource contention on shared runners
+  workers: process.env.CI ? 1 : undefined,
   expect: {
     timeout: 10000,
   },
@@ -28,7 +29,7 @@ export default defineConfig({
     command: 'npm run build && npm run preview',
     port: 4321,
     reuseExistingServer: !process.env.CI,
-    timeout: 180000, // Allow 3 minutes for build + server startup
+    timeout: 240000, // Allow 4 minutes for build + server startup in CI
     stdout: 'pipe',
     stderr: 'pipe',
   },

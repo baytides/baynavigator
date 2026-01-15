@@ -8,18 +8,22 @@ import { test, expect } from '@playwright/test';
  * poor connectivity or who need to access information without internet.
  */
 
+// Service worker registration and caching take longer in CI
+const SW_WAIT_TIME = process.env.CI ? 5000 : 2000;
+const SW_CACHE_WAIT_TIME = process.env.CI ? 6000 : 3000;
+
 test.describe('Service Worker & Offline Functionality', () => {
   test('service worker is registered', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
-    // Wait for service worker to register (may take a moment)
-    await page.waitForTimeout(2000);
+    // Wait for service worker to register (longer in CI)
+    await page.waitForTimeout(SW_WAIT_TIME);
 
     // Check if service worker is registered
     const swRegistered = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
       // Wait a bit for registration to complete
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       const registrations = await navigator.serviceWorker.getRegistrations();
       return registrations.length > 0;
     });
@@ -35,7 +39,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Wait for service worker to install and cache
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Verify page loaded
     await expect(page.locator('h1')).toBeVisible();
@@ -65,7 +69,7 @@ test.describe('Service Worker & Offline Functionality', () => {
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
 
     // Wait for service worker and initial data to cache
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Verify programs loaded
     const cards = page.locator('[data-category]');
@@ -92,7 +96,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // First visit to cache everything
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Verify initial load
     await page.locator('[data-category]').first().waitFor({ state: 'visible', timeout: 10000 });
@@ -131,7 +135,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // Visit favorites page first
     await page.goto('/favorites', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(SW_WAIT_TIME);
 
     // Go offline
     await context.setOffline(true);
@@ -153,7 +157,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
     // Cache about page
     await page.goto('/about', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(SW_WAIT_TIME);
 
     // Go offline
     await context.setOffline(true);
@@ -171,7 +175,7 @@ test.describe('Service Worker & Offline Functionality', () => {
 
   test('AI toggle shows disabled state offline', async ({ page, context }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(SW_WAIT_TIME);
 
     // AI toggle should exist and be enabled
     const aiToggle = page.locator('#ai-toggle');
@@ -264,7 +268,7 @@ test.describe('Cached API Data', () => {
 
     // Load page to trigger caching
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Go offline
     await context.setOffline(true);
@@ -297,7 +301,7 @@ test.describe('Cached API Data', () => {
 
     // Load page to trigger caching
     await page.goto('/directory', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(SW_CACHE_WAIT_TIME);
 
     // Go offline
     await context.setOffline(true);
