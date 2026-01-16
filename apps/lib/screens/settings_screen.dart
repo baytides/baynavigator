@@ -268,7 +268,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 builder: (context, settings, child) {
                   return SwitchListTile(
                     secondary: const Text('✨', style: TextStyle(fontSize: 24)),
-                    title: const Text('AI-Powered Search'),
+                    title: Row(
+                      children: [
+                        const Text('AI-Powered Search'),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.shade100,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            'Beta',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.amber.shade800,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                     subtitle: Text(
                       settings.aiSearchEnabled
                           ? 'Natural language search enabled'

@@ -175,6 +175,14 @@ struct SettingsView: View {
                                 Image(systemName: "sparkles")
                                     .foregroundStyle(.purple)
                                 Text("AI-Powered Search")
+                                Text("Beta")
+                                    .font(.caption2)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(Color.orange.opacity(0.2))
+                                    .foregroundStyle(.orange)
+                                    .clipShape(Capsule())
                             }
                             Text(settings.aiSearchEnabled
                                 ? "Natural language search enabled"
