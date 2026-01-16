@@ -21,7 +21,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             Privacy Policy
           </h1>
           <p class="text-neutral-600 dark:text-neutral-300" data-i18n="privacy.lastUpdated">
-            Last updated: January 10, 2026
+            Last updated: January 16, 2026
           </p>
         </div>
 
@@ -786,6 +786,45 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 Plausible does not use cookies, does not collect personal data, and does not track
                 users across sites. All data is aggregated and cannot be used to identify
                 individuals.
+              </p>
+
+              <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
+                New Relic Browser Monitoring
+              </h4>
+              <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                We use <a
+                  href="https://newrelic.com/products/browser-monitoring"
+                  class="text-primary-700 dark:text-primary-300">New Relic Browser</a
+                > to monitor website performance and detect errors. This helps us ensure Bay Navigator
+                loads quickly and works reliably. We have configured New Relic with privacy-focused settings:
+              </p>
+              <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
+                <li>
+                  <strong>No cookies:</strong> We have disabled tracking cookies. New Relic uses only
+                  session storage which is cleared when you close your browser.
+                </li>
+                <li>
+                  <strong>No session replay:</strong> We have disabled session replay recording, which
+                  means your screen activity is never recorded.
+                </li>
+                <li>
+                  <strong>No session traces:</strong> We have disabled detailed user journey tracking.
+                </li>
+                <li>
+                  <strong>Aggregate data only:</strong> We collect page load times, JavaScript errors,
+                  and AJAX performance metrics in aggregate form.
+                </li>
+                <li>
+                  <strong>No personal identifiers:</strong> Performance data is not linked to any personal
+                  identifier or user account.
+                </li>
+              </ul>
+              <p class="text-neutral-600 dark:text-neutral-300">
+                For more details, see <a
+                  href="https://docs.newrelic.com/docs/browser/browser-monitoring/getting-started/browser-data-privacy/"
+                  class="text-primary-700 dark:text-primary-300"
+                  >New Relic Browser Data Privacy documentation</a
+                >.
               </p>
             </div>
           </details>
