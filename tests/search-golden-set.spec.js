@@ -21,9 +21,21 @@ async function searchAndGetResults(page, query) {
   await input.fill(query);
   await input.press('Enter');
 
-  // Wait for search to complete (AI search has 500ms debounce + API call)
-  // Increased timeout for CI environments where network might be slower
-  await page.waitForTimeout(3000);
+  // Wait for search to complete by watching the loading spinner
+  // The spinner appears during search and gets 'hidden' class when done
+  const searchLoading = page.locator('#search-loading');
+
+  // First wait for loading to start (may be quick)
+  await page.waitForTimeout(500);
+
+  // Then wait for loading spinner to be hidden (search complete)
+  // Use longer timeout for CI environments, especially mobile-safari
+  await searchLoading.waitFor({ state: 'hidden', timeout: 15000 }).catch(() => {
+    // If loading spinner was never shown (instant results), that's okay
+  });
+
+  // Additional small wait for DOM to settle after search completes
+  await page.waitForTimeout(500);
 
   // Get visible program names and descriptions (search may match on description too)
   const visibleCards = page.locator('[data-category]:not([style*="display: none"])');
