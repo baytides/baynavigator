@@ -13,21 +13,15 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 // Categories to scan for proxy-permitted resources
-const CATEGORIES_TO_SCAN = [
-  'safety',
-  'lgbtq',
-  'health',
-  'legal',
-  'community'
-];
+const CATEGORIES_TO_SCAN = ['safety', 'lgbtq', 'health', 'legal', 'community'];
 
 // Category display names and order
 const CATEGORY_CONFIG = {
-  'Safety': { order: 1, title: 'Domestic Violence & Safety' },
+  Safety: { order: 1, title: 'Domestic Violence & Safety' },
   'LGBTQ+': { order: 2, title: 'LGBTQ+ Support' },
-  'Health': { order: 3, title: 'Health & Wellness' },
-  'Legal': { order: 4, title: 'Legal Support' },
-  'Community': { order: 5, title: 'Community Resources' }
+  Health: { order: 3, title: 'Health & Wellness' },
+  Legal: { order: 4, title: 'Legal Support' },
+  Community: { order: 5, title: 'Community Resources' },
 };
 
 function loadYamlFile(filename) {
@@ -56,7 +50,7 @@ function generateResourceCard(program) {
 function generateCategorySection(categoryName, programs) {
   const config = CATEGORY_CONFIG[categoryName] || { title: categoryName };
 
-  const cards = programs.map(p => generateResourceCard(p)).join('\n');
+  const cards = programs.map((p) => generateResourceCard(p)).join('\n');
 
   return `
             <!-- ${config.title} -->
@@ -68,12 +62,11 @@ ${cards}`;
 
 function generateHtml(programsByCategory) {
   // Sort categories by order
-  const sortedCategories = Object.entries(programsByCategory)
-    .sort((a, b) => {
-      const orderA = CATEGORY_CONFIG[a[0]]?.order || 99;
-      const orderB = CATEGORY_CONFIG[b[0]]?.order || 99;
-      return orderA - orderB;
-    });
+  const sortedCategories = Object.entries(programsByCategory).sort((a, b) => {
+    const orderA = CATEGORY_CONFIG[a[0]]?.order || 99;
+    const orderB = CATEGORY_CONFIG[b[0]]?.order || 99;
+    return orderA - orderB;
+  });
 
   const categorySections = sortedCategories
     .map(([cat, programs]) => generateCategorySection(cat, programs))
@@ -198,7 +191,7 @@ function main() {
   for (const category of CATEGORIES_TO_SCAN) {
     const programs = loadYamlFile(category);
 
-    const proxyPermitted = programs.filter(p => p.proxy_permitted === true && p.link);
+    const proxyPermitted = programs.filter((p) => p.proxy_permitted === true && p.link);
 
     if (proxyPermitted.length > 0) {
       // Group by category field in the program
@@ -213,7 +206,9 @@ function main() {
     }
   }
 
-  console.log(`Found ${totalPrograms} proxy-permitted programs across ${Object.keys(programsByCategory).length} categories`);
+  console.log(
+    `Found ${totalPrograms} proxy-permitted programs across ${Object.keys(programsByCategory).length} categories`
+  );
 
   // Generate HTML
   const html = generateHtml(programsByCategory);
@@ -225,8 +220,12 @@ function main() {
 
   // Also show SCP command to deploy
   console.log('\nTo deploy to proxy server:');
-  console.log('scp -i ~/.ssh/id_do_ollama proxy-resources.html root@ai.baytides.org:/opt/holyunblocker/views/pages/nav/resources.html');
-  console.log('Then run: ssh -i ~/.ssh/id_do_ollama root@ai.baytides.org "cd /opt/holyunblocker && npm run build && systemctl restart holyunblocker"');
+  console.log(
+    'scp -i ~/.ssh/id_do_ollama proxy-resources.html root@ai.baytides.org:/opt/holyunblocker/views/pages/nav/resources.html'
+  );
+  console.log(
+    'Then run: ssh -i ~/.ssh/id_do_ollama root@ai.baytides.org "cd /opt/holyunblocker && npm run build && systemctl restart holyunblocker"'
+  );
 }
 
 main();
