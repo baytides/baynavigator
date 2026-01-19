@@ -1,0 +1,520 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const title = 'Chat with Bay Navigator';
+const description = 'Ask our AI assistant to help you find programs and services in the Bay Area.';
+
+const apiEndpoint = 'https://ai.baytides.org/api/chat';
+const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section py-4">
+    <div class="container-page">
+      <Breadcrumb items={[{ label: 'Chat', current: true }]} />
+    </div>
+  </section>
+
+  <section class="section pt-0 flex-1 flex flex-col min-h-[calc(100vh-200px)]">
+    <div class="container-page flex-1 flex flex-col max-w-3xl mx-auto w-full px-4 sm:px-6">
+      <!-- Header -->
+      <div class="text-center mb-4 sm:mb-6">
+        <div
+          class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3 sm:mb-4"
+        >
+          <svg
+            class="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+            ></path>
+          </svg>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white mb-2">{title}</h1>
+        <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
+          I can help you find food assistance, healthcare, housing, utility help, and more.
+        </p>
+      </div>
+
+      <!-- Chat Container -->
+      <div
+        class="flex-1 flex flex-col bg-white dark:bg-neutral-800 rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+        style="min-height: 400px; max-height: calc(100vh - 280px);"
+      >
+        <!-- Messages -->
+        <div
+          id="chat-messages"
+          class="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4"
+        >
+          <!-- Welcome message -->
+          <div class="assistant-message">
+            <div
+              class="bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]"
+            >
+              <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200">
+                Hi! I'm here to help you find programs and services in the Bay Area. You can ask me
+                things like:
+              </p>
+              <ul
+                class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 sm:mt-3 space-y-1.5 sm:space-y-2"
+              >
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-500 flex-shrink-0">•</span>
+                  <span>"I need help paying my electric bill"</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-500 flex-shrink-0">•</span>
+                  <span>"What food assistance is available for seniors?"</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary-500 flex-shrink-0">•</span>
+                  <span>"I'm a veteran looking for housing help"</span>
+                </li>
+              </ul>
+              <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200 mt-2 sm:mt-3">
+                What can I help you find today?
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick prompts -->
+        <div id="quick-prompts" class="px-3 sm:px-4 md:px-6 pb-2 sm:pb-3">
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
+            <button type="button" class="quick-prompt-btn">Food assistance</button>
+            <button type="button" class="quick-prompt-btn">Utility bill help</button>
+            <button type="button" class="quick-prompt-btn">Healthcare</button>
+            <button type="button" class="quick-prompt-btn hidden sm:inline-flex"
+              >Housing help</button
+            >
+            <button type="button" class="quick-prompt-btn hidden md:inline-flex"
+              >Job training</button
+            >
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div
+          class="p-3 sm:p-4 md:p-6 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900/50"
+        >
+          <form id="chat-form" class="flex gap-2 sm:gap-3">
+            <label for="chat-input" class="sr-only">Type your message</label>
+            <input
+              type="text"
+              id="chat-input"
+              class="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 rounded-lg sm:rounded-xl text-sm sm:text-base focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:text-white"
+              placeholder="Ask about programs..."
+              autocomplete="off"
+            />
+            <button
+              type="submit"
+              id="chat-send"
+              class="px-4 sm:px-6 py-2.5 sm:py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-neutral-400 text-white rounded-lg sm:rounded-xl flex items-center justify-center transition-colors font-medium"
+              aria-label="Send message"
+            >
+              <span class="hidden sm:inline mr-2">Send</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              </svg>
+            </button>
+          </form>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 sm:mt-3 text-center">
+            AI responses are suggestions only. <a
+              href="/programs"
+              class="text-primary-600 dark:text-primary-400 hover:underline">Search all programs</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Helpful links -->
+      <div class="mt-4 sm:mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        <a
+          href="/programs"
+          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+        >
+          <svg
+            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300"
+            >Search Programs</span
+          >
+        </a>
+        <a
+          href="tel:211"
+          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+        >
+          <svg
+            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            ></path>
+          </svg>
+          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Call 211</span>
+        </a>
+        <a
+          href="/eligibility"
+          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+        >
+          <svg
+            class="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            ></path>
+          </svg>
+          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Eligibility</span>
+        </a>
+        <a
+          href="/crisis"
+          class="flex items-center gap-2 p-2 sm:p-3 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-600 transition-colors"
+        >
+          <svg
+            class="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            ></path>
+          </svg>
+          <span class="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">Crisis Help</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ apiEndpoint, apiKey }}>
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('chat-send');
+  const messagesContainer = document.getElementById('chat-messages');
+  const quickPrompts = document.getElementById('quick-prompts');
+
+  let conversationHistory = [];
+  let isLoading = false;
+
+  // System prompt for Bay Navigator Assistant
+  const SYSTEM_PROMPT = `You are Bay Navigator Assistant, a helpful AI that helps people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+
+Your Role:
+- Help users find relevant programs and services
+- Be warm, supportive, and non-judgmental
+- Keep responses concise (2-4 sentences)
+- Prioritize safety in crisis situations
+
+Key Programs:
+- CalFresh (food stamps): Apply at BenefitsCal.com
+- Medi-Cal (health insurance): Apply at BenefitsCal.com
+- Section 8 (housing vouchers): Contact local housing authority
+- CARE Program: 20% PG&E discount for low-income
+- CalWORKs: Cash aid for families with children
+- 211 Bay Area: Call 211 for help finding any service
+
+Crisis Resources (provide immediately when relevant):
+- Emergency: 911
+- Suicide/Crisis: 988 (call or text)
+- Domestic Violence: 1-800-799-7233
+- Homelessness: Call 211
+- Crisis Text Line: Text HOME to 741741
+
+Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
+
+When in doubt, suggest calling 211 or visiting baynavigator.org for more help.`;
+
+  // Crisis detection keywords
+  const EMERGENCY_KEYWORDS = [
+    'emergency',
+    'danger',
+    'hurt',
+    'attack',
+    'abuse',
+    'violence',
+    'domestic violence',
+    'unsafe',
+    'threatened',
+  ];
+  const MENTAL_HEALTH_KEYWORDS = [
+    'suicide',
+    'suicidal',
+    'kill myself',
+    'end my life',
+    "don't want to live",
+    'want to die',
+    'self-harm',
+    'crisis',
+  ];
+
+  function detectCrisis(message) {
+    const lowerMessage = message.toLowerCase();
+    for (const keyword of EMERGENCY_KEYWORDS) {
+      if (lowerMessage.includes(keyword)) return 'emergency';
+    }
+    for (const keyword of MENTAL_HEALTH_KEYWORDS) {
+      if (lowerMessage.includes(keyword)) return 'mentalHealth';
+    }
+    return null;
+  }
+
+  // Quick prompts
+  document.querySelectorAll('.quick-prompt-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (input && !isLoading) {
+        input.value = btn.textContent || '';
+        sendMessage();
+      }
+    });
+  });
+
+  // Form submit
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendMessage();
+  });
+
+  async function sendMessage() {
+    const message = input?.value.trim();
+    if (!message || isLoading) return;
+
+    // Check for crisis keywords first
+    const crisisType = detectCrisis(message);
+    if (crisisType) {
+      showCrisisDialog(crisisType);
+    }
+
+    // Hide quick prompts after first message
+    quickPrompts?.classList.add('hidden');
+
+    // Add user message to UI
+    addMessage(message, 'user');
+    input.value = '';
+
+    // Show loading
+    isLoading = true;
+    sendBtn?.setAttribute('disabled', 'true');
+    const loadingEl = addLoadingIndicator();
+
+    try {
+      // Build messages array for Ollama chat API
+      const messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...conversationHistory.slice(-6),
+        { role: 'user', content: message },
+      ];
+
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey,
+        },
+        body: JSON.stringify({
+          model: 'llama3.2:3b',
+          messages: messages,
+          stream: false,
+          options: {
+            temperature: 0.7,
+            num_predict: 500,
+          },
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to get response');
+      }
+
+      // Update conversation history
+      conversationHistory.push({ role: 'user', content: message });
+
+      // Extract assistant response from Ollama format
+      const assistantMessage =
+        data.message?.content ||
+        data.response ||
+        'I apologize, but I could not generate a response.';
+      conversationHistory.push({ role: 'assistant', content: assistantMessage });
+
+      // Add AI response to chat
+      addMessage(assistantMessage, 'assistant');
+    } catch (error) {
+      console.error('Chat error:', error);
+      addMessage(
+        "I'm sorry, I'm having trouble connecting right now. Please try searching the programs directly or call 211 for assistance.",
+        'assistant',
+        true
+      );
+    } finally {
+      loadingEl?.remove();
+      isLoading = false;
+      sendBtn?.removeAttribute('disabled');
+      input?.focus();
+    }
+  }
+
+  function showCrisisDialog(type) {
+    const isEmergency = type === 'emergency';
+    const dialog = document.createElement('div');
+    dialog.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4';
+
+    const content = document.createElement('div');
+    content.className = 'bg-white dark:bg-neutral-800 rounded-2xl max-w-md w-full p-6 shadow-2xl';
+
+    // Build dialog content safely
+    const header = document.createElement('div');
+    header.className = 'flex items-center gap-3 mb-4';
+
+    const iconWrapper = document.createElement('div');
+    iconWrapper.className = `w-12 h-12 rounded-full flex items-center justify-center ${isEmergency ? 'bg-red-100 dark:bg-red-900/30' : 'bg-blue-100 dark:bg-blue-900/30'}`;
+    iconWrapper.innerHTML = `<svg class="w-6 h-6 ${isEmergency ? 'text-red-600' : 'text-blue-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">${isEmergency ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>' : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>'}</svg>`;
+
+    const title = document.createElement('h3');
+    title.className = `text-lg font-bold ${isEmergency ? 'text-red-700 dark:text-red-400' : 'text-blue-700 dark:text-blue-400'}`;
+    title.textContent = isEmergency ? 'Emergency Resources' : 'Crisis Support Available';
+
+    header.appendChild(iconWrapper);
+    header.appendChild(title);
+
+    const desc = document.createElement('p');
+    desc.className = 'text-neutral-600 dark:text-neutral-300 mb-6';
+    desc.textContent = isEmergency
+      ? 'If you or someone else is in immediate danger, please call 911.'
+      : "If you're experiencing a mental health crisis, help is available 24/7.";
+
+    const resources = document.createElement('div');
+    resources.className = 'space-y-3';
+
+    if (isEmergency) {
+      resources.innerHTML = `<a href="tel:911" class="flex items-center gap-4 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">Emergency Services</div><div class="text-sm text-red-600 dark:text-red-400 font-medium">Call 911</div></div></a>`;
+    } else {
+      resources.innerHTML = `<a href="tel:988" class="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">988 Suicide & Crisis Lifeline</div><div class="text-sm text-blue-600 dark:text-blue-400 font-medium">Call or text 988</div></div></a><a href="sms:741741&body=HOME" class="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"><div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center"><svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div><div class="flex-1"><div class="font-semibold text-neutral-900 dark:text-white">Crisis Text Line</div><div class="text-sm text-blue-600 dark:text-blue-400 font-medium">Text HOME to 741741</div></div></a>`;
+    }
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className =
+      'w-full mt-4 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200';
+    closeBtn.textContent = 'Continue to chat';
+    closeBtn.addEventListener('click', () => dialog.remove());
+
+    content.appendChild(header);
+    content.appendChild(desc);
+    content.appendChild(resources);
+    content.appendChild(closeBtn);
+    dialog.appendChild(content);
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.remove();
+    });
+
+    document.body.appendChild(dialog);
+  }
+
+  function addMessage(text, role, isError = false) {
+    const wrapper = document.createElement('div');
+    wrapper.className = role === 'user' ? 'flex justify-end' : 'assistant-message';
+
+    const bubble = document.createElement('div');
+
+    if (role === 'user') {
+      bubble.className =
+        'bg-primary-600 text-white rounded-2xl rounded-tr-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
+    } else {
+      bubble.className = `${isError ? 'bg-red-100 dark:bg-red-900/30' : 'bg-neutral-100 dark:bg-neutral-700'} rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]`;
+    }
+
+    const p = document.createElement('p');
+    p.className = `text-sm sm:text-base ${role === 'user' ? 'text-white' : 'text-neutral-800 dark:text-neutral-200'}`;
+    p.textContent = text;
+    // Convert newlines to <br> safely
+    p.innerHTML = p.innerHTML.replace(/\n/g, '<br>');
+
+    bubble.appendChild(p);
+    wrapper.appendChild(bubble);
+    messagesContainer?.appendChild(wrapper);
+    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+  }
+
+  function addLoadingIndicator() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'assistant-message loading-indicator';
+
+    const bubble = document.createElement('div');
+    bubble.className =
+      'bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
+
+    const dots = document.createElement('div');
+    dots.className = 'flex gap-1';
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'w-2 h-2 bg-neutral-400 rounded-full animate-bounce';
+      dot.style.animationDelay = `${i * 150}ms`;
+      dots.appendChild(dot);
+    }
+
+    bubble.appendChild(dots);
+    wrapper.appendChild(bubble);
+    messagesContainer?.appendChild(wrapper);
+    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    return wrapper;
+  }
+</script>
+
+<style>
+  .quick-prompt-btn {
+    @apply text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-700 dark:hover:text-primary-300 transition-colors;
+  }
+
+  .assistant-message {
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

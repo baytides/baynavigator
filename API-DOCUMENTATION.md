@@ -818,6 +818,310 @@ describe('Programs API', () => {
 
 ---
 
-**Last Updated:** 2025-12-22
-**Version:** 1.0.0
+## AI Chat API
+
+Bay Navigator includes an AI-powered assistant to help users find programs and services. The AI API is hosted separately from the static program data.
+
+### Base URL
+
+```
+Production: https://ai.baytides.org/api
+```
+
+### Authentication
+
+All AI API requests require an API key passed in the `X-API-Key` header.
+
+```bash
+curl https://ai.baytides.org/api/chat \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '...'
+```
+
+**To obtain an API key:** Contact the Bay Navigator team.
+
+---
+
+### Chat Completion
+
+**POST** `/chat`
+
+Send a message to the AI assistant and receive a response.
+
+**Request Body:**
+
+```json
+{
+  "model": "llama3.2:3b",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Bay Navigator Assistant..."
+    },
+    {
+      "role": "user",
+      "content": "I need help paying my electric bill"
+    }
+  ],
+  "stream": false,
+  "options": {
+    "temperature": 0.7,
+    "num_predict": 500
+  }
+}
+```
+
+**Parameters:**
+
+| Field                 | Type    | Required | Description                      |
+| --------------------- | ------- | -------- | -------------------------------- |
+| `model`               | string  | Yes      | Model to use. Use `llama3.2:3b`  |
+| `messages`            | array   | Yes      | Conversation history             |
+| `stream`              | boolean | No       | Stream response (default: false) |
+| `options.temperature` | number  | No       | Creativity (0-1, default: 0.7)   |
+| `options.num_predict` | number  | No       | Max tokens to generate           |
+
+**Message Roles:**
+
+- `system`: System prompt with context about Bay Navigator
+- `user`: User's message
+- `assistant`: Previous AI responses (for conversation history)
+
+**Response:**
+
+```json
+{
+  "model": "llama3.2:3b",
+  "created_at": "2026-01-19T09:30:00.000Z",
+  "message": {
+    "role": "assistant",
+    "content": "For help with your electric bill, you have several options:\n\n1. **CARE Program** - Get a 20% discount on your PG&E bill if you're income-eligible. Apply at pge.com/care\n\n2. **LIHEAP** - One-time payment assistance for heating/cooling. Contact your county social services.\n\n3. **REACH** - Emergency bill assistance through PG&E for customers facing hardship.\n\nYou can also call 211 for help finding local utility assistance programs."
+  },
+  "done": true,
+  "total_duration": 5000000000,
+  "eval_count": 150
+}
+```
+
+---
+
+### Recommended System Prompt
+
+Include this system prompt for consistent, helpful responses:
+
+```javascript
+const SYSTEM_PROMPT = `You are Bay Navigator Assistant, a helpful AI that helps people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+
+Your Role:
+- Help users find relevant programs and services
+- Be warm, supportive, and non-judgmental
+- Keep responses concise (2-4 sentences)
+- Prioritize safety in crisis situations
+
+Key Programs:
+- CalFresh (food stamps): Apply at BenefitsCal.com
+- Medi-Cal (health insurance): Apply at BenefitsCal.com
+- Section 8 (housing vouchers): Contact local housing authority
+- CARE Program: 20% PG&E discount for low-income
+- CalWORKs: Cash aid for families with children
+- 211 Bay Area: Call 211 for help finding any service
+
+Crisis Resources (provide immediately when relevant):
+- Emergency: 911
+- Suicide/Crisis: 988 (call or text)
+- Domestic Violence: 1-800-799-7233
+- Homelessness: Call 211
+- Crisis Text Line: Text HOME to 741741
+
+Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
+
+When in doubt, suggest calling 211 or visiting baynavigator.org for more help.`;
+```
+
+---
+
+### Flutter Integration
+
+```dart
+// lib/services/chat_service.dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class ChatService {
+  static const String _baseUrl = 'https://ai.baytides.org/api';
+  static const String _apiKey = String.fromEnvironment('OLLAMA_API_KEY');
+
+  final List<Map<String, String>> _conversationHistory = [];
+
+  static const String _systemPrompt = '''
+You are Bay Navigator Assistant...
+''';
+
+  Future<String> sendMessage(String message) async {
+    // Add user message to history
+    _conversationHistory.add({'role': 'user', 'content': message});
+
+    // Build messages array
+    final messages = [
+      {'role': 'system', 'content': _systemPrompt},
+      ..._conversationHistory.take(6), // Keep last 6 messages
+    ];
+
+    final response = await http.post(
+      Uri.parse('$_baseUrl/chat'),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': _apiKey,
+      },
+      body: jsonEncode({
+        'model': 'llama3.2:3b',
+        'messages': messages,
+        'stream': false,
+        'options': {
+          'temperature': 0.7,
+          'num_predict': 500,
+        },
+      }),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to get response: ${response.statusCode}');
+    }
+
+    final data = jsonDecode(response.body);
+    final assistantMessage = data['message']['content'] as String;
+
+    // Add assistant response to history
+    _conversationHistory.add({'role': 'assistant', 'content': assistantMessage});
+
+    return assistantMessage;
+  }
+
+  void clearHistory() {
+    _conversationHistory.clear();
+  }
+}
+```
+
+---
+
+### Swift Integration
+
+```swift
+// ChatService.swift
+import Foundation
+
+class ChatService: ObservableObject {
+    private let baseURL = "https://ai.baytides.org/api"
+    private let apiKey: String
+
+    @Published var conversationHistory: [[String: String]] = []
+
+    private let systemPrompt = """
+    You are Bay Navigator Assistant...
+    """
+
+    init() {
+        self.apiKey = Bundle.main.infoDictionary?["OLLAMA_API_KEY"] as? String ?? ""
+    }
+
+    func sendMessage(_ message: String) async throws -> String {
+        // Add user message to history
+        conversationHistory.append(["role": "user", "content": message])
+
+        // Build messages array
+        var messages: [[String: String]] = [
+            ["role": "system", "content": systemPrompt]
+        ]
+        messages.append(contentsOf: conversationHistory.suffix(6))
+
+        let requestBody: [String: Any] = [
+            "model": "llama3.2:3b",
+            "messages": messages,
+            "stream": false,
+            "options": [
+                "temperature": 0.7,
+                "num_predict": 500
+            ]
+        ]
+
+        var request = URLRequest(url: URL(string: "\(baseURL)/chat")!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw ChatError.requestFailed
+        }
+
+        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        let messageObj = json?["message"] as? [String: Any]
+        let content = messageObj?["content"] as? String ?? ""
+
+        // Add assistant response to history
+        conversationHistory.append(["role": "assistant", "content": content])
+
+        return content
+    }
+
+    func clearHistory() {
+        conversationHistory.removeAll()
+    }
+}
+
+enum ChatError: Error {
+    case requestFailed
+}
+```
+
+---
+
+### Rate Limiting
+
+The AI API has the following rate limits:
+
+| Tier       | Requests per minute | Requests per day |
+| ---------- | ------------------- | ---------------- |
+| Standard   | 10                  | 500              |
+| Mobile App | 30                  | 2000             |
+
+If you exceed rate limits, you'll receive a `429 Too Many Requests` response.
+
+---
+
+### Error Responses
+
+```json
+{
+  "error": "Invalid or missing API key. Include X-API-Key header."
+}
+```
+
+| Status Code | Description                |
+| ----------- | -------------------------- |
+| 200         | Success                    |
+| 401         | Missing or invalid API key |
+| 429         | Rate limit exceeded        |
+| 500         | Server error               |
+| 503         | Model unavailable          |
+
+---
+
+### Best Practices
+
+1. **Include conversation history** - Send the last 4-6 messages for context
+2. **Handle errors gracefully** - Show a friendly message if the API fails
+3. **Implement crisis detection** - Check for crisis keywords and show crisis resources immediately
+4. **Cache responses** - Don't call the API for identical questions
+5. **Set reasonable timeouts** - AI responses can take 5-15 seconds
+
+---
+
+**Last Updated:** 2026-01-19
+**Version:** 1.1.0
 **Maintained By:** Bay Navigator Development Team

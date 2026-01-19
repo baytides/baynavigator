@@ -2,14 +2,18 @@
 /**
  * Smart Assistant Component
  * AI-powered chat interface to help users find relevant programs
+ * Uses self-hosted Ollama (Llama 3.2) at ai.baytides.org
  */
 
 interface Props {
   apiEndpoint?: string;
+  apiKey?: string;
 }
 
-const { apiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assistant' } =
-  Astro.props;
+const {
+  apiEndpoint = 'https://ai.baytides.org/api/chat',
+  apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '',
+} = Astro.props;
 ---
 
 <!-- Floating Assistant Button -->
@@ -151,7 +155,7 @@ const { apiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assis
   </div>
 </div>
 
-<script define:vars={{ apiEndpoint }}>
+<script define:vars={{ apiEndpoint, apiKey }}>
   const toggle = document.getElementById('assistant-toggle');
   const panel = document.getElementById('assistant-panel');
   const closeBtn = document.getElementById('assistant-close');
@@ -164,6 +168,34 @@ const { apiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assis
 
   let conversationHistory = [];
   let isLoading = false;
+
+  // System prompt for Bay Navigator Assistant
+  const SYSTEM_PROMPT = `You are Bay Navigator Assistant, a helpful AI that helps people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+
+Your Role:
+- Help users find relevant programs and services
+- Be warm, supportive, and non-judgmental
+- Keep responses concise (2-4 sentences)
+- Prioritize safety in crisis situations
+
+Key Programs:
+- CalFresh (food stamps): Apply at BenefitsCal.com
+- Medi-Cal (health insurance): Apply at BenefitsCal.com
+- Section 8 (housing vouchers): Contact local housing authority
+- CARE Program: 20% PG&E discount for low-income
+- CalWORKs: Cash aid for families with children
+- 211 Bay Area: Call 211 for help finding any service
+
+Crisis Resources (provide immediately when relevant):
+- Emergency: 911
+- Suicide/Crisis: 988 (call or text)
+- Domestic Violence: 1-800-799-7233
+- Homelessness: Call 211
+- Crisis Text Line: Text HOME to 741741
+
+Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
+
+When in doubt, suggest calling 211 or visiting baynavigator.org for more help.`;
 
   // Crisis detection keywords
   const EMERGENCY_KEYWORDS = [
@@ -285,12 +317,27 @@ const { apiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assis
     const loadingEl = addLoadingIndicator();
 
     try {
+      // Build messages array for Ollama chat API
+      const messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...conversationHistory.slice(-6),
+        { role: 'user', content: message },
+      ];
+
       const response = await fetch(apiEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey,
+        },
         body: JSON.stringify({
-          message,
-          conversationHistory: conversationHistory.slice(-6),
+          model: 'llama3.2:3b',
+          messages: messages,
+          stream: false,
+          options: {
+            temperature: 0.7,
+            num_predict: 500,
+          },
         }),
       });
 
@@ -303,8 +350,15 @@ const { apiEndpoint = 'https://baytides-link-checker.azurewebsites.net/api/assis
       // Update conversation history
       conversationHistory.push({ role: 'user', content: message });
 
-      // Add program cards (no AI message anymore)
-      addProgramResults(data.programs || [], data.programsFound || 0);
+      // Extract assistant response from Ollama format
+      const assistantMessage =
+        data.message?.content ||
+        data.response ||
+        'I apologize, but I could not generate a response.';
+      conversationHistory.push({ role: 'assistant', content: assistantMessage });
+
+      // Add AI response to chat
+      addMessage(assistantMessage, 'assistant');
     } catch (error) {
       console.error('Assistant error:', error);
       addMessage(
