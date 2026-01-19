@@ -1119,7 +1119,7 @@ async function searchPrograms(query, location = null) {
 
   // If location detected, filter to show:
   // 1. Programs in their specific city/county
-  // 2. Bay Area-wide programs (always eligible)
+  // 2. Bay Area programs (always eligible)
   // 3. Statewide programs (always eligible)
   // 4. Nationwide programs (always eligible)
   if (location && location.county) {

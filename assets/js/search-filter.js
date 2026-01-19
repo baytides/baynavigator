@@ -585,7 +585,7 @@ class DiscountSearchFilter {
       // Check area filters
       if (activeFilters.area.length > 0) {
         const hasArea = activeFilters.area.some((area) => {
-          // "Other" matches Bay Area-wide, Statewide, or Nationwide programs
+          // "Other" matches Bay Area, Statewide, or Nationwide programs
           if (area === 'Other') {
             return (
               program.area.includes('Bay Area') ||
@@ -593,7 +593,7 @@ class DiscountSearchFilter {
               program.area.includes('Nationwide')
             );
           }
-          // For specific counties, also include Bay Area-wide, Statewide, and Nationwide programs
+          // For specific counties, also include Bay Area, Statewide, and Nationwide programs
           // since those apply to everyone in that county
           if (program.area.includes(area)) {
             return true;

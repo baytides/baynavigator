@@ -196,7 +196,7 @@
       body.innerHTML = `
         <div class="onboarding-step">
           <h2 class="onboarding-title">Where do you live?</h2>
-          <p class="onboarding-description">This helps us show programs in your area. Bay Area-wide and statewide programs are always included.</p>
+          <p class="onboarding-description">This helps us show programs in your area. Bay Area, statewide, and nationwide programs are always included.</p>
 
           <div class="onboarding-county-grid" role="radiogroup" aria-label="Select your county">
             ${COUNTIES.map(
