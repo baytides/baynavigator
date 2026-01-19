@@ -233,6 +233,65 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
   let conversationHistory = [];
   let isLoading = false;
 
+  // Quick response cache for common questions (saves API calls and energy)
+  const QUICK_RESPONSES = {
+    // Greetings
+    hello:
+      "Hi there! I'm Carl, your Bay Area guide. I can help you find food assistance, healthcare, housing, utility help, and more. What can I help you with today?",
+    hi: "Hello! I'm Carl. How can I help you find programs and services in the Bay Area today?",
+    hey: "Hey there! I'm Carl, ready to help you find resources in the Bay Area. What are you looking for?",
+    'good morning': "Good morning! I'm Carl, your Bay Area guide. How can I help you today?",
+    'good afternoon': "Good afternoon! I'm Carl. What programs or services can I help you find?",
+    'good evening':
+      "Good evening! I'm Carl, here to help you find Bay Area resources. What do you need?",
+
+    // About Carl
+    'who are you':
+      "I'm Carl! I'm named after Karl the Fog - that famous fog that rolls over the Golden Gate Bridge. But I spell it with a C because I'm the Chat version! I help people find social services and programs in the Bay Area.",
+    'what is your name':
+      "I'm Carl! Named after Karl the Fog (spelled with a C for Chat). I'm here to help you find programs and services in the San Francisco Bay Area.",
+    'what can you do':
+      'I can help you find food assistance (CalFresh, food banks), healthcare (Medi-Cal, clinics), housing help, utility assistance (CARE, LIHEAP), cash aid, and much more. Just tell me what you need!',
+    'how does this work':
+      "Just ask me about what kind of help you need - like 'I need help with food' or 'how do I apply for Medi-Cal'. I'll point you to the right programs and tell you how to apply. You can also call 211 anytime for personalized help.",
+
+    // Common program questions
+    'what is calfresh':
+      'CalFresh (also called SNAP or food stamps) provides monthly grocery benefits on an EBT card. Most low-income Californians qualify, including immigrants. Apply at BenefitsCal.com or call your county social services office.',
+    'what is medi-cal':
+      "Medi-Cal is California's free health insurance for low-income residents. It covers doctor visits, hospital care, prescriptions, mental health, and more. Many immigrants qualify too. Apply at BenefitsCal.com.",
+    'what is section 8':
+      'Section 8 (Housing Choice Voucher) helps pay rent in private housing. You pay about 30% of your income, the voucher covers the rest. Apply through your local housing authority - waitlists are often long, so apply early!',
+    'what is 211':
+      '211 is a free, confidential helpline available 24/7. They can connect you to local services for food, housing, utilities, healthcare, and more. Just dial 2-1-1 from any phone or visit 211bayarea.org.',
+
+    // Help categories
+    'food help':
+      "For food assistance, check out: CalFresh (monthly grocery benefits) - apply at BenefitsCal.com, local food banks like Second Harvest or SF-Marin Food Bank, and WIC if you're pregnant or have young children. Call 211 for your nearest food pantry!",
+    'food assistance':
+      "For food assistance, check out: CalFresh (monthly grocery benefits) - apply at BenefitsCal.com, local food banks like Second Harvest or SF-Marin Food Bank, and WIC if you're pregnant or have young children. Call 211 for your nearest food pantry!",
+    'utility help':
+      'For utility bill help: CARE Program gives 20% off PG&E bills (apply at pge.com), LIHEAP provides one-time help with heating/cooling bills, and REACH helps with emergency utility assistance. Call 211 for more options!',
+    'housing help':
+      "For housing assistance: Section 8 vouchers help pay rent (apply through your housing authority), emergency rental assistance may be available through your county, and if you're homeless, call 211 for Coordinated Entry services.",
+    healthcare:
+      'For healthcare: Medi-Cal provides free coverage for low-income Californians (apply at BenefitsCal.com), Covered California offers subsidized insurance (CoveredCA.com), and community clinics offer low-cost care regardless of insurance.',
+
+    // Thank you
+    'thank you':
+      "You're welcome! Remember, you can also call 211 anytime for free, confidential help finding services. Good luck, and take care!",
+    thanks:
+      "You're welcome! Feel free to ask if you need help finding anything else. You can also call 211 for personalized assistance.",
+  };
+
+  function getQuickResponse(message) {
+    const normalized = message
+      .toLowerCase()
+      .trim()
+      .replace(/[?!.,]/g, '');
+    return QUICK_RESPONSES[normalized] || null;
+  }
+
   // System prompt for Carl, the Bay Navigator Assistant
   const SYSTEM_PROMPT = `You are Carl, a friendly AI assistant for Bay Navigator. You're named after Karl the Fog, San Francisco's famous fog. You help people in the San Francisco Bay Area find social services, benefits programs, and community resources.
 
@@ -335,10 +394,23 @@ Fun facts about yourself:
     addMessage(message, 'user');
     input.value = '';
 
+    // Check for cached quick response first (saves API call and energy)
+    const quickResponse = getQuickResponse(message);
+    if (quickResponse) {
+      // Small delay to feel natural
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      conversationHistory.push({ role: 'user', content: message });
+      conversationHistory.push({ role: 'assistant', content: quickResponse });
+      addMessage(quickResponse, 'assistant');
+      return;
+    }
+
     // Show loading
     isLoading = true;
     sendBtn?.setAttribute('disabled', 'true');
-    const loadingEl = addLoadingIndicator();
+
+    // Create streaming message bubble
+    const streamingBubble = addStreamingMessage();
 
     try {
       // Build messages array for Ollama chat API
@@ -357,7 +429,7 @@ Fun facts about yourself:
         body: JSON.stringify({
           model: 'llama3.2:3b',
           messages: messages,
-          stream: false,
+          stream: true,
           options: {
             temperature: 0.7,
             num_predict: 500,
@@ -365,36 +437,98 @@ Fun facts about yourself:
         }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to get response');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get response');
+      }
+
+      // Handle streaming response
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let fullResponse = '';
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          // Ollama streams JSON objects, one per line
+          const lines = chunk.split('\n').filter((line) => line.trim());
+
+          for (const line of lines) {
+            try {
+              const json = JSON.parse(line);
+              if (json.message?.content) {
+                fullResponse += json.message.content;
+                updateStreamingMessage(streamingBubble, fullResponse);
+              }
+            } catch {
+              // Skip malformed JSON chunks
+            }
+          }
+        }
       }
 
       // Update conversation history
       conversationHistory.push({ role: 'user', content: message });
+      conversationHistory.push({
+        role: 'assistant',
+        content: fullResponse || 'I apologize, but I could not generate a response.',
+      });
 
-      // Extract assistant response from Ollama format
-      const assistantMessage =
-        data.message?.content ||
-        data.response ||
-        'I apologize, but I could not generate a response.';
-      conversationHistory.push({ role: 'assistant', content: assistantMessage });
-
-      // Add AI response to chat
-      addMessage(assistantMessage, 'assistant');
+      // Finalize the streaming message
+      finalizeStreamingMessage(streamingBubble, fullResponse);
     } catch (error) {
       console.error('Chat error:', error);
+      streamingBubble?.remove();
       addMessage(
         "I'm sorry, I'm having trouble connecting right now. Please try searching the programs directly or call 211 for assistance.",
         'assistant',
         true
       );
     } finally {
-      loadingEl?.remove();
       isLoading = false;
       sendBtn?.removeAttribute('disabled');
       input?.focus();
+    }
+  }
+
+  function addStreamingMessage() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'assistant-message';
+
+    const bubble = document.createElement('div');
+    bubble.className =
+      'bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
+
+    const p = document.createElement('p');
+    p.className = 'text-sm sm:text-base text-neutral-800 dark:text-neutral-200 streaming-text';
+    p.innerHTML = '<span class="inline-block w-2 h-4 bg-primary-500 animate-pulse"></span>';
+
+    bubble.appendChild(p);
+    wrapper.appendChild(bubble);
+    messagesContainer?.appendChild(wrapper);
+    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    return wrapper;
+  }
+
+  function updateStreamingMessage(wrapper, text) {
+    const p = wrapper?.querySelector('.streaming-text');
+    if (p) {
+      // Convert newlines and add cursor
+      p.innerHTML =
+        text.replace(/\n/g, '<br>') +
+        '<span class="inline-block w-2 h-4 bg-primary-500 animate-pulse ml-0.5"></span>';
+      messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  function finalizeStreamingMessage(wrapper, text) {
+    const p = wrapper?.querySelector('.streaming-text');
+    if (p) {
+      // Remove cursor
+      p.innerHTML = text.replace(/\n/g, '<br>');
     }
   }
 
@@ -479,30 +613,6 @@ Fun facts about yourself:
     wrapper.appendChild(bubble);
     messagesContainer?.appendChild(wrapper);
     messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-  }
-
-  function addLoadingIndicator() {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'assistant-message loading-indicator';
-
-    const bubble = document.createElement('div');
-    bubble.className =
-      'bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]';
-
-    const dots = document.createElement('div');
-    dots.className = 'flex gap-1';
-    for (let i = 0; i < 3; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'w-2 h-2 bg-neutral-400 rounded-full animate-bounce';
-      dot.style.animationDelay = `${i * 150}ms`;
-      dots.appendChild(dot);
-    }
-
-    bubble.appendChild(dots);
-    wrapper.appendChild(bubble);
-    messagesContainer?.appendChild(wrapper);
-    messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
-    return wrapper;
   }
 </script>
 
