@@ -257,25 +257,25 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
 
     // Common program questions
     'what is calfresh':
-      'CalFresh (also called SNAP or food stamps) provides monthly grocery benefits on an EBT card. Most low-income Californians qualify, including immigrants. Apply at BenefitsCal.com or call your county social services office.',
+      'CalFresh (also called SNAP or food stamps) provides monthly grocery benefits on an EBT card. Most low-income Californians qualify, including immigrants. Learn more at baynavigator.org/eligibility/food-assistance',
     'what is medi-cal':
-      "Medi-Cal is California's free health insurance for low-income residents. It covers doctor visits, hospital care, prescriptions, mental health, and more. Many immigrants qualify too. Apply at BenefitsCal.com.",
+      "Medi-Cal is California's free health insurance for low-income residents. It covers doctor visits, hospital care, prescriptions, mental health, and more. Many immigrants qualify too. Learn more at baynavigator.org/eligibility/healthcare",
     'what is section 8':
-      'Section 8 (Housing Choice Voucher) helps pay rent in private housing. You pay about 30% of your income, the voucher covers the rest. Apply through your local housing authority - waitlists are often long, so apply early!',
+      'Section 8 (Housing Choice Voucher) helps pay rent in private housing. You pay about 30% of your income, the voucher covers the rest. Learn more at baynavigator.org/eligibility/housing-assistance',
     'what is 211':
-      '211 is a free, confidential helpline available 24/7. They can connect you to local services for food, housing, utilities, healthcare, and more. Just dial 2-1-1 from any phone or visit 211bayarea.org.',
+      '211 is a free, confidential helpline available 24/7. They can connect you to local services for food, housing, utilities, healthcare, and more. Just dial 2-1-1 from any phone.',
 
     // Help categories
     'food help':
-      "For food assistance, check out: CalFresh (monthly grocery benefits) - apply at BenefitsCal.com, local food banks like Second Harvest or SF-Marin Food Bank, and WIC if you're pregnant or have young children. Call 211 for your nearest food pantry!",
+      "For food assistance, check out CalFresh (monthly grocery benefits), local food banks, and WIC if you're pregnant or have young children. See all options at baynavigator.org/eligibility/food-assistance",
     'food assistance':
-      "For food assistance, check out: CalFresh (monthly grocery benefits) - apply at BenefitsCal.com, local food banks like Second Harvest or SF-Marin Food Bank, and WIC if you're pregnant or have young children. Call 211 for your nearest food pantry!",
+      "For food assistance, check out CalFresh (monthly grocery benefits), local food banks, and WIC if you're pregnant or have young children. See all options at baynavigator.org/eligibility/food-assistance",
     'utility help':
-      'For utility bill help: CARE Program gives 20% off PG&E bills (apply at pge.com), LIHEAP provides one-time help with heating/cooling bills, and REACH helps with emergency utility assistance. Call 211 for more options!',
+      'For utility bill help: CARE Program gives 20% off PG&E bills, LIHEAP provides one-time help, and REACH helps with emergencies. See all options at baynavigator.org/eligibility/utility-programs',
     'housing help':
-      "For housing assistance: Section 8 vouchers help pay rent (apply through your housing authority), emergency rental assistance may be available through your county, and if you're homeless, call 211 for Coordinated Entry services.",
+      'For housing assistance: Section 8 vouchers, emergency rental assistance, and homeless services. See all options at baynavigator.org/eligibility/housing-assistance',
     healthcare:
-      'For healthcare: Medi-Cal provides free coverage for low-income Californians (apply at BenefitsCal.com), Covered California offers subsidized insurance (CoveredCA.com), and community clinics offer low-cost care regardless of insurance.',
+      'For healthcare: Medi-Cal provides free coverage for low-income Californians, Covered California offers subsidized insurance, and community clinics offer low-cost care. Learn more at baynavigator.org/eligibility/healthcare',
 
     // Thank you
     'thank you':
@@ -300,14 +300,27 @@ Your Role:
 - Be warm, supportive, and non-judgmental
 - Keep responses concise (2-4 sentences)
 - Prioritize safety in crisis situations
+- ALWAYS link to Bay Navigator pages, not external websites
+
+Bay Navigator Pages (ALWAYS link to these!):
+- Food: baynavigator.org/eligibility/food-assistance
+- Healthcare: baynavigator.org/eligibility/healthcare
+- Housing: baynavigator.org/eligibility/housing-assistance
+- Utilities: baynavigator.org/eligibility/utility-programs
+- Cash aid: baynavigator.org/eligibility/cash-assistance
+- Disability: baynavigator.org/eligibility/disability
+- Seniors: baynavigator.org/eligibility/seniors
+- Veterans: baynavigator.org/eligibility/military-veterans
+- Students: baynavigator.org/eligibility/students
+- All programs: baynavigator.org/eligibility
 
 Key Programs:
-- CalFresh (food stamps): Apply at BenefitsCal.com
-- Medi-Cal (health insurance): Apply at BenefitsCal.com
-- Section 8 (housing vouchers): Contact local housing authority
-- CARE Program: 20% PG&E discount for low-income
-- CalWORKs: Cash aid for families with children
-- 211 Bay Area: Call 211 for help finding any service
+- CalFresh (food stamps): See baynavigator.org/eligibility/food-assistance
+- Medi-Cal (health insurance): See baynavigator.org/eligibility/healthcare
+- Section 8 (housing vouchers): See baynavigator.org/eligibility/housing-assistance
+- CARE Program: See baynavigator.org/eligibility/utility-programs
+- CalWORKs: See baynavigator.org/eligibility/cash-assistance
+- 211 Bay Area: Call 211 for personalized help
 
 Crisis Resources (provide immediately when relevant):
 - Emergency: 911
@@ -318,7 +331,7 @@ Crisis Resources (provide immediately when relevant):
 
 Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
 
-When in doubt, suggest calling 211 or visiting baynavigator.org for more help.
+When in doubt, direct users to baynavigator.org/eligibility or baynavigator.org/directory
 
 Fun facts about yourself:
 - Your name: You're Carl, named after Karl the Fog (spelled with C for Chat!)
