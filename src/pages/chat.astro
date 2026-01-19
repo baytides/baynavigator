@@ -277,11 +277,86 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     healthcare:
       'For healthcare: Medi-Cal provides free coverage for low-income Californians, Covered California offers subsidized insurance, and community clinics offer low-cost care. Learn more at baynavigator.org/eligibility/healthcare',
 
+    // More help categories
+    'cash assistance':
+      'For cash assistance: CalWORKs helps families with children, General Assistance helps adults without children, and SSI/SSDI helps people with disabilities. See all options at baynavigator.org/eligibility/cash-assistance',
+    'cash help':
+      'For cash assistance: CalWORKs helps families with children, General Assistance helps adults without children, and SSI/SSDI helps people with disabilities. See all options at baynavigator.org/eligibility/cash-assistance',
+    'money help':
+      'For financial assistance: CalWORKs, General Assistance, and disability benefits may help. See all options at baynavigator.org/eligibility/cash-assistance',
+    disability:
+      'For disability benefits: SSI provides monthly payments for people with disabilities, SSDI is for those who worked before becoming disabled. See all options at baynavigator.org/eligibility/disability',
+    'disability help':
+      'For disability benefits: SSI provides monthly payments, SSDI is for those with work history. Medi-Cal also covers health services. See all options at baynavigator.org/eligibility/disability',
+
+    // Population-specific
+    'senior help':
+      'For seniors 60+: Many programs offer extra benefits including higher CalFresh amounts, Medi-Cal, IHSS for in-home care, and more. See all options at baynavigator.org/eligibility/seniors',
+    seniors:
+      'For seniors 60+: CalFresh, Medi-Cal, IHSS (in-home care), Medicare, and other programs are available. See all options at baynavigator.org/eligibility/seniors',
+    'veteran help':
+      'For veterans: VA healthcare, disability compensation, pension, education benefits, and more are available. See all options at baynavigator.org/eligibility/military-veterans',
+    veterans:
+      'Veterans have access to VA healthcare, disability benefits, GI Bill, home loans, and more. See all options at baynavigator.org/eligibility/military-veterans',
+    'student help':
+      'For students: Financial aid, CalFresh (students can qualify!), Medi-Cal, and other programs may help. See all options at baynavigator.org/eligibility/students',
+    students:
+      'Students can qualify for financial aid, CalFresh, Medi-Cal, and other support programs. See all options at baynavigator.org/eligibility/students',
+
+    // Specific programs
+    calworks:
+      'CalWORKs provides cash aid to families with children while parents work or prepare for work. See details at baynavigator.org/eligibility/cash-assistance',
+    'what is calworks':
+      'CalWORKs provides cash aid to families with children while parents work or prepare for work. It also includes job training. See details at baynavigator.org/eligibility/cash-assistance',
+    wic: 'WIC provides food and nutrition support for pregnant women, new moms, and children up to 5 years old. See details at baynavigator.org/eligibility/food-assistance',
+    'what is wic':
+      'WIC (Women, Infants & Children) provides food, nutrition education, and healthcare referrals for pregnant women and young children. See details at baynavigator.org/eligibility/food-assistance',
+    'care program':
+      'CARE gives a 20% discount on PG&E electric and gas bills for income-eligible households. See details at baynavigator.org/eligibility/utility-programs',
+    'what is care':
+      'CARE (California Alternate Rates for Energy) gives a 20% discount on PG&E bills. Low-income households often qualify automatically. See details at baynavigator.org/eligibility/utility-programs',
+    liheap:
+      'LIHEAP provides one-time help paying heating or cooling bills. See details at baynavigator.org/eligibility/utility-programs',
+    'what is liheap':
+      'LIHEAP (Low Income Home Energy Assistance Program) provides one-time payments to help with heating and cooling bills. See details at baynavigator.org/eligibility/utility-programs',
+
+    // Common questions
+    'how do i apply':
+      'Most programs can be applied for at BenefitsCal.com, or call 211 for help with your specific situation. Check baynavigator.org/eligibility for program details.',
+    'where do i apply':
+      'Most programs can be applied for at BenefitsCal.com, or visit your county human services office. Call 211 for help finding the right place.',
+    'i need help':
+      "I'm here to help! Tell me what you need - food, healthcare, housing, utilities, cash assistance - and I'll point you to the right programs. You can also browse all programs at baynavigator.org/eligibility",
+    help: 'I can help you find: food assistance, healthcare, housing help, utility assistance, cash aid, and more. What do you need? You can also browse all programs at baynavigator.org/eligibility',
+    eligibility:
+      'Eligibility varies by program, household size, and income. Most programs serve residents regardless of immigration status. Check specific requirements at baynavigator.org/eligibility',
+    'am i eligible':
+      'Eligibility depends on the program, your household size, and income. Many programs serve all residents. Check baynavigator.org/eligibility for specific requirements.',
+    'food banks':
+      'Bay Area food banks include Second Harvest (South Bay), SF-Marin Food Bank, and Alameda County Community Food Bank. Call 211 for your nearest pantry location.',
+    'food pantry':
+      'Call 211 to find your nearest food pantry. Major food banks include Second Harvest, SF-Marin Food Bank, and Alameda County Community Food Bank.',
+
+    // Emergencies - these should be instant
+    homeless:
+      'If you are experiencing homelessness, call 211 for Coordinated Entry services. They can connect you to shelter, housing assistance, and other support.',
+    homelessness:
+      'Call 211 for Coordinated Entry if you need shelter or housing assistance. They can connect you to local services 24/7.',
+    'rent help':
+      'For rent assistance: Check if your county has emergency rental assistance, and explore Section 8 vouchers. See options at baynavigator.org/eligibility/housing-assistance',
+    emergency:
+      'For emergencies: Call 911 for immediate danger. For crisis support: 988 (suicide/mental health), 1-800-799-7233 (domestic violence), or 211 for other urgent needs.',
+    crisis:
+      'Crisis resources: 988 for suicide/mental health crisis, 1-800-799-7233 for domestic violence, 911 for emergencies, 211 for other urgent needs.',
+
     // Thank you
     'thank you':
       "You're welcome! Remember, you can also call 211 anytime for free, confidential help finding services. Good luck, and take care!",
     thanks:
       "You're welcome! Feel free to ask if you need help finding anything else. You can also call 211 for personalized assistance.",
+    bye: 'Take care! Remember, 211 is available 24/7 if you need help finding services. Good luck!',
+    goodbye:
+      'Goodbye! Best of luck, and remember 211 is always available for personalized assistance.',
   };
 
   function getQuickResponse(message) {
