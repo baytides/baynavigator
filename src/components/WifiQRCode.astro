@@ -108,8 +108,31 @@
             class="flex justify-between items-center py-2 border-b border-neutral-200 dark:border-neutral-600"
           >
             <span class="text-neutral-600 dark:text-neutral-400">Network name</span>
-            <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-ssid-manual"
-            ></span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-neutral-900 dark:text-white" id="wifi-qr-ssid-manual"
+              ></span>
+              <button
+                type="button"
+                id="wifi-qr-copy-ssid-btn"
+                class="p-1 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                aria-label="Copy network name"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="flex justify-between items-center py-2" id="wifi-qr-password-row">
             <span class="text-neutral-600 dark:text-neutral-400">Password</span>
@@ -189,14 +212,17 @@
   const ssidManual = document.getElementById('wifi-qr-ssid-manual');
   const passwordManual = document.getElementById('wifi-qr-password-manual');
   const passwordRow = document.getElementById('wifi-qr-password-row');
+  const copySsidBtn = document.getElementById('wifi-qr-copy-ssid-btn');
   const copyBtn = document.getElementById('wifi-qr-copy-btn');
 
+  let currentSsid = '';
   let currentPassword = '';
 
   // Open modal function - exposed globally
   async function openWifiQRModal(ssid: string, password?: string) {
     if (!modal || !qrImage) return;
 
+    currentSsid = ssid;
     currentPassword = password || '';
 
     // Update displays using textContent (safe from XSS)
@@ -267,6 +293,27 @@
   modal?.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       modal.close();
+    }
+  });
+
+  // Copy SSID
+  copySsidBtn?.addEventListener('click', async () => {
+    if (currentSsid) {
+      try {
+        await navigator.clipboard.writeText(currentSsid);
+        // Show feedback
+        const originalLabel = copySsidBtn.getAttribute('aria-label');
+        copySsidBtn.setAttribute('aria-label', 'Copied!');
+        copySsidBtn.classList.add('text-green-600', 'dark:text-green-400');
+
+        setTimeout(() => {
+          copySsidBtn.setAttribute('aria-label', originalLabel || 'Copy network name');
+          copySsidBtn.classList.remove('text-green-600', 'dark:text-green-400');
+        }, 2000);
+      } catch {
+        // Fallback for older browsers
+        console.error('Failed to copy SSID');
+      }
     }
   });
 
