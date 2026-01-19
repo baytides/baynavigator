@@ -1,0 +1,27 @@
+{
+  "id": "section-8-hcv",
+  "name": "Section 8 Housing Choice Voucher Program",
+  "category": "housing",
+  "description": "Rental subsidy covering difference between 30% of income and fair market rent",
+  "fullDescription": "The Housing Choice Voucher (Section 8) program helps low-income families, seniors, and people with disabilities afford rental housing by subsidizing a portion of rent paid to private landlords.",
+  "whatTheyOffer": "- Monthly rental subsidy paid directly to landlord\n- Tenant pays approximately 30% of income toward rent\n- Choice to rent in private market (not just public housing)\n- Portability to move between housing authorities\n- Protection from paying more than 30-40% of income for housing\n",
+  "howToGetIt": "1. Apply through your local housing authority\n2. Must meet income limits (generally below 50% of area median income)\n3. Waitlists are often long (years in some areas)\n4. Some housing authorities open waitlists periodically\n5. When your name comes up, attend briefing and find housing\n6. Housing authority inspects unit and approves rent\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.hud.gov/topics/housing_choice_voucher_program_section_8",
+  "cost": null,
+  "phone": "800-955-2232",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Section 8, housing voucher, HCV, rent assistance, HUD, low-income housing, rental subsidy, waitlist, public housing",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

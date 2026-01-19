@@ -1,0 +1,27 @@
+{
+  "id": "tenants-union-sf",
+  "name": "San Francisco Tenants Union",
+  "category": "legal",
+  "description": "Tenant counseling, education, and advocacy for San Francisco renters",
+  "fullDescription": "The San Francisco Tenants Union provides tenant counseling, education, and advocacy to help renters understand and exercise their rights under SF rent control laws.",
+  "whatTheyOffer": "- Tenant counseling and advice (free for members)\n- Help understanding rent control laws\n- Assistance with habitability complaints\n- Guidance on eviction defense\n- Tenant rights workshops\n- Advocacy for tenant-friendly policies\n",
+  "howToGetIt": "1. Become a member ($50/year sliding scale)\n2. Attend drop-in counseling hours\n3. Call the counseling line for advice\n4. Attend free tenant rights workshops\n5. Get referrals to legal services if needed\n",
+  "groups": [
+    "everyone"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": null,
+  "website": "https://sftu.org/",
+  "cost": null,
+  "phone": "415-282-6622",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "tenants union, San Francisco, tenant rights, rent control, eviction, landlord, housing, counseling, renter, lease",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

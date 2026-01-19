@@ -1,0 +1,28 @@
+{
+  "id": "eops",
+  "name": "EOPS/CARE (Extended Opportunity Programs)",
+  "category": "education",
+  "description": "Book vouchers, priority registration, counseling, and additional grants for low-income community college students",
+  "fullDescription": "EOPS provides academic and financial support to low-income community college students, while CARE offers additional support to single parents on public assistance.",
+  "whatTheyOffer": "- Priority registration\n- Book vouchers and supplies\n- Academic counseling\n- Transfer assistance\n- Grant aid (in addition to other financial aid)\n- CARE program: childcare assistance, meal vouchers, additional grants for single parents\n",
+  "howToGetIt": "1. Must be enrolled at California Community College\n2. Must meet income eligibility requirements\n3. Must be educationally disadvantaged\n4. Must enroll in at least 12 units\n5. Apply through college EOPS office\n6. CARE: must be single parent receiving CalWORKs/TANF\n",
+  "groups": [
+    "income-eligible",
+    "college-students"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.cccco.edu/Students/Support-Services/Special-populations/Extended-Opportunity-Programs-and-Services-EOPS",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "EOPS, CARE, community college, low-income, academic support, financial aid, book vouchers, counseling, single parent",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

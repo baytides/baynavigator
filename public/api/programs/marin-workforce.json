@@ -1,0 +1,28 @@
+{
+  "id": "marin-workforce",
+  "name": "Marin Employment Connection",
+  "category": "employment",
+  "description": "Free career services and job training for Marin County residents",
+  "fullDescription": "Marin Employment Connection is Marin County's America's Job Center, providing comprehensive employment and training services to job seekers and employers.",
+  "whatTheyOffer": "- Free career counseling and assessment\n- Job search workshops and resources\n- Resume and interview preparation\n- Skills training and certifications\n- Youth employment programs\n- Veteran services\n- Employer recruitment assistance\n",
+  "howToGetIt": "1. Visit Marin Employment Connection in San Rafael\n2. Register and complete intake\n3. Work with career counselor\n4. Access training and job search services\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "Marin County"
+  ],
+  "city": null,
+  "website": "https://www.marincounty.org/depts/hr/employment-connection",
+  "cost": null,
+  "phone": "415-473-3300",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Marin County, workforce, employment connection, AJCC, job training, career services, San Rafael",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

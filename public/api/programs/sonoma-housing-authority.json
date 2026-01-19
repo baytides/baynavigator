@@ -1,0 +1,27 @@
+{
+  "id": "sonoma-housing-authority",
+  "name": "Sonoma County Housing Authority",
+  "category": "housing",
+  "description": "Section 8 housing vouchers for Sonoma County residents",
+  "fullDescription": "The Sonoma County Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents in Sonoma County.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n- Homeownership voucher program\n",
+  "howToGetIt": "1. Check SCHA website for waitlist status\n2. Apply when waitlist opens\n3. Must meet income limits\n4. Sonoma County residents get preference\n5. Wait for name on waitlist\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Sonoma County"
+  ],
+  "city": null,
+  "website": "https://sonomacounty.ca.gov/housing-authority",
+  "cost": null,
+  "phone": "707-565-7500",
+  "email": null,
+  "address": "1440 Guerneville Road, Santa Rosa, CA 95403",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Sonoma Housing Authority, Section 8, housing voucher, Santa Rosa, low-income, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

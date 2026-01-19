@@ -170,17 +170,18 @@ const RESTRICTED_SOURCES = ['ThroughLine'];
 const allPrograms = [];
 // Filter out non-program files (metadata files that don't contain program arrays)
 const NON_PROGRAM_FILES = [
-  'cities.yml',
-  'groups.yml',
-  'zipcodes.yml',
-  'suppressed.yml',
-  'search-config.yml',
-  'transit-agencies.yml',
-  'county-supervisors.yml',
-  'site-config.yml',
+  'airports.yml',
   'bay-area-jurisdictions.yml',
+  'cities.yml',
   'city-profiles.yml',
+  'county-supervisors.yml',
+  'groups.yml',
   'helplines.yml',
+  'search-config.yml',
+  'site-config.yml',
+  'suppressed.yml',
+  'transit-agencies.yml',
+  'zipcodes.yml',
 ];
 const categoryFiles = fs
   .readdirSync(DATA_DIR)

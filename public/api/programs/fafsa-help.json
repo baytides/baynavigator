@@ -1,0 +1,29 @@
+{
+  "id": "fafsa-help",
+  "name": "Free FAFSA Help",
+  "category": "education",
+  "description": "Free expert help completing FAFSA and Dream Act applications to maximize financial aid",
+  "fullDescription": "Free help completing the FAFSA (Free Application for Federal Student Aid) is available through California Cash for College workshops and other programs.",
+  "whatTheyOffer": "- Free in-person FAFSA completion workshops\n- Help with California Dream Act Application\n- One-on-one assistance with financial aid forms\n- Virtual and in-person options available\n- Bilingual assistance in many locations\n- Help understanding financial aid awards\n",
+  "howToGetIt": "1. Find a Cash for College workshop near you\n2. Bring required documents (tax returns, Social Security numbers, etc.)\n3. Work with trained volunteers to complete FAFSA\n4. Get help understanding next steps\n5. Workshops held at schools, libraries, and community centers\n",
+  "groups": [
+    "everyone",
+    "college-students",
+    "youth"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.csac.ca.gov/cash-for-college",
+  "cost": null,
+  "phone": "888-224-7268",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "FAFSA, financial aid, college, federal aid, Pell Grant, student loans, free help, application, form, CSAC, Cash for College",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

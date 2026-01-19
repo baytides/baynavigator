@@ -1,0 +1,28 @@
+{
+  "id": "jobtrain",
+  "name": "JobTrain",
+  "category": "employment",
+  "description": "Free career training with 90%+ job placement in healthcare, culinary, tech, and construction",
+  "fullDescription": "JobTrain provides free career training in high-demand fields including healthcare, culinary arts, technology, and construction for low-income Bay Area residents.",
+  "whatTheyOffer": "- Free career training programs (8-16 weeks)\n- Healthcare certifications (CNA, Medical Assistant, Phlebotomy)\n- Culinary arts and food service training\n- Construction and green energy training\n- IT and digital skills training\n- Job placement assistance (90%+ placement rate)\n- Supportive services (childcare, transportation, emergency funds)\n",
+  "howToGetIt": "1. Must be low-income (specific guidelines apply)\n2. Must be at least 18 years old\n3. Attend information session\n4. Complete application and interview\n5. Start training program\n6. Receive job placement support upon completion\n",
+  "groups": [
+    "income-eligible",
+    "unemployed"
+  ],
+  "areas": [
+    "San Mateo County"
+  ],
+  "city": "Menlo Park",
+  "website": "https://www.jobtrainworks.org/",
+  "cost": null,
+  "phone": "650-330-6400",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "JobTrain, Menlo Park, job training, career, healthcare, culinary, IT, construction, certificate, low-income",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

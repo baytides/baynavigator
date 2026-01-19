@@ -1,0 +1,89 @@
+# Bay Area Airports
+# Real-time status available via FAA External API
+# https://external-api.faa.gov/asws/api/airport/status/{code}
+
+airports:
+  - code: SFO
+    name: San Francisco International Airport
+    city: San Francisco
+    county: San Mateo
+    terminals:
+      - name: Terminal 1
+        airlines:
+          - Southwest
+          - JetBlue
+      - name: Terminal 2
+        airlines:
+          - American
+          - Delta (domestic)
+      - name: Terminal 3
+        airlines:
+          - United
+      - name: International Terminal
+        airlines:
+          - International carriers
+    transit:
+      bart: true
+      bart_station: San Francisco International Airport
+      caltrain: false
+      shuttle: AirTrain (free)
+    coordinates:
+      lat: 37.6213
+      lng: -122.379
+    website: https://www.flysfo.com
+    phone: '(650) 821-8211'
+
+  - code: OAK
+    name: Oakland International Airport
+    city: Oakland
+    county: Alameda
+    terminals:
+      - name: Terminal 1
+        airlines:
+          - Southwest
+          - Spirit
+          - Volaris
+          - Allegiant
+      - name: Terminal 2
+        airlines:
+          - Southwest
+    transit:
+      bart: true
+      bart_station: Oakland International Airport
+      caltrain: false
+      shuttle: BART Connector (free)
+    coordinates:
+      lat: 37.7126
+      lng: -122.2197
+    website: https://www.oaklandairport.com
+    phone: '(510) 563-3300'
+
+  - code: SJC
+    name: Norman Y. Mineta San Jose International Airport
+    city: San Jose
+    county: Santa Clara
+    terminals:
+      - name: Terminal A
+        airlines:
+          - Southwest
+          - American
+          - Delta
+          - Spirit
+      - name: Terminal B
+        airlines:
+          - Alaska
+          - JetBlue
+          - United
+    transit:
+      bart: false
+      vta: true
+      vta_routes:
+        - 'Route 10 - Airport Flyer'
+        - 'Route 60'
+      caltrain: false
+      shuttle: Free Airport Shuttle to Metro/Airport Light Rail
+    coordinates:
+      lat: 37.3639
+      lng: -121.9289
+    website: https://www.flysanjose.com
+    phone: '(408) 392-3600'

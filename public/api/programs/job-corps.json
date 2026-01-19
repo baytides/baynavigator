@@ -1,0 +1,28 @@
+{
+  "id": "job-corps",
+  "name": "Job Corps",
+  "category": "employment",
+  "description": "Free residential job training, education, room and board, and job placement for ages 16-24",
+  "fullDescription": "Job Corps is the nation's largest free residential education and job training program for young adults ages 16-24. Students live on campus while earning a high school diploma and learning job skills.",
+  "whatTheyOffer": "- Free room and board while training\n- High school diploma or GED completion\n- Career training in high-demand industries\n- Healthcare, construction, IT, culinary, and more\n- Job placement assistance\n- Driver's license assistance\n- Monthly living allowance\n",
+  "howToGetIt": "1. Must be 16-24 years old\n2. Must be low-income (specific guidelines apply)\n3. Must be a U.S. citizen or legal resident\n4. Contact Job Corps admissions or local outreach office\n5. Complete application and interview\n6. Pass background check and health screening\n",
+  "groups": [
+    "youth",
+    "income-eligible"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.jobcorps.gov/",
+  "cost": null,
+  "phone": "800-733-5627",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Job Corps, youth job training, free job training, vocational training, 16-24, career training, housing, education, certification, young adults",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

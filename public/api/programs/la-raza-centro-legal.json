@@ -1,0 +1,28 @@
+{
+  "id": "la-raza-centro-legal",
+  "name": "La Raza Centro Legal",
+  "category": "legal",
+  "description": "Free legal services in immigration, housing, and workers' rights for Latino and immigrant communities",
+  "fullDescription": "La Raza Centro Legal provides free legal services to Latino and immigrant communities in San Francisco, specializing in immigration, housing, and workers' rights.",
+  "whatTheyOffer": "- Immigration legal services (family petitions, DACA, asylum, citizenship)\n- Tenant rights and eviction defense\n- Workers' rights and wage claims\n- Community education\n- Bilingual services (English/Spanish)\n",
+  "howToGetIt": "1. Call 415-575-3500 for intake\n2. Must meet income guidelines\n3. Complete intake screening\n4. Receive legal advice or representation\n",
+  "groups": [
+    "immigrants",
+    "income-eligible"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": null,
+  "website": "https://lrcl.org/",
+  "cost": null,
+  "phone": "415-575-3500",
+  "email": null,
+  "address": "474 Valencia Street, Suite 295, San Francisco, CA 94103",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "La Raza, San Francisco, immigration, tenant rights, housing, workers rights, Latino, Mission District, Spanish, free legal, DACA",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "caljobs",
+  "name": "CalJOBS",
+  "category": "employment",
+  "description": "Free online job search, resume builder, training finder, and connection to local career services",
+  "fullDescription": "CalJOBS is California's online employment center connecting job seekers with employers. Search jobs, build resumes, find training programs, and connect with local career centers.",
+  "whatTheyOffer": "- Free job search with thousands of California job listings\n- Resume builder and career profile tools\n- Training program finder\n- Labor market information and salary data\n- Connection to local America's Job Centers\n- Virtual job fairs and hiring events\n- Skills assessment tools\n",
+  "howToGetIt": "1. Visit CalJOBS.ca.gov\n2. Create a free account\n3. Build your resume and job seeker profile\n4. Search for jobs matching your skills\n5. Apply directly through the system\n6. Find local career center for in-person help\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.caljobs.ca.gov/",
+  "cost": null,
+  "phone": "800-758-0398",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "CalJOBS, job search, employment, resume builder, job training, EDD, California jobs, career, workforce, job board, job listings",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

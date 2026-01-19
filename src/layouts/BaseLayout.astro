@@ -4,6 +4,7 @@ import I18nLoader from '../components/i18n-loader.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
 import OfflineBanner from '../components/OfflineBanner.astro';
 import PrintQR from '../components/PrintQR.astro';
+import ProgramDetailModal from '../components/ProgramDetailModal.astro';
 import PWAInstallBanner from '../components/PWAInstallBanner.astro';
 import SafetyExit from '../components/SafetyExit.astro';
 import SkipLinks from '../components/SkipLinks.astro';
@@ -1930,6 +1931,9 @@ const websiteSchema = {
     <!-- Service Worker Registration -->
     <!-- Toast notifications -->
     <Toast />
+
+    <!-- Program Detail Modal -->
+    <ProgramDetailModal />
 
     <!-- i18n translation loader -->
     <I18nLoader />

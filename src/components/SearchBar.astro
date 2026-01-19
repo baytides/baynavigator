@@ -167,6 +167,180 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 <div class="sr-only" aria-live="polite" aria-atomic="true" id="search-announcer"></div>
 <div class="sr-only" aria-live="assertive" aria-atomic="true" id="search-urgent-announcer"></div>
 
+<!-- Refinement Bar (shown when results are broad) -->
+<div
+  id="refinement-bar"
+  class="hidden mt-4 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700"
+  role="region"
+  aria-label="Search refinement options"
+>
+  <!-- Location display/prompt -->
+  <div id="location-section" class="mb-4">
+    <!-- Shown when location is set -->
+    <div id="location-display" class="hidden flex items-center gap-2 text-sm flex-wrap">
+      <svg
+        class="w-4 h-4 text-neutral-500 dark:text-neutral-400 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <span class="text-neutral-600 dark:text-neutral-300">Location:</span>
+      <span id="location-value" class="font-medium text-neutral-900 dark:text-white"></span>
+      <span id="location-source" class="text-xs text-neutral-400"></span>
+      <button
+        id="change-location-btn"
+        type="button"
+        class="text-primary-600 dark:text-primary-400 hover:underline text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 rounded"
+      >
+        Change
+      </button>
+    </div>
+
+    <!-- Shown when no location is set -->
+    <div id="location-prompt" class="hidden">
+      <p
+        class="text-sm text-neutral-600 dark:text-neutral-300 mb-2 font-medium"
+        id="location-prompt-label"
+      >
+        Where are you located?
+      </p>
+      <div
+        class="flex items-center gap-2 flex-wrap"
+        role="group"
+        aria-labelledby="location-prompt-label"
+      >
+        <button
+          id="use-gps-btn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-md bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          Use my location
+        </button>
+        <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
+        <label for="zip-city-input" class="sr-only">Enter ZIP code or city</label>
+        <input
+          type="text"
+          id="zip-city-input"
+          placeholder="ZIP code or city"
+          class="px-3 py-1.5 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          autocomplete="postal-code"
+        />
+      </div>
+      <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
+        <svg
+          class="w-3 h-3 flex-shrink-0"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Your location stays on your device
+      </p>
+    </div>
+  </div>
+
+  <!-- Category buttons -->
+  <div id="category-refinement" role="group" aria-labelledby="category-prompt">
+    <p id="category-prompt" class="text-sm text-neutral-600 dark:text-neutral-300 mb-3 font-medium">
+      What kind of help are you looking for?
+    </p>
+    <div class="flex flex-wrap gap-2" id="category-buttons" role="list">
+      <!-- Populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Sub-options (shown after category selection) -->
+  <div id="suboption-refinement" class="hidden" role="group" aria-labelledby="suboption-prompt">
+    <p
+      id="suboption-prompt"
+      class="text-sm text-neutral-600 dark:text-neutral-300 mb-3 font-medium"
+    >
+    </p>
+    <div class="flex flex-wrap gap-2" id="suboption-buttons" role="list">
+      <!-- Populated by JavaScript -->
+    </div>
+    <button
+      id="back-to-categories"
+      type="button"
+      class="mt-3 text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 rounded"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+        ></path>
+      </svg>
+      Back to all categories
+    </button>
+  </div>
+</div>
+
+<!-- City autocomplete datalist -->
+<datalist id="city-list">
+  <option value="Alameda"></option>
+  <option value="Albany"></option>
+  <option value="Berkeley"></option>
+  <option value="Concord"></option>
+  <option value="Daly City"></option>
+  <option value="Dublin"></option>
+  <option value="Emeryville"></option>
+  <option value="Fremont"></option>
+  <option value="Hayward"></option>
+  <option value="Livermore"></option>
+  <option value="Milpitas"></option>
+  <option value="Mountain View"></option>
+  <option value="Newark"></option>
+  <option value="Oakland"></option>
+  <option value="Palo Alto"></option>
+  <option value="Pleasanton"></option>
+  <option value="Redwood City"></option>
+  <option value="Richmond"></option>
+  <option value="San Francisco"></option>
+  <option value="San Jose"></option>
+  <option value="San Leandro"></option>
+  <option value="San Mateo"></option>
+  <option value="San Rafael"></option>
+  <option value="Santa Clara"></option>
+  <option value="Sunnyvale"></option>
+  <option value="Union City"></option>
+  <option value="Vallejo"></option>
+  <option value="Walnut Creek"></option>
+</datalist>
+
 <script>
   import Fuse from 'fuse.js';
 
@@ -181,6 +355,325 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const QUERY_REWRITES: Record<string, string> = JSON.parse(
     configEl?.dataset?.queryRewrites || '{}'
   );
+
+  // Refinement configuration (loaded from search-config.yml at build time)
+  interface RefinementCategory {
+    id: string;
+    label: string;
+    icon: string;
+    search_terms: string[];
+    best_bets: string[];
+    sub_options: Array<{
+      label: string;
+      search_terms: string[];
+      best_bets: string[];
+    }>;
+  }
+
+  interface RefinementConfig {
+    trigger: {
+      min_results: number;
+      max_query_length: number;
+      vague_terms: string[];
+    };
+    categories: RefinementCategory[];
+  }
+
+  // Refinement trigger settings
+  const REFINEMENT_TRIGGER = {
+    min_results: 12,
+    max_query_length: 10,
+    vague_terms: ['help', 'assistance', 'need', 'program', 'benefit', 'services', 'resources'],
+  };
+
+  // Category refinement data
+  const REFINEMENT_CATEGORIES: RefinementCategory[] = [
+    {
+      id: 'food',
+      label: 'Food',
+      icon: '🍎',
+      search_terms: ['food', 'calfresh', 'snap', 'meals'],
+      best_bets: ['calfresh-food-assistance', 'sf-marin-food-bank', 'second-harvest-food-bank'],
+      sub_options: [
+        {
+          label: "Can't afford groceries",
+          search_terms: ['calfresh', 'food stamps', 'snap'],
+          best_bets: ['calfresh-food-assistance'],
+        },
+        {
+          label: 'Need food right now',
+          search_terms: ['food bank', 'food pantry', 'emergency food'],
+          best_bets: ['sf-marin-food-bank', 'second-harvest-food-bank'],
+        },
+        {
+          label: 'Baby food or formula',
+          search_terms: ['wic', 'baby food', 'formula', 'infant nutrition'],
+          best_bets: ['wic-program'],
+        },
+        {
+          label: 'Senior meals',
+          search_terms: ['meals on wheels', 'senior meals', 'congregate meals'],
+          best_bets: ['meals-on-wheels'],
+        },
+      ],
+    },
+    {
+      id: 'housing',
+      label: 'Housing',
+      icon: '🏠',
+      search_terms: ['housing', 'rent', 'shelter', 'homeless'],
+      best_bets: ['federal-department-of-housing-choice-voucher-section-8'],
+      sub_options: [
+        {
+          label: "Can't pay rent",
+          search_terms: ['rental assistance', 'rent help', 'emergency rental'],
+          best_bets: ['rental-assistance-program', 'eviction-prevention'],
+        },
+        {
+          label: 'Facing eviction',
+          search_terms: ['eviction', 'eviction defense', 'tenant rights'],
+          best_bets: ['bay-area-legal-aid', 'eviction-defense-collaborative'],
+        },
+        {
+          label: 'Need a place to stay',
+          search_terms: ['shelter', 'homeless', 'navigation center', 'coordinated entry'],
+          best_bets: ['coordinated-entry', 'navigation-centers'],
+        },
+        {
+          label: 'Looking to buy a home',
+          search_terms: ['first-time homebuyer', 'down payment', 'mortgage assistance'],
+          best_bets: ['calhfa-first-time-homebuyer'],
+        },
+      ],
+    },
+    {
+      id: 'healthcare',
+      label: 'Healthcare',
+      icon: '💊',
+      search_terms: ['healthcare', 'medical', 'health insurance', 'doctor'],
+      best_bets: ['medi-cal', 'covered-california'],
+      sub_options: [
+        {
+          label: 'Need health insurance',
+          search_terms: ['medi-cal', 'covered california', 'health insurance'],
+          best_bets: ['medi-cal', 'covered-california'],
+        },
+        {
+          label: 'Mental health support',
+          search_terms: ['mental health', 'counseling', 'therapy', 'crisis'],
+          best_bets: ['988-suicide-crisis-lifeline', 'county-behavioral-health'],
+        },
+        {
+          label: 'Dental care',
+          search_terms: ['dental', 'dentist', 'denti-cal'],
+          best_bets: ['denti-cal'],
+        },
+        {
+          label: 'Need to see a doctor',
+          search_terms: ['clinic', 'community health', 'primary care'],
+          best_bets: ['community-health-centers'],
+        },
+      ],
+    },
+    {
+      id: 'jobs',
+      label: 'Jobs',
+      icon: '💼',
+      search_terms: ['job', 'employment', 'work', 'career'],
+      best_bets: ['caljobs', 'sf-jobsnow'],
+      sub_options: [
+        {
+          label: 'Looking for a job',
+          search_terms: ['job search', 'caljobs', 'employment'],
+          best_bets: ['caljobs', 'sf-jobsnow'],
+        },
+        {
+          label: 'Lost my job',
+          search_terms: ['unemployment', 'edd', 'laid off'],
+          best_bets: ['edd-unemployment-insurance'],
+        },
+        {
+          label: 'Need job training',
+          search_terms: ['job training', 'workforce', 'vocational'],
+          best_bets: ['nova-workforce', 'job-corps'],
+        },
+        {
+          label: 'Resume help',
+          search_terms: ['resume', 'interview', 'job search'],
+          best_bets: ['career-counseling-centers'],
+        },
+      ],
+    },
+    {
+      id: 'money',
+      label: 'Money',
+      icon: '💰',
+      search_terms: ['cash', 'money', 'welfare', 'bills'],
+      best_bets: ['calworks-cash-assistance'],
+      sub_options: [
+        {
+          label: 'Need cash assistance',
+          search_terms: ['calworks', 'welfare', 'cash aid', 'general assistance'],
+          best_bets: ['calworks-cash-assistance', 'general-assistance'],
+        },
+        {
+          label: 'Disability benefits',
+          search_terms: ['ssi', 'ssdi', 'disability'],
+          best_bets: ['federal-social-security-supplemental-security-income-ssi'],
+        },
+        {
+          label: 'Help with utility bills',
+          search_terms: ['utility', 'liheap', 'care', 'pgcap', 'energy'],
+          best_bets: ['care-program-pge', 'liheap'],
+        },
+        {
+          label: 'Retirement/Social Security',
+          search_terms: ['retirement', 'social security', 'pension'],
+          best_bets: ['federal-social-security-retirement-benefits'],
+        },
+      ],
+    },
+    {
+      id: 'legal',
+      label: 'Legal',
+      icon: '⚖️',
+      search_terms: ['legal', 'lawyer', 'attorney', 'rights'],
+      best_bets: ['bay-area-legal-aid'],
+      sub_options: [
+        {
+          label: 'Free legal help',
+          search_terms: ['legal aid', 'free lawyer', 'legal services'],
+          best_bets: ['bay-area-legal-aid', 'legal-aid-at-work'],
+        },
+        {
+          label: 'Tenant/landlord issues',
+          search_terms: ['tenant rights', 'eviction', 'landlord'],
+          best_bets: ['bay-area-legal-aid', 'tenants-union'],
+        },
+        {
+          label: 'Immigration help',
+          search_terms: ['immigration', 'citizenship', 'daca', 'visa'],
+          best_bets: ['centro-legal-de-la-raza', 'immigration-legal-services'],
+        },
+      ],
+    },
+    {
+      id: 'family',
+      label: 'Family',
+      icon: '👨‍👩‍👧',
+      search_terms: ['family', 'children', 'childcare', 'senior'],
+      best_bets: ['head-start-bay-area'],
+      sub_options: [
+        {
+          label: 'Childcare/preschool',
+          search_terms: ['childcare', 'daycare', 'preschool', 'head start'],
+          best_bets: ['head-start-bay-area', 'subsidized-childcare'],
+        },
+        {
+          label: 'After school programs',
+          search_terms: ['after school', 'youth programs', 'tutoring'],
+          best_bets: ['after-school-all-stars'],
+        },
+        {
+          label: 'Senior services',
+          search_terms: ['senior', 'elderly', 'aging', 'meals on wheels'],
+          best_bets: ['senior-center', 'meals-on-wheels'],
+        },
+        {
+          label: 'Diapers/baby supplies',
+          search_terms: ['diapers', 'baby', 'infant', 'wic'],
+          best_bets: ['diaper-bank', 'wic-program'],
+        },
+      ],
+    },
+    {
+      id: 'education',
+      label: 'Education',
+      icon: '🎓',
+      search_terms: ['education', 'school', 'college', 'ged'],
+      best_bets: ['cal-grant'],
+      sub_options: [
+        {
+          label: 'Paying for college',
+          search_terms: ['financial aid', 'fafsa', 'cal grant', 'scholarship'],
+          best_bets: ['cal-grant', 'fafsa-help'],
+        },
+        {
+          label: 'GED/Adult education',
+          search_terms: ['ged', 'adult education', 'adult school'],
+          best_bets: ['career-online-high-school', 'adult-school-sf'],
+        },
+        {
+          label: 'ESL/English classes',
+          search_terms: ['esl', 'english', 'language'],
+          best_bets: ['esl-classes'],
+        },
+        {
+          label: 'School meals',
+          search_terms: ['school meals', 'free lunch', 'summer meals'],
+          best_bets: ['national-school-lunch-program'],
+        },
+      ],
+    },
+  ];
+
+  // City to county mapping for location lookup
+  const CITY_TO_COUNTY: Record<string, string> = {
+    alameda: 'Alameda County',
+    albany: 'Alameda County',
+    berkeley: 'Alameda County',
+    dublin: 'Alameda County',
+    emeryville: 'Alameda County',
+    fremont: 'Alameda County',
+    hayward: 'Alameda County',
+    livermore: 'Alameda County',
+    newark: 'Alameda County',
+    oakland: 'Alameda County',
+    piedmont: 'Alameda County',
+    pleasanton: 'Alameda County',
+    'san leandro': 'Alameda County',
+    'union city': 'Alameda County',
+    concord: 'Contra Costa County',
+    antioch: 'Contra Costa County',
+    pittsburg: 'Contra Costa County',
+    richmond: 'Contra Costa County',
+    'walnut creek': 'Contra Costa County',
+    'san rafael': 'Marin County',
+    novato: 'Marin County',
+    napa: 'Napa County',
+    'san francisco': 'San Francisco',
+    'daly city': 'San Mateo County',
+    'redwood city': 'San Mateo County',
+    'san mateo': 'San Mateo County',
+    'south san francisco': 'San Mateo County',
+    milpitas: 'Santa Clara County',
+    'mountain view': 'Santa Clara County',
+    'palo alto': 'Santa Clara County',
+    'san jose': 'Santa Clara County',
+    'santa clara': 'Santa Clara County',
+    sunnyvale: 'Santa Clara County',
+    fairfield: 'Solano County',
+    vallejo: 'Solano County',
+    'santa rosa': 'Sonoma County',
+    petaluma: 'Sonoma County',
+  };
+
+  // County coordinates for GPS lookup
+  const COUNTY_COORDINATES: Record<string, { lat: number; lng: number }> = {
+    'Alameda County': { lat: 37.6017, lng: -121.7195 },
+    'Contra Costa County': { lat: 37.9193, lng: -121.9277 },
+    'Marin County': { lat: 38.0834, lng: -122.7633 },
+    'Napa County': { lat: 38.5025, lng: -122.2654 },
+    'San Francisco': { lat: 37.7749, lng: -122.4194 },
+    'San Mateo County': { lat: 37.4969, lng: -122.3331 },
+    'Santa Clara County': { lat: 37.3541, lng: -121.9552 },
+    'Solano County': { lat: 38.2721, lng: -121.9399 },
+    'Sonoma County': { lat: 38.578, lng: -122.9888 },
+  };
+
+  // Refinement state
+  let currentLocation: { source: string; county: string; input?: string } | null = null;
+  let selectedCategory: RefinementCategory | null = null;
 
   // Type-ahead elements
   const typeaheadDropdown = document.getElementById('typeahead-dropdown');
@@ -986,6 +1479,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
           );
         }
       }
+
+      // Check if refinement bar should be shown
+      checkAndShowRefinement(query, visibleCount);
     }
   }
 
@@ -1500,6 +1996,541 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       searchInput.focus();
     }
   });
+
+  // ==========================================
+  // Refinement Bar Functions
+  // ==========================================
+
+  // Check if refinement should be shown and display it
+  function checkAndShowRefinement(query: string, resultCount: number) {
+    const bar = document.getElementById('refinement-bar');
+    if (!bar) return;
+
+    if (!query) {
+      bar.classList.add('hidden');
+      return;
+    }
+
+    const isVague = REFINEMENT_TRIGGER.vague_terms.some((term) =>
+      query.toLowerCase().includes(term)
+    );
+    const isShort = query.length <= REFINEMENT_TRIGGER.max_query_length;
+    const hasManyResults = resultCount >= REFINEMENT_TRIGGER.min_results;
+
+    if ((isVague || isShort) && hasManyResults) {
+      // Show refinement bar - trigger the full showRefinementBar function
+      showRefinementBarFull();
+    } else {
+      bar.classList.add('hidden');
+    }
+  }
+
+  const refinementBar = document.getElementById('refinement-bar');
+  const locationDisplay = document.getElementById('location-display');
+  const locationPrompt = document.getElementById('location-prompt');
+  const locationValue = document.getElementById('location-value');
+  const locationSource = document.getElementById('location-source');
+  const categoryButtons = document.getElementById('category-buttons');
+  const categoryRefinement = document.getElementById('category-refinement');
+  const suboptionRefinement = document.getElementById('suboption-refinement');
+  const suboptionPrompt = document.getElementById('suboption-prompt');
+  const suboptionButtons = document.getElementById('suboption-buttons');
+  const backToCategories = document.getElementById('back-to-categories');
+  const useGpsBtn = document.getElementById('use-gps-btn');
+  const zipCityInput = document.getElementById('zip-city-input') as HTMLInputElement | null;
+  const changeLocationBtn = document.getElementById('change-location-btn');
+
+  // Check if refinement should be shown based on query and result count
+  function shouldShowRefinement(query: string, resultCount: number): boolean {
+    const isVague = REFINEMENT_TRIGGER.vague_terms.some((term) =>
+      query.toLowerCase().includes(term)
+    );
+    const isShort = query.length <= REFINEMENT_TRIGGER.max_query_length;
+    const hasManyResults = resultCount >= REFINEMENT_TRIGGER.min_results;
+
+    return (isVague || isShort) && hasManyResults && query.length > 0;
+  }
+
+  // Show the refinement bar with full category buttons
+  function showRefinementBarFull() {
+    if (!refinementBar) return;
+
+    // Update location display
+    updateLocationDisplay();
+
+    // Build category buttons
+    if (categoryButtons) {
+      // Clear safely using textContent
+      categoryButtons.textContent = '';
+
+      REFINEMENT_CATEGORIES.forEach((cat) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+          'inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors';
+        btn.setAttribute('role', 'listitem');
+        btn.setAttribute('data-category-id', cat.id);
+
+        const icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = cat.icon;
+        btn.appendChild(icon);
+
+        const label = document.createElement('span');
+        label.textContent = cat.label;
+        btn.appendChild(label);
+
+        btn.addEventListener('click', () => selectCategory(cat));
+        categoryButtons.appendChild(btn);
+      });
+    }
+
+    // Reset to category view
+    if (categoryRefinement) categoryRefinement.classList.remove('hidden');
+    if (suboptionRefinement) suboptionRefinement.classList.add('hidden');
+    selectedCategory = null;
+
+    refinementBar.classList.remove('hidden');
+    announceToScreenReader(
+      'Refinement options are now available. Select a category to narrow your search.'
+    );
+  }
+
+  // Hide the refinement bar
+  function hideRefinementBar() {
+    if (refinementBar) {
+      refinementBar.classList.add('hidden');
+    }
+  }
+
+  // Handle category selection
+  function selectCategory(category: RefinementCategory) {
+    selectedCategory = category;
+
+    // Perform preliminary search with category terms
+    const query = category.search_terms.join(' ');
+    performRefinedSearch(query, category.best_bets);
+
+    // Show sub-options
+    if (categoryRefinement) categoryRefinement.classList.add('hidden');
+    if (suboptionRefinement) suboptionRefinement.classList.remove('hidden');
+
+    if (suboptionPrompt) {
+      suboptionPrompt.textContent = `${category.label} - What's your situation?`;
+    }
+
+    if (suboptionButtons) {
+      // Clear safely
+      suboptionButtons.textContent = '';
+
+      category.sub_options.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+          'px-3 py-2 text-sm font-medium rounded-lg bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:border-primary-300 dark:hover:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors';
+        btn.setAttribute('role', 'listitem');
+        btn.textContent = opt.label;
+        btn.addEventListener('click', () => selectSubOption(opt));
+        suboptionButtons.appendChild(btn);
+      });
+    }
+
+    announceToScreenReader(
+      `Selected ${category.label}. Choose your specific situation to see relevant programs.`
+    );
+  }
+
+  // Handle sub-option selection
+  function selectSubOption(option: { label: string; search_terms: string[]; best_bets: string[] }) {
+    // Perform final refined search
+    const query = option.search_terms.join(' ');
+    performRefinedSearch(query, option.best_bets);
+
+    // Hide refinement bar after selection
+    hideRefinementBar();
+
+    announceToScreenReader(`Showing results for "${option.label}".`);
+  }
+
+  // Perform search with refinement terms and best bets
+  function performRefinedSearch(query: string, bestBetIds: string[]) {
+    // Update the search input
+    if (searchInput) {
+      (searchInput as HTMLInputElement).value = query;
+    }
+
+    // Use existing fuzzy search with best bets prioritized
+    const allResults = new Map();
+    const results = fuse.search(query);
+    results.forEach((r) => {
+      allResults.set(r.item.index, r);
+    });
+
+    const matchedIndices = new Set(allResults.keys());
+    const bestBetSet = new Set(bestBetIds);
+
+    if (isHomepage) {
+      homeResultsSection?.classList.remove('hidden');
+
+      let visibleCount = 0;
+      programs.forEach((p) => {
+        const matchesSearch = matchedIndices.has(p.index);
+        const isBestBet = bestBetSet.has(p.id);
+
+        if (matchesSearch || isBestBet) {
+          if (p.wrapper) {
+            p.wrapper.classList.remove('hidden');
+            if (isBestBet) {
+              p.wrapper.classList.add('best-bet');
+            } else {
+              p.wrapper.classList.remove('best-bet');
+            }
+            visibleCount++;
+          }
+        } else {
+          if (p.wrapper) {
+            p.wrapper.classList.add('hidden');
+            p.wrapper.classList.remove('best-bet');
+          }
+        }
+      });
+
+      if (homeResultsCount) {
+        homeResultsCount.textContent = `${visibleCount} program${visibleCount !== 1 ? 's' : ''} found`;
+      }
+      if (visibleCount === 0) {
+        noResultsEl?.classList.remove('hidden');
+      } else {
+        noResultsEl?.classList.add('hidden');
+      }
+    } else {
+      // Directory page
+      let visibleCount = 0;
+      programs.forEach((p) => {
+        const matchesSearch = matchedIndices.has(p.index);
+        const isBestBet = bestBetSet.has(p.id);
+        const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+        const locationHidden = p.element.hasAttribute('data-location-hidden');
+        const shouldShow = (matchesSearch || isBestBet) && matchesCategory && !locationHidden;
+
+        p.element.style.display = shouldShow ? '' : 'none';
+
+        if (isBestBet && shouldShow) {
+          p.element.classList.add('best-bet');
+        } else {
+          p.element.classList.remove('best-bet');
+        }
+
+        if (shouldShow) visibleCount++;
+      });
+
+      updateResultsCount(visibleCount, query, false);
+      announceToScreenReader(`Found ${visibleCount} program${visibleCount !== 1 ? 's' : ''}.`);
+    }
+  }
+
+  // Back button handler
+  backToCategories?.addEventListener('click', () => {
+    if (suboptionRefinement) suboptionRefinement.classList.add('hidden');
+    if (categoryRefinement) categoryRefinement.classList.remove('hidden');
+    selectedCategory = null;
+    announceToScreenReader('Returned to category selection.');
+  });
+
+  // Update location display
+  function updateLocationDisplay() {
+    if (currentLocation) {
+      if (locationValue) locationValue.textContent = currentLocation.county;
+      if (locationSource) {
+        locationSource.textContent =
+          currentLocation.source === 'gps'
+            ? '(GPS)'
+            : currentLocation.source === 'profile'
+              ? '(from profile)'
+              : '';
+      }
+      if (locationDisplay) locationDisplay.classList.remove('hidden');
+      if (locationPrompt) locationPrompt.classList.add('hidden');
+    } else {
+      if (locationDisplay) locationDisplay.classList.add('hidden');
+      if (locationPrompt) locationPrompt.classList.remove('hidden');
+    }
+  }
+
+  // GPS location handler
+  useGpsBtn?.addEventListener('click', async () => {
+    if (!navigator.geolocation) {
+      announceToScreenReader('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    const originalText = useGpsBtn.textContent;
+    useGpsBtn.textContent = 'Getting location...';
+    (useGpsBtn as HTMLButtonElement).disabled = true;
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const county = findNearestCounty(latitude, longitude);
+
+        currentLocation = {
+          source: 'gps',
+          county: county,
+        };
+
+        updateLocationDisplay();
+        localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
+
+        useGpsBtn.textContent = originalText;
+        (useGpsBtn as HTMLButtonElement).disabled = false;
+
+        announceToScreenReader(`Location set to ${county}.`);
+      },
+      () => {
+        announceToScreenReader('Could not get your location. Please enter a ZIP code or city.');
+        useGpsBtn.textContent = originalText;
+        (useGpsBtn as HTMLButtonElement).disabled = false;
+      },
+      { enableHighAccuracy: false, timeout: 10000 }
+    );
+  });
+
+  // ZIP/City input handler
+  zipCityInput?.addEventListener('change', (e) => {
+    const value = (e.target as HTMLInputElement).value.trim();
+    if (!value) return;
+
+    const county = lookupCounty(value);
+    if (county) {
+      currentLocation = {
+        source: 'manual',
+        input: value,
+        county: county,
+      };
+      updateLocationDisplay();
+      localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
+      announceToScreenReader(`Location set to ${county}.`);
+    } else {
+      announceToScreenReader('Location not found. Please try a different ZIP code or city.');
+    }
+  });
+
+  // Change location handler
+  changeLocationBtn?.addEventListener('click', () => {
+    if (locationDisplay) locationDisplay.classList.add('hidden');
+    if (locationPrompt) locationPrompt.classList.remove('hidden');
+    if (zipCityInput) {
+      zipCityInput.value = '';
+      zipCityInput.focus();
+    }
+  });
+
+  // Find nearest county from GPS coordinates using Haversine formula
+  function findNearestCounty(lat: number, lng: number): string {
+    let nearest = 'Bay Area';
+    let minDist = Infinity;
+
+    for (const [county, coords] of Object.entries(COUNTY_COORDINATES)) {
+      const dist = haversineDistance(lat, lng, coords.lat, coords.lng);
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = county;
+      }
+    }
+
+    return nearest;
+  }
+
+  // Haversine distance calculation
+  function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+    const R = 3959; // Earth radius in miles
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  // Lookup county from ZIP or city
+  function lookupCounty(input: string): string | null {
+    // Check if ZIP code (basic validation)
+    if (/^\d{5}$/.test(input)) {
+      // For now, use a simple mapping - in production, this would use the full zipcodes.yml data
+      // Map some common Bay Area ZIPs
+      const zipToCity: Record<string, string> = {
+        '94102': 'san francisco',
+        '94103': 'san francisco',
+        '94104': 'san francisco',
+        '94105': 'san francisco',
+        '94107': 'san francisco',
+        '94108': 'san francisco',
+        '94109': 'san francisco',
+        '94110': 'san francisco',
+        '94111': 'san francisco',
+        '94112': 'san francisco',
+        '94114': 'san francisco',
+        '94115': 'san francisco',
+        '94116': 'san francisco',
+        '94117': 'san francisco',
+        '94118': 'san francisco',
+        '94121': 'san francisco',
+        '94122': 'san francisco',
+        '94123': 'san francisco',
+        '94124': 'san francisco',
+        '94127': 'san francisco',
+        '94131': 'san francisco',
+        '94132': 'san francisco',
+        '94133': 'san francisco',
+        '94134': 'san francisco',
+        '94577': 'san leandro',
+        '94578': 'san leandro',
+        '94579': 'san leandro',
+        '94601': 'oakland',
+        '94602': 'oakland',
+        '94603': 'oakland',
+        '94604': 'oakland',
+        '94605': 'oakland',
+        '94606': 'oakland',
+        '94607': 'oakland',
+        '94608': 'oakland',
+        '94609': 'oakland',
+        '94610': 'oakland',
+        '94611': 'oakland',
+        '94612': 'oakland',
+        '94618': 'oakland',
+        '94619': 'oakland',
+        '94621': 'oakland',
+        '94702': 'berkeley',
+        '94703': 'berkeley',
+        '94704': 'berkeley',
+        '94705': 'berkeley',
+        '94706': 'albany',
+        '94707': 'berkeley',
+        '94708': 'berkeley',
+        '94709': 'berkeley',
+        '94710': 'berkeley',
+        '95110': 'san jose',
+        '95111': 'san jose',
+        '95112': 'san jose',
+        '95113': 'san jose',
+        '95116': 'san jose',
+        '95117': 'san jose',
+        '95118': 'san jose',
+        '95119': 'san jose',
+        '95120': 'san jose',
+        '95121': 'san jose',
+        '95122': 'san jose',
+        '95123': 'san jose',
+        '95124': 'san jose',
+        '95125': 'san jose',
+        '95126': 'san jose',
+        '95127': 'san jose',
+        '95128': 'san jose',
+        '95129': 'san jose',
+        '95130': 'san jose',
+        '95131': 'san jose',
+        '95132': 'san jose',
+        '95133': 'san jose',
+        '95134': 'san jose',
+        '95135': 'san jose',
+        '95136': 'san jose',
+        '95138': 'san jose',
+        '95139': 'san jose',
+        '95140': 'san jose',
+        '95148': 'san jose',
+        '94010': 'san mateo',
+        '94014': 'daly city',
+        '94015': 'daly city',
+        '94061': 'redwood city',
+        '94062': 'redwood city',
+        '94063': 'redwood city',
+        '94401': 'san mateo',
+        '94402': 'san mateo',
+        '94403': 'san mateo',
+        '94404': 'san mateo',
+        '94501': 'alameda',
+        '94502': 'alameda',
+        '94536': 'fremont',
+        '94537': 'fremont',
+        '94538': 'fremont',
+        '94539': 'fremont',
+        '94540': 'hayward',
+        '94541': 'hayward',
+        '94542': 'hayward',
+        '94544': 'hayward',
+        '94545': 'hayward',
+        '94546': 'hayward',
+        '94550': 'livermore',
+        '94551': 'livermore',
+        '94560': 'newark',
+        '94566': 'pleasanton',
+        '94568': 'dublin',
+        '94587': 'union city',
+        '94588': 'pleasanton',
+        '94596': 'walnut creek',
+        '94597': 'walnut creek',
+        '94598': 'walnut creek',
+        '94801': 'richmond',
+        '94804': 'richmond',
+        '94805': 'richmond',
+        '94520': 'concord',
+        '94521': 'concord',
+        '94903': 'san rafael',
+        '94901': 'san rafael',
+        '95050': 'santa clara',
+        '95051': 'santa clara',
+        '95054': 'santa clara',
+        '94086': 'sunnyvale',
+        '94087': 'sunnyvale',
+        '94089': 'sunnyvale',
+        '94301': 'palo alto',
+        '94303': 'palo alto',
+        '94304': 'palo alto',
+        '94306': 'palo alto',
+        '94040': 'mountain view',
+        '94041': 'mountain view',
+        '94043': 'mountain view',
+        '95035': 'milpitas',
+        '94590': 'vallejo',
+        '94591': 'vallejo',
+        '94589': 'vallejo',
+      };
+      const city = zipToCity[input];
+      if (city) {
+        return CITY_TO_COUNTY[city] || null;
+      }
+    }
+
+    // Check city name
+    return CITY_TO_COUNTY[input.toLowerCase()] || null;
+  }
+
+  // Load saved location from localStorage
+  function loadSavedLocation() {
+    const saved = localStorage.getItem('baynavigator_location');
+    if (saved) {
+      try {
+        currentLocation = JSON.parse(saved);
+      } catch {
+        currentLocation = null;
+      }
+    }
+  }
+
+  // Initialize refinement
+  loadSavedLocation();
+
+  // Connect to the existing performSearch flow
+  // Override the fuzzy search results handler to check for refinement
+  const originalPerformFuzzySearch = performFuzzySearch;
+
+  // We need to track result count for refinement detection
+  // This is done by modifying the performSearch function behavior
+  // The refinement bar will show based on the search results
 </script>
 
 <style>

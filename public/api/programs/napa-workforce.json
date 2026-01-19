@@ -1,0 +1,28 @@
+{
+  "id": "napa-workforce",
+  "name": "Napa County Workforce Investment Board",
+  "category": "employment",
+  "description": "Free career services and job training for Napa County residents",
+  "fullDescription": "Napa County's America's Job Center provides employment and training services to help residents find jobs and advance their careers.",
+  "whatTheyOffer": "- Career counseling and assessment\n- Job search workshops and resources\n- Resume and interview preparation\n- Skills training programs\n- Youth employment services\n- Connection to local employers\n",
+  "howToGetIt": "1. Visit the Napa County America's Job Center\n2. Register and complete intake\n3. Meet with career counselor\n4. Access training and job search services\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "Napa County"
+  ],
+  "city": null,
+  "website": "https://www.napawib.org/",
+  "cost": null,
+  "phone": "707-253-4516",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Napa County, workforce, AJCC, America's Job Center, job training, career services, wine country",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "sf-youthworks",
+  "name": "SF YouthWorks",
+  "category": "employment",
+  "description": "Paid work experience and internships for San Francisco youth ages 16-24",
+  "fullDescription": "YouthWorks provides San Francisco young people ages 16-24 with paid work experience, job training, and career exploration opportunities.",
+  "whatTheyOffer": "- Paid work experience and internships\n- Summer employment programs\n- Year-round employment opportunities\n- Job readiness training\n- Career exploration and mentorship\n- Supportive services\n",
+  "howToGetIt": "1. Must be 16-24 years old\n2. Must be San Francisco resident\n3. Apply through DCYF or partner organizations\n4. Complete orientation and job readiness training\n5. Get matched with employment opportunity\n",
+  "groups": [
+    "youth"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": "San Francisco",
+  "website": "https://sf.gov/information/youth-employment-programs",
+  "cost": null,
+  "phone": "415-554-8990",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "YouthWorks, San Francisco, youth employment, summer jobs, internship, young people, teen jobs, work experience, 16-24",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

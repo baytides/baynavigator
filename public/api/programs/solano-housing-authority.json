@@ -1,0 +1,27 @@
+{
+  "id": "solano-housing-authority",
+  "name": "Solano County Housing Authority",
+  "category": "housing",
+  "description": "Section 8 housing vouchers for Solano County residents",
+  "fullDescription": "The Housing Authority of the County of Solano administers Section 8 vouchers and affordable housing programs for low-income residents in Solano County.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n",
+  "howToGetIt": "1. Check HACS website for waitlist status\n2. Apply when waitlist opens\n3. Must meet income limits\n4. Solano County residents get preference\n5. Wait for name on waitlist\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Solano County"
+  ],
+  "city": null,
+  "website": "https://www.hcsolano.org/",
+  "cost": null,
+  "phone": "707-428-0461",
+  "email": null,
+  "address": "1 Harbor Center, Suite 200, Suisun City, CA 94585",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Solano Housing Authority, Section 8, housing voucher, Fairfield, Vallejo, Vacaville, low-income, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

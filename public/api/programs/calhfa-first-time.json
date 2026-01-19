@@ -1,0 +1,27 @@
+{
+  "id": "calhfa-first-time",
+  "name": "CalHFA First-Time Homebuyer Programs",
+  "category": "housing",
+  "description": "Low-interest mortgages and down payment assistance for first-time California homebuyers",
+  "fullDescription": "The California Housing Finance Agency (CalHFA) offers low-interest mortgage loans and down payment assistance to help first-time homebuyers afford their first home.",
+  "whatTheyOffer": "- Low-interest first mortgage loans\n- Down payment assistance (up to 3.5% of purchase price)\n- Closing cost assistance\n- CalHFA Zero Interest Program (ZIP)\n- MyHome Assistance Program\n- Programs for specific groups (teachers, firefighters, etc.)\n",
+  "howToGetIt": "1. Must be first-time homebuyer (not owned home in 3 years)\n2. Must meet income limits (varies by county)\n3. Must complete homebuyer education course\n4. Work with CalHFA-approved lender\n5. Home must be primary residence in California\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.calhfa.ca.gov/homebuyer/index.htm",
+  "cost": null,
+  "phone": "877-922-5432",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "CalHFA, first-time homebuyer, down payment assistance, mortgage, home loan, California, low-income, homeownership",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

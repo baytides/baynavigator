@@ -1,0 +1,28 @@
+{
+  "id": "catholic-charities-immigration",
+  "name": "Catholic Charities Immigration Services",
+  "category": "legal",
+  "description": "Affordable immigration legal services including citizenship, green cards, asylum, and family petitions",
+  "fullDescription": "Catholic Charities provides affordable immigration legal services throughout the Bay Area, including help with citizenship, green cards, asylum, and family petitions.",
+  "whatTheyOffer": "- Citizenship and naturalization applications\n- Green card applications and renewals\n- Family-based petitions\n- DACA applications and renewals\n- Asylum applications\n- Refugee resettlement services\n- Low-cost legal consultations\n",
+  "howToGetIt": "1. Call your local Catholic Charities office\n2. Schedule a legal consultation\n3. Sliding scale fees based on income\n4. Bring all immigration documents to appointment\n5. Receive assistance with applications and representation\n",
+  "groups": [
+    "immigrants",
+    "income-eligible"
+  ],
+  "areas": [
+    "Bay Area-wide"
+  ],
+  "city": null,
+  "website": "https://www.catholiccharitiessf.org/services/immigration-legal-services.html",
+  "cost": null,
+  "phone": "415-972-1200",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Catholic Charities, immigration, citizenship, green card, family petition, asylum, refugee, DACA, naturalization, low-cost legal",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

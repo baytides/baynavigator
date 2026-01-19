@@ -1,0 +1,27 @@
+{
+  "id": "bay-area-legal-aid",
+  "name": "Bay Area Legal Aid (BayLegal)",
+  "category": "legal",
+  "description": "Free civil legal services in housing, benefits, healthcare, consumer, and family law for low-income Bay Area residents",
+  "fullDescription": "Bay Area Legal Aid is the largest civil legal aid provider in the Bay Area, offering free legal help to low-income individuals in housing, public benefits, healthcare, consumer, and family law matters.",
+  "whatTheyOffer": "- Housing law (eviction defense, habitability, Section 8)\n- Public benefits (CalFresh, Medi-Cal, CalWORKs appeals)\n- Healthcare access and insurance issues\n- Consumer rights and debt issues\n- Domestic violence restraining orders\n- Immigration assistance\n- Senior law services\n",
+  "howToGetIt": "1. Call the intake line at 800-551-5554\n2. Or apply online at baylegal.org\n3. Must meet income eligibility (generally 200% FPL or below)\n4. Complete phone or online intake\n5. If eligible, receive legal advice, brief services, or representation\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Bay Area-wide"
+  ],
+  "city": null,
+  "website": "https://baylegal.org/",
+  "cost": null,
+  "phone": "800-551-5554",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "BayLegal, Bay Area Legal Aid, free lawyer, legal aid, eviction, housing, public benefits, healthcare, domestic violence, consumer, low-income, civil legal",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,409 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import AirportStatus from '../components/AirportStatus.astro';
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+
+// Load airports from YAML
+const airportsPath = path.join(process.cwd(), 'src/data/airports.yml');
+let airports: any[] = [];
+try {
+  const yamlContent = fs.readFileSync(airportsPath, 'utf8');
+  const data = yaml.load(yamlContent) as any;
+  airports = data?.airports || [];
+} catch (e) {
+  console.error('Failed to load airports:', e);
+}
+---
+
+<BaseLayout
+  title="Bay Area Airports - BayNavigator"
+  description="Real-time status, delays, and weather for San Francisco (SFO), Oakland (OAK), and San Jose (SJC) airports. Check current conditions before you travel."
+>
+  <main class="container mx-auto px-4 py-8 max-w-5xl" id="main-content">
+    <Breadcrumb items={[{ label: 'Airports', href: '/airports' }]} />
+
+    <!-- Hero Section -->
+    <div class="text-center mb-8">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
+        aria-hidden="true"
+      >
+        <svg
+          class="w-8 h-8 text-primary-600 dark:text-primary-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+        </svg>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        Bay Area Airports
+      </h1>
+      <p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+        Real-time status, delays, and weather for the {airports.length} major Bay Area airports. Check
+        current conditions before you travel.
+      </p>
+    </div>
+
+    <!-- Airport Cards -->
+    <section aria-labelledby="airports-heading" class="mb-10">
+      <h2 id="airports-heading" class="sr-only">Airport Status</h2>
+      <div class="space-y-6">
+        {
+          airports.map((airport) => (
+            <article
+              class="bg-white dark:bg-neutral-800 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-700 overflow-hidden"
+              aria-labelledby={`airport-${airport.code}-name`}
+            >
+              <div class="p-6">
+                <div class="flex flex-col md:flex-row md:items-start gap-4">
+                  {/* Airport Info */}
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <span
+                        class="text-2xl font-bold text-primary-600 dark:text-primary-400"
+                        aria-label={`Airport code: ${airport.code}`}
+                      >
+                        {airport.code}
+                      </span>
+                      <h3
+                        id={`airport-${airport.code}-name`}
+                        class="text-xl font-semibold text-neutral-900 dark:text-white"
+                      >
+                        {airport.name}
+                      </h3>
+                    </div>
+                    <p class="text-neutral-600 dark:text-neutral-300 mb-4">
+                      {airport.city}, {airport.county} County
+                    </p>
+
+                    {/* Live Status */}
+                    <div class="mb-4">
+                      <AirportStatus code={airport.code} showWeather={true} />
+                    </div>
+
+                    {/* Terminals */}
+                    <div class="mb-4">
+                      <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                        Terminals
+                      </h4>
+                      <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                        {airport.terminals.map((terminal: any) => (
+                          <li>
+                            <span class="font-medium">{terminal.name}:</span>{' '}
+                            {terminal.airlines.join(', ')}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Transit */}
+                    <div class="mb-4">
+                      <h4 class="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                        Getting There
+                      </h4>
+                      <ul class="text-sm text-neutral-600 dark:text-neutral-400 space-y-1">
+                        {airport.transit.bart && (
+                          <li class="flex items-center gap-2">
+                            <span
+                              class="w-4 h-4 rounded bg-blue-500 flex items-center justify-center text-white text-xs font-bold"
+                              aria-hidden="true"
+                            >
+                              B
+                            </span>
+                            <span>BART: {airport.transit.bart_station}</span>
+                          </li>
+                        )}
+                        {airport.transit.vta && (
+                          <li class="flex items-center gap-2">
+                            <span
+                              class="w-4 h-4 rounded bg-blue-600 flex items-center justify-center text-white text-xs font-bold"
+                              aria-hidden="true"
+                            >
+                              V
+                            </span>
+                            <span>
+                              VTA:{' '}
+                              {airport.transit.vta_routes
+                                ? airport.transit.vta_routes.join(', ')
+                                : 'Light Rail'}
+                            </span>
+                          </li>
+                        )}
+                        {airport.transit.shuttle && (
+                          <li class="flex items-center gap-2">
+                            <svg
+                              class="w-4 h-4 text-neutral-500"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7h8m-4-3v3m-4 0h8a2 2 0 012 2v6a2 2 0 01-2 2h-1l-1 2H10l-1-2H8a2 2 0 01-2-2V9a2 2 0 012-2z"
+                              />
+                            </svg>
+                            <span>{airport.transit.shuttle}</span>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Quick Links */}
+                  <div class="flex flex-col gap-2 md:w-48">
+                    <a
+                      href={airport.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                      <span>Official Site</span>
+                      <span class="sr-only">(opens in new tab)</span>
+                    </a>
+                    <a
+                      href={`tel:${airport.phone.replace(/[^0-9]/g, '')}`}
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                        />
+                      </svg>
+                      <span>{airport.phone}</span>
+                    </a>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${airport.coordinates.lat},${airport.coordinates.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center justify-center gap-2 px-4 py-2 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      <span>Directions</span>
+                      <span class="sr-only">(opens in new tab)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Travel Resources Section -->
+    <section
+      aria-labelledby="resources-heading"
+      class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-6 mb-8"
+    >
+      <h2
+        id="resources-heading"
+        class="text-xl font-semibold text-neutral-900 dark:text-white mb-4"
+      >
+        Travel Resources
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a
+          href="https://www.tsa.gov/travel"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          <div
+            class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              class="w-5 h-5 text-blue-600 dark:text-blue-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-medium text-neutral-900 dark:text-white">TSA Travel Tips</span>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Security screening guidelines
+            </p>
+          </div>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+
+        <a
+          href="https://www.tsa.gov/travel/security-screening/whatcanibring/all"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          <div
+            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              class="w-5 h-5 text-green-600 dark:text-green-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-medium text-neutral-900 dark:text-white">What Can I Bring?</span>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">TSA prohibited items list</p>
+          </div>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+
+        <a
+          href="https://www.tsa.gov/precheck"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          <div
+            class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              class="w-5 h-5 text-purple-600 dark:text-purple-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-medium text-neutral-900 dark:text-white">TSA PreCheck</span>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              Expedited security screening
+            </p>
+          </div>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+
+        <a
+          href="/transit"
+          class="flex items-center gap-3 p-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          <div
+            class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              class="w-5 h-5 text-teal-600 dark:text-teal-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7h8m-8 4h8m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-medium text-neutral-900 dark:text-white">Bay Area Transit</span>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              BART, Caltrain & bus connections
+            </p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Data Attribution -->
+    <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center">
+      Airport status data provided by the{' '}
+      <a
+        href="https://www.faa.gov/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+      >
+        Federal Aviation Administration (FAA)
+      </a>. Weather data from{' '}
+      <a
+        href="https://weather.gov/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
+      >
+        NOAA's National Weather Service
+      </a>. Status refreshes every 5 minutes.
+    </p>
+  </main>
+</BaseLayout>

@@ -1,0 +1,28 @@
+{
+  "id": "pell-grant",
+  "name": "Federal Pell Grant",
+  "category": "education",
+  "description": "Up to $7,395/year in free federal grant money for college (no repayment)",
+  "fullDescription": "The Federal Pell Grant provides free money for college to undergraduate students with financial need. Unlike loans, Pell Grants do not need to be repaid.",
+  "whatTheyOffer": "- Up to $7,395 per year (2024-2025)\n- Free money - no repayment required\n- Can be used for tuition, fees, books, and living expenses\n- Available at most colleges and universities\n- Can be combined with other financial aid\n",
+  "howToGetIt": "1. Complete the FAFSA at studentaid.gov\n2. Must demonstrate financial need (based on EFC)\n3. Must be pursuing undergraduate degree\n4. Must be enrolled at least half-time\n5. Must be U.S. citizen or eligible noncitizen\n6. Amount depends on financial need, cost of attendance, and enrollment status\n",
+  "groups": [
+    "income-eligible",
+    "college-students"
+  ],
+  "areas": [
+    "Nationwide"
+  ],
+  "city": null,
+  "website": "https://studentaid.gov/understand-aid/types/grants/pell",
+  "cost": null,
+  "phone": "800-433-3243",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Pell Grant, federal aid, financial aid, FAFSA, college, free money, undergraduate, low-income, student aid",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

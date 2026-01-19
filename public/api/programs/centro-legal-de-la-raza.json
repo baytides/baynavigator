@@ -1,0 +1,28 @@
+{
+  "id": "centro-legal-de-la-raza",
+  "name": "Centro Legal de la Raza",
+  "category": "legal",
+  "description": "Free bilingual legal services in immigration, housing, and workers' rights for East Bay communities",
+  "fullDescription": "Centro Legal de la Raza provides free bilingual legal services to low-income communities in the East Bay, specializing in immigration, housing, and workers' rights.",
+  "whatTheyOffer": "- Immigration legal services (family petitions, DACA, asylum, citizenship)\n- Tenant rights and eviction defense\n- Workers' rights and wage claims\n- Community education and outreach\n- Bilingual services (English/Spanish)\n- Know Your Rights workshops\n",
+  "howToGetIt": "1. Call 510-437-1554 for intake\n2. Or visit during walk-in clinic hours\n3. Must meet income guidelines\n4. Complete intake and eligibility screening\n5. Receive legal advice or representation\n",
+  "groups": [
+    "immigrants",
+    "income-eligible"
+  ],
+  "areas": [
+    "Alameda County"
+  ],
+  "city": "Oakland",
+  "website": "https://centrolegal.org/",
+  "cost": null,
+  "phone": "510-437-1554",
+  "email": null,
+  "address": "3400 E. 12th Street, Oakland, CA 94601",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Centro Legal, Oakland, immigration, tenant rights, housing, workers rights, community organizing, Latino, Spanish, free legal, East Bay, Alameda",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "san-mateo-workforce",
+  "name": "San Mateo County Workforce Development",
+  "category": "employment",
+  "description": "Free career training, job search support, and employment services in San Mateo County",
+  "fullDescription": "San Mateo County's workforce services connect residents with career training, job search support, and employment opportunities throughout the Peninsula.",
+  "whatTheyOffer": "- Career assessment and counseling\n- Job search assistance and workshops\n- Skills training and certifications\n- Youth employment programs\n- Business services for employers\n- Supportive services\n",
+  "howToGetIt": "1. Visit JobTrain or workforce partner location\n2. Complete intake and assessment\n3. Work with career counselor on employment plan\n4. Access training and job placement services\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "San Mateo County"
+  ],
+  "city": null,
+  "website": "https://hsa.smcgov.org/workforce-services",
+  "cost": null,
+  "phone": "650-363-4100",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "San Mateo, workforce, JobTrain, AJCC, America's Job Center, job training, career services, Peninsula",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "cal-grant",
+  "name": "Cal Grant",
+  "category": "education",
+  "description": "Free state grant money for college tuition - Cal Grant A covers up to $12,570 for tuition, Cal Grant B adds living allowance",
+  "fullDescription": "Cal Grants are free money from the state of California to help eligible students pay for college tuition and fees at California colleges and universities.",
+  "whatTheyOffer": "- Cal Grant A: Covers tuition/fees at UC, CSU, or private colleges (up to $12,570)\n- Cal Grant B: Living allowance plus tuition for low-income students\n- Cal Grant C: Vocational/career technical training funding\n- Renewable for up to 4 years\n- No repayment required (not a loan)\n",
+  "howToGetIt": "1. Complete FAFSA or California Dream Act Application by March 2 deadline\n2. Submit verified GPA to California Student Aid Commission\n3. Must be California resident for at least 1 year\n4. Must attend eligible California college\n5. Must meet income and asset requirements\n6. Must maintain satisfactory academic progress\n",
+  "groups": [
+    "income-eligible",
+    "youth",
+    "college-students"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.csac.ca.gov/cal-grants",
+  "cost": null,
+  "phone": "888-224-7268",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Cal Grant, financial aid, college, tuition, California, FAFSA, Dream Act, state grant, free money, Cal Grant A, Cal Grant B, Cal Grant C",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -10,7 +10,7 @@
       "id": "education",
       "name": "Education",
       "icon": "📚",
-      "programCount": 6
+      "programCount": 21
     },
     {
       "id": "equipment",
@@ -40,7 +40,7 @@
       "id": "legal",
       "name": "Legal",
       "icon": "⚖️",
-      "programCount": 9
+      "programCount": 21
     },
     {
       "id": "library_resources",

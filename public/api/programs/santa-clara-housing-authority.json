@@ -1,0 +1,27 @@
+{
+  "id": "santa-clara-housing-authority",
+  "name": "Santa Clara County Housing Authority",
+  "category": "housing",
+  "description": "Section 8 housing vouchers for Santa Clara County residents",
+  "fullDescription": "The Santa Clara County Housing Authority administers the largest Section 8 program in California, serving low-income families throughout Santa Clara County.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers (17,000+ vouchers)\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n- Rapid rehousing programs\n- Homeless prevention services\n",
+  "howToGetIt": "1. Check SCCHA website for waitlist status\n2. Apply when waitlist opens (check website regularly)\n3. Must meet income limits (50% area median income)\n4. Santa Clara County residents get preference\n5. Wait for name on waitlist (can be years)\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Santa Clara County"
+  ],
+  "city": null,
+  "website": "https://www.scchousingauthority.org/",
+  "cost": null,
+  "phone": "408-275-8770",
+  "email": null,
+  "address": "505 W. Julian Street, San Jose, CA 95110",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "SCCHA, Santa Clara Housing Authority, Section 8, housing voucher, San Jose, Silicon Valley, low-income, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

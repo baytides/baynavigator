@@ -1,0 +1,27 @@
+{
+  "id": "court-self-help-alameda",
+  "name": "Alameda County Court Self-Help Center",
+  "category": "legal",
+  "description": "Free help with court forms and self-representation in Alameda County courts",
+  "fullDescription": "The Alameda County Law Library Self-Help Center provides free assistance to people representing themselves in court matters.",
+  "whatTheyOffer": "- Free help with court forms and procedures\n- Family law assistance (divorce, custody, support)\n- Restraining order help\n- Small claims guidance\n- Landlord-tenant matters\n- Referrals to legal services\n",
+  "howToGetIt": "1. Visit the Self-Help Center at Alameda County Law Library\n2. Or access online resources at acgov.org/law\n3. Bring your court papers\n4. Staff can help with forms but cannot give legal advice\n",
+  "groups": [
+    "everyone"
+  ],
+  "areas": [
+    "Alameda County"
+  ],
+  "city": null,
+  "website": "https://www.acgov.org/lawlibrary/",
+  "cost": null,
+  "phone": "510-208-4800",
+  "email": null,
+  "address": "125 12th Street, Oakland, CA 94607",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "self-help, court, Alameda, Oakland, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

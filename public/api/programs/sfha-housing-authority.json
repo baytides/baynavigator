@@ -1,0 +1,27 @@
+{
+  "id": "sfha-housing-authority",
+  "name": "San Francisco Housing Authority",
+  "category": "housing",
+  "description": "Housing vouchers and public housing for low-income San Francisco residents",
+  "fullDescription": "The San Francisco Housing Authority administers public housing and Section 8 Housing Choice Vouchers for low-income San Francisco residents.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing units\n- Project-based vouchers\n- Special programs for homeless, veterans, and disabled\n- HOPE SF public housing redevelopment\n",
+  "howToGetIt": "1. Check SFHA website for waitlist openings\n2. Apply when waitlist opens (typically closes quickly)\n3. Must meet income limits\n4. Must be SF resident or working in SF\n5. Wait for name to come up on waitlist\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": "San Francisco",
+  "website": "https://sfha.org/",
+  "cost": null,
+  "phone": "415-715-3232",
+  "email": null,
+  "address": "1815 Egbert Avenue, San Francisco, CA 94124",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "SFHA, San Francisco Housing Authority, Section 8, public housing, housing voucher, low-income housing, SF, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

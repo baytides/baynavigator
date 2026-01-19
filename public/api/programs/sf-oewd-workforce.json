@@ -1,0 +1,28 @@
+{
+  "id": "sf-oewd-workforce",
+  "name": "SF Office of Economic and Workforce Development",
+  "category": "employment",
+  "description": "Free career counseling, job training, and employment services for SF residents",
+  "fullDescription": "San Francisco's Office of Economic and Workforce Development connects residents with free job training, career counseling, and employment services through local workforce centers.",
+  "whatTheyOffer": "- Free career counseling and job search assistance\n- Resume and interview preparation\n- Job training and skills workshops\n- Connection to hiring employers\n- Supportive services (transportation, childcare assistance)\n- Specialized programs for target populations\n- Access to CalJOBS and job listings\n",
+  "howToGetIt": "1. Visit a San Francisco workforce center\n2. Complete intake assessment\n3. Meet with career counselor\n4. Access training and job search services\n5. Get connected to employment opportunities\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": "San Francisco",
+  "website": "https://sf.gov/departments/office-economic-and-workforce-development",
+  "cost": null,
+  "phone": "415-701-4848",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "OEWD, San Francisco, workforce, job training, career center, employment, job search, resume, One-Stop, AJCC",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

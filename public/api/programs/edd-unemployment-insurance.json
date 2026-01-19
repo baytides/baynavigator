@@ -1,0 +1,27 @@
+{
+  "id": "edd-unemployment-insurance",
+  "name": "EDD Unemployment Insurance (UI)",
+  "category": "employment",
+  "description": "Weekly unemployment benefits up to $450/week for up to 26 weeks while job searching",
+  "fullDescription": "California's Unemployment Insurance program provides temporary financial assistance to workers who lost their jobs through no fault of their own while they search for new employment.",
+  "whatTheyOffer": "- Weekly unemployment benefits (up to $450/week in 2024)\n- Up to 26 weeks of regular benefits\n- Extended benefits during high unemployment\n- Pandemic Unemployment Assistance (when applicable)\n- Connection to job training and career services\n",
+  "howToGetIt": "1. File a claim online at EDD website or by phone\n2. Must have earned enough wages in base period\n3. Must be unemployed through no fault of your own\n4. Must be able and available to work\n5. Must actively search for work\n6. Certify for benefits every two weeks\n",
+  "groups": [
+    "unemployed"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://edd.ca.gov/unemployment/",
+  "cost": null,
+  "phone": "800-300-5616",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "EDD, unemployment, UI, unemployment insurance, jobless, laid off, unemployment benefits, California unemployment, weekly benefits, job loss",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

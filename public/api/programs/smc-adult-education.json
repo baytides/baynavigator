@@ -1,0 +1,28 @@
+{
+  "id": "smc-adult-education",
+  "name": "San Mateo Adult & Community Education",
+  "category": "education",
+  "description": "Free ESL and adult education classes in San Mateo County",
+  "fullDescription": "San Mateo Adult & Community Education offers free and low-cost classes for adults including ESL, GED preparation, citizenship, and career skills.",
+  "whatTheyOffer": "- ESL classes at all levels (free)\n- GED and high school equivalency preparation\n- U.S. Citizenship classes\n- Career technical education\n- Computer and digital literacy\n- Parent education\n",
+  "howToGetIt": "1. Visit San Mateo Adult School\n2. Complete registration\n3. Take placement test for ESL if needed\n4. Enroll in classes\n",
+  "groups": [
+    "everyone",
+    "immigrants"
+  ],
+  "areas": [
+    "San Mateo County"
+  ],
+  "city": null,
+  "website": "https://smace.smccd.edu/",
+  "cost": null,
+  "phone": "650-558-2100",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "adult school, San Mateo, GED, ESL, high school diploma, adult education, career training, free classes, Peninsula",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

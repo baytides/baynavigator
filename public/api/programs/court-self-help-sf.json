@@ -1,0 +1,27 @@
+{
+  "id": "court-self-help-sf",
+  "name": "SF Superior Court Self-Help Center",
+  "category": "legal",
+  "description": "Free help with court forms, procedures, and self-representation in SF courts",
+  "fullDescription": "The SF Superior Court Self-Help Center provides free legal information and assistance to people representing themselves in court matters.",
+  "whatTheyOffer": "- Free help with court forms and procedures\n- Assistance with family law matters (divorce, custody, support)\n- Help with restraining orders\n- Small claims court assistance\n- Eviction/unlawful detainer guidance\n- Referrals to legal aid organizations\n",
+  "howToGetIt": "1. Visit the Self-Help Center at SF Civic Center Courthouse\n2. Or call for information\n3. No appointment needed for many services\n4. Bring your court papers and case information\n5. Staff cannot give legal advice but can help with forms and procedures\n",
+  "groups": [
+    "everyone"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": null,
+  "website": "https://www.sfsuperiorcourt.org/divisions/collaborative-courts/self-help",
+  "cost": null,
+  "phone": "415-551-4000",
+  "email": null,
+  "address": "400 McAllister Street, Room 509, San Francisco, CA 94102",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "self-help, court, San Francisco, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

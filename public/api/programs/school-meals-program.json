@@ -1,0 +1,29 @@
+{
+  "id": "school-meals-program",
+  "name": "Free & Reduced School Meals",
+  "category": "education",
+  "description": "Free or reduced-price breakfast and lunch at school for qualifying students",
+  "fullDescription": "California schools provide free breakfast and lunch to students who qualify based on family income, and many districts now offer universal free meals to all students.",
+  "whatTheyOffer": "- Free or reduced-price breakfast and lunch\n- Many California districts now offer free meals to ALL students\n- Nutritious meals meeting federal nutrition standards\n- Available during school year\n- Some districts offer summer meal programs\n",
+  "howToGetIt": "1. Complete free/reduced meal application through your school\n2. Household income must be at or below 185% of poverty for reduced price\n3. Household income at or below 130% for free meals\n4. Children in CalFresh, CalWORKs, or foster care automatically qualify\n5. Many California districts provide universal free meals regardless of income\n",
+  "groups": [
+    "families",
+    "youth",
+    "income-eligible"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://www.cde.ca.gov/ls/nu/sn/",
+  "cost": null,
+  "phone": null,
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "free lunch, school meals, reduced lunch, breakfast, NSLP, school breakfast, children, low-income, food, hunger",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

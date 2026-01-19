@@ -368,3 +368,184 @@ query_rewrites:
   'facing eviction': 'eviction help legal aid'
   'immigration help': 'immigration legal aid'
   'need immigration lawyer': 'immigration legal aid'
+
+# Refinement tree for guiding vague searches
+refinement:
+  # When to show refinement options
+  trigger:
+    min_results: 12 # Show refinement when results exceed this
+    max_query_length: 10 # Show refinement for short vague queries
+    vague_terms: # Always trigger for these terms
+      - help
+      - assistance
+      - need
+      - program
+      - benefit
+      - services
+      - resources
+
+  # Location prompt settings
+  location:
+    prompt: 'Where are you located?'
+    show_gps_button: true
+    show_zip_input: true
+    privacy_note: 'Your location stays on your device'
+
+  # Category refinement tree
+  categories:
+    - id: food
+      label: Food
+      icon: apple
+      description: 'Food assistance & nutrition'
+      search_terms: ['food', 'calfresh', 'snap', 'meals']
+      best_bets: ['calfresh-food-assistance', 'sf-marin-food-bank', 'second-harvest-food-bank']
+      sub_options:
+        - label: "Can't afford groceries"
+          search_terms: ['calfresh', 'food stamps', 'snap']
+          best_bets: ['calfresh-food-assistance']
+        - label: 'Need food right now'
+          search_terms: ['food bank', 'food pantry', 'emergency food']
+          best_bets: ['sf-marin-food-bank', 'second-harvest-food-bank']
+        - label: 'Baby food or formula'
+          search_terms: ['wic', 'baby food', 'formula', 'infant nutrition']
+          best_bets: ['wic-program']
+        - label: 'Senior meals'
+          search_terms: ['meals on wheels', 'senior meals', 'congregate meals']
+          best_bets: ['meals-on-wheels']
+
+    - id: housing
+      label: Housing
+      icon: home
+      description: 'Rent, housing, shelter'
+      search_terms: ['housing', 'rent', 'shelter', 'homeless']
+      best_bets: ['federal-department-of-housing-choice-voucher-section-8']
+      sub_options:
+        - label: "Can't pay rent"
+          search_terms: ['rental assistance', 'rent help', 'emergency rental']
+          best_bets: ['rental-assistance-program', 'eviction-prevention']
+        - label: 'Facing eviction'
+          search_terms: ['eviction', 'eviction defense', 'tenant rights']
+          best_bets: ['bay-area-legal-aid', 'eviction-defense-collaborative']
+        - label: 'Need a place to stay'
+          search_terms: ['shelter', 'homeless', 'navigation center', 'coordinated entry']
+          best_bets: ['coordinated-entry', 'navigation-centers']
+        - label: 'Looking to buy a home'
+          search_terms: ['first-time homebuyer', 'down payment', 'mortgage assistance']
+          best_bets: ['calhfa-first-time-homebuyer']
+
+    - id: healthcare
+      label: Healthcare
+      icon: heart
+      description: 'Medical, dental, mental health'
+      search_terms: ['healthcare', 'medical', 'health insurance', 'doctor']
+      best_bets: ['medi-cal', 'covered-california']
+      sub_options:
+        - label: 'Need health insurance'
+          search_terms: ['medi-cal', 'covered california', 'health insurance']
+          best_bets: ['medi-cal', 'covered-california']
+        - label: 'Mental health support'
+          search_terms: ['mental health', 'counseling', 'therapy', 'crisis']
+          best_bets: ['988-suicide-crisis-lifeline', 'county-behavioral-health']
+        - label: 'Dental care'
+          search_terms: ['dental', 'dentist', 'denti-cal']
+          best_bets: ['denti-cal']
+        - label: 'Need to see a doctor'
+          search_terms: ['clinic', 'community health', 'primary care']
+          best_bets: ['community-health-centers']
+
+    - id: jobs
+      label: Jobs
+      icon: briefcase
+      description: 'Employment & training'
+      search_terms: ['job', 'employment', 'work', 'career']
+      best_bets: ['caljobs', 'sf-jobsnow']
+      sub_options:
+        - label: 'Looking for a job'
+          search_terms: ['job search', 'caljobs', 'employment']
+          best_bets: ['caljobs', 'sf-jobsnow']
+        - label: 'Lost my job'
+          search_terms: ['unemployment', 'edd', 'laid off']
+          best_bets: ['edd-unemployment-insurance']
+        - label: 'Need job training'
+          search_terms: ['job training', 'workforce', 'vocational']
+          best_bets: ['nova-workforce', 'job-corps']
+        - label: 'Resume help'
+          search_terms: ['resume', 'interview', 'job search']
+          best_bets: ['career-counseling-centers']
+
+    - id: money
+      label: Money
+      icon: dollar
+      description: 'Cash aid & bill help'
+      search_terms: ['cash', 'money', 'welfare', 'bills']
+      best_bets: ['calworks-cash-assistance']
+      sub_options:
+        - label: 'Need cash assistance'
+          search_terms: ['calworks', 'welfare', 'cash aid', 'general assistance']
+          best_bets: ['calworks-cash-assistance', 'general-assistance']
+        - label: 'Disability benefits'
+          search_terms: ['ssi', 'ssdi', 'disability']
+          best_bets: ['federal-social-security-supplemental-security-income-ssi']
+        - label: 'Help with utility bills'
+          search_terms: ['utility', 'liheap', 'care', 'pgcap', 'energy']
+          best_bets: ['care-program-pge', 'liheap']
+        - label: 'Retirement/Social Security'
+          search_terms: ['retirement', 'social security', 'pension']
+          best_bets: ['federal-social-security-retirement-benefits']
+
+    - id: legal
+      label: Legal
+      icon: scale
+      description: 'Legal aid & rights'
+      search_terms: ['legal', 'lawyer', 'attorney', 'rights']
+      best_bets: ['bay-area-legal-aid']
+      sub_options:
+        - label: 'Free legal help'
+          search_terms: ['legal aid', 'free lawyer', 'legal services']
+          best_bets: ['bay-area-legal-aid', 'legal-aid-at-work']
+        - label: 'Tenant/landlord issues'
+          search_terms: ['tenant rights', 'eviction', 'landlord']
+          best_bets: ['bay-area-legal-aid', 'tenants-union']
+        - label: 'Immigration help'
+          search_terms: ['immigration', 'citizenship', 'daca', 'visa']
+          best_bets: ['centro-legal-de-la-raza', 'immigration-legal-services']
+
+    - id: family
+      label: Family
+      icon: users
+      description: 'Kids, childcare, seniors'
+      search_terms: ['family', 'children', 'childcare', 'senior']
+      best_bets: ['head-start-bay-area']
+      sub_options:
+        - label: 'Childcare/preschool'
+          search_terms: ['childcare', 'daycare', 'preschool', 'head start']
+          best_bets: ['head-start-bay-area', 'subsidized-childcare']
+        - label: 'After school programs'
+          search_terms: ['after school', 'youth programs', 'tutoring']
+          best_bets: ['after-school-all-stars']
+        - label: 'Senior services'
+          search_terms: ['senior', 'elderly', 'aging', 'meals on wheels']
+          best_bets: ['senior-center', 'meals-on-wheels']
+        - label: 'Diapers/baby supplies'
+          search_terms: ['diapers', 'baby', 'infant', 'wic']
+          best_bets: ['diaper-bank', 'wic-program']
+
+    - id: education
+      label: Education
+      icon: graduation
+      description: 'School, college, GED'
+      search_terms: ['education', 'school', 'college', 'ged']
+      best_bets: ['cal-grant']
+      sub_options:
+        - label: 'Paying for college'
+          search_terms: ['financial aid', 'fafsa', 'cal grant', 'scholarship']
+          best_bets: ['cal-grant', 'fafsa-help']
+        - label: 'GED/Adult education'
+          search_terms: ['ged', 'adult education', 'adult school']
+          best_bets: ['career-online-high-school', 'adult-school-sf']
+        - label: 'ESL/English classes'
+          search_terms: ['esl', 'english', 'language']
+          best_bets: ['esl-classes']
+        - label: 'School meals'
+          search_terms: ['school meals', 'free lunch', 'summer meals']
+          best_bets: ['national-school-lunch-program']

@@ -1,0 +1,27 @@
+{
+  "id": "oakland-housing-authority",
+  "name": "Oakland Housing Authority",
+  "category": "housing",
+  "description": "Housing vouchers and public housing for low-income Oakland residents",
+  "fullDescription": "The Oakland Housing Authority administers public housing and Section 8 vouchers for low-income Oakland residents.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing communities\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n",
+  "howToGetIt": "1. Check OHA website for waitlist openings\n2. Apply when waitlist opens (usually online)\n3. Must meet income limits\n4. Oakland residents get preference\n5. Wait for lottery selection\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Alameda County"
+  ],
+  "city": "Oakland",
+  "website": "https://www.oakha.org/",
+  "cost": null,
+  "phone": "510-874-1500",
+  "email": null,
+  "address": "1619 Harrison Street, Oakland, CA 94612",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Oakland Housing Authority, OHA, Section 8, public housing, housing voucher, Oakland, low-income, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

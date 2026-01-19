@@ -5,7 +5,7 @@
       "name": "Income-Eligible",
       "description": "For people who qualify based on income",
       "icon": "💳",
-      "programCount": 182
+      "programCount": 215
     },
     {
       "id": "seniors",
@@ -19,14 +19,14 @@
       "name": "Youth",
       "description": "For children and young adults",
       "icon": "🧒",
-      "programCount": 44
+      "programCount": 56
     },
     {
       "id": "college-students",
       "name": "College Students",
       "description": "For enrolled college students",
       "icon": "🎓",
-      "programCount": 26
+      "programCount": 31
     },
     {
       "id": "veterans",
@@ -40,7 +40,7 @@
       "name": "Families",
       "description": "For families with children",
       "icon": "👨‍👩‍👧",
-      "programCount": 91
+      "programCount": 95
     },
     {
       "id": "disability",
@@ -75,21 +75,21 @@
       "name": "Unemployed/Job Seekers",
       "description": "For people actively seeking employment",
       "icon": "💼",
-      "programCount": 7
+      "programCount": 19
     },
     {
       "id": "immigrants",
       "name": "Immigrants/Refugees",
       "description": "For new arrivals, undocumented, DACA",
       "icon": "🌍",
-      "programCount": 12
+      "programCount": 21
     },
     {
       "id": "unhoused",
       "name": "Unhoused",
       "description": "For people experiencing homelessness",
       "icon": "🏠",
-      "programCount": 9
+      "programCount": 11
     },
     {
       "id": "pregnant",
@@ -131,7 +131,7 @@
       "name": "Everyone",
       "description": "Available to all residents",
       "icon": "🌎",
-      "programCount": 456
+      "programCount": 481
     }
   ]
 }

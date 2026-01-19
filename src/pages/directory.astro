@@ -229,9 +229,41 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
   <!-- Programs List -->
   <section class="section" id="programs">
     <div class="container-page">
-      <p id="results-count" class="text-neutral-600 dark:text-neutral-300 mb-6">
-        {allPrograms.length} programs found
-      </p>
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <p id="results-count" class="text-neutral-600 dark:text-neutral-300">
+          {allPrograms.length} programs found
+        </p>
+        <div
+          id="sort-toggle-container"
+          class="flex items-center gap-2"
+          role="group"
+          aria-label="Sort results"
+        >
+          <span class="text-sm text-neutral-500 dark:text-neutral-400">Sort by:</span>
+          <div class="inline-flex rounded-md shadow-sm" role="radiogroup" aria-label="Sort order">
+            <button
+              id="sort-relevance"
+              type="button"
+              class="sort-toggle-btn sort-toggle-active px-3 py-1.5 text-sm font-medium rounded-l-md border border-neutral-300 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:z-10 transition-colors"
+              role="radio"
+              aria-checked="true"
+              data-sort="relevance"
+            >
+              Relevance
+            </button>
+            <button
+              id="sort-alpha"
+              type="button"
+              class="sort-toggle-btn px-3 py-1.5 text-sm font-medium rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:z-10 transition-colors"
+              role="radio"
+              aria-checked="false"
+              data-sort="alpha"
+            >
+              A-Z
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="programs-grid">
         {
@@ -649,5 +681,129 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
     // Handle hash changes (e.g., back/forward navigation)
     window.addEventListener('hashchange', handleHashNavigation);
+
+    // ==========================================
+    // Sort Toggle Functionality
+    // ==========================================
+
+    const sortRelevanceBtn = document.getElementById('sort-relevance');
+    const sortAlphaBtn = document.getElementById('sort-alpha');
+    let currentSort: 'relevance' | 'alpha' = 'relevance';
+
+    // Store original DOM order for relevance sorting
+    const originalOrder: Element[] = Array.from(programsGrid?.children || []);
+
+    function updateSortToggleUI() {
+      const activeClasses = [
+        'bg-primary-100',
+        'dark:bg-primary-900/50',
+        'text-primary-700',
+        'dark:text-primary-300',
+        'border-primary-400',
+        'dark:border-primary-600',
+      ];
+      const inactiveClasses = [
+        'bg-white',
+        'dark:bg-neutral-800',
+        'text-neutral-700',
+        'dark:text-neutral-300',
+      ];
+
+      if (currentSort === 'relevance') {
+        sortRelevanceBtn?.classList.remove(...inactiveClasses);
+        sortRelevanceBtn?.classList.add(...activeClasses);
+        sortRelevanceBtn?.setAttribute('aria-checked', 'true');
+
+        sortAlphaBtn?.classList.remove(...activeClasses);
+        sortAlphaBtn?.classList.add(...inactiveClasses);
+        sortAlphaBtn?.setAttribute('aria-checked', 'false');
+      } else {
+        sortAlphaBtn?.classList.remove(...inactiveClasses);
+        sortAlphaBtn?.classList.add(...activeClasses);
+        sortAlphaBtn?.setAttribute('aria-checked', 'true');
+
+        sortRelevanceBtn?.classList.remove(...activeClasses);
+        sortRelevanceBtn?.classList.add(...inactiveClasses);
+        sortRelevanceBtn?.setAttribute('aria-checked', 'false');
+      }
+    }
+
+    function sortPrograms() {
+      if (!programsGrid) return;
+
+      const visibleCards = Array.from(programsGrid.children).filter(
+        (card) => (card as HTMLElement).style.display !== 'none'
+      ) as HTMLElement[];
+
+      if (currentSort === 'alpha') {
+        // Sort alphabetically by program name
+        visibleCards.sort((a, b) => {
+          const nameA = a.querySelector('[data-program-name]')?.textContent?.toLowerCase() || '';
+          const nameB = b.querySelector('[data-program-name]')?.textContent?.toLowerCase() || '';
+          return nameA.localeCompare(nameB);
+        });
+
+        // Reorder DOM elements
+        visibleCards.forEach((card) => {
+          programsGrid.appendChild(card);
+        });
+      } else {
+        // Restore original order
+        originalOrder.forEach((card) => {
+          if (programsGrid.contains(card)) {
+            programsGrid.appendChild(card);
+          }
+        });
+      }
+    }
+
+    sortRelevanceBtn?.addEventListener('click', () => {
+      if (currentSort !== 'relevance') {
+        currentSort = 'relevance';
+        updateSortToggleUI();
+        sortPrograms();
+
+        // Announce to screen readers
+        const announcer = document.getElementById('search-announcer');
+        if (announcer) {
+          announcer.textContent = 'Results sorted by relevance';
+        }
+      }
+    });
+
+    sortAlphaBtn?.addEventListener('click', () => {
+      if (currentSort !== 'alpha') {
+        currentSort = 'alpha';
+        updateSortToggleUI();
+        sortPrograms();
+
+        // Announce to screen readers
+        const announcer = document.getElementById('search-announcer');
+        if (announcer) {
+          announcer.textContent = 'Results sorted alphabetically A to Z';
+        }
+      }
+    });
+
+    // Initialize sort toggle UI
+    updateSortToggleUI();
   });
 </script>
+
+<style>
+  .sort-toggle-btn {
+    @apply bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300;
+  }
+
+  .sort-toggle-btn:hover {
+    @apply bg-neutral-50 dark:bg-neutral-700;
+  }
+
+  .sort-toggle-active {
+    @apply bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 border-primary-400 dark:border-primary-600;
+  }
+
+  .sort-toggle-active:hover {
+    @apply bg-primary-200 dark:bg-primary-900/70;
+  }
+</style>

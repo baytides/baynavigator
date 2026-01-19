@@ -1,0 +1,28 @@
+{
+  "id": "legal-aid-at-work",
+  "name": "Legal Aid at Work",
+  "category": "legal",
+  "description": "Free employment law help including discrimination, wage theft, wrongful termination, and workplace rights",
+  "fullDescription": "Legal Aid at Work provides free legal services and resources to workers facing employment problems, including discrimination, wage theft, and wrongful termination.",
+  "whatTheyOffer": "- Free legal clinics for workers\n- Employment law advice and representation\n- Help with discrimination and harassment claims\n- Wage theft recovery assistance\n- Disability and pregnancy accommodation\n- Workers' rights education\n- Know Your Rights resources in multiple languages\n",
+  "howToGetIt": "1. Call the Workers' Rights Clinic at 415-864-8208\n2. Or attend a free legal clinic (check website for schedule)\n3. Services available regardless of immigration status\n4. Complete intake to determine eligibility for representation\n5. Receive legal advice, referrals, or representation\n",
+  "groups": [
+    "everyone",
+    "income-eligible"
+  ],
+  "areas": [
+    "Statewide"
+  ],
+  "city": null,
+  "website": "https://legalaidatwork.org/",
+  "cost": null,
+  "phone": "415-864-8208",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Legal Aid at Work, employment law, workplace rights, discrimination, harassment, wage theft, wrongful termination, disability accommodation, pregnancy, workers rights, free legal",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "contra-costa-housing-authority",
+  "name": "Contra Costa County Housing Authority",
+  "category": "housing",
+  "description": "Section 8 housing vouchers for Contra Costa County residents",
+  "fullDescription": "The Contra Costa County Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents throughout Contra Costa County.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing units\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Special programs for families and seniors\n",
+  "howToGetIt": "1. Check CCCHA website for waitlist status\n2. Apply when waitlist opens\n3. Must meet income limits\n4. County residents get preference\n5. Wait for name on waitlist\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Contra Costa County"
+  ],
+  "city": null,
+  "website": "https://www.contracosta.ca.gov/1403/Housing-Authority",
+  "cost": null,
+  "phone": "925-957-8000",
+  "email": null,
+  "address": "3133 Estudillo Street, Martinez, CA 94553",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "CCCHA, Contra Costa Housing Authority, Section 8, housing voucher, Richmond, Concord, low-income, waitlist",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

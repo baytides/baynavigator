@@ -1,0 +1,28 @@
+{
+  "id": "adult-school-sf",
+  "name": "San Francisco City College Adult Education",
+  "category": "education",
+  "description": "Free adult education including GED, ESL, citizenship, and career training classes",
+  "fullDescription": "City College of San Francisco offers free adult education classes including GED preparation, ESL, citizenship, and career training.",
+  "whatTheyOffer": "- Free GED and high school diploma preparation\n- Free ESL (English as a Second Language) classes\n- U.S. Citizenship preparation\n- Basic skills and literacy\n- Career and technical education\n- Computer literacy classes\n- Multiple locations throughout San Francisco\n",
+  "howToGetIt": "1. Visit CCSF website or adult education center\n2. Take placement test if required\n3. Register for classes\n4. Classes are free for California residents\n5. Flexible schedules including evening and weekend options\n",
+  "groups": [
+    "everyone",
+    "immigrants"
+  ],
+  "areas": [
+    "San Francisco"
+  ],
+  "city": "San Francisco",
+  "website": "https://www.ccsf.edu/academics/schools/adult-education",
+  "cost": null,
+  "phone": "415-239-3000",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "adult school, San Francisco, CCSF, GED, ESL, English, citizenship, high school diploma, adult education, free classes, continuing education",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

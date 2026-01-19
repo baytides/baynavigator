@@ -1,0 +1,352 @@
+---
+interface Props {
+  code: string;
+  name?: string;
+  showWeather?: boolean;
+  compact?: boolean;
+}
+
+const { code, name, showWeather = true, compact = false } = Astro.props;
+---
+
+<div class:list={['airport-status', { compact }]} data-airport={code}>
+  <div class="airport-header">
+    <span class="airport-code">{code}</span>
+    {name && <span class="airport-name">{name}</span>}
+    <span class="status-indicator" data-status="loading">
+      <span class="status-dot"></span>
+      <span class="status-text">Checking...</span>
+    </span>
+  </div>
+
+  {
+    showWeather && (
+      <div class="weather-info" data-weather>
+        {/* Populated by JS */}
+      </div>
+    )
+  }
+
+  <div class="delay-info" data-delays>
+    {/* Populated by JS */}
+  </div>
+</div>
+
+<style>
+  .airport-status {
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--card-bg, #fff);
+  }
+
+  .airport-status.compact {
+    padding: 8px 12px;
+  }
+
+  .airport-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .airport-code {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--text-primary, #1f2937);
+  }
+
+  .airport-name {
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.9em;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85em;
+    margin-left: auto;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  [data-status='ok'] .status-dot {
+    background: #22c55e;
+  }
+
+  [data-status='ok'] .status-text {
+    color: #16a34a;
+  }
+
+  [data-status='delay'] .status-dot {
+    background: #f59e0b;
+  }
+
+  [data-status='delay'] .status-text {
+    color: #d97706;
+  }
+
+  [data-status='closed'] .status-dot {
+    background: #ef4444;
+  }
+
+  [data-status='closed'] .status-text {
+    color: #dc2626;
+  }
+
+  [data-status='loading'] .status-dot {
+    animation: pulse 1.5s infinite;
+  }
+
+  [data-status='error'] .status-dot {
+    background: #94a3b8;
+  }
+
+  [data-status='error'] .status-text {
+    color: #6b7280;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .weather-info {
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: var(--text-secondary, #6b7280);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .weather-info:empty {
+    display: none;
+  }
+
+  .compact .weather-info {
+    margin-top: 4px;
+    font-size: 0.8em;
+  }
+
+  .delay-info {
+    margin-top: 8px;
+  }
+
+  .delay-info:empty {
+    display: none;
+  }
+
+  .compact .delay-info {
+    margin-top: 4px;
+  }
+
+  :global(.delay-alert) {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 0.9em;
+    color: #92400e;
+    margin-top: 4px;
+  }
+
+  :global(.delay-alert:first-child) {
+    margin-top: 0;
+  }
+
+  .compact :global(.delay-alert) {
+    padding: 6px 8px;
+    font-size: 0.8em;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .airport-status {
+      border-color: var(--border-color, #374151);
+      background: var(--card-bg, #1f2937);
+    }
+
+    .airport-code {
+      color: var(--text-primary, #f9fafb);
+    }
+
+    .airport-name {
+      color: var(--text-secondary, #9ca3af);
+    }
+
+    .weather-info {
+      color: var(--text-secondary, #9ca3af);
+    }
+
+    :global(.delay-alert) {
+      background: #78350f;
+      border-color: #b45309;
+      color: #fef3c7;
+    }
+  }
+</style>
+
+<script>
+  interface AirportStatusData {
+    Name: string;
+    City: string;
+    State: string;
+    ICAO: string;
+    IATA: string;
+    SupportedAirport: boolean;
+    Delay: boolean;
+    DelayCount: number;
+    Status: Array<{ Reason: string }>;
+    Weather: {
+      Weather: Array<{ Temp: string[] }>;
+      Visibility: number[];
+      Temp: string[];
+      Wind: string[];
+      Meta: Array<{ Updated: string }>;
+    };
+  }
+
+  const AIRPORT_API_BASE = 'https://external-api.faa.gov/asws/api/airport/status';
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+  const statusCache = new Map<string, { data: AirportStatusData; timestamp: number }>();
+
+  async function fetchAirportStatus(code: string): Promise<AirportStatusData | null> {
+    // Check cache
+    const cached = statusCache.get(code);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+      return cached.data;
+    }
+
+    try {
+      const response = await fetch(`${AIRPORT_API_BASE}/${code}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const data: AirportStatusData = await response.json();
+
+      // Cache the result
+      statusCache.set(code, { data, timestamp: Date.now() });
+
+      return data;
+    } catch (error) {
+      console.error(`Failed to fetch status for ${code}:`, error);
+      return null;
+    }
+  }
+
+  function updateAirportStatusUI(container: HTMLElement, status: AirportStatusData | null) {
+    const indicator = container.querySelector('[data-status]');
+    const statusText = indicator?.querySelector('.status-text');
+    const weatherEl = container.querySelector('[data-weather]');
+    const delaysEl = container.querySelector('[data-delays]');
+
+    if (!status) {
+      indicator?.setAttribute('data-status', 'error');
+      if (statusText) statusText.textContent = 'Unavailable';
+      return;
+    }
+
+    // Update status indicator
+    if (status.Delay) {
+      indicator?.setAttribute('data-status', 'delay');
+      if (statusText) {
+        statusText.textContent =
+          status.DelayCount === 1 ? '1 delay' : `${status.DelayCount} delays`;
+      }
+    } else {
+      indicator?.setAttribute('data-status', 'ok');
+      if (statusText) statusText.textContent = 'No delays';
+    }
+
+    // Update weather using safe DOM methods
+    if (weatherEl && status.Weather) {
+      // Clear existing content
+      weatherEl.textContent = '';
+
+      const temp = status.Weather.Temp?.[0] || '';
+      const conditions = status.Weather.Weather?.[0]?.Temp?.[0] || '';
+      const wind = status.Weather.Wind?.[0] || '';
+      const visibility = status.Weather.Visibility?.[0];
+
+      if (temp) {
+        const tempSpan = document.createElement('span');
+        tempSpan.className = 'weather-temp';
+        tempSpan.textContent = temp;
+        weatherEl.appendChild(tempSpan);
+      }
+
+      if (conditions) {
+        const condSpan = document.createElement('span');
+        condSpan.className = 'weather-conditions';
+        condSpan.textContent = conditions;
+        weatherEl.appendChild(condSpan);
+      }
+
+      if (wind && wind !== 'Calm') {
+        const windSpan = document.createElement('span');
+        windSpan.className = 'weather-wind';
+        windSpan.textContent = wind;
+        weatherEl.appendChild(windSpan);
+      }
+
+      if (visibility && visibility < 10) {
+        const visSpan = document.createElement('span');
+        visSpan.className = 'weather-visibility';
+        visSpan.textContent = `Visibility: ${visibility} mi`;
+        weatherEl.appendChild(visSpan);
+      }
+    }
+
+    // Update delays using safe DOM methods
+    if (delaysEl) {
+      // Clear existing content
+      delaysEl.textContent = '';
+
+      if (status.Delay && status.Status?.length > 0) {
+        status.Status.filter(
+          (s) => s.Reason && s.Reason !== 'No known delays for this airport'
+        ).forEach((s) => {
+          const alertDiv = document.createElement('div');
+          alertDiv.className = 'delay-alert';
+          alertDiv.textContent = s.Reason;
+          delaysEl.appendChild(alertDiv);
+        });
+      }
+    }
+  }
+
+  // Initialize all airport status components on the page
+  function initAirportStatus() {
+    document.querySelectorAll('.airport-status[data-airport]').forEach(async (el) => {
+      const code = el.getAttribute('data-airport');
+      if (!code) return;
+
+      const status = await fetchAirportStatus(code);
+      updateAirportStatusUI(el as HTMLElement, status);
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAirportStatus);
+  } else {
+    initAirportStatus();
+  }
+
+  // Re-run when navigating (for SPA-like behavior)
+  document.addEventListener('astro:page-load', initAirportStatus);
+</script>

@@ -1,0 +1,27 @@
+{
+  "id": "marin-housing-authority",
+  "name": "Marin Housing Authority",
+  "category": "housing",
+  "description": "Section 8 housing vouchers for Marin County residents",
+  "fullDescription": "The Marin Housing Authority administers Section 8 vouchers and affordable housing programs for low-income residents in Marin County.",
+  "whatTheyOffer": "- Section 8 Housing Choice Vouchers\n- Public housing\n- Project-based vouchers\n- VASH vouchers for homeless veterans\n- Family self-sufficiency program\n",
+  "howToGetIt": "1. Check MHA website for waitlist status\n2. Apply during open enrollment\n3. Must meet income limits\n4. Marin County residents get preference\n5. Wait for lottery selection\n",
+  "groups": [
+    "income-eligible"
+  ],
+  "areas": [
+    "Marin County"
+  ],
+  "city": null,
+  "website": "https://www.marinhousing.org/",
+  "cost": null,
+  "phone": "415-491-2530",
+  "email": null,
+  "address": "4020 Civic Center Drive, San Rafael, CA 94903",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Marin Housing Authority, Section 8, housing voucher, Marin County, low-income, waitlist, San Rafael",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

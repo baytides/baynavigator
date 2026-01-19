@@ -1,0 +1,28 @@
+{
+  "id": "scusd-adult-education",
+  "name": "San Jose Adult Education",
+  "category": "education",
+  "description": "Free adult education including ESL, GED, and career training in San Jose",
+  "fullDescription": "San Jose Unified School District Adult Education provides free classes for adults including ESL, GED, citizenship, and career training.",
+  "whatTheyOffer": "- Free ESL classes at all levels\n- GED and high school diploma preparation\n- Citizenship preparation\n- Career and technical education\n- Digital literacy classes\n- Parent education\n",
+  "howToGetIt": "1. Visit San Jose Adult Education center\n2. Complete registration\n3. Take placement assessment\n4. Enroll in appropriate classes\n",
+  "groups": [
+    "everyone",
+    "immigrants"
+  ],
+  "areas": [
+    "Santa Clara County"
+  ],
+  "city": "San Jose",
+  "website": "https://sjadulted.org/",
+  "cost": null,
+  "phone": "408-723-6400",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "adult school, San Jose, Santa Clara, GED, ESL, high school diploma, adult education, career training, free classes",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

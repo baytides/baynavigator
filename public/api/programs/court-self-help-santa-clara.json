@@ -1,0 +1,27 @@
+{
+  "id": "court-self-help-santa-clara",
+  "name": "Santa Clara County Self-Help Center",
+  "category": "legal",
+  "description": "Free help with court forms, workshops, and self-representation in Santa Clara County",
+  "fullDescription": "The Santa Clara County Self-Help Center provides free assistance to people representing themselves in court matters.",
+  "whatTheyOffer": "- Free help with court forms and procedures\n- Family law workshops (divorce, custody, support)\n- Restraining order assistance\n- Small claims court help\n- Eviction defense resources\n- Debt collection guidance\n",
+  "howToGetIt": "1. Visit the Self-Help Center at the downtown San Jose courthouse\n2. Or access online resources and virtual workshops\n3. Check website for workshop schedules\n4. Bring your court papers and case information\n",
+  "groups": [
+    "everyone"
+  ],
+  "areas": [
+    "Santa Clara County"
+  ],
+  "city": null,
+  "website": "https://www.scscourt.org/self_service/self_help/",
+  "cost": null,
+  "phone": "408-882-2900",
+  "email": null,
+  "address": "191 N. First Street, San Jose, CA 95113",
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "self-help, court, Santa Clara, San Jose, forms, family law, divorce, custody, restraining order, small claims, eviction, free legal help",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}

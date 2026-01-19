@@ -1,0 +1,28 @@
+{
+  "id": "solano-workforce",
+  "name": "Solano County Workforce Development",
+  "category": "employment",
+  "description": "Free career services and job training for Solano County residents",
+  "fullDescription": "Solano County's workforce development services connect residents with career training and employment opportunities at America's Job Centers throughout the county.",
+  "whatTheyOffer": "- Career counseling and job search assistance\n- Resume and interview workshops\n- Occupational skills training\n- Youth employment programs\n- Veteran employment services\n- Employer connections\n",
+  "howToGetIt": "1. Visit an America's Job Center in Solano County\n2. Locations in Fairfield, Vallejo, and Vacaville\n3. Register and complete assessment\n4. Work with career counselor\n5. Access training and employment services\n",
+  "groups": [
+    "unemployed",
+    "everyone"
+  ],
+  "areas": [
+    "Solano County"
+  ],
+  "city": null,
+  "website": "https://www.solanowdb.org/",
+  "cost": null,
+  "phone": "707-863-3500",
+  "email": null,
+  "address": null,
+  "requirements": null,
+  "howToApply": null,
+  "keywords": "Solano County, workforce, AJCC, America's Job Center, Fairfield, Vallejo, Vacaville, job training, career services",
+  "lifeEvents": [],
+  "agency": null,
+  "lastUpdated": "2026-01-19"
+}
