@@ -259,7 +259,7 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     'what can you do':
       'I can help you find food assistance, healthcare (Medi-Cal), housing help, utility assistance, cash aid, and more. Tell me your city and what you need!',
     'how does this work':
-      "Tell me what kind of help you need and your city or zip code. I'll point you to the right programs. You can also call 211 anytime for personalized help.",
+      "Tell me what kind of help you need and your city or zip code. I'll point you to the right programs. I'm available 24/7!",
 
     // Food assistance
     'what is calfresh':
@@ -281,7 +281,7 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     'food stamps':
       "CalFresh (California's food stamps) provides monthly grocery benefits on an EBT card. See how to apply at baynavigator.org/eligibility/food-assistance",
     hungry:
-      'I can help! CalFresh provides monthly grocery money, and food banks offer free food. Call 211 for your nearest food pantry, or see baynavigator.org/eligibility/food-assistance',
+      'I can help! CalFresh provides monthly grocery money, and food banks offer free food. See baynavigator.org/eligibility/food-assistance or search the directory for pantries near you.',
 
     // Healthcare
     'what is medi-cal':
@@ -301,7 +301,7 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     dental:
       'Denti-Cal (part of Medi-Cal) provides free dental care. Some community clinics also offer low-cost dental. See baynavigator.org/eligibility/healthcare',
     'mental health':
-      'Medi-Cal covers mental health services. You can also call 988 for crisis support, or 211 to find local mental health services.',
+      'Medi-Cal covers mental health services. For crisis support, call or text 988 anytime. See baynavigator.org/eligibility/healthcare for more options.',
 
     // Housing
     'what is section 8':
@@ -313,15 +313,15 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     'rent help':
       'For rent help: Emergency rental assistance (varies by county), Section 8 vouchers, and other programs exist. See baynavigator.org/eligibility/housing-assistance',
     'cant pay rent':
-      'For rent help, check if your county has emergency rental assistance. Call 211 for current programs. See baynavigator.org/eligibility/housing-assistance',
+      'For rent help, check if your county has emergency rental assistance. See baynavigator.org/eligibility/housing-assistance for current programs.',
     eviction:
-      'If facing eviction, call 211 immediately for emergency assistance and legal help. Free legal aid may be available.',
+      'If facing eviction, see baynavigator.org/eligibility/housing-assistance for emergency help and legal aid options. Free legal aid may be available in your county.',
     homeless:
-      'If experiencing homelessness, call 211 for Coordinated Entry. They connect you to shelter and housing services 24/7.',
+      'If experiencing homelessness, see baynavigator.org/eligibility/housing-assistance for shelter and Coordinated Entry info. I can help you find resources 24/7.',
     homelessness:
-      'Call 211 for Coordinated Entry to access shelter and housing assistance. Available 24/7.',
+      'See baynavigator.org/eligibility/housing-assistance for shelter and housing assistance options. Ask me about resources in your area anytime.',
     shelter:
-      'Call 211 for shelter and Coordinated Entry services. They can connect you to local options.',
+      'For shelter help, see baynavigator.org/eligibility/housing-assistance. Tell me your city and I can point you to local options.',
 
     // Utilities
     'what is care':
@@ -400,15 +400,15 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
       'WIC provides free food and support for pregnant women. Medi-Cal covers prenatal care. See baynavigator.org/eligibility/food-assistance',
     baby: 'For babies: WIC provides free food and formula. Medi-Cal covers well-baby visits. See baynavigator.org/eligibility/food-assistance',
 
-    // 211
+    // 211 (keep as backup option, but emphasize Bay Navigator first)
     'what is 211':
-      '211 is a free, confidential helpline available 24/7. They connect you to local services for any need. Just dial 2-1-1.',
+      '211 is a phone helpline for finding services. But you can also use Bay Navigator 24/7 - just ask me what you need and I can help!',
     '211':
-      '211 is a free helpline for finding local services - food, housing, utilities, healthcare. Available 24/7. Just dial 2-1-1.',
+      '211 is available by phone, but Bay Navigator and I are here 24/7 too! Tell me what you need and I can help find resources.',
 
     // General questions
     'how do i apply':
-      "What city are you in? Your county's Human Services Agency handles most benefits applications. You can also call 211 for help.",
+      "What city are you in? Your county's Human Services Agency handles most benefits applications. I can point you to the right place!",
     'where do i apply':
       "Applications go through your county's Human Services Agency. What city are you in? I can tell you which agency serves you.",
     'i need help':
@@ -419,17 +419,17 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     'am i eligible':
       'Eligibility depends on income, household size, and the program. Many programs serve all residents. Check baynavigator.org/eligibility',
     'food banks':
-      'Bay Area food banks include Second Harvest (South Bay), SF-Marin Food Bank, Alameda County Food Bank. Call 211 for your nearest pantry.',
+      'Bay Area food banks include Second Harvest (South Bay), SF-Marin Food Bank, Alameda County Food Bank. Search baynavigator.org/directory for pantries near you!',
     'food pantry':
-      'Call 211 for your nearest food pantry. No income verification needed at most locations.',
+      'Search baynavigator.org/directory for food pantries near you. No income verification needed at most locations!',
     'free food':
-      'Food banks provide free groceries - no income verification. Call 211 for nearest location, or see baynavigator.org/eligibility/food-assistance',
+      'Food banks provide free groceries - no income verification needed! Search baynavigator.org/directory for locations near you, or see baynavigator.org/eligibility/food-assistance',
 
     // Crisis responses (instant, no location needed)
     emergency:
-      'For emergencies: 911 for immediate danger. 988 for mental health crisis. 1-800-799-7233 for domestic violence. 211 for other urgent needs.',
+      'For emergencies: 911 for immediate danger. 988 for mental health crisis. 1-800-799-7233 for domestic violence. I can also help find other resources.',
     crisis:
-      'Crisis help: 988 (mental health), 1-800-799-7233 (domestic violence), 911 (emergency), 211 (other needs).',
+      'Crisis help: 988 (mental health), 1-800-799-7233 (domestic violence), 911 (emergency). Tell me what you need and I can help find resources.',
     suicide:
       "Please call or text 988 now - free, confidential support 24/7. You can also text HOME to 741741. You're not alone.",
     'want to die':
@@ -439,16 +439,15 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
     'domestic violence':
       'National Domestic Violence Hotline: 1-800-799-7233 (24/7). Text START to 88788. If in danger, call 911.',
     unsafe:
-      "If you're in danger, call 911. For domestic violence: 1-800-799-7233. For other crisis: 988 or 211.",
+      "If you're in danger, call 911. For domestic violence: 1-800-799-7233. For mental health crisis: 988. I can also help find local resources.",
 
     // Thank you / goodbye
-    'thank you':
-      "You're welcome! Remember, 211 is available 24/7 for free help finding services. Take care!",
-    thanks: "You're welcome! Call 211 anytime for personalized help. Good luck!",
+    'thank you': "You're welcome! I'm here 24/7 if you need more help. Take care!",
+    thanks: "You're welcome! Come back anytime - I'm always here to help.",
     ty: "You're welcome! Let me know if you need anything else.",
-    bye: 'Take care! Remember, 211 is available 24/7. Good luck!',
-    goodbye: 'Goodbye! 211 is always available for help finding services.',
-    ok: 'Let me know if you have more questions! You can also call 211 for personalized help.',
+    bye: 'Take care! Bay Navigator and I are here 24/7 whenever you need us.',
+    goodbye: 'Goodbye! Come back anytime - Bay Navigator is always here to help.',
+    ok: "Let me know if you have more questions! I'm available 24/7.",
     okay: 'Great! Feel free to ask if you need help with anything else.',
 
     // Common typos and variations
@@ -510,14 +509,14 @@ Crisis resources (provide IMMEDIATELY, don't ask for location first):
 - Emergency: 911
 - Suicide/Crisis: 988
 - Domestic Violence: 1-800-799-7233
-- Any service: Call 211
 
 Guidelines:
 - Ask for city/zip BEFORE giving program recommendations (unless crisis)
 - ONLY use baynavigator.org links, never external sites
 - Mention their county's HSA when discussing benefits
 - Keep responses concise
-- Be warm and non-judgmental`;
+- Be warm and non-judgmental
+- Remind users Bay Navigator and Carl are available 24/7 - no phone calls needed!`;
 
   // Crisis detection keywords
   const EMERGENCY_KEYWORDS = [
@@ -680,7 +679,7 @@ Guidelines:
       }
       streamingBubble?.remove();
       addMessage(
-        "I'm sorry, I'm having trouble connecting right now. Please try searching the programs directly or call 211 for assistance.",
+        "I'm sorry, I'm having trouble connecting right now. Please try searching baynavigator.org/directory directly, or come back in a moment - I'm available 24/7!",
         'assistant',
         true
       );
