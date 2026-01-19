@@ -250,13 +250,23 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         </button>
         <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
         <label for="zip-city-input" class="sr-only">Enter ZIP code or city</label>
-        <input
-          type="text"
-          id="zip-city-input"
-          placeholder="ZIP code or city"
-          class="px-3 py-1.5 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-          autocomplete="postal-code"
-        />
+        <div class="flex items-center gap-1">
+          <input
+            type="text"
+            id="zip-city-input"
+            placeholder="ZIP code or city"
+            class="px-3 py-1.5 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            autocomplete="postal-code"
+          />
+          <button
+            id="submit-location-btn"
+            type="button"
+            class="px-3 py-1.5 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+            aria-label="Set location"
+          >
+            Go
+          </button>
+        </div>
       </div>
       <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
         <svg
@@ -672,7 +682,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   };
 
   // Refinement state
-  let currentLocation: { source: string; county: string; input?: string } | null = null;
+  let currentLocation: { source: string; county: string; city?: string; input?: string } | null =
+    null;
   let selectedCategory: RefinementCategory | null = null;
 
   // Type-ahead elements
@@ -2038,6 +2049,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const backToCategories = document.getElementById('back-to-categories');
   const useGpsBtn = document.getElementById('use-gps-btn');
   const zipCityInput = document.getElementById('zip-city-input') as HTMLInputElement | null;
+  const submitLocationBtn = document.getElementById('submit-location-btn');
   const changeLocationBtn = document.getElementById('change-location-btn');
 
   // Check if refinement should be shown based on query and result count
@@ -2237,10 +2249,24 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     announceToScreenReader('Returned to category selection.');
   });
 
+  // Capitalize city name for display (moved here for use in updateLocationDisplay)
+  function capitalizeCityName(city: string): string {
+    return city
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
   // Update location display
   function updateLocationDisplay() {
     if (currentLocation) {
-      if (locationValue) locationValue.textContent = currentLocation.county;
+      // Show city name if available, otherwise show county
+      if (locationValue) {
+        const displayName = currentLocation.city
+          ? capitalizeCityName(currentLocation.city)
+          : currentLocation.county;
+        locationValue.textContent = displayName;
+      }
       if (locationSource) {
         locationSource.textContent =
           currentLocation.source === 'gps'
@@ -2295,23 +2321,38 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     );
   });
 
-  // ZIP/City input handler
-  zipCityInput?.addEventListener('change', (e) => {
-    const value = (e.target as HTMLInputElement).value.trim();
+  // Handle location submission from ZIP/city input
+  function handleLocationSubmit() {
+    if (!zipCityInput) return;
+    const value = zipCityInput.value.trim();
     if (!value) return;
 
-    const county = lookupCounty(value);
-    if (county) {
+    const result = lookupCountyAndCity(value);
+    if (result) {
       currentLocation = {
         source: 'manual',
         input: value,
-        county: county,
+        county: result.county,
+        city: result.city,
       };
       updateLocationDisplay();
       localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
-      announceToScreenReader(`Location set to ${county}.`);
+      // Announce the city if we know it, otherwise announce county
+      const locationName = result.city ? capitalizeCityName(result.city) : result.county;
+      announceToScreenReader(`Location set to ${locationName}.`);
     } else {
       announceToScreenReader('Location not found. Please try a different ZIP code or city.');
+    }
+  }
+
+  // Submit button click handler
+  submitLocationBtn?.addEventListener('click', handleLocationSubmit);
+
+  // Enter key handler for ZIP/city input
+  zipCityInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleLocationSubmit();
     }
   });
 
@@ -2355,12 +2396,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
-  // Lookup county from ZIP or city
-  function lookupCounty(input: string): string | null {
+  // Lookup county and city from ZIP or city name
+  function lookupCountyAndCity(input: string): { county: string; city?: string } | null {
     // Check if ZIP code (basic validation)
     if (/^\d{5}$/.test(input)) {
-      // For now, use a simple mapping - in production, this would use the full zipcodes.yml data
-      // Map some common Bay Area ZIPs
+      // Map common Bay Area ZIPs to city names
       const zipToCity: Record<string, string> = {
         '94102': 'san francisco',
         '94103': 'san francisco',
@@ -2501,12 +2541,21 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       };
       const city = zipToCity[input];
       if (city) {
-        return CITY_TO_COUNTY[city] || null;
+        const county = CITY_TO_COUNTY[city];
+        if (county) {
+          return { county, city };
+        }
       }
+      return null;
     }
 
-    // Check city name
-    return CITY_TO_COUNTY[input.toLowerCase()] || null;
+    // Check city name (typed directly)
+    const normalizedInput = input.toLowerCase();
+    const county = CITY_TO_COUNTY[normalizedInput];
+    if (county) {
+      return { county, city: normalizedInput };
+    }
+    return null;
   }
 
   // Load saved location from localStorage

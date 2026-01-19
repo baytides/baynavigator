@@ -6,29 +6,84 @@ interface Props {
   compact?: boolean;
 }
 
+interface AirportStatusData {
+  Name: string;
+  City: string;
+  State: string;
+  ICAO: string;
+  IATA: string;
+  SupportedAirport: boolean;
+  Delay: boolean;
+  DelayCount: number;
+  Status: Array<{ Reason: string }>;
+  Weather: {
+    Weather: Array<{ Temp: string[] }>;
+    Visibility: number[];
+    Temp: string[];
+    Wind: string[];
+    Meta: Array<{ Updated: string }>;
+  };
+}
+
 const { code, name, showWeather = true, compact = false } = Astro.props;
+
+// Fetch airport status at build time (server-side, no CORS issues)
+let initialStatus: AirportStatusData | null = null;
+try {
+  const response = await fetch(`https://external-api.faa.gov/asws/api/airport/status/${code}`);
+  if (response.ok) {
+    initialStatus = await response.json();
+  }
+} catch (error) {
+  console.error(`Failed to fetch status for ${code}:`, error);
+}
+
+// Prepare initial display values from build-time data
+const hasDelay = initialStatus?.Delay ?? false;
+const delayCount = initialStatus?.DelayCount ?? 0;
+const statusClass = initialStatus ? (hasDelay ? 'delay' : 'ok') : 'loading';
+const statusText = initialStatus
+  ? hasDelay
+    ? delayCount === 1
+      ? '1 delay'
+      : `${delayCount} delays`
+    : 'No delays'
+  : 'Checking...';
+const temp = initialStatus?.Weather?.Temp?.[0] || '';
+const conditions = initialStatus?.Weather?.Weather?.[0]?.Temp?.[0] || '';
+const wind = initialStatus?.Weather?.Wind?.[0] || '';
+const visibility = initialStatus?.Weather?.Visibility?.[0];
+const delays =
+  initialStatus?.Status?.filter(
+    (s) => s.Reason && s.Reason !== 'No known delays for this airport'
+  ) || [];
 ---
 
 <div class:list={['airport-status', { compact }]} data-airport={code}>
   <div class="airport-header">
     <span class="airport-code">{code}</span>
     {name && <span class="airport-name">{name}</span>}
-    <span class="status-indicator" data-status="loading">
+    <span class="status-indicator" data-status={statusClass}>
       <span class="status-dot"></span>
-      <span class="status-text">Checking...</span>
+      <span class="status-text">{statusText}</span>
     </span>
   </div>
 
   {
     showWeather && (
       <div class="weather-info" data-weather>
-        {/* Populated by JS */}
+        {temp && <span class="weather-temp">{temp}</span>}
+        {conditions && <span class="weather-conditions">{conditions}</span>}
+        {wind && wind !== 'Calm' && <span class="weather-wind">{wind}</span>}
+        {visibility && visibility < 10 && (
+          <span class="weather-visibility">Visibility: {visibility} mi</span>
+        )}
       </div>
     )
   }
 
   <div class="delay-info" data-delays>
-    {/* Populated by JS */}
+    {delays.map((d) => <div class="delay-alert">{d.Reason}</div>)}
   </div>
 </div>
 
@@ -199,154 +254,3 @@ const { code, name, showWeather = true, compact = false } = Astro.props;
     }
   }
 </style>
-
-<script>
-  interface AirportStatusData {
-    Name: string;
-    City: string;
-    State: string;
-    ICAO: string;
-    IATA: string;
-    SupportedAirport: boolean;
-    Delay: boolean;
-    DelayCount: number;
-    Status: Array<{ Reason: string }>;
-    Weather: {
-      Weather: Array<{ Temp: string[] }>;
-      Visibility: number[];
-      Temp: string[];
-      Wind: string[];
-      Meta: Array<{ Updated: string }>;
-    };
-  }
-
-  const AIRPORT_API_BASE = 'https://external-api.faa.gov/asws/api/airport/status';
-  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-  const statusCache = new Map<string, { data: AirportStatusData; timestamp: number }>();
-
-  async function fetchAirportStatus(code: string): Promise<AirportStatusData | null> {
-    // Check cache
-    const cached = statusCache.get(code);
-    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-      return cached.data;
-    }
-
-    try {
-      const response = await fetch(`${AIRPORT_API_BASE}/${code}`);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-      const data: AirportStatusData = await response.json();
-
-      // Cache the result
-      statusCache.set(code, { data, timestamp: Date.now() });
-
-      return data;
-    } catch (error) {
-      console.error(`Failed to fetch status for ${code}:`, error);
-      return null;
-    }
-  }
-
-  function updateAirportStatusUI(container: HTMLElement, status: AirportStatusData | null) {
-    const indicator = container.querySelector('[data-status]');
-    const statusText = indicator?.querySelector('.status-text');
-    const weatherEl = container.querySelector('[data-weather]');
-    const delaysEl = container.querySelector('[data-delays]');
-
-    if (!status) {
-      indicator?.setAttribute('data-status', 'error');
-      if (statusText) statusText.textContent = 'Unavailable';
-      return;
-    }
-
-    // Update status indicator
-    if (status.Delay) {
-      indicator?.setAttribute('data-status', 'delay');
-      if (statusText) {
-        statusText.textContent =
-          status.DelayCount === 1 ? '1 delay' : `${status.DelayCount} delays`;
-      }
-    } else {
-      indicator?.setAttribute('data-status', 'ok');
-      if (statusText) statusText.textContent = 'No delays';
-    }
-
-    // Update weather using safe DOM methods
-    if (weatherEl && status.Weather) {
-      // Clear existing content
-      weatherEl.textContent = '';
-
-      const temp = status.Weather.Temp?.[0] || '';
-      const conditions = status.Weather.Weather?.[0]?.Temp?.[0] || '';
-      const wind = status.Weather.Wind?.[0] || '';
-      const visibility = status.Weather.Visibility?.[0];
-
-      if (temp) {
-        const tempSpan = document.createElement('span');
-        tempSpan.className = 'weather-temp';
-        tempSpan.textContent = temp;
-        weatherEl.appendChild(tempSpan);
-      }
-
-      if (conditions) {
-        const condSpan = document.createElement('span');
-        condSpan.className = 'weather-conditions';
-        condSpan.textContent = conditions;
-        weatherEl.appendChild(condSpan);
-      }
-
-      if (wind && wind !== 'Calm') {
-        const windSpan = document.createElement('span');
-        windSpan.className = 'weather-wind';
-        windSpan.textContent = wind;
-        weatherEl.appendChild(windSpan);
-      }
-
-      if (visibility && visibility < 10) {
-        const visSpan = document.createElement('span');
-        visSpan.className = 'weather-visibility';
-        visSpan.textContent = `Visibility: ${visibility} mi`;
-        weatherEl.appendChild(visSpan);
-      }
-    }
-
-    // Update delays using safe DOM methods
-    if (delaysEl) {
-      // Clear existing content
-      delaysEl.textContent = '';
-
-      if (status.Delay && status.Status?.length > 0) {
-        status.Status.filter(
-          (s) => s.Reason && s.Reason !== 'No known delays for this airport'
-        ).forEach((s) => {
-          const alertDiv = document.createElement('div');
-          alertDiv.className = 'delay-alert';
-          alertDiv.textContent = s.Reason;
-          delaysEl.appendChild(alertDiv);
-        });
-      }
-    }
-  }
-
-  // Initialize all airport status components on the page
-  function initAirportStatus() {
-    document.querySelectorAll('.airport-status[data-airport]').forEach(async (el) => {
-      const code = el.getAttribute('data-airport');
-      if (!code) return;
-
-      const status = await fetchAirportStatus(code);
-      updateAirportStatusUI(el as HTMLElement, status);
-    });
-  }
-
-  // Run on page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAirportStatus);
-  } else {
-    initAirportStatus();
-  }
-
-  // Re-run when navigating (for SPA-like behavior)
-  document.addEventListener('astro:page-load', initAirportStatus);
-</script>
