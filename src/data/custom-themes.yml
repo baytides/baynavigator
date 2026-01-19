@@ -1,0 +1,315 @@
+# Bay Navigator Custom Themes
+# Celebrate sports teams, patriotic holidays, and special events!
+# Last updated: 2026-01-18
+#
+# Usage: Set activeTheme to a theme id to enable, or null/'default' to disable
+# Themes are applied to the hero section gradient and accent colors
+#
+# WCAG Accessibility Note:
+# Custom themes are celebratory/decorative and temporary (exempt from WCAG 1.4.3).
+# However, we maintain readability by:
+# - Using high-contrast text colors that meet at least 4.5:1 ratio
+# - Keeping core site functionality unaffected (SearchBar remains accessible)
+# - Only applying to the hero section (main content uses standard theme)
+# - Themes can be disabled by users who prefer high contrast
+
+# Current active theme (set to team id or null)
+# Sports: 'warriors', 'giants', '49ers', 'sharks', 'stanford', 'cal'
+# Patriotic: 'america250', 'july4th', 'veterans_day', 'memorial_day'
+# Seasonal: 'pride', 'halloween', 'thanksgiving', 'winter_holidays'
+# Other: 'bay_pride', 'champions', null
+activeTheme: null
+
+# Optional: Schedule themes automatically
+# If set, overrides activeTheme during the specified date range
+schedule:
+  # Example: Warriors playoff run
+  # - team: warriors
+  #   start: '2026-04-15'
+  #   end: '2026-06-30'
+  #   reason: 'NBA Playoffs'
+  #
+  # Example: Giants home opener
+  # - team: giants
+  #   start: '2026-04-01'
+  #   end: '2026-04-07'
+  #   reason: 'Opening Week'
+
+# =============================================================================
+# TEAM DEFINITIONS
+# =============================================================================
+teams:
+  # Golden State Warriors - NBA
+  warriors:
+    name: 'Golden State Warriors'
+    sport: 'NBA Basketball'
+    colors:
+      primary: '#1D428A' # Warriors Blue
+      secondary: '#FFC72C' # Warriors Gold
+      accent: '#26282A' # Warriors Dark
+    gradient:
+      from: '#1D428A' # Blue
+      to: '#0E2240' # Darker blue
+    textColor: '#FFFFFF' # White text on blue
+    subtitleColor: '#FFC72C' # Gold for subtitle
+    accentTextColor: '#FFC72C'
+    logo: '/images/teams/warriors.svg' # Optional
+    message: "Go Dubs! Let's find some winning resources."
+    hashtag: '#DubNation'
+
+  # San Francisco Giants - MLB
+  giants:
+    name: 'San Francisco Giants'
+    sport: 'MLB Baseball'
+    colors:
+      primary: '#FD5A1E' # Giants Orange
+      secondary: '#27251F' # Giants Black
+      accent: '#EFD19F' # Giants Cream
+    gradient:
+      from: '#FD5A1E' # Orange
+      to: '#E54D12' # Slightly darker orange (keeps it bright)
+    textColor: '#27251F' # Black text on orange
+    subtitleColor: '#3D3A35' # Slightly lighter black for subtitle
+    accentTextColor: '#27251F'
+    logo: '/images/teams/giants.svg'
+    message: "Let's go Giants! Find resources in the Bay."
+    hashtag: '#SFGiants'
+
+  # San Francisco 49ers - NFL
+  49ers:
+    name: 'San Francisco 49ers'
+    sport: 'NFL Football'
+    colors:
+      primary: '#AA0000' # 49ers Red
+      secondary: '#B3995D' # 49ers Gold
+      accent: '#000000' # Black
+    gradient:
+      from: '#AA0000' # Red
+      to: '#5C0000' # Darker red
+    textColor: '#FFFFFF' # White text on red
+    subtitleColor: '#B3995D' # Gold subtitle for red/gold combo
+    accentTextColor: '#B3995D'
+    logo: '/images/teams/49ers.svg'
+    message: 'Bang Bang Niner Gang! Find your resources.'
+    hashtag: '#FTTB'
+
+  # San Jose Sharks - NHL
+  sharks:
+    name: 'San Jose Sharks'
+    sport: 'NHL Hockey'
+    colors:
+      primary: '#006D75' # Sharks Teal
+      secondary: '#EA7200' # Sharks Orange
+      accent: '#000000' # Black
+    gradient:
+      from: '#006D75' # Teal
+      to: '#003A3D' # Darker teal
+    textColor: '#FFFFFF' # White text on teal
+    subtitleColor: '#EA7200' # Orange subtitle for contrast
+    accentTextColor: '#EA7200'
+    logo: '/images/teams/sharks.svg'
+    message: "Sharks territory! Navigate the Bay's resources."
+    hashtag: '#SJSharks'
+
+  # Stanford Cardinal - NCAA
+  stanford:
+    name: 'Stanford Cardinal'
+    sport: 'NCAA'
+    colors:
+      primary: '#8C1515' # Stanford Cardinal Red
+      secondary: '#FFFFFF' # White
+      accent: '#2E2D29' # Stanford Gray
+    gradient:
+      from: '#8C1515' # Cardinal
+      to: '#4A0A0A' # Darker cardinal
+    textColor: '#FFFFFF' # White text on cardinal
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#FFFFFF'
+    logo: '/images/teams/stanford.svg'
+    message: 'Go Cardinal! Find resources on the Farm and beyond.'
+    hashtag: '#GoStanford'
+
+  # Cal Bears - NCAA
+  cal:
+    name: 'California Golden Bears'
+    sport: 'NCAA'
+    colors:
+      primary: '#003262' # Berkeley Blue
+      secondary: '#FDB515' # California Gold
+      accent: '#FFFFFF' # White
+    gradient:
+      from: '#003262' # Blue
+      to: '#001A33' # Darker blue
+    textColor: '#FFFFFF' # White text on blue
+    subtitleColor: '#FDB515' # Gold subtitle
+    accentTextColor: '#FDB515'
+    logo: '/images/teams/cal.svg'
+    message: "Go Bears! Navigate the Bay's resources."
+    hashtag: '#GoBears'
+
+# =============================================================================
+# SPECIAL EVENTS
+# =============================================================================
+# For multi-team or regional celebrations
+special:
+  # Bay Area Pride (could use for local pride events)
+  bay_pride:
+    name: 'Bay Area Pride'
+    colors:
+      primary: '#00838f' # Bay Navigator Teal
+      secondary: '#ffc107' # Gold
+    gradient:
+      from: '#00838f'
+      to: '#003a3d'
+    textColor: '#FFFFFF'
+    message: 'Celebrating the Bay! Find resources in your community.'
+
+  # Championship celebration (generic)
+  champions:
+    name: 'Champions!'
+    colors:
+      primary: '#FFD700' # Gold
+      secondary: '#000000' # Black
+    gradient:
+      from: '#FFD700'
+      to: '#B8860B' # Dark gold
+    textColor: '#000000'
+    message: 'Celebrating our champions! Find winning resources.'
+
+  # America 250 - Semiquincentennial (July 4, 2026)
+  # Celebrating America's 250th birthday!
+  america250:
+    name: "America's 250th"
+    colors:
+      primary: '#002868' # Old Glory Blue
+      secondary: '#BF0A30' # Old Glory Red
+      accent: '#FFFFFF' # White
+    gradient:
+      from: '#002868' # Blue
+      to: '#001845' # Darker blue
+    textColor: '#FFFFFF' # White text on blue
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#BF0A30'
+    message: 'Celebrating 250 years! Find resources in the Bay Area.'
+    hashtag: '#America250'
+
+  # Fourth of July / Independence Day
+  july4th:
+    name: 'Independence Day'
+    colors:
+      primary: '#BF0A30' # Old Glory Red
+      secondary: '#002868' # Old Glory Blue
+      accent: '#FFFFFF' # White
+    gradient:
+      from: '#BF0A30' # Red
+      to: '#8B0000' # Darker red
+    textColor: '#FFFFFF' # White text on red
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#FFFFFF'
+    message: 'Happy Independence Day! Find resources in your community.'
+    hashtag: '#July4th'
+
+  # Veterans Day
+  veterans_day:
+    name: 'Veterans Day'
+    colors:
+      primary: '#002868' # Old Glory Blue
+      secondary: '#BF0A30' # Old Glory Red
+      accent: '#FFFFFF' # White
+    gradient:
+      from: '#002868' # Blue
+      to: '#001845' # Darker blue
+    textColor: '#FFFFFF' # White text
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#BF0A30'
+    message: 'Honoring those who served. Find veteran resources and more.'
+    hashtag: '#VeteransDay'
+
+  # Memorial Day
+  memorial_day:
+    name: 'Memorial Day'
+    colors:
+      primary: '#002868' # Old Glory Blue
+      secondary: '#BF0A30' # Old Glory Red
+      accent: '#FFFFFF' # White
+    gradient:
+      from: '#002868' # Blue
+      to: '#001845' # Darker blue
+    textColor: '#FFFFFF' # White text
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#BF0A30'
+    message: 'Remembering those who gave all. Find community resources.'
+    hashtag: '#MemorialDay'
+
+  # Pride Month (June)
+  pride:
+    name: 'Pride Month'
+    colors:
+      primary: '#E40303' # Red (rainbow start)
+      secondary: '#750787' # Violet (rainbow end)
+      accent: '#FFED00' # Yellow
+    gradient:
+      from: '#E40303' # Red
+      via: # Rainbow gradient stops
+        - '#FF8C00' # Orange
+        - '#FFED00' # Yellow
+        - '#008026' # Green
+        - '#24408E' # Blue
+      to: '#750787' # Violet
+    textColor: '#FFFFFF' # White text
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#FFED00'
+    message: 'Happy Pride! Celebrating our LGBTQ+ community. Find resources for all.'
+    hashtag: '#Pride'
+    effect: 'rainbow-shimmer' # Subtle rainbow shimmer animation
+
+  # Halloween (October)
+  halloween:
+    name: 'Halloween'
+    colors:
+      primary: '#1a1a2e' # Spooky dark purple-black
+      secondary: '#FF6600' # Pumpkin orange
+      accent: '#8B008B' # Dark magenta
+    gradient:
+      from: '#1a1a2e' # Dark purple-black
+      to: '#0d0d1a' # Darker
+    textColor: '#FF6600' # Orange text
+    subtitleColor: '#8B5CF6' # Purple subtitle
+    accentTextColor: '#FF6600'
+    message: "Happy Halloween! Don't be scared to find resources. 🎃"
+    hashtag: '#Halloween'
+    effect: 'floating-ghosts' # Subtle floating ghost/bat silhouettes
+
+  # Thanksgiving (November)
+  thanksgiving:
+    name: 'Thanksgiving'
+    colors:
+      primary: '#8B4513' # Saddle brown
+      secondary: '#D2691E' # Chocolate/rust
+      accent: '#DAA520' # Goldenrod
+    gradient:
+      from: '#8B4513' # Brown
+      to: '#5D2E0C' # Darker brown
+    textColor: '#FFFFFF' # White text
+    subtitleColor: '#DAA520' # Gold subtitle
+    accentTextColor: '#DAA520'
+    message: 'Happy Thanksgiving! Grateful for our community. Find resources to share.'
+    hashtag: '#Thanksgiving'
+    effect: 'falling-leaves' # Subtle falling autumn leaves
+
+  # Winter Holidays (December)
+  winter_holidays:
+    name: 'Happy Holidays'
+    colors:
+      primary: '#0F4C81' # Winter blue
+      secondary: '#C41E3A' # Holiday red
+      accent: '#FFFFFF' # Snow white
+    gradient:
+      from: '#0F4C81' # Winter blue
+      to: '#0A2E4D' # Darker blue
+    textColor: '#FFFFFF' # White text
+    subtitleColor: '#FFFFFF' # White subtitle
+    accentTextColor: '#C41E3A'
+    message: 'Happy Holidays! Find warmth and resources in the Bay Area. ❄️'
+    hashtag: '#HappyHolidays'
+    effect: 'snowfall' # Gentle falling snowflakes

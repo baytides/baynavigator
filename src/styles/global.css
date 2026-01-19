@@ -14,6 +14,13 @@
   --text-line-height: 1.6;
   --text-letter-spacing: 0em;
   --text-word-spacing: 0em;
+
+  /* Team Theme Variables (default: BayNavigator teal) */
+  --theme-gradient-from: #005a5f;
+  --theme-gradient-to: #003a3d;
+  --theme-text-color: #ffffff;
+  --theme-subtitle-color: #b2ebf2;
+  --theme-accent-color: #ffc107;
 }
 
 /* Apply text customization to main content */
@@ -326,9 +333,206 @@ main h6 {
     @apply py-12 md:py-16;
   }
 
-  /* Hero section */
+  /* Hero section - supports team theming via CSS variables */
   .hero {
-    @apply bg-gradient-to-br from-primary-700 to-primary-900 text-white py-16 md:py-24;
+    @apply py-16 md:py-24;
+    background: linear-gradient(
+      to bottom right,
+      var(--theme-gradient-from),
+      var(--theme-gradient-to)
+    );
+    color: var(--theme-text-color);
+  }
+
+  .hero-subtitle {
+    color: var(--theme-subtitle-color);
+  }
+
+  /* ==========================================================================
+     Theme Effects - Seasonal animations for special themes
+     ========================================================================== */
+
+  /* Base effect container - creates overlay for particles */
+  .hero[data-theme-effect]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero[data-theme-effect] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero[data-theme-effect] > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Pride Month - Rainbow shimmer effect */
+  .hero[data-theme-effect='rainbow-shimmer'] {
+    background: linear-gradient(
+      135deg,
+      #e40303 0%,
+      #ff8c00 16.67%,
+      #ffed00 33.33%,
+      #008026 50%,
+      #24408e 66.67%,
+      #750787 83.33%,
+      #e40303 100%
+    );
+    background-size: 400% 400%;
+    animation: rainbow-shift 8s ease infinite;
+  }
+
+  @keyframes rainbow-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Halloween - Floating ghosts/bats */
+  .hero[data-theme-effect='floating-ghosts']::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff10'%3E%3Cpath d='M12 2C8.5 2 6 4.5 6 8c0 1.5.5 3 1.5 4L6 22l3-2 3 2 3-2 3 2-1.5-10c1-1 1.5-2.5 1.5-4 0-3.5-2.5-6-6-6zm-2 7a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff660015'%3E%3Cpath d='M12 4C6 4 2 8 2 12c2 0 3-1 4-1s2 1 4 1 3-1 4-1 2 1 4 1 3-1 4-1c0-4-4-8-10-8zm-4 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm8 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3z'/%3E%3C/svg%3E");
+    background-size:
+      40px 40px,
+      50px 50px;
+    background-position:
+      10% 20%,
+      80% 60%;
+    animation: float-ghosts 15s ease-in-out infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes float-ghosts {
+    0%,
+    100% {
+      background-position:
+        10% 20%,
+        80% 60%;
+      transform: translateY(0);
+    }
+    25% {
+      background-position:
+        30% 40%,
+        60% 30%;
+      transform: translateY(-10px);
+    }
+    50% {
+      background-position:
+        50% 10%,
+        40% 70%;
+      transform: translateY(-5px);
+    }
+    75% {
+      background-position:
+        70% 50%,
+        20% 40%;
+      transform: translateY(-15px);
+    }
+  }
+
+  /* Thanksgiving - Falling leaves */
+  .hero[data-theme-effect='falling-leaves']::before {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DAA52030'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D2691E25'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B451320'%3E%3Cpath d='M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L7 19.27l1.29 2.73 1.89-.66c-.18-4.17 1.68-8.17 5.82-10.34V13l4-5-4-5v5z'/%3E%3C/svg%3E");
+    background-size:
+      30px 30px,
+      25px 25px,
+      35px 35px;
+    animation: fall-leaves 12s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes fall-leaves {
+    0% {
+      background-position:
+        0% -10%,
+        50% -20%,
+        100% -5%;
+      transform: rotate(0deg);
+    }
+    100% {
+      background-position:
+        20% 110%,
+        70% 120%,
+        40% 115%;
+      transform: rotate(15deg);
+    }
+  }
+
+  /* Winter Holidays - Snowfall */
+  .hero[data-theme-effect='snowfall']::before {
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 40% 70%, white, transparent),
+      radial-gradient(1px 1px at 50% 20%, white, transparent),
+      radial-gradient(2px 2px at 60% 50%, white, transparent),
+      radial-gradient(1px 1px at 70% 80%, white, transparent),
+      radial-gradient(2px 2px at 80% 10%, white, transparent),
+      radial-gradient(1px 1px at 90% 40%, white, transparent),
+      radial-gradient(2px 2px at 10% 60%, white, transparent),
+      radial-gradient(1px 1px at 30% 90%, white, transparent),
+      radial-gradient(2px 2px at 85% 70%, white, transparent);
+    background-size: 200px 200px;
+    animation: snowfall 10s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes snowfall {
+    0% {
+      background-position:
+        0px 0px,
+        50px 0px,
+        100px 0px,
+        150px 0px,
+        200px 0px,
+        0px 0px,
+        50px 0px,
+        100px 0px,
+        150px 0px,
+        200px 0px;
+    }
+    100% {
+      background-position:
+        20px 200px,
+        70px 200px,
+        90px 200px,
+        180px 200px,
+        160px 200px,
+        40px 200px,
+        110px 200px,
+        130px 200px,
+        60px 200px,
+        190px 200px;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .hero[data-theme-effect='rainbow-shimmer'] {
+      animation: none;
+      background-size: 100% 100%;
+    }
+    .hero[data-theme-effect='floating-ghosts']::before,
+    .hero[data-theme-effect='falling-leaves']::before,
+    .hero[data-theme-effect='snowfall']::before {
+      animation: none;
+      opacity: 0.3;
+    }
   }
 
   /* Category badge */

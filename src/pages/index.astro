@@ -6,6 +6,38 @@ import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Load custom theme configuration (sports teams, patriotic, special events)
+const customThemeFile = path.join(process.cwd(), 'src/data/custom-themes.yml');
+let activeTeamTheme: any = null;
+
+if (fs.existsSync(customThemeFile)) {
+  const themeData = yaml.load(fs.readFileSync(customThemeFile, 'utf8')) as any;
+
+  // Check for scheduled themes first
+  const today = new Date().toISOString().split('T')[0];
+  let activeThemeId = themeData.activeTheme;
+
+  if (themeData.schedule && Array.isArray(themeData.schedule)) {
+    for (const scheduled of themeData.schedule) {
+      if (scheduled.start <= today && today <= scheduled.end) {
+        activeThemeId = scheduled.team;
+        break;
+      }
+    }
+  }
+
+  // Get the theme data if active - check both teams and special sections
+  if (activeThemeId && activeThemeId !== 'default') {
+    const themeSource = themeData.teams?.[activeThemeId] || themeData.special?.[activeThemeId];
+    if (themeSource) {
+      activeTeamTheme = {
+        id: activeThemeId,
+        ...themeSource,
+      };
+    }
+  }
+}
+
 // Load all programs for search (hidden by default, shown on search)
 const dataDir = path.join(process.cwd(), 'src/data');
 const NON_PROGRAM_FILES = [
@@ -20,6 +52,8 @@ const NON_PROGRAM_FILES = [
   'bay-area-jurisdictions.yml',
   'city-profiles.yml',
   'helplines.yml',
+  'custom-themes.yml',
+  'chat-messages.yml',
 ];
 
 // Load suppressed programs
@@ -72,13 +106,30 @@ for (const file of files) {
   title="Home"
   description="Find free and low-cost programs for food, housing, healthcare, utilities, and more across the San Francisco Bay Area."
 >
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- Hero Section - supports team themes via CSS variables -->
+  <section
+    class="hero"
+    style={activeTeamTheme
+      ? `--theme-gradient-from: ${activeTeamTheme.gradient.from}; --theme-gradient-to: ${activeTeamTheme.gradient.to}; --theme-text-color: ${activeTeamTheme.textColor}; --theme-subtitle-color: ${activeTeamTheme.subtitleColor || activeTeamTheme.textColor};${activeTeamTheme.gradient.via ? ` --theme-gradient-via: ${activeTeamTheme.gradient.via.join(', ')};` : ''}`
+      : undefined}
+    data-team-theme={activeTeamTheme?.id || null}
+    data-theme-effect={activeTeamTheme?.effect || null}
+  >
     <div class="container-page text-center">
+      {
+        activeTeamTheme && (
+          <p
+            class="text-sm mb-4 opacity-90"
+            style={`color: ${activeTeamTheme.subtitleColor || activeTeamTheme.textColor}`}
+          >
+            {activeTeamTheme.hashtag} &bull; {activeTeamTheme.name}
+          </p>
+        )
+      }
       <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="home.heroTitle">
         Find programs, services, and resources in the San Francisco Bay Area
       </h1>
-      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto" data-i18n="home.heroSubtitle">
+      <p class="text-xl hero-subtitle mb-8 max-w-2xl mx-auto" data-i18n="home.heroSubtitle">
         Discover free and low-cost resources for food, housing, healthcare, utilities, and more.
       </p>
       <div class="max-w-2xl mx-auto">

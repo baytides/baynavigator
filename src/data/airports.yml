@@ -27,6 +27,9 @@ airports:
       bart_station: San Francisco International Airport
       caltrain: false
       shuttle: AirTrain (free)
+    wifi:
+      ssid: '#SFO FREE WIFI'
+      # Open network, no password required
     coordinates:
       lat: 37.6213
       lng: -122.379
@@ -52,6 +55,9 @@ airports:
       bart_station: Oakland International Airport
       caltrain: false
       shuttle: BART Connector (free)
+    wifi:
+      ssid: 'OAK Free WiFi'
+      # Open network, no password required
     coordinates:
       lat: 37.7126
       lng: -122.2197
@@ -82,6 +88,9 @@ airports:
         - 'Route 60'
       caltrain: false
       shuttle: Free Airport Shuttle to Metro/Airport Light Rail
+    wifi:
+      ssid: 'sjcfreewifi'
+      # Open network, no password required
     coordinates:
       lat: 37.3639
       lng: -121.9289

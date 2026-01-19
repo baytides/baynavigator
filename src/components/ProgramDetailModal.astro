@@ -384,6 +384,13 @@
 </style>
 
 <script>
+  interface AmenityData {
+    name: string;
+    link?: string;
+    ssid?: string;
+    password?: string;
+  }
+
   interface ProgramData {
     id: string;
     name: string;
@@ -398,9 +405,28 @@
     link?: string;
     linkText?: string;
     feeInfo?: string;
-    amenities?: string[];
+    amenities?: AmenityData[];
     verifiedBy?: string;
     verifiedDate?: string;
+  }
+
+  // Generate WiFi URL from SSID and optional password
+  function generateWifiUrl(ssid: string, password?: string): string {
+    const encodedSsid = encodeURIComponent(ssid);
+    if (password) {
+      const encodedPassword = encodeURIComponent(password);
+      return `wifi://:${encodedPassword}@${encodedSsid}`;
+    }
+    return `wifi://${encodedSsid}`;
+  }
+
+  // Check if amenity is a WiFi amenity
+  function isWifiAmenity(amenity: AmenityData): boolean {
+    return (
+      !!amenity.ssid ||
+      amenity.name.toLowerCase().includes('wifi') ||
+      amenity.name.toLowerCase().includes('wi-fi')
+    );
   }
 
   const modal = document.getElementById('program-detail-modal') as HTMLDialogElement | null;
@@ -502,13 +528,58 @@
     const amenitiesSection = document.getElementById('modal-amenities-section');
     const amenitiesContainer = document.getElementById('modal-amenities');
     if (program.amenities && program.amenities.length > 0 && amenitiesContainer) {
-      amenitiesContainer.textContent = '';
+      // Clear container safely
+      while (amenitiesContainer.firstChild) {
+        amenitiesContainer.removeChild(amenitiesContainer.firstChild);
+      }
       program.amenities.forEach((amenity) => {
-        const span = document.createElement('span');
-        span.className =
-          'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200';
-        span.textContent = amenity;
-        amenitiesContainer.appendChild(span);
+        const hasWifi = isWifiAmenity(amenity);
+        const wifiUrl = amenity.ssid ? generateWifiUrl(amenity.ssid, amenity.password) : null;
+        const href = wifiUrl || amenity.link;
+
+        // Create WiFi icon SVG element
+        const createWifiIcon = (): SVGSVGElement => {
+          const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('class', 'w-3.5 h-3.5');
+          svg.setAttribute('fill', 'currentColor');
+          svg.setAttribute('viewBox', '0 0 24 24');
+          svg.setAttribute('aria-hidden', 'true');
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute(
+            'd',
+            'M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3c2.7-2.7 7.1-2.7 9.8 0l1.4-1.4c-3.5-3.5-9.1-3.5-12.6 0l1.4 1.4zm-2.8-2.8c4.3-4.3 11.2-4.3 15.4 0l1.4-1.4c-5-5-13.2-5-18.2 0l1.4 1.4zM1.5 10c5.8-5.8 15.2-5.8 21 0l1.4-1.4c-6.6-6.6-17.2-6.6-23.8 0L1.5 10z'
+          );
+          svg.appendChild(path);
+          return svg;
+        };
+
+        if (href) {
+          const link = document.createElement('a');
+          link.href = href;
+          if (!wifiUrl) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          }
+          link.className =
+            'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-600';
+          link.title = wifiUrl ? `Connect to WiFi: ${amenity.ssid}` : amenity.name;
+
+          if (hasWifi) {
+            link.appendChild(createWifiIcon());
+          }
+          link.appendChild(document.createTextNode(amenity.name));
+          amenitiesContainer.appendChild(link);
+        } else {
+          const span = document.createElement('span');
+          span.className =
+            'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200';
+
+          if (hasWifi) {
+            span.appendChild(createWifiIcon());
+          }
+          span.appendChild(document.createTextNode(amenity.name));
+          amenitiesContainer.appendChild(span);
+        }
       });
       amenitiesSection?.classList.remove('hidden');
     } else {
