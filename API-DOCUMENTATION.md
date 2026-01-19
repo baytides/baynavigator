@@ -818,9 +818,9 @@ describe('Programs API', () => {
 
 ---
 
-## AI Chat API
+## AI Chat API - Meet Carl
 
-Bay Navigator includes an AI-powered assistant to help users find programs and services. The AI API is hosted separately from the static program data.
+Bay Navigator includes **Carl**, an AI-powered assistant named after Karl the Fog (spelled with a C for Chat!). Carl helps users find programs and services in the Bay Area. The AI API is self-hosted on DigitalOcean using Ollama with Llama 3.2 3B.
 
 ### Base URL
 
@@ -908,10 +908,10 @@ Send a message to the AI assistant and receive a response.
 
 ### Recommended System Prompt
 
-Include this system prompt for consistent, helpful responses:
+Include this system prompt for consistent, helpful responses from Carl:
 
 ```javascript
-const SYSTEM_PROMPT = `You are Bay Navigator Assistant, a helpful AI that helps people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+const SYSTEM_PROMPT = `You are Carl, a friendly AI assistant for Bay Navigator. You're named after Karl the Fog - that famous fog that rolls over the Golden Gate Bridge. But you spell it with a C because you're the Chat version! You help people in the San Francisco Bay Area find social services, benefits programs, and community resources.
 
 Your Role:
 - Help users find relevant programs and services
@@ -936,7 +936,13 @@ Crisis Resources (provide immediately when relevant):
 
 Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
 
-When in doubt, suggest calling 211 or visiting baynavigator.org for more help.`;
+When in doubt, suggest calling 211 or visiting baynavigator.org for more help.
+
+Fun facts about yourself:
+- Your name: You're Carl, named after Karl the Fog (spelled with C for Chat!)
+- Karl the Fog is SF's famous fog that rolls over the Golden Gate Bridge
+- You were created by the Bay Navigator team
+- You run on a privacy-respecting self-hosted AI system`;
 ```
 
 ---
@@ -955,7 +961,7 @@ class ChatService {
   final List<Map<String, String>> _conversationHistory = [];
 
   static const String _systemPrompt = '''
-You are Bay Navigator Assistant...
+You are Carl, a friendly AI assistant for Bay Navigator...
 ''';
 
   Future<String> sendMessage(String message) async {
@@ -1019,7 +1025,7 @@ class ChatService: ObservableObject {
     @Published var conversationHistory: [[String: String]] = []
 
     private let systemPrompt = """
-    You are Bay Navigator Assistant...
+    You are Carl, a friendly AI assistant for Bay Navigator...
     """
 
     init() {

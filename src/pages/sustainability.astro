@@ -5,7 +5,14 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 // Calculate approximate stats
 const hostingProvider = 'Microsoft Azure';
 const cdnProvider = 'Cloudflare';
-const aiProvider = 'Cloudflare Workers AI';
+const aiProvider = 'Bay Tides Self-Hosted AI';
+
+// DigitalOcean sustainability stats (from their published data)
+const digitalOceanStats = {
+  renewableEnergy: 100, // % achieved in North American data centers
+  carbonNeutralSince: 2021,
+  waterRecycling: true,
+};
 
 // Azure sustainability stats (from Microsoft's published data)
 const azureStats = {
@@ -115,9 +122,9 @@ const githubStats = {
           </div>
           <div
             class="text-xs text-neutral-600 dark:text-neutral-300"
-            data-i18n="sustainability.smartSearchQueries"
+            data-i18n="sustainability.aiChatQueries"
           >
-            Smart Search Queries
+            AI Chat Queries
           </div>
         </div>
         <div class="bg-white/50 dark:bg-neutral-800/50 rounded-lg p-4">
@@ -218,6 +225,11 @@ const githubStats = {
           id="source-azure"
           class="bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded"
           >Azure: —</span
+        >
+        <span
+          id="source-ollama"
+          class="bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded"
+          >AI Chat: —</span
         >
       </div>
 
@@ -382,42 +394,43 @@ const githubStats = {
           </div>
         </div>
 
-        <!-- Cloudflare Workers AI -->
+        <!-- Bay Tides Self-Hosted AI (DigitalOcean) -->
         <div
           class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700"
         >
           <div class="flex items-start gap-4">
             <div
-              class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
+              class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0"
             >
-              <svg class="w-7 h-7" viewBox="0 0 32 32">
-                <path d="M8.16 23h21.177v-5.86l-4.023-2.307-.694-.3-16.46.113z" fill="#fff"></path>
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="#0080FF">
                 <path
-                  d="M22.012 22.222c.197-.675.122-1.294-.206-1.754-.3-.422-.807-.666-1.416-.694l-11.545-.15c-.075 0-.14-.038-.178-.094s-.047-.13-.028-.206c.038-.113.15-.197.272-.206l11.648-.15c1.38-.066 2.88-1.182 3.404-2.55l.666-1.735a.38.38 0 0 0 .02-.225c-.75-3.395-3.78-5.927-7.4-5.927-3.34 0-6.17 2.157-7.184 5.15-.657-.488-1.5-.75-2.392-.666-1.604.16-2.9 1.444-3.048 3.048a3.58 3.58 0 0 0 .084 1.191A4.84 4.84 0 0 0 0 22.1c0 .234.02.47.047.703.02.113.113.197.225.197H21.58a.29.29 0 0 0 .272-.206l.16-.572z"
-                  fill="#f38020"></path>
-                <path
-                  d="M25.688 14.803l-.32.01c-.075 0-.14.056-.17.13l-.45 1.566c-.197.675-.122 1.294.206 1.754.3.422.807.666 1.416.694l2.457.15c.075 0 .14.038.178.094s.047.14.028.206c-.038.113-.15.197-.272.206l-2.56.15c-1.388.066-2.88 1.182-3.404 2.55l-.188.478c-.038.094.028.188.13.188h8.797a.23.23 0 0 0 .225-.169A6.41 6.41 0 0 0 32 21.106a6.32 6.32 0 0 0-6.312-6.302"
-                  fill="#faae40"></path>
+                  d="M12.04 2C6.5 2 2 6.5 2 12.04c0 3.85 2.17 7.18 5.35 8.87v-2.72c-1.95-.97-3.29-2.98-3.29-5.3 0-3.28 2.67-5.95 5.95-5.95 2.32 0 4.33 1.34 5.3 3.29h2.72C17.22 6.07 14.74 3.7 11.66 3v-.04C11.77 2.04 11.88 2 12.04 2zm-.04 4.85c-2.84 0-5.15 2.31-5.15 5.15s2.31 5.15 5.15 5.15c2.09 0 3.89-1.25 4.69-3.04h-2.15c-.59.87-1.57 1.44-2.68 1.44-1.8 0-3.26-1.46-3.26-3.26s1.46-3.26 3.26-3.26c1.11 0 2.09.57 2.68 1.44h2.15c-.8-1.79-2.6-3.04-4.69-3.04v-.58zm0 3.41a1.74 1.74 0 100 3.48 1.74 1.74 0 000-3.48z"
+                ></path>
               </svg>
             </div>
             <div class="flex-1">
               <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Cloudflare Workers AI (Smart Search)
+                Bay Tides Self-Hosted AI (DigitalOcean)
               </h3>
               <p class="text-neutral-600 dark:text-neutral-300 text-sm mb-3">
-                Our Smart Search uses Cloudflare Workers AI with the Llama 3.1 8B model, running on
-                Cloudflare's carbon-neutral edge network with 100% renewable energy.
+                Our AI Chat uses a self-hosted Ollama server running Meta's Llama 3.2 3B model on
+                DigitalOcean, which powers 100% of their North American data centers with renewable
+                energy.
               </p>
-              <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="grid grid-cols-3 gap-3 text-sm">
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
-                  <div class="font-bold text-green-900 dark:text-green-100">Net Zero</div>
-                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Since 2025</div>
+                  <div class="font-bold text-green-900 dark:text-green-100">
+                    {digitalOceanStats.renewableEnergy}%
+                  </div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Renewable (NA)</div>
                 </div>
                 <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
-                  <div class="font-bold text-green-900 dark:text-green-100">Llama 3.1 8B</div>
-                  <div class="text-xs text-neutral-600 dark:text-neutral-300">
-                    Efficient open model
-                  </div>
+                  <div class="font-bold text-green-900 dark:text-green-100">Llama 3.2 3B</div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Efficient model</div>
+                </div>
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-2 text-center">
+                  <div class="font-bold text-green-900 dark:text-green-100">Self-Hosted</div>
+                  <div class="text-xs text-neutral-600 dark:text-neutral-300">Full control</div>
                 </div>
               </div>
             </div>
@@ -912,6 +925,24 @@ const githubStats = {
               Cloudflare Impact Report
             </a>
           </li>
+          <li>
+            <a
+              href="https://www.digitalocean.com/about/sustainability"
+              target="_blank"
+              rel="noopener"
+              class="text-primary-700 dark:text-primary-300 hover:underline flex items-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                ></path></svg
+              >
+              DigitalOcean Sustainability
+            </a>
+          </li>
         </ul>
       </div>
     </section>
@@ -978,7 +1009,7 @@ const githubStats = {
             data.usage.cdnRequests != null ? formatNumber(data.usage.cdnRequests) : '—';
         if (statAiQueries)
           statAiQueries.textContent =
-            data.usage.aiQueries != null ? formatNumber(data.usage.aiQueries) : '—';
+            data.usage.aiChatQueries != null ? formatNumber(data.usage.aiChatQueries) : '—';
         if (statCiRuns)
           statCiRuns.textContent =
             data.usage.ciRuns != null ? formatNumber(data.usage.ciRuns) : '—';
@@ -1001,11 +1032,9 @@ const githubStats = {
 
         if (breakdownCdn) breakdownCdn.textContent = `CDN: ${data.emissionsBySource.cdn.grams}g`;
         // Combine both AI services for the breakdown display
-        const smartSearchGrams = parseFloat(
-          data.emissionsBySource.smartSearch?.grams || data.emissionsBySource.ai?.grams || '0'
-        );
-        const simpleLangGrams = parseFloat(data.emissionsBySource.simpleLang?.grams || '0');
-        const totalAiGrams = (smartSearchGrams + simpleLangGrams).toFixed(1);
+        const aiChatGrams = parseFloat(data.emissionsBySource.aiChat?.grams || '0');
+        const simpleLangGrams = parseFloat(data.emissionsBySource.ai?.grams || '0');
+        const totalAiGrams = (aiChatGrams + simpleLangGrams).toFixed(1);
         if (breakdownAi) breakdownAi.textContent = `AI: ${totalAiGrams}g`;
         if (breakdownCi) breakdownCi.textContent = `CI/CD: ${data.emissionsBySource.ci.grams}g`;
 
@@ -1013,6 +1042,7 @@ const githubStats = {
         const sourceCloudflare = document.getElementById('source-cloudflare');
         const sourceGithub = document.getElementById('source-github');
         const sourceAzure = document.getElementById('source-azure');
+        const sourceOllama = document.getElementById('source-ollama');
 
         const liveClass =
           'bg-green-100 dark:bg-green-900/50 text-green-900 dark:text-green-100 px-2 py-0.5 rounded';
@@ -1038,6 +1068,10 @@ const githubStats = {
         if (sourceAzure) {
           sourceAzure.textContent = `Azure: ${data.dataFreshness.azure}`;
           sourceAzure.className = getStatusClass(data.dataFreshness.azure);
+        }
+        if (sourceOllama) {
+          sourceOllama.textContent = `AI Chat: ${data.dataFreshness.ollama || 'unavailable'}`;
+          sourceOllama.className = getStatusClass(data.dataFreshness.ollama || 'unavailable');
         }
 
         // Update equivalents

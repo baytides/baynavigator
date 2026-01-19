@@ -34,10 +34,17 @@ const PROVIDER_STATS = {
     carbonNeutralSince: 2019,
     renewableEnergy: 100,
   },
+  digitalOcean: {
+    name: 'DigitalOcean',
+    renewableEnergy: 100, // North American data centers
+    carbonNeutralSince: 2021,
+    note: 'Powers Bay Tides AI Chat (Ollama/Llama 3.2 3B)',
+  },
   azureOpenAI: {
     name: 'Azure OpenAI',
     model: 'GPT-4o-mini',
     carbonNeutral: true,
+    note: 'Used only for Simple Language accessibility feature',
   },
 };
 
@@ -161,6 +168,28 @@ async function getGitHubStats() {
   }
 }
 
+async function getOllamaStats() {
+  try {
+    const response = await fetch('https://ai.baytides.org/stats');
+    if (!response.ok) {
+      console.log('Ollama stats API error:', response.status);
+      return null;
+    }
+    const data = await response.json();
+    return {
+      totalChats: data.totalChats || 0,
+      chatsToday: data.chatsToday || 0,
+      chatsThisMonth: data.chatsThisMonth || 0,
+      model: data.model || 'llama3.2:3b',
+      provider: data.provider || 'DigitalOcean',
+      source: 'ollama_stats_api',
+    };
+  } catch (error) {
+    console.error('Ollama stats fetch error:', error.message);
+    return null;
+  }
+}
+
 async function getAzureStats() {
   // Check if Azure CLI is available and logged in
   try {
@@ -223,10 +252,11 @@ async function getAzureStats() {
 async function main() {
   console.log('Fetching carbon stats...');
 
-  const [cloudflareStats, githubStats, azureStats] = await Promise.all([
+  const [cloudflareStats, githubStats, azureStats, ollamaStats] = await Promise.all([
     getCloudflareStats(),
     getGitHubStats(),
     getAzureStats(),
+    getOllamaStats(),
   ]);
 
   // Use real data where available, fall back to null (no estimates)
@@ -235,6 +265,7 @@ async function main() {
     cdnBytesTransferred: cloudflareStats?.bytesTransferred ?? null,
     cdnCacheHitRate: cloudflareStats?.cacheHitRate ?? null,
     aiQueries: azureStats?.aiRequests ?? null,
+    aiChatQueries: ollamaStats?.chatsThisMonth ?? null,
     functionExecutions: azureStats?.functionExecutions ?? null,
     ciRuns: githubStats?.totalRuns ?? null,
     ciMinutes: githubStats?.estimatedMinutes ?? null,
@@ -245,12 +276,16 @@ async function main() {
     cloudflare: cloudflareStats ? 'live' : 'unavailable',
     github: githubStats ? 'live' : 'unavailable',
     azure: azureStats ? 'live' : 'unavailable',
+    ollama: ollamaStats ? 'live' : 'unavailable',
   };
 
   // Calculate emissions (use 0 if data unavailable)
+  // Note: AI Chat uses smaller model (3B vs 8B), so lower emissions factor
+  const AI_CHAT_QUERY_GRAMS = 0.8; // Llama 3.2 3B is more efficient than GPT-4o-mini
   const grossEmissions = {
     cdn: (usage.cdnRequests || 0) * CARBON_FACTORS.cdnRequestGrams,
     ai: (usage.aiQueries || 0) * CARBON_FACTORS.aiQueryGrams,
+    aiChat: (usage.aiChatQueries || 0) * AI_CHAT_QUERY_GRAMS,
     ci: (usage.ciMinutes || 0) * CARBON_FACTORS.ciMinuteGrams,
   };
 
@@ -283,6 +318,13 @@ async function main() {
         grams: grossEmissions.ai.toFixed(1),
         percent:
           totalGrossGrams > 0 ? ((grossEmissions.ai / totalGrossGrams) * 100).toFixed(1) : '0',
+        note: 'Azure OpenAI (Simple Language)',
+      },
+      aiChat: {
+        grams: grossEmissions.aiChat.toFixed(1),
+        percent:
+          totalGrossGrams > 0 ? ((grossEmissions.aiChat / totalGrossGrams) * 100).toFixed(1) : '0',
+        note: 'Bay Tides AI Chat (Ollama)',
       },
       ci: {
         grams: grossEmissions.ci.toFixed(1),
@@ -306,6 +348,8 @@ async function main() {
       'Azure has been carbon neutral since 2012',
       'GitHub Actions runners are powered by renewable energy',
       'Cloudflare operates a carbon-neutral network',
+      'DigitalOcean powers 100% of NA data centers with renewable energy',
+      'Bay Tides AI Chat logs are anonymized - no IP addresses stored',
       'Usage data is updated daily via GitHub Actions',
     ],
   };
@@ -324,8 +368,9 @@ async function main() {
   console.log(`- Cloudflare: ${dataSources.cloudflare} (${usage.cdnRequests ?? 'N/A'} requests)`);
   console.log(`- GitHub: ${dataSources.github} (${usage.ciRuns ?? 'N/A'} runs)`);
   console.log(
-    `- Azure: ${dataSources.azure} (${usage.aiQueries ?? 'N/A'} AI queries, ${usage.functionExecutions ?? 'N/A'} function executions)`
+    `- Azure: ${dataSources.azure} (${usage.aiQueries ?? 'N/A'} Simple Language queries, ${usage.functionExecutions ?? 'N/A'} function executions)`
   );
+  console.log(`- Ollama: ${dataSources.ollama} (${usage.aiChatQueries ?? 'N/A'} AI Chat queries)`);
   console.log(`- Total gross emissions: ${stats.summary.totalGrossEmissionsKg} kg CO₂e`);
 }
 

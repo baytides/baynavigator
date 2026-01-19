@@ -1,55 +1,48 @@
 {
-  "generated": "2026-01-19T06:14:02.732Z",
+  "generated": "2026-01-19T09:44:46.859Z",
   "period": "last_30_days",
   "dataFreshness": {
-    "cloudflare": "live",
-    "github": "live",
-    "azure": "live"
+    "cloudflare": "unavailable",
+    "github": "unavailable",
+    "azure": "live",
+    "ollama": "live"
   },
   "summary": {
-    "totalGrossEmissionsKg": "0.095",
+    "totalGrossEmissionsKg": "0.013",
     "renewableEnergyPercent": 100,
     "netEmissionsKg": "0.000",
     "greenRating": "A+",
     "carbonNeutral": true
   },
   "usage": {
-    "cdnRequests": 12090,
-    "cdnBytesTransferred": 318839736,
-    "cdnCacheHitRate": "49.7",
+    "cdnRequests": null,
+    "cdnBytesTransferred": null,
+    "cdnCacheHitRate": null,
     "aiQueries": 9,
-    "functionExecutions": 1107,
-    "ciRuns": 100,
-    "ciMinutes": 200,
-    "ciWorkflows": {
-      "Update Carbon Stats": 3,
-      "Update PMTiles Map Data": 2,
-      "OSV-Scanner Scheduled": 13,
-      "Carbon Footprint Tracking": 25,
-      "CodeQL Security Analysis": 13,
-      "Lighthouse CI": 12,
-      "CI": 12,
-      "Deploy Website (Azure)": 12,
-      "Deploy Web App": 2,
-      "Test": 2,
-      "Translate i18n Files": 1,
-      "Sync NPS Parks Data": 1,
-      "Sync GitHub IPs to Storage": 1,
-      "Update Simple Language": 1
-    }
+    "aiChatQueries": 0,
+    "functionExecutions": 1108,
+    "ciRuns": null,
+    "ciMinutes": null,
+    "ciWorkflows": null
   },
   "emissionsBySource": {
     "cdn": {
-      "grams": "1.2",
-      "percent": "1.3"
+      "grams": "0.0",
+      "percent": "0.0"
     },
     "ai": {
       "grams": "13.5",
-      "percent": "14.3"
+      "percent": "100.0",
+      "note": "Azure OpenAI (Simple Language)"
+    },
+    "aiChat": {
+      "grams": "0.0",
+      "percent": "0.0",
+      "note": "Bay Tides AI Chat (Ollama)"
     },
     "ci": {
-      "grams": "80.0",
-      "percent": "84.5"
+      "grams": "0.0",
+      "percent": "0.0"
     }
   },
   "providers": {
@@ -70,10 +63,17 @@
       "carbonNeutralSince": 2019,
       "renewableEnergy": 100
     },
+    "digitalOcean": {
+      "name": "DigitalOcean",
+      "renewableEnergy": 100,
+      "carbonNeutralSince": 2021,
+      "note": "Powers Bay Tides AI Chat (Ollama/Llama 3.2 3B)"
+    },
     "azureOpenAI": {
       "name": "Azure OpenAI",
       "model": "GPT-4o-mini",
-      "carbonNeutral": true
+      "carbonNeutral": true,
+      "note": "Used only for Simple Language accessibility feature"
     }
   },
   "carbonFactors": {
@@ -85,14 +85,16 @@
   "comparison": {
     "paperFormGrams": 10,
     "drivingMileGrams": 400,
-    "equivalentMilesDriven": "0.24",
-    "equivalentPaperPages": 9
+    "equivalentMilesDriven": "0.03",
+    "equivalentPaperPages": 1
   },
   "notes": [
     "All infrastructure providers use 100% renewable energy",
     "Azure has been carbon neutral since 2012",
     "GitHub Actions runners are powered by renewable energy",
     "Cloudflare operates a carbon-neutral network",
+    "DigitalOcean powers 100% of NA data centers with renewable energy",
+    "Bay Tides AI Chat logs are anonymized - no IP addresses stored",
     "Usage data is updated daily via GitHub Actions"
   ]
 }

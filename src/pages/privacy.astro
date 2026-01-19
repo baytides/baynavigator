@@ -21,7 +21,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             Privacy Policy
           </h1>
           <p class="text-neutral-600 dark:text-neutral-300" data-i18n="privacy.lastUpdated">
-            Last updated: January 18, 2026
+            Last updated: January 19, 2026
           </p>
         </div>
 
@@ -562,37 +562,37 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   </div>
                 </div>
 
-                <!-- External Tiers (Amber) -->
+                <!-- AI Chat (Green - Self-Hosted) -->
                 <div
-                  class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3"
+                  class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3"
                 >
                   <div
-                    class="text-xs font-semibold text-amber-700 dark:text-amber-300 mb-2 flex items-center gap-1"
+                    class="text-xs font-semibold text-green-700 dark:text-green-300 mb-2 flex items-center gap-1"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        d="M5 13l4 4L19 7"></path>
                     </svg>
-                    Query Only (if needed)
+                    Self-Hosted AI (Query Only)
                   </div>
                   <div class="space-y-2">
                     <div class="bg-white dark:bg-neutral-800 rounded p-2">
                       <div class="text-xs font-medium text-neutral-800 dark:text-neutral-200">
-                        Tier 3: Cloudflare AI
+                        Tier 3: Bay Tides AI
                       </div>
                       <div class="text-xs text-neutral-500 dark:text-neutral-400">
-                        Complex queries, discarded after
+                        Self-hosted Llama 3.2, not stored
                       </div>
                     </div>
                     <div class="bg-white dark:bg-neutral-800 rounded p-2">
                       <div class="text-xs font-medium text-neutral-800 dark:text-neutral-200">
-                        Tier 4: Azure OpenAI
+                        No external AI services
                       </div>
                       <div class="text-xs text-neutral-500 dark:text-neutral-400">
-                        Fallback only, not stored
+                        Your queries never leave our servers
                       </div>
                     </div>
                   </div>
@@ -605,11 +605,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               >
                 <div class="flex items-center gap-1.5">
                   <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-                  <span>Never leaves device</span>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <span class="w-3 h-3 bg-amber-500 rounded-full"></span>
-                  <span>Query text only, then discarded</span>
+                  <span>All data stays private (on-device or Bay Tides servers)</span>
                 </div>
               </div>
             </div>
@@ -644,8 +640,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 Privacy-First Tiered Architecture
               </h4>
               <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-                To minimize data sent to external services and reduce environmental impact, Smart
-                Search uses a tiered approach:
+                To maximize privacy and minimize environmental impact, Smart Search and AI Chat use
+                a tiered approach:
               </p>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
@@ -658,76 +654,77 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                   fuzzy matching with synonym expansion. No server contact needed.
                 </li>
                 <li>
-                  <strong>Tier 3 - Cloudflare Workers AI:</strong> Complex natural language queries that
-                  can't be cached are processed by Cloudflare using Meta's Llama 3.1 model. Limited to
-                  free tier usage.
-                </li>
-                <li>
-                  <strong>Tier 4 - Azure OpenAI:</strong> If Cloudflare is unavailable, Azure GPT-4o-mini
-                  is used as a fallback, with strict daily budget limits to control costs and environmental
-                  impact.
+                  <strong>Tier 3 - Bay Tides Self-Hosted AI:</strong> Complex natural language queries
+                  and AI Chat conversations are processed by our self-hosted AI server running Meta's
+                  Llama 3.2 3B model. Your data never leaves Bay Tides infrastructure.
                 </li>
               </ul>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-4 mb-3">
-                What Data is Sent (Only for Tier 3 & 4)
+                What Data is Sent (Only for Tier 3)
               </h4>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>Query text only:</strong> Only your search query is sent. No personal identifiers,
-                  no location data, no cookies, no session information.
+                  <strong>Query text only:</strong> Only your search query or chat message is sent. No
+                  personal identifiers, no location data, no cookies, no session information.
                 </li>
                 <li>
-                  <strong>Not stored:</strong> We do not store your search queries on our servers. Queries
-                  are processed and immediately discarded.
+                  <strong>Not stored:</strong> We do not store your queries or conversations. They are
+                  processed in memory and immediately discarded after generating a response.
                 </li>
                 <li>
-                  <strong>Not for training:</strong> Neither Cloudflare nor Azure use your queries to
-                  train AI models.
+                  <strong>Not for training:</strong> Your queries are never used to train AI models. We
+                  run an open-source model (Llama 3.2) that we do not modify or retrain.
                 </li>
                 <li>
-                  <strong>Offline mode:</strong> When you're offline, AI search is automatically disabled.
+                  <strong>Self-hosted:</strong> Unlike most AI services, your data never leaves Bay Tides
+                  infrastructure. We do not use external AI providers like OpenAI, Google, or Anthropic
+                  for chat functionality.
+                </li>
+                <li>
+                  <strong>Offline mode:</strong> When you're offline, AI features are automatically disabled.
                   All searches use local fuzzy matching instead—no failed requests, no errors.
                 </li>
               </ul>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">
-                Cloudflare Workers AI Data Handling
+                Bay Tides Self-Hosted AI
               </h4>
               <p class="text-neutral-600 dark:text-neutral-300 mb-4">
-                When you use the AI-powered search, your queries are processed by <a
-                  href="https://developers.cloudflare.com/workers-ai/privacy/"
-                  class="text-primary-700 dark:text-primary-300">Cloudflare Workers AI</a
-                > using the Llama 3.1 8B model. Cloudflare provides the following guarantees:
+                Our AI Chat and Smart Search features use a self-hosted AI server operated entirely
+                by Bay Tides. This gives us complete control over your data:
               </p>
               <ul class="text-neutral-600 dark:text-neutral-300 space-y-2 mb-4 list-disc pl-5">
                 <li>
-                  <strong>Not used for training:</strong> Your prompts and responses are never used to
-                  train AI models.
+                  <strong>Self-hosted infrastructure:</strong> We run our own AI server using <a
+                    href="https://ollama.ai/"
+                    class="text-primary-700 dark:text-primary-300">Ollama</a
+                  >, an open-source AI runtime, on our own infrastructure.
                 </li>
                 <li>
-                  <strong>Not stored:</strong> Cloudflare does not log or store inference data beyond
-                  what's needed to process your request.
+                  <strong>Open source model:</strong> We use Meta's Llama 3.2 3B model, a smaller, efficient
+                  open-source model optimized for helpful responses.
                 </li>
                 <li>
-                  <strong>Open source model:</strong> Llama 3.1 is an open-source model from Meta, running
-                  on Cloudflare's infrastructure.
+                  <strong>No third-party AI services:</strong> Your conversations never pass through OpenAI,
+                  Google, Anthropic, or any other external AI provider.
                 </li>
                 <li>
-                  <strong>Privacy-first infrastructure:</strong> Cloudflare is committed to privacy and
-                  does not sell user data.
+                  <strong>Data never stored:</strong> Conversations are processed in memory and discarded
+                  immediately. We do not log queries or responses.
                 </li>
                 <li>
-                  <strong>Geographic distribution:</strong> Requests are processed at the nearest Cloudflare
-                  edge location for low latency.
+                  <strong>No training on your data:</strong> We do not fine-tune or retrain the model.
+                  Your conversations cannot influence the AI's future behavior.
+                </li>
+                <li>
+                  <strong>Encrypted in transit:</strong> All connections to our AI server use HTTPS/TLS
+                  encryption.
                 </li>
               </ul>
               <p class="text-neutral-600 dark:text-neutral-300">
-                For more details, see <a
-                  href="https://developers.cloudflare.com/workers-ai/privacy/"
-                  class="text-primary-700 dark:text-primary-300"
-                  >Cloudflare Workers AI Privacy documentation</a
-                >.
+                By self-hosting our AI, we ensure maximum privacy while still providing helpful
+                natural language assistance for finding benefits and services.
               </p>
 
               <h4 class="font-semibold text-neutral-900 dark:text-white mt-6 mb-3">

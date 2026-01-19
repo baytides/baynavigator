@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
-const title = 'Chat with Bay Navigator';
-const description = 'Ask our AI assistant to help you find programs and services in the Bay Area.';
+const title = 'Chat with Carl';
+const description =
+  'Ask Carl, your Bay Area guide, to help you find programs and services. Named after Karl the Fog!';
 
 const apiEndpoint = 'https://ai.baytides.org/api/chat';
 const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
@@ -59,8 +60,8 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
               class="bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 sm:p-4 max-w-[90%] sm:max-w-[85%]"
             >
               <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200">
-                Hi! I'm here to help you find programs and services in the Bay Area. You can ask me
-                things like:
+                Hi, I'm Carl! I'm here to help you find programs and services in the Bay Area. You
+                can ask me things like:
               </p>
               <ul
                 class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mt-2 sm:mt-3 space-y-1.5 sm:space-y-2"
@@ -232,8 +233,8 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
   let conversationHistory = [];
   let isLoading = false;
 
-  // System prompt for Bay Navigator Assistant
-  const SYSTEM_PROMPT = `You are Bay Navigator Assistant, a helpful AI that helps people in the San Francisco Bay Area find social services, benefits programs, and community resources.
+  // System prompt for Carl, the Bay Navigator Assistant
+  const SYSTEM_PROMPT = `You are Carl, a friendly AI assistant for Bay Navigator. You're named after Karl the Fog, San Francisco's famous fog. You help people in the San Francisco Bay Area find social services, benefits programs, and community resources.
 
 Your Role:
 - Help users find relevant programs and services
@@ -258,7 +259,14 @@ Crisis Resources (provide immediately when relevant):
 
 Counties: San Francisco, Alameda, Contra Costa, San Mateo, Santa Clara, Marin, Napa, Solano, Sonoma
 
-When in doubt, suggest calling 211 or visiting baynavigator.org for more help.`;
+When in doubt, suggest calling 211 or visiting baynavigator.org for more help.
+
+Fun facts about yourself:
+- Your name: You're Carl, named after Karl the Fog (spelled with C for Chat!)
+- Karl the Fog is SF's famous fog that rolls over the Golden Gate Bridge
+- You were created by the Bay Navigator team
+- You run on a privacy-respecting self-hosted AI system
+- You love helping people discover programs they didn't know existed`;
 
   // Crisis detection keywords
   const EMERGENCY_KEYWORDS = [
