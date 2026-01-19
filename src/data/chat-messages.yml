@@ -1,0 +1,446 @@
+# Smart Search Chat Messages Library
+# Consistent, friendly copy for the conversational AI interface
+# Last updated: 2026-01-18
+#
+# Note: Messages with arrays will be randomly selected for variety
+# Variables use {curly_braces} and are replaced at runtime
+# Easter eggs are sprinkled throughout - clean, respectful, Bay Area-flavored fun!
+
+# =============================================================================
+# GREETINGS & WELCOME
+# =============================================================================
+greetings:
+  initial:
+    - 'Hi! I can help you find assistance programs in the Bay Area.'
+    - 'Hello! Let me help you find resources that match your needs.'
+    - "Welcome! I'm here to help connect you with local programs and services."
+    - "Hey there! Ready to navigate the Bay Area's resources together?" # Easter egg
+
+  returning_user:
+    - 'Welcome back! How can I help you today?'
+    - 'Good to see you again. What are you looking for?'
+    - "You're back! Let's find what you need." # Easter egg
+
+# =============================================================================
+# LOCATION PROMPTS
+# =============================================================================
+location:
+  # When we need to ask for location
+  ask_initial:
+    - 'To find programs near you, what city or ZIP code are you in?'
+    - 'Where are you located? This helps me find nearby resources.'
+    - "What's your city or ZIP code? I'll find programs in your area."
+
+  ask_friendly:
+    - "First, let me know where you're located so I can find nearby resources."
+    - 'To show you the most relevant programs, what area are you in?'
+    - 'I can help! But first, what city or ZIP code should I search in?'
+
+  # When location is recognized
+  confirm:
+    - 'Got it! Searching for programs in {location}...'
+    - 'Great, looking for resources in {location}...'
+    - "Perfect! Here's what I found in {location}..."
+    - "{location}? Great choice! Let me see what's available there." # Easter egg
+
+  # When location isn't recognized
+  not_found:
+    - "I didn't recognize that location. Can you try a city name or 5-digit ZIP code?"
+    - "Hmm, I couldn't find that location. Try entering a Bay Area city or ZIP code."
+    - "I'm not sure where that is. Could you enter a city like 'Oakland' or a ZIP like '94612'?"
+
+  # Outside service area
+  outside_area:
+    - 'That location appears to be outside the Bay Area. I can still show statewide programs that might help.'
+    - 'I focus on Bay Area resources, but many California-wide programs may be available to you.'
+
+# =============================================================================
+# CATEGORY CLARIFICATION
+# =============================================================================
+clarification:
+  # When query is too vague
+  what_kind_of_help:
+    - 'What kind of help are you looking for?'
+    - 'I can help with several things. What do you need assistance with?'
+    - 'There are many programs available. What type of help do you need?'
+
+  # Specific category prompts
+  food:
+    - 'I can help you find food assistance. Are you looking for:'
+    - 'There are several food programs available:'
+
+  housing:
+    - "I can help with housing. What's your situation?"
+    - 'There are different housing programs depending on your needs:'
+
+  healthcare:
+    - 'I can help you find healthcare services. What do you need?'
+    - 'There are several health programs available:'
+
+  employment:
+    - 'I can help with employment resources. What are you looking for?'
+    - 'There are job programs for different situations:'
+
+# =============================================================================
+# SEARCH RESULTS
+# =============================================================================
+results:
+  # When programs are found
+  found_multiple:
+    - 'I found {count} programs that might help.'
+    - "Here are {count} programs that match what you're looking for."
+    - 'Good news! I found {count} relevant programs.'
+    - 'Success! {count} programs ready for you to explore.' # Easter egg
+
+  found_one:
+    - 'I found a program that might help.'
+    - "Here's a program that matches your needs."
+    - 'Found one! And it looks like a good fit.' # Easter egg
+
+  found_with_category:
+    - 'I found {count} {category} programs for you.'
+    - 'Here are {count} programs for {category} assistance.'
+
+  # When no programs found
+  none_found:
+    - "I couldn't find programs matching that specific request. Try broadening your search or browse our categories."
+    - 'No exact matches found. Would you like to try different search terms?'
+    - "I didn't find programs for that. Let me suggest some alternatives."
+
+  # Suggestions when no results
+  try_instead:
+    - 'You might try searching for:'
+    - 'Here are some related searches:'
+    - 'Consider looking for:'
+
+# =============================================================================
+# ERRORS & RECOVERY
+# =============================================================================
+errors:
+  # General errors
+  generic:
+    - 'Sorry, something went wrong. Please try again.'
+    - 'I had trouble with that request. Could you try again?'
+    - "Oops! Something didn't work right. Let's try that again."
+    - "Hit a small bump in the road. Let's give it another go!" # Easter egg
+
+  # Didn't understand
+  not_understood:
+    - "I didn't quite understand that. Could you rephrase your question?"
+    - "I'm not sure what you mean. Can you try asking in a different way?"
+    - "Sorry, I didn't catch that. Could you be more specific?"
+    - 'My circuits are a bit confused. Mind rephrasing that?' # Easter egg
+
+  # Network/offline errors
+  offline:
+    - 'You appear to be offline. Smart Search requires an internet connection.'
+    - "Can't connect right now. Please check your internet connection."
+    - 'Looks like Karl the Fog got into the WiFi. Please check your connection.' # Easter egg - SF fog reference
+
+  # Timeout
+  timeout:
+    - "That's taking longer than expected. Please try again."
+    - "The search timed out. Let's try a simpler query."
+    - "Even BART gets there eventually... but this is taking too long. Let's try again." # Easter egg - BART reference
+
+# =============================================================================
+# CONVERSATION LIMITS
+# =============================================================================
+limits:
+  # When chat limit is reached
+  limit_reached:
+    - "I've gathered enough information to help. Here are the programs I found based on our conversation."
+    - "Based on what you've told me, here are the best matching programs. You can browse the results below."
+    - 'I think I have what I need! Here are the programs that match your situation.'
+    - "Alright, I've got a good picture now! Here's what I found for you." # Easter egg
+
+  # Encouraging to browse results
+  browse_results:
+    - 'Browse the results below or start a new search.'
+    - 'Check out the programs below. Click any card for more details.'
+    - 'Take a look at these programs. You can save favorites for later.'
+    - 'The programs are ready! Like a perfectly timed Muni arrival.' # Easter egg - Muni reference
+
+# =============================================================================
+# HELPFUL PROMPTS & SUGGESTIONS
+# =============================================================================
+suggestions:
+  # When user seems stuck
+  stuck:
+    - 'Not sure where to start? Try telling me what kind of help you need.'
+    - "You can ask me things like 'I need help with rent' or 'Where can I get food assistance?'"
+    - "Try describing your situation, like 'I'm a senior looking for meal programs.'"
+
+  # Example queries to try
+  examples:
+    - 'I need help finding food'
+    - "I'm looking for rental assistance"
+    - 'Where can I apply for Medi-Cal?'
+    - "I'm a veteran who needs housing help"
+    - 'Help with utility bills'
+    - 'Free legal services near me'
+
+  # Follow-up suggestions
+  follow_up:
+    - 'Would you like me to narrow these results by location?'
+    - 'Do any of these programs look helpful? I can tell you more about them.'
+    - "Is there a specific type of program you'd prefer?"
+
+# =============================================================================
+# DEMOGRAPHIC-SPECIFIC MESSAGES
+# =============================================================================
+demographics:
+  seniors:
+    intro: 'I can help you find programs for seniors and older adults.'
+    examples:
+      - 'Meals on Wheels'
+      - 'Senior center activities'
+      - 'Medicare assistance'
+      - 'Paratransit services'
+
+  veterans:
+    intro: 'Thank you for your service. Let me find veteran-specific programs.'
+    examples:
+      - 'VA benefits enrollment'
+      - 'Veteran housing assistance'
+      - 'Veteran employment services'
+
+  families:
+    intro: 'I can help families find support programs.'
+    examples:
+      - 'Childcare assistance'
+      - 'CalWORKs'
+      - 'School meal programs'
+      - 'Family health insurance'
+
+  students:
+    intro: 'I can help students find educational and support resources.'
+    examples:
+      - 'Financial aid'
+      - 'Cal Grant'
+      - 'Student food assistance'
+
+  immigrants:
+    intro: 'I can help find programs available regardless of immigration status.'
+    note: 'Many programs are available to all California residents.'
+
+# =============================================================================
+# CATEGORY-SPECIFIC RESPONSES
+# =============================================================================
+categories:
+  food:
+    found: 'Here are food assistance programs that can help:'
+    types:
+      - label: 'Groceries/Food Stamps'
+        description: 'CalFresh (SNAP/EBT) provides monthly benefits for groceries'
+      - label: 'Food Banks'
+        description: 'Get free groceries from local food pantries'
+      - label: 'Hot Meals'
+        description: 'Community meals and meal delivery programs'
+      - label: 'Baby Food/Formula'
+        description: 'WIC provides nutrition for infants and young children'
+
+  housing:
+    found: 'Here are housing assistance programs:'
+    types:
+      - label: 'Rental Assistance'
+        description: 'Help paying rent or avoiding eviction'
+      - label: 'Emergency Shelter'
+        description: 'Immediate housing for those without shelter'
+      - label: 'Section 8 Vouchers'
+        description: 'Long-term housing subsidies'
+      - label: 'First-Time Homebuyer'
+        description: 'Down payment assistance programs'
+
+  healthcare:
+    found: 'Here are healthcare options:'
+    types:
+      - label: 'Medi-Cal'
+        description: 'Free or low-cost health coverage'
+      - label: 'Community Clinics'
+        description: 'Sliding-scale fee medical care'
+      - label: 'Mental Health'
+        description: 'Counseling and therapy services'
+      - label: 'Dental Care'
+        description: 'Denti-Cal and low-cost dental clinics'
+
+  utilities:
+    found: 'Here are programs to help with utility bills:'
+    types:
+      - label: 'CARE Program'
+        description: '20-30% discount on PG&E bills'
+      - label: 'LIHEAP'
+        description: 'One-time help paying energy bills'
+      - label: 'Water Assistance'
+        description: 'Help with water and sewer bills'
+      - label: 'Phone/Internet'
+        description: 'Lifeline and ACP discounts'
+
+# =============================================================================
+# QUICK ACTION BUTTON LABELS
+# =============================================================================
+buttons:
+  # Location selection
+  use_my_location: 'Use my location'
+  enter_zip: 'Enter ZIP code'
+
+  # Common cities
+  cities:
+    - 'San Francisco'
+    - 'Oakland'
+    - 'San Jose'
+    - 'Other...'
+
+  # Category buttons
+  categories:
+    - label: 'Food'
+      icon: '🍎'
+    - label: 'Housing'
+      icon: '🏠'
+    - label: 'Healthcare'
+      icon: '💊'
+    - label: 'Jobs'
+      icon: '💼'
+    - label: 'Money'
+      icon: '💰'
+    - label: 'Legal'
+      icon: '⚖️'
+
+  # Action buttons
+  actions:
+    show_more: 'Show more programs'
+    start_over: 'Start new search'
+    save_results: 'Save these results'
+    get_directions: 'Get directions'
+    call_now: 'Call now'
+    apply_online: 'Apply online'
+    learn_more: 'Learn more'
+
+# =============================================================================
+# ACCESSIBILITY & SCREEN READER TEXT
+# =============================================================================
+accessibility:
+  # Announcements
+  announcements:
+    results_found: '{count} programs found for your search'
+    no_results: 'No programs found. Try different search terms.'
+    loading: 'Searching for programs...'
+    error: 'Search error. Please try again.'
+    chat_opened: 'Smart Search chat opened'
+    chat_closed: 'Smart Search chat closed'
+    message_received: 'New message from Smart Search assistant'
+
+  # Button labels
+  labels:
+    close_chat: 'Close smart search chat'
+    send_message: 'Send message'
+    clear_search: 'Clear search'
+    toggle_ai: 'Toggle AI-powered search'
+
+# =============================================================================
+# PRIVACY & TRANSPARENCY
+# =============================================================================
+privacy:
+  # Data handling notices
+  notices:
+    location_stored_locally: 'Your location is stored only on your device'
+    no_personal_data: "We don't collect personal information"
+    search_not_saved: "Your searches aren't saved on our servers"
+
+  # When AI is used
+  ai_notice: 'Using AI to find the best matches'
+  local_notice: 'Searching locally (no data sent)'
+
+# =============================================================================
+# CRISIS RESPONSES
+# =============================================================================
+crisis:
+  # Immediate help needed
+  emergency:
+    title: "If you're in immediate danger, call 911"
+    message: 'Emergency services can help right away.'
+
+  mental_health:
+    title: 'Help is available 24/7'
+    message: "You're not alone. Free, confidential support is available."
+    resource:
+      name: '988 Suicide & Crisis Lifeline'
+      phone: '988'
+      action: 'Call or text 988'
+
+  domestic_violence:
+    title: 'You deserve to be safe'
+    message: 'Confidential support is available 24/7.'
+    resource:
+      name: 'National Domestic Violence Hotline'
+      phone: '1-800-799-7233'
+      action: 'Call 1-800-799-7233'
+
+# =============================================================================
+# EASTER EGGS & FUN RESPONSES
+# =============================================================================
+# These are triggered by specific queries or randomly sprinkled in
+# All clean, respectful, and Bay Area-flavored!
+easter_eggs:
+  # Special greetings for specific times
+  time_based:
+    morning: 'Good morning! Ready to start the day with some helpful resources?'
+    afternoon: 'Good afternoon! How can I help you today?'
+    evening: 'Good evening! Still here to help, even after rush hour.'
+    late_night: "Burning the midnight oil? I'm here whenever you need me."
+
+  # Bay Area local flavor
+  bay_area:
+    - "Fun fact: The Bay Area has over 500 assistance programs. Let's find the right one for you!"
+    - "From the Golden Gate to the South Bay, I've got resources covered."
+    - "Whether you're in the fog belt or the sunny East Bay, I can help!"
+
+  # Encouraging messages when things are tough
+  encouragement:
+    - 'Looking for help is a sign of strength, not weakness.'
+    - "Everyone needs a hand sometimes. That's what community is for."
+    - 'The Bay Area has great resources, and you deserve to use them.'
+    - "One step at a time. Let's find what you need."
+
+  # Thank you responses
+  gratitude:
+    - "Happy to help! That's what I'm here for."
+    - "You're welcome! Good luck with everything."
+    - 'Glad I could help! Take care.'
+    - 'Anytime! Wishing you the best.'
+
+  # When user says something funny or unexpected
+  playful:
+    hello: 'Hello! Ready to explore some resources?'
+    hi: 'Hi there! What can I help you find?'
+    hey: "Hey! Let's find some programs for you."
+    thanks: "You're very welcome! Is there anything else I can help with?"
+    thank_you: 'Happy to help! Take care out there.'
+    bye: 'Goodbye! Come back anytime you need help.'
+    goodbye: 'Take care! Remember, help is always here when you need it.'
+    cool: 'Glad you think so! Anything else I can help with?'
+    awesome: 'Thanks! Let me know if you need anything else.'
+    lol: 'Glad I could bring a smile! Now, what can I help you find?'
+    haha: 'I try! Seriously though, how can I help?'
+
+  # Hidden gems triggered by specific queries
+  special_triggers:
+    'where is waldo': "I'm not sure where Waldo is, but I can definitely help you find resources in the Bay Area!"
+    'meaning of life': '42... but also, having access to food, shelter, and healthcare helps. What can I find for you?'
+    'are you real': "I'm as real as the morning fog rolling over Twin Peaks! How can I help?"
+    'who are you': "I'm BayNavigator's Smart Search assistant, here to help you find assistance programs in the Bay Area."
+    'tell me a joke': "Why did the tech worker move to the East Bay? Because San Francisco rent is no joke! But seriously, I'm here to help find resources."
+    'i love you': "That's sweet! I'm here to help. What resources can I find for you today?"
+    'how are you': "I'm running smoothly, thanks for asking! How can I help you today?"
+    'what can you do': 'I can help you find assistance programs for food, housing, healthcare, utilities, jobs, and more in the Bay Area!'
+
+  # Responses for when AI is being extra helpful
+  proud_moments:
+    - "Found exactly what you needed? That's what I call a successful search!"
+    - 'Sometimes things just click. Let me know if you need anything else!'
+
+  # Gentle humor for no results
+  no_results_friendly:
+    - "Hmm, couldn't find that one. But don't give up - let's try something else!"
+    - 'No matches yet, but I have a lot more resources to explore. What else can I try?'
+    - "That's a tricky one! Mind trying different words?"

@@ -117,7 +117,19 @@ function checkQuickAnswer(query, location) {
     }
   }
 
-  // 2. Check clarify patterns (vague queries)
+  // 2. Check category intent patterns (specific help requests like "help finding food")
+  for (const intent of quickAnswers.categoryIntentPatterns || []) {
+    for (const pattern of intent.patterns) {
+      if (lowerQuery.includes(pattern.toLowerCase())) {
+        return {
+          matched: true,
+          response: intent.response,
+        };
+      }
+    }
+  }
+
+  // 3. Check clarify patterns (vague queries)
   for (const clarify of quickAnswers.clarifyPatterns || []) {
     for (const pattern of clarify.patterns) {
       // Match exact or as primary content
@@ -130,7 +142,7 @@ function checkQuickAnswer(query, location) {
     }
   }
 
-  // 3. Check trouble/application help patterns
+  // 5. Check trouble/application help patterns
   const troublePatterns = quickAnswers.troublePatterns;
   if (troublePatterns) {
     const hasTroubleTrigger = troublePatterns.triggers.some((t) =>
@@ -170,7 +182,7 @@ function checkQuickAnswer(query, location) {
     }
   }
 
-  // 4. Check program info queries
+  // 6. Check program info queries
   for (const programQuery of quickAnswers.programQueries || []) {
     for (const pattern of programQuery.patterns) {
       if (lowerQuery.includes(pattern.toLowerCase())) {
@@ -182,7 +194,7 @@ function checkQuickAnswer(query, location) {
     }
   }
 
-  // 5. Check eligibility queries
+  // 7. Check eligibility queries
   const eligibilityQueries = quickAnswers.eligibilityQueries;
   if (eligibilityQueries) {
     const hasEligibilityTrigger = eligibilityQueries.triggers.some((t) =>
@@ -909,38 +921,87 @@ function detectProgramCategories(query) {
 
 /**
  * Expand query with synonyms and reference document keywords for better matching
+ * Returns object with primary (high weight) and secondary (normal weight) terms
  */
 function expandQueryWithSynonyms(query) {
   const lowerQuery = query.toLowerCase();
   const words = lowerQuery.split(/\s+/);
-  const expansions = new Set(words);
 
-  // Add synonyms for each word
-  for (const word of words) {
-    if (SYNONYMS[word]) {
-      SYNONYMS[word].forEach((syn) => expansions.add(syn));
-    }
-  }
+  // Primary terms: category-specific keywords (highest priority)
+  const primaryTerms = new Set();
+  // Secondary terms: synonyms and original words
+  const secondaryTerms = new Set();
 
-  // Expand using reference documents (cost optimization)
+  // Detect categories FIRST - these are most important for relevance
   const detectedCategories = detectProgramCategories(query);
   for (const cat of detectedCategories) {
-    // Add category-specific search keywords
+    // Add category name to primary (e.g., "food", "housing")
+    primaryTerms.add(cat.id);
+    // Add category-specific search keywords to primary
     if (cat.searchKeywords) {
-      cat.searchKeywords.split(' ').forEach((k) => expansions.add(k));
+      cat.searchKeywords.split(' ').forEach((k) => primaryTerms.add(k));
     }
   }
 
   const detectedGroups = detectEligibilityGroups(query);
   for (const group of detectedGroups) {
-    // Add group-specific search keywords
+    // Add group-specific search keywords to primary
     if (group.searchKeywords) {
-      group.searchKeywords.split(' ').forEach((k) => expansions.add(k));
+      group.searchKeywords.split(' ').forEach((k) => primaryTerms.add(k));
     }
   }
 
-  // Return expanded terms (limit to avoid overly long queries)
-  const expandedTerms = Array.from(expansions).slice(0, 30).join(' ');
+  // Add original content words (skip very common words)
+  const stopWords = new Set([
+    'i',
+    'need',
+    'help',
+    'me',
+    'a',
+    'an',
+    'the',
+    'for',
+    'to',
+    'with',
+    'my',
+    'am',
+    'is',
+    'are',
+    'can',
+    'you',
+    'how',
+    'where',
+    'what',
+    'looking',
+    'find',
+    'finding',
+    'get',
+    'getting',
+  ]);
+  for (const word of words) {
+    if (!stopWords.has(word) && word.length > 2) {
+      secondaryTerms.add(word);
+    }
+  }
+
+  // Add synonyms for content words only (not stop words)
+  for (const word of words) {
+    if (SYNONYMS[word] && !stopWords.has(word)) {
+      SYNONYMS[word].forEach((syn) => secondaryTerms.add(syn));
+    }
+  }
+
+  // If we detected categories, prioritize those terms heavily
+  // Otherwise fall back to all terms equally
+  if (primaryTerms.size > 0) {
+    // Return category-specific terms only for better precision
+    const expandedTerms = Array.from(primaryTerms).slice(0, 25).join(' ');
+    return expandedTerms;
+  }
+
+  // No category detected - use all terms
+  const allTerms = new Set([...primaryTerms, ...secondaryTerms]);
+  const expandedTerms = Array.from(allTerms).slice(0, 30).join(' ');
   return expandedTerms;
 }
 
@@ -950,9 +1011,17 @@ async function searchPrograms(query, location = null) {
     return [];
   }
 
+  // Detect categories for filtering
+  const detectedCategories = detectProgramCategories(query);
+  // Use category ID (e.g., "food") not name (e.g., "Food Assistance") - must match program data
+  const categoryIds = detectedCategories.map((c) => c.id);
+
   // Expand query with synonyms
   const expandedQuery = expandQueryWithSynonyms(query);
   console.log(`Original query: "${query}" -> Expanded: "${expandedQuery}"`);
+  if (categoryIds.length > 0) {
+    console.log(`Detected categories: ${categoryIds.join(', ')}`);
+  }
 
   const searchParams = {
     search: expandedQuery,
@@ -962,6 +1031,18 @@ async function searchPrograms(query, location = null) {
     select: 'id,name,category,description,whatTheyOffer,howToGetIt,groups,areas,city,website,phone',
     searchFields: 'name,category,description,whatTheyOffer,howToGetIt,groups',
   };
+
+  // Build combined filter: category AND location
+  const filters = [];
+
+  // If we detected specific categories, filter to only show programs in those categories
+  // This dramatically improves relevance for queries like "help finding food"
+  // Use lowercase category IDs to match program data (e.g., "food" not "Food Assistance")
+  if (categoryIds.length > 0) {
+    const categoryFilter = categoryIds.map((cat) => `category eq '${cat}'`).join(' or ');
+    filters.push(`(${categoryFilter})`);
+    console.log(`Category filter: ${categoryFilter}`);
+  }
 
   // If location detected, filter to show:
   // 1. Programs in their specific city/county
@@ -987,8 +1068,14 @@ async function searchPrograms(query, location = null) {
       areaFilters.push(`areas/any(a: a eq '${city}')`);
     }
 
-    searchParams.filter = `(${areaFilters.join(' or ')})`;
-    console.log(`Location filter applied: ${searchParams.filter}`);
+    filters.push(`(${areaFilters.join(' or ')})`);
+    console.log(`Location filter: ${areaFilters.join(' or ')}`);
+  }
+
+  // Combine filters with AND
+  if (filters.length > 0) {
+    searchParams.filter = filters.join(' and ');
+    console.log(`Combined filter: ${searchParams.filter}`);
   }
 
   try {

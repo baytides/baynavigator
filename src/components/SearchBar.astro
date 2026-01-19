@@ -25,6 +25,16 @@ try {
   console.warn('Could not load search-config.yml:', e);
 }
 
+// Load chat messages at build time
+let chatMessages: any = {};
+try {
+  const messagesPath = path.join(process.cwd(), 'src/data/chat-messages.yml');
+  const messagesContent = fs.readFileSync(messagesPath, 'utf8');
+  chatMessages = yaml.load(messagesContent);
+} catch (e) {
+  console.warn('Could not load chat-messages.yml:', e);
+}
+
 const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 pr-10';
 ---
 
@@ -89,33 +99,124 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     />
   </div>
 
-  <!-- AI Toggle Pill -->
-  <div class="relative flex items-center justify-end mt-2 gap-2">
-    <span
-      class="text-xs text-neutral-600 dark:text-neutral-300"
-      data-tooltip="Smart Search uses AI to understand your question and find relevant programs. Turn it off for simple keyword matching."
-      data-i18n-tooltip="search.smartSearchTooltip"
-      data-tooltip-position="left"
-      data-i18n="search.smartSearch"
-      tabindex="0">Smart search</span
-    ><span
-      class="ml-1 px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-neutral-200 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200"
-      >Beta</span
-    >
+  <!-- Settings row: Location + AI Toggle -->
+  <div class="relative flex items-center justify-between mt-2 gap-3 flex-wrap">
+    <!-- Location button -->
     <button
       type="button"
-      id="ai-toggle"
-      class="ai-toggle-btn ai-toggle-on"
-      role="switch"
-      aria-checked="true"
-      aria-label="Toggle AI-powered search"
-      data-tooltip="AI-powered search helps find programs using natural language. Turn off to use keyword search only."
-      data-tooltip-position="bottom"
+      id="location-quick-btn"
+      class="inline-flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 rounded transition-colors"
+      aria-label="Set your location for better results"
     >
-      <span class="ai-toggle-track">
-        <span class="ai-toggle-thumb"></span>
-      </span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      <span id="location-quick-text">Set location</span>
     </button>
+
+    <!-- AI Toggle -->
+    <div class="flex items-center gap-2">
+      <span
+        class="text-xs text-neutral-600 dark:text-neutral-300"
+        data-tooltip="Smart Search uses AI to understand your question and find relevant programs. Turn it off for simple keyword matching."
+        data-i18n-tooltip="search.smartSearchTooltip"
+        data-tooltip-position="left"
+        data-i18n="search.smartSearch"
+        tabindex="0">Smart search</span
+      ><span
+        class="ml-1 px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-neutral-200 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200"
+        >Beta</span
+      >
+      <button
+        type="button"
+        id="ai-toggle"
+        class="ai-toggle-btn ai-toggle-off"
+        role="switch"
+        aria-checked="false"
+        aria-label="Toggle AI-powered search"
+        data-tooltip="AI-powered search helps find programs using natural language. Turn off to use keyword search only."
+        data-tooltip-position="bottom"
+      >
+        <span class="ai-toggle-track">
+          <span class="ai-toggle-thumb"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Location popover (shown when location button clicked) -->
+  <div
+    id="location-popover"
+    class="hidden absolute left-0 right-0 mt-2 p-4 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 z-50"
+  >
+    <p class="text-sm font-medium text-neutral-900 dark:text-white mb-3">
+      Set your location for better results
+    </p>
+    <div class="flex items-center gap-2 flex-wrap">
+      <button
+        id="popover-gps-btn"
+        type="button"
+        class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        Use my location
+      </button>
+      <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
+      <div class="flex items-center gap-1">
+        <label for="popover-zip-input" class="sr-only">Enter ZIP code or city</label>
+        <input
+          type="text"
+          id="popover-zip-input"
+          placeholder="ZIP code or city"
+          list="city-list"
+          class="px-3 py-2 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-36 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+        />
+        <button
+          id="popover-submit-btn"
+          type="button"
+          class="px-3 py-2 text-sm font-medium rounded-md bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+        >
+          Set
+        </button>
+      </div>
+    </div>
+    <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
+      <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path
+          fill-rule="evenodd"
+          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+          clip-rule="evenodd"></path>
+      </svg>
+      Your location stays on your device
+    </p>
   </div>
 
   <!-- Search hints -->
@@ -154,6 +255,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   data-best-bets={JSON.stringify(searchConfig.best_bets || {})}
   data-suggestions={JSON.stringify(searchConfig.suggestions || [])}
   data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
+  data-chat-messages={JSON.stringify(chatMessages || {})}
   class="hidden"
 >
 </div>
@@ -166,6 +268,179 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 <!-- Screen reader announcements (aria-live regions) -->
 <div class="sr-only" aria-live="polite" aria-atomic="true" id="search-announcer"></div>
 <div class="sr-only" aria-live="assertive" aria-atomic="true" id="search-urgent-announcer"></div>
+
+<!-- Smart Search Suggestion (shown when vague query detected with AI off) -->
+<div
+  id="smart-search-suggestion"
+  class="hidden mt-4 p-4 bg-primary-50 dark:bg-primary-900/30 rounded-lg border border-primary-200 dark:border-primary-800"
+  role="region"
+  aria-label="Smart search suggestion"
+>
+  <div class="flex items-start gap-3">
+    <div class="flex-shrink-0 mt-0.5">
+      <svg
+        class="w-5 h-5 text-primary-600 dark:text-primary-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+        ></path>
+      </svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <p
+        class="text-sm font-medium text-primary-900 dark:text-primary-100 mb-1"
+        id="smart-suggestion-title"
+      >
+        Need help finding specific resources?
+      </p>
+      <p class="text-sm text-primary-700 dark:text-primary-300 mb-3" id="smart-suggestion-message">
+        Turn on Smart Search to help find programs that match your needs.
+      </p>
+      <div class="flex items-center gap-3 flex-wrap">
+        <button
+          type="button"
+          id="enable-smart-search-btn"
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 transition-colors"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          Enable Smart Search
+        </button>
+        <button
+          type="button"
+          id="dismiss-smart-suggestion-btn"
+          class="text-sm text-primary-600 dark:text-primary-400 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 rounded"
+        >
+          No thanks
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      id="close-smart-suggestion-btn"
+      class="flex-shrink-0 text-primary-400 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+      aria-label="Dismiss suggestion"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Smart Search Chat Interface (shown when AI is enabled) -->
+<div
+  id="smart-chat-container"
+  class="hidden mt-4 bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden"
+  role="region"
+  aria-label="Smart search conversation"
+>
+  <!-- Chat Header -->
+  <div
+    class="flex items-center justify-between px-4 py-2 bg-primary-50 dark:bg-primary-900/30 border-b border-primary-100 dark:border-primary-800"
+  >
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true"></div>
+      <span class="text-sm font-medium text-primary-900 dark:text-primary-100">Smart Search</span>
+      <span
+        class="text-xs text-primary-600 dark:text-primary-400 bg-primary-100 dark:bg-primary-800 px-1.5 py-0.5 rounded"
+        >Beta</span
+      >
+    </div>
+    <button
+      type="button"
+      id="close-smart-chat-btn"
+      class="text-primary-400 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded p-1"
+      aria-label="Close smart search chat"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Chat Messages -->
+  <div
+    id="smart-chat-messages"
+    class="p-4 space-y-3 max-h-64 overflow-y-auto"
+    role="log"
+    aria-live="polite"
+  >
+    <!-- Messages will be added here dynamically -->
+  </div>
+
+  <!-- Chat Input (for follow-up questions) -->
+  <div
+    id="smart-chat-input-area"
+    class="hidden px-4 py-3 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900"
+  >
+    <div class="flex items-center gap-2">
+      <label for="smart-chat-input" class="sr-only">Ask a follow-up question</label>
+      <input
+        type="text"
+        id="smart-chat-input"
+        placeholder="Ask a follow-up question..."
+        class="flex-1 px-3 py-2 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+      />
+      <button
+        type="button"
+        id="smart-chat-send-btn"
+        class="px-3 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 transition-colors"
+        aria-label="Send message"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick Action Buttons (shown when AI asks clarifying questions) -->
+  <div
+    id="smart-chat-actions"
+    class="hidden px-4 py-3 border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900"
+  >
+    <div id="smart-chat-action-buttons" class="flex flex-wrap gap-2">
+      <!-- Action buttons will be added here dynamically -->
+    </div>
+  </div>
+</div>
 
 <!-- Refinement Bar (shown when results are broad) -->
 <div
@@ -368,6 +643,34 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const QUERY_REWRITES: Record<string, string> = JSON.parse(
     configEl?.dataset?.queryRewrites || '{}'
   );
+
+  // Load chat messages from build-time config
+  const CHAT_MESSAGES: any = JSON.parse(configEl?.dataset?.chatMessages || '{}');
+
+  // Helper to get a random message from an array
+  function getRandomMessage(messages: string[] | undefined, fallback: string): string {
+    if (!messages || messages.length === 0) return fallback;
+    return messages[Math.floor(Math.random() * messages.length)];
+  }
+
+  // Helper to get a message with variable substitution
+  function getMessage(
+    category: string,
+    key: string,
+    vars: Record<string, string | number> = {}
+  ): string {
+    const messages = CHAT_MESSAGES?.[category]?.[key];
+    let message = getRandomMessage(
+      Array.isArray(messages) ? messages : [messages],
+      messages || `[${category}.${key}]`
+    );
+
+    // Replace variables like {count}, {location}, etc.
+    for (const [varName, value] of Object.entries(vars)) {
+      message = message.replace(new RegExp(`\\{${varName}\\}`, 'g'), String(value));
+    }
+    return message;
+  }
 
   // Refinement configuration (loaded from search-config.yml at build time)
   interface RefinementCategory {
@@ -930,8 +1233,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   let lastAIQuery = '';
   let isOffline = !navigator.onLine;
 
-  // Load AI preference from localStorage (defaults to true when online, false when offline)
-  let aiEnabled = !isOffline && localStorage.getItem('aiSearchEnabled') !== 'false';
+  // Load AI preference from localStorage (defaults to OFF - user must explicitly enable)
+  let aiEnabled = !isOffline && localStorage.getItem('aiSearchEnabled') === 'true';
 
   // Initialize toggle state
   function updateToggleState() {
@@ -991,14 +1294,27 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     localStorage.setItem('aiSearchEnabled', String(aiEnabled));
     updateToggleState();
 
-    // If AI is now disabled, hide any AI indicators
+    // If AI is now disabled, hide any AI indicators and chat
     if (!aiEnabled) {
       hideAIIndicator();
+      // Hide the chat if it's showing
+      const smartChatEl = document.getElementById('smart-chat-container');
+      smartChatEl?.classList.add('hidden');
     }
 
     // Re-run search with new setting
     if (searchInput?.value) {
-      performSearch();
+      // If turning on AI with a query, start the chat
+      if (aiEnabled) {
+        const smartChatEl = document.getElementById('smart-chat-container');
+        if (smartChatEl) {
+          // Start chat conversation
+          startSmartChatConversation(searchInput.value);
+          performAISearch(searchInput.value);
+        }
+      } else {
+        performSearch();
+      }
     }
   });
 
@@ -1006,7 +1322,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   window.addEventListener('online', () => {
     isOffline = false;
     // Restore AI enabled state from localStorage when coming back online
-    aiEnabled = localStorage.getItem('aiSearchEnabled') !== 'false';
+    aiEnabled = localStorage.getItem('aiSearchEnabled') === 'true';
     updateToggleState();
   });
   window.addEventListener('offline', () => {
@@ -1365,7 +1681,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     } else if (
       quickAnswer.type === 'guide' ||
       quickAnswer.type === 'program' ||
-      quickAnswer.type === 'eligibility'
+      quickAnswer.type === 'eligibility' ||
+      quickAnswer.type === 'category_search' ||
+      quickAnswer.type === 'guide_with_contact'
     ) {
       card.classList.add('quick-answer-guide');
 
@@ -1448,12 +1766,530 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     }
   }
 
+  // Smart Search Suggestion functions
+  const smartSuggestionEl = document.getElementById('smart-search-suggestion');
+  const smartSuggestionTitle = document.getElementById('smart-suggestion-title');
+  const smartSuggestionMessage = document.getElementById('smart-suggestion-message');
+  const enableSmartSearchBtn = document.getElementById('enable-smart-search-btn');
+  const dismissSmartSuggestionBtn = document.getElementById('dismiss-smart-suggestion-btn');
+  const closeSmartSuggestionBtn = document.getElementById('close-smart-suggestion-btn');
+  let smartSuggestionDismissed = sessionStorage.getItem('smartSuggestionDismissed') === 'true';
+
+  function showSmartSearchSuggestion(query: string) {
+    if (!smartSuggestionEl || smartSuggestionDismissed || aiEnabled || isOffline) return;
+
+    // Customize message based on query
+    if (smartSuggestionTitle && smartSuggestionMessage) {
+      // Detect what type of help they might need
+      const lowerQuery = query.toLowerCase();
+
+      if (/\b(need|looking for|help|find)\b.*\b(food|hungry|eat)\b/i.test(lowerQuery)) {
+        smartSuggestionTitle.textContent = 'Looking for food assistance?';
+        smartSuggestionMessage.textContent =
+          'Smart Search can help find food banks, CalFresh enrollment, and meal programs near you.';
+      } else if (
+        /\b(need|looking for|help)\b.*\b(housing|rent|shelter|homeless)\b/i.test(lowerQuery)
+      ) {
+        smartSuggestionTitle.textContent = 'Need housing help?';
+        smartSuggestionMessage.textContent =
+          'Smart Search can find rental assistance, shelters, and housing programs in your area.';
+      } else if (
+        /\b(need|looking for|help)\b.*\b(job|work|employment|unemployed)\b/i.test(lowerQuery)
+      ) {
+        smartSuggestionTitle.textContent = 'Looking for employment help?';
+        smartSuggestionMessage.textContent =
+          'Smart Search can find job training, career centers, and employment programs for you.';
+      } else if (
+        /\b(need|looking for|help)\b.*\b(health|doctor|medical|clinic)\b/i.test(lowerQuery)
+      ) {
+        smartSuggestionTitle.textContent = 'Need healthcare assistance?';
+        smartSuggestionMessage.textContent =
+          'Smart Search can find free clinics, Medi-Cal enrollment, and health services near you.';
+      } else if (/\b(i'm|i am|my|we)\b/i.test(lowerQuery) || query.split(/\s+/).length >= 5) {
+        smartSuggestionTitle.textContent = 'Let us help you find the right programs';
+        smartSuggestionMessage.textContent =
+          'Smart Search understands your situation and can match you with relevant resources.';
+      } else {
+        smartSuggestionTitle.textContent = 'Need help finding specific resources?';
+        smartSuggestionMessage.textContent =
+          'Turn on Smart Search to help find programs that match your needs.';
+      }
+    }
+
+    smartSuggestionEl.classList.remove('hidden');
+    announceToScreenReader('Smart Search suggestion available. Enable for better results.');
+  }
+
+  function hideSmartSearchSuggestion() {
+    smartSuggestionEl?.classList.add('hidden');
+  }
+
+  // Handle Enable Smart Search button click
+  enableSmartSearchBtn?.addEventListener('click', () => {
+    aiEnabled = true;
+    localStorage.setItem('aiSearchEnabled', 'true');
+    updateToggleState();
+    hideSmartSearchSuggestion();
+
+    // Start the chat conversation with the current query
+    if (searchInput?.value) {
+      startSmartChatConversation(searchInput.value);
+      // Perform the AI search which will populate the chat
+      performAISearch(searchInput.value);
+    }
+  });
+
+  // Handle dismiss buttons
+  dismissSmartSuggestionBtn?.addEventListener('click', () => {
+    smartSuggestionDismissed = true;
+    sessionStorage.setItem('smartSuggestionDismissed', 'true');
+    hideSmartSearchSuggestion();
+  });
+
+  closeSmartSuggestionBtn?.addEventListener('click', () => {
+    hideSmartSearchSuggestion();
+  });
+
+  // Check if query should trigger smart search suggestion
+  function shouldSuggestSmartSearch(query: string): boolean {
+    if (!query || aiEnabled || isOffline || smartSuggestionDismissed) return false;
+
+    const trimmed = query.trim().toLowerCase();
+
+    // Patterns that suggest the user might benefit from AI search
+    const benefitPatterns = [
+      /\b(i'm|i am|my|we|our)\b/i, // First person
+      /\b(need|looking for|help with|want|trying to find)\b/i, // Intent words
+      /\b(senior|elderly|disabled|veteran|family|child|low.?income|immigrant|homeless)\b/i, // Demographics
+      /\b(how|where|what|can i|do i)\b/i, // Questions
+    ];
+
+    const matchCount = benefitPatterns.filter((p) => p.test(trimmed)).length;
+    const isLongQuery = query.split(/\s+/).length >= 4;
+
+    // Show suggestion if multiple patterns match or it's a long natural language query
+    return matchCount >= 1 || isLongQuery;
+  }
+
+  // ==========================================
+  // Smart Search Chat Interface
+  // ==========================================
+  const smartChatContainer = document.getElementById('smart-chat-container');
+  const smartChatMessages = document.getElementById('smart-chat-messages');
+  const smartChatInputArea = document.getElementById('smart-chat-input-area');
+  const smartChatInput = document.getElementById('smart-chat-input') as HTMLInputElement;
+  const smartChatSendBtn = document.getElementById('smart-chat-send-btn');
+  const smartChatActions = document.getElementById('smart-chat-actions');
+  const smartChatActionButtons = document.getElementById('smart-chat-action-buttons');
+  const closeSmartChatBtn = document.getElementById('close-smart-chat-btn');
+
+  // Chat conversation history
+  let chatHistory: Array<{ role: 'user' | 'assistant'; content: string }> = [];
+
+  function showSmartChat() {
+    smartChatContainer?.classList.remove('hidden');
+    hideSmartSearchSuggestion();
+  }
+
+  function hideSmartChat() {
+    smartChatContainer?.classList.add('hidden');
+    clearChatMessages();
+    chatHistory = [];
+  }
+
+  function clearChatMessages() {
+    if (smartChatMessages) {
+      while (smartChatMessages.firstChild) {
+        smartChatMessages.removeChild(smartChatMessages.firstChild);
+      }
+    }
+    smartChatInputArea?.classList.add('hidden');
+    smartChatActions?.classList.add('hidden');
+  }
+
+  function addChatMessage(role: 'user' | 'assistant', content: string, isTyping = false) {
+    if (!smartChatMessages) return;
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+
+    const bubble = document.createElement('div');
+    bubble.className =
+      role === 'user'
+        ? 'max-w-[85%] px-3 py-2 rounded-lg bg-primary-600 text-white text-sm'
+        : 'max-w-[85%] px-3 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white text-sm';
+
+    if (isTyping) {
+      bubble.innerHTML =
+        '<span class="typing-indicator"><span></span><span></span><span></span></span>';
+      bubble.classList.add('typing-bubble');
+    } else {
+      bubble.textContent = content;
+    }
+
+    messageDiv.appendChild(bubble);
+    smartChatMessages.appendChild(messageDiv);
+
+    // Scroll to bottom
+    smartChatMessages.scrollTop = smartChatMessages.scrollHeight;
+
+    return messageDiv;
+  }
+
+  function removeTypingIndicator() {
+    const typingBubble = smartChatMessages?.querySelector('.typing-bubble');
+    typingBubble?.parentElement?.remove();
+  }
+
+  function showChatActionButtons(buttons: Array<{ label: string; value: string; icon?: string }>) {
+    if (!smartChatActionButtons || !smartChatActions) return;
+
+    // Clear existing buttons
+    while (smartChatActionButtons.firstChild) {
+      smartChatActionButtons.removeChild(smartChatActionButtons.firstChild);
+    }
+
+    buttons.forEach((btn) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className =
+        'px-3 py-1.5 text-sm font-medium rounded-md bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors';
+
+      if (btn.icon) {
+        button.innerHTML = `<span class="mr-1">${btn.icon}</span>${btn.label}`;
+      } else {
+        button.textContent = btn.label;
+      }
+
+      button.addEventListener('click', () => {
+        handleChatAction(btn.value, btn.label);
+      });
+
+      smartChatActionButtons.appendChild(button);
+    });
+
+    smartChatActions.classList.remove('hidden');
+  }
+
+  function hideChatActionButtons() {
+    smartChatActions?.classList.add('hidden');
+  }
+
+  function showChatInput() {
+    smartChatInputArea?.classList.remove('hidden');
+    smartChatInput?.focus();
+  }
+
+  async function handleChatAction(value: string, label: string) {
+    // Add user's selection as a message
+    addChatMessage('user', label);
+    chatHistory.push({ role: 'user', content: label });
+    hideChatActionButtons();
+
+    // If it's a location, save it and continue search
+    if (value.startsWith('location:')) {
+      const location = value.replace('location:', '');
+      localStorage.setItem('userLocation', location);
+
+      // Try to determine county
+      const cityLower = location.toLowerCase();
+      const county = CITY_TO_COUNTY[cityLower];
+      if (county) {
+        localStorage.setItem('userCounty', county);
+      }
+
+      // Show typing indicator
+      addChatMessage('assistant', '', true);
+
+      // Re-run search with location
+      setTimeout(() => {
+        removeTypingIndicator();
+        addChatMessage('assistant', `Got it! Searching for programs in ${location}...`);
+        chatHistory.push({
+          role: 'assistant',
+          content: `Searching for programs in ${location}...`,
+        });
+
+        // Perform the search
+        if (searchInput?.value) {
+          performAISearch(searchInput.value);
+        }
+      }, 500);
+    } else if (value.startsWith('search:')) {
+      // It's a category search
+      const searchQuery = value.replace('search:', '');
+      if (searchInput) {
+        (searchInput as HTMLInputElement).value = searchQuery;
+      }
+
+      // Show typing indicator
+      addChatMessage('assistant', '', true);
+
+      setTimeout(() => {
+        removeTypingIndicator();
+        performAISearch(searchQuery);
+      }, 300);
+    } else {
+      // Generic action - pass to AI
+      addChatMessage('assistant', '', true);
+      await sendChatMessage(value);
+    }
+  }
+
+  async function sendChatMessage(message: string) {
+    if (!message.trim()) return;
+
+    // Check if we've reached the message limit
+    if (isChatLimitReached()) {
+      removeTypingIndicator();
+      showChatLimitMessage();
+      return;
+    }
+
+    // Get user location for context
+    const userLocation = localStorage.getItem('userLocation') || '';
+    const userCounty = localStorage.getItem('userCounty') || '';
+
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: message,
+          history: chatHistory.slice(-6), // Keep last 6 messages for context
+          mode: 'conversation', // Conversational mode for follow-ups
+          location: userLocation,
+          county: userCounty,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Chat failed');
+
+      const data = await response.json();
+      removeTypingIndicator();
+
+      // Handle the response
+      if (data.quickAnswer) {
+        handleQuickAnswerInChat(data.quickAnswer);
+      } else if (data.message) {
+        addChatMessage('assistant', data.message);
+        chatHistory.push({ role: 'assistant', content: data.message });
+
+        // If programs found, update the results
+        if (data.programs && data.programs.length > 0) {
+          filterProgramsByAIResults(data.programs);
+        }
+      }
+
+      // Check message limit before showing input
+      if (isChatLimitReached()) {
+        showChatLimitMessage();
+      } else {
+        showChatInput();
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      removeTypingIndicator();
+      addChatMessage(
+        'assistant',
+        'Sorry, I had trouble understanding that. Try rephrasing your question.'
+      );
+
+      // Still check limit
+      if (!isChatLimitReached()) {
+        showChatInput();
+      }
+    }
+  }
+
+  function handleQuickAnswerInChat(quickAnswer: any) {
+    if (quickAnswer.type === 'clarify' && quickAnswer.categories) {
+      // Show clarifying question with action buttons
+      addChatMessage('assistant', quickAnswer.message || 'What kind of help are you looking for?');
+      chatHistory.push({
+        role: 'assistant',
+        content: quickAnswer.message || 'What kind of help are you looking for?',
+      });
+
+      const buttons = quickAnswer.categories.map((cat: any) => ({
+        label: `${cat.icon || ''} ${cat.label}`.trim(),
+        value: `search:${cat.search || cat.label}`,
+        icon: cat.icon,
+      }));
+      showChatActionButtons(buttons);
+    } else if (quickAnswer.type === 'category_search') {
+      // Show category-specific response
+      const message = quickAnswer.title
+        ? `I can help you find ${quickAnswer.title.toLowerCase()}. ${quickAnswer.summary || ''}`
+        : quickAnswer.summary || 'Here are some resources that might help.';
+      addChatMessage('assistant', message);
+      chatHistory.push({ role: 'assistant', content: message });
+
+      // Ask for location if not set
+      const userLocation = localStorage.getItem('userLocation');
+      if (!userLocation) {
+        setTimeout(() => {
+          addChatMessage(
+            'assistant',
+            'To show you the most relevant programs, what city or ZIP code are you in?'
+          );
+          chatHistory.push({ role: 'assistant', content: 'What city or ZIP code are you in?' });
+          showLocationButtons();
+        }, 800);
+      } else {
+        // Perform the search
+        if (quickAnswer.search) {
+          performAISearch(quickAnswer.search);
+        }
+        showChatInput();
+      }
+    } else {
+      // Other quick answer types - show as message
+      const message =
+        quickAnswer.summary || quickAnswer.title || 'Here are some resources that might help.';
+      addChatMessage('assistant', message);
+      chatHistory.push({ role: 'assistant', content: message });
+      showChatInput();
+    }
+  }
+
+  function showLocationButtons() {
+    // Common Bay Area cities
+    const cities = [
+      { label: 'San Francisco', value: 'location:San Francisco' },
+      { label: 'Oakland', value: 'location:Oakland' },
+      { label: 'San Jose', value: 'location:San Jose' },
+      { label: 'Other...', value: 'location:other' },
+    ];
+    showChatActionButtons(cities);
+
+    // Also show text input for custom location
+    showChatInput();
+    if (smartChatInput) {
+      smartChatInput.placeholder = 'Or type your city/ZIP...';
+    }
+  }
+
+  function filterProgramsByAIResults(matchedPrograms: any[]) {
+    const matchedIds = new Set(
+      matchedPrograms.map((p) => (p.id || p.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-'))
+    );
+
+    let visibleCount = 0;
+
+    if (isHomepage) {
+      homeResultsSection?.classList.remove('hidden');
+      programs.forEach((p) => {
+        const matchesAI = matchedIds.size === 0 || matchedIds.has(p.id);
+        if (p.wrapper) {
+          if (matchesAI) {
+            p.wrapper.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            p.wrapper.classList.add('hidden');
+          }
+        }
+      });
+      if (homeResultsCount) {
+        homeResultsCount.textContent = `${visibleCount} program${visibleCount !== 1 ? 's' : ''} found`;
+      }
+    } else {
+      programs.forEach((p) => {
+        const matchesAI = matchedIds.size === 0 || matchedIds.has(p.id);
+        const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+        const shouldShow = matchesAI && matchesCategory;
+        p.element.style.display = shouldShow ? '' : 'none';
+        if (shouldShow) visibleCount++;
+      });
+      updateResultsCount(visibleCount, searchInput?.value || '', true);
+    }
+  }
+
+  // Handle close chat button
+  closeSmartChatBtn?.addEventListener('click', () => {
+    hideSmartChat();
+    // Turn off AI
+    aiEnabled = false;
+    localStorage.setItem('aiSearchEnabled', 'false');
+    updateToggleState();
+  });
+
+  // Handle chat input
+  smartChatSendBtn?.addEventListener('click', () => {
+    const message = smartChatInput?.value.trim();
+    if (message) {
+      addChatMessage('user', message);
+      chatHistory.push({ role: 'user', content: message });
+      smartChatInput.value = '';
+
+      // Check if it looks like a location
+      const zipMatch = message.match(/^\d{5}$/);
+      const cityMatch = CITY_TO_COUNTY[message.toLowerCase()];
+
+      if (zipMatch || cityMatch) {
+        handleChatAction(`location:${message}`, message);
+      } else {
+        addChatMessage('assistant', '', true);
+        sendChatMessage(message);
+      }
+    }
+  });
+
+  smartChatInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      smartChatSendBtn?.click();
+    }
+  });
+
+  // Message limit for chat conversations (to prevent excessive AI usage)
+  const MAX_CHAT_MESSAGES = 6; // 3 exchanges (user + assistant)
+
+  // Start a smart chat conversation
+  function startSmartChatConversation(query: string) {
+    showSmartChat();
+    clearChatMessages();
+    chatHistory = [];
+
+    // Add user's query
+    addChatMessage('user', query);
+    chatHistory.push({ role: 'user', content: query });
+
+    // Show typing indicator
+    addChatMessage('assistant', '', true);
+  }
+
+  // Check if chat has reached message limit
+  function isChatLimitReached(): boolean {
+    return chatHistory.length >= MAX_CHAT_MESSAGES;
+  }
+
+  // Show final results message when limit is reached
+  function showChatLimitMessage() {
+    addChatMessage(
+      'assistant',
+      "I've gathered enough information to help. Here are the programs I found based on our conversation. You can browse the results below or start a new search."
+    );
+    chatHistory.push({
+      role: 'assistant',
+      content: 'Here are the programs based on our conversation.',
+    });
+    hideChatActionButtons();
+    smartChatInputArea?.classList.add('hidden');
+  }
+
   async function performAISearch(query) {
     if (isAISearching || query === lastAIQuery) return;
 
     isAISearching = true;
     lastAIQuery = query;
     showLoading(true);
+    hideSmartSearchSuggestion(); // Hide suggestion when AI is active
+
+    // Show the chat interface for AI searches
+    if (!smartChatContainer?.classList.contains('hidden') === false) {
+      startSmartChatConversation(query);
+    }
 
     // Get user location for location-aware quick answers
     const userLocation = localStorage.getItem('userLocation') || '';
@@ -1464,8 +2300,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: `Find programs matching this request. Return ONLY the program names that match, nothing else. Request: ${query}`,
-          history: [],
+          message: query, // Send raw query - backend handles pattern matching
+          history: chatHistory.slice(-6),
           mode: 'filter', // Tell the API we just want filtering, not conversation
           location: userLocation,
           county: userCounty,
@@ -1476,24 +2312,59 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
       const data = await response.json();
 
+      // Remove typing indicator if chat is showing
+      if (!smartChatContainer?.classList.contains('hidden')) {
+        removeTypingIndicator();
+      }
+
       // Check for quick answer first (Tier 1 - cached responses)
       if (data.quickAnswer) {
-        showQuickAnswer(data.quickAnswer);
-        // For crisis responses, stop here - don't show regular results
-        if (data.quickAnswer.type === 'crisis') {
-          showLoading(false);
-          isAISearching = false;
-          return;
+        // Show in chat interface if it's open
+        if (!smartChatContainer?.classList.contains('hidden')) {
+          handleQuickAnswerInChat(data.quickAnswer);
+
+          // Check message limit
+          if (isChatLimitReached()) {
+            showChatLimitMessage();
+          }
+
+          // For crisis or clarify, stop here
+          if (data.quickAnswer.type === 'crisis' || data.quickAnswer.type === 'clarify') {
+            showLoading(false);
+            isAISearching = false;
+            return;
+          }
+        } else {
+          // Show traditional quick answer card
+          showQuickAnswer(data.quickAnswer);
+          // For crisis responses, stop here - don't show regular results
+          if (data.quickAnswer.type === 'crisis') {
+            showLoading(false);
+            isAISearching = false;
+            return;
+          }
+          // For clarify responses, wait for user selection
+          if (data.quickAnswer.type === 'clarify') {
+            showLoading(false);
+            isAISearching = false;
+            return;
+          }
         }
-        // For clarify responses, wait for user selection
-        if (data.quickAnswer.type === 'clarify') {
-          showLoading(false);
-          isAISearching = false;
-          return;
-        }
-        // For other quick answers, continue to show relevant programs below
       } else {
         hideQuickAnswer();
+
+        // Add response message to chat if open
+        if (!smartChatContainer?.classList.contains('hidden') && data.message) {
+          addChatMessage('assistant', data.message);
+          chatHistory.push({ role: 'assistant', content: data.message });
+
+          // Check message limit
+          if (isChatLimitReached()) {
+            showChatLimitMessage();
+          } else {
+            showChatInput();
+          }
+        }
       }
 
       // Extract program IDs/names from AI response
@@ -1576,6 +2447,13 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   function performFuzzySearch(query) {
+    // Check if we should suggest Smart Search for this query
+    if (shouldSuggestSmartSearch(query)) {
+      showSmartSearchSuggestion(query);
+    } else {
+      hideSmartSearchSuggestion();
+    }
+
     if (isHomepage) {
       // Homepage: show/hide search results section
       if (!query) {
@@ -1585,6 +2463,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
           if (p.wrapper) p.wrapper.classList.add('hidden');
         });
         noResultsEl?.classList.add('hidden');
+        hideSmartSearchSuggestion();
         return;
       }
 
@@ -2810,6 +3689,147 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   // We need to track result count for refinement detection
   // This is done by modifying the performSearch function behavior
   // The refinement bar will show based on the search results
+
+  // =========================================================================
+  // LOCATION POPOVER HANDLERS
+  // =========================================================================
+  const locationQuickBtn = document.getElementById('location-quick-btn');
+  const locationQuickText = document.getElementById('location-quick-text');
+  const locationPopover = document.getElementById('location-popover');
+  const popoverGpsBtn = document.getElementById('popover-gps-btn');
+  const popoverZipInput = document.getElementById('popover-zip-input') as HTMLInputElement | null;
+  const popoverSubmitBtn = document.getElementById('popover-submit-btn');
+
+  // Update the location quick button text based on current location
+  function updateLocationQuickButton() {
+    if (!locationQuickText) return;
+    if (currentLocation) {
+      const displayName = currentLocation.city
+        ? capitalizeCityName(currentLocation.city)
+        : currentLocation.county;
+      locationQuickText.textContent = displayName;
+      // Also store for API calls
+      localStorage.setItem('userLocation', currentLocation.city || '');
+      localStorage.setItem('userCounty', currentLocation.county || '');
+    } else {
+      locationQuickText.textContent = 'Set location';
+      localStorage.removeItem('userLocation');
+      localStorage.removeItem('userCounty');
+    }
+  }
+
+  // Show/hide popover
+  function toggleLocationPopover() {
+    if (!locationPopover) return;
+    locationPopover.classList.toggle('hidden');
+    if (!locationPopover.classList.contains('hidden') && popoverZipInput) {
+      popoverZipInput.focus();
+    }
+  }
+
+  // Close popover
+  function closeLocationPopover() {
+    if (locationPopover) {
+      locationPopover.classList.add('hidden');
+    }
+  }
+
+  // Toggle on button click
+  locationQuickBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLocationPopover();
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (
+      locationPopover &&
+      !locationPopover.contains(e.target as Node) &&
+      locationQuickBtn &&
+      !locationQuickBtn.contains(e.target as Node)
+    ) {
+      closeLocationPopover();
+    }
+  });
+
+  // GPS button in popover
+  popoverGpsBtn?.addEventListener('click', async () => {
+    if (!navigator.geolocation) {
+      announceToScreenReader('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    const originalText = popoverGpsBtn.textContent;
+    popoverGpsBtn.textContent = 'Getting location...';
+    (popoverGpsBtn as HTMLButtonElement).disabled = true;
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const county = findNearestCounty(latitude, longitude);
+
+        currentLocation = {
+          source: 'gps',
+          county: county,
+        };
+
+        updateLocationDisplay();
+        updateLocationQuickButton();
+        localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
+
+        popoverGpsBtn.textContent = originalText;
+        (popoverGpsBtn as HTMLButtonElement).disabled = false;
+        closeLocationPopover();
+
+        announceToScreenReader(`Location set to ${county}.`);
+      },
+      () => {
+        announceToScreenReader('Could not get your location. Please enter a ZIP code or city.');
+        popoverGpsBtn.textContent = originalText;
+        (popoverGpsBtn as HTMLButtonElement).disabled = false;
+      },
+      { enableHighAccuracy: false, timeout: 10000 }
+    );
+  });
+
+  // ZIP/city input in popover
+  function handlePopoverLocationSubmit() {
+    if (!popoverZipInput) return;
+    const value = popoverZipInput.value.trim();
+    if (!value) return;
+
+    const result = lookupCountyAndCity(value);
+    if (result) {
+      currentLocation = {
+        source: 'manual',
+        input: value,
+        county: result.county,
+        city: result.city,
+      };
+      updateLocationDisplay();
+      updateLocationQuickButton();
+      localStorage.setItem('baynavigator_location', JSON.stringify(currentLocation));
+      closeLocationPopover();
+      const locationName = result.city ? capitalizeCityName(result.city) : result.county;
+      announceToScreenReader(`Location set to ${locationName}.`);
+    } else {
+      announceToScreenReader('Location not found. Please try a different ZIP code or city.');
+    }
+  }
+
+  popoverSubmitBtn?.addEventListener('click', handlePopoverLocationSubmit);
+  popoverZipInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handlePopoverLocationSubmit();
+    }
+    if (e.key === 'Escape') {
+      closeLocationPopover();
+    }
+  });
+
+  // Initialize location quick button on load
+  updateLocationQuickButton();
 </script>
 
 <style>
@@ -3049,7 +4069,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   .quick-answer-clarify {
-    @apply bg-primary-50 dark:bg-primary-950 border-primary-300 dark:border-primary-700;
+    @apply bg-primary-50 dark:bg-primary-900 border-primary-300 dark:border-primary-700;
   }
 
   .quick-answer-guide {
@@ -3157,6 +4177,66 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .quick-answer-card {
+      animation: none;
+    }
+  }
+
+  /* Smart Chat Typing Indicator */
+  .typing-indicator {
+    @apply flex items-center gap-1;
+  }
+
+  .typing-indicator span {
+    @apply w-2 h-2 bg-neutral-400 dark:bg-neutral-500 rounded-full;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+  }
+
+  .typing-indicator span:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  .typing-indicator span:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0s;
+  }
+
+  @keyframes typingBounce {
+    0%,
+    80%,
+    100% {
+      transform: scale(0.6);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Smart Chat Message Animation */
+  #smart-chat-messages > div {
+    animation: chatMessageSlide 0.2s ease-out;
+  }
+
+  @keyframes chatMessageSlide {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-indicator span {
+      animation: none;
+    }
+    #smart-chat-messages > div {
       animation: none;
     }
   }

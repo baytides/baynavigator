@@ -315,6 +315,72 @@
     }
   },
 
+  "categoryIntentPatterns": [
+    {
+      "patterns": [
+        "need food",
+        "help with food",
+        "help finding food",
+        "find food",
+        "looking for food",
+        "food help",
+        "food resources",
+        "food assistance",
+        "where can i get food",
+        "how to get food"
+      ],
+      "response": {
+        "type": "category_search",
+        "title": "Food Assistance",
+        "message": "Here are food assistance programs in your area:",
+        "guideUrl": "/eligibility/food",
+        "guideText": "See food program eligibility",
+        "search": "food bank calfresh snap ebt wic meals pantry free meals groceries"
+      }
+    },
+    {
+      "patterns": [
+        "need housing",
+        "help with housing",
+        "help finding housing",
+        "find housing",
+        "looking for housing",
+        "housing help",
+        "housing resources",
+        "housing assistance",
+        "rent help",
+        "help with rent"
+      ],
+      "response": {
+        "type": "category_search",
+        "title": "Housing Assistance",
+        "message": "Here are housing assistance programs in your area:",
+        "guideUrl": "/eligibility/housing",
+        "guideText": "See housing program eligibility",
+        "search": "section 8 housing voucher rental assistance emergency shelter affordable housing"
+      }
+    },
+    {
+      "patterns": [
+        "need healthcare",
+        "help with healthcare",
+        "health insurance",
+        "need insurance",
+        "medical help",
+        "doctor help",
+        "find a doctor"
+      ],
+      "response": {
+        "type": "category_search",
+        "title": "Healthcare",
+        "message": "Here are healthcare programs in your area:",
+        "guideUrl": "/eligibility/healthcare",
+        "guideText": "See healthcare program eligibility",
+        "search": "medi-cal covered california medicare community clinic health insurance"
+      }
+    }
+  ],
+
   "programQueries": [
     {
       "patterns": [
