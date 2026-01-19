@@ -16,10 +16,51 @@
  * Privacy: Only query text is sent to AI - no personal data collected
  */
 
-const { createLogger, createTimer, extractErrorInfo } = require('../shared/logger');
+const { createLogger, createTimer, extractErrorInfo, hashIP } = require('../shared/logger');
 const { TableClient, AzureNamedKeyCredential } = require('@azure/data-tables');
 const fs = require('fs');
 const path = require('path');
+
+// =============================================================================
+// PER-CLIENT RATE LIMITING (using hashed IP for privacy)
+// Prevents abuse without storing actual IP addresses
+// =============================================================================
+const RATE_LIMIT_REQUESTS = 30; // Max requests per client per window
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
+const clientRequests = new Map(); // Hashed IP -> { count, windowStart }
+
+/**
+ * Check if a client (by hashed IP) is rate limited
+ * Returns true if allowed, false if rate limited
+ */
+function checkRateLimit(clientHash) {
+  const now = Date.now();
+  const record = clientRequests.get(clientHash);
+
+  // Clean up old entries periodically (every 100 checks)
+  if (Math.random() < 0.01) {
+    for (const [hash, data] of clientRequests) {
+      if (now - data.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
+        clientRequests.delete(hash);
+      }
+    }
+  }
+
+  if (!record || now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
+    // New window
+    clientRequests.set(clientHash, { count: 1, windowStart: now });
+    return true;
+  }
+
+  if (record.count >= RATE_LIMIT_REQUESTS) {
+    // Rate limited
+    return false;
+  }
+
+  // Increment count
+  record.count++;
+  return true;
+}
 
 // Load AI reference documents at startup (cost optimization)
 let commonQueries = null;
@@ -87,6 +128,38 @@ const AZURE_SEARCH_ENDPOINT =
   process.env.AZURE_SEARCH_ENDPOINT || 'https://baynavigator-search.search.windows.net';
 const AZURE_SEARCH_KEY = process.env.AZURE_SEARCH_KEY;
 const SEARCH_INDEX = 'programs';
+
+// =============================================================================
+// PRIVACY: QUERY SANITIZATION
+// Strips personally identifiable information (PII) before processing
+// Users should never include personal data, but this protects them if they do
+// =============================================================================
+
+/**
+ * Sanitize user query by removing PII (SSN, email, phone, CC, account numbers)
+ * @param {string} query - Raw user input
+ * @returns {string} - Sanitized query with PII redacted
+ */
+function sanitizeQuery(query) {
+  if (!query || typeof query !== 'string') return query;
+
+  return (
+    query
+      // SSN with dashes (XXX-XX-XXXX)
+      .replace(/\b\d{3}-\d{2}-\d{4}\b/g, '[REDACTED]')
+      // SSN without dashes (9 consecutive digits)
+      .replace(/\b\d{9}\b/g, '[REDACTED]')
+      // Email addresses
+      .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[REDACTED]')
+      // Phone numbers (various formats)
+      .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, '[REDACTED]')
+      .replace(/\(\d{3}\)\s*\d{3}[-.\s]?\d{4}/g, '[REDACTED]')
+      // Credit card numbers (13-19 digits with optional spaces/dashes)
+      .replace(/\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{1,7}\b/g, '[REDACTED]')
+      // Bank account numbers (8-17 digits)
+      .replace(/\b\d{8,17}\b/g, '[REDACTED]')
+  );
+}
 
 // =============================================================================
 // QUICK ANSWER FUNCTIONS
@@ -1343,6 +1416,26 @@ module.exports = async function (context, req) {
   try {
     logger.logRequest(req);
 
+    // Per-client rate limiting using hashed IP (privacy-preserving)
+    const forwardedFor = req.headers?.['x-forwarded-for'];
+    const clientIP = forwardedFor?.split(',')[0]?.trim();
+    const clientHash = hashIP(clientIP);
+
+    if (!checkRateLimit(clientHash)) {
+      logger.warn('Rate limited', { clientHash });
+      context.res = {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          'Retry-After': '60',
+        },
+        body: JSON.stringify({
+          error: 'Too many requests. Please wait a minute and try again.',
+        }),
+      };
+      return;
+    }
+
     // Validate configuration (Cloudflare Workers AI for LLM, Azure Search for retrieval)
     if (!CF_ACCOUNT_ID || !CF_API_TOKEN) {
       logger.warn('Cloudflare Workers AI not configured, using synonym expansion fallback');
@@ -1374,11 +1467,13 @@ module.exports = async function (context, req) {
       return;
     }
 
-    const userMessage = message.trim().slice(0, 500);
+    // Sanitize user input to remove any PII before processing or logging
+    const userMessage = sanitizeQuery(message.trim().slice(0, 500));
     logger.info('Processing query', {
       queryLength: userMessage.length,
       wordCount: userMessage.split(/\s+/).length,
       hasHistory: conversationHistory.length > 0,
+      // Note: Only sanitized message is logged for privacy
     });
 
     // Extract location from query (zip code, city, or county) - no AI needed

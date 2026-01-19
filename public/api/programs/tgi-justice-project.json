@@ -1,7 +1,7 @@
 {
   "id": "tgi-justice-project",
   "name": "TGI Justice Project",
-  "category": "community",
+  "category": "lgbtq",
   "description": "Free reentry support, advocacy, and community resources for trans/intersex individuals",
   "fullDescription": "TGI Justice Project supports transgender and intersex people who are currently or formerly incarcerated, providing reentry services, advocacy, and community support.",
   "whatTheyOffer": "- Reentry support services\n- Advocacy for incarcerated trans/intersex people\n- Housing assistance\n- Legal name/gender marker changes\n- Community organizing\n- Mutual aid support\n",
@@ -12,7 +12,7 @@
     "income-eligible"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://tgijp.org/",

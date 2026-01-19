@@ -1,0 +1,429 @@
+# Bay Navigator - Safety & Crisis Services
+# Domestic violence services, emergency shelters, and crisis support
+
+- id: la-casa-madres
+  name: La Casa de las Madres
+  category: Safety
+  area: San Francisco
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    La Casa de las Madres, San Francisco, crisis line, emergency shelter, counseling, legal advocacy, children programs,
+    transitional housing, Spanish, 877-503-1850
+  description: >-
+    La Casa de las Madres provides comprehensive support services for individuals and families seeking safety, offering
+    a 24/7 crisis line, emergency shelter, counseling, legal advocacy, and children's programs throughout San Francisco.
+  what_they_offer: |
+    - 24/7 crisis line support
+    - Emergency shelter services
+    - Individual and group counseling
+    - Legal advocacy and court accompaniment
+    - Children and youth programs
+    - Transitional housing assistance
+    - Economic empowerment programs
+    - Support in English and Spanish
+  how_to_get_it: |
+    1. Call 24-hour crisis line: 877-503-1850
+    2. Teen crisis line: 877-923-0700
+    3. Text line: 415-200-3575
+    4. Speak with trained advocate
+    5. Receive safety planning support
+    6. Access shelter and services as needed
+  phone: 877-503-1850
+  benefit: Emergency shelter, counseling, legal advocacy, and family support services
+  timeframe: 24/7
+  link: https://www.lacasa.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+  latitude: 37.7749
+  longitude: -122.4194
+- id: woman-inc-sf
+  name: W.O.M.A.N., Inc.
+  category: Safety
+  area: San Francisco
+  groups:
+    - survivors
+    - everyone
+  keywords: >-
+    WOMAN Inc, San Francisco, crisis intervention, counseling, advocacy, support services, safety, 24/7 hotline,
+    415-864-4722
+  description: >-
+    W.O.M.A.N., Inc. has served the San Francisco Bay Area since 1978, providing crisis intervention, counseling,
+    advocacy, and support services for individuals experiencing unsafe home situations.
+  what_they_offer: |
+    - 24-hour crisis line
+    - Individual counseling sessions
+    - Support groups
+    - Legal advocacy
+    - Safety planning
+    - Latinx program with Spanish-speaking staff
+    - Community education
+    - Referrals to resources
+  how_to_get_it: |
+    1. Call crisis line: 415-864-4722
+    2. For Latinx program: 415-969-6811
+    3. Email for appointments
+    4. Walk-in hours available
+    5. All services confidential
+    6. No insurance required
+  phone: 415-864-4722
+  benefit: Crisis support, counseling, legal advocacy, and Spanish-language services
+  timeframe: 24/7 crisis line
+  link: https://www.womaninc.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'
+- id: safe-place-oakland
+  name: A Safe Place
+  category: Safety
+  area: Alameda County
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    A Safe Place, Oakland, East Bay, Alameda County, crisis hotline, emergency shelter, legal advocacy, counseling,
+    children services, 510-536-7233
+  description: >-
+    A Safe Place provides comprehensive support services including emergency shelter, legal advocacy, counseling, and
+    community education for individuals and families in the East Bay seeking safety.
+  what_they_offer: |
+    - 24-hour crisis hotline
+    - Emergency shelter
+    - Legal advocacy and court support
+    - Individual and group counseling
+    - Children's services
+    - Transitional housing
+    - Community outreach and education
+    - Support in multiple languages
+  how_to_get_it: |
+    1. Call 24-hour hotline: 510-536-7233
+    2. Speak with trained advocate
+    3. Receive safety planning
+    4. Access shelter if needed
+    5. Connect with ongoing services
+    6. All services free and confidential
+  phone: 510-536-7233
+  benefit: Emergency shelter, legal advocacy, counseling, and family support in the East Bay
+  timeframe: 24/7
+  link: https://www.asafeplace.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+- id: building-futures-alameda
+  name: Building Futures
+  category: Safety
+  area: Alameda County
+  groups:
+    - survivors
+    - families
+    - unhoused
+  keywords: >-
+    Building Futures, Alameda County, Sister Me Home, crisis line, emergency shelter, counseling, housing navigation,
+    children programs, 1-866-292-9688
+  description: >-
+    Building Futures provides shelter, support services, and pathways to stability for individuals and families in
+    Alameda County facing homelessness or unsafe home situations.
+  what_they_offer: |
+    - 24-hour crisis line
+    - Emergency shelter at Sister Me Home
+    - Free counseling sessions
+    - Court accompaniment
+    - Children's programs
+    - Housing navigation
+    - Support groups
+    - Services in English and Spanish
+  how_to_get_it: |
+    1. Call crisis line: 1-866-292-9688
+    2. Speak with advocate
+    3. Complete intake assessment
+    4. Access emergency shelter
+    5. Receive ongoing case management
+    6. Work toward permanent housing
+  phone: 1-866-292-9688
+  benefit: Emergency shelter, free counseling, court support, and housing assistance
+  timeframe: 24/7
+  link: https://bfwc.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'
+- id: stand-contra-costa
+  name: STAND! For Families Free of Violence
+  category: Safety
+  area: Contra Costa County
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    STAND, Contra Costa County, crisis line, emergency shelter, family counseling, legal advocacy, youth services,
+    prevention education, 888-215-5555
+  description: >-
+    STAND! provides comprehensive family safety services throughout Contra Costa County, including crisis intervention,
+    emergency shelter, counseling, legal services, and prevention education.
+  what_they_offer: |
+    - 24-hour crisis line
+    - Emergency shelter
+    - Individual and family counseling
+    - Legal advocacy
+    - Support groups
+    - Youth services
+    - Prevention education
+    - Certified batterer intervention program
+  how_to_get_it: |
+    1. Call 24-hour line: 888-215-5555
+    2. Or text: 925-956-8037
+    3. Speak with trained advocate
+    4. Receive safety planning
+    5. Access shelter and services
+    6. All services confidential
+  phone: 888-215-5555
+  benefit: Emergency shelter, counseling, legal advocacy, and family services in Contra Costa
+  timeframe: 24/7
+  link: https://standffov.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+- id: cora-san-mateo
+  name: CORA (Community Overcoming Relationship Abuse)
+  category: Safety
+  area: San Mateo County
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    CORA, San Mateo County, crisis hotline, emergency shelter, counseling, restraining order, children counseling,
+    transitional housing, 800-300-1080
+  description: >-
+    CORA serves San Mateo County with comprehensive support services including a 24-hour hotline, emergency shelter,
+    counseling, legal services, and community education programs.
+  what_they_offer: |
+    - 24-hour crisis hotline
+    - Emergency shelter
+    - Individual and group counseling
+    - Legal advocacy and restraining order help
+    - Children's counseling
+    - Transitional housing
+    - Support in multiple languages
+    - Community education
+  how_to_get_it: |
+    1. Call hotline: 800-300-1080
+    2. Speak with trained advocate
+    3. Create safety plan together
+    4. Access shelter if needed
+    5. Connect with counseling
+    6. Receive legal support
+  phone: 800-300-1080
+  benefit: Emergency shelter, counseling, legal advocacy in San Mateo County
+  timeframe: 24/7
+  link: https://www.corasupport.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'
+- id: next-door-santa-clara
+  name: Next Door Solutions
+  category: Safety
+  area: Santa Clara County
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    Next Door Solutions, Santa Clara County, San Jose, crisis line, emergency shelter, counseling, legal advocacy,
+    economic empowerment, multilingual, 408-279-2962
+  description: >-
+    Next Door Solutions provides comprehensive support services in Santa Clara County including crisis intervention,
+    emergency shelter, counseling, legal help, and economic empowerment programs.
+  what_they_offer: |
+    - 24-hour crisis hotline
+    - Emergency shelter
+    - Counseling services
+    - Legal advocacy
+    - Children's services
+    - Economic empowerment
+    - Support groups
+    - Multilingual services
+  how_to_get_it: |
+    1. Call crisis line: 408-279-2962
+    2. Speak with advocate
+    3. Receive safety planning
+    4. Access shelter and services
+    5. Connect with ongoing support
+    6. All services free and confidential
+  phone: 408-279-2962
+  benefit: Emergency shelter, counseling, legal help in Santa Clara County
+  timeframe: 24/7
+  link: https://www.nextdoor.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+- id: narika-south-asian
+  name: Narika
+  category: Safety
+  area: Bay Area
+  groups:
+    - survivors
+    - immigrants
+  keywords: >-
+    Narika, South Asian, Hindi, Urdu, Punjabi, Bengali, Tamil, helpline, case management, legal advocacy, immigration
+    assistance, housing support, 800-215-7308
+  description: >-
+    Narika provides culturally specific support services for South Asian individuals and families, offering a
+    confidential helpline, case management, legal advocacy, and support groups in multiple South Asian languages.
+  what_they_offer: |
+    - Confidential helpline
+    - Case management
+    - Legal advocacy
+    - Support groups
+    - Immigration assistance
+    - Housing support
+    - Services in Hindi, Urdu, Punjabi, Bengali, Tamil, and more
+    - Culturally sensitive approach
+  how_to_get_it: |
+    1. Call helpline: 800-215-7308
+    2. Or email: narika@narika.org
+    3. Speak with trained advocate
+    4. Services in your language
+    5. Receive culturally sensitive support
+    6. Access resources and referrals
+  phone: 800-215-7308
+  benefit: Culturally specific support services in South Asian languages
+  timeframe: Ongoing
+  link: https://www.narika.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'
+- id: asian-womens-shelter
+  name: Asian Women's Shelter
+  category: Safety
+  area: Bay Area
+  groups:
+    - survivors
+    - immigrants
+  keywords: >-
+    Asian Women's Shelter, Asian, Pacific Islander, multilingual, 40+ languages, crisis line, emergency shelter,
+    counseling, legal advocacy, immigration assistance, 877-751-0880
+  description: >-
+    Asian Women's Shelter provides comprehensive, multilingual services including emergency shelter, counseling, legal
+    advocacy, and support programs serving Asian and Pacific Islander communities throughout the Bay Area.
+  what_they_offer: |
+    - 24-hour multilingual crisis line
+    - Emergency shelter
+    - Counseling services
+    - Legal advocacy
+    - Case management
+    - Children's programs
+    - Support in 40+ Asian languages
+    - Immigration assistance
+  how_to_get_it: |
+    1. Call crisis line: 877-751-0880
+    2. Services in your language available
+    3. Speak with trained advocate
+    4. Receive safety planning
+    5. Access shelter and services
+    6. All services confidential
+  phone: 877-751-0880
+  benefit: Multilingual emergency shelter and support services for Asian communities
+  timeframe: 24/7
+  link: https://www.sfaws.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+- id: maitri-south-bay
+  name: Maitri
+  category: Safety
+  area: Santa Clara County
+  groups:
+    - survivors
+    - immigrants
+  keywords: >-
+    Maitri, South Asian, Santa Clara County, Hindi, Gujarati, Tamil, helpline, emergency shelter, case management, legal
+    advocacy, immigration assistance, 888-862-4874
+  description: >-
+    Maitri serves South Asian families in the Bay Area, providing culturally specific support services including a
+    helpline, emergency shelter, counseling, and legal assistance in multiple languages.
+  what_they_offer: |
+    - 24-hour helpline
+    - Emergency shelter
+    - Case management
+    - Legal advocacy
+    - Counseling services
+    - Support groups
+    - Immigration assistance
+    - Services in Hindi, Gujarati, Tamil, and more
+  how_to_get_it: |
+    1. Call helpline: 888-862-4874
+    2. Services in your language
+    3. Speak with trained advocate
+    4. Receive confidential support
+    5. Access shelter if needed
+    6. Connect with ongoing services
+  phone: 888-862-4874
+  benefit: Culturally specific shelter and support for South Asian families
+  timeframe: 24/7
+  link: https://www.maitri.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'
+- id: family-justice-center-alameda
+  name: Alameda County Family Justice Center
+  category: Safety
+  area: Alameda County
+  groups:
+    - survivors
+    - families
+  keywords: >-
+    Family Justice Center, Alameda County, Oakland, one-stop services, legal assistance, victim advocacy, counseling,
+    restraining order, immigration, children services, 510-267-8800
+  description: >-
+    The Alameda County Family Justice Center brings together multiple agencies under one roof to provide comprehensive
+    services including legal help, counseling, victim advocacy, and support for families seeking safety.
+  what_they_offer: |
+    - One-stop services center
+    - Legal assistance
+    - Victim advocacy
+    - Counseling services
+    - Restraining order help
+    - Immigration assistance
+    - Children's services
+    - Multiple agencies in one location
+  how_to_get_it: |
+    1. Call: 510-267-8800
+    2. Walk-in welcome during business hours
+    3. Appointment recommended but not required
+    4. Access multiple services in one visit
+    5. All services free and confidential
+    6. Interpretation available
+  phone: 510-267-8800
+  address: 470 27th Street, Oakland, CA 94612
+  benefit: One-stop center with legal, counseling, and advocacy services
+  timeframe: Mon-Fri 8:30am-5pm
+  link: https://www.acfjc.org/
+  link_text: Get Help
+  verified_date: '2026-01-09'
+  latitude: 37.8155
+  longitude: -122.2618
+- id: love-is-respect
+  name: Love Is Respect
+  category: Safety
+  area: Nationwide
+  groups:
+    - survivors
+    - youth
+  keywords: >-
+    Love Is Respect, youth, young people, ages 13-26, peer advocates, relationship help, text LOVEIS 22522,
+    1-866-331-9474, online chat, safety planning
+  description: >-
+    Love Is Respect provides support for young people ages 13-26 navigating relationships, offering a 24/7 helpline,
+    text support, and online chat with trained peer advocates.
+  what_they_offer: |
+    - 24/7 phone support
+    - Text support (text LOVEIS to 22522)
+    - Online chat
+    - Peer advocates aged 18-26
+    - Relationship education
+    - Safety planning
+    - Local resource referrals
+    - Support for all genders
+  how_to_get_it: |
+    1. Call: 1-866-331-9474
+    2. Text LOVEIS to 22522
+    3. Chat online at loveisrespect.org
+    4. Peer advocates available 24/7
+    5. Confidential and judgment-free
+    6. No question too small
+  phone: 1-866-331-9474
+  benefit: 24/7 peer support for young people navigating relationships
+  timeframe: 24/7
+  link: https://www.loveisrespect.org/
+  link_text: Get Support
+  verified_date: '2026-01-09'

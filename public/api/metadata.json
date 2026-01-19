@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-01-19T05:42:55.897Z",
+  "generatedAt": "2026-01-19T21:25:57.833Z",
   "totalPrograms": 858,
   "endpoints": {
     "programs": "/api/programs.json",

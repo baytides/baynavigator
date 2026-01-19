@@ -4,19 +4,31 @@
       "id": "community",
       "name": "Community",
       "icon": "🏘️",
-      "programCount": 146
+      "programCount": 58
     },
     {
       "id": "education",
       "name": "Education",
       "icon": "📚",
-      "programCount": 21
+      "programCount": 28
+    },
+    {
+      "id": "employment",
+      "name": "Employment",
+      "icon": "💼",
+      "programCount": 22
     },
     {
       "id": "equipment",
       "name": "Equipment",
       "icon": "🔧",
       "programCount": 10
+    },
+    {
+      "id": "federal-benefits",
+      "name": "Federal Benefits",
+      "icon": "🏛️",
+      "programCount": 68
     },
     {
       "id": "finance",
@@ -37,10 +49,22 @@
       "programCount": 45
     },
     {
+      "id": "housing",
+      "name": "Housing",
+      "icon": "🏠",
+      "programCount": 22
+    },
+    {
       "id": "legal",
       "name": "Legal",
       "icon": "⚖️",
-      "programCount": 21
+      "programCount": 27
+    },
+    {
+      "id": "lgbtq",
+      "name": "LGBTQ+",
+      "icon": "🏳️‍🌈",
+      "programCount": 16
     },
     {
       "id": "library_resources",
@@ -64,7 +88,13 @@
       "id": "retail",
       "name": "Retail",
       "icon": "🛍️",
-      "programCount": 23
+      "programCount": 56
+    },
+    {
+      "id": "safety",
+      "name": "Safety",
+      "icon": "🛡️",
+      "programCount": 12
     },
     {
       "id": "technology",

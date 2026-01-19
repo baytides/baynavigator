@@ -1,7 +1,7 @@
 {
   "id": "echo-housing",
   "name": "ECHO Housing",
-  "category": "community",
+  "category": "housing",
   "description": "Addresses housing discrimination complaints and ensures equal access to housing",
   "fullDescription": "ECHO Housing is a fair housing organization that investigates discrimination complaints, provides housing counseling, and works to ensure equal access to housing for all Bay Area residents.",
   "whatTheyOffer": "- Housing discrimination investigation\n- Fair housing complaint filing\n- Housing counseling services\n- Tenant rights education\n- Landlord compliance assistance\n- Legal referrals when needed\n",
@@ -10,7 +10,7 @@
     "everyone"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://www.echofairhousing.org/",

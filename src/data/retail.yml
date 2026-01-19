@@ -1,19 +1,5 @@
 # Bay Navigator - Retail Discounts
 # Store and retail discounts for seniors, military, first responders, teachers, and more
-#
-# Categories:
-# - Clothing & Apparel
-# - Department Stores
-# - Restaurants & Dining
-# - Pharmacy & Health
-# - Office & Craft Supplies
-# - Outdoor & Sporting Goods
-# - Car Rental & Automotive
-# - Gaming & Entertainment
-
-# ============================================================================
-# DEPARTMENT STORES
-# ============================================================================
 
 - id: kohls-community-discounts
   name: Kohl's Senior & Military Discounts
@@ -23,7 +9,9 @@
     - seniors
     - veterans
   keywords: Kohl's, senior discount, military discount, veteran, 60+, Wednesday, Monday, retail, department store, 15% off
-  description: Kohl's offers 15% off in-store purchases for seniors (60+) every Wednesday and for military/veterans every Monday with valid verification.
+  description: >-
+    Kohl's offers 15% off in-store purchases for seniors (60+) every Wednesday and for military/veterans every Monday
+    with valid verification.
   what_they_offer: |
     - 15% off in-store purchases for seniors every Wednesday
     - 15% off in-store purchases for military every Monday
@@ -41,7 +29,6 @@
   link: https://www.kohls.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
 - id: ross-senior-discount
   name: Ross Dress for Less Senior Discount
   category: Retail
@@ -49,7 +36,9 @@
   groups:
     - seniors
   keywords: Ross, senior discount, 55+, Tuesday, retail, clothing, discount store, 10% off
-  description: Ross Dress for Less offers customers aged 55 and older a 10% discount on in-store purchases every Tuesday. Ask the cashier at checkout.
+  description: >-
+    Ross Dress for Less offers customers aged 55 and older a 10% discount on in-store purchases every Tuesday. Ask the
+    cashier at checkout.
   what_they_offer: |
     - 10% off entire in-store purchase
     - Available every Tuesday
@@ -67,11 +56,6 @@
   link: https://www.rossstores.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
-# ============================================================================
-# RESTAURANTS & DINING
-# ============================================================================
-
 - id: dennys-senior-menu
   name: Denny's 55+ Menu
   category: Retail
@@ -79,7 +63,9 @@
   groups:
     - seniors
   keywords: Denny's, senior discount, 55+, senior menu, restaurant, breakfast, affordable meals
-  description: Denny's offers a dedicated 55+ menu with smaller portions at reduced prices. Available at all locations for guests aged 55 and older.
+  description: >-
+    Denny's offers a dedicated 55+ menu with smaller portions at reduced prices. Available at all locations for guests
+    aged 55 and older.
   what_they_offer: |
     - Dedicated 55+ menu with value pricing
     - Smaller portion sizes
@@ -97,7 +83,6 @@
   link: https://www.dennys.com/
   link_text: View Menu
   verified_date: '2026-01-14'
-
 - id: ihop-senior-menu
   name: IHOP 55+ Menu
   category: Retail
@@ -105,7 +90,9 @@
   groups:
     - seniors
   keywords: IHOP, senior discount, 55+, senior menu, restaurant, breakfast, pancakes, affordable meals
-  description: IHOP offers a 55+ menu featuring smaller portions of popular items at reduced prices. Available at participating locations for guests aged 55 and older.
+  description: >-
+    IHOP offers a 55+ menu featuring smaller portions of popular items at reduced prices. Available at participating
+    locations for guests aged 55 and older.
   what_they_offer: |
     - 55+ menu with reduced pricing
     - Smaller portion sizes
@@ -123,11 +110,6 @@
   link: https://www.ihop.com/
   link_text: Find a Location
   verified_date: '2026-01-14'
-
-# ============================================================================
-# PHARMACY & HEALTH
-# ============================================================================
-
 - id: walgreens-senior-day
   name: Walgreens Seniors Day
   category: Retail
@@ -135,7 +117,9 @@
   groups:
     - seniors
   keywords: Walgreens, senior discount, 55+, first Tuesday, pharmacy, retail, 20% off, myWalgreens
-  description: Walgreens offers seniors aged 55+ a 20% discount on regularly priced items the first Tuesday of each month. Must be a myWalgreens member (free to join).
+  description: >-
+    Walgreens offers seniors aged 55+ a 20% discount on regularly priced items the first Tuesday of each month. Must be
+    a myWalgreens member (free to join).
   what_they_offer: |
     - 20% off regularly priced items
     - Available first Tuesday of each month
@@ -153,7 +137,6 @@
   link: https://www.walgreens.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
 - id: rite-aid-senior-day
   name: Rite Aid Senior Day
   category: Retail
@@ -161,7 +144,9 @@
   groups:
     - seniors
   keywords: Rite Aid, senior discount, 65+, first Wednesday, pharmacy, retail, rewards points
-  description: Rite Aid offers seniors aged 65+ 5x rewards points on qualifying purchases the first Wednesday of each month with their free Rite Aid Rewards card.
+  description: >-
+    Rite Aid offers seniors aged 65+ 5x rewards points on qualifying purchases the first Wednesday of each month with
+    their free Rite Aid Rewards card.
   what_they_offer: |
     - 5x rewards points on qualifying purchases
     - First Wednesday of each month
@@ -179,11 +164,6 @@
   link: https://www.riteaid.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
-# ============================================================================
-# CLOTHING & APPAREL
-# ============================================================================
-
 - id: adidas-first-responder
   name: Adidas First Responder Discount
   category: Retail
@@ -191,7 +171,9 @@
   groups:
     - first-responders
   keywords: Adidas, first responder discount, firefighter, police, EMT, 30% off, athletic wear, shoes, ID.me
-  description: Adidas offers a 30% discount to first responders on full-price items and 20% off at outlet stores. Verification through ID.me required.
+  description: >-
+    Adidas offers a 30% discount to first responders on full-price items and 20% off at outlet stores. Verification
+    through ID.me required.
   what_they_offer: |
     - 30% off full-price items on adidas.com
     - 20% off at Adidas outlet stores
@@ -209,7 +191,6 @@
   link: https://www.adidas.com/us/discount-programs
   link_text: Verify & Save
   verified_date: '2026-01-14'
-
 - id: 511-tactical-first-responder
   name: 5.11 Tactical First Responder Discount
   category: Retail
@@ -218,7 +199,9 @@
     - first-responders
     - veterans
   keywords: 5.11 Tactical, first responder, military, veteran, tactical gear, 25% off, GovX
-  description: 5.11 Tactical offers first responders and military personnel 25% off select gear and apparel through GovX verification.
+  description: >-
+    5.11 Tactical offers first responders and military personnel 25% off select gear and apparel through GovX
+    verification.
   what_they_offer: |
     - 25% off select tactical gear and apparel
     - Includes bags, boots, clothing, and accessories
@@ -236,7 +219,6 @@
   link: https://www.511tactical.com/
   link_text: Shop Now
   verified_date: '2026-01-14'
-
 - id: samsung-first-responder
   name: Samsung First Responder Discount
   category: Retail
@@ -244,7 +226,9 @@
   groups:
     - first-responders
   keywords: Samsung, first responder, firefighter, police, EMT, 30% off, Galaxy, phone, tablet, TV
-  description: Samsung offers first responders up to 30% off on phones, tablets, TVs, and appliances through their Education Offers Program with ID.me verification.
+  description: >-
+    Samsung offers first responders up to 30% off on phones, tablets, TVs, and appliances through their Education Offers
+    Program with ID.me verification.
   what_they_offer: |
     - Up to 30% off Samsung phones and tablets
     - Discounts on TVs and home appliances
@@ -262,7 +246,6 @@
   link: https://www.samsung.com/us/shop/discount-program/first-responders/
   link_text: Verify & Shop
   verified_date: '2026-01-14'
-
 - id: carhartt-first-responder
   name: Carhartt First Responder Discount
   category: Retail
@@ -288,7 +271,6 @@
   link: https://www.carhartt.com/
   link_text: Shop & Verify
   verified_date: '2026-01-14'
-
 - id: lululemon-first-responder
   name: lululemon First Responder Discount
   category: Retail
@@ -296,7 +278,9 @@
   groups:
     - first-responders
   keywords: lululemon, first responder discount, athletic wear, yoga, 15% off, firefighter, police, EMT, nurse
-  description: lululemon offers first responders and healthcare workers a 15% discount on online and in-store purchases with verification.
+  description: >-
+    lululemon offers first responders and healthcare workers a 15% discount on online and in-store purchases with
+    verification.
   what_they_offer: |
     - 15% off online and in-store purchases
     - Applies to athletic wear, yoga gear, accessories
@@ -314,7 +298,6 @@
   link: https://info.lululemon.com/help/military-and-first-responders
   link_text: Learn More
   verified_date: '2026-01-14'
-
 - id: tuft-needle-first-responder
   name: Tuft & Needle First Responder Discount
   category: Retail
@@ -340,7 +323,6 @@
   link: https://www.tuftandneedle.com/
   link_text: Shop Now
   verified_date: '2026-01-14'
-
 - id: ll-bean-military
   name: L.L. Bean Military & First Responder Discount
   category: Retail
@@ -349,7 +331,9 @@
     - veterans
     - first-responders
   keywords: L.L. Bean, military discount, veteran, first responder, 10% off, outdoor gear, clothing
-  description: L.L. Bean offers a 10% discount to military personnel, veterans, and first responders on most purchases through SheerID verification.
+  description: >-
+    L.L. Bean offers a 10% discount to military personnel, veterans, and first responders on most purchases through
+    SheerID verification.
   what_they_offer: |
     - 10% off most purchases
     - Applies to outdoor gear, clothing, footwear
@@ -367,11 +351,6 @@
   link: https://www.llbean.com/llb/shop/516584
   link_text: Learn More
   verified_date: '2026-01-14'
-
-# ============================================================================
-# OFFICE & CRAFT SUPPLIES
-# ============================================================================
-
 - id: michaels-teacher-discount
   name: Michaels Teacher Discount
   category: Retail
@@ -379,7 +358,9 @@
   groups:
     - teachers
   keywords: Michaels, teacher discount, educator, 15% off, craft supplies, classroom, art supplies
-  description: Michaels offers teachers and educators 15% off every purchase in-store and online when enrolled in the free Michaels Rewards program.
+  description: >-
+    Michaels offers teachers and educators 15% off every purchase in-store and online when enrolled in the free Michaels
+    Rewards program.
   what_they_offer: |
     - 15% off every in-store and online purchase
     - Applies to craft supplies, art materials, décor
@@ -397,7 +378,6 @@
   link: https://www.michaels.com/rewards
   link_text: Join Rewards
   verified_date: '2026-01-14'
-
 - id: staples-teacher-discount
   name: Staples Teacher Rewards
   category: Retail
@@ -405,7 +385,9 @@
   groups:
     - teachers
   keywords: Staples, teacher discount, educator, 20% off, school supplies, office supplies, classroom
-  description: Staples offers teachers 20% off in-store purchases with app coupon and teacher ID, plus special back-to-school savings and rewards.
+  description: >-
+    Staples offers teachers 20% off in-store purchases with app coupon and teacher ID, plus special back-to-school
+    savings and rewards.
   what_they_offer: |
     - 20% off in-store with app coupon and teacher ID
     - Special teacher appreciation events
@@ -423,7 +405,6 @@
   link: https://www.staples.com/
   link_text: Download App
   verified_date: '2026-01-14'
-
 - id: office-depot-teacher-discount
   name: Office Depot/OfficeMax Teacher Discount
   category: Retail
@@ -431,7 +412,9 @@
   groups:
     - teachers
   keywords: Office Depot, OfficeMax, teacher discount, educator, 25% cash back, school supplies, classroom
-  description: Office Depot/OfficeMax offers teachers 25% cash back on qualifying in-store purchases with teacher ID through their rewards program.
+  description: >-
+    Office Depot/OfficeMax offers teachers 25% cash back on qualifying in-store purchases with teacher ID through their
+    rewards program.
   what_they_offer: |
     - 25% cash back on qualifying in-store purchases
     - Free rewards membership required
@@ -449,7 +432,6 @@
   link: https://www.officedepot.com/
   link_text: Join Rewards
   verified_date: '2026-01-14'
-
 - id: joann-teacher-discount
   name: JOANN Teacher Discount
   category: Retail
@@ -457,7 +439,9 @@
   groups:
     - teachers
   keywords: JOANN, teacher discount, educator, 15% off, craft supplies, fabric, classroom, art
-  description: JOANN offers teachers 15% off total purchase every day with valid teacher ID in-store or through online verification.
+  description: >-
+    JOANN offers teachers 15% off total purchase every day with valid teacher ID in-store or through online
+    verification.
   what_they_offer: |
     - 15% off total purchase
     - Applies to fabric, craft supplies, art materials
@@ -475,11 +459,6 @@
   link: https://www.joann.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
-# ============================================================================
-# CAR RENTAL & AUTOMOTIVE
-# ============================================================================
-
 - id: enterprise-adaptive-equipment
   name: Enterprise Adaptive Driving Equipment
   category: Retail
@@ -487,7 +466,9 @@
   groups:
     - disability
   keywords: Enterprise, car rental, adaptive equipment, hand controls, disability, accessible vehicle, mobility
-  description: Enterprise Rent-A-Car provides adaptive driving equipment at no additional charge to customers with disabilities, including hand controls, spinner knobs, left foot accelerators, and pedal extenders.
+  description: >-
+    Enterprise Rent-A-Car provides adaptive driving equipment at no additional charge to customers with disabilities,
+    including hand controls, spinner knobs, left foot accelerators, and pedal extenders.
   what_they_offer: |
     - Hand controls at no extra charge
     - Left foot accelerators
@@ -502,13 +483,12 @@
     4. Allow 24-72 hours advance notice
     5. Equipment installed before pickup
     6. No additional documentation required
-  phone: '1-866-225-4284'
+  phone: 1-866-225-4284
   benefit: Free adaptive driving equipment with car rental for customers with disabilities
   timeframe: Ongoing
   link: https://www.enterprise.com/en/help/faqs/accessibility.html
   link_text: Learn More
   verified_date: '2026-01-14'
-
 - id: hertz-accessibility-services
   name: Hertz Accessibility Services
   category: Retail
@@ -516,7 +496,9 @@
   groups:
     - disability
   keywords: Hertz, car rental, hand controls, disability, accessible vehicle, mobility, adaptive equipment
-  description: Hertz offers hand controls, spinner knobs, and accessible parking services to customers with disabilities at no additional charge.
+  description: >-
+    Hertz offers hand controls, spinner knobs, and accessible parking services to customers with disabilities at no
+    additional charge.
   what_they_offer: |
     - Hand controls at no extra charge
     - Spinner knobs
@@ -530,13 +512,12 @@
     3. Provide at least 24-48 hours notice
     4. Confirm equipment availability at pickup location
     5. Equipment provided at no additional cost
-  phone: '1-800-654-3131'
+  phone: 1-800-654-3131
   benefit: Free hand controls and accessibility equipment with car rental
   timeframe: Ongoing
   link: https://www.hertz.com/
   link_text: Make a Reservation
   verified_date: '2026-01-14'
-
 - id: ford-mobility-rebate
   name: Ford Mobility Motoring Program
   category: Retail
@@ -544,7 +525,9 @@
   groups:
     - disability
   keywords: Ford, mobility, rebate, adaptive equipment, disability, vehicle modification, wheelchair accessible
-  description: Ford offers up to $1,000 reimbursement toward the cost of adaptive equipment or $200 for alert hearing devices, lumbar support, or running boards when purchasing or leasing a new Ford vehicle.
+  description: >-
+    Ford offers up to $1,000 reimbursement toward the cost of adaptive equipment or $200 for alert hearing devices,
+    lumbar support, or running boards when purchasing or leasing a new Ford vehicle.
   what_they_offer: |
     - Up to $1,000 reimbursement for adaptive equipment
     - $200 rebate for alert hearing devices
@@ -564,7 +547,6 @@
   link: https://www.ford.com/support/how-tos/owner-resources/accessibility/ford-mobility-motoring-program/
   link_text: Learn More
   verified_date: '2026-01-14'
-
 - id: gm-mobility-program
   name: GM Mobility Reimbursement Program
   category: Retail
@@ -572,7 +554,9 @@
   groups:
     - disability
   keywords: GM, Chevrolet, Buick, Cadillac, GMC, mobility, adaptive equipment, disability, reimbursement
-  description: General Motors offers up to $1,500 reimbursement for adaptive equipment installation on new Chevrolet, Buick, Cadillac, or GMC vehicles.
+  description: >-
+    General Motors offers up to $1,500 reimbursement for adaptive equipment installation on new Chevrolet, Buick,
+    Cadillac, or GMC vehicles.
   what_they_offer: |
     - Up to $1,500 reimbursement for adaptive equipment
     - Applies to Chevrolet, Buick, Cadillac, GMC vehicles
@@ -591,11 +575,6 @@
   link: https://www.gm.com/commitments/accessibility
   link_text: Learn More
   verified_date: '2026-01-14'
-
-# ============================================================================
-# GAMING & ENTERTAINMENT
-# ============================================================================
-
 - id: gamestop-military
   name: GameStop Military Discount
   category: Retail
@@ -603,7 +582,9 @@
   groups:
     - veterans
   keywords: GameStop, military discount, veteran, 10% off, video games, gaming, consoles
-  description: GameStop offers active and former military personnel 10% off new and pre-owned video games, hardware, accessories, and collectibles year-round.
+  description: >-
+    GameStop offers active and former military personnel 10% off new and pre-owned video games, hardware, accessories,
+    and collectibles year-round.
   what_they_offer: |
     - 10% off video games (new and pre-owned)
     - 10% off gaming hardware and accessories
@@ -621,11 +602,6 @@
   link: https://www.gamestop.com/
   link_text: Find a Store
   verified_date: '2026-01-14'
-
-# ============================================================================
-# DISABILITY GRANTS & PROGRAMS
-# ============================================================================
-
 - id: challenged-athletes-grants
   name: Challenged Athletes Foundation Grants
   category: Retail
@@ -633,7 +609,9 @@
   groups:
     - disability
   keywords: Challenged Athletes Foundation, CAF, grant, adaptive sports, prosthetics, wheelchair, disability, athletics
-  description: The Challenged Athletes Foundation provides grants for adaptive sports equipment, training, and competition expenses to individuals with physical disabilities.
+  description: >-
+    The Challenged Athletes Foundation provides grants for adaptive sports equipment, training, and competition expenses
+    to individuals with physical disabilities.
   what_they_offer: |
     - Grants for adaptive sports equipment
     - Funding for athletic prosthetics
@@ -652,4 +630,1006 @@
   timeframe: Quarterly application deadlines
   link: https://www.challengedathletes.org/programs/grants/
   link_text: Apply for Grant
+  verified_date: '2026-01-14'
+- id: smc-refuel-your-fun
+  name: ReFuel Your Fun Program
+  category: Community Services
+  area: San Mateo County
+  groups:
+    - everyone
+  keywords: ReFuel Your Fun, reusable, dishware, utensils, events, San Mateo County, zero waste, party supplies
+  description: >-
+    San Mateo County's ReFuel Your Fun program offers discounted propane refills for reusable cylinders, providing an
+    eco-friendly and cost-effective alternative to disposable propane.
+  what_they_offer: |
+    - Discounted propane refills
+    - For reusable cylinders
+    - Alternative to single-use 1 lb. cylinders
+    - Reduces waste
+    - Saves money on propane
+    - Environmentally friendly option
+  how_to_get_it: |
+    1. Get reusable propane cylinder
+    2. Find participating refill location
+    3. Bring empty cylinder
+    4. Receive discounted refill
+    5. Reuse cylinder for camping/grilling
+    6. Return for future refills
+  benefit: Discounted propane refills for reusable cylinders as alternative to single-use 1 lb. propane cylinders
+  timeframe: Ongoing
+  link: https://www.smchealth.org/refuel
+  link_text: Learn More
+  verified_date: '2025-12-25'
+- id: acs-discovery-shop-los-altos
+  name: 'American Cancer Society: Discovery Shop (Los Altos)'
+  category: Community Services
+  area: City of Los Altos
+  groups:
+    - everyone
+  keywords: >-
+    ACS, American Cancer Society, Discovery Shop, Los Altos, thrift store, donate clothes, secondhand, vintage, charity
+    shop, clothing donation, furniture donation, senior discount
+  description: >-
+    The American Cancer Society Discovery Shop in Los Altos is a thrift store selling quality secondhand and vintage
+    items, with proceeds supporting cancer research and patient programs. Seniors 55+ receive 10% off on Tuesdays.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 243 Main St, Los Altos
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (650) 949-0505 for info
+  address: 243 Main St, Los Altos, CA 94022
+  phone: (650) 949-0505
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/los-altos.html
+  link_text: Visit Store
+  verified_date: '2026-01-06'
+  latitude: 37.3788
+  longitude: -122.1141
+- id: acs-discovery-shop-menlo-park
+  name: 'American Cancer Society: Discovery Shop (Menlo Park)'
+  category: Community Services
+  area: City of Menlo Park
+  groups:
+    - everyone
+  keywords: >-
+    ACS, American Cancer Society, Discovery Shop, Menlo Park, thrift store, donate clothes, secondhand, vintage, charity
+    shop, clothing donation, furniture donation, military discount, senior discount
+  description: >-
+    The American Cancer Society Discovery Shop in Menlo Park is a thrift store selling quality secondhand and vintage
+    items, with proceeds supporting cancer research and patient programs. Military receive 10% off any day; seniors 55+
+    receive 10% off on Tuesdays.
+  what_they_offer: |
+    - Accept clothing donations
+    - Accept accessories and housewares
+    - Accept linens and furniture
+    - Accept collectibles and vintage items
+    - Affordable thrift shopping
+    - Proceeds fund cancer research
+  how_to_get_it: |
+    1. Visit the Discovery Shop at 748 Santa Cruz Ave, Menlo Park
+    2. Donate gently used items
+    3. Or shop for affordable goods
+    4. Open Mon-Sat 10am-6pm, Sun 10am-5pm
+    5. Call (650) 325-8939 for info
+  address: 748 Santa Cruz Ave, Menlo Park, CA 94025
+  phone: (650) 325-8939
+  benefit: Thrift store accepting donations; proceeds support cancer research and patient programs
+  timeframe: Ongoing
+  link: https://www.cancer.org/donate/discovery-shops-national/shops/menlo-park.html
+  link_text: Visit Store
+  verified_date: '2026-01-06'
+  latitude: 37.4529
+  longitude: -122.1817
+- id: glbt-historical-society
+  name: GLBT Historical Society Museum
+  category: Museums
+  area: San Francisco
+  city: San Francisco
+  groups:
+    - lgbtq
+    - seniors
+    - income-eligible
+    - everyone
+  keywords: >-
+    GLBT Historical Society, Castro, San Francisco, LGBTQ museum, gay history, lesbian history, free admission, First
+    Sunday, senior discount, student discount
+  description: >-
+    The GLBT Historical Society Museum in the Castro preserves and exhibits LGBTQ+ history, culture, and arts, with free
+    admission days and reduced rates available.
+  what_they_offer: |
+    - Free First Sundays (free admission monthly)
+    - Regular admission only $10
+    - Seniors, students, military: $7
+    - LGBTQ+ history exhibitions
+    - Research archives access
+    - Educational programs
+    - Community events
+  how_to_get_it: |
+    1. Visit on First Sunday for free admission
+    2. Or pay regular admission ($10, $7 reduced)
+    3. Check website for current exhibitions
+    4. Access archives by appointment
+    5. Join educational programs
+  phone: 415-621-1107
+  address: 4127 18th St, San Francisco, CA 94114
+  benefit: Free First Sundays and $7 reduced admission for seniors/students/military
+  timeframe: Ongoing
+  link: https://www.glbthistory.org/
+  link_text: Plan Visit
+  verified_date: '2025-12-30'
+  latitude: 37.7607664
+  longitude: -122.435607
+- id: id-me-first-responders
+  name: ID.me First Responder Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+    - first-responders
+    - everyone
+  keywords: >-
+    ID.me, first responder discount, firefighter discount, EMT discount, paramedic discount, police discount, retail
+    discount, 10-25% off, verified identity
+  description: >-
+    ID.me provides verified identity for first responders (firefighters, EMTs, paramedics, police) to unlock exclusive
+    discounts at hundreds of retailers, restaurants, and service providers.
+  what_they_offer: |
+    - One-time identity verification
+    - Access to many retailer discounts
+    - 10-25% off at major brands
+    - Tech discounts (Apple, Samsung, Dell)
+    - Travel discounts (hotels, car rentals)
+    - Entertainment and subscription savings
+  how_to_get_it: |
+    1. Create free ID.me account
+    2. Verify first responder status with credentials
+    3. Upload employment verification if needed
+    4. Once verified, access discounts through ID.me Shop
+    5. Verification transfers across all participating retailers
+  benefit: 10-25% discounts at many major retailers after one-time verification
+  timeframe: Ongoing
+  link: https://www.id.me/government
+  link_text: Verify Status
+  verified_date: '2025-12-30'
+- id: govx-first-responder
+  name: GovX First Responder Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+    - first-responders
+    - veterans
+    - everyone
+  keywords: >-
+    GovX, first responder discount, military discount, law enforcement, 60% off, tactical gear, apparel, electronics,
+    outdoor gear, veteran discount
+  description: >-
+    GovX is an exclusive online shopping platform offering discounts up to 60% off for verified first responders,
+    military, and law enforcement on apparel, gear, and everyday essentials.
+  what_they_offer: |
+    - Up to 60% off major brands
+    - Tactical and outdoor gear
+    - Apparel and footwear
+    - Electronics and tech
+    - Travel and entertainment
+    - Home and auto products
+  how_to_get_it: |
+    1. Register at govx.com
+    2. Verify first responder status
+    3. Provide department or agency info
+    4. Access exclusive member pricing
+    5. Shop and save on every order
+  benefit: Up to 60% off on gear, apparel, electronics, and more for verified first responders
+  timeframe: Ongoing
+  link: https://www.govx.com/
+  link_text: Join Free
+  verified_date: '2025-12-30'
+- id: verizon-discounts
+  name: Verizon Community Discounts
+  category: Technology
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+    - teachers
+    - everyone
+  keywords: >-
+    Verizon, military discount, veteran, first responder, teacher, nurse, firefighter, police, EMT, cell phone, wireless
+    plan, ID.me, healthcare worker
+  description: >-
+    Verizon offers ongoing monthly discounts on unlimited wireless plans for military, veterans, first responders,
+    teachers, and nurses. All programs provide $10-25/month off plus 25% off accessories.
+  what_they_offer: |
+    - $10/month off (1 phone line)
+    - $25/month off (2-3 phone lines)
+    - $20/month off (4+ phone lines)
+    - 25% off accessories (online only)
+    - Available for new and existing customers
+    - Eligible groups: military/veterans, first responders, teachers, nurses
+  how_to_get_it: |
+    1. Visit verizon.com/discounts to see all available programs
+    2. Verify status through ID.me
+    3. Military: active duty, veterans, retirees, National Guard, Reserve
+    4. First responders: firefighters, EMTs/EMS, state/local police
+    5. Teachers: K-12 and college/university educators
+    6. Nurses: RNs, LPNs, nurse practitioners, respiratory therapists
+    7. Discount continues as long as status is verified
+  benefit: $10-25/month off unlimited plans plus 25% off accessories
+  timeframe: Ongoing
+  link: https://www.verizon.com/discounts/
+  link_text: View All Discounts
+  verified_date: '2026-01-14'
+- id: tmobile-first-responders
+  name: T-Mobile First Responders Discount
+  category: Technology
+  area: Nationwide
+  groups:
+    - first-responders
+  keywords: >-
+    T-Mobile, first responder discount, firefighter, police, EMT, paramedic, 911 dispatcher, Essentials, Go5G, cell
+    phone, wireless plan
+  description: >-
+    T-Mobile offers special pricing on wireless plans for first responders including law enforcement, firefighters,
+    EMTs, pensioned retirees, and families of first responders killed in line of duty.
+  what_they_offer: |
+    - Essentials First Responder: $90/month for 3 lines (nearly 20% savings)
+    - Go5G First Responder plans with Netflix included
+    - Optional priority network access for $7.50/month
+    - 40% off additional family lines
+    - 5G network access
+  how_to_get_it: |
+    1. Visit T-Mobile store or t-mobile.com/cell-phone-plans/first-responder-discounts
+    2. Choose Essentials First Responder or Go5G First Responder plan
+    3. Verify status through ID.me
+    4. Eligible: state/local law enforcement, firefighters, EMTs, retirees
+    5. Federal employees not eligible
+  benefit: ~20% off monthly plans, 40% off family lines, Netflix included on Go5G plans
+  timeframe: Ongoing
+  link: https://www.t-mobile.com/cell-phone-plans/first-responder-discounts
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: apple-veterans-military
+  name: Apple Veterans and Military Purchase Program
+  category: Technology
+  area: Nationwide
+  groups:
+    - veterans
+  keywords: Apple, military discount, veteran discount, 10% off, Mac, MacBook, iPad, National Guard, Reserve, family discount
+  description: >-
+    Apple offers a 10% discount for current and veteran members of the US Military, National Guard, and Reserve.
+    Discount also extends to immediate family members in the same household.
+  what_they_offer: |
+    - 10% discount on Mac computers
+    - 10% discount on iPad
+    - 10% discount on accessories
+    - Same warranty and service as regular purchases
+    - Available to eligible family members in same household
+  how_to_get_it: |
+    1. Visit Apple's Veterans and Military store online
+    2. Sign in with ID.me verification
+    3. Verify military or veteran status
+    4. Access exclusive 10% pricing
+    5. Purchase with standard Apple checkout (Apple Card Monthly Installments not available)
+  benefit: 10% discount on Mac, iPad, and accessories for verified military and veterans
+  timeframe: Ongoing
+  link: https://www.apple.com/shop/browse/home/veterans_military
+  link_text: Shop Now
+  verified_date: '2026-01-04'
+- id: apple-education-discount
+  name: Apple Education Store
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+    - teachers
+  keywords: Apple, student discount, education discount, college, university, teacher, Mac, MacBook, iPad, back to school
+  description: >-
+    Apple offers education pricing for college students, parents of college students, and educators at all levels, with
+    savings of $100-400 on Mac and iPad products.
+  what_they_offer: |
+    - Up to $200 off Mac computers
+    - Up to $100 off iPad
+    - Discounted AppleCare+
+    - Free Apple Music for students (50% off)
+    - Back to School bonus (June-Sept): free accessories worth up to $199
+  how_to_get_it: |
+    1. Visit apple.com/us-edu/store
+    2. Shop with .edu email or verify through UNiDAYS
+    3. Higher education students, parents buying for students, and faculty qualify
+    4. Homeschool teachers also eligible
+    5. Discounted prices shown automatically in Education Store
+  benefit: $100-400 savings on Mac and iPad for students and educators
+  timeframe: Ongoing (bonus accessories June-September)
+  link: https://www.apple.com/us-edu/store
+  link_text: Shop Education
+  verified_date: '2026-01-14'
+- id: att-discounts
+  name: AT&T Community & Employee Discounts
+  category: Technology
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+    - teachers
+    - college-students
+    - seniors
+    - everyone
+  keywords: >-
+    AT&T, military discount, veteran, first responder, teacher, nurse, physician, student, senior, 55+, AARP, Signature
+    Hub, employee discount, 25% off, cell phone, wireless plan, ID.me
+  description: >-
+    AT&T offers multiple discount programs including 25% off for military, veterans, retired first responders, teachers,
+    nurses, and physicians. Additional discounts available for students, seniors 55+, AARP members, and employees of
+    qualifying companies through Signature Hub.
+  what_they_offer: |
+    **AT&T Appreciation (25% off):**
+    - Military, veterans, retired first responders
+    - Teachers (K-12 and college faculty)
+    - Nurses, physicians, PA-Cs
+    - Applies to Unlimited Premium, Extra, and Starter plans
+
+    **AT&T Signature Program ($10/line/month off):**
+    - Employees of qualifying companies
+    - Students with .edu email
+    - AARP members
+    - Union members
+    - Up to 5 lines, then $5/line for lines 6-10
+
+    **55+ Plans:**
+    - Special pricing for customers 55 and older
+  how_to_get_it: |
+    1. Appreciation discounts: Visit att.com/appreciation and verify through ID.me
+    2. Signature/employee discounts: Visit att.com/verification/signaturehub
+    3. Students: Verify with .edu email or student ID
+    4. AARP members: Verify membership status
+    5. 55+: Visit att.com or AT&T store to sign up for age-verified plans
+    6. Discount starts within 2-3 billing cycles
+  benefit: 25% off for heroes/educators or $10/line/month for employees/students
+  timeframe: Ongoing
+  link: https://www.att.com/offers/discount-program/
+  link_text: View All Discounts
+  verified_date: '2026-01-14'
+- id: att-firstnet
+  name: FirstNet by AT&T
+  category: Technology
+  area: Nationwide
+  groups:
+    - first-responders
+  keywords: >-
+    FirstNet, AT&T, first responder, police, firefighter, EMT, EMS, 911, emergency, priority network, public safety,
+    healthcare, utilities
+  description: >-
+    FirstNet is America's dedicated wireless network for first responders and public safety, built as a public-private
+    partnership with the federal government. Provides priority access and dedicated bandwidth during emergencies.
+  what_they_offer: |
+    - Dedicated wireless network for public safety
+    - First Priority access during emergencies
+    - 5G connectivity with low latency
+    - Over 2.99 million square miles of coverage
+    - 25% savings on family lines
+    - FirstNet Fusion push-to-talk and 9-1-1 integration
+    - Device financing offers available
+  how_to_get_it: |
+    1. Visit firstnet.com to check eligibility
+    2. Eligible: law enforcement, fire, EMS, 911 dispatchers
+    3. Also eligible: healthcare providers, utilities workers, school safety
+    4. Sign up online or at AT&T/FirstNet retail locations
+    5. Plans start at $42.99/month for individuals
+    6. Agency plans also available
+  benefit: Dedicated first responder network with priority access starting at $42.99/month
+  timeframe: Ongoing
+  link: https://www.firstnet.com/
+  link_text: Check Eligibility
+  verified_date: '2026-01-14'
+- id: tmobile-military-discount
+  name: T-Mobile Military Discount
+  category: Technology
+  area: Nationwide
+  groups:
+    - veterans
+  keywords: T-Mobile, military discount, veteran, active duty, National Guard, Reserve, Gold Star, cell phone, wireless plan
+  description: >-
+    T-Mobile offers special military pricing on wireless plans for active military, veterans, and their families, with
+    Netflix included on select plans.
+  what_they_offer: |
+    - Essentials Military: $90/month for 3 lines (nearly 20% savings)
+    - Go5G Military plans with Netflix included
+    - Available for all consumer plans
+    - Gold Star families eligible
+    - Veteran-owned businesses also qualify
+  how_to_get_it: |
+    1. Visit T-Mobile store or t-mobile.com/cell-phone-plans/military-discount-plans
+    2. Choose Essentials Military or Go5G Military plan
+    3. Verify military status
+    4. Military member/veteran must be primary account holder
+    5. Maintain valid military line on account
+  benefit: ~20% off monthly plans, Netflix included on Go5G plans
+  timeframe: Ongoing
+  link: https://www.t-mobile.com/cell-phone-plans/military-discount-plans
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: outback-heroes-discount
+  name: Outback Steakhouse Heroes Discount
+  category: Food
+  area: Bay Area
+  groups:
+    - veterans
+    - first-responders
+  keywords: >-
+    Outback Steakhouse, military discount, veteran, first responder, police, firefighter, nurse, doctor, 10% off,
+    restaurant, dining
+  description: >-
+    Outback Steakhouse offers a 10% Heroes Discount every day for military, veterans, police, firefighters, first
+    responders, nurses, doctors, and medical staff.
+  what_they_offer: |
+    - 10% off entire check every day
+    - Available for dine-in with valid ID
+    - Includes military, veterans, police, firefighters
+    - Also includes nurses, doctors, medical staff
+    - Online orders verified through SheerID
+  how_to_get_it: |
+    1. Dine in at any Outback Steakhouse location
+    2. Show valid military, medical, or service ID
+    3. 10% discount applied to check (excludes alcohol)
+    4. Maximum one discount per table
+    5. For online orders, verify through SheerID at checkout
+  benefit: 10% off every day for heroes with valid ID
+  timeframe: Ongoing (increased to 20% on some holidays)
+  link: https://www.outback.com/offers/heroes-discount
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: home-depot-military-discount
+  name: Home Depot Military Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+  keywords: Home Depot, military discount, veteran, active duty, 10% off, home improvement, tools, hardware, SheerID
+  description: >-
+    Home Depot offers a 10% military discount on select in-store purchases for active duty, veterans, retirees, and
+    eligible dependents, with a $400 annual maximum.
+  what_they_offer: |
+    - 10% off select in-stock purchases
+    - $400 maximum annual discount (resets each calendar year)
+    - Tax-free shopping through military exchanges (expanded May 2025)
+    - Available in-store and online
+    - Virtual ID on Home Depot app for easy checkout
+  how_to_get_it: |
+    1. Download The Home Depot app or visit homedepot.com/military
+    2. Create account and verify military status through SheerID
+    3. Eligible: active duty, veterans, retirees, DoD civilians, spouses
+    4. Scan Virtual ID at register or enter phone number
+    5. Physical military IDs no longer accepted at register
+  benefit: 10% off up to $400/year on select home improvement purchases
+  timeframe: Ongoing
+  link: https://www.homedepot.com/c/military
+  link_text: Verify Status
+  verified_date: '2026-01-14'
+- id: lowes-military-discount
+  name: Lowe's Military Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+  keywords: Lowe's, military discount, veteran, active duty, 10% off, home improvement, tools, hardware, MyLowes, ID.me
+  description: >-
+    Lowe's offers a year-round 10% military discount on most full-priced items for active duty, veterans, and military
+    spouses, with no annual limit.
+  what_they_offer: |
+    - 10% off most full-priced items
+    - No annual spending limit
+    - Free standard shipping for verified members
+    - Free upgrade to Silver Key status in MyLowe's Rewards
+    - Available in-store and online
+  how_to_get_it: |
+    1. Visit lowes.com/military to register
+    2. Verify military status through ID.me
+    3. Eligible: all US military branches, veterans, spouses
+    4. Link to MyLowe's Rewards account
+    5. Give phone number or MyLowe's card at checkout
+  benefit: 10% off full-priced items with no annual limit
+  timeframe: Ongoing
+  link: https://www.lowes.com/l/about/honor-our-military
+  link_text: Verify Status
+  verified_date: '2026-01-14'
+- id: nike-community-discounts
+  name: Nike Community Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+    - teachers
+    - college-students
+  keywords: >-
+    Nike, military discount, student discount, teacher discount, first responder, nurse, 10% off, shoes, athletic,
+    SheerID
+  description: >-
+    Nike offers 10% off for students, military members, first responders, medical professionals, and teachers on
+    Nike.com and in the Nike App.
+  what_they_offer: |
+    - 10% off most items on Nike.com and Nike App
+    - Students can reuse discount every 30 days
+    - Military/first responders can reuse every 7 days
+    - Nike Members also get free shipping
+    - Birthday month: additional 20% off (up to 10 items)
+  how_to_get_it: |
+    1. Visit nike.com/promo-code
+    2. Verify status through SheerID
+    3. Eligible: students, military, first responders, nurses, teachers
+    4. Receive 10% off promo code after verification
+    5. Reusable (frequency varies by group)
+  benefit: 10% off reusable discount for verified community members
+  timeframe: Ongoing
+  link: https://www.nike.com/help/a/first-responder-discount
+  link_text: Verify Status
+  verified_date: '2026-01-14'
+- id: under-armour-community-discount
+  name: Under Armour Military & First Responder Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+    - teachers
+  keywords: Under Armour, military discount, first responder, teacher, nurse, 20% off, athletic wear, shoes, ID.me
+  description: >-
+    Under Armour offers 20% off for military, first responders, healthcare workers, and teachers on UA.com, the UA App,
+    and at UA Brand Houses.
+  what_they_offer: |
+    - 20% off at UA.com, UA App, and Brand Houses
+    - 10% off at UA Factory House stores
+    - Discount may increase during promotional periods
+    - Cannot combine with other promo codes
+    - Freedom Collection gear available
+  how_to_get_it: |
+    1. Shop on UA.com or UA App
+    2. Verify status through ID.me at checkout
+    3. Eligible: military, veterans, first responders, nurses, teachers
+    4. In-store: show valid ID at Brand House or Factory House
+    5. Discount applied automatically after verification
+  benefit: 20% off year-round for verified community members
+  timeframe: Ongoing
+  link: https://www.underarmour.com/en-us/t/troop-id-instructions.html
+  link_text: Verify Status
+  verified_date: '2026-01-14'
+- id: nfl-shop-discount
+  name: NFL Shop Military & First Responder Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+  keywords: NFL Shop, football, military discount, first responder, veteran, sports merchandise, jersey, ID.me, 15% off
+  description: >-
+    NFL Shop offers 15% off for military members, veterans, first responders, and their families on official NFL
+    merchandise and gear.
+  what_they_offer: |
+    - 15% off eligible purchases
+    - Available to military, veterans, and first responders
+    - Extends to spouses and immediate family members
+    - Official NFL jerseys, apparel, and merchandise
+    - Cannot combine with other promo codes
+  how_to_get_it: |
+    1. Shop at NFLShop.com
+    2. Add items to cart and proceed to checkout
+    3. Click "Military and first responder discounts" at checkout
+    4. Verify status through ID.me
+    5. Discount applies automatically after verification
+  benefit: 15% off NFL merchandise for military and first responders
+  timeframe: Ongoing
+  link: https://www.nflshop.com/military-fr-faq/x-130486+z-96888856-1923288078
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: mlb-shop-discount
+  name: MLB Shop Military & First Responder Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+  keywords: MLB Shop, baseball, military discount, first responder, veteran, sports merchandise, jersey, ID.me, 15% off
+  description: >-
+    MLB Shop offers 15% off for military members, veterans, first responders, and their families on official MLB
+    merchandise and gear.
+  what_they_offer: |
+    - 15% off eligible purchases
+    - Available to military, veterans, and first responders
+    - Extends to spouses and immediate family members
+    - Official MLB jerseys, apparel, and merchandise
+    - Cannot combine with other promo codes
+  how_to_get_it: |
+    1. Shop at MLBShop.com
+    2. Add items to cart and proceed to checkout
+    3. Click "First Responder ID" or "Troop ID" button at checkout
+    4. Verify status through ID.me
+    5. Discount applies automatically after verification
+  benefit: 15% off MLB merchandise for military and first responders
+  timeframe: Ongoing
+  link: https://www.mlbshop.com/military-fr-faq/x-248915+z-8038715-2782151551
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: nba-store-discount
+  name: NBA Store Military & First Responder Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+  keywords: NBA Store, basketball, military discount, first responder, veteran, sports merchandise, jersey, ID.me, 15% off
+  description: >-
+    NBA Store offers 15% off for military members, veterans, first responders, and their families on official NBA
+    merchandise and gear.
+  what_they_offer: |
+    - 15% off eligible purchases
+    - Available to military, veterans, and first responders
+    - Extends to spouses and immediate family members
+    - Official NBA jerseys, apparel, and merchandise
+    - Cannot combine with other promo codes
+  how_to_get_it: |
+    1. Shop at store.nba.com
+    2. Add items to cart and proceed to checkout
+    3. Select "Military and First Responder Discount"
+    4. Verify status through ID.me or SheerID
+    5. Discount code applied after verification
+  benefit: 15% off NBA merchandise for military and first responders
+  timeframe: Ongoing
+  link: https://store.nba.com/military-offer/x-253882+z-91832123-1978184840
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: nhl-shop-discount
+  name: NHL Shop Military & First Responder Discount
+  category: Community Services
+  area: Nationwide
+  groups:
+    - veterans
+    - first-responders
+  keywords: NHL Shop, hockey, military discount, first responder, veteran, sports merchandise, jersey, ID.me, 15% off
+  description: >-
+    NHL Shop offers 15% off for military members, veterans, first responders, and their families on official NHL
+    merchandise and gear.
+  what_they_offer: |
+    - 15% off eligible purchases
+    - Available to military, veterans, and first responders
+    - Extends to spouses and immediate family members
+    - Official NHL jerseys, apparel, and merchandise
+    - Cannot combine with other promo codes
+  how_to_get_it: |
+    1. Shop at shop.nhl.com
+    2. Scroll to footer and click "Military Discount" or "First Responder Discount"
+    3. Verify status through ID.me
+    4. Receive unique discount code
+    5. Apply code at checkout
+  benefit: 15% off NHL merchandise for military and first responders
+  timeframe: Ongoing
+  link: https://shop.nhl.com/military-fr-faq/x-361479+z-98362145-2017216188
+  link_text: Learn More
+  verified_date: '2026-01-14'
+- id: microsoft-military-student-discount
+  name: Microsoft Store Military & Student Discounts
+  category: Technology
+  area: Nationwide
+  groups:
+    - veterans
+    - college-students
+    - teachers
+  keywords: Microsoft, military discount, student discount, veteran, Surface, laptop, Xbox, Office 365, 10% off
+  description: >-
+    Microsoft Store offers 10% off select products for active military, veterans, and students, plus free Office 365 for
+    students with a school email.
+  what_they_offer: |
+    - 10% off select Surface devices, laptops, and tablets
+    - Free Office 365 for students with .edu email
+    - Military Appreciation Edition Microsoft 365 (~30% off through exchanges)
+    - Excludes Xbox consoles, games, and gift cards
+    - Online only at Microsoft Store
+  how_to_get_it: |
+    1. Visit microsoft.com/en-us/store/b/military or /b/education
+    2. Sign in and verify status
+    3. Students: use school email for free Office 365
+    4. Military: verify through store account
+    5. Discounted prices shown automatically when signed in
+  benefit: 10% off select devices, free Office 365 for students
+  timeframe: Ongoing
+  link: https://www.microsoft.com/en-us/store/b/education
+  link_text: Shop Education
+  verified_date: '2026-01-14'
+- id: amazon-prime-student
+  name: Amazon Prime Student
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+  keywords: Amazon Prime, student discount, Prime Student, college, university, 50% off, free shipping, Prime Video, 18-24
+  description: >-
+    Amazon Prime Student (now Prime for Young Adults) offers 50% off Prime membership for college students and young
+    adults ages 18-24, with a 6-month free trial.
+  what_they_offer: |
+    - 6-month free trial
+    - $7.49/month or $69/year (50% off regular Prime)
+    - All Prime benefits: free shipping, Prime Video, Prime Music
+    - 5% cash back on select categories (limited time)
+    - Eligible for up to 4 years
+  how_to_get_it: |
+    1. Visit amazon.com/Amazon-Student
+    2. Students: verify with .edu email or enrollment proof
+    3. Ages 18-24 (non-students): verify age with ID
+    4. Start 6-month free trial
+    5. After trial or 4 years, converts to regular Prime pricing
+  benefit: 50% off Prime membership ($69/year vs $139/year)
+  timeframe: Ongoing
+  link: https://www.amazon.com/Amazon-Student/b?node=668781011
+  link_text: Start Free Trial
+  verified_date: '2026-01-14'
+- id: xfinity-military-program
+  name: Xfinity Military Program
+  category: Utilities
+  area: Bay Area
+  groups:
+    - veterans
+    - first-responders
+  keywords: Xfinity, Comcast, military discount, veteran, first responder, internet, cable, TV, mobile, Peacock, ID.me
+  description: >-
+    Xfinity offers exclusive benefits for military members, veterans, and first responders including free mobile
+    service, streaming discounts, and Visa gift cards.
+  what_they_offer: |
+    - Free Unlimited Xfinity Mobile line for 24 months (with Xfinity Internet)
+    - NOW TV included for 1 year (125+ live channels, Peacock Premium)
+    - Peacock Premium at $3.99/mo for 1 year (normally $7.99)
+    - $180 Visa Gift Card ($15/mo value for 1 year)
+    - Xfinity Rewards Diamond member status
+    - First responders also eligible
+  how_to_get_it: |
+    1. Visit military.xfinity.com or xfinity.com/military
+    2. Sign in with Xfinity ID
+    3. Verify military/first responder status through ID.me or SheerID
+    4. Eligible: active duty, Guard, Reserve, veterans, military families
+    5. First responders: police, firefighters, EMTs, paramedics
+    6. Benefits apply within 1-2 billing cycles
+  benefit: Free mobile line 24 months + streaming discounts + $180 gift card
+  timeframe: Ongoing
+  link: https://military.xfinity.com/
+  link_text: Get Benefits
+  verified_date: '2026-01-14'
+- id: dish-network-military
+  name: DISH Network Military & First Responder Discount
+  category: Utilities
+  area: Bay Area
+  groups:
+    - veterans
+    - first-responders
+  keywords: DISH, satellite TV, military discount, veteran, first responder, Stars and Stripes, Hopper DVR, ID.me
+  description: >-
+    DISH Network offers exclusive military and first responder packages including free Stars & Stripes channel pack,
+    monthly movie rental, and Hopper DVR upgrade - over $500 savings over 2 years.
+  what_they_offer: |
+    - Stars & Stripes channel pack FREE for 2 years ($240 value)
+    - Channels include STARZ, Encore, Smithsonian, American Heroes Channel
+    - Free Pay-Per-View movie rental every month
+    - Free Hopper DVR upgrade (stream content anywhere)
+    - 2-year price guarantee starting at $89.99/mo
+    - Up to $300 gift card for new TV + Internet customers
+  how_to_get_it: |
+    1. Call DISH or visit dish.com/offers/military-offer
+    2. Verify military/first responder status through ID.me
+    3. Eligible: active duty military, veterans, first responders
+    4. First responders include firefighters, EMTs, police
+    5. 2-year commitment required ($20/mo ETF if canceled early)
+  benefit: Over $500 savings with free Stars & Stripes pack + monthly movie + Hopper DVR
+  timeframe: Offer ends 5/13/2026
+  link: https://www.dish.com/offers/military-offer/
+  link_text: Get Military Offer
+  verified_date: '2026-01-14'
+- id: teacher-id-me-discounts
+  name: ID.me Teacher Discounts
+  category: Community Services
+  area: Nationwide
+  groups:
+    - teachers
+  keywords: >-
+    ID.me, teacher discount, educator discount, 10-25% off, classroom supplies, Apple, Dell, HP, Staples, Office Depot,
+    teacher verification
+  description: >-
+    ID.me provides verified identity for teachers and educators to unlock exclusive discounts at hundreds of retailers
+    on classroom supplies, technology, and personal items.
+  what_they_offer: |
+    - 10-25% off at major retailers
+    - Classroom supply discounts (Staples, Office Depot)
+    - Technology discounts (Apple, Dell, HP)
+    - Entertainment and subscription savings
+    - One-time verification for all retailers
+  how_to_get_it: |
+    1. Create free ID.me account
+    2. Verify teacher/educator status
+    3. Upload school ID or employment verification
+    4. Once verified, access discounts through ID.me Shop
+    5. Verification works across all participating stores
+  benefit: 10-25% discounts at many retailers after one-time teacher verification
+  timeframe: Ongoing
+  link: https://www.id.me/teacher-military-discounts
+  link_text: Verify Status
+  verified_date: '2025-12-30'
+- id: amazon-prime
+  name: Amazon Prime
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+    - youth
+    - income-eligible
+  keywords: >-
+    Amazon, Prime Student, Prime Access, young adult, student discount, EBT, SNAP, Medicaid, free shipping, Prime Video,
+    college, university, 50% off, streaming, 18-24
+  description: >-
+    Amazon offers discounted Prime memberships for students, young adults (18-24), and qualifying government assistance
+    recipients, with rates starting at $6.99/month.
+  what_they_offer: |
+    **Prime Student & Young Adult ($7.49/month):**
+    - For college students or ages 18-24
+    - 6-month free trial for new student members
+    - Free 2-day shipping on eligible items
+    - Prime Video, Prime Music, Prime Reading included
+
+    **Prime Access ($6.99/month):**
+    - For recipients of qualifying government assistance
+    - EBT, Medicaid, and other programs qualify
+    - Same full Prime benefits
+    - Re-verify eligibility every 12 months
+  how_to_get_it: |
+    1. Visit amazon.com/amazonprime and choose your plan
+    2. Prime Student: Verify with .edu email or enrollment documents
+    3. Young Adult (18-24): Verify age through ID verification
+    4. Prime Access: Verify EBT card or Medicaid status
+    5. All discounted plans include full Prime benefits
+  benefit: $6.99-$7.49/month Prime membership (50% off) for students, young adults, or EBT/Medicaid recipients
+  timeframe: Ongoing (verify eligibility annually)
+  link: https://www.amazon.com/amazonprime
+  link_text: Choose Your Plan
+  verified_date: '2026-01-14'
+- id: spotify-student
+  name: Spotify Premium Student
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+  keywords: Spotify, student discount, music streaming, Premium, Hulu, Showtime, college, university
+  description: >-
+    Spotify offers college students Premium for $5.99/month (normally $11.99), including Hulu with ads and Showtime.
+    Available for up to 4 years while enrolled.
+  what_they_offer: |
+    - Spotify Premium for $5.99/month (50% off)
+    - Ad-free music streaming
+    - Offline listening
+    - Hulu (ad-supported) included
+    - Available for up to 4 years
+    - Re-verify enrollment annually
+  how_to_get_it: |
+    1. Visit spotify.com/us/student
+    2. Verify enrollment through SheerID
+    3. Must be at Title IV accredited US college/university
+    4. Sign up or upgrade existing account
+    5. Re-verify student status every 12 months
+  benefit: Spotify Premium plus Hulu for $5.99/month (50% off) for students
+  timeframe: Up to 4 years while enrolled
+  link: https://www.spotify.com/us/student/
+  link_text: Get Premium Student
+  verified_date: '2026-01-14'
+- id: adobe-creative-cloud-student
+  name: Adobe Creative Cloud Student Discount
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+    - teachers
+  keywords: Adobe, Creative Cloud, student discount, teacher discount, Photoshop, Illustrator, Premiere Pro, 60% off
+  description: >-
+    Adobe offers students and teachers 60% off Creative Cloud All Apps, including Photoshop, Illustrator, Premiere Pro,
+    and 20+ creative apps for $22.99/month.
+  what_they_offer: |
+    - All Creative Cloud apps for $22.99/month (60% off)
+    - Includes Photoshop, Illustrator, Premiere Pro
+    - Access to 20+ creative applications
+    - 100GB cloud storage
+    - Adobe Fonts included
+    - First year pricing, then $29.99/month
+  how_to_get_it: |
+    1. Visit adobe.com/creativecloud/plans
+    2. Select Students & Teachers plan
+    3. Verify status with school-issued email or SheerID
+    4. Students ages 13+ at accredited schools eligible
+    5. Teachers and faculty at all levels eligible
+  benefit: 60% off Creative Cloud All Apps ($22.99/month) for students and teachers
+  timeframe: Ongoing (verify annually)
+  link: https://www.adobe.com/creativecloud/plans.html
+  link_text: Get Student Discount
+  verified_date: '2026-01-14'
+- id: apple-music-student
+  name: Apple Music Student Plan
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+  keywords: Apple Music, student discount, music streaming, Apple TV+, college, university, 50% off
+  description: >-
+    Apple Music offers college students a discounted rate of $5.99/month (normally $10.99), including Apple TV+ for
+    free. Available for up to 48 months while enrolled.
+  what_they_offer: |
+    - Apple Music for $5.99/month (45% off)
+    - Apple TV+ included at no extra cost
+    - Full access to 100+ million songs
+    - Ad-free listening
+    - Lossless audio and spatial audio
+    - Available for up to 48 months
+  how_to_get_it: |
+    1. Open Apple Music app or visit music.apple.com
+    2. Sign up for Student plan
+    3. Verify enrollment through UNiDAYS
+    4. Must be enrolled at university or college
+    5. Re-verify enrollment periodically
+  benefit: Apple Music plus Apple TV+ for $5.99/month for college students
+  timeframe: Up to 48 months while enrolled
+  link: https://www.apple.com/apple-music/
+  link_text: Get Student Plan
+  verified_date: '2026-01-14'
+- id: youtube-premium-student
+  name: YouTube Premium Student Plan
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+  keywords: YouTube Premium, student discount, ad-free, YouTube Music, background play, college, university
+  description: >-
+    YouTube Premium offers college students a discounted rate of $7.99/month (normally $13.99), including YouTube Music
+    Premium, ad-free viewing, and background play.
+  what_they_offer: |
+    - YouTube Premium for $7.99/month (43% off)
+    - YouTube Music Premium included
+    - Ad-free videos on YouTube
+    - Background play on mobile
+    - Video downloads for offline viewing
+    - Available for up to 4 years
+  how_to_get_it: |
+    1. Visit youtube.com/premium/student
+    2. Sign in with Google account
+    3. Verify student status through SheerID
+    4. Must be at accredited higher education institution
+    5. Re-verify enrollment annually
+  benefit: YouTube Premium and Music for $7.99/month for college students
+  timeframe: Up to 4 years while enrolled
+  link: https://www.youtube.com/premium/student
+  link_text: Get Student Plan
+  verified_date: '2026-01-14'
+- id: hulu-student
+  name: Hulu Student Discount
+  category: Technology
+  area: Nationwide
+  groups:
+    - college-students
+  keywords: Hulu, student discount, streaming, TV shows, movies, college, university
+  description: >-
+    Hulu offers college students the ad-supported plan for $1.99/month (normally $9.99), a savings of 80%. Available
+    through SheerID verification.
+  what_they_offer: |
+    - Hulu (ad-supported) for $1.99/month
+    - 80% off regular price
+    - Full streaming library access
+    - Watch on multiple devices
+    - Available for up to 4 years
+  how_to_get_it: |
+    1. Visit hulu.com/student
+    2. Verify enrollment through SheerID
+    3. Must be enrolled at US Title IV college
+    4. New and returning subscribers eligible
+    5. Re-verify student status annually
+  benefit: Hulu streaming for $1.99/month (80% off) for college students
+  timeframe: Up to 4 years while enrolled
+  link: https://www.hulu.com/student
+  link_text: Get Student Discount
   verified_date: '2026-01-14'

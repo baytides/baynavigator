@@ -4,12 +4,49 @@
  * Provides consistent, structured JSON logging for all Azure Functions.
  * Compatible with Azure Application Insights and Log Analytics.
  *
+ * PRIVACY: This logger is designed to protect user anonymity:
+ * - IP addresses are hashed (for rate limiting) but never stored in plaintext
+ * - User agents are simplified to prevent fingerprinting
+ * - No personal data should ever be logged
+ *
  * Usage:
  *   const { createLogger } = require('../shared/logger');
  *   const logger = createLogger(context, 'smart-assistant');
  *   logger.info('Processing request', { userId: '123', query: 'food assistance' });
  *   logger.error('Search failed', { error: err.message, stack: err.stack });
  */
+
+const crypto = require('crypto');
+
+/**
+ * Hash an IP address for rate limiting without storing the actual IP
+ * Uses a daily rotating salt so hashes can't be correlated across days
+ */
+function hashIP(ip) {
+  if (!ip) return 'unknown';
+  // Daily rotating salt based on date (UTC)
+  const date = new Date().toISOString().split('T')[0];
+  const salt = `baynavigator-${date}`;
+  return crypto
+    .createHash('sha256')
+    .update(ip + salt)
+    .digest('hex')
+    .slice(0, 16);
+}
+
+/**
+ * Simplify user agent to basic browser/device type without fingerprinting details
+ */
+function simplifyUserAgent(ua) {
+  if (!ua) return 'unknown';
+  // Just identify general browser type, not version details
+  if (ua.includes('Mobile')) return 'mobile';
+  if (ua.includes('Chrome')) return 'chrome';
+  if (ua.includes('Firefox')) return 'firefox';
+  if (ua.includes('Safari')) return 'safari';
+  if (ua.includes('Edge')) return 'edge';
+  return 'other';
+}
 
 /**
  * Log levels with numeric values for filtering
@@ -126,16 +163,24 @@ function createLogger(context, functionName, options = {}) {
 
     /**
      * Log the start of a function invocation
+     * PRIVACY: IP addresses are hashed, user agents simplified
      * @param {object} req - HTTP request object
      */
     logRequest(req) {
+      // Get the first IP from x-forwarded-for (client IP)
+      const forwardedFor = req.headers?.['x-forwarded-for'];
+      const clientIP = forwardedFor?.split(',')[0]?.trim();
+
       this.info('Function invoked', {
         method: req.method,
-        url: req.url,
+        // Don't log full URL - may contain sensitive query params
+        path: req.url?.split('?')[0],
         headers: {
           'content-type': req.headers?.['content-type'],
-          'user-agent': req.headers?.['user-agent'],
-          'x-forwarded-for': req.headers?.['x-forwarded-for'],
+          // Simplified user agent - no fingerprinting details
+          'client-type': simplifyUserAgent(req.headers?.['user-agent']),
+          // Hashed IP for rate limiting - not the actual IP
+          'client-hash': hashIP(clientIP),
         },
         bodySize: req.body ? JSON.stringify(req.body).length : 0,
       });
@@ -224,4 +269,5 @@ module.exports = {
   createTimer,
   extractErrorInfo,
   LogLevel,
+  hashIP, // Export for rate limiting
 };

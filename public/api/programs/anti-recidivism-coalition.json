@@ -1,7 +1,7 @@
 {
   "id": "anti-recidivism-coalition",
   "name": "Anti-Recidivism Coalition (ARC)",
-  "category": "community",
+  "category": "legal",
   "description": "Comprehensive reentry support including housing, employment, and education assistance",
   "fullDescription": "The Anti-Recidivism Coalition provides reentry support, advocacy, and community for formerly and currently incarcerated people in California.",
   "whatTheyOffer": "- Reentry support and case management\n- Housing assistance\n- Employment support and job training\n- Education navigation\n- Policy advocacy\n- Community and peer support\n- Leadership development\n",
@@ -10,7 +10,7 @@
     "reentry"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://antirecidivism.org/",

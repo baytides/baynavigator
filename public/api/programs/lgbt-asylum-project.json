@@ -1,7 +1,7 @@
 {
   "id": "lgbt-asylum-project",
   "name": "The LGBT Asylum Project",
-  "category": "community",
+  "category": "lgbtq",
   "description": "Free legal representation for LGBTQ+ asylum seekers",
   "fullDescription": "The LGBT Asylum Project provides free legal representation and support to LGBTQ+ asylum seekers fleeing persecution based on their sexual orientation or gender identity.",
   "whatTheyOffer": "- Free legal representation for asylum cases\n- Help preparing asylum applications\n- Court representation\n- Case management support\n- Connection to community resources\n- Pro bono attorney referrals\n",
@@ -12,7 +12,7 @@
     "income-eligible"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://www.lgbtasylumproject.org/",

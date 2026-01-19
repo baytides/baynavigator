@@ -1,7 +1,7 @@
 {
   "id": "asian-womens-shelter",
   "name": "Asian Women's Shelter",
-  "category": "community",
+  "category": "safety",
   "description": "Multilingual emergency shelter and support services for Asian communities",
   "fullDescription": "Asian Women's Shelter provides comprehensive, multilingual services including emergency shelter, counseling, legal advocacy, and support programs serving Asian and Pacific Islander communities throughout the Bay Area.",
   "whatTheyOffer": "- 24-hour multilingual crisis line\n- Emergency shelter\n- Counseling services\n- Legal advocacy\n- Case management\n- Children's programs\n- Support in 40+ Asian languages\n- Immigration assistance\n",
@@ -11,7 +11,7 @@
     "immigrants"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://www.sfaws.org/",

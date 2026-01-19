@@ -1,7 +1,7 @@
 {
   "id": "iiba-immigration",
   "name": "Immigration Institute of the Bay Area",
-  "category": "community",
+  "category": "legal",
   "description": "Affordable immigration legal services and consultations",
   "fullDescription": "The Immigration Institute of the Bay Area (IIBA) provides affordable immigration legal services to immigrant families throughout the Bay Area.",
   "whatTheyOffer": "- Low-cost immigration legal consultations\n- Citizenship and naturalization assistance\n- Green card and family petition services\n- DACA renewal support\n- Deportation defense referrals\n- Legal workshops and Know Your Rights\n",
@@ -11,7 +11,7 @@
     "income-eligible"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://iibayarea.org/",

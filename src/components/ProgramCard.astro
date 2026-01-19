@@ -149,11 +149,18 @@ const categoryColors: Record<string, string> = {
   'Pet Resources': 'bg-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-900 dark:text-fuchsia-100',
   Equipment: 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
   'Public Transit': 'bg-sky-100 text-sky-900 dark:bg-sky-900 dark:text-sky-100',
+  // Sensitive categories with distinct, privacy-aware colors
+  Safety: 'bg-rose-100 text-rose-900 dark:bg-rose-900 dark:text-rose-100',
+  'LGBTQ+': 'bg-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-900 dark:text-fuchsia-100',
 };
 
 const badgeColor =
   categoryColors[category] ||
   'bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200';
+
+// Sensitive categories that benefit from privacy features
+const SENSITIVE_CATEGORIES = ['Safety', 'LGBTQ+'];
+const isSensitiveCategory = SENSITIVE_CATEGORIES.includes(category);
 
 // Display location - prefer city if available, else area
 const displayLocation = city || area;
@@ -409,23 +416,79 @@ const displayLocation = city || area;
   >
     {
       link && (
-        <a href={link} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
-          {linkText}
-          <svg
-            class="w-4 h-4 ml-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            />
-          </svg>
-        </a>
+        <div class="flex items-center gap-2">
+          <a href={link} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+            {linkText}
+            <svg
+              class="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
+          {/* Privacy buttons for sensitive categories */}
+          {isSensitiveCategory && (
+            <>
+              {/* Copy link button - allows pasting in Tor Browser */}
+              <button
+                type="button"
+                class="copy-link-btn inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-neutral-300 dark:border-neutral-600 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300"
+                data-link={link}
+                title="Copy link to paste in Tor Browser for private browsing"
+                aria-label="Copy link for private browsing"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+                  />
+                </svg>
+                <span class="copy-text">Copy</span>
+              </button>
+              {/* Open Proxy button - opens privacy proxy where user can browse */}
+              <a
+                href="https://proxy.baytides.org/browsing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="proxy-btn inline-flex items-center gap-1 px-3 py-1.5 text-sm border border-purple-300 dark:border-purple-600 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                title="Open our privacy proxy - paste the copied link there to browse privately"
+                aria-label="Open privacy proxy"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+                <span>Proxy</span>
+              </a>
+            </>
+          )}
+        </div>
       )
     }
 
@@ -520,13 +583,61 @@ const displayLocation = city || area;
     });
   }
 
+  function initCopyLinkButtons(): void {
+    document.querySelectorAll('.copy-link-btn').forEach((btn) => {
+      // Skip if already initialized
+      if (btn.hasAttribute('data-copy-initialized')) return;
+      btn.setAttribute('data-copy-initialized', 'true');
+
+      btn.addEventListener('click', async (e) => {
+        const button = e.currentTarget as HTMLButtonElement;
+        const link = button.getAttribute('data-link');
+        const copyText = button.querySelector('.copy-text');
+
+        if (!link) return;
+
+        try {
+          await navigator.clipboard.writeText(link);
+
+          // Visual feedback
+          if (copyText) {
+            const originalText = copyText.textContent;
+            copyText.textContent = 'Copied!';
+            button.classList.add(
+              'bg-green-100',
+              'dark:bg-green-900/30',
+              'border-green-300',
+              'dark:border-green-700'
+            );
+
+            setTimeout(() => {
+              copyText.textContent = originalText;
+              button.classList.remove(
+                'bg-green-100',
+                'dark:bg-green-900/30',
+                'border-green-300',
+                'dark:border-green-700'
+              );
+            }, 2000);
+          }
+        } catch (err) {
+          console.error('Failed to copy link:', err);
+          // Fallback: show the link in an alert
+          alert(`Copy this link: ${link}`);
+        }
+      });
+    });
+  }
+
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', () => {
     initMoreDetailsButtons();
     initWifiQRButtons();
+    initCopyLinkButtons();
   });
   document.addEventListener('astro:page-load', () => {
     initMoreDetailsButtons();
     initWifiQRButtons();
+    initCopyLinkButtons();
   });
 </script>

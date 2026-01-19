@@ -1,7 +1,7 @@
 {
   "id": "five-keys",
   "name": "Five Keys Schools and Programs",
-  "category": "community",
+  "category": "legal",
   "description": "Free high school diploma, GED prep, and career training for justice-involved individuals",
   "fullDescription": "Five Keys provides education and workforce development for justice-involved individuals, offering high school diplomas, career training, and reentry support in the Bay Area.",
   "whatTheyOffer": "- Free high school diploma programs\n- GED preparation\n- Career technical education\n- Job placement assistance\n- Workforce readiness training\n- Wraparound support services\n- Programs in jails and community\n",
@@ -12,7 +12,7 @@
     "everyone"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://www.fivekeyscharter.org/",

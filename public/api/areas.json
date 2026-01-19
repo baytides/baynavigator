@@ -4,7 +4,7 @@
       "id": "san-francisco",
       "name": "San Francisco",
       "type": "county",
-      "programCount": 75
+      "programCount": 85
     },
     {
       "id": "alameda-county",
@@ -58,7 +58,7 @@
       "id": "bay-area",
       "name": "Bay Area",
       "type": "region",
-      "programCount": 62
+      "programCount": 135
     },
     {
       "id": "statewide",

@@ -237,6 +237,30 @@ const apiKey = import.meta.env.PUBLIC_OLLAMA_API_KEY || '';
   let conversationHistory = [];
   let isLoading = false;
 
+  // =============================================================================
+  // PRIVACY: Query Sanitization
+  // Strips personally identifiable information (PII) before sending to LLM
+  // Users should never include personal data, but this protects them if they do
+  // =============================================================================
+  function sanitizeQuery(query) {
+    return (
+      query
+        // SSN with dashes (XXX-XX-XXXX)
+        .replace(/\b\d{3}-\d{2}-\d{4}\b/g, '[REDACTED]')
+        // SSN without dashes (9 consecutive digits that look like SSN)
+        .replace(/\b\d{9}\b/g, '[REDACTED]')
+        // Email addresses
+        .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[REDACTED]')
+        // Phone numbers (various formats)
+        .replace(/\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b/g, '[REDACTED]')
+        .replace(/\(\d{3}\)\s*\d{3}[-.\s]?\d{4}/g, '[REDACTED]')
+        // Credit card numbers (13-19 digits with optional spaces/dashes)
+        .replace(/\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{1,7}\b/g, '[REDACTED]')
+        // Bank account numbers (8-17 digits)
+        .replace(/\b\d{8,17}\b/g, '[REDACTED]')
+    );
+  }
+
   // Quick response cache for common questions (saves API calls and responds instantly)
   const QUICK_RESPONSES = {
     // Greetings
@@ -747,11 +771,18 @@ CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.`;
     const streamingBubble = addStreamingMessage();
 
     try {
+      // Sanitize message before sending to LLM (strip PII for privacy)
+      const sanitizedMessage = sanitizeQuery(message);
+
       // Build messages array for Ollama chat API
+      // Note: Uses sanitized message to protect user privacy
       const messages = [
         { role: 'system', content: SYSTEM_PROMPT },
-        ...conversationHistory.slice(-6),
-        { role: 'user', content: message },
+        ...conversationHistory.slice(-6).map((msg) => ({
+          ...msg,
+          content: msg.role === 'user' ? sanitizeQuery(msg.content) : msg.content,
+        })),
+        { role: 'user', content: sanitizedMessage },
       ];
 
       const response = await fetch(apiEndpoint, {

@@ -167,10 +167,18 @@ categories:
     name: Utilities
     icon: '💡'
 
-  # Health & Legal
+  # Health, Safety & Legal
   - id: health
     name: Health
     icon: '🏥'
+
+  - id: lgbtq
+    name: LGBTQ+
+    icon: '🏳️‍🌈'
+
+  - id: safety
+    name: Safety
+    icon: '🛡️'
 
   - id: legal
     name: Legal Services

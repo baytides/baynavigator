@@ -1,7 +1,7 @@
 {
   "id": "head-start",
   "name": "Head Start",
-  "category": "community",
+  "category": "education",
   "description": "Free preschool for low-income families with children 3-4",
   "fullDescription": "Head Start is a federally-funded program providing free, comprehensive early childhood education, health, nutrition, and family support services to low-income children and families.",
   "whatTheyOffer": "- Free preschool education\n- For children ages 3-4\n- Comprehensive child development\n- Health and nutrition services\n- Family support programs\n- Special needs support included\n",
@@ -12,7 +12,7 @@
     "youth"
   ],
   "areas": [
-    "Bay Area-wide"
+    "Bay Area"
   ],
   "city": null,
   "website": "https://mychildcareplan.org/resource/child-care-subsidy-programs/",
