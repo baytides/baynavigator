@@ -14,6 +14,7 @@ import 'providers/user_prefs_provider.dart';
 import 'providers/safety_provider.dart';
 import 'providers/localization_provider.dart';
 import 'providers/navigation_provider.dart';
+import 'providers/accessibility_provider.dart';
 import 'widgets/quick_exit_detector.dart';
 import 'widgets/safety_widgets.dart';
 import 'screens/for_you_screen.dart';
@@ -50,7 +51,8 @@ Future<void> main() async {
 
   // Check if crash reporting is enabled
   final prefs = await SharedPreferences.getInstance();
-  final crashReportingEnabled = prefs.getBool('baynavigator:crash_reporting') ?? true;
+  final crashReportingEnabled =
+      prefs.getBool('baynavigator:crash_reporting') ?? true;
 
   if (_sentryDsn.isNotEmpty && crashReportingEnabled) {
     await SentryFlutter.init(
@@ -76,10 +78,15 @@ class BayAreaDiscountsApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProgramsProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()..initialize()),
         ChangeNotifierProvider(create: (_) => SettingsProvider()..initialize()),
-        ChangeNotifierProvider(create: (_) => UserPrefsProvider()..initialize()),
+        ChangeNotifierProvider(
+            create: (_) => UserPrefsProvider()..initialize()),
         ChangeNotifierProvider(create: (_) => SafetyProvider()..initialize()),
-        ChangeNotifierProvider(create: (_) => LocalizationProvider()..initialize()),
-        ChangeNotifierProvider(create: (_) => NavigationProvider()..initialize()),
+        ChangeNotifierProvider(
+            create: (_) => LocalizationProvider()..initialize()),
+        ChangeNotifierProvider(
+            create: (_) => NavigationProvider()..initialize()),
+        ChangeNotifierProvider(
+            create: (_) => AccessibilityProvider()..initialize()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -117,8 +124,10 @@ class MainNavigation extends StatefulWidget {
 
 class MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
-  final GlobalKey<DirectoryScreenState> _directoryKey = GlobalKey<DirectoryScreenState>();
-  final GlobalKey<FavoritesScreenState> _favoritesKey = GlobalKey<FavoritesScreenState>();
+  final GlobalKey<DirectoryScreenState> _directoryKey =
+      GlobalKey<DirectoryScreenState>();
+  final GlobalKey<FavoritesScreenState> _favoritesKey =
+      GlobalKey<FavoritesScreenState>();
 
   // All screens indexed by NavItems.all order
   late final Map<String, Widget> _screensMap;
@@ -186,7 +195,9 @@ class MainNavigationState extends State<MainNavigation> {
       return;
     }
     final success = await ExportService.saveAndShareCsv(programs, context);
-    _showSnackBar(success ? 'Programs exported successfully' : 'Failed to export programs');
+    _showSnackBar(success
+        ? 'Programs exported successfully'
+        : 'Failed to export programs');
   }
 
   Future<void> printSavedPrograms() async {
@@ -311,7 +322,8 @@ class MainNavigationState extends State<MainNavigation> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Your guide to local savings & benefits in the Bay Area.'),
+            const Text(
+                'Your guide to local savings & benefits in the Bay Area.'),
             const SizedBox(height: 16),
             const Text('A project by Bay Tides.'),
             const SizedBox(height: 16),
@@ -368,7 +380,8 @@ class MainNavigationState extends State<MainNavigation> {
                 // Navigate to Settings if user enabled protection
                 if (showSettings) {
                   // Find the Settings index in NavItems
-                  final settingsIndex = NavItems.all.indexWhere((item) => item.id == 'settings');
+                  final settingsIndex =
+                      NavItems.all.indexWhere((item) => item.id == 'settings');
                   if (settingsIndex != -1) {
                     _currentIndex = settingsIndex;
                   }
@@ -424,14 +437,14 @@ class MainNavigationState extends State<MainNavigation> {
     // - Large phones in landscape (width >= 700)
     final isTablet = !kIsWeb && PlatformService.isMobile && screenWidth >= 768;
     final isLargePhoneLandscape = !kIsWeb &&
-                                   PlatformService.isMobile &&
-                                   isLandscape &&
-                                   screenWidth >= 700 &&
-                                   screenWidth < 768;
+        PlatformService.isMobile &&
+        isLandscape &&
+        screenWidth >= 700 &&
+        screenWidth < 768;
     final useDesktopLayout = (isDesktop && screenWidth >= 800) ||
-                             (kIsWeb && screenWidth >= 1024) ||
-                             isTablet ||
-                             isLargePhoneLandscape;
+        (kIsWeb && screenWidth >= 1024) ||
+        isTablet ||
+        isLargePhoneLandscape;
 
     Widget scaffold;
 
@@ -471,9 +484,10 @@ class MainNavigationState extends State<MainNavigation> {
                   Expanded(
                     child: IndexedStack(
                       index: _currentIndex,
-                      children: NavItems.all.map((item) =>
-                        _screensMap[item.id] ?? const SizedBox()
-                      ).toList(),
+                      children: NavItems.all
+                          .map((item) =>
+                              _screensMap[item.id] ?? const SizedBox())
+                          .toList(),
                     ),
                   ),
                 ],
@@ -493,7 +507,8 @@ class MainNavigationState extends State<MainNavigation> {
 
           // Build the screens for the tab bar + More screen
           final tabScreens = <Widget>[
-            ...tabBarItems.map((item) => _screensMap[item.id] ?? const SizedBox()),
+            ...tabBarItems
+                .map((item) => _screensMap[item.id] ?? const SizedBox()),
             if (hasMoreItems) MoreScreen(onNavigate: _navigateToItem),
           ];
 
@@ -534,7 +549,8 @@ class MainNavigationState extends State<MainNavigation> {
                     ),
                   )
                 : NavigationBar(
-                    selectedIndex: _currentIndex.clamp(0, tabBarItems.length + (hasMoreItems ? 0 : -1)),
+                    selectedIndex: _currentIndex.clamp(
+                        0, tabBarItems.length + (hasMoreItems ? 0 : -1)),
                     onDestinationSelected: (index) {
                       setState(() {
                         _currentIndex = index;
@@ -543,10 +559,10 @@ class MainNavigationState extends State<MainNavigation> {
                     destinations: [
                       // Tab bar items
                       ...tabBarItems.map((item) => NavigationDestination(
-                        icon: Icon(item.icon),
-                        selectedIcon: Icon(item.selectedIcon),
-                        label: item.label,
-                      )),
+                            icon: Icon(item.icon),
+                            selectedIcon: Icon(item.selectedIcon),
+                            label: item.label,
+                          )),
                       // More tab
                       if (hasMoreItems)
                         const NavigationDestination(

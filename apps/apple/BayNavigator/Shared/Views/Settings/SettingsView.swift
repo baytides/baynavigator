@@ -15,6 +15,7 @@ struct SettingsViewContent: View {
     @Environment(SettingsViewModel.self) private var settingsVM
     @Environment(ProgramsViewModel.self) private var programsVM
     @Environment(UserPrefsViewModel.self) private var userPrefsVM
+    @Environment(AccessibilityViewModel.self) private var accessibilityVM
     @Environment(\.openURL) private var openURL
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -42,6 +43,7 @@ struct SettingsViewContent: View {
             profileSection
             appInfoSection
             appearanceSection
+            accessibilitySection
             searchSection
             languageSection
             privacySection
@@ -248,6 +250,29 @@ struct SettingsViewContent: View {
                 Label("Warm Mode", systemImage: "sun.max")
             }
             #endif
+        }
+    }
+
+    private var accessibilitySection: some View {
+        Section {
+            NavigationLink {
+                AccessibilitySettingsView()
+                    .environment(accessibilityVM)
+            } label: {
+                HStack {
+                    Label("Accessibility", systemImage: "accessibility")
+                    Spacer()
+                    if accessibilityVM.hasCustomizations {
+                        Text("Customized")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        } header: {
+            Text("Accessibility")
+        } footer: {
+            Text("WCAG 2.2 AAA compliant settings for vision, motion, reading, and interaction.")
         }
     }
 
@@ -553,4 +578,5 @@ struct ProxyConfigSheet: View {
         .environment(SettingsViewModel())
         .environment(ProgramsViewModel())
         .environment(UserPrefsViewModel())
+        .environment(AccessibilityViewModel())
 }

@@ -32,6 +32,8 @@ public actor CacheService {
         // Privacy settings
         case crashReportingEnabled = "baynavigator:crash_reporting_enabled"
         case shareProfileWithCarl = "baynavigator:share_profile_with_carl"
+        // Accessibility settings
+        case accessibilitySettings = "baynavigator:accessibility_settings"
     }
 
     private struct CachedData<T: Codable>: Codable {
@@ -357,6 +359,26 @@ public actor CacheService {
 
     public func setShareProfileWithCarl(_ enabled: Bool) {
         defaults.set(enabled, forKey: CacheKey.shareProfileWithCarl.rawValue)
+    }
+
+    // MARK: - Accessibility Settings
+
+    public func getAccessibilitySettings() -> AccessibilitySettings {
+        guard let data = defaults.data(forKey: CacheKey.accessibilitySettings.rawValue),
+              let settings = try? JSONDecoder().decode(AccessibilitySettings.self, from: data) else {
+            return .default
+        }
+        return settings
+    }
+
+    public func setAccessibilitySettings(_ settings: AccessibilitySettings) {
+        if let data = try? JSONEncoder().encode(settings) {
+            defaults.set(data, forKey: CacheKey.accessibilitySettings.rawValue)
+        }
+    }
+
+    public func resetAccessibilitySettings() {
+        defaults.removeObject(forKey: CacheKey.accessibilitySettings.rawValue)
     }
 
     // MARK: - Cache Management

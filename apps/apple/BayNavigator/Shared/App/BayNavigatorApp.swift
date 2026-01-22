@@ -7,6 +7,7 @@ struct BayNavigatorApp: App {
     @State private var settingsViewModel = SettingsViewModel()
     @State private var userPrefsViewModel = UserPrefsViewModel()
     @State private var assistantViewModel = SmartAssistantViewModel()
+    @State private var accessibilityViewModel = AccessibilityViewModel()
 
     // NavigationService is a singleton with shared state
     private let navigationService = NavigationService.shared
@@ -18,6 +19,7 @@ struct BayNavigatorApp: App {
                 .environment(settingsViewModel)
                 .environment(userPrefsViewModel)
                 .environment(assistantViewModel)
+                .environment(accessibilityViewModel)
                 .environment(navigationService)
                 .preferredColorScheme(settingsViewModel.colorScheme)
                 #if os(visionOS)
@@ -49,6 +51,7 @@ struct BayNavigatorApp: App {
                 .environment(settingsViewModel)
                 .environment(programsViewModel)
                 .environment(userPrefsViewModel)
+                .environment(accessibilityViewModel)
                 .environment(navigationService)
         }
         #endif

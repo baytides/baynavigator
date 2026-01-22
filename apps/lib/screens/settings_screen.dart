@@ -8,11 +8,13 @@ import '../providers/user_prefs_provider.dart';
 import '../providers/localization_provider.dart';
 import '../providers/safety_provider.dart';
 import '../providers/settings_provider.dart';
+import '../providers/accessibility_provider.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
 import 'settings/privacy_settings_screen.dart';
 import 'settings/safety_settings_screen.dart';
 import 'settings/appearance_settings_screen.dart';
+import 'settings/accessibility_settings_screen.dart';
 import 'settings/about_settings_screen.dart';
 import 'edit_profile_screen.dart';
 
@@ -110,13 +112,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               String profileSubtitle = 'Set up your profile';
               if (userPrefs.hasPreferences) {
                 final parts = <String>[];
-                if (firstName != null && firstName.isNotEmpty) parts.add(firstName);
+                if (firstName != null && firstName.isNotEmpty) {
+                  parts.add(firstName);
+                }
                 if (city != null && city.isNotEmpty) {
                   parts.add(city);
                 } else if (county != null && county.isNotEmpty) {
                   parts.add(county);
                 }
-                profileSubtitle = parts.isNotEmpty ? parts.join(' • ') : 'Configured';
+                profileSubtitle =
+                    parts.isNotEmpty ? parts.join(' • ') : 'Configured';
               }
 
               return _buildSection(
@@ -126,14 +131,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildNavTile(
                     context,
                     icon: '👤',
-                    title: userPrefs.hasPreferences ? 'Edit Profile' : 'Set Up Profile',
+                    title: userPrefs.hasPreferences
+                        ? 'Edit Profile'
+                        : 'Set Up Profile',
                     subtitle: profileSubtitle,
                     onTap: () {
                       HapticFeedback.lightImpact();
                       if (userPrefs.hasPreferences) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+                          MaterialPageRoute(
+                              builder: (_) => const EditProfileScreen()),
                         );
                       } else {
                         userPrefs.reopenOnboarding();
@@ -167,10 +175,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     context,
                     icon: isDark ? '🌙' : '☀️',
                     title: 'Appearance',
-                    subtitle: '${themeProvider.modeLabel} • ${localization.currentLocale.nativeName}',
+                    subtitle:
+                        '${themeProvider.modeLabel} • ${localization.currentLocale.nativeName}',
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const AppearanceSettingsScreen()),
+                      MaterialPageRoute(
+                          builder: (_) => const AppearanceSettingsScreen()),
+                    ),
+                  );
+                },
+              ),
+              const Divider(height: 1, indent: 16),
+              Consumer<AccessibilityProvider>(
+                builder: (context, accessibility, child) {
+                  String subtitle = 'Vision, motion, reading, interaction';
+                  if (accessibility.hasCustomizations) {
+                    if (accessibility.settings.activePreset != null) {
+                      subtitle =
+                          accessibility.settings.activePreset!.displayName;
+                    } else {
+                      subtitle = 'Customized';
+                    }
+                  }
+                  return _buildNavTile(
+                    context,
+                    icon: '♿',
+                    title: 'Accessibility',
+                    subtitle: subtitle,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AccessibilitySettingsScreen(),
+                      ),
                     ),
                   );
                 },
@@ -183,14 +219,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 subtitle: 'Tor, proxy, and call relay settings',
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const PrivacySettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (_) => const PrivacySettingsScreen()),
                 ),
               ),
               const Divider(height: 1, indent: 16),
               Consumer<SafetyProvider>(
                 builder: (context, safety, child) {
                   String subtitle = 'Quick exit, PIN protection, incognito';
-                  if (safety.quickExitEnabled || safety.hasPinSet || safety.incognitoModeEnabled) {
+                  if (safety.quickExitEnabled ||
+                      safety.hasPinSet ||
+                      safety.incognitoModeEnabled) {
                     final enabled = <String>[];
                     if (safety.quickExitEnabled) enabled.add('Quick Exit');
                     if (safety.hasPinSet) enabled.add('PIN');
@@ -204,7 +243,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     subtitle: subtitle,
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const SafetySettingsScreen()),
+                      MaterialPageRoute(
+                          builder: (_) => const SafetySettingsScreen()),
                     ),
                   );
                 },
@@ -219,7 +259,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const Text('AI-Powered Search'),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(10),
@@ -264,7 +305,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const Divider(height: 1, indent: 16),
               ListTile(
                 leading: Icon(Icons.delete_outline, color: AppColors.danger),
-                title: Text('Clear Cache', style: TextStyle(color: AppColors.danger)),
+                title: Text('Clear Cache',
+                    style: TextStyle(color: AppColors.danger)),
                 onTap: () async {
                   HapticFeedback.lightImpact();
                   final provider = context.read<ProgramsProvider>();
@@ -283,7 +325,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(dialogContext, true),
-                          style: TextButton.styleFrom(foregroundColor: AppColors.danger),
+                          style: TextButton.styleFrom(
+                              foregroundColor: AppColors.danger),
                           child: const Text('Clear'),
                         ),
                       ],
@@ -313,7 +356,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: [
                     Text(
                       'Help Keep This App Free',
-                      style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w700),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
@@ -336,7 +380,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.success,
                     foregroundColor: Colors.white,
                     minimumSize: const Size.fromHeight(48),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                   child: const Text(
                     'Donate via Website',
@@ -359,7 +404,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 subtitle: 'Version info, links, and legal',
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const AboutSettingsScreen()),
+                  MaterialPageRoute(
+                      builder: (_) => const AboutSettingsScreen()),
                 ),
               ),
             ],
@@ -372,7 +418,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Text(
                   'Bay Navigator - a Bay Tides project',
-                  style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                  style: theme.textTheme.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 4),
@@ -452,7 +499,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text(
             '$label: ',
             style: theme.textTheme.bodySmall?.copyWith(
-              color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+              color: isDark
+                  ? AppColors.darkTextSecondary
+                  : AppColors.lightTextSecondary,
             ),
           ),
           Expanded(
