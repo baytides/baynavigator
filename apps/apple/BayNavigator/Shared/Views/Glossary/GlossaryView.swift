@@ -593,7 +593,17 @@ extension GlossaryTerm {
 
 // MARK: - Glossary View
 
+/// Full Glossary view with NavigationStack (use when displayed as a tab)
 struct GlossaryView: View {
+    var body: some View {
+        NavigationStack {
+            GlossaryViewContent()
+        }
+    }
+}
+
+/// Glossary content without NavigationStack (use when pushed onto existing navigation)
+struct GlossaryViewContent: View {
     @State private var searchText = ""
     @State private var selectedCategory: GlossaryCategory?
     @State private var expandedTerms: Set<UUID> = []
@@ -626,35 +636,33 @@ struct GlossaryView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                // Category filter chips
-                categoryFilter
-                    .padding(.vertical, 8)
+        VStack(spacing: 0) {
+            // Category filter chips
+            categoryFilter
+                .padding(.vertical, 8)
 
-                // Results count
-                HStack {
-                    Text("\(filteredTerms.count) terms")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 8)
-
-                // Terms list
-                if filteredTerms.isEmpty {
-                    emptyState
-                } else {
-                    termsList
-                }
+            // Results count
+            HStack {
+                Text("\(filteredTerms.count) terms")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Spacer()
             }
-            .navigationTitle("Glossary")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
-            #endif
-            .searchable(text: $searchText, prompt: "Search acronyms...")
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+
+            // Terms list
+            if filteredTerms.isEmpty {
+                emptyState
+            } else {
+                termsList
+            }
         }
+        .navigationTitle("Glossary")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
+        .searchable(text: $searchText, prompt: "Search acronyms...")
     }
 
     // MARK: - Category Filter

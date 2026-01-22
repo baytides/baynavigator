@@ -4,9 +4,19 @@ import BayNavigatorCore
 
 // MARK: - MapView
 
+/// Full Map view with NavigationStack (use when displayed as a tab)
+struct MapView: View {
+    var body: some View {
+        NavigationStack {
+            MapViewContent()
+        }
+    }
+}
+
 /// Interactive map view showing program locations with clustering, search, and list/map toggle.
 /// Works on iOS 17+, macOS 14+, and visionOS 1+.
-struct MapView: View {
+/// Content without NavigationStack (use when pushed onto existing navigation)
+struct MapViewContent: View {
     @Environment(ProgramsViewModel.self) private var programsVM
     @Environment(\.colorScheme) private var colorScheme
 
@@ -53,8 +63,7 @@ struct MapView: View {
     // MARK: - Body
 
     var body: some View {
-        NavigationStack {
-            Group {
+        Group {
                 switch viewMode {
                 case .map:
                     mapContent
@@ -99,7 +108,6 @@ struct MapView: View {
                 ProgramDetailView(program: program)
                     .environment(programsVM)
             }
-        }
     }
 
     // MARK: - Map Content
@@ -293,7 +301,7 @@ struct MapView: View {
 
 // MARK: - View Mode
 
-extension MapView {
+extension MapViewContent {
     enum ViewMode: String, CaseIterable, Identifiable {
         case map
         case list

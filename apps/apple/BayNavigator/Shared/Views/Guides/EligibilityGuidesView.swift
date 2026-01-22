@@ -146,7 +146,17 @@ enum GuideLayoutMode: String, CaseIterable {
 
 // MARK: - Eligibility Guides View
 
+/// Full Eligibility Guides view with NavigationStack (use when displayed as a tab)
 struct EligibilityGuidesView: View {
+    var body: some View {
+        NavigationStack {
+            EligibilityGuidesViewContent()
+        }
+    }
+}
+
+/// Eligibility Guides content without NavigationStack (use when pushed onto existing navigation)
+struct EligibilityGuidesViewContent: View {
     @State private var searchText = ""
     @State private var layoutMode: GuideLayoutMode = .grid
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -182,37 +192,35 @@ struct EligibilityGuidesView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                // Info banner
-                infoBanner
-                    .padding(.horizontal)
-                    .padding(.top, 8)
+        VStack(spacing: 0) {
+            // Info banner
+            infoBanner
+                .padding(.horizontal)
+                .padding(.top, 8)
 
-                // Results count and layout toggle
-                resultsHeader
-                    .padding(.horizontal)
-                    .padding(.vertical, 12)
+            // Results count and layout toggle
+            resultsHeader
+                .padding(.horizontal)
+                .padding(.vertical, 12)
 
-                // Guides content
-                if filteredGuides.isEmpty {
-                    emptyState
-                } else {
-                    guidesContent
-                }
+            // Guides content
+            if filteredGuides.isEmpty {
+                emptyState
+            } else {
+                guidesContent
             }
-            .navigationTitle("Eligibility Guides")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
-            #endif
-            .searchable(text: $searchText, prompt: "Search guides...")
-            .navigationDestination(for: EligibilityGuide.self) { guide in
-                GuideViewerView(
-                    title: guide.title,
-                    guideId: guide.category.guideId,
-                    accentColor: guide.color
-                )
-            }
+        }
+        .navigationTitle("Eligibility Guides")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
+        .searchable(text: $searchText, prompt: "Search guides...")
+        .navigationDestination(for: EligibilityGuide.self) { guide in
+            GuideViewerView(
+                title: guide.title,
+                guideId: guide.category.guideId,
+                accentColor: guide.color
+            )
         }
     }
 

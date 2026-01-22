@@ -150,35 +150,38 @@ struct MoreView: View {
 
     @ViewBuilder
     private func destinationView(for item: NavItem) -> some View {
+        // Note: Using Content versions for views that have their own NavigationStack
+        // to avoid nested navigation stacks when pushed from MoreView
         switch item.id {
         case "for_you":
-            ForYouView()
+            ForYouViewContent()
                 .environment(programsVM)
                 .environment(userPrefsVM)
         case "directory":
-            DirectoryView()
+            DirectoryViewContent()
                 .environment(programsVM)
                 .environment(settingsVM)
         case "saved":
-            FavoritesView()
+            FavoritesViewContent()
                 .environment(programsVM)
         case "map":
-            MapView()
+            MapViewContent()
                 .environment(programsVM)
         case "ask_carl":
             AskCarlView()
                 .environment(assistantVM)
                 .environment(programsVM)
+                .environment(settingsVM)
         case "transit":
-            TransitView()
+            TransitViewContent()
         case "glossary":
-            GlossaryView()
+            GlossaryViewContent()
         case "guides":
-            EligibilityGuidesView()
+            EligibilityGuidesViewContent()
         case "profiles":
-            ProfilesView()
+            ProfilesViewContent()
         case "settings":
-            SettingsView()
+            SettingsViewContent()
                 .environment(settingsVM)
                 .environment(programsVM)
                 .environment(userPrefsVM)

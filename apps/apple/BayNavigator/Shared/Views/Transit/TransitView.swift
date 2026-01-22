@@ -44,72 +44,80 @@ final class TransitViewModel {
 
 // MARK: - Transit View
 
+/// Full Transit view with NavigationStack (use when displayed as a tab)
 struct TransitView: View {
+    var body: some View {
+        NavigationStack {
+            TransitViewContent()
+        }
+    }
+}
+
+/// Transit content without NavigationStack (use when pushed onto existing navigation)
+struct TransitViewContent: View {
     @State private var viewModel = TransitViewModel()
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    // Header
-                    headerSection
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // Header
+                headerSection
 
-                    // Live Alerts Section
-                    liveAlertsSection
+                // Live Alerts Section
+                liveAlertsSection
 
-                    // Rail Services
-                    agencySection(
-                        title: "Rail Services",
-                        icon: "tram.fill",
-                        dotColor: .blue,
-                        agencies: viewModel.railAgencies
-                    )
+                // Rail Services
+                agencySection(
+                    title: "Rail Services",
+                    icon: "tram.fill",
+                    dotColor: .blue,
+                    agencies: viewModel.railAgencies
+                )
 
-                    // Ferry Services
-                    agencySection(
-                        title: "Ferry Services",
-                        icon: "ferry.fill",
-                        dotColor: .teal,
-                        agencies: viewModel.ferryAgencies
-                    )
+                // Ferry Services
+                agencySection(
+                    title: "Ferry Services",
+                    icon: "ferry.fill",
+                    dotColor: .teal,
+                    agencies: viewModel.ferryAgencies
+                )
 
-                    // Bus Services
-                    agencySection(
-                        title: "Bus Services",
-                        icon: "bus.fill",
-                        dotColor: .green,
-                        agencies: viewModel.busAgencies
-                    )
+                // Bus Services
+                agencySection(
+                    title: "Bus Services",
+                    icon: "bus.fill",
+                    dotColor: .green,
+                    agencies: viewModel.busAgencies
+                )
 
-                    // Clipper Card Info
-                    clipperCardSection
+                // Clipper Card Info
+                clipperCardSection
 
-                    Spacer(minLength: 32)
-                }
-                .padding()
+                Spacer(minLength: 32)
             }
-            .navigationTitle("Transit")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
-            #endif
-            .refreshable {
-                await viewModel.loadAlerts(forceRefresh: true)
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        Task {
-                            await viewModel.loadAlerts(forceRefresh: true)
-                        }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
+            .padding()
+        }
+        .navigationTitle("Transit")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
+        .refreshable {
+            await viewModel.loadAlerts(forceRefresh: true)
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    Task {
+                        await viewModel.loadAlerts(forceRefresh: true)
                     }
-                    .disabled(viewModel.isLoading)
+                } label: {
+                    Image(systemName: "arrow.clockwise")
                 }
+                .disabled(viewModel.isLoading)
             }
-            .task {
-                await viewModel.loadAlerts()
-            }
+        }
+        .task {
+            await viewModel.loadAlerts()
         }
     }
 

@@ -106,6 +106,8 @@ struct GuideViewerView: View {
             } else {
                 markdownScrollView(content: content)
             }
+        case .notAvailable:
+            notAvailableView
         case .error(let message):
             errorView(message: message)
         }
@@ -166,6 +168,44 @@ struct GuideViewerView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
+    }
+
+    // MARK: - Not Available View
+
+    private var notAvailableView: some View {
+        VStack(spacing: 24) {
+            Image(systemName: "doc.text.magnifyingglass")
+                .font(.system(size: 64))
+                .foregroundStyle(accentColor)
+
+            Text("Opening in Browser")
+                .font(.title2.bold())
+
+            Text("Guide content not available in-app yet.\nOpening the web version...")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+
+            ProgressView()
+                .scaleEffect(1.2)
+                .tint(accentColor)
+
+            Button {
+                openInBrowser()
+            } label: {
+                Label("Open Now", systemImage: "safari")
+                    .frame(maxWidth: 200)
+            }
+            .buttonStyle(.bordered)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .onChange(of: viewModel.shouldOpenInBrowser) { _, shouldOpen in
+            if shouldOpen {
+                openInBrowser()
+            }
+        }
     }
 
     // MARK: - Markdown Scroll View
@@ -245,13 +285,13 @@ struct GuideViewerView: View {
     // MARK: - Helper Methods
 
     private func openInBrowser() {
-        if let url = URL(string: "https://baynavigator.org/guides/\(guideId)") {
+        if let url = URL(string: "https://baynavigator.org/eligibility/\(guideId)") {
             openURL(url)
         }
     }
 
     private var shareURL: URL {
-        URL(string: "https://baynavigator.org/guides/\(guideId)") ?? URL(string: "https://baynavigator.org")!
+        URL(string: "https://baynavigator.org/eligibility/\(guideId)") ?? URL(string: "https://baynavigator.org")!
     }
 }
 
@@ -272,11 +312,13 @@ final class GuideViewerViewModel: ObservableObject {
         case loading
         case loaded(String)
         case error(String)
+        case notAvailable // Content not available, will open in browser
     }
 
     @Published private(set) var state: State = .loading
     @Published private(set) var useWebViewFallback = false
     @Published private(set) var htmlContent = ""
+    @Published var shouldOpenInBrowser = false
 
     private let guideId: String
     private let markdownService = MarkdownService.shared
@@ -288,6 +330,7 @@ final class GuideViewerViewModel: ObservableObject {
     func loadContent() async {
         state = .loading
         useWebViewFallback = false
+        shouldOpenInBrowser = false
 
         do {
             let content = try await markdownService.fetchGuideMarkdown(guideId: guideId)
@@ -301,7 +344,11 @@ final class GuideViewerViewModel: ObservableObject {
         } catch let error as MarkdownServiceError {
             switch error {
             case .notFound:
-                state = .error("Guide content not available yet.")
+                // Content not available - signal to open in browser
+                state = .notAvailable
+                // Auto-open in browser after a short delay
+                try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
+                shouldOpenInBrowser = true
             case .networkError:
                 state = .error("Unable to connect. Check your internet connection.")
             case .httpError(let code):
@@ -353,7 +400,7 @@ enum MarkdownServiceError: Error, LocalizedError {
 actor MarkdownService {
     static let shared = MarkdownService()
 
-    private let baseURL = "https://baynavigator.org/api/guides"
+    private let baseURL = "https://baynavigator.org/api/eligibility"
     private let session: URLSession
     private let requestTimeout: TimeInterval = 15
 

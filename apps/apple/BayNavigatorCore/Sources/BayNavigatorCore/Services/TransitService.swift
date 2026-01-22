@@ -157,9 +157,11 @@ public actor TransitService {
     public static let shared = TransitService()
 
     private let alertsAPIURL = "https://baytides-integrity.azurewebsites.net/api/transit-alerts"
-    private let session: URLSession
+    private let standardSession: URLSession
+    private var torSession: URLSession?
     private let cacheDuration: TimeInterval = 5 * 60 // 5 minutes
     private let requestTimeout: TimeInterval = 10
+    private let torRequestTimeout: TimeInterval = 30 // Tor is slower
 
     // In-memory cache
     private var cachedResponse: TransitAlertsResponse?
@@ -169,7 +171,32 @@ public actor TransitService {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = requestTimeout
         config.timeoutIntervalForResource = requestTimeout
-        self.session = URLSession(configuration: config)
+        self.standardSession = URLSession(configuration: config)
+    }
+
+    // MARK: - Tor Integration
+
+    /// Get the appropriate URLSession based on Tor status
+    private func getSession() async -> URLSession {
+        let safetyService = SafetyService.shared
+        let torEnabled = await safetyService.isTorEnabled()
+
+        if torEnabled {
+            let proxyAvailable = await safetyService.isOrbotProxyAvailable()
+            if proxyAvailable {
+                // Create or return Tor session
+                if torSession == nil {
+                    let config = safetyService.createTorProxyConfiguration()
+                    config.timeoutIntervalForRequest = torRequestTimeout
+                    config.timeoutIntervalForResource = torRequestTimeout
+                    torSession = URLSession(configuration: config)
+                }
+                return torSession!
+            }
+        }
+
+        // Fall back to standard session
+        return standardSession
     }
 
     // MARK: - Static Agency Data
@@ -230,6 +257,7 @@ public actor TransitService {
                 throw TransitServiceError.invalidURL
             }
 
+            let session = await getSession()
             let (data, response) = try await session.data(from: url)
 
             guard let httpResponse = response as? HTTPURLResponse else {

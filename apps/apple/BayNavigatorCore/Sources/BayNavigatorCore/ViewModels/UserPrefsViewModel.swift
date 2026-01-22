@@ -2,6 +2,25 @@ import SwiftUI
 
 @Observable
 public final class UserPrefsViewModel {
+    /// Profile colors available for selection
+    public static let profileColors: [Color] = [
+        Color(hex: "00ACC1"),   // Teal (primary)
+        Color(hex: "FF6F00"),   // Orange
+        Color(hex: "8B5CF6"),   // Purple
+        Color(hex: "22C55E"),   // Green
+        Color(hex: "3B82F6"),   // Blue
+        Color(hex: "EF4444"),   // Red
+        Color(hex: "F59E0B"),   // Amber
+        Color(hex: "EC4899"),   // Pink
+        Color(hex: "6366F1"),   // Indigo
+        Color(hex: "14B8A6"),   // Cyan
+    ]
+
+    /// Get the user's selected profile color
+    public var profileColor: Color {
+        Self.profileColors.indices.contains(profileColorIndex) ? Self.profileColors[profileColorIndex] : Self.profileColors[0]
+    }
+
     // Legacy fields
     public var selectedGroups: [String] = []
     public var selectedCounty: String?
@@ -15,6 +34,7 @@ public final class UserPrefsViewModel {
     public var birthYear: Int?
     public var qualifications: [String] = []
     public var isMilitaryOrVeteran: Bool?
+    public var profileColorIndex: Int = 0
 
     private let cache = CacheService.shared
 
@@ -22,14 +42,15 @@ public final class UserPrefsViewModel {
         !selectedGroups.isEmpty || selectedCounty != nil || firstName != nil
     }
 
-    /// Display location: city name, or county name if no city
+    /// Display location: city name with zip (if available), or county name if no city
     public var displayLocation: String? {
         if let city = city, !city.isEmpty {
+            if let zip = zipCode, !zip.isEmpty {
+                return "\(city), \(zip)"
+            }
             return city
         }
-        if let county = selectedCounty {
-            return countyIdToDisplayName(county)
-        }
+        // County is internal only - don't show it to users
         return nil
     }
 
@@ -52,6 +73,7 @@ public final class UserPrefsViewModel {
         birthYear = await cache.getUserBirthYear()
         qualifications = await cache.getUserQualifications()
         isMilitaryOrVeteran = await cache.getUserIsMilitary()
+        profileColorIndex = await cache.getUserProfileColorIndex()
 
         // Show onboarding if not complete
         if !onboardingComplete {
@@ -68,7 +90,8 @@ public final class UserPrefsViewModel {
         birthYear: Int? = nil,
         isMilitaryOrVeteran: Bool? = nil,
         qualifications: [String] = [],
-        groups: [String] = []
+        groups: [String] = [],
+        profileColorIndex: Int = 0
     ) async {
         await cache.setUserFirstName(firstName)
         await cache.setUserCity(city)
@@ -78,6 +101,7 @@ public final class UserPrefsViewModel {
         await cache.setUserIsMilitary(isMilitaryOrVeteran)
         await cache.setUserQualifications(qualifications)
         await cache.setUserGroups(groups)
+        await cache.setUserProfileColorIndex(profileColorIndex)
 
         await MainActor.run {
             self.firstName = firstName
@@ -88,6 +112,7 @@ public final class UserPrefsViewModel {
             self.isMilitaryOrVeteran = isMilitaryOrVeteran
             self.qualifications = qualifications
             self.selectedGroups = groups
+            self.profileColorIndex = profileColorIndex
         }
     }
 

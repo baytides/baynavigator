@@ -98,7 +98,13 @@ extension Color {
 
 extension ShapeStyle where Self == Color {
     public static var cardBackground: Color {
+        #if os(iOS) || os(visionOS)
         Color(.systemBackground)
+        #elseif os(macOS)
+        Color(nsColor: .windowBackgroundColor)
+        #else
+        Color.white
+        #endif
     }
 
     public static var secondaryText: Color {

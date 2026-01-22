@@ -1,9 +1,18 @@
 import SwiftUI
 import BayNavigatorCore
 
-/// View for managing user profiles
-/// Each household member can have their own profile with personalized saved programs
+/// Full Profiles view with NavigationStack (use when displayed as a tab)
 struct ProfilesView: View {
+    var body: some View {
+        NavigationStack {
+            ProfilesViewContent()
+        }
+    }
+}
+
+/// View for managing user profiles - content without NavigationStack
+/// Each household member can have their own profile with personalized saved programs
+struct ProfilesViewContent: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
 
@@ -19,69 +28,61 @@ struct ProfilesView: View {
     private let profileService = ProfileService.shared
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if isLoading {
-                    ProgressView("Loading profiles...")
-                } else if profiles.isEmpty {
-                    emptyStateView
-                } else {
-                    profilesListView
-                }
+        Group {
+            if isLoading {
+                ProgressView("Loading profiles...")
+            } else if profiles.isEmpty {
+                emptyStateView
+            } else {
+                profilesListView
             }
-            .navigationTitle("Profiles")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Done") {
-                        dismiss()
-                    }
-                }
-
-                if profiles.count < UserProfile.maxProfiles {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            editingProfile = nil
-                            showEditSheet = true
-                        } label: {
-                            Image(systemName: "plus")
-                        }
+        }
+        .navigationTitle("Profiles")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
+        .toolbar {
+            if profiles.count < UserProfile.maxProfiles {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        editingProfile = nil
+                        showEditSheet = true
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
             }
-            .sheet(isPresented: $showEditSheet) {
-                EditProfileView(
-                    profile: editingProfile,
-                    existingNames: profiles.map { $0.name.lowercased() },
-                    onSave: { profile in
-                        Task {
-                            await saveProfile(profile)
-                        }
+        }
+        .sheet(isPresented: $showEditSheet) {
+            EditProfileView(
+                profile: editingProfile,
+                existingNames: profiles.map { $0.name.lowercased() },
+                onSave: { profile in
+                    Task {
+                        await saveProfile(profile)
                     }
-                )
+                }
+            )
+        }
+        .confirmationDialog(
+            "Delete Profile",
+            isPresented: $showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            if let profile = profileToDelete {
+                Button("Delete \"\(profile.name)\"", role: .destructive) {
+                    Task {
+                        await deleteProfile(profile)
+                    }
+                }
             }
-            .confirmationDialog(
-                "Delete Profile",
-                isPresented: $showDeleteConfirmation,
-                titleVisibility: .visible
-            ) {
-                if let profile = profileToDelete {
-                    Button("Delete \"\(profile.name)\"", role: .destructive) {
-                        Task {
-                            await deleteProfile(profile)
-                        }
-                    }
-                }
-                Button("Cancel", role: .cancel) {
-                    profileToDelete = nil
-                }
-            } message: {
-                if let profile = profileToDelete {
-                    let count = savedCounts[profile.id] ?? 0
-                    Text("This will delete the profile and \(count) saved program\(count == 1 ? "" : "s").")
-                }
+            Button("Cancel", role: .cancel) {
+                profileToDelete = nil
+            }
+        } message: {
+            if let profile = profileToDelete {
+                let count = savedCounts[profile.id] ?? 0
+                Text("This will delete the profile and \(count) saved program\(count == 1 ? "" : "s").")
             }
         }
         .task {

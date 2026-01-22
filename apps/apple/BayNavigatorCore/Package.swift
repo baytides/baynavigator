@@ -14,11 +14,21 @@ let package = Package(
             targets: ["BayNavigatorCore"]
         ),
     ],
+    dependencies: [
+        // Lottie for high-quality animations
+        .package(url: "https://github.com/airbnb/lottie-ios.git", from: "4.4.0"),
+    ],
     targets: [
         .target(
             name: "BayNavigatorCore",
-            dependencies: [],
-            path: "Sources/BayNavigatorCore"
+            dependencies: [
+                .product(name: "Lottie", package: "lottie-ios"),
+            ],
+            path: "Sources/BayNavigatorCore",
+            resources: [
+                .process("Resources/Animations"),
+                .process("Resources/quick-answers.json"),
+            ]
         ),
         .testTarget(
             name: "BayNavigatorCoreTests",

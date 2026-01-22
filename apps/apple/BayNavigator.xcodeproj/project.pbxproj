@@ -110,6 +110,16 @@
 		SHARED026000002 /* WebViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED026000000 /* WebViewScreen.swift */; };
 		SHARED026000003 /* WebViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED026000000 /* WebViewScreen.swift */; };
 
+		/* ProfileEditSheet */
+		SHARED027000001 /* ProfileEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED027000000 /* ProfileEditSheet.swift */; };
+		SHARED027000002 /* ProfileEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED027000000 /* ProfileEditSheet.swift */; };
+		SHARED027000003 /* ProfileEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED027000000 /* ProfileEditSheet.swift */; };
+
+		/* FlowLayout */
+		SHARED028000001 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED028000000 /* FlowLayout.swift */; };
+		SHARED028000002 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED028000000 /* FlowLayout.swift */; };
+		SHARED028000003 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = SHARED028000000 /* FlowLayout.swift */; };
+
 		/* visionOS specific */
 		VISION001000001 /* ImmersiveWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = VISION001000000 /* ImmersiveWelcomeView.swift */; };
 
@@ -117,6 +127,11 @@
 		ASSETS001000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS001000000 /* Assets.xcassets */; };
 		ASSETS001000002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS001000000 /* Assets.xcassets */; };
 		ASSETS001000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS001000000 /* Assets.xcassets */; };
+
+		/* Privacy Manifest */
+		PRIVACY00000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = PRIVACY00000000 /* PrivacyInfo.xcprivacy */; };
+		PRIVACY00000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = PRIVACY00000000 /* PrivacyInfo.xcprivacy */; };
+		PRIVACY00000003 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = PRIVACY00000000 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,12 +169,17 @@
 		SHARED024000000 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		SHARED025000000 /* NavigationCustomizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustomizationView.swift; sourceTree = "<group>"; };
 		SHARED026000000 /* WebViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScreen.swift; sourceTree = "<group>"; };
+		SHARED027000000 /* ProfileEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSheet.swift; sourceTree = "<group>"; };
+		SHARED028000000 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 
 		/* visionOS specific */
 		VISION001000000 /* ImmersiveWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveWelcomeView.swift; sourceTree = "<group>"; };
 
 		/* Assets */
 		ASSETS001000000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+
+		/* Privacy Manifest */
+		PRIVACY00000000 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 
 		/* Package Reference */
 		PKG001000000 /* BayNavigatorCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BayNavigatorCore; path = BayNavigatorCore; sourceTree = "<group>"; };
@@ -208,6 +228,7 @@
 				GRPSHARED0000 /* Shared */,
 				GRPVISION0000 /* visionOS */,
 				ASSETS001000000 /* Assets.xcassets */,
+				PRIVACY00000000 /* PrivacyInfo.xcprivacy */,
 			);
 			path = BayNavigator;
 			sourceTree = "<group>";
@@ -276,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				SHARED005000000 /* ProgramCard.swift */,
+				SHARED028000000 /* FlowLayout.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -300,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				SHARED008000000 /* SettingsView.swift */,
+				SHARED027000000 /* ProfileEditSheet.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -550,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ASSETS001000001 /* Assets.xcassets in Resources */,
+				PRIVACY00000001 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ASSETS001000002 /* Assets.xcassets in Resources */,
+				PRIVACY00000002 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ASSETS001000003 /* Assets.xcassets in Resources */,
+				PRIVACY00000003 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +628,8 @@
 				SHARED024000001 /* MoreView.swift in Sources */,
 				SHARED025000001 /* NavigationCustomizationView.swift in Sources */,
 				SHARED026000001 /* WebViewScreen.swift in Sources */,
+				SHARED027000001 /* ProfileEditSheet.swift in Sources */,
+				SHARED028000001 /* FlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +663,8 @@
 				SHARED024000002 /* MoreView.swift in Sources */,
 				SHARED025000002 /* NavigationCustomizationView.swift in Sources */,
 				SHARED026000002 /* WebViewScreen.swift in Sources */,
+				SHARED027000002 /* ProfileEditSheet.swift in Sources */,
+				SHARED028000002 /* FlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +698,8 @@
 				SHARED024000003 /* MoreView.swift in Sources */,
 				SHARED025000003 /* NavigationCustomizationView.swift in Sources */,
 				SHARED026000003 /* WebViewScreen.swift in Sources */,
+				SHARED027000003 /* ProfileEditSheet.swift in Sources */,
+				SHARED028000003 /* FlowLayout.swift in Sources */,
 				VISION001000001 /* ImmersiveWelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,7 +833,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bay Navigator";
@@ -817,7 +849,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = iphoneos;
@@ -836,7 +868,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bay Navigator";
@@ -852,7 +884,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = iphoneos;
@@ -874,7 +906,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -887,7 +919,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = macosx;
@@ -905,7 +937,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -918,7 +950,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = macosx;
@@ -934,7 +966,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bay Navigator";
@@ -947,7 +979,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = xros;
@@ -966,7 +998,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C5U8Z5536K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Bay Navigator";
@@ -979,7 +1011,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.baytides.navigator;
 				PRODUCT_NAME = "Bay Navigator";
 				SDKROOT = xros;

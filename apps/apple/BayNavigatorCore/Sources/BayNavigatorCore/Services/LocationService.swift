@@ -16,7 +16,11 @@ public final class LocationService: NSObject {
 
     public var hasLocation: Bool { currentLocation != nil }
     public var hasPermission: Bool {
+        #if os(macOS)
+        authorizationStatus == .authorized || authorizationStatus == .authorizedAlways
+        #else
         authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways
+        #endif
     }
 
     // MARK: - Private

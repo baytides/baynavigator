@@ -161,13 +161,15 @@ struct EditProfileView: View {
 
                 // Birth Year Section
                 Section {
+                    let currentYear = Calendar.current.component(.year, from: Date())
                     Picker("Birth Year", selection: Binding(
-                        get: { birthYear ?? Calendar.current.component(.year, from: Date()) - 30 },
+                        get: { birthYear ?? (currentYear - 30) },
                         set: { birthYear = $0 }
                     )) {
                         Text("Not set").tag(Optional<Int>.none)
 
-                        ForEach((1920...Calendar.current.component(.year, from: Date())).reversed(), id: \.self) { year in
+                        // Birth years from 104 years ago to 18 years ago (adults for most programs)
+                        ForEach(((currentYear - 104)...(currentYear - 18)).reversed(), id: \.self) { year in
                             Text(String(year)).tag(Optional(year))
                         }
                     }

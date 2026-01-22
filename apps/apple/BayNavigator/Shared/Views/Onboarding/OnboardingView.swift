@@ -8,11 +8,16 @@ struct OnboardingView: View {
     @Environment(UserPrefsViewModel.self) private var userPrefsVM
     @Environment(ProgramsViewModel.self) private var programsVM
     @Environment(SettingsViewModel.self) private var settingsVM
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // MARK: - Page Navigation
 
-    @State private var currentPage = 0
-    private let totalPages = 9
+    @State private var currentPage = 0 {
+        didSet {
+            announcePageChange()
+        }
+    }
+    private let totalPages = 10
 
     // MARK: - Form State
 
@@ -24,6 +29,7 @@ struct OnboardingView: View {
     @State private var selectedBirthYear: Int?
     @State private var isMilitaryOrVeteran: Bool = false
     @State private var selectedQualifications: Set<String> = []
+    @State private var selectedColorIndex: Int = 0
 
     // MARK: - Location State
 
@@ -87,8 +93,9 @@ struct OnboardingView: View {
                     locationInputPage.tag(4)
                     birthYearPage.tag(5)
                     qualificationsPage.tag(6)
-                    reviewPage.tag(7)
-                    processingPage.tag(8)
+                    profileColorPage.tag(7)
+                    reviewPage.tag(8)
+                    processingPage.tag(9)
                 }
                 #if os(iOS)
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -522,8 +529,9 @@ struct OnboardingView: View {
 
     private var birthYearPage: some View {
         let currentYear = Calendar.current.component(.year, from: Date())
-        // Allow years from 104 years ago to current year (for newborns/children)
-        let years = Array((currentYear - 104)...currentYear).reversed()
+        // Birth years from 104 years ago to 18 years ago (adults only for most programs)
+        // Youngest reasonable: 18 years old, Oldest reasonable: 104 years old
+        let years = Array((currentYear - 104)...(currentYear - 18)).reversed()
 
         return VStack(alignment: .leading, spacing: 24) {
             Spacer().frame(height: 40)
@@ -537,32 +545,30 @@ struct OnboardingView: View {
                     .foregroundStyle(.secondary)
             }
 
-            // Use Menu to prevent TabView gesture conflicts
-            Menu {
-                Button("Select year") {
-                    selectedBirthYear = nil
-                }
-                ForEach(years, id: \.self) { year in
-                    Button(String(year)) {
-                        selectedBirthYear = year
+            // Use inline Picker with wheel style to avoid overlay/popup issues with TabView
+            VStack(spacing: 8) {
+                Picker("Birth Year", selection: Binding(
+                    get: { selectedBirthYear ?? (currentYear - 30) },
+                    set: { selectedBirthYear = $0 }
+                )) {
+                    ForEach(years, id: \.self) { year in
+                        Text(String(year)).tag(year)
                     }
                 }
-            } label: {
-                HStack {
-                    Text(selectedBirthYear.map { String($0) } ?? "Select year")
-                        .foregroundStyle(selectedBirthYear == nil ? .secondary : .primary)
-                    Spacer()
-                    Image(systemName: "chevron.up.chevron.down")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                .padding()
+                .pickerStyle(.wheel)
+                .frame(height: 150)
                 #if os(iOS)
                 .background(Color(.secondarySystemBackground))
                 #else
                 .background(Color.secondary.opacity(0.1))
                 #endif
                 .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                if selectedBirthYear != nil {
+                    Text("Age: \(currentYear - selectedBirthYear!) years old")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.appPrimary)
+                }
             }
 
             HStack(spacing: 8) {
@@ -666,24 +672,118 @@ struct OnboardingView: View {
             .background(Color.appPrimary.opacity(0.08))
             .clipShape(RoundedRectangle(cornerRadius: 12))
 
-            navigationButtons(canSkip: true, nextLabel: "Review")
+            navigationButtons(canSkip: true)
         }
         .padding()
     }
 
-    // MARK: - Page 7: Review
+    // MARK: - Page 7: Profile Color
+
+    private var profileColorPage: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Spacer().frame(height: 40)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Pick your profile color")
+                    .font(.title.bold())
+
+                Text("This helps identify your profile at a glance.")
+                    .font(.body)
+                    .foregroundStyle(.secondary)
+            }
+
+            // Color preview
+            VStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .fill(UserPrefsViewModel.profileColors[selectedColorIndex])
+                        .frame(width: 100, height: 100)
+                        .shadow(color: UserPrefsViewModel.profileColors[selectedColorIndex].opacity(0.5), radius: 10, x: 0, y: 4)
+
+                    Text(firstName.isEmpty ? "?" : String(firstName.prefix(1)).uppercased())
+                        .font(.system(size: 44, weight: .bold))
+                        .foregroundStyle(.white)
+                }
+
+                Text(firstName.isEmpty ? "Your Profile" : firstName)
+                    .font(.headline)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 20)
+
+            // Color selection grid
+            LazyVGrid(columns: [
+                GridItem(.adaptive(minimum: 56), spacing: 16)
+            ], spacing: 16) {
+                ForEach(Array(UserPrefsViewModel.profileColors.enumerated()), id: \.offset) { index, color in
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            selectedColorIndex = index
+                        }
+                        triggerHaptic()
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(color)
+                                .frame(width: 56, height: 56)
+
+                            if selectedColorIndex == index {
+                                Image(systemName: "checkmark")
+                                    .font(.headline.bold())
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                        .overlay(
+                            Circle()
+                                .stroke(selectedColorIndex == index ? Color.white : Color.clear, lineWidth: 3)
+                        )
+                        .shadow(
+                            color: selectedColorIndex == index ? color.opacity(0.5) : .clear,
+                            radius: 8,
+                            x: 0,
+                            y: 3
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal)
+
+            Spacer()
+
+            navigationButtons(canSkip: false, nextLabel: "Review")
+        }
+        .padding()
+    }
+
+    // MARK: - Page 8: Review
 
     private var reviewPage: some View {
         VStack(alignment: .leading, spacing: 16) {
             Spacer().frame(height: 20)
 
-            VStack(alignment: .leading, spacing: 8) {
-                Text(firstName.isEmpty ? "Review your info" : "Looking good, \(firstName)!")
-                    .font(.title.bold())
+            // Profile preview with color
+            HStack(spacing: 16) {
+                ZStack {
+                    Circle()
+                        .fill(UserPrefsViewModel.profileColors[selectedColorIndex])
+                        .frame(width: 60, height: 60)
 
-                Text("Make sure everything looks right before we personalize your experience.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    Text(firstName.isEmpty ? "?" : String(firstName.prefix(1)).uppercased())
+                        .font(.title2.bold())
+                        .foregroundStyle(.white)
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(firstName.isEmpty ? "Review your info" : "Looking good, \(firstName)!")
+                        .font(.title2.bold())
+
+                    Text("Make sure everything looks right.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
             }
 
             ScrollView {
@@ -692,6 +792,7 @@ struct OnboardingView: View {
                     reviewItem(label: "Location", value: displayLocationForReview, icon: "location.fill", editPage: 4)
                     reviewItem(label: "Birth Year", value: selectedBirthYear.map { String($0) } ?? "Not provided", icon: "gift.fill", editPage: 5)
                     reviewItem(label: "About You", value: qualificationsDisplayString, icon: "checklist", editPage: 6)
+                    reviewItemWithColor(label: "Profile Color", colorIndex: selectedColorIndex, editPage: 7)
                 }
             }
 
@@ -841,6 +942,40 @@ struct OnboardingView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
+    private func reviewItemWithColor(label: String, colorIndex: Int, editPage: Int) -> some View {
+        HStack(spacing: 12) {
+            Circle()
+                .fill(UserPrefsViewModel.profileColors[colorIndex])
+                .frame(width: 24, height: 24)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                Text("Selected")
+                    .font(.subheadline.weight(.medium))
+            }
+
+            Spacer()
+
+            Button {
+                goToPage(editPage)
+            } label: {
+                Image(systemName: "pencil")
+                    .font(.caption)
+                    .foregroundStyle(Color.appPrimary)
+            }
+        }
+        .padding()
+        #if os(iOS)
+        .background(Color(.secondarySystemBackground))
+        #else
+        .background(Color.secondary.opacity(0.1))
+        #endif
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
     private func navigationButtons(canSkip: Bool = false, nextLabel: String = "Continue") -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
@@ -922,12 +1057,37 @@ struct OnboardingView: View {
         return items.isEmpty ? "None selected" : items.joined(separator: ", ")
     }
 
+    // MARK: - Accessibility
+
+    private func announcePageChange() {
+        let pageNames = [
+            "Language selection",
+            "Welcome",
+            "Privacy information",
+            "Enter your name",
+            "Enter your location",
+            "Enter your birth year",
+            "Select your qualifications",
+            "Choose profile color",
+            "Review your information",
+            "Processing"
+        ]
+        let pageName = currentPage < pageNames.count ? pageNames[currentPage] : "Page \(currentPage + 1)"
+        Task { @MainActor in
+            AccessibilityService.shared.announceScreenChange("\(pageName), step \(currentPage + 1) of \(totalPages)")
+        }
+    }
+
     // MARK: - Navigation
 
     private func nextPage() {
         if currentPage < totalPages - 1 {
-            withAnimation {
+            if reduceMotion {
                 currentPage += 1
+            } else {
+                withAnimation {
+                    currentPage += 1
+                }
             }
             triggerHaptic()
         }
@@ -935,16 +1095,24 @@ struct OnboardingView: View {
 
     private func previousPage() {
         if currentPage > 0 {
-            withAnimation {
+            if reduceMotion {
                 currentPage -= 1
+            } else {
+                withAnimation {
+                    currentPage -= 1
+                }
             }
             triggerHaptic()
         }
     }
 
     private func goToPage(_ page: Int) {
-        withAnimation {
+        if reduceMotion {
             currentPage = page
+        } else {
+            withAnimation {
+                currentPage = page
+            }
         }
         triggerHaptic()
     }
@@ -1089,7 +1257,8 @@ struct OnboardingView: View {
                 birthYear: selectedBirthYear,
                 isMilitaryOrVeteran: isMilitaryOrVeteran ? true : nil,
                 qualifications: Array(selectedQualifications),
-                groups: []
+                groups: [],
+                profileColorIndex: selectedColorIndex
             )
 
             // Mark onboarding complete

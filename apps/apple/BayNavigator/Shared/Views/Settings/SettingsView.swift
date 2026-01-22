@@ -1,11 +1,22 @@
 import SwiftUI
 import BayNavigatorCore
 
+/// Full Settings view with NavigationStack (use when displayed as a tab)
 struct SettingsView: View {
+    var body: some View {
+        NavigationStack {
+            SettingsViewContent()
+        }
+    }
+}
+
+/// Settings content without NavigationStack (use when pushed onto existing navigation)
+struct SettingsViewContent: View {
     @Environment(SettingsViewModel.self) private var settingsVM
     @Environment(ProgramsViewModel.self) private var programsVM
     @Environment(UserPrefsViewModel.self) private var userPrefsVM
     @Environment(\.openURL) private var openURL
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     #if os(visionOS)
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
@@ -14,6 +25,7 @@ struct SettingsView: View {
     #endif
 
     @State private var showProxyConfig = false
+    @State private var showProfileEdit = false
     @State private var proxyHost = ""
     @State private var proxyPort = ""
     @State private var proxyType: ProxyType = .socks5
@@ -22,29 +34,27 @@ struct SettingsView: View {
     @State private var cacheSize = "Calculating..."
 
     var body: some View {
-        NavigationStack {
-            Form {
-                #if os(visionOS)
-                spatialExperienceSection
-                #endif
-
-                profileSection
-                appInfoSection
-                appearanceSection
-                searchSection
-                languageSection
-                privacySection
-                storageSection
-                supportSection
-                legalSection
-            }
-            .navigationTitle("Settings")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
+        Form {
+            #if os(visionOS)
+            spatialExperienceSection
             #endif
-            .task {
-                cacheSize = await settingsVM.cacheSize
-            }
+
+            profileSection
+            appInfoSection
+            appearanceSection
+            searchSection
+            languageSection
+            privacySection
+            storageSection
+            supportSection
+            legalSection
+        }
+        .navigationTitle("Settings")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
+        .task {
+            cacheSize = await settingsVM.cacheSize
         }
     }
 
@@ -75,13 +85,108 @@ struct SettingsView: View {
 
     private var profileSection: some View {
         Section("Your Profile") {
+            // Show saved profile information if available
+            if userPrefsVM.hasPreferences {
+                // Profile header with avatar
+                HStack(spacing: 12) {
+                    ZStack {
+                        Circle()
+                            .fill(userPrefsVM.profileColor)
+                            .frame(width: 50, height: 50)
+
+                        Text(userPrefsVM.firstName?.prefix(1).uppercased() ?? "?")
+                            .font(.title2.bold())
+                            .foregroundStyle(.white)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        if let firstName = userPrefsVM.firstName, !firstName.isEmpty {
+                            Text(firstName)
+                                .font(.headline)
+                        }
+
+                        if let location = userPrefsVM.displayLocation {
+                            Text(location)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+
+                // Birth Year / Age
+                if let birthYear = userPrefsVM.birthYear {
+                    let currentYear = Calendar.current.component(.year, from: Date())
+                    let age = currentYear - birthYear
+                    LabeledContent {
+                        Text("\(age) years old")
+                    } label: {
+                        Label("Age", systemImage: "calendar")
+                    }
+                }
+
+                // Interests/Groups
+                if !userPrefsVM.selectedGroups.isEmpty {
+                    let groupNames = userPrefsVM.getGroupNames(from: programsVM.groups)
+                    if !groupNames.isEmpty {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Interests", systemImage: "heart.fill")
+                            FlowLayout(spacing: 6) {
+                                ForEach(groupNames, id: \.self) { name in
+                                    Text(name)
+                                        .font(.caption)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(Color.appPrimary.opacity(0.1))
+                                        .foregroundStyle(Color.appPrimary)
+                                        .clipShape(Capsule())
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+
+                // Qualifications
+                if !userPrefsVM.qualifications.isEmpty {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Label("Qualifications", systemImage: "checkmark.seal.fill")
+                        FlowLayout(spacing: 6) {
+                            ForEach(userPrefsVM.qualifications, id: \.self) { qual in
+                                Text(formatQualification(qual))
+                                    .font(.caption)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(Color.appAccent.opacity(0.1))
+                                    .foregroundStyle(Color.appAccent)
+                                    .clipShape(Capsule())
+                            }
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+            } else {
+                // No profile set up yet
+                HStack {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .foregroundStyle(.secondary)
+                    Text("No profile set up yet")
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            // Edit button - use lightweight sheet for existing profiles, onboarding for new users
             Button {
-                userPrefsVM.reopenOnboarding()
+                if userPrefsVM.hasPreferences {
+                    showProfileEdit = true
+                } else {
+                    userPrefsVM.reopenOnboarding()
+                }
             } label: {
                 HStack {
-                    Image(systemName: "person.crop.circle")
+                    Image(systemName: "pencil.circle.fill")
                         .foregroundStyle(Color.appPrimary)
-                    Text("Edit Profile")
+                    Text(userPrefsVM.hasPreferences ? "Edit Profile" : "Set Up Profile")
                     Spacer()
                     Image(systemName: "chevron.right")
                         .font(.caption)
@@ -90,6 +195,13 @@ struct SettingsView: View {
             }
             .buttonStyle(.plain)
         }
+    }
+
+    /// Format qualification ID to display name
+    private func formatQualification(_ qual: String) -> String {
+        qual.split(separator: "_")
+            .map { String($0).capitalized }
+            .joined(separator: " ")
     }
 
     private var appInfoSection: some View {
@@ -146,7 +258,7 @@ struct SettingsView: View {
                 set: { settingsVM.aiSearchEnabled = $0 }
             )) {
                 HStack {
-                    Label("AI-Powered Search", systemImage: "sparkles")
+                    Label("AI Features", systemImage: "sparkles")
                     Text("BETA")
                         .font(.caption2.bold())
                         .padding(.horizontal, 6)
@@ -157,9 +269,9 @@ struct SettingsView: View {
                 }
             }
         } header: {
-            Text("Search")
+            Text("AI")
         } footer: {
-            Text("Use AI to understand natural language queries like \"food help for seniors\"")
+            Text("Enable AI-powered search and Ask Carl assistant. When disabled, Ask Carl will be unavailable.")
         }
     }
 
@@ -182,26 +294,6 @@ struct SettingsView: View {
 
     private var privacySection: some View {
         Section {
-            // Tor toggle
-            Toggle(isOn: Binding(
-                get: { settingsVM.useOnion },
-                set: { settingsVM.useOnion = $0 }
-            )) {
-                HStack {
-                    Image(systemName: "network.badge.shield.half.filled")
-                        .foregroundStyle(.purple)
-                    VStack(alignment: .leading) {
-                        Text("Tor Network")
-                        if !settingsVM.torAvailable {
-                            Text("Tor not detected")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                }
-            }
-            .disabled(!settingsVM.torAvailable)
-
             // Custom proxy
             Button {
                 showProxyConfig = true
@@ -272,6 +364,10 @@ struct SettingsView: View {
                 type: $proxyType
             )
             .environment(settingsVM)
+        }
+        .sheet(isPresented: $showProfileEdit) {
+            ProfileEditSheet()
+                .environment(userPrefsVM)
         }
     }
 
@@ -350,34 +446,22 @@ struct SettingsView: View {
 
     private var legalSection: some View {
         Section("Legal") {
-            Link(destination: SettingsViewModel.termsURL) {
-                HStack {
-                    Text("Terms of Service")
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+            NavigationLink {
+                WebContentView(title: "Terms of Service", url: SettingsViewModel.termsURL)
+            } label: {
+                Text("Terms of Service")
             }
 
-            Link(destination: SettingsViewModel.privacyURL) {
-                HStack {
-                    Text("Privacy Policy")
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+            NavigationLink {
+                WebContentView(title: "Privacy Policy", url: SettingsViewModel.privacyURL)
+            } label: {
+                Text("Privacy Policy")
             }
 
-            Link(destination: SettingsViewModel.creditsURL) {
-                HStack {
-                    Text("Credits")
-                    Spacer()
-                    Image(systemName: "arrow.up.right")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+            NavigationLink {
+                WebContentView(title: "Credits", url: SettingsViewModel.creditsURL)
+            } label: {
+                Text("Credits")
             }
         }
     }

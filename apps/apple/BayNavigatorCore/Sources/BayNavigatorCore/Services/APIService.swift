@@ -3,27 +3,86 @@ import Foundation
 public actor APIService {
     public static let shared = APIService()
 
-    private let baseURL = "https://baynavigator.org/api"
-    private let session: URLSession
+    private let clearnetBaseURL = "https://baynavigator.org/api"
     private let cache = CacheService.shared
     private let cacheDuration: TimeInterval = 24 * 60 * 60 // 24 hours
     private let requestTimeout: TimeInterval = 12
+    private let torRequestTimeout: TimeInterval = 30 // Tor is slower
+
+    /// Standard URLSession for clearnet requests
+    private let clearnetSession: URLSession
+
+    /// URLSession configured for Tor SOCKS5 proxy
+    private var torSession: URLSession?
 
     private init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = requestTimeout
         config.timeoutIntervalForResource = requestTimeout
-        self.session = URLSession(configuration: config)
+        self.clearnetSession = URLSession(configuration: config)
+    }
+
+    // MARK: - Session Management
+
+    /// Get the appropriate base URL based on Tor status
+    private func getBaseURL() async -> String {
+        let safetyService = SafetyService.shared
+        let torEnabled = await safetyService.isTorEnabled()
+
+        if torEnabled {
+            let proxyAvailable = await safetyService.isOrbotProxyAvailable()
+            if proxyAvailable {
+                return SafetyService.onionBaseURL
+            }
+        }
+        return clearnetBaseURL
+    }
+
+    /// Get the appropriate URLSession based on Tor status
+    private func getSession() async -> URLSession {
+        let safetyService = SafetyService.shared
+        let torEnabled = await safetyService.isTorEnabled()
+
+        if torEnabled {
+            let proxyAvailable = await safetyService.isOrbotProxyAvailable()
+            if proxyAvailable {
+                // Create or return Tor session
+                if torSession == nil {
+                    let config = safetyService.createTorProxyConfiguration()
+                    torSession = URLSession(configuration: config)
+                }
+                return torSession!
+            }
+        }
+
+        // Fall back to clearnet
+        return clearnetSession
+    }
+
+    /// Check if requests should be blocked (offline mode)
+    private func shouldBlockRequests() async -> Bool {
+        await SafetyService.shared.isOfflineModeEnabled()
     }
 
     // MARK: - API Calls
 
     public func getPrograms(forceRefresh: Bool = false) async throws -> [Program] {
+        // Check cache first
         if !forceRefresh, let cached: [Program] = await cache.get(forKey: .programs) {
             return cached
         }
 
+        // In offline mode, only use cache
+        if await shouldBlockRequests() {
+            if let cached: [Program] = await cache.get(forKey: .programs, allowStale: true) {
+                return cached
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/programs.json")!
             let (data, response) = try await session.data(from: url)
 
@@ -49,7 +108,16 @@ public actor APIService {
             return cached
         }
 
+        if await shouldBlockRequests() {
+            if let cached: [ProgramCategory] = await cache.get(forKey: .categories, allowStale: true) {
+                return cached
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/categories.json")!
             let (data, response) = try await session.data(from: url)
 
@@ -74,7 +142,16 @@ public actor APIService {
             return cached
         }
 
+        if await shouldBlockRequests() {
+            if let cached: [ProgramGroup] = await cache.get(forKey: .groups, allowStale: true) {
+                return cached
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/groups.json")!
             let (data, response) = try await session.data(from: url)
 
@@ -99,7 +176,16 @@ public actor APIService {
             return cached
         }
 
+        if await shouldBlockRequests() {
+            if let cached: [Area] = await cache.get(forKey: .areas, allowStale: true) {
+                return cached
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/areas.json")!
             let (data, response) = try await session.data(from: url)
 
@@ -124,7 +210,16 @@ public actor APIService {
             return cached
         }
 
+        if await shouldBlockRequests() {
+            if let cached: APIMetadata = await cache.get(forKey: .metadata, allowStale: true) {
+                return cached
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/metadata.json")!
             let (data, response) = try await session.data(from: url)
 
@@ -154,7 +249,20 @@ public actor APIService {
             return result
         }
 
+        if await shouldBlockRequests() {
+            if let cached: [String: [Double]] = await cache.get(forKey: .programCoordinates, allowStale: true) {
+                var result: [String: (latitude: Double, longitude: Double)] = [:]
+                for (id, coords) in cached where coords.count == 2 {
+                    result[id] = (latitude: coords[1], longitude: coords[0])
+                }
+                return result
+            }
+            throw APIError.offlineMode
+        }
+
         do {
+            let baseURL = await getBaseURL()
+            let session = await getSession()
             let url = URL(string: "\(baseURL)/programs.geojson")!
             let (data, response) = try await session.data(from: url)
 
@@ -190,6 +298,18 @@ public actor APIService {
             throw error
         }
     }
+
+    /// Pre-cache all data for offline use
+    /// Call this when the app launches or when user enables offline mode
+    public func preCacheAllData() async {
+        // Fetch all data types to populate cache
+        _ = try? await getPrograms(forceRefresh: true)
+        _ = try? await getCategories(forceRefresh: true)
+        _ = try? await getGroups(forceRefresh: true)
+        _ = try? await getAreas(forceRefresh: true)
+        _ = try? await getMetadata(forceRefresh: true)
+        _ = try? await getProgramCoordinates(forceRefresh: true)
+    }
 }
 
 // MARK: - GeoJSON Models
@@ -220,6 +340,7 @@ public enum APIError: LocalizedError, Sendable {
     case httpError(Int)
     case decodingError
     case networkError
+    case offlineMode
 
     public var errorDescription: String? {
         switch self {
@@ -229,6 +350,8 @@ public enum APIError: LocalizedError, Sendable {
             return "Failed to decode response"
         case .networkError:
             return "Network error"
+        case .offlineMode:
+            return "Offline mode is enabled. Using cached data."
         }
     }
 }

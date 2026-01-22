@@ -1,30 +1,45 @@
 import SwiftUI
 import BayNavigatorCore
 
+/// Full Favorites view with NavigationStack (use when displayed as a tab)
 struct FavoritesView: View {
+    var body: some View {
+        NavigationStack {
+            FavoritesViewContent()
+        }
+    }
+}
+
+/// Favorites content without NavigationStack (use when pushed onto existing navigation)
+struct FavoritesViewContent: View {
     @Environment(ProgramsViewModel.self) private var programsVM
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var selectedProgram: Program?
     @State private var showStatusEditor = false
     @State private var editingItem: FavoriteItem?
 
     var body: some View {
-        NavigationStack {
-            Group {
-                if programsVM.favoritePrograms.isEmpty {
-                    emptyState
-                } else {
-                    favoritesList
-                }
+        Group {
+            if programsVM.favoritePrograms.isEmpty {
+                emptyState
+            } else {
+                favoritesList
             }
-            .navigationTitle("Saved")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.large)
-            #endif
         }
+        .navigationTitle("Saved")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.large)
+        #endif
         .sheet(item: $editingItem) { item in
             StatusEditorSheet(item: item)
                 .environment(programsVM)
+        }
+        .onAppear {
+            // Announce screen to VoiceOver
+            Task { @MainActor in
+                AccessibilityService.shared.announceScreenChange("Saved programs, \(programsVM.favoritePrograms.count) items")
+            }
         }
     }
 
@@ -62,9 +77,11 @@ struct FavoritesView: View {
             Image(systemName: "bookmark")
                 .font(.system(size: 64))
                 .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
 
             Text("No Saved Programs")
                 .font(.title2.bold())
+                .accessibilityAddTraits(.isHeader)
 
             Text("Programs you save will appear here so you can easily track your applications.")
                 .font(.body)
@@ -73,6 +90,8 @@ struct FavoritesView: View {
                 .padding(.horizontal, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("No saved programs. Programs you save will appear here so you can easily track your applications.")
     }
 }
 
@@ -84,6 +103,8 @@ struct FavoriteCard: View {
     let onStatusTap: () -> Void
 
     @Environment(ProgramsViewModel.self) private var programsVM
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityDifferentiateWithoutColor) private var differentiateWithoutColor
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -97,12 +118,14 @@ struct FavoriteCard: View {
                             .font(.body)
                             .foregroundStyle(.white)
                     }
+                    .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(program.name)
                         .font(.headline)
                         .foregroundStyle(.primary)
                         .lineLimit(2)
+                        .accessibilityAddTraits(.isHeader)
 
                     Text(program.category)
                         .font(.caption)
@@ -124,6 +147,7 @@ struct FavoriteCard: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
                     .italic()
+                    .accessibilityLabel("Notes: \(notes)")
             }
 
             // Actions row
@@ -136,19 +160,37 @@ struct FavoriteCard: View {
                 }
                 .buttonStyle(.bordered)
                 .tint(.appPrimary)
+                .accessibilityHint("Opens status editor to update application progress")
 
                 Spacer()
 
                 Button {
-                    withAnimation {
+                    if reduceMotion {
                         programsVM.toggleFavorite(program.id)
+                    } else {
+                        withAnimation {
+                            programsVM.toggleFavorite(program.id)
+                        }
+                    }
+                    // Announce removal
+                    Task { @MainActor in
+                        AccessibilityService.shared.announce("\(program.name) removed from saved programs")
                     }
                 } label: {
-                    Image(systemName: "trash")
-                        .font(.body)
-                        .foregroundStyle(Color.appDanger)
+                    HStack(spacing: 4) {
+                        Image(systemName: "trash")
+                            .font(.body)
+                            .foregroundStyle(Color.appDanger)
+                        if differentiateWithoutColor {
+                            Text("Remove")
+                                .font(.caption)
+                                .foregroundStyle(Color.appDanger)
+                        }
+                    }
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Remove \(program.name) from saved programs")
+                .accessibilityHint("Removes this program from your saved list")
             }
         }
         .padding()
@@ -158,6 +200,20 @@ struct FavoriteCard: View {
         .background(Color(.systemBackground), in: RoundedRectangle(cornerRadius: 16))
         #endif
         .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(cardAccessibilityLabel)
+        .accessibilityHint("Double tap to view program details")
+    }
+
+    private var cardAccessibilityLabel: String {
+        var label = "\(program.name), \(program.category)"
+        if let status = item?.status {
+            label += ", status: \(status.label)"
+        }
+        if let notes = item?.notes, !notes.isEmpty {
+            label += ", has notes"
+        }
+        return label
     }
 
     private func statusBadge(for status: FavoriteStatus) -> some View {
@@ -171,6 +227,7 @@ struct FavoriteCard: View {
         .background(statusColor(for: status).opacity(0.15))
         .foregroundStyle(statusColor(for: status))
         .clipShape(Capsule())
+        .accessibilityLabel("Status: \(status.label)")
     }
 
     private func statusColor(for status: FavoriteStatus) -> Color {
