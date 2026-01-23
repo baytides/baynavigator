@@ -15,68 +15,69 @@ const INPUT_FILE = path.join(__dirname, '../data-exports/sfserviceguide-2025-onl
 const OUTPUT_FILE = path.join(__dirname, '../src/data/sfserviceguide.yml');
 
 // Map SF Service Guide categories to our category system
+// Output uses Title Case to match ProgramCard.astro categoryColors
 const CATEGORY_MAPPING = {
   // Food
-  food: 'food',
-  'food resources': 'food',
-  'food assistance': 'food',
-  meals: 'food',
-  'food pantry': 'food',
-  'food pantries': 'food',
-  calfresh: 'food',
+  food: 'Food',
+  'food resources': 'Food',
+  'food assistance': 'Food',
+  meals: 'Food',
+  'food pantry': 'Food',
+  'food pantries': 'Food',
+  calfresh: 'Food',
   // Housing
-  housing: 'housing',
-  shelter: 'housing',
-  'emergency shelter': 'housing',
-  'rental assistance': 'housing',
-  'transitional housing': 'housing',
-  'permanent housing': 'housing',
+  housing: 'Housing',
+  shelter: 'Housing',
+  'emergency shelter': 'Housing',
+  'rental assistance': 'Housing',
+  'transitional housing': 'Housing',
+  'permanent housing': 'Housing',
   // Health
-  health: 'health',
-  healthcare: 'health',
-  'mental health': 'health',
-  'substance use': 'health',
-  medical: 'health',
-  dental: 'health',
-  vision: 'health',
+  health: 'Health',
+  healthcare: 'Health',
+  'mental health': 'Health',
+  'substance use': 'Health',
+  medical: 'Health',
+  dental: 'Health',
+  vision: 'Health',
   // Legal
-  legal: 'legal',
-  'legal assistance': 'legal',
-  'legal services': 'legal',
-  'citizenship & immigration': 'legal',
-  'immigration assistance': 'legal',
-  'discrimination & civil rights': 'legal',
+  legal: 'Legal Services',
+  'legal assistance': 'Legal Services',
+  'legal services': 'Legal Services',
+  'citizenship & immigration': 'Legal Services',
+  'immigration assistance': 'Legal Services',
+  'discrimination & civil rights': 'Legal Services',
   // Employment
-  employment: 'employment',
-  jobs: 'employment',
-  'job training': 'employment',
-  'job assistance': 'employment',
-  'job search': 'employment',
+  employment: 'Employment',
+  jobs: 'Employment',
+  'job training': 'Employment',
+  'job assistance': 'Employment',
+  'job search': 'Employment',
   // Education
-  education: 'education',
-  learning: 'education',
-  literacy: 'education',
-  esl: 'education',
-  ged: 'education',
+  education: 'Education',
+  learning: 'Education',
+  literacy: 'Education',
+  esl: 'Education',
+  ged: 'Education',
   // Finance
-  finance: 'finance',
-  financial: 'finance',
-  'financial assistance': 'finance',
-  benefits: 'finance',
+  finance: 'Finance',
+  financial: 'Finance',
+  'financial assistance': 'Finance',
+  benefits: 'Finance',
   // Technology
-  technology: 'technology',
-  internet: 'technology',
-  computer: 'technology',
+  technology: 'Technology',
+  internet: 'Technology',
+  computer: 'Technology',
   // Transportation
-  transportation: 'transportation',
-  transit: 'transportation',
+  transportation: 'Transportation',
+  transit: 'Transportation',
   // LGBTQ+
-  lgbtq: 'lgbtq',
-  'sfsg-lgbtqa': 'lgbtq',
+  lgbtq: 'LGBTQ+',
+  'sfsg-lgbtqa': 'LGBTQ+',
   // Community
-  community: 'community',
-  'case management': 'community',
-  default: 'community',
+  community: 'Community Services',
+  'case management': 'Community Services',
+  default: 'Community Services',
 };
 
 // Map eligibility terms to our groups
@@ -169,7 +170,7 @@ function safeYamlString(text) {
  * Determine category from SF Service Guide categories
  */
 function determineCategory(categories) {
-  if (!categories || categories.length === 0) return 'community';
+  if (!categories || categories.length === 0) return 'Community Services';
 
   for (const cat of categories) {
     const catLower = cat.toLowerCase();
@@ -180,7 +181,7 @@ function determineCategory(categories) {
     }
   }
 
-  return 'community';
+  return 'Community Services';
 }
 
 /**
@@ -388,7 +389,9 @@ function generateYaml(programs) {
     }
 
     if (p.email) {
-      lines.push(`  email: "${p.email}"`);
+      // Clean email: remove any whitespace/newlines
+      const cleanEmail = p.email.trim().replace(/\s+/g, '');
+      lines.push(`  email: "${cleanEmail}"`);
     }
 
     if (p.link) {

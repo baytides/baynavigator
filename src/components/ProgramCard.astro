@@ -53,6 +53,8 @@ interface Props {
   mapLink?: string;
   amenities?: AmenityInput[];
   feeInfo?: string;
+  // API source indicator - if set, data is from external API (hide "needs review")
+  dataSource?: string;
 }
 
 const {
@@ -74,7 +76,12 @@ const {
   mapLink,
   amenities = [],
   feeInfo,
+  dataSource,
 } = Astro.props;
+
+// Don't show "needs review" for API-sourced data (like SF Service Guide)
+// These are continuously updated by their source, not by our team
+const isApiSourced = !!dataSource;
 
 // Format verified date for display
 const formatDate = (dateStr: string) => {
@@ -136,6 +143,7 @@ const categoryColors: Record<string, string> = {
   Utilities: 'bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-100',
   Transportation: 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100',
   Education: 'bg-indigo-100 text-indigo-900 dark:bg-indigo-900 dark:text-indigo-100',
+  Employment: 'bg-teal-100 text-teal-900 dark:bg-teal-900 dark:text-teal-100',
   'Legal Services': 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100',
   Finance: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900 dark:text-emerald-100',
   Technology: 'bg-cyan-100 text-cyan-900 dark:bg-cyan-900 dark:text-cyan-100',
@@ -144,7 +152,7 @@ const categoryColors: Record<string, string> = {
   'Parks & Open Space': 'bg-lime-100 text-lime-900 dark:bg-lime-900 dark:text-lime-100',
   Museums: 'bg-violet-100 text-violet-900 dark:bg-violet-900 dark:text-violet-100',
   'Library Resources': 'bg-amber-100 text-amber-900 dark:bg-amber-900 dark:text-amber-100',
-  'Tax Preparation': 'bg-teal-100 text-teal-900 dark:bg-teal-900 dark:text-teal-100',
+  'Tax Preparation': 'bg-stone-100 text-stone-900 dark:bg-stone-900 dark:text-stone-100',
   Childcare: 'bg-rose-100 text-rose-900 dark:bg-rose-900 dark:text-rose-100',
   'Pet Resources': 'bg-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-900 dark:text-fuchsia-100',
   Equipment: 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
@@ -218,9 +226,9 @@ const displayLocation = city || area;
           </span>
         )
       }
-      {/* Data freshness indicator - only show for stale data */}
+      {/* Data freshness indicator - only show for stale data from non-API sources */}
       {
-        dataFreshness.status === 'stale' && (
+        dataFreshness.status === 'stale' && !isApiSourced && (
           <span
             class="inline-flex items-center gap-1 text-xs text-amber-900 dark:text-amber-100 bg-amber-50 dark:bg-amber-900/30 px-2 py-0.5 rounded-full"
             data-tooltip={dataFreshness.message}
