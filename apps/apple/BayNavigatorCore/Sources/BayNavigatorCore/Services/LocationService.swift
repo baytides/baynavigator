@@ -18,6 +18,9 @@ public final class LocationService: NSObject {
     public var hasPermission: Bool {
         #if os(macOS)
         authorizationStatus == .authorized || authorizationStatus == .authorizedAlways
+        #elseif os(visionOS)
+        // visionOS only supports authorizedWhenInUse, not authorizedAlways
+        authorizationStatus == .authorizedWhenInUse
         #else
         authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways
         #endif
