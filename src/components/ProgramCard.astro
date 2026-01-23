@@ -79,7 +79,7 @@ const {
   dataSource,
 } = Astro.props;
 
-// Don't show "needs review" for API-sourced data (like SF Service Guide)
+// Don't show "needs review" for API-sourced data
 // These are continuously updated by their source, not by our team
 const isApiSourced = !!dataSource;
 
