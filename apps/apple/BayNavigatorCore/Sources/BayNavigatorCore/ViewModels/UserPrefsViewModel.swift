@@ -103,6 +103,9 @@ public final class UserPrefsViewModel {
         await cache.setUserGroups(groups)
         await cache.setUserProfileColorIndex(profileColorIndex)
 
+        // Force synchronization to ensure data is persisted immediately
+        await cache.synchronize()
+
         await MainActor.run {
             self.firstName = firstName
             self.city = city
@@ -120,6 +123,7 @@ public final class UserPrefsViewModel {
     public func savePreferences(groups: [String], county: String?) async {
         await cache.setUserGroups(groups)
         await cache.setUserCounty(county)
+        await cache.synchronize()
 
         await MainActor.run {
             self.selectedGroups = groups
@@ -129,6 +133,7 @@ public final class UserPrefsViewModel {
 
     public func completeOnboarding() async {
         await cache.setOnboardingComplete(true)
+        await cache.synchronize()
         await MainActor.run {
             self.onboardingComplete = true
             self.showOnboarding = false

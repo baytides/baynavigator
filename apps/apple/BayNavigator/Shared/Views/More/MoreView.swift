@@ -128,7 +128,9 @@ struct MoreView: View {
 
     private var customizeButton: some View {
         Button {
+            #if os(iOS)
             HapticManager.impact(.light)
+            #endif
             showCustomization = true
         } label: {
             HStack {

@@ -868,7 +868,7 @@ struct MarkdownContentView: View {
 
 // MARK: - Markdown WebView (Fallback)
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 struct MarkdownWebView: UIViewRepresentable {
     let htmlContent: String
     let accentColor: Color

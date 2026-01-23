@@ -255,11 +255,88 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+            .listStyle(.sidebar)
+            .navigationSplitViewColumnWidth(min: 180, ideal: 220, max: 280)
         } detail: {
-            tabContent(for: selectedTab)
+            // Wrap in NavigationStack for macOS - individual views don't need their own
+            NavigationStack {
+                macOSDetailContent(for: selectedTab)
+                    .toolbar {
+                        macOSToolbarContent
+                    }
+            }
         }
-        .frame(minWidth: 900, minHeight: 600)
+        .frame(minWidth: 1000, minHeight: 650)
+        .navigationSplitViewStyle(.balanced)
+        // Add keyboard shortcuts for tab navigation
+        .background {
+            // Cmd+1 through Cmd+4 for main tabs
+            ForEach(Array(visibleTabs.enumerated()), id: \.offset) { index, tab in
+                if index < 9 {
+                    Button("") {
+                        selectedTab = tab
+                    }
+                    .keyboardShortcut(KeyEquivalent(Character("\(index + 1)")), modifiers: .command)
+                    .opacity(0)
+                }
+            }
+            // Cmd+, for Settings
+            Button("") {
+                selectedTab = .settings
+            }
+            .keyboardShortcut(",", modifiers: .command)
+            .opacity(0)
+        }
+    }
+
+    /// macOS-specific toolbar content
+    @ToolbarContentBuilder
+    private var macOSToolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .automatic) {
+            Button {
+                // Refresh current view
+                Task {
+                    await programsVM.loadData()
+                }
+            } label: {
+                Image(systemName: "arrow.clockwise")
+            }
+            .help("Refresh data")
+            .keyboardShortcut("r", modifiers: .command)
+        }
+    }
+
+    /// macOS-specific detail content - uses content views without NavigationStack wrappers
+    @ViewBuilder
+    private func macOSDetailContent(for tab: Tab) -> some View {
+        switch tab {
+        case .forYou:
+            ForYouViewContent()
+        case .directory:
+            DirectoryViewContent()
+        case .map:
+            MapViewContent()
+        case .askCarl:
+            AskCarlView()
+        case .saved:
+            FavoritesViewContent()
+        case .transit:
+            TransitViewContent()
+        case .airports:
+            AirportsViewContent()
+        case .glossary:
+            GlossaryViewContent()
+        case .guides:
+            EligibilityGuidesViewContent()
+        case .profiles:
+            ProfilesViewContent()
+        case .settings:
+            SettingsViewContent()
+        case .safety:
+            SafetySettingsView()
+        case .more:
+            MoreView()
+        }
     }
     #endif
 

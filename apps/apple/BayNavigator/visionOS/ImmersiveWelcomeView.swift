@@ -103,7 +103,7 @@ struct ImmersiveWelcomeView: View {
         var particleEmitter = ParticleEmitterComponent()
         particleEmitter.emitterShape = .sphere
         particleEmitter.emitterShapeSize = [3, 3, 3]
-        particleEmitter.birthRate = 20
+        particleEmitter.mainEmitter.birthRate = 20
         particleEmitter.mainEmitter.lifeSpan = 5.0
         particleEmitter.mainEmitter.size = 0.005
         particleEmitter.mainEmitter.color = .constant(.single(.white.withAlphaComponent(0.3)))

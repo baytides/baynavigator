@@ -238,7 +238,9 @@ struct NavigationCustomizationView: View {
             tabBarIds.append(id)
             hasChanges = true
         }
+        #if os(iOS)
         HapticManager.impact(.light)
+        #endif
     }
 
     private func moveToMore(_ id: String) {
@@ -252,7 +254,9 @@ struct NavigationCustomizationView: View {
             moreIds.append(id)
             hasChanges = true
         }
+        #if os(iOS)
         HapticManager.impact(.light)
+        #endif
     }
 
     private func resetToDefaults() {
@@ -263,12 +267,16 @@ struct NavigationCustomizationView: View {
                 .map(\.id)
             hasChanges = true
         }
+        #if os(iOS)
         HapticManager.notification(.warning)
+        #endif
     }
 
     private func saveChanges() {
         navigationService.applyConfiguration(tabBarIds: tabBarIds)
+        #if os(iOS)
         HapticManager.notification(.success)
+        #endif
     }
 
     @State private var showingAddPicker = false

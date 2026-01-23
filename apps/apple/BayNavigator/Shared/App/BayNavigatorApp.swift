@@ -28,9 +28,6 @@ struct BayNavigatorApp: App {
                 .environment(accessibilityViewModel)
                 .environment(navigationService)
                 .preferredColorScheme(settingsViewModel.colorScheme)
-                #if os(visionOS)
-                .warmMode(settingsViewModel.warmModeEnabled)
-                #endif
                 .task {
                     // Initialize navigation service
                     await navigationService.initialize()
@@ -60,8 +57,50 @@ struct BayNavigatorApp: App {
                 .environment(accessibilityViewModel)
                 .environment(navigationService)
         }
+        .commands {
+            macOSMenuCommands
+        }
         #endif
     }
+
+    #if os(macOS)
+    // MARK: - macOS Menu Commands
+    @CommandsBuilder
+    private var macOSMenuCommands: some Commands {
+        CommandGroup(after: .appInfo) {
+            Divider()
+            Button("Refresh Data") {
+                Task {
+                    await programsViewModel.loadData()
+                }
+            }
+            .keyboardShortcut("r", modifiers: .command)
+        }
+
+        // Help menu with useful links
+        CommandGroup(replacing: .help) {
+            Button("Bay Navigator Help") {
+                if let url = URL(string: "https://baynavigator.org/help") {
+                    NSWorkspace.shared.open(url)
+                }
+            }
+
+            Button("Report a Problem") {
+                if let url = URL(string: "https://baynavigator.org/feedback") {
+                    NSWorkspace.shared.open(url)
+                }
+            }
+
+            Divider()
+
+            Button("About Bay Navigator") {
+                if let url = URL(string: "https://baynavigator.org/about") {
+                    NSWorkspace.shared.open(url)
+                }
+            }
+        }
+    }
+    #endif
 
     // MARK: - Deep Link Handling
 

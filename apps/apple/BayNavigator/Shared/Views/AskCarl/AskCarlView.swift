@@ -301,13 +301,22 @@ struct AskCarlView: View {
                         MessageBubbleView(
                             message: message,
                             onProgramTap: { program in
-                                // Navigate to program detail
+                                // Navigate to program detail - find matching program in programsVM
+                                if let matchingProgram = programsVM.programs.first(where: { $0.id == program.id }) {
+                                    // Use deep link to navigate
+                                    if let url = URL(string: "baynavigator://program/\(matchingProgram.id)") {
+                                        openURL(url)
+                                    }
+                                }
                             },
                             onPhoneCall: { phone in
                                 callPhone(phone)
                             },
                             onTextMessage: { phone, message in
                                 sendSMS(to: phone, body: message)
+                            },
+                            onLinkTap: { url in
+                                handleLinkTap(url)
                             }
                         )
                         .id(message.id)
@@ -525,8 +534,10 @@ struct AskCarlView: View {
     private var backgroundColor: Color {
         #if os(iOS)
         Color(.systemGroupedBackground)
-        #else
+        #elseif os(macOS)
         Color(.windowBackgroundColor)
+        #else
+        Color.clear
         #endif
     }
 
@@ -571,6 +582,44 @@ struct AskCarlView: View {
             openURL(url)
         }
     }
+
+    /// Handle tapped links - convert baynavigator.org URLs to deep links
+    private func handleLinkTap(_ url: URL) {
+        // Check if this is a baynavigator.org link that should be handled in-app
+        if let host = url.host, host.contains("baynavigator.org") || host.contains("baytides.org") {
+            let path = url.path
+
+            // Handle eligibility guides: /eligibility/food -> open guide
+            if path.hasPrefix("/eligibility/") {
+                let guideName = String(path.dropFirst("/eligibility/".count))
+                if let deepLinkURL = URL(string: "baynavigator://guide/\(guideName)") {
+                    openURL(deepLinkURL)
+                    return
+                }
+            }
+
+            // Handle program links: /program/abc123 -> open program
+            if path.hasPrefix("/program/") {
+                let programId = String(path.dropFirst("/program/".count))
+                if let deepLinkURL = URL(string: "baynavigator://program/\(programId)") {
+                    openURL(deepLinkURL)
+                    return
+                }
+            }
+
+            // Handle category links: /category/food -> open category
+            if path.hasPrefix("/category/") {
+                let category = String(path.dropFirst("/category/".count))
+                if let deepLinkURL = URL(string: "baynavigator://category/\(category)") {
+                    openURL(deepLinkURL)
+                    return
+                }
+            }
+        }
+
+        // For external links, open in browser
+        openURL(url)
+    }
 }
 
 // MARK: - Message Bubble View
@@ -580,8 +629,10 @@ struct MessageBubbleView: View {
     var onProgramTap: ((AIProgram) -> Void)?
     var onPhoneCall: ((String) -> Void)?
     var onTextMessage: ((String, String) -> Void)?
+    var onLinkTap: ((URL) -> Void)?
 
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.openURL) private var openURL
 
     private var isUser: Bool {
         message.role == .user
@@ -634,12 +685,52 @@ struct MessageBubbleView: View {
     }
 
     private var messageBubble: some View {
-        Text(message.content)
+        Text(parseMarkdownContent(message.content))
             .font(.body)
             .foregroundStyle(isUser ? .white : .primary)
+            .tint(isUser ? .white : .appPrimary)
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
             .background(bubbleBackground, in: bubbleShape)
+            .environment(\.openURL, OpenURLAction { url in
+                // Handle URL taps
+                if let onLinkTap = onLinkTap {
+                    onLinkTap(url)
+                } else {
+                    openURL(url)
+                }
+                return .handled
+            })
+    }
+
+    /// Parse markdown content and return styled AttributedString with tappable links
+    private func parseMarkdownContent(_ text: String) -> AttributedString {
+        do {
+            var options = AttributedString.MarkdownParsingOptions()
+            options.interpretedSyntax = .inlineOnlyPreservingWhitespace
+            var result = try AttributedString(markdown: text, options: options)
+
+            // Style links appropriately based on bubble color
+            for run in result.runs {
+                if run.link != nil {
+                    let range = run.range
+                    if isUser {
+                        // White links on colored bubble
+                        result[range].foregroundColor = .white
+                        result[range].underlineStyle = .single
+                    } else {
+                        // Accent colored links on light bubble
+                        result[range].foregroundColor = .appPrimary
+                        result[range].underlineStyle = .single
+                    }
+                }
+            }
+
+            return result
+        } catch {
+            // Fallback to plain text if markdown parsing fails
+            return AttributedString(text)
+        }
     }
 
     private var bubbleBackground: some ShapeStyle {

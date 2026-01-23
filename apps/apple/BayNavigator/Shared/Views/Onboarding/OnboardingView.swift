@@ -555,8 +555,12 @@ struct OnboardingView: View {
                         Text(String(year)).tag(year)
                     }
                 }
+                #if os(macOS)
+                .pickerStyle(.menu)
+                #else
                 .pickerStyle(.wheel)
                 .frame(height: 150)
+                #endif
                 #if os(iOS)
                 .background(Color(.secondarySystemBackground))
                 #else

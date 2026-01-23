@@ -209,6 +209,12 @@
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"
+    },
+    {
+      "filename" : "AppIcon-visionOS-1024.png",
+      "idiom" : "reality",
+      "platform" : "vision",
+      "size" : "1024x1024"
     }
   ],
   "info" : {

@@ -256,6 +256,7 @@ final class PushNotificationService: NSObject, Sendable {
 
     // MARK: - Push Notification Handling
 
+    #if os(iOS)
     /// Handle received remote notification
     func didReceiveRemoteNotification(
         userInfo: [AnyHashable: Any],
@@ -307,6 +308,7 @@ final class PushNotificationService: NSObject, Sendable {
             completion(.noData)
         }
     }
+    #endif
 
     /// Handle notification tap/action
     func handleNotificationResponse(_ response: UNNotificationResponse) {
@@ -539,7 +541,9 @@ private struct CountyPickerView: View {
             }
         }
         .navigationTitle("Select Counties")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Done") {

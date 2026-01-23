@@ -163,11 +163,9 @@ struct MapViewContent: View {
             #endif
         }
         #if os(visionOS)
-        .mapCameraKeyframeAnimator(trigger: selectedMapItem) { camera in
-            if let item = selectedMapItem {
-                KeyframeTrack(\.centerCoordinate) {
-                    LinearKeyframe(item.coordinate, duration: 0.5)
-                }
+        .mapCameraKeyframeAnimator(trigger: selectedMapItem) { _ in
+            KeyframeTrack(\.centerCoordinate) {
+                LinearKeyframe(selectedMapItem?.coordinate ?? CLLocationCoordinate2D(), duration: 0.5)
             }
         }
         #endif

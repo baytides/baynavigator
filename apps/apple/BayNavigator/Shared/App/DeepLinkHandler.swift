@@ -8,6 +8,7 @@ enum DeepLink: Equatable {
     case search(query: String?, category: String?, county: String?)
     case program(id: String)
     case category(id: String, county: String?)
+    case guide(id: String)
     case favorites
     case settings
     case forYou
@@ -42,6 +43,14 @@ enum DeepLink: Equatable {
             // baynavigator://category/food?county=alameda
             if let categoryId = url.pathComponents.dropFirst().first ?? queryParams?["id"] {
                 self = .category(id: categoryId, county: queryParams?["county"])
+            } else {
+                return nil
+            }
+
+        case "guide":
+            // baynavigator://guide/food -> open food eligibility guide
+            if let guideId = url.pathComponents.dropFirst().first ?? queryParams?["id"] {
+                self = .guide(id: guideId)
             } else {
                 return nil
             }
@@ -113,6 +122,11 @@ class DeepLinkHandler {
             selectedTab = .directory
             selectedCategory = id
             selectedCounty = county
+
+        case .guide(let id):
+            selectedTab = .guides
+            // Push guide onto navigation stack
+            pendingDeepLink = deepLink
 
         case .favorites:
             selectedTab = .favorites

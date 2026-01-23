@@ -217,6 +217,40 @@ class HapticManager {
     }
 }
 
+// MARK: - Static Convenience Methods
+
+extension HapticManager {
+    enum ImpactStyle {
+        case light, medium, heavy, soft, rigid
+    }
+
+    enum NotificationType {
+        case success, warning, error
+    }
+
+    static func impact(_ style: ImpactStyle) {
+        switch style {
+        case .light: shared.lightTap()
+        case .medium: shared.tap()
+        case .heavy: shared.heavyTap()
+        case .soft: shared.soft()
+        case .rigid: shared.rigid()
+        }
+    }
+
+    static func notification(_ type: NotificationType) {
+        switch type {
+        case .success: shared.success()
+        case .warning: shared.warning()
+        case .error: shared.error()
+        }
+    }
+
+    static func selection() {
+        shared.selection()
+    }
+}
+
 // MARK: - SwiftUI View Modifiers
 
 struct HapticOnTap: ViewModifier {

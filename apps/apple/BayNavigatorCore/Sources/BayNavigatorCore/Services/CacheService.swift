@@ -381,6 +381,14 @@ public actor CacheService {
         defaults.removeObject(forKey: CacheKey.accessibilitySettings.rawValue)
     }
 
+    // MARK: - Synchronization
+
+    /// Force synchronization of UserDefaults to ensure data is persisted
+    /// Call this after saving critical profile data
+    public func synchronize() {
+        defaults.synchronize()
+    }
+
     // MARK: - Cache Management
 
     public func clearCache() {
