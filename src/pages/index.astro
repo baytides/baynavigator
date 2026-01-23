@@ -76,6 +76,8 @@ for (const file of files) {
   const data = yaml.load(content) as any;
 
   // Handle both formats: array of programs or object with {category, programs}
+  // Skip files that are empty or only contain comments (yaml.load returns null)
+  if (!data) continue;
   const programs = Array.isArray(data) ? data : data.programs || [];
 
   for (const program of programs) {
