@@ -39,53 +39,186 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
       </div>
     </div>
 
-    <!-- Tor/Onion Notice (shown when map can't load via Tor) -->
+    <!-- Tor/Onion Notice with Static Map Alternative -->
     <div
       id="tor-notice"
-      class="hidden absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 z-10"
+      class="hidden absolute inset-0 bg-neutral-100 dark:bg-neutral-800 z-10 overflow-y-auto"
     >
-      <div class="text-center max-w-md px-6">
-        <svg
-          class="w-16 h-16 mx-auto mb-4 text-amber-500"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          ></path>
-        </svg>
-        <h2
-          class="text-lg font-semibold text-neutral-900 dark:text-white mb-2"
-          data-i18n="map.torNotAvailable"
-        >
-          Map Not Available via Tor
-        </h2>
-        <p class="text-neutral-600 dark:text-neutral-300 mb-4" data-i18n="map.torNotAvailableDesc">
-          The interactive map requires external resources that cannot be loaded through the Tor
-          network for privacy and security reasons.
-        </p>
-        <div class="space-y-3">
+      <div class="max-w-4xl mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="text-center mb-6">
+          <div
+            class="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 px-4 py-2 rounded-full text-sm mb-4"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Tor-Safe View</span>
+          </div>
+          <h2 class="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
+            Browse Programs by County
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-300 text-sm max-w-lg mx-auto">
+            The interactive map requires external resources. Here's a privacy-respecting view of all
+            programs organized by location.
+          </p>
+        </div>
+
+        <!-- Static Bay Area SVG Map -->
+        <div class="bg-white dark:bg-neutral-900 rounded-xl p-4 mb-6 shadow-sm">
+          <svg
+            viewBox="0 0 400 350"
+            class="w-full max-w-md mx-auto"
+            role="img"
+            aria-label="Bay Area counties map"
+          >
+            <!-- Simplified Bay Area county shapes -->
+            <g
+              class="fill-neutral-200 dark:fill-neutral-700 stroke-neutral-400 dark:stroke-neutral-500"
+              stroke-width="1"
+            >
+              <!-- Sonoma -->
+              <path
+                id="tor-map-sonoma"
+                d="M40,20 L120,15 L130,80 L100,120 L50,100 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Sonoma"></path>
+              <!-- Napa -->
+              <path
+                id="tor-map-napa"
+                d="M120,15 L170,20 L175,90 L130,80 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Napa"></path>
+              <!-- Solano -->
+              <path
+                id="tor-map-solano"
+                d="M170,20 L260,25 L250,100 L175,90 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Solano"></path>
+              <!-- Marin -->
+              <path
+                id="tor-map-marin"
+                d="M50,100 L100,120 L95,180 L70,200 L40,170 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Marin"></path>
+              <!-- Contra Costa -->
+              <path
+                id="tor-map-contracosta"
+                d="M130,80 L175,90 L250,100 L240,170 L160,180 L130,150 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Contra Costa"></path>
+              <!-- San Francisco -->
+              <path
+                id="tor-map-sf"
+                d="M70,200 L95,180 L100,210 L75,220 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="San Francisco"></path>
+              <!-- Alameda -->
+              <path
+                id="tor-map-alameda"
+                d="M130,150 L160,180 L240,170 L260,250 L180,280 L120,230 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Alameda"></path>
+              <!-- San Mateo -->
+              <path
+                id="tor-map-sanmateo"
+                d="M75,220 L100,210 L120,230 L130,300 L80,320 L60,280 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="San Mateo"></path>
+              <!-- Santa Clara -->
+              <path
+                id="tor-map-santaclara"
+                d="M120,230 L180,280 L260,250 L300,320 L200,350 L130,300 Z"
+                class="cursor-pointer hover:fill-primary-200 dark:hover:fill-primary-800 transition-colors"
+                data-county="Santa Clara"></path>
+            </g>
+            <!-- County labels -->
+            <g
+              class="fill-neutral-700 dark:fill-neutral-300 text-[10px] font-medium pointer-events-none"
+              text-anchor="middle"
+            >
+              <text x="85" y="65">Sonoma</text>
+              <text x="150" y="55">Napa</text>
+              <text x="210" y="60">Solano</text>
+              <text x="70" y="150">Marin</text>
+              <text x="185" y="130">Contra Costa</text>
+              <text x="85" y="205">SF</text>
+              <text x="185" y="215">Alameda</text>
+              <text x="95" y="270">San Mateo</text>
+              <text x="200" y="300">Santa Clara</text>
+            </g>
+            <!-- Water (Bay) -->
+            <ellipse
+              cx="130"
+              cy="200"
+              rx="30"
+              ry="50"
+              class="fill-blue-200 dark:fill-blue-900/50 opacity-50"></ellipse>
+          </svg>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-2">
+            Click a county to filter programs
+          </p>
+        </div>
+
+        <!-- County Program Counts -->
+        <div id="tor-county-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Programs List -->
+        <div id="tor-programs-list" class="bg-white dark:bg-neutral-900 rounded-xl shadow-sm">
+          <div
+            class="p-4 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between"
+          >
+            <h3 id="tor-programs-title" class="font-semibold text-neutral-900 dark:text-white">
+              All Programs
+            </h3>
+            <span id="tor-programs-count" class="text-sm text-neutral-500 dark:text-neutral-400"
+            ></span>
+          </div>
+          <div
+            id="tor-programs-container"
+            class="divide-y divide-neutral-200 dark:divide-neutral-700 max-h-96 overflow-y-auto"
+          >
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Alternative Actions -->
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href="/directory"
-            class="block bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg font-medium no-underline"
-            data-i18n="map.browseDirectory"
+            class="inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium no-underline transition-colors"
           >
-            Browse Programs in Directory
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+            </svg>
+            Full Directory
           </a>
           <a
             href="https://baynavigator.org/map"
-            class="block border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 px-4 py-3 rounded-lg font-medium no-underline"
+            class="inline-flex items-center justify-center gap-2 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 px-6 py-3 rounded-lg font-medium no-underline transition-colors"
             target="_blank"
             rel="noopener"
           >
-            <span data-i18n="map.openMainSite">Open Map on Main Site</span>
-            <span class="text-xs text-neutral-500 dark:text-neutral-400" data-i18n="map.nonTor"
-              >(non-Tor)</span
-            >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              ></path>
+            </svg>
+            Interactive Map
+            <span class="text-xs opacity-70">(clearnet)</span>
           </a>
         </div>
       </div>
@@ -1536,6 +1669,251 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
     layers: layers('protomaps', namedFlavor('dark'), { lang: 'en' }),
   };
 
+  // ========================================
+  // TOR-SAFE STATIC VIEW
+  // Provides a privacy-respecting alternative when accessing via .onion
+  // All data is from bundled JSON - no external requests
+  // ========================================
+  async function initTorSafeView() {
+    const countyGrid = document.getElementById('tor-county-grid');
+    const programsContainer = document.getElementById('tor-programs-container');
+    const programsTitle = document.getElementById('tor-programs-title');
+    const programsCount = document.getElementById('tor-programs-count');
+
+    // Bay Area counties
+    const counties = [
+      'Alameda',
+      'Contra Costa',
+      'Marin',
+      'Napa',
+      'San Francisco',
+      'San Mateo',
+      'Santa Clara',
+      'Solano',
+      'Sonoma',
+    ];
+
+    // Load programs from local JSON (bundled, no external requests)
+    let allPrograms: any[] = [];
+    try {
+      const response = await fetch('/api/programs.json');
+      const data = await response.json();
+      allPrograms = data.programs || [];
+    } catch (e) {
+      console.warn('Could not load programs for Tor view');
+    }
+
+    // Count programs per county
+    const countsByCounty: Record<string, number> = {};
+    counties.forEach((c) => (countsByCounty[c] = 0));
+
+    allPrograms.forEach((program) => {
+      const areas = program.serviceArea || [];
+      areas.forEach((area: string) => {
+        const areaLower = area.toLowerCase();
+        counties.forEach((county) => {
+          if (areaLower.includes(county.toLowerCase())) {
+            countsByCounty[county]++;
+          }
+        });
+        // Count statewide/nationwide programs for all counties
+        if (
+          areaLower.includes('statewide') ||
+          areaLower.includes('nationwide') ||
+          areaLower.includes('california')
+        ) {
+          counties.forEach((county) => countsByCounty[county]++);
+        }
+      });
+    });
+
+    // Helper to escape HTML - sanitizes all user/program data
+    function escapeHtml(text: string): string {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Render county grid using safe DOM methods
+    if (countyGrid) {
+      countyGrid.textContent = ''; // Clear safely
+      counties.forEach((county) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+          'tor-county-btn p-3 bg-white dark:bg-neutral-900 rounded-lg shadow-sm hover:shadow-md transition-all text-left group';
+        btn.setAttribute('data-county', county);
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className =
+          'font-medium text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors';
+        nameDiv.textContent = county;
+
+        const countDiv = document.createElement('div');
+        countDiv.className = 'text-sm text-neutral-500 dark:text-neutral-400';
+        countDiv.textContent = `${countsByCounty[county]} programs`;
+
+        btn.appendChild(nameDiv);
+        btn.appendChild(countDiv);
+        btn.addEventListener('click', () => filterByCounty(county));
+        countyGrid.appendChild(btn);
+      });
+    }
+
+    // Add click handlers for SVG map counties
+    document.querySelectorAll('[data-county]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const county = el.getAttribute('data-county');
+        if (county) filterByCounty(county);
+      });
+    });
+
+    // Filter programs by county
+    let currentCounty: string | null = null;
+
+    function filterByCounty(county: string | null) {
+      currentCounty = county;
+
+      // Update UI state
+      document.querySelectorAll('[data-county]').forEach((el) => {
+        if (county && el.getAttribute('data-county') === county) {
+          el.classList.add('fill-primary-400', 'dark:fill-primary-600');
+          el.classList.remove('fill-neutral-200', 'dark:fill-neutral-700');
+        } else {
+          el.classList.remove('fill-primary-400', 'dark:fill-primary-600');
+          el.classList.add('fill-neutral-200', 'dark:fill-neutral-700');
+        }
+      });
+
+      // Update button states
+      document.querySelectorAll('.tor-county-btn').forEach((btn) => {
+        if (county && btn.getAttribute('data-county') === county) {
+          btn.classList.add('ring-2', 'ring-primary-500');
+        } else {
+          btn.classList.remove('ring-2', 'ring-primary-500');
+        }
+      });
+
+      // Filter and render programs
+      const filtered = county
+        ? allPrograms.filter((p) => {
+            const areas = (p.serviceArea || []).map((a: string) => a.toLowerCase());
+            return areas.some(
+              (a: string) =>
+                a.includes(county.toLowerCase()) ||
+                a.includes('statewide') ||
+                a.includes('nationwide') ||
+                a.includes('california')
+            );
+          })
+        : allPrograms;
+
+      renderPrograms(filtered, county);
+    }
+
+    // Render programs list using safe DOM methods
+    function renderPrograms(programs: any[], county: string | null) {
+      if (programsTitle) {
+        programsTitle.textContent = county ? `${county} Programs` : 'All Programs';
+      }
+      if (programsCount) {
+        programsCount.textContent = `${programs.length} programs`;
+      }
+
+      if (!programsContainer) return;
+
+      programsContainer.textContent = ''; // Clear safely
+
+      if (programs.length === 0) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'p-8 text-center text-neutral-500 dark:text-neutral-400';
+        const p = document.createElement('p');
+        p.textContent = 'No programs found';
+        emptyDiv.appendChild(p);
+        programsContainer.appendChild(emptyDiv);
+        return;
+      }
+
+      // Sort by name
+      const sorted = [...programs].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+      // Render each program using safe DOM methods
+      sorted.slice(0, 50).forEach((program) => {
+        const link = document.createElement('a');
+        link.href = `/directory?q=${encodeURIComponent(program.name || '')}`;
+        link.className =
+          'block p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors';
+
+        const container = document.createElement('div');
+        container.className = 'flex items-start gap-3';
+
+        // Color dot
+        const dot = document.createElement('div');
+        dot.className = 'w-2 h-2 mt-2 rounded-full flex-shrink-0';
+        dot.style.backgroundColor =
+          CATEGORY_COLORS[program.category as keyof typeof CATEGORY_COLORS] || '#6B7280';
+
+        // Content
+        const content = document.createElement('div');
+        content.className = 'flex-1 min-w-0';
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'font-medium text-neutral-900 dark:text-white truncate';
+        nameDiv.textContent = program.name || 'Unknown';
+
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'text-sm text-neutral-500 dark:text-neutral-400 truncate';
+        categoryDiv.textContent = program.category || '';
+
+        content.appendChild(nameDiv);
+        content.appendChild(categoryDiv);
+
+        if (program.phone) {
+          const phoneDiv = document.createElement('div');
+          phoneDiv.className = 'text-sm text-primary-600 dark:text-primary-400 mt-1';
+          phoneDiv.textContent = program.phone;
+          content.appendChild(phoneDiv);
+        }
+
+        // Arrow icon
+        const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        arrow.setAttribute('class', 'w-5 h-5 text-neutral-400 flex-shrink-0');
+        arrow.setAttribute('fill', 'none');
+        arrow.setAttribute('stroke', 'currentColor');
+        arrow.setAttribute('viewBox', '0 0 24 24');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('stroke-linejoin', 'round');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('d', 'M9 5l7 7-7 7');
+        arrow.appendChild(path);
+
+        container.appendChild(dot);
+        container.appendChild(content);
+        container.appendChild(arrow);
+        link.appendChild(container);
+        programsContainer.appendChild(link);
+      });
+
+      // Show "view all" link if more than 50 programs
+      if (programs.length > 50) {
+        const moreDiv = document.createElement('div');
+        moreDiv.className = 'p-4 text-center';
+
+        const moreLink = document.createElement('a');
+        moreLink.href = `/directory${county ? '?county=' + encodeURIComponent(county) : ''}`;
+        moreLink.className = 'text-primary-600 dark:text-primary-400 hover:underline text-sm';
+        moreLink.textContent = `View all ${programs.length} programs →`;
+
+        moreDiv.appendChild(moreLink);
+        programsContainer.appendChild(moreDiv);
+      }
+    }
+
+    // Initial render - show all programs
+    renderPrograms(allPrograms, null);
+  }
+
   // Initialize map
   async function initMap() {
     const loadingEl = document.getElementById('map-loading');
@@ -1552,6 +1930,8 @@ const azureMapsKey = import.meta.env.PUBLIC_AZURE_MAPS_KEY || '';
     if (isOnion) {
       if (loadingEl) loadingEl.style.display = 'none';
       if (torNoticeEl) torNoticeEl.classList.remove('hidden');
+      // Initialize the Tor-safe static view
+      initTorSafeView();
       return; // Don't attempt to load the map
     }
 

@@ -1574,6 +1574,215 @@ import Breadcrumb from '../components/Breadcrumb.astro';
             </details>
           </section>
 
+          <!-- Carl Privacy Controls -->
+          <section
+            class="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 mb-8"
+          >
+            <div class="flex items-start gap-4 mb-6">
+              <div class="bg-primary-100 dark:bg-primary-900/30 p-3 rounded-xl flex-shrink-0">
+                <svg
+                  class="w-6 h-6 text-primary-600 dark:text-primary-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+                  Ask Carl - Your Data Controls
+                </h2>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                  Control how Carl stores your conversations on this device
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Conversation History Toggle -->
+              <div
+                class="flex items-center justify-between p-4 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl"
+              >
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <svg
+                      class="w-5 h-5 text-neutral-600 dark:text-neutral-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="font-medium text-neutral-900 dark:text-white"
+                      >Save Conversation History</span
+                    >
+                  </div>
+                  <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 ml-7">
+                    Remember past conversations so Carl can provide continuity. All data stays on
+                    your device.
+                  </p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer ml-4">
+                  <input
+                    type="checkbox"
+                    id="carl-history-toggle"
+                    class="sr-only peer"
+                    aria-describedby="carl-history-description"
+                  />
+                  <div
+                    class="w-11 h-6 bg-neutral-300 dark:bg-neutral-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 dark:peer-focus:ring-primary-800 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"
+                  >
+                  </div>
+                </label>
+              </div>
+
+              <!-- Info Box -->
+              <div
+                class="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800"
+              >
+                <svg
+                  class="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="text-sm text-blue-800 dark:text-blue-200">
+                  <strong>100% On-Device Storage</strong><br />
+                  Your conversation history is stored in your browser's IndexedDB. It never leaves your
+                  device and is not sent to our servers. Clear your browser data to delete it anytime.
+                </div>
+              </div>
+
+              <!-- History Stats & Actions -->
+              <div id="carl-history-actions" class="hidden">
+                <div
+                  class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl"
+                >
+                  <div>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                      <span id="carl-history-count">0</span> conversations saved
+                    </p>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      id="carl-export-btn"
+                      type="button"
+                      class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-700 border border-neutral-300 dark:border-neutral-600 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-600 transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                      </svg>
+                      Export
+                    </button>
+                    <button
+                      id="carl-clear-btn"
+                      type="button"
+                      class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-neutral-700 border border-red-300 dark:border-red-800 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        ></path>
+                      </svg>
+                      Clear History
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <script is:inline src="/assets/js/carl-storage.js"></script>
+          <script is:inline>
+            // Carl Privacy Controls
+            document.addEventListener('DOMContentLoaded', async () => {
+              const toggle = document.getElementById('carl-history-toggle');
+              const actionsPanel = document.getElementById('carl-history-actions');
+              const countEl = document.getElementById('carl-history-count');
+              const exportBtn = document.getElementById('carl-export-btn');
+              const clearBtn = document.getElementById('carl-clear-btn');
+
+              if (!toggle || typeof window.CarlStorage === 'undefined') return;
+
+              // Initialize toggle state
+              const enabled = await window.CarlStorage.isHistoryEnabled();
+              toggle.checked = enabled;
+              if (enabled) {
+                actionsPanel?.classList.remove('hidden');
+                updateCount();
+              }
+
+              // Toggle handler
+              toggle.addEventListener('change', async () => {
+                const newState = toggle.checked;
+                await window.CarlStorage.setHistoryEnabled(newState);
+
+                if (newState) {
+                  actionsPanel?.classList.remove('hidden');
+                  updateCount();
+                } else {
+                  actionsPanel?.classList.add('hidden');
+                }
+              });
+
+              // Update conversation count
+              async function updateCount() {
+                if (countEl) {
+                  const count = await window.CarlStorage.getConversationCount();
+                  countEl.textContent = count.toString();
+                }
+              }
+
+              // Export handler
+              exportBtn?.addEventListener('click', async () => {
+                const data = await window.CarlStorage.exportData();
+                const blob = new Blob([JSON.stringify(data, null, 2)], {
+                  type: 'application/json',
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `carl-history-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+              });
+
+              // Clear handler
+              clearBtn?.addEventListener('click', async () => {
+                if (confirm('Clear all conversation history? This cannot be undone.')) {
+                  await window.CarlStorage.clearAllHistory();
+                  updateCount();
+                }
+              });
+
+              // Listen for history changes from other tabs/components
+              document.addEventListener('carlHistoryCleared', updateCount);
+            });
+          </script>
+
           <!-- Contact CTA -->
           <div
             class="text-center bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 mb-8"

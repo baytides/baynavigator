@@ -129,20 +129,95 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         <p class="text-xs text-primary-100">Your Bay Area resource guide</p>
       </div>
     </div>
-    <button
-      id="assistant-close"
-      type="button"
-      class="p-1 hover:bg-white/20 rounded-lg transition-colors"
-      aria-label="Close assistant"
+    <div class="flex items-center gap-1">
+      <!-- History button -->
+      <button
+        id="assistant-history-btn"
+        type="button"
+        class="p-1.5 hover:bg-white/20 rounded-lg transition-colors hidden"
+        aria-label="View conversation history"
+        title="History"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </button>
+      <!-- New chat button -->
+      <button
+        id="assistant-new-chat"
+        type="button"
+        class="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+        aria-label="Start new conversation"
+        title="New chat"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"
+          ></path>
+        </svg>
+      </button>
+      <!-- Close button -->
+      <button
+        id="assistant-close"
+        type="button"
+        class="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
+        aria-label="Close assistant"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- History Panel (hidden by default) -->
+  <div
+    id="assistant-history-panel"
+    class="absolute inset-0 bg-white dark:bg-neutral-800 z-10 hidden flex-col"
+  >
+    <div
+      class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700"
     >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
+      <h3 class="font-semibold text-neutral-900 dark:text-white">Conversation History</h3>
+      <button
+        id="history-back-btn"
+        type="button"
+        class="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg transition-colors"
+        aria-label="Back to chat"
+      >
+        <svg
+          class="w-5 h-5 text-neutral-600 dark:text-neutral-300"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="history-list" class="flex-1 overflow-y-auto p-4 space-y-2">
+      <!-- History items populated by JS -->
+    </div>
+    <div class="p-4 border-t border-neutral-200 dark:border-neutral-700">
+      <button
+        id="clear-history-btn"
+        type="button"
+        class="w-full py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+      >
+        Clear all history
+      </button>
+    </div>
   </div>
 
   <!-- Messages -->
@@ -217,6 +292,7 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   </div>
 </div>
 
+<script is:inline src="/assets/js/carl-storage.js"></script>
 <script define:vars={{ effectiveEndpoint, apiKey, SYSTEM_PROMPT, locationData }}>
   // DOM Elements
   const toggle = document.getElementById('assistant-toggle');
@@ -228,12 +304,64 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   const messagesContainer = document.getElementById('assistant-messages');
   const quickPrompts = document.getElementById('quick-prompts');
   const notificationDot = document.getElementById('assistant-dot');
+  const historyBtn = document.getElementById('assistant-history-btn');
+  const historyPanel = document.getElementById('assistant-history-panel');
+  const historyBackBtn = document.getElementById('history-back-btn');
+  const historyList = document.getElementById('history-list');
+  const clearHistoryBtn = document.getElementById('clear-history-btn');
+  const newChatBtn = document.getElementById('assistant-new-chat');
 
   // State
   let conversationHistory = [];
   let isLoading = false;
   let programsCache = null;
   let userLocation = null;
+  let userProfile = null; // From preferences (groups, county)
+  let currentConversationId = null; // For history tracking
+  let historyEnabled = false; // Will be set from CarlStorage
+
+  // County to major city mapping (for user-friendly display)
+  // Users see cities, counties are internal for program filtering only
+  const countyToCity = {
+    alameda: 'Oakland',
+    'contra costa': 'Concord',
+    marin: 'San Rafael',
+    napa: 'Napa',
+    'san francisco': 'San Francisco',
+    'san mateo': 'San Mateo',
+    'santa clara': 'San Jose',
+    solano: 'Vallejo',
+    sonoma: 'Santa Rosa',
+  };
+
+  // Load user profile from Preferences (privacy-respecting: stays local)
+  function loadUserProfile() {
+    try {
+      // Check if Preferences API is available
+      if (typeof window.Preferences !== 'undefined' && window.Preferences.get) {
+        const prefs = window.Preferences.get();
+        if (prefs && (prefs.groups?.length > 0 || prefs.county)) {
+          const county = prefs.county || null;
+          // Map county to a friendly city name for user-facing display
+          // County is stored internally only for program filtering
+          const city = county ? countyToCity[county.toLowerCase()] || null : null;
+          userProfile = {
+            groups: prefs.groups || [],
+            county: county, // Internal use only - for filtering programs
+            city: city, // User-facing - what Carl says
+          };
+          // Set initial location from preferences (city for display, county for filtering)
+          if (city && !userLocation) {
+            userLocation = { city: city, county: county };
+          }
+          return userProfile;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not load user preferences:', e);
+    }
+    return null;
+  }
 
   // Detect if running in app - check multiple signals for robust detection
   const isApp = (() => {
@@ -326,6 +454,9 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   async function searchPrograms(query, location = null) {
     const programs = await loadPrograms();
     if (!programs.length) return [];
+
+    // Ensure we have latest profile
+    if (!userProfile) loadUserProfile();
 
     const queryLower = query.toLowerCase();
     const queryTerms = queryLower.split(/\s+/).filter((t) => t.length > 2);
@@ -584,6 +715,40 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         }
       }
 
+      // User profile boosting - prioritize programs matching user's groups
+      if (userProfile?.groups?.length > 0) {
+        const eligibility = (program.eligibility || '').toLowerCase();
+        const tags = (program.tags || []).map((t) => t.toLowerCase());
+        const allText = `${name} ${desc} ${keywords} ${eligibility} ${tags.join(' ')}`;
+
+        // Map group IDs to keywords that indicate relevance
+        const groupKeywords = {
+          senior: ['senior', 'elderly', 'older adult', '65+', '60+', 'aging', 'medicare'],
+          veteran: ['veteran', 'military', 'va ', 'armed forces', 'service member'],
+          disabled: ['disability', 'disabled', 'ssdi', 'ssi', 'accessible', 'ada'],
+          family: ['family', 'families', 'children', 'child', 'parent', 'wic', 'childcare'],
+          'low-income': [
+            'low-income',
+            'low income',
+            'poverty',
+            'assistance',
+            'calfresh',
+            'calworks',
+          ],
+          homeless: ['homeless', 'unhoused', 'shelter', 'housing', 'unsheltered'],
+          immigrant: ['immigrant', 'immigration', 'refugee', 'asylum', 'citizenship'],
+          student: ['student', 'education', 'school', 'college', 'university', 'financial aid'],
+        };
+
+        for (const group of userProfile.groups) {
+          const keywords = groupKeywords[group] || [];
+          const matchFound = keywords.some((kw) => allText.includes(kw));
+          if (matchFound) {
+            score += 8; // Significant boost for programs matching user's groups
+          }
+        }
+      }
+
       return { program, score };
     });
 
@@ -624,6 +789,283 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     notificationDot?.remove();
   }
 
+  // Initialize history feature
+  async function initHistory() {
+    if (typeof window.CarlStorage !== 'undefined') {
+      historyEnabled = await window.CarlStorage.isHistoryEnabled();
+      if (historyEnabled) {
+        historyBtn?.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Call init after a short delay to ensure CarlStorage is loaded
+  setTimeout(initHistory, 100);
+
+  // Listen for history setting changes
+  document.addEventListener('carlHistorySettingChanged', async (e) => {
+    historyEnabled = e.detail.enabled;
+    if (historyEnabled) {
+      historyBtn?.classList.remove('hidden');
+    } else {
+      historyBtn?.classList.add('hidden');
+    }
+  });
+
+  // Show history panel
+  function showHistoryPanel() {
+    historyPanel?.classList.remove('hidden');
+    historyPanel?.classList.add('flex');
+    loadHistoryList();
+  }
+
+  // Hide history panel
+  function hideHistoryPanel() {
+    historyPanel?.classList.add('hidden');
+    historyPanel?.classList.remove('flex');
+  }
+
+  // Load and display history list
+  async function loadHistoryList() {
+    if (!historyList || typeof window.CarlStorage === 'undefined') return;
+
+    const conversations = await window.CarlStorage.getRecentConversations(20);
+
+    if (conversations.length === 0) {
+      historyList.innerHTML = `
+        <div class="text-center py-8 text-neutral-500 dark:text-neutral-400">
+          <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+          <p class="text-sm">No conversations yet</p>
+          <p class="text-xs mt-1">Your chat history will appear here</p>
+        </div>
+      `;
+      return;
+    }
+
+    historyList.innerHTML = '';
+
+    conversations.forEach((conv) => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className =
+        'w-full text-left p-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors group';
+
+      const date = new Date(conv.timestamp);
+      const dateStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      const timeStr = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+
+      item.innerHTML = `
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-neutral-900 dark:text-white truncate">${escapeHtml(conv.summary)}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">${dateStr} at ${timeStr}</p>
+          </div>
+          <button type="button" class="delete-conv p-1 opacity-0 group-hover:opacity-100 hover:text-red-500 transition-all" data-id="${conv.id}" aria-label="Delete conversation">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      // Load conversation on click
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('.delete-conv')) return;
+        loadConversation(conv);
+      });
+
+      // Delete button
+      const deleteBtn = item.querySelector('.delete-conv');
+      deleteBtn?.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (confirm('Delete this conversation?')) {
+          await window.CarlStorage.deleteConversation(conv.id);
+          loadHistoryList();
+        }
+      });
+
+      historyList.appendChild(item);
+    });
+  }
+
+  // Load a conversation from history
+  function loadConversation(conv) {
+    // Reset current state
+    conversationHistory = conv.messages || [];
+    currentConversationId = conv.id;
+
+    // Clear messages container except welcome
+    if (messagesContainer) {
+      messagesContainer.innerHTML = '';
+
+      // Add all messages
+      conv.messages.forEach((msg) => {
+        if (msg.role === 'user') {
+          addMessage(msg.content, 'user');
+        } else if (msg.role === 'assistant') {
+          addMessage(msg.content, 'assistant');
+        }
+      });
+    }
+
+    // Hide quick prompts since this is a loaded conversation
+    quickPrompts?.classList.add('hidden');
+
+    // Close history panel
+    hideHistoryPanel();
+  }
+
+  // Start a new conversation
+  function startNewConversation() {
+    // Save current conversation if it has messages
+    saveCurrentConversation();
+
+    // Reset state
+    conversationHistory = [];
+    currentConversationId = null;
+
+    // Reset UI
+    if (messagesContainer) {
+      messagesContainer.innerHTML = `
+        <div class="assistant-message">
+          <div class="bg-neutral-100 dark:bg-neutral-700 rounded-2xl rounded-tl-sm p-3 max-w-[85%]">
+            <p class="text-sm text-neutral-800 dark:text-neutral-200">
+              Hi! I'm Carl, named after Karl the Fog. I'm here to help you find programs in the Bay Area.
+            </p>
+            <p class="text-sm text-neutral-800 dark:text-neutral-200 mt-2">
+              What can I help you with today?
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Show quick prompts again
+    quickPrompts?.classList.remove('hidden');
+
+    // Update welcome message with personalization
+    updateWelcomeMessage();
+
+    // Close history panel if open
+    hideHistoryPanel();
+  }
+
+  // Save current conversation to history
+  async function saveCurrentConversation() {
+    if (!historyEnabled || conversationHistory.length === 0) return;
+    if (typeof window.CarlStorage === 'undefined') return;
+
+    const metadata = {
+      userCity: userProfile?.city || userLocation?.city || null,
+      programsDiscussed: [], // Could track this if needed
+    };
+
+    if (currentConversationId) {
+      await window.CarlStorage.updateConversation(
+        currentConversationId,
+        conversationHistory,
+        metadata
+      );
+    } else {
+      currentConversationId = await window.CarlStorage.saveConversation(
+        conversationHistory,
+        metadata
+      );
+    }
+  }
+
+  // Escape HTML for safe display
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // History button click
+  historyBtn?.addEventListener('click', showHistoryPanel);
+
+  // History back button
+  historyBackBtn?.addEventListener('click', hideHistoryPanel);
+
+  // New chat button
+  newChatBtn?.addEventListener('click', startNewConversation);
+
+  // Clear all history
+  clearHistoryBtn?.addEventListener('click', async () => {
+    if (confirm('Clear all conversation history? This cannot be undone.')) {
+      await window.CarlStorage?.clearAllHistory();
+      loadHistoryList();
+    }
+  });
+
+  // Generate personalized welcome message based on user profile
+  function getPersonalizedWelcome() {
+    const profile = loadUserProfile();
+
+    if (!profile || (!profile.groups?.length && !profile.city)) {
+      // Default welcome for new users
+      return null;
+    }
+
+    // Build personalized greeting
+    const greetings = ['Hi there!', 'Hello!', 'Hey there!'];
+    const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+
+    // Map group IDs to friendly names
+    const groupNames = {
+      senior: 'seniors',
+      veteran: 'veterans',
+      disabled: 'people with disabilities',
+      family: 'families',
+      'low-income': 'low-income households',
+      homeless: 'people experiencing homelessness',
+      immigrant: 'immigrants',
+      student: 'students',
+    };
+
+    let message = greeting;
+
+    // Add location context (always city, never county)
+    if (profile.city) {
+      message += ` I see you're in ${profile.city}.`;
+    }
+
+    // Add group context (only mention 1-2 for brevity)
+    if (profile.groups?.length > 0) {
+      const friendlyGroups = profile.groups
+        .slice(0, 2)
+        .map((g) => groupNames[g] || g)
+        .filter(Boolean);
+
+      if (friendlyGroups.length > 0) {
+        message += ` I can help you find programs for ${friendlyGroups.join(' and ')}.`;
+      }
+    }
+
+    message += '\n\nWhat can I help you with today?';
+
+    return message;
+  }
+
+  // Update welcome message if user has profile
+  function updateWelcomeMessage() {
+    const personalizedMsg = getPersonalizedWelcome();
+    if (personalizedMsg && messagesContainer) {
+      const welcomeBubble = messagesContainer.querySelector('.assistant-message p');
+      if (welcomeBubble) {
+        // Replace default welcome with personalized one
+        const parent = welcomeBubble.parentElement;
+        parent.innerHTML = '';
+        const p = document.createElement('p');
+        p.className = 'text-sm text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap';
+        p.textContent = personalizedMsg;
+        parent.appendChild(p);
+      }
+    }
+  }
+
   // Toggle panel
   toggle?.addEventListener('click', () => {
     const isOpen = !panel?.classList.contains('hidden');
@@ -633,6 +1075,8 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       input?.focus();
       localStorage.setItem('assistantUsed', 'true');
       notificationDot?.remove();
+      // Load profile and update welcome message
+      updateWelcomeMessage();
       // Preload programs for RAG
       loadPrograms();
     }
@@ -719,16 +1163,46 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
         ragContext += `\nMention these programs by name. Users will see clickable cards below your response.`;
       }
 
-      // Add location context
+      // Add location context (always use city/zip for user-facing, county is internal only)
       let locationContext = '';
       if (userLocation) {
-        locationContext = `\n\n[USER LOCATION]: ${userLocation.city || userLocation.neighborhood}`;
-        if (userLocation.county) locationContext += ` (${userLocation.county})`;
+        // Always prefer city or neighborhood for user-facing context
+        const displayLocation = userLocation.city || userLocation.neighborhood;
+        if (displayLocation) {
+          locationContext = `\n\n[USER LOCATION]: ${displayLocation}`;
+          if (userLocation.zip) {
+            locationContext += ` (${userLocation.zip})`;
+          }
+          // Internal note for filtering - never shown to user
+          locationContext += `. IMPORTANT: Always refer to the user's location by city name, never by county.`;
+        }
+      }
+
+      // Add user profile context for personalization (stays local, helps AI give relevant answers)
+      let profileContext = '';
+      if (userProfile) {
+        const groupDescriptions = {
+          senior: 'a senior (65+)',
+          veteran: 'a veteran',
+          disabled: 'a person with a disability',
+          family: 'part of a family with children',
+          'low-income': 'from a low-income household',
+          homeless: 'experiencing housing instability',
+          immigrant: 'an immigrant',
+          student: 'a student',
+        };
+
+        if (userProfile.groups?.length > 0) {
+          const descriptions = userProfile.groups.map((g) => groupDescriptions[g]).filter(Boolean);
+          if (descriptions.length > 0) {
+            profileContext = `\n\n[USER PROFILE]: User is ${descriptions.join(', ')}. Prioritize programs that serve these groups. Use natural language, not bureaucratic terms.`;
+          }
+        }
       }
 
       // Build messages array for Ollama chat API
       const messages = [
-        { role: 'system', content: SYSTEM_PROMPT + ragContext + locationContext },
+        { role: 'system', content: SYSTEM_PROMPT + ragContext + locationContext + profileContext },
         ...conversationHistory.slice(-6),
         { role: 'user', content: message },
       ];
@@ -801,6 +1275,9 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       // Update conversation history
       conversationHistory.push({ role: 'user', content: message });
       conversationHistory.push({ role: 'assistant', content: fullResponse });
+
+      // Save conversation to local history (if enabled)
+      saveCurrentConversation();
 
       // Add program cards if we found relevant programs
       if (relevantPrograms.length > 0) {
