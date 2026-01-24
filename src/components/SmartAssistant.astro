@@ -441,7 +441,9 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     try {
       const response = await fetch('/api/programs.json');
       if (response.ok) {
-        programsCache = await response.json();
+        const data = await response.json();
+        // API returns {total, count, offset, programs: [...]}
+        programsCache = data.programs || [];
         return programsCache;
       }
     } catch (e) {
@@ -1151,16 +1153,19 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
       // Build context for the AI with rich program details
       let ragContext = '';
       if (relevantPrograms.length > 0) {
-        ragContext = `\n\n[MATCHING PROGRAMS - mention these by name when relevant!]\n`;
+        ragContext = `\n\n[LOCAL PROGRAMS FOR THIS USER - MENTION THESE BY NAME!]\n`;
+        ragContext += `These programs match the user's location and needs. Reference them specifically:\n\n`;
         relevantPrograms.forEach((p, i) => {
           ragContext += `${i + 1}. **${p.name}**`;
-          if (p.category) ragContext += ` [${p.category}]`;
+          if (p.areas && p.areas.length > 0)
+            ragContext += ` (serves: ${p.areas.slice(0, 2).join(', ')})`;
           ragContext += '\n';
-          if (p.description) ragContext += `   ${p.description.substring(0, 200)}\n`;
-          if (p.phone) ragContext += `   Phone: ${p.phone}\n`;
-          if (p.website) ragContext += `   Has website on Bay Navigator\n`;
+          if (p.description) ragContext += `   → ${p.description.substring(0, 150)}\n`;
+          if (p.phone) ragContext += `   → Phone: ${p.phone}\n`;
+          if (p.whatTheyOffer)
+            ragContext += `   → ${p.whatTheyOffer.split('\n')[0].substring(0, 100)}\n`;
         });
-        ragContext += `\nMention these programs by name. Users will see clickable cards below your response.`;
+        ragContext += `\nIMPORTANT: Mention 2-3 of these programs BY NAME in your response. The user will see clickable cards for each program after your message.`;
       }
 
       // Add location context (always use city/zip for user-facing, county is internal only)
