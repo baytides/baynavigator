@@ -51,7 +51,7 @@
     "smartSearchTooltip": "스마트 검색은 AI를 사용해 질문을 이해하고 관련 프로그램을 찾아줍니다. 간단한 키워드 매칭을 위해 꺼두세요.",
     "noResults": "검색하신 내용에 맞는 프로그램은 찾지 못했습니다.",
     "browseAll": "모든 프로그램 둘러보기",
-    "trySearching": "다음 항목을 검색해 보세요:",
+    "trySearching": "인기 검색:",
     "orAskQuestion": "또는 질문을 해보세요:",
     "resultsCount": "{count}프로그램{s}발견",
     "aiPowered": "AI 기반"
