@@ -14,7 +14,6 @@
     version: VERSION,
     groups: [],
     county: null,
-    completedOnboarding: false,
     lastUpdated: null,
   };
 
@@ -26,6 +25,7 @@
   function load() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
+      localStorage.removeItem('baynavigator:onboarding_complete');
       if (!stored) {
         currentPrefs = { ...DEFAULT_PREFS };
         return currentPrefs;
@@ -66,8 +66,6 @@
       migrated.county = oldData.county;
     }
 
-    // Check if user had completed any onboarding
-    migrated.completedOnboarding = !!(migrated.groups.length > 0 || migrated.county);
     migrated.lastUpdated = Date.now();
 
     return migrated;
@@ -128,26 +126,6 @@
    */
   function setCounty(county) {
     return update({ county: county || null });
-  }
-
-  /**
-   * Mark onboarding as complete
-   */
-  function completeOnboarding(groups, county) {
-    return save({
-      ...get(),
-      groups: groups || [],
-      county: county || null,
-      completedOnboarding: true,
-    });
-  }
-
-  /**
-   * Check if user has completed onboarding
-   */
-  function hasCompletedOnboarding() {
-    const prefs = get();
-    return prefs.completedOnboarding === true;
   }
 
   /**
@@ -243,8 +221,6 @@
     update,
     setGroups,
     setCounty,
-    completeOnboarding,
-    hasCompletedOnboarding,
     hasPreferences,
     reset,
   };

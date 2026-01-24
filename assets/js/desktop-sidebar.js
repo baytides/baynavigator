@@ -22,16 +22,6 @@
    * Initialize action buttons (Update Filters, Install)
    */
   function initActionButtons() {
-    // Update Filters button - opens onboarding modal
-    const updateFiltersBtn = document.getElementById('sidebar-update-filters');
-    if (updateFiltersBtn) {
-      updateFiltersBtn.addEventListener('click', () => {
-        if (window.Onboarding && window.Onboarding.open) {
-          window.Onboarding.open();
-        }
-      });
-    }
-
     // Install App button
     const installBtn = document.getElementById('sidebar-install');
     const installItem = document.getElementById('sidebar-install-item');

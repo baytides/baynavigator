@@ -20,90 +20,65 @@ try {
   console.warn('Could not load search-config.yml:', e);
 }
 
-const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 pr-10';
+const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 pr-10 text-base';
 ---
 
 <div class="search-container">
-  <div class="relative">
-    <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
+  <div class="search-shell">
+    <div class="search-main">
+      <div class="search-field">
+        <label for="search-input" class="sr-only" data-i18n="common.search">Search programs</label>
 
-    <!-- Search icon -->
-    <svg
-      class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-    </svg>
+        <!-- Search icon -->
+        <svg
+          class={`search-icon absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 ${size === 'large' ? 'w-6 h-6 left-4' : 'w-5 h-5'}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
 
-    <input
-      type="search"
-      id="search-input"
-      class={`search-input ${sizeClasses}`}
-      placeholder={placeholder}
-      autocomplete="off"
-    />
-    <button
-      type="button"
-      id="search-clear-btn"
-      class={`search-clear-btn hidden absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded ${size === 'large' ? 'right-4' : ''}`}
-      aria-label="Clear search"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-  </div>
+        <input
+          type="search"
+          id="search-input"
+          class={`search-input ${sizeClasses}`}
+          placeholder={placeholder}
+          autocomplete="off"
+        />
+        <button
+          type="button"
+          id="search-clear-btn"
+          class={`search-clear-btn hidden absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded ${size === 'large' ? 'right-4' : ''}`}
+          aria-label="Clear search"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
 
-  <!-- Settings row: Location -->
-  <div class="relative flex items-center justify-between mt-2 gap-3 flex-wrap">
-    <!-- Location button -->
-    <button
-      type="button"
-      id="location-quick-btn"
-      class="inline-flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 rounded transition-colors"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-        ></path>
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-      </svg>
-      <span id="location-quick-text">Set location</span>
-    </button>
-  </div>
+        <!-- Type-ahead dropdown -->
+        <div id="typeahead-dropdown" class="typeahead-dropdown hidden">
+          <ul id="typeahead-list" role="listbox" aria-label="Search suggestions"></ul>
+        </div>
+      </div>
 
-  <!-- Location popover (shown when location button clicked) -->
-  <div
-    id="location-popover"
-    class="hidden absolute left-0 right-0 mt-2 p-4 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 z-50"
-  >
-    <p class="text-sm font-medium text-neutral-900 dark:text-white mb-3">
-      Set your location for better results
-    </p>
-    <div class="flex items-center gap-2 flex-wrap">
-      <button
-        id="popover-gps-btn"
-        type="button"
-        class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
-      >
+      <button type="button" id="search-submit-btn" class="search-submit-btn">
         <svg
           class="w-4 h-4"
           fill="none"
@@ -115,59 +90,155 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-          ></path>
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
-        Use my location
+        <span data-i18n="common.search">Search</span>
       </button>
-      <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
-      <div class="flex items-center gap-1">
-        <label for="popover-zip-input" class="sr-only">Enter ZIP code or city</label>
-        <input
-          type="text"
-          id="popover-zip-input"
-          placeholder="ZIP code or city"
-          list="city-list"
-          class="px-3 py-2 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-36 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-        />
-        <button
-          id="popover-submit-btn"
-          type="button"
-          class="px-3 py-2 text-sm font-medium rounded-md bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
-        >
-          Set
-        </button>
-      </div>
     </div>
-    <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
-      <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-        <path
-          fill-rule="evenodd"
-          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-          clip-rule="evenodd"></path>
-      </svg>
-      Your location stays on your device
-    </p>
-  </div>
 
-  <!-- Search hints -->
-  <div
-    id="search-hints"
-    class="hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 p-3 z-50"
-  >
-    <p class="text-xs text-neutral-600 dark:text-neutral-300 mb-2" data-i18n="search.trySearching">
-      Try searching for:
-    </p>
-    <div class="flex flex-wrap gap-2 mb-3">
-      <button type="button" class="search-hint-btn" data-type="keyword">food assistance</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">utility bill help</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">healthcare</button>
-      <button type="button" class="search-hint-btn" data-type="keyword">senior programs</button>
+    <div class="search-secondary">
+      <!-- Search hints -->
+      <div id="search-hints" class="search-hints">
+        <span class="search-hints-label" data-i18n="search.trySearching"> Try searching for: </span>
+        <div class="search-hints-list">
+          <button type="button" class="search-hint-btn" data-type="keyword">food assistance</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">rent help</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">utility bills</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">healthcare</button>
+          <button type="button" class="search-hint-btn" data-type="keyword">job training</button>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="search-tools">
+        <div class="relative">
+          <button
+            type="button"
+            id="location-quick-btn"
+            class="location-pill"
+            aria-expanded="false"
+            aria-controls="location-popover"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span class="location-pill-label">Location:</span>
+            <span id="location-quick-text" class="location-pill-value">Set location</span>
+            <svg class="w-4 h-4 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+
+          <!-- Location popover (shown when location button clicked) -->
+          <div
+            id="location-popover"
+            class="hidden absolute right-0 top-full mt-3 w-[min(100vw,24rem)] p-4 bg-white dark:bg-neutral-800 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 z-50"
+          >
+            <button
+              id="location-popover-close"
+              type="button"
+              class="absolute right-3 top-3 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded"
+              aria-label="Close location settings"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            <p class="text-sm font-medium text-neutral-900 dark:text-white mb-3">
+              Set your location for better results
+            </p>
+            <div class="flex items-center gap-2 flex-wrap">
+              <button
+                id="popover-gps-btn"
+                type="button"
+                class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Use my location
+              </button>
+              <span class="text-neutral-400 text-sm" aria-hidden="true">or</span>
+              <div class="flex items-center gap-1">
+                <label for="popover-zip-input" class="sr-only">Enter ZIP code or city</label>
+                <input
+                  type="text"
+                  id="popover-zip-input"
+                  placeholder="ZIP code or city"
+                  list="city-list"
+                  class="px-3 py-2 text-sm rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white w-36 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                />
+                <button
+                  id="popover-submit-btn"
+                  type="button"
+                  class="px-3 py-2 text-sm font-medium rounded-md bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-800 transition-colors"
+                >
+                  Set
+                </button>
+              </div>
+            </div>
+            <p class="text-xs text-neutral-400 dark:text-neutral-500 mt-2 flex items-center gap-1">
+              <svg
+                class="w-3 h-3 flex-shrink-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              Your location stays on your device
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -181,11 +252,6 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   data-query-rewrites={JSON.stringify(searchConfig.query_rewrites || {})}
   class="hidden"
 >
-</div>
-
-<!-- Type-ahead dropdown -->
-<div id="typeahead-dropdown" class="typeahead-dropdown hidden">
-  <ul id="typeahead-list" role="listbox" aria-label="Search suggestions"></ul>
 </div>
 
 <!-- Screen reader announcements (aria-live regions) -->
@@ -988,6 +1054,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const searchHints = document.getElementById('search-hints');
   const hintButtons = document.querySelectorAll('.search-hint-btn');
   const inlineClearBtn = document.getElementById('search-clear-btn');
+  const searchSubmitBtn = document.getElementById('search-submit-btn');
 
   // Aria-live announcers for screen readers
   const searchAnnouncer = document.getElementById('search-announcer');
@@ -1007,11 +1074,14 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
   let activeCategory = 'all';
 
-  function updateClearButton() {
-    if (!searchInput || !inlineClearBtn) return;
+  function updateInputState() {
+    if (!searchInput) return;
     const hasValue = searchInput.value.trim().length > 0;
-    inlineClearBtn.classList.toggle('hidden', !hasValue);
+    inlineClearBtn?.classList.toggle('hidden', !hasValue);
+    searchHints?.classList.toggle('hidden', hasValue);
   }
+
+  updateInputState();
 
   async function ensureFuseReady() {
     if (fuse) return;
@@ -1738,7 +1808,6 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      searchHints?.classList.add('hidden');
       hideTypeahead();
 
       // If a suggestion is selected, use it
@@ -1751,15 +1820,14 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       }
 
       void performSearch();
-      updateClearButton();
+      updateInputState();
     } else if (e.key === 'Escape') {
       if (searchInput.value.trim().length > 0) {
         searchInput.value = '';
         hideTypeahead();
-        searchHints?.classList.add('hidden');
         selectedSuggestionIndex = -1;
         void performFuzzySearch('');
-        updateClearButton();
+        updateInputState();
       } else {
         hideTypeahead();
       }
@@ -1770,7 +1838,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   searchInput?.addEventListener('input', (e) => {
     const query = (e.target as HTMLInputElement).value;
     showTypeahead(query);
-    updateClearButton();
+    updateInputState();
   });
 
   // Hide type-ahead when clicking outside
@@ -1787,12 +1855,18 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   hintButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       searchInput.value = btn.textContent || '';
-      searchHints?.classList.add('hidden');
       hideTypeahead();
       void performSearch();
-      updateClearButton();
+      updateInputState();
       searchInput.focus();
     });
+  });
+
+  searchSubmitBtn?.addEventListener('click', () => {
+    hideTypeahead();
+    void performSearch();
+    updateInputState();
+    searchInput?.focus();
   });
 
   inlineClearBtn?.addEventListener('click', () => {
@@ -1800,9 +1874,8 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     searchInput.value = '';
     selectedSuggestionIndex = -1;
     hideTypeahead();
-    searchHints?.classList.add('hidden');
     void performFuzzySearch('');
-    updateClearButton();
+    updateInputState();
     searchInput.focus();
   });
 
@@ -1819,7 +1892,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       searchInput.value = '';
       void performFuzzySearch('');
       searchInput.focus();
-      updateClearButton();
+      updateInputState();
     }
   });
 
@@ -2400,6 +2473,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const locationQuickBtn = document.getElementById('location-quick-btn');
   const locationQuickText = document.getElementById('location-quick-text');
   const locationPopover = document.getElementById('location-popover');
+  const locationPopoverClose = document.getElementById('location-popover-close');
   const popoverGpsBtn = document.getElementById('popover-gps-btn');
   const popoverZipInput = document.getElementById('popover-zip-input') as HTMLInputElement | null;
   const popoverSubmitBtn = document.getElementById('popover-submit-btn');
@@ -2426,8 +2500,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   function toggleLocationPopover() {
     if (!locationPopover) return;
     locationPopover.classList.toggle('hidden');
-    if (!locationPopover.classList.contains('hidden') && popoverZipInput) {
-      popoverZipInput.focus();
+    if (locationQuickBtn) {
+      locationQuickBtn.setAttribute(
+        'aria-expanded',
+        locationPopover.classList.contains('hidden') ? 'false' : 'true'
+      );
     }
   }
 
@@ -2435,6 +2512,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   function closeLocationPopover() {
     if (locationPopover) {
       locationPopover.classList.add('hidden');
+    }
+    if (locationQuickBtn) {
+      locationQuickBtn.setAttribute('aria-expanded', 'false');
     }
   }
 
@@ -2454,6 +2534,10 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     ) {
       closeLocationPopover();
     }
+  });
+
+  locationPopoverClose?.addEventListener('click', () => {
+    closeLocationPopover();
   });
 
   // GPS button in popover
@@ -2537,8 +2621,57 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 </script>
 
 <style>
+  .search-container {
+    @apply relative;
+  }
+
+  .search-shell {
+    @apply relative rounded-2xl border border-neutral-200/80 dark:border-neutral-700/80 bg-white/90 dark:bg-neutral-900/80 shadow-lg backdrop-blur;
+    background-image: radial-gradient(circle at top, rgba(59, 130, 246, 0.08), transparent 55%);
+  }
+
+  .search-main {
+    @apply flex flex-col gap-3 p-3 md:flex-row md:items-center md:gap-4 md:p-4;
+  }
+
+  .search-field {
+    @apply relative flex-1;
+  }
+
+  .search-submit-btn {
+    @apply inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-neutral-900 md:w-auto;
+  }
+
+  .search-secondary {
+    @apply flex flex-col gap-2 border-t border-neutral-200/80 px-3 pb-4 pt-3 dark:border-neutral-700/80 md:flex-row md:items-center md:justify-between md:gap-4 md:px-4;
+  }
+
+  .search-hints {
+    @apply flex flex-wrap items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 md:text-sm;
+  }
+
+  .search-hints-label {
+    @apply text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 md:text-[0.65rem];
+  }
+
+  .search-hints-list {
+    @apply flex flex-wrap gap-2;
+  }
+
   .search-hint-btn {
-    @apply text-xs px-2 py-1 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors;
+    @apply rounded-full border border-neutral-200 bg-white/80 px-2.5 py-1 text-[0.7rem] text-neutral-700 transition-colors hover:border-primary-300 hover:text-primary-700 dark:border-neutral-700 dark:bg-neutral-900/70 dark:text-neutral-200 dark:hover:text-primary-300 md:px-3 md:py-1.5 md:text-xs;
+  }
+
+  .location-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-3 py-2 text-sm text-neutral-700 transition-colors hover:border-primary-300 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-neutral-700 dark:bg-neutral-900/70 dark:text-neutral-200 dark:hover:text-primary-300 dark:focus:ring-offset-neutral-900;
+  }
+
+  .location-pill-label {
+    @apply text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-neutral-400 dark:text-neutral-500;
+  }
+
+  .location-pill-value {
+    @apply text-sm font-medium;
   }
 
   /* Crisis Banner Styles */

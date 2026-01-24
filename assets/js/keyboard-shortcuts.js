@@ -285,17 +285,6 @@ class KeyboardShortcuts {
       return;
     }
 
-    // Close onboarding modal if open
-    const onboarding = document.getElementById('onboarding-modal');
-    if (onboarding && !onboarding.hidden) {
-      if (window.Onboarding && window.Onboarding.close) {
-        window.Onboarding.close();
-      } else {
-        onboarding.hidden = true;
-      }
-      return;
-    }
-
     // Otherwise clear filters
     if (window.searchFilter && typeof window.searchFilter.resetFilters === 'function') {
       window.searchFilter.resetFilters();
