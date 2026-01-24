@@ -802,7 +802,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         if (suggestion && searchInput) {
           (searchInput as HTMLInputElement).value = suggestion;
           hideTypeahead();
-          performSearch();
+          void performSearch();
         }
       });
     });
@@ -869,35 +869,42 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   const cardWrappers = isHomepage ? document.querySelectorAll('.home-program-card') : null;
 
   const programs = Array.from(cards).map((card, index) => {
-    const nameEl = card.querySelector('h3');
-    const descEl = card.querySelector('p');
-    const areaEl = card.querySelector('[class*="text-neutral-600"], [class*="text-neutral-500"]');
-    const id = card.id?.replace('program-', '') || '';
-    // For homepage, the wrapper element controls visibility
+    const id = card.getAttribute('data-program-id') || card.id?.replace('program-', '') || '';
     const wrapper = isHomepage && cardWrappers ? cardWrappers[index] : null;
+    const groups = (card.getAttribute('data-groups') || '')
+      .split(',')
+      .map((group) => group.trim())
+      .filter(Boolean);
 
     return {
       index,
       element: card,
       wrapper,
       id,
-      name: nameEl?.textContent?.trim() || '',
-      description: descEl?.textContent?.trim() || '',
       category: card.getAttribute('data-category') || '',
-      groups: card.getAttribute('data-groups')?.split(',') || [],
-      area: areaEl?.textContent?.trim() || '',
-      text: card.textContent?.trim() || '',
+      groups,
+      verified: card.getAttribute('data-verified') === 'true',
     };
   });
 
-  // Configure Fuse.js with weighted search
-  const fuse = new Fuse(programs, {
-    keys: [
-      { name: 'name', weight: 0.4 },
-      { name: 'description', weight: 0.3 },
-      { name: 'category', weight: 0.2 },
-      { name: 'area', weight: 0.1 },
-    ],
+  const programById = new Map(programs.map((program) => [program.id, program]));
+  const originalOrder = programs.map((program) => program.wrapper || program.element);
+  const resultsContainer = isHomepage
+    ? cardWrappers?.[0]?.parentElement || null
+    : document.getElementById('programs-grid');
+
+  const SEARCH_INDEX_URL = '/api/search-index.json';
+
+  const DEFAULT_SEARCH_KEYS = [
+    { name: 'name', weight: 0.45 },
+    { name: 'description', weight: 0.3 },
+    { name: 'category', weight: 0.15 },
+    { name: 'area', weight: 0.1 },
+    { name: 'keywords', weight: 0.1 },
+  ];
+
+  const DEFAULT_FUSE_OPTIONS = {
+    keys: DEFAULT_SEARCH_KEYS,
     threshold: 0.4,
     distance: 100,
     minMatchCharLength: 2,
@@ -905,7 +912,63 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     includeMatches: true,
     ignoreLocation: true,
     useExtendedSearch: true,
-  });
+  };
+
+  let searchDocuments = [];
+  let searchDocumentsById = new Map();
+  let fuse = null;
+
+  function buildSearchDocumentsFromDom() {
+    const documents = programs.map((program) => {
+      const nameEl = program.element.querySelector('[data-program-name]');
+      const descEl = program.element.querySelector('p');
+      const areaEl = program.element.querySelector(
+        '[class*="text-neutral-600"], [class*="text-neutral-500"]'
+      );
+
+      return {
+        id: program.id,
+        name: nameEl?.textContent?.trim() || '',
+        description: descEl?.textContent?.trim() || '',
+        category: program.category || '',
+        area: areaEl?.textContent?.trim() || '',
+        keywords: '',
+      };
+    });
+
+    searchDocuments = documents;
+    searchDocumentsById = new Map(documents.map((doc) => [doc.id, doc]));
+    fuse = new Fuse(searchDocuments, DEFAULT_FUSE_OPTIONS);
+  }
+
+  async function loadSearchIndex() {
+    try {
+      const response = await fetch(SEARCH_INDEX_URL, { cache: 'force-cache' });
+      if (!response.ok) {
+        throw new Error(`Search index request failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!Array.isArray(data?.documents)) {
+        throw new Error('Search index payload missing documents');
+      }
+
+      const keys = data?.keys || DEFAULT_SEARCH_KEYS;
+      const index =
+        data?.index && typeof Fuse.parseIndex === 'function' ? Fuse.parseIndex(data.index) : null;
+
+      searchDocuments = data.documents;
+      searchDocumentsById = new Map(searchDocuments.map((doc) => [doc.id, doc]));
+      fuse = index
+        ? new Fuse(searchDocuments, { ...DEFAULT_FUSE_OPTIONS, keys }, index)
+        : new Fuse(searchDocuments, { ...DEFAULT_FUSE_OPTIONS, keys });
+    } catch (error) {
+      console.warn('Search index unavailable, falling back to DOM search.', error);
+      buildSearchDocumentsFromDom();
+    }
+  }
+
+  const searchIndexReady = loadSearchIndex();
 
   const searchInput = document.getElementById('search-input');
   const searchHints = document.getElementById('search-hints');
@@ -929,16 +992,172 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
   let activeCategory = 'all';
 
+  async function ensureFuseReady() {
+    if (fuse) return;
+    await searchIndexReady;
+    if (!fuse) {
+      buildSearchDocumentsFromDom();
+    }
+  }
+
+  function getActiveFilters() {
+    const categorySelect = document.getElementById('category-select') as HTMLSelectElement | null;
+    const verifiedCheckbox = document.getElementById('verified-only') as HTMLInputElement | null;
+    const activeGroupBtn = document.querySelector('.group-filter-btn[data-active="true"]');
+    const categoryValue = categorySelect?.value || activeCategory || 'all';
+
+    return {
+      category: categoryValue.toLowerCase(),
+      group: activeGroupBtn?.getAttribute('data-group') || null,
+      verifiedOnly: verifiedCheckbox?.checked || false,
+    };
+  }
+
+  function matchesActiveFilters(program) {
+    const filters = getActiveFilters();
+    const programCategory = program.category || '';
+    const matchesCategory =
+      filters.category === 'all' || programCategory.toLowerCase() === filters.category;
+    const matchesGroup = !filters.group || program.groups.includes(filters.group);
+    const matchesVerified = !filters.verifiedOnly || program.verified;
+    const locationHidden = program.element.hasAttribute('data-location-hidden');
+
+    return matchesCategory && matchesGroup && matchesVerified && !locationHidden;
+  }
+
+  function getProgramName(id: string) {
+    const docName = searchDocumentsById.get(id)?.name;
+    if (docName) return docName;
+
+    const program = programById.get(id);
+    const nameEl = program?.element.querySelector('[data-program-name]');
+    return nameEl?.textContent?.trim() || '';
+  }
+
+  function shouldApplyRelevanceOrder() {
+    const relevanceBtn = document.getElementById('sort-relevance');
+    const alphaBtn = document.getElementById('sort-alpha');
+    if (!relevanceBtn || !alphaBtn) {
+      return true;
+    }
+
+    return relevanceBtn.getAttribute('aria-checked') === 'true';
+  }
+
+  function applyRelevanceOrder(rankedIds: string[]) {
+    if (!shouldApplyRelevanceOrder()) return;
+    if (!resultsContainer) return;
+    const rankedSet = new Set(rankedIds);
+    const orderedPrograms = [
+      ...rankedIds
+        .map((id) => programById.get(id))
+        .filter((program) => program && program.wrapper !== undefined),
+      ...programs.filter((program) => !rankedSet.has(program.id)),
+    ];
+
+    orderedPrograms.forEach((program) => {
+      const node = program.wrapper || program.element;
+      if (node && resultsContainer.contains(node)) {
+        resultsContainer.appendChild(node);
+      }
+    });
+  }
+
+  function resetRelevanceOrder() {
+    if (!shouldApplyRelevanceOrder()) return;
+    if (!resultsContainer) return;
+    originalOrder.forEach((node) => {
+      if (resultsContainer.contains(node)) {
+        resultsContainer.appendChild(node);
+      }
+    });
+  }
+
+  function setRelevanceRanks(rankedIds: string[]) {
+    const rankById = new Map(rankedIds.map((id, index) => [id, index]));
+    programs.forEach((program) => {
+      const rank = rankById.get(program.id);
+      if (rank === undefined) {
+        program.element.removeAttribute('data-relevance-rank');
+        return;
+      }
+      program.element.setAttribute('data-relevance-rank', String(rank));
+    });
+  }
+
+  function collectSearchResults(terms: string[]) {
+    const resultsById = new Map();
+
+    terms.forEach((term) => {
+      const results = fuse.search(term);
+      results.forEach((result) => {
+        const id = result.item.id;
+        const program = programById.get(id);
+        if (!program || !matchesActiveFilters(program)) return;
+
+        const score = result.score ?? 1;
+        const existing = resultsById.get(id);
+        if (!existing || score < existing.score) {
+          resultsById.set(id, { id, score });
+        }
+      });
+    });
+
+    return resultsById;
+  }
+
+  function rankSearchResults(resultsById: Map<string, { id: string; score: number }>, bestBetIds) {
+    const bestBetRank = new Map();
+    bestBetIds.forEach((id, index) => {
+      bestBetRank.set(id, index);
+    });
+
+    const bestBets = bestBetIds
+      .map((id) => {
+        const program = programById.get(id);
+        if (!program || !matchesActiveFilters(program)) return null;
+        return { id, score: -1, bestBetRank: bestBetRank.get(id) ?? 0 };
+      })
+      .filter(Boolean);
+
+    const regularResults = Array.from(resultsById.values()).filter(
+      (result) => !bestBetRank.has(result.id)
+    );
+
+    regularResults.sort((a, b) => {
+      if (a.score !== b.score) {
+        return a.score - b.score;
+      }
+
+      const nameA = getProgramName(a.id).toLowerCase();
+      const nameB = getProgramName(b.id).toLowerCase();
+      if (nameA !== nameB) {
+        return nameA.localeCompare(nameB);
+      }
+
+      return a.id.localeCompare(b.id);
+    });
+
+    const rankedResults = [
+      ...bestBets.sort((a, b) => a.bestBetRank - b.bestBetRank),
+      ...regularResults,
+    ];
+
+    return rankedResults.map((result) => result.id);
+  }
+
   // Track active category filter
   document.addEventListener('click', (e) => {
     const filterBtn = e.target.closest('[data-filter]');
     if (filterBtn) {
       activeCategory = filterBtn.getAttribute('data-filter') || 'all';
-      performSearch();
+      void performSearch();
     }
   });
 
-  function performFuzzySearch(query) {
+  async function performFuzzySearch(query) {
+    await ensureFuseReady();
+
     if (isHomepage) {
       // Homepage: show/hide search results section
       if (!query) {
@@ -946,9 +1165,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         homeResultsSection?.classList.add('hidden');
         programs.forEach((p) => {
           if (p.wrapper) p.wrapper.classList.add('hidden');
+          p.element.removeAttribute('data-relevance-rank');
         });
         noResultsEl?.classList.add('hidden');
         hideSmartSearchSuggestion();
+        resetRelevanceOrder();
         return;
       }
 
@@ -960,33 +1181,19 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       const expandedTerms = expandWithSynonyms(rewrittenQuery);
       const bestBetIds = new Set(getBestBets(query));
 
-      // Fuzzy search with Fuse.js - search for all expanded terms
-      const allResults = new Map();
-      for (const term of expandedTerms) {
-        const results = fuse.search(term);
-        results.forEach((r) => {
-          const existing = allResults.get(r.item.index);
-          if (!existing || r.score < existing.score) {
-            allResults.set(r.item.index, r);
-          }
-        });
-      }
-      const matchedIndices = new Set(allResults.keys());
+      const resultsById = collectSearchResults(expandedTerms);
+      const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
+      const matchedIds = new Set(rankedIds);
+      setRelevanceRanks(rankedIds);
+      applyRelevanceOrder(rankedIds);
 
       let visibleCount = 0;
-      const bestBetPrograms: typeof programs = [];
-      const regularPrograms: typeof programs = [];
 
       programs.forEach((p) => {
-        const matchesSearch = matchedIndices.has(p.index);
+        const matchesSearch = matchedIds.has(p.id);
         const isBestBet = bestBetIds.has(p.id);
 
-        if (matchesSearch || isBestBet) {
-          if (isBestBet) {
-            bestBetPrograms.push(p);
-          } else {
-            regularPrograms.push(p);
-          }
+        if (matchesSearch) {
           if (p.wrapper) {
             p.wrapper.classList.remove('hidden');
             // Mark best bets for styling
@@ -1023,37 +1230,28 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       if (!query) {
         // No search query - show all (respect category filter)
         programs.forEach((p) => {
-          const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
-          // Also respect location filter if active
-          const locationHidden = p.element.hasAttribute('data-location-hidden');
-          p.element.style.display = matchesCategory && !locationHidden ? '' : 'none';
+          const shouldShow = matchesActiveFilters(p);
+          p.element.style.display = shouldShow ? '' : 'none';
           p.element.classList.remove('best-bet');
+          p.element.removeAttribute('data-relevance-rank');
         });
+        resetRelevanceOrder();
       } else {
         // Apply search enhancements
         const rewrittenQuery = rewriteQuery(query);
         const expandedTerms = expandWithSynonyms(rewrittenQuery);
         const bestBetIds = new Set(getBestBets(query));
 
-        // Fuzzy search with Fuse.js - search for all expanded terms
-        const allResults = new Map();
-        for (const term of expandedTerms) {
-          const results = fuse.search(term);
-          results.forEach((r) => {
-            const existing = allResults.get(r.item.index);
-            if (!existing || r.score < existing.score) {
-              allResults.set(r.item.index, r);
-            }
-          });
-        }
-        const matchedIndices = new Set(allResults.keys());
+        const resultsById = collectSearchResults(expandedTerms);
+        const rankedIds = rankSearchResults(resultsById, Array.from(bestBetIds));
+        const matchedIds = new Set(rankedIds);
+        setRelevanceRanks(rankedIds);
+        applyRelevanceOrder(rankedIds);
 
         programs.forEach((p) => {
-          const matchesSearch = matchedIndices.has(p.index);
+          const matchesSearch = matchedIds.has(p.id);
           const isBestBet = bestBetIds.has(p.id);
-          const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
-          const locationHidden = p.element.hasAttribute('data-location-hidden');
-          const shouldShow = (matchesSearch || isBestBet) && matchesCategory && !locationHidden;
+          const shouldShow = matchesSearch;
 
           p.element.style.display = shouldShow ? '' : 'none';
 
@@ -1492,7 +1690,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
     closeBtn?.addEventListener('click', () => banner.remove());
   }
 
-  function performSearch() {
+  async function performSearch() {
     const query = searchInput?.value.trim() || '';
 
     // Check for crisis keywords first - show banner but ALSO show relevant programs
@@ -1501,11 +1699,11 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       showCrisisBanner(crisisType);
       // Continue with fuzzy search to show relevant mental health resources
       // (like 988 Suicide & Crisis Lifeline)
-      performFuzzySearch(query);
+      await performFuzzySearch(query);
       return;
     }
 
-    performFuzzySearch(query);
+    await performFuzzySearch(query);
   }
 
   // Handle Enter key - perform search only on Enter
@@ -1531,7 +1729,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
         }
       }
 
-      performSearch();
+      void performSearch();
     } else if (e.key === 'Escape') {
       hideTypeahead();
     }
@@ -1559,7 +1757,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       searchInput.value = btn.textContent || '';
       searchHints?.classList.add('hidden');
       hideTypeahead();
-      performSearch();
+      void performSearch();
       searchInput.focus();
     });
   });
@@ -1567,7 +1765,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   // Listen for location changes to re-apply search
   window.addEventListener('locationChanged', () => {
     if (searchInput.value) {
-      performSearch();
+      void performSearch();
     }
   });
 
@@ -1575,7 +1773,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   clearSearchBtn?.addEventListener('click', () => {
     if (searchInput) {
       searchInput.value = '';
-      performFuzzySearch('');
+      void performFuzzySearch('');
       searchInput.focus();
     }
   });
@@ -1693,7 +1891,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
 
     // Perform preliminary search with category terms
     const query = category.search_terms.join(' ');
-    performRefinedSearch(query, category.best_bets);
+    void performRefinedSearch(query, category.best_bets);
 
     // Show sub-options
     if (categoryRefinement) categoryRefinement.classList.add('hidden');
@@ -1728,7 +1926,7 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   function selectSubOption(option: { label: string; search_terms: string[]; best_bets: string[] }) {
     // Perform final refined search
     const query = option.search_terms.join(' ');
-    performRefinedSearch(query, option.best_bets);
+    void performRefinedSearch(query, option.best_bets);
 
     // Hide refinement bar after selection
     hideRefinementBar();
@@ -1737,31 +1935,31 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
   }
 
   // Perform search with refinement terms and best bets
-  function performRefinedSearch(query: string, bestBetIds: string[]) {
+  async function performRefinedSearch(query: string, bestBetIds: string[]) {
+    await ensureFuseReady();
     // Update the search input
     if (searchInput) {
       (searchInput as HTMLInputElement).value = query;
     }
 
-    // Use existing fuzzy search with best bets prioritized
-    const allResults = new Map();
-    const results = fuse.search(query);
-    results.forEach((r) => {
-      allResults.set(r.item.index, r);
-    });
-
-    const matchedIndices = new Set(allResults.keys());
+    const rewrittenQuery = rewriteQuery(query);
+    const expandedTerms = expandWithSynonyms(rewrittenQuery);
+    const resultsById = collectSearchResults(expandedTerms);
+    const rankedIds = rankSearchResults(resultsById, bestBetIds);
+    const matchedIds = new Set(rankedIds);
     const bestBetSet = new Set(bestBetIds);
+    setRelevanceRanks(rankedIds);
+    applyRelevanceOrder(rankedIds);
 
     if (isHomepage) {
       homeResultsSection?.classList.remove('hidden');
 
       let visibleCount = 0;
       programs.forEach((p) => {
-        const matchesSearch = matchedIndices.has(p.index);
+        const matchesSearch = matchedIds.has(p.id);
         const isBestBet = bestBetSet.has(p.id);
 
-        if (matchesSearch || isBestBet) {
+        if (matchesSearch) {
           if (p.wrapper) {
             p.wrapper.classList.remove('hidden');
             if (isBestBet) {
@@ -1791,11 +1989,9 @@ const sizeClasses = size === 'large' ? 'py-4 pl-12 pr-12 text-lg' : 'py-3 pl-10 
       // Directory page
       let visibleCount = 0;
       programs.forEach((p) => {
-        const matchesSearch = matchedIndices.has(p.index);
+        const matchesSearch = matchedIds.has(p.id);
         const isBestBet = bestBetSet.has(p.id);
-        const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
-        const locationHidden = p.element.hasAttribute('data-location-hidden');
-        const shouldShow = (matchesSearch || isBestBet) && matchesCategory && !locationHidden;
+        const shouldShow = matchesSearch;
 
         p.element.style.display = shouldShow ? '' : 'none';
 

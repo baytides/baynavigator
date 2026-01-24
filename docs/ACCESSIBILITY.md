@@ -93,6 +93,14 @@ This website has been tested with:
 - Mobile device testing (iPhone SE, Android devices)
 - Vision Pro spatial computing compatibility
 
+## Release Checklist (Manual)
+
+- Keyboard-only navigation across home + directory (visible focus, logical order)
+- Screen reader spot-check (VoiceOver/NVDA): search input, filters, results count
+- Reduced motion check (prefers-reduced-motion enabled)
+- Color contrast spot-check (light + dark)
+- Skip link + landmark regions verified
+
 ## Known Limitations
 
 We are actively working to address any accessibility issues. If you encounter any barriers, please let us know.

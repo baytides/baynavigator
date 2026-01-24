@@ -19,6 +19,8 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const Ajv = require('ajv');
+const addFormats = require('ajv-formats');
 
 // Colors for terminal output
 const colors = {
@@ -65,22 +67,23 @@ function loadSuppressedIds() {
   return new Set(data.map((s) => s.id));
 }
 
-// Load valid values from groups.yml
+// Load valid values from groups.yml and cities.yml
 function loadValidValues() {
   const groupsPath = path.join(__dirname, '..', 'src', 'data', 'groups.yml');
+  const citiesPath = path.join(__dirname, '..', 'src', 'data', 'cities.yml');
   const content = fs.readFileSync(groupsPath, 'utf-8');
   const data = yaml.load(content);
+  const cities = fs.existsSync(citiesPath) ? yaml.load(fs.readFileSync(citiesPath, 'utf-8')) : [];
 
   const validGroups = data.groups.map((g) => g.id);
   const validCategories = data.categories.map((c) => c.name);
   const validCounties = data.counties.map((c) => c.name);
-
-  // Also allow category IDs (some files use IDs, some use names)
-  const validCategoryIds = data.categories.map((c) => c.id);
+  const validCities = Array.isArray(cities) ? cities.map((c) => c.name) : [];
 
   // Valid area values
-  const validAreas = [
+  const validAreas = new Set([
     ...validCounties,
+    ...validCities,
     'San Francisco', // City and county
     'San Francisco County', // Alternative
     'Bay Area',
@@ -88,10 +91,16 @@ function loadValidValues() {
     'California',
     'Nationwide',
     'National',
+    'Northern California',
+    'Monterey County',
     // Also allow individual cities (we don't validate these strictly)
-  ];
+  ]);
 
-  return { validGroups, validCategories, validCategoryIds, validAreas };
+  return {
+    validGroups,
+    validCategories,
+    validAreas,
+  };
 }
 
 // Validate URL format
@@ -106,10 +115,17 @@ function isValidUrl(string) {
 }
 
 // Validate a single program entry
-function validateProgram(program, fileName, lineNumber, validValues) {
+function validateProgram(program, fileName, lineNumber, validValues, schemaValidate) {
   const errors = [];
   const warnings = [];
-  const { validGroups, validCategories, validCategoryIds, validAreas } = validValues;
+  const { validGroups, validCategories, validAreas } = validValues;
+
+  if (!schemaValidate(program)) {
+    schemaValidate.errors.forEach((error) => {
+      const pathLabel = error.instancePath ? ` ${error.instancePath}` : '';
+      errors.push(`Schema${pathLabel}: ${error.message}`);
+    });
+  }
 
   // Check required fields
   for (const field of REQUIRED_FIELDS) {
@@ -145,19 +161,11 @@ function validateProgram(program, fileName, lineNumber, validValues) {
     }
   }
 
-  // Validate category (allow both names and IDs)
+  // Validate category (must be a known display category)
   if (program.category) {
-    const categoryLower = program.category.toLowerCase();
-    const isValidCategory =
-      validCategories.includes(program.category) ||
-      validCategoryIds.includes(categoryLower) ||
-      validCategoryIds.includes(program.category);
+    const isValidCategory = validCategories.includes(program.category);
     if (!isValidCategory) {
-      // Special categories from sync scripts
-      const specialCategories = ['National Parks', 'State Parks', 'Museums', 'WiFi Hotspots'];
-      if (!specialCategories.includes(program.category)) {
-        warnings.push(`Unusual category: "${program.category}"`);
-      }
+      errors.push(`Invalid category: "${program.category}"`);
     }
   }
 
@@ -167,16 +175,14 @@ function validateProgram(program, fileName, lineNumber, validValues) {
     const areas = Array.isArray(program.area) ? program.area : [program.area];
     for (const area of areas) {
       if (typeof area !== 'string') {
-        warnings.push(`Invalid area type: expected string, got ${typeof area}`);
+        errors.push(`Invalid area type: expected string, got ${typeof area}`);
         continue;
       }
-      // Areas can be specific cities, so we only warn for truly unusual values
-      const isKnownArea = validAreas.some(
-        (a) => a.toLowerCase() === area.toLowerCase() || area.toLowerCase().includes('county')
-      );
-      if (!isKnownArea && !program.city) {
-        // Only warn if it's not a city-based entry
-        // (entries with city field can have more specific areas)
+      const normalizedArea = area.replace(/^(City|Town) of\s+/i, '').trim();
+      const areaKey = normalizedArea.toLowerCase();
+      const isKnownArea = Array.from(validAreas).some((a) => a.toLowerCase() === areaKey);
+      if (!isKnownArea) {
+        errors.push(`Invalid area: "${area}"`);
       }
     }
   }
@@ -226,7 +232,7 @@ function validateProgram(program, fileName, lineNumber, validValues) {
 }
 
 // Parse YAML file and validate all programs
-function validateFile(filePath, validValues, allIds, suppressedIds) {
+function validateFile(filePath, validValues, allIds, suppressedIds, schemaValidate) {
   const fileName = path.basename(filePath);
   const results = {
     file: fileName,
@@ -283,7 +289,7 @@ function validateFile(filePath, validValues, allIds, suppressedIds) {
       }
 
       // Validate program
-      const { errors, warnings } = validateProgram(program, fileName, i, validValues);
+      const { errors, warnings } = validateProgram(program, fileName, i, validValues, schemaValidate);
 
       for (const error of errors) {
         results.errors.push({ program: programId, message: error });
@@ -310,13 +316,19 @@ function main() {
 
   // Load valid values
   let validValues;
+  let schemaValidate;
   try {
     validValues = loadValidValues();
     console.log(
       `${colors.blue}✓${colors.reset} Loaded ${validValues.validGroups.length} groups, ${validValues.validCategories.length} categories`
     );
+    const schemaPath = path.join(__dirname, '..', 'schemas', 'programs-yaml.schema.json');
+    const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8'));
+    const ajv = new Ajv({ allErrors: true, strict: false });
+    addFormats(ajv);
+    schemaValidate = ajv.compile(schema);
   } catch (e) {
-    console.error(`${colors.red}✗${colors.reset} Failed to load groups.yml: ${e.message}`);
+    console.error(`${colors.red}✗${colors.reset} Failed to load validation data: ${e.message}`);
     process.exit(1);
   }
 
@@ -350,7 +362,7 @@ function main() {
       continue;
     }
 
-    const results = validateFile(filePath, validValues, allIds, suppressedIds);
+    const results = validateFile(filePath, validValues, allIds, suppressedIds, schemaValidate);
     allResults.push(results);
 
     totalPrograms += results.programs;

@@ -39,6 +39,7 @@ const API_ENDPOINTS = [
   '/api/groups.json',
   '/api/areas.json',
   '/api/metadata.json',
+  '/api/search-index.json',
   '/api/emergency.json', // Crisis resources for offline access
 ];
 
@@ -118,9 +119,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle API requests - stale-while-revalidate
+  // Handle API requests - network first
   if (url.pathname.startsWith('/api/')) {
-    event.respondWith(staleWhileRevalidate(request, API_CACHE));
+    event.respondWith(networkFirst(request, API_CACHE));
+    return;
+  }
+
+  // Handle immutable build assets - cache first
+  if (url.pathname.startsWith('/_astro/')) {
+    event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE));
     return;
   }
 
@@ -143,21 +150,20 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(cacheFirstWithNetwork(request, STATIC_CACHE));
 });
 
-// Strategy: Stale-while-revalidate (best for API data)
-async function staleWhileRevalidate(request, cacheName) {
+// Strategy: Network first with cache fallback
+async function networkFirst(request, cacheName) {
   const cache = await caches.open(cacheName);
-  const cachedResponse = await cache.match(request);
-
-  const fetchPromise = fetch(request)
-    .then((networkResponse) => {
-      if (networkResponse.ok) {
-        cache.put(request, networkResponse.clone());
-      }
-      return networkResponse;
-    })
-    .catch(() => null);
-
-  return cachedResponse || (await fetchPromise) || cache.match(request);
+  try {
+    const networkResponse = await fetch(new Request(request, { cache: 'no-store' }));
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await cache.match(request);
+    if (cachedResponse) return cachedResponse;
+    return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+  }
 }
 
 // Strategy: Network first with offline fallback

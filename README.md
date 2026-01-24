@@ -54,6 +54,14 @@ This community-driven resource aims to:
 
 ---
 
+## ✅ Quality & Compliance
+
+- **Data validation**: `npm run validate:data` (schema + referential integrity checks)
+- **Accessibility checks**: `npm run test:a11y` (axe-core + Playwright, desktop + mobile)
+- **PWA caching**: network-first for `/api/*.json`, cache-first for immutable build assets
+
+---
+
 ## 🔌 Static JSON API
 
 Bay Navigator provides static JSON API files for accessing program data:

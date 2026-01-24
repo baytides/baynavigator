@@ -519,6 +519,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
     const programsSection = document.getElementById('programs');
     const quickCategoryBtns = document.querySelectorAll('.quick-category-btn');
 
+    groupBtns.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
+
     let activeCategory = 'all';
     let activeGroup: string | null = null;
     let verifiedOnly = false;
@@ -796,6 +798,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         if (activeGroup === group) {
           // Deselect
           activeGroup = null;
+          btn.removeAttribute('data-active');
+          btn.setAttribute('aria-pressed', 'false');
           btn.classList.remove(
             'bg-primary-100',
             'dark:bg-primary-900/50',
@@ -817,6 +821,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
         } else {
           // Deselect all first
           groupBtns.forEach((b) => {
+            b.removeAttribute('data-active');
+            b.setAttribute('aria-pressed', 'false');
             b.classList.remove(
               'bg-primary-100',
               'dark:bg-primary-900/50',
@@ -835,6 +841,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
           // Select this one
           activeGroup = group;
+          btn.setAttribute('data-active', 'true');
+          btn.setAttribute('aria-pressed', 'true');
           btn.classList.remove(
             'bg-white',
             'dark:bg-neutral-700',
@@ -878,6 +886,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
 
       // Reset group buttons
       groupBtns.forEach((btn) => {
+        btn.removeAttribute('data-active');
+        btn.setAttribute('aria-pressed', 'false');
         btn.classList.remove(
           'bg-primary-100',
           'dark:bg-primary-900/50',
@@ -934,6 +944,8 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       activeGroup = groupParam;
       const matchingBtn = document.querySelector(`[data-group="${groupParam}"]`);
       if (matchingBtn) {
+        matchingBtn.setAttribute('data-active', 'true');
+        matchingBtn.setAttribute('aria-pressed', 'true');
         matchingBtn.classList.remove(
           'bg-white',
           'dark:bg-neutral-700',
@@ -1096,6 +1108,10 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
       const visibleCards = Array.from(programsGrid.children).filter(
         (card) => (card as HTMLElement).style.display !== 'none'
       ) as HTMLElement[];
+      const hasQuery = searchInput?.value.trim().length > 0;
+      const hasRankedResults = visibleCards.some((card) =>
+        card.hasAttribute('data-relevance-rank')
+      );
 
       if (currentSort === 'alpha') {
         // Sort alphabetically by program name
@@ -1110,12 +1126,30 @@ allPrograms.sort((a, b) => a.name.localeCompare(b.name));
           programsGrid.appendChild(card);
         });
       } else {
-        // Restore original order
-        originalOrder.forEach((card) => {
-          if (programsGrid.contains(card)) {
+        if (hasQuery && hasRankedResults) {
+          visibleCards.sort((a, b) => {
+            const rankA = parseInt(a.getAttribute('data-relevance-rank') || '999999', 10);
+            const rankB = parseInt(b.getAttribute('data-relevance-rank') || '999999', 10);
+            if (rankA !== rankB) return rankA - rankB;
+
+            const nameA = a.querySelector('[data-program-name]')?.textContent?.toLowerCase() || '';
+            const nameB = b.querySelector('[data-program-name]')?.textContent?.toLowerCase() || '';
+            if (nameA !== nameB) return nameA.localeCompare(nameB);
+
+            return 0;
+          });
+
+          visibleCards.forEach((card) => {
             programsGrid.appendChild(card);
-          }
-        });
+          });
+        } else {
+          // Restore original order
+          originalOrder.forEach((card) => {
+            if (programsGrid.contains(card)) {
+              programsGrid.appendChild(card);
+            }
+          });
+        }
       }
     }
 

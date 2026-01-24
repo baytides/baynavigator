@@ -349,6 +349,47 @@ const areas = Object.keys(AREA_TYPES).map((name) => ({
 fs.writeFileSync(path.join(API_DIR, 'areas.json'), JSON.stringify({ areas }, null, 2));
 console.log('✅ Generated areas.json');
 
+function generateSearchIndex(programs) {
+  let Fuse = null;
+  try {
+    Fuse = require('fuse.js');
+    Fuse = Fuse.default || Fuse;
+  } catch (error) {
+    console.warn('⚠️  Fuse.js not available, skipping search index generation.', error);
+    return;
+  }
+
+  const searchKeys = [
+    { name: 'name', weight: 0.45 },
+    { name: 'description', weight: 0.3 },
+    { name: 'category', weight: 0.15 },
+    { name: 'area', weight: 0.1 },
+    { name: 'keywords', weight: 0.1 },
+  ];
+
+  const documents = programs.map((program) => ({
+    id: program.id,
+    name: program.name,
+    description: program.description || '',
+    category: program.category || '',
+    area: Array.isArray(program.areas) ? program.areas.join(', ') : program.areas || '',
+    keywords: program.keywords || '',
+  }));
+
+  const index = Fuse.createIndex(searchKeys, documents);
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    keys: searchKeys,
+    documents,
+    index: index.toJSON(),
+  };
+
+  fs.writeFileSync(path.join(API_DIR, 'search-index.json'), JSON.stringify(payload, null, 2));
+  console.log('✅ Generated search-index.json');
+}
+
+generateSearchIndex(allPrograms);
+
 // Generate API metadata
 const metadata = {
   version: '1.0.0',
@@ -359,6 +400,7 @@ const metadata = {
     categories: '/api/categories.json',
     groups: '/api/groups.json',
     areas: '/api/areas.json',
+    searchIndex: '/api/search-index.json',
     singleProgram: '/api/programs/{id}.json',
   },
 };

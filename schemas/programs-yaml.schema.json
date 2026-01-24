@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://baynavigator.org/schemas/programs-yaml.schema.json",
+  "title": "Bay Navigator Program YAML",
+  "description": "Schema for a single program record in YAML files",
+  "type": "object",
+  "required": ["id", "name", "category", "area", "groups", "link"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "area": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      ]
+    },
+    "groups": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "description": {
+      "type": "string"
+    },
+    "what_they_offer": {
+      "type": "string"
+    },
+    "how_to_get_it": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "string"
+    },
+    "how_to_apply": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri"
+    },
+    "link_text": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "keywords": {
+      "anyOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }]
+    },
+    "life_events": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agency": {
+      "type": "string"
+    },
+    "verified_by": {
+      "type": "string"
+    },
+    "verified_date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "amenities": {
+      "type": "array"
+    },
+    "fee_info": {
+      "type": "string"
+    },
+    "map_link": {
+      "type": "string"
+    },
+    "data_source": {
+      "type": "string"
+    },
+    "external_id": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

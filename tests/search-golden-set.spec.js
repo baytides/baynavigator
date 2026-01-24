@@ -457,6 +457,29 @@ test.describe('Category Searches', () => {
   });
 });
 
+test.describe('Ranking & Typo Tolerance', () => {
+  test('search "CalFresh Online" ranks the exact program first', async ({ page }) => {
+    const { count } = await searchAndGetResults(page, 'CalFresh Online');
+
+    expect(count).toBeGreaterThan(0);
+    const firstName = await page
+      .locator('[data-category]:not([style*="display: none"])')
+      .first()
+      .locator('h3')
+      .textContent();
+
+    expect(firstName?.trim().toLowerCase()).toContain('calfresh online');
+  });
+
+  test('search typo "calfrsh online" still returns CalFresh Online', async ({ page }) => {
+    const { count, names } = await searchAndGetResults(page, 'calfrsh online');
+
+    expect(count).toBeGreaterThan(0);
+    const hasTypoMatch = hasResultContaining(names, 'calfresh online', 'calfresh');
+    expect(hasTypoMatch).toBe(true);
+  });
+});
+
 test.describe('Zero Results Handling', () => {
   test('search with gibberish shows fallback resources', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });

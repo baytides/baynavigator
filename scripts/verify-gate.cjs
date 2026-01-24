@@ -168,7 +168,20 @@ runGate('Build Astro site', () => {
   return { passed: true };
 });
 
-// Gate 6: Check for duplicate program IDs
+// Gate 6: Accessibility smoke tests
+runGate('Run accessibility checks', () => {
+  const result = spawnSync('npm', ['run', 'test:a11y'], {
+    cwd: path.join(__dirname, '..'),
+    encoding: 'utf-8',
+    env: { ...process.env, CI: 'true' },
+  });
+  if (result.status !== 0) {
+    return { passed: false, message: 'Accessibility checks failed' };
+  }
+  return { passed: true };
+});
+
+// Gate 7: Check for duplicate program IDs
 runGate('Check for duplicate IDs', () => {
   const result = spawnSync('node', ['scripts/check-duplicates.cjs'], {
     cwd: path.join(__dirname, '..'),
@@ -180,7 +193,7 @@ runGate('Check for duplicate IDs', () => {
   return { passed: true };
 });
 
-// Gate 7: Verify GeoJSON generation (if applicable)
+// Gate 8: Verify GeoJSON generation (if applicable)
 runGate('Generate GeoJSON', () => {
   const geojsonScript = path.join(__dirname, 'generate-geojson.cjs');
   if (!fs.existsSync(geojsonScript)) {
