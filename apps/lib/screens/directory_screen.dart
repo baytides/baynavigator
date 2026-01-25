@@ -115,13 +115,12 @@ class DirectoryScreenState extends State<DirectoryScreen> {
     }
     _hideRecentSearches();
 
-    // Try AI search for natural language queries (if enabled in settings)
+    // Try AI search for natural language queries
     final provider = context.read<ProgramsProvider>();
-    final settingsProvider = context.read<SettingsProvider>();
     if (provider.shouldUseAISearch(query)) {
       await provider.performAISearch(
         query,
-        aiEnabled: settingsProvider.aiSearchEnabled,
+        aiEnabled: true, // Carl AI is always enabled
       );
     }
   }

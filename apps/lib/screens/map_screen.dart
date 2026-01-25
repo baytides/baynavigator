@@ -138,6 +138,7 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
+  // ignore: unused_element
   void _onSymbolTapped(Symbol symbol) {
     final programId = symbol.data?['programId'] as String?;
     if (programId == null) return;

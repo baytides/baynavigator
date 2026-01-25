@@ -626,6 +626,7 @@ class _ProgramCardState extends State<ProgramCard> {
     );
   }
 
+  // ignore: unused_element
   Widget _buildGroupTag(BuildContext context, String group, bool isDark) {
     // Format the group text
     String displayText = group

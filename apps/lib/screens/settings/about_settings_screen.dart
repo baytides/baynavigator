@@ -7,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:http/http.dart' as http;
 import '../../providers/programs_provider.dart';
-import '../../providers/settings_provider.dart';
 import '../../config/theme.dart';
 import '../webview_screen.dart';
 

@@ -10,13 +10,11 @@ enum DirectoryViewMode {
 
 class SettingsProvider extends ChangeNotifier {
   static const String _crashReportingKey = 'baynavigator:crash_reporting';
-  static const String _aiSearchEnabledKey = 'baynavigator:ai_search_enabled';
   static const String _directoryViewModeKey = 'baynavigator:directory_view_mode';
 
   final PrivacyService _privacyService = PrivacyService();
 
   bool _crashReportingEnabled = true;
-  bool _aiSearchEnabled = true;
   bool _initialized = false;
   DirectoryViewMode _directoryViewMode = DirectoryViewMode.comfort;
 
@@ -32,8 +30,6 @@ class SettingsProvider extends ChangeNotifier {
   List<CallingApp> _availableCallingApps = [CallingApp.system, CallingApp.other];
 
   bool get crashReportingEnabled => _crashReportingEnabled;
-  // AI search is now always enabled - toggle removed
-  bool get aiSearchEnabled => true;
   bool get initialized => _initialized;
   DirectoryViewMode get directoryViewMode => _directoryViewMode;
 
@@ -55,7 +51,6 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       _crashReportingEnabled = prefs.getBool(_crashReportingKey) ?? true;
-      _aiSearchEnabled = prefs.getBool(_aiSearchEnabledKey) ?? true;
 
       // Load directory view mode
       final viewModeStr = prefs.getString(_directoryViewModeKey);
@@ -90,18 +85,6 @@ class SettingsProvider extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_crashReportingKey, enabled);
-    } catch (e) {
-      // Continue without persistence
-    }
-  }
-
-  Future<void> setAISearchEnabled(bool enabled) async {
-    _aiSearchEnabled = enabled;
-    notifyListeners();
-
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool(_aiSearchEnabledKey, enabled);
     } catch (e) {
       // Continue without persistence
     }

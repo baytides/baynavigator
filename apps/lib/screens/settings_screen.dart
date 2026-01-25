@@ -7,7 +7,6 @@ import '../providers/theme_provider.dart';
 import '../providers/user_prefs_provider.dart';
 import '../providers/localization_provider.dart';
 import '../providers/safety_provider.dart';
-import '../providers/settings_provider.dart';
 import '../providers/accessibility_provider.dart';
 import '../config/theme.dart';
 import 'profiles_screen.dart';
@@ -450,6 +449,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // ignore: unused_element
   Widget _buildProfileDetail(String label, String value) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -479,6 +479,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // ignore: unused_element
   String _formatQualifications(List<String> qualifications) {
     final labels = <String>[];
     for (final qual in qualifications) {

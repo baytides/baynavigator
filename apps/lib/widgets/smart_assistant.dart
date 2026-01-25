@@ -312,7 +312,8 @@ class _SmartAssistantState extends State<SmartAssistant>
 
     return Consumer<SettingsProvider>(
       builder: (context, settings, child) {
-        final aiEnabled = settings.aiSearchEnabled;
+        // Carl AI assistant is always enabled
+        const aiEnabled = true;
 
         return Stack(
           children: [

@@ -254,6 +254,7 @@ class DesktopSidebar extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   void _showTextSpacingDialog(BuildContext context) {
     showDialog(
       context: context,

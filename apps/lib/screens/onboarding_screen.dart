@@ -22,8 +22,10 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-  bool _isLoading = false;
-  bool _isProcessing = false;
+  // ignore: unused_field
+  bool _isLoading = false; // Reserved for future loading states
+  // ignore: unused_field
+  bool _isProcessing = false; // Reserved for future processing states
   String _processingMessage = '';
 
   // Form state
