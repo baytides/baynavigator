@@ -7,7 +7,8 @@
  * translation switching without full page reloads for cached content.
  *
  * Usage:
- * - Add data-i18n="key.path" to elements for text content translation
+ * - Add data-i18n="key.path" to elements for text content translation (plain text)
+ * - Add data-i18n-html="key.path" for HTML content with links (sanitized)
  * - Add data-i18n-aria-label="key.path" for aria-label translation
  * - Add data-i18n-title="key.path" for title attribute translation
  * - Add data-i18n-placeholder="key.path" for placeholder translation
@@ -73,16 +74,98 @@
   }
 
   /**
+   * Sanitize HTML by parsing and only allowing safe elements/attributes
+   */
+  function sanitizeHtml(html: string): DocumentFragment {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const fragment = document.createDocumentFragment();
+
+    // Allowed elements and their allowed attributes
+    const allowedElements: Record<string, string[]> = {
+      a: ['href', 'class', 'target', 'rel'],
+      span: ['class'],
+      strong: ['class'],
+      em: ['class'],
+      br: [],
+    };
+
+    function processNode(node: Node): Node | null {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return document.createTextNode(node.textContent || '');
+      }
+
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const el = node as Element;
+        const tagName = el.tagName.toLowerCase();
+
+        if (!(tagName in allowedElements)) {
+          // Not allowed - return text content only
+          return document.createTextNode(el.textContent || '');
+        }
+
+        const newEl = document.createElement(tagName);
+        const allowedAttrs = allowedElements[tagName];
+
+        for (const attr of allowedAttrs) {
+          const value = el.getAttribute(attr);
+          if (value !== null) {
+            // Sanitize href to prevent javascript: URLs
+            if (attr === 'href' && (value.startsWith('javascript:') || value.startsWith('data:'))) {
+              continue;
+            }
+            newEl.setAttribute(attr, value);
+          }
+        }
+
+        // Process children
+        for (const child of Array.from(el.childNodes)) {
+          const processedChild = processNode(child);
+          if (processedChild) {
+            newEl.appendChild(processedChild);
+          }
+        }
+
+        return newEl;
+      }
+
+      return null;
+    }
+
+    for (const child of Array.from(doc.body.childNodes)) {
+      const processed = processNode(child);
+      if (processed) {
+        fragment.appendChild(processed);
+      }
+    }
+
+    return fragment;
+  }
+
+  /**
    * Apply translations to all elements with data-i18n attributes
    */
   function applyTranslations(translations: Record<string, unknown>): void {
-    // Translate text content
+    // Translate text content (plain text only)
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       if (key) {
         const translated = getNestedValue(translations, key);
         if (translated) {
           el.textContent = translated;
+        }
+      }
+    });
+
+    // Translate HTML content (allows safe links and formatting)
+    document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-html');
+      if (key) {
+        const translated = getNestedValue(translations, key);
+        if (translated) {
+          // Clear existing content and append sanitized HTML
+          el.textContent = '';
+          el.appendChild(sanitizeHtml(translated));
         }
       }
     });

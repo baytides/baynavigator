@@ -87,7 +87,10 @@ const modelName = OLLAMA_CONFIG.model;
     class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700 bg-gradient-to-r from-amber-500 to-orange-600 text-white"
   >
     <div class="flex items-center gap-3">
-      <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+      <div
+        id="carl-cloud-icon"
+        class="carl-cloud carl-cloud--idle w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
+      >
         <!-- Cloud icon for Karl the Fog / cloud computing -->
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -125,16 +128,57 @@ const modelName = OLLAMA_CONFIG.model;
             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </button>
-      <!-- New chat button -->
+      <!-- Clear chat button (trash icon) -->
       <button
         id="assistant-new-chat"
         type="button"
         class="p-1.5 hover:bg-white/20 rounded-lg transition-colors"
-        aria-label="Start new conversation"
-        title="New chat"
+        aria-label="Clear conversation"
+        title="Clear chat"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          ></path>
+        </svg>
+      </button>
+      <!-- Fullscreen toggle (desktop only) -->
+      <button
+        id="assistant-fullscreen"
+        type="button"
+        class="p-1.5 hover:bg-white/20 rounded-lg transition-colors hidden md:block"
+        aria-label="Toggle fullscreen"
+        title="Fullscreen"
+      >
+        <svg
+          id="fullscreen-expand-icon"
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+          ></path>
+        </svg>
+        <svg
+          id="fullscreen-collapse-icon"
+          class="w-5 h-5 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 9V4m0 5H4m0 0l5-5m11 5h-5m5 0V4m0 0l-5 5m-5 11v-5m0 5H4m0 0l5-5m11 5l-5-5m5 5v-5m0 5h-5"
           ></path>
         </svg>
       </button>
@@ -271,6 +315,26 @@ const modelName = OLLAMA_CONFIG.model;
   const historyList = document.getElementById('history-list');
   const clearHistoryBtn = document.getElementById('clear-history-btn');
   const newChatBtn = document.getElementById('assistant-new-chat');
+  const cloudIcon = document.getElementById('carl-cloud-icon');
+  const fullscreenBtn = document.getElementById('assistant-fullscreen');
+  const fullscreenExpandIcon = document.getElementById('fullscreen-expand-icon');
+  const fullscreenCollapseIcon = document.getElementById('fullscreen-collapse-icon');
+  let isFullscreen = false;
+
+  // Carl emotive state management
+  function setCarlState(state) {
+    if (!cloudIcon) return;
+    // Remove all state classes
+    cloudIcon.classList.remove(
+      'carl-cloud--idle',
+      'carl-cloud--thinking',
+      'carl-cloud--responding',
+      'carl-cloud--error',
+      'carl-cloud--happy'
+    );
+    // Add new state class
+    cloudIcon.classList.add(`carl-cloud--${state}`);
+  }
 
   // Tor Browser detection and endpoint selection
   // Tor Browser has specific characteristics we can detect
@@ -342,6 +406,7 @@ const modelName = OLLAMA_CONFIG.model;
   let californiaCodesCache = null;
   let californiaResourcesCache = null;
   let locationDataCache = null;
+  let programsGeoCache = null; // GeoJSON with program coordinates
   let userLocation = null;
   let userProfile = null; // From preferences (groups, county)
   let currentConversationId = null; // For history tracking
@@ -366,6 +431,189 @@ const modelName = OLLAMA_CONFIG.model;
 
   // Initialize location data on page load
   loadLocationData();
+
+  // Load programs GeoJSON for distance calculations
+  async function loadProgramsGeo() {
+    if (programsGeoCache) return programsGeoCache;
+    try {
+      const response = await fetch('/api/programs.geojson');
+      if (response.ok) {
+        const geojson = await response.json();
+        // Build a map of program ID -> coordinates for fast lookup
+        const coordMap = {};
+        for (const feature of geojson.features || []) {
+          const id = feature.properties?.id;
+          const coords = feature.geometry?.coordinates;
+          if (id && coords && coords.length === 2) {
+            // GeoJSON is [lng, lat], store as { lat, lng }
+            coordMap[id] = { lat: coords[1], lng: coords[0] };
+          }
+        }
+        programsGeoCache = coordMap;
+        return programsGeoCache;
+      }
+    } catch (e) {
+      console.error('Failed to load programs GeoJSON:', e);
+    }
+    return {};
+  }
+
+  // Haversine formula to calculate distance between two points in miles
+  function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 3959; // Earth's radius in miles
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  // City center coordinates for distance calculations (approximate)
+  const cityCoordinates = {
+    // San Mateo County
+    atherton: { lat: 37.4613, lng: -122.1979 },
+    belmont: { lat: 37.5202, lng: -122.2758 },
+    brisbane: { lat: 37.6808, lng: -122.3999 },
+    burlingame: { lat: 37.5841, lng: -122.3661 },
+    colma: { lat: 37.6769, lng: -122.455 },
+    'daly city': { lat: 37.6879, lng: -122.4702 },
+    'east palo alto': { lat: 37.4689, lng: -122.1411 },
+    'foster city': { lat: 37.5585, lng: -122.2711 },
+    'half moon bay': { lat: 37.4636, lng: -122.4286 },
+    hillsborough: { lat: 37.5741, lng: -122.3794 },
+    'menlo park': { lat: 37.453, lng: -122.1817 },
+    millbrae: { lat: 37.5985, lng: -122.3872 },
+    pacifica: { lat: 37.6138, lng: -122.4869 },
+    'portola valley': { lat: 37.3841, lng: -122.2352 },
+    'redwood city': { lat: 37.4852, lng: -122.2364 },
+    'san bruno': { lat: 37.6305, lng: -122.4111 },
+    'san carlos': { lat: 37.5072, lng: -122.2608 },
+    'san mateo': { lat: 37.563, lng: -122.3255 },
+    'south san francisco': { lat: 37.6547, lng: -122.4077 },
+    woodside: { lat: 37.4299, lng: -122.2539 },
+    // San Francisco
+    'san francisco': { lat: 37.7749, lng: -122.4194 },
+    // Alameda County
+    oakland: { lat: 37.8044, lng: -122.2712 },
+    berkeley: { lat: 37.8716, lng: -122.2727 },
+    fremont: { lat: 37.5485, lng: -121.9886 },
+    hayward: { lat: 37.6688, lng: -122.0808 },
+    alameda: { lat: 37.7652, lng: -122.2416 },
+    'san leandro': { lat: 37.7249, lng: -122.1561 },
+    livermore: { lat: 37.6819, lng: -121.768 },
+    pleasanton: { lat: 37.6624, lng: -121.8747 },
+    'union city': { lat: 37.5934, lng: -122.0439 },
+    newark: { lat: 37.5297, lng: -122.0402 },
+    dublin: { lat: 37.7022, lng: -121.9358 },
+    emeryville: { lat: 37.8313, lng: -122.2852 },
+    // Santa Clara County
+    'san jose': { lat: 37.3382, lng: -121.8863 },
+    sunnyvale: { lat: 37.3688, lng: -122.0363 },
+    'santa clara': { lat: 37.3541, lng: -121.9552 },
+    'mountain view': { lat: 37.3861, lng: -122.0839 },
+    'palo alto': { lat: 37.4419, lng: -122.143 },
+    milpitas: { lat: 37.4323, lng: -121.8996 },
+    cupertino: { lat: 37.323, lng: -122.0322 },
+    campbell: { lat: 37.2872, lng: -121.95 },
+    'los gatos': { lat: 37.2358, lng: -121.9624 },
+    saratoga: { lat: 37.2638, lng: -122.023 },
+    'los altos': { lat: 37.3852, lng: -122.1141 },
+    // Contra Costa County
+    concord: { lat: 37.978, lng: -122.0311 },
+    'walnut creek': { lat: 37.9101, lng: -122.0652 },
+    richmond: { lat: 37.9358, lng: -122.3477 },
+    antioch: { lat: 38.0049, lng: -121.8058 },
+    pittsburg: { lat: 38.028, lng: -121.8847 },
+    'san ramon': { lat: 37.7799, lng: -121.978 },
+    brentwood: { lat: 37.9317, lng: -121.6958 },
+    danville: { lat: 37.8216, lng: -121.9999 },
+    martinez: { lat: 38.0194, lng: -122.1341 },
+    // Marin County
+    'san rafael': { lat: 37.9735, lng: -122.5311 },
+    novato: { lat: 38.1074, lng: -122.5697 },
+    'mill valley': { lat: 37.906, lng: -122.5449 },
+    sausalito: { lat: 37.8591, lng: -122.4852 },
+    larkspur: { lat: 37.9341, lng: -122.535 },
+    // Solano County
+    vallejo: { lat: 38.1041, lng: -122.2566 },
+    fairfield: { lat: 38.2494, lng: -122.04 },
+    vacaville: { lat: 38.3566, lng: -121.9877 },
+    benicia: { lat: 38.0494, lng: -122.158 },
+    'suisun city': { lat: 38.2383, lng: -122.04 },
+    // Sonoma County
+    'santa rosa': { lat: 38.4404, lng: -122.7141 },
+    petaluma: { lat: 38.2324, lng: -122.6367 },
+    'rohnert park': { lat: 38.3396, lng: -122.7011 },
+    windsor: { lat: 38.5469, lng: -122.8166 },
+    healdsburg: { lat: 38.6105, lng: -122.8694 },
+    // Napa County
+    napa: { lat: 38.2975, lng: -122.2869 },
+    'american canyon': { lat: 38.1749, lng: -122.2608 },
+    'st. helena': { lat: 38.5052, lng: -122.4702 },
+    calistoga: { lat: 38.5788, lng: -122.5797 },
+  };
+
+  // Get user coordinates from location (ZIP, city, or browser geolocation)
+  async function getUserCoordinates(location) {
+    // First priority: exact coordinates from browser geolocation
+    if (location?.lat && location?.lng) {
+      return { lat: location.lat, lng: location.lng };
+    }
+
+    // Second priority: ZIP code coordinates (most accurate for user-provided location)
+    if (location?.zip) {
+      const locationData = await loadLocationData();
+      const zipCoords = locationData.zipCoordinates?.[location.zip];
+      if (zipCoords) {
+        return zipCoords;
+      }
+    }
+
+    // Third priority: city center coordinates
+    if (location?.city) {
+      const cityLower = location.city.toLowerCase();
+      return cityCoordinates[cityLower] || null;
+    }
+
+    return null;
+  }
+
+  // Store browser geolocation if user granted permission
+  let browserGeolocation = null;
+
+  // Try to get cached geolocation (from previous permission grant)
+  function tryGetCachedGeolocation() {
+    if (!navigator.geolocation) return;
+
+    // Check if we already have permission (won't prompt)
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+        if (result.state === 'granted') {
+          // Permission already granted, get location without prompting
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              browserGeolocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+            },
+            () => {
+              // Silently fail - user may have blocked
+            },
+            { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+          );
+        }
+      });
+    }
+  }
+
+  // Initialize geolocation check on load
+  tryGetCachedGeolocation();
 
   // County to major city mapping (for user-friendly display)
   // Users see cities, counties are internal for program filtering only
@@ -2081,12 +2329,12 @@ const modelName = OLLAMA_CONFIG.model;
         }
       }
 
-      // Location filtering - boost matching, penalize non-matching
+      // Location filtering - strongly prefer matching, penalize non-matching
       if (location && location.county) {
         const countyLower = location.county.toLowerCase();
-        const isAvailable = areas.some(
+        const isLocalMatch = areas.some((a) => a.includes(countyLower));
+        const isBroadMatch = areas.some(
           (a) =>
-            a.includes(countyLower) ||
             a.includes('bay area') ||
             a.includes('statewide') ||
             a.includes('nationwide') ||
@@ -2094,13 +2342,12 @@ const modelName = OLLAMA_CONFIG.model;
             a.includes('california')
         );
 
-        if (isAvailable) {
-          score += 6; // Boost local programs
-        } else if (
-          areas.length > 0 &&
-          !areas.some((a) => a.includes('statewide') || a.includes('nationwide'))
-        ) {
-          score -= 10; // Penalize programs clearly not in user's area
+        if (isLocalMatch) {
+          score += 15; // Strong boost for programs specifically in user's county
+        } else if (isBroadMatch) {
+          score += 5; // Smaller boost for regional/statewide programs
+        } else if (areas.length > 0) {
+          score -= 20; // Strong penalty for programs clearly not in user's area
         }
       }
 
@@ -2150,13 +2397,53 @@ const modelName = OLLAMA_CONFIG.model;
     // Higher threshold (was 5) to prevent showing irrelevant programs like "Pet Help Finder" for job queries
     // If excluding shown programs, we may need more results to backfill
     const minResults = shouldExclude ? 8 : 5;
-    return scored
+    let results = scored
       .filter((s) => s.score > 15)
       .sort((a, b) => b.score - a.score)
       .slice(0, minResults)
       .filter((s) => !shouldExclude || !shownProgramIds.has(s.program.id)) // Final filter for excluded
-      .slice(0, 5)
-      .map((s) => s.program);
+      .slice(0, 5);
+
+    // Calculate distances if user has location
+    // Priority: browser geolocation > ZIP coordinates > city center
+    const locationWithGeo = browserGeolocation
+      ? { ...location, lat: browserGeolocation.lat, lng: browserGeolocation.lng }
+      : location;
+    const userCoords = await getUserCoordinates(locationWithGeo);
+    if (userCoords) {
+      const geoData = await loadProgramsGeo();
+      results = results.map((item) => {
+        const programCoords = geoData[item.program.id];
+        if (programCoords) {
+          const dist = calculateDistance(
+            userCoords.lat,
+            userCoords.lng,
+            programCoords.lat,
+            programCoords.lng
+          );
+          return { ...item, distance: dist };
+        }
+        return { ...item, distance: null };
+      });
+
+      // Sort by distance for programs with similar scores (within 10 points)
+      // This keeps highly relevant programs at the top but orders similar ones by proximity
+      results.sort((a, b) => {
+        const scoreDiff = b.score - a.score;
+        // If scores are significantly different (>10), keep score-based order
+        if (Math.abs(scoreDiff) > 10) return scoreDiff;
+        // For similar scores, sort by distance (closer first)
+        if (a.distance !== null && b.distance !== null) {
+          return a.distance - b.distance;
+        }
+        // Programs without coordinates go last among similar-scored programs
+        if (a.distance === null && b.distance !== null) return 1;
+        if (a.distance !== null && b.distance === null) return -1;
+        return scoreDiff;
+      });
+    }
+
+    return results.map((s) => s.program);
   }
 
   // Generate program link based on platform
@@ -2606,15 +2893,59 @@ const modelName = OLLAMA_CONFIG.model;
 
   // Close panel
   closeBtn?.addEventListener('click', () => {
+    // Exit fullscreen first if active
+    if (isFullscreen) {
+      toggleFullscreen();
+    }
     panel?.classList.add('hidden');
     toggle?.setAttribute('aria-expanded', 'false');
   });
 
+  // Fullscreen toggle (desktop only)
+  function toggleFullscreen() {
+    if (!panel) return;
+    isFullscreen = !isFullscreen;
+
+    if (isFullscreen) {
+      // Save original styles
+      panel.dataset.originalStyle = panel.getAttribute('style') || '';
+      // Go fullscreen
+      panel.style.cssText = `
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        width: auto;
+        max-width: none;
+        height: auto;
+        max-height: none;
+        z-index: 100;
+      `;
+      fullscreenExpandIcon?.classList.add('hidden');
+      fullscreenCollapseIcon?.classList.remove('hidden');
+      fullscreenBtn?.setAttribute('title', 'Exit fullscreen');
+    } else {
+      // Restore original styles
+      panel.style.cssText = panel.dataset.originalStyle || '';
+      fullscreenExpandIcon?.classList.remove('hidden');
+      fullscreenCollapseIcon?.classList.add('hidden');
+      fullscreenBtn?.setAttribute('title', 'Fullscreen');
+    }
+  }
+
+  fullscreenBtn?.addEventListener('click', toggleFullscreen);
+
   // Close on escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !panel?.classList.contains('hidden')) {
-      panel?.classList.add('hidden');
-      toggle?.setAttribute('aria-expanded', 'false');
+      // Exit fullscreen first, then close on second press
+      if (isFullscreen) {
+        toggleFullscreen();
+      } else {
+        panel?.classList.add('hidden');
+        toggle?.setAttribute('aria-expanded', 'false');
+      }
     }
   });
 
@@ -2654,6 +2985,7 @@ const modelName = OLLAMA_CONFIG.model;
     isLoading = true;
     sendBtn?.setAttribute('disabled', 'true');
     const loadingEl = addLoadingIndicator();
+    setCarlState('thinking');
 
     // Declare outside try so it's accessible in catch block
     let relevantPrograms = [];
@@ -2915,6 +3247,7 @@ const modelName = OLLAMA_CONFIG.model;
       loadingEl?.remove();
       const responseBubble = createResponseBubble();
       let fullResponse = '';
+      setCarlState('responding');
 
       // Handle streaming response
       const reader = response.body.getReader();
@@ -2948,6 +3281,14 @@ const modelName = OLLAMA_CONFIG.model;
       // Save conversation to local history (if enabled)
       saveCurrentConversation();
 
+      // Add source citations for programs mentioned in response
+      if (relevantPrograms.length > 0) {
+        addCitationsToResponse(responseBubble, fullResponse, relevantPrograms);
+      }
+
+      // Add feedback buttons (thumbs up/down) to the response
+      addFeedbackToResponse(responseBubble, message);
+
       // Add program cards if we found relevant programs AND this isn't just a location response
       // Skip showing programs when user is just answering "what's your location?"
       if (relevantPrograms.length > 0 && !isJustLocation) {
@@ -2962,6 +3303,8 @@ const modelName = OLLAMA_CONFIG.model;
       console.error('Error message:', error.message);
       console.error('Error stack:', error.stack);
       loadingEl?.remove();
+      setCarlState('error');
+      setTimeout(() => setCarlState('idle'), 1500);
 
       // Show helpful error message with fallback
       let errorMessage;
@@ -2997,6 +3340,10 @@ const modelName = OLLAMA_CONFIG.model;
     } finally {
       isLoading = false;
       sendBtn?.removeAttribute('disabled');
+      // Return to idle state (unless error handler already set a state)
+      if (!cloudIcon?.classList.contains('carl-cloud--error')) {
+        setCarlState('idle');
+      }
     }
   }
 
@@ -3020,8 +3367,329 @@ const modelName = OLLAMA_CONFIG.model;
 
   function updateResponseBubble(element, text) {
     if (element) {
-      element.textContent = text;
+      // Parse markdown to DOM safely
+      element.textContent = ''; // Clear existing content
+      const parsed = parseMarkdownToDOM(text);
+      element.appendChild(parsed);
       messagesContainer?.scrollTo({ top: messagesContainer.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  // Lightweight markdown parser - builds DOM safely without innerHTML
+  function parseMarkdownToDOM(text) {
+    const container = document.createDocumentFragment();
+
+    // Split into paragraphs (double newline)
+    const paragraphs = text.split(/\n\n+/);
+
+    paragraphs.forEach((para) => {
+      const trimmedPara = para.trim();
+      if (!trimmedPara) return;
+
+      // Check if this is a list
+      if (isListParagraph(trimmedPara)) {
+        const list = parseList(trimmedPara);
+        container.appendChild(list);
+      } else {
+        // Regular paragraph - handle single newlines as line breaks
+        const p = document.createElement('span');
+        p.className = 'block mb-2 last:mb-0';
+
+        const lines = trimmedPara.split('\n');
+        lines.forEach((line, lineIndex) => {
+          parseInlineElements(line, p);
+          if (lineIndex < lines.length - 1) {
+            p.appendChild(document.createElement('br'));
+          }
+        });
+
+        container.appendChild(p);
+      }
+    });
+
+    return container;
+  }
+
+  // Check if a paragraph is a list
+  function isListParagraph(text) {
+    const lines = text.split('\n').filter((l) => l.trim());
+    if (lines.length === 0) return false;
+    // Check if all non-empty lines start with list markers
+    return lines.every((line) => {
+      const trimmed = line.trim();
+      return /^[-*]\s/.test(trimmed) || /^\d+\.\s/.test(trimmed);
+    });
+  }
+
+  // Parse a list paragraph into a DOM list element
+  function parseList(text) {
+    const lines = text.split('\n').filter((l) => l.trim());
+    const isOrdered = /^\d+\./.test(lines[0].trim());
+    const list = document.createElement(isOrdered ? 'ol' : 'ul');
+    list.className = isOrdered
+      ? 'list-decimal list-inside space-y-1 mb-2'
+      : 'list-disc list-inside space-y-1 mb-2';
+
+    lines.forEach((line) => {
+      const li = document.createElement('li');
+      li.className = 'text-sm';
+      // Remove list marker
+      const content = line
+        .trim()
+        .replace(/^[-*]\s*/, '')
+        .replace(/^\d+\.\s*/, '');
+      parseInlineElements(content, li);
+      list.appendChild(li);
+    });
+
+    return list;
+  }
+
+  // Parse inline markdown elements (bold, italic, links) safely
+  function parseInlineElements(text, container) {
+    // Process text to find markdown patterns
+    const patterns = [
+      { regex: /\*\*([^*]+)\*\*/g, type: 'bold' },
+      { regex: /\*([^*]+)\*/g, type: 'italic' },
+      { regex: /\[([^\]]+)\]\(([^)]+)\)/g, type: 'link' },
+    ];
+
+    // Find all matches and their positions
+    const matches = [];
+    patterns.forEach(({ regex, type }) => {
+      let match;
+      const r = new RegExp(regex.source, 'g');
+      while ((match = r.exec(text)) !== null) {
+        matches.push({
+          type,
+          start: match.index,
+          end: match.index + match[0].length,
+          text: match[1],
+          url: match[2] || null,
+        });
+      }
+    });
+
+    // Sort by position
+    matches.sort((a, b) => a.start - b.start);
+
+    // Remove overlapping matches (keep first)
+    const filteredMatches = [];
+    let lastEnd = 0;
+    matches.forEach((m) => {
+      if (m.start >= lastEnd) {
+        filteredMatches.push(m);
+        lastEnd = m.end;
+      }
+    });
+
+    // Build DOM from matches
+    let pos = 0;
+    filteredMatches.forEach((m) => {
+      // Add text before this match
+      if (m.start > pos) {
+        container.appendChild(document.createTextNode(text.slice(pos, m.start)));
+      }
+
+      // Create element for match
+      if (m.type === 'bold') {
+        const strong = document.createElement('strong');
+        strong.className = 'font-semibold';
+        strong.textContent = m.text;
+        container.appendChild(strong);
+      } else if (m.type === 'italic') {
+        const em = document.createElement('em');
+        em.textContent = m.text;
+        container.appendChild(em);
+      } else if (m.type === 'link') {
+        const link = document.createElement('a');
+        // Only allow safe URLs (internal paths or https)
+        if (m.url && (m.url.startsWith('/') || m.url.startsWith('https://'))) {
+          link.href = m.url;
+          link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+          if (m.url.startsWith('https://')) {
+            link.rel = 'noopener noreferrer';
+            link.target = '_blank';
+          }
+        }
+        link.textContent = m.text;
+        container.appendChild(link);
+      }
+
+      pos = m.end;
+    });
+
+    // Add remaining text (this also handles the case when there are no matches,
+    // since pos will be 0 and text.slice(0) is the full text)
+    if (pos < text.length) {
+      container.appendChild(document.createTextNode(text.slice(pos)));
+    }
+  }
+
+  // Escape special regex characters in program names
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // Create citation footer with links to mentioned programs
+  function createCitationFooter(citations) {
+    if (!citations || citations.length === 0) return null;
+
+    const footer = document.createElement('div');
+    footer.className = 'mt-3 pt-2 border-t border-neutral-200 dark:border-neutral-600';
+
+    const label = document.createElement('p');
+    label.className = 'text-xs text-neutral-500 dark:text-neutral-400 mb-1';
+    label.textContent = 'Sources:';
+    footer.appendChild(label);
+
+    const list = document.createElement('ul');
+    list.className = 'text-xs space-y-0.5';
+
+    citations.forEach((citation, index) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = citation.url;
+      link.className = 'text-primary-600 dark:text-primary-400 hover:underline';
+      link.textContent = `[${index + 1}] ${citation.name}`;
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    footer.appendChild(list);
+    return footer;
+  }
+
+  // Find programs mentioned in response and create citations
+  function findCitedPrograms(responseText, relevantPrograms) {
+    if (!relevantPrograms || relevantPrograms.length === 0) return [];
+
+    const citations = [];
+    const responseLower = responseText.toLowerCase();
+
+    // Sort by name length (longest first) to avoid partial matches
+    const sortedPrograms = [...relevantPrograms].sort(
+      (a, b) => (b.name?.length || 0) - (a.name?.length || 0)
+    );
+
+    sortedPrograms.forEach((program) => {
+      if (!program.name) return;
+
+      // Check if program name appears in response (case-insensitive)
+      const nameLower = program.name.toLowerCase();
+      if (responseLower.includes(nameLower) && !citations.find((c) => c.id === program.id)) {
+        citations.push({
+          id: program.id,
+          name: program.name,
+          url: getProgramLink(program),
+        });
+      }
+    });
+
+    return citations;
+  }
+
+  // Add citations to the response bubble
+  function addCitationsToResponse(responseBubble, responseText, relevantPrograms) {
+    const citations = findCitedPrograms(responseText, relevantPrograms);
+    if (citations.length === 0) return;
+
+    const bubbleContainer = responseBubble.parentElement;
+    if (bubbleContainer) {
+      const citationFooter = createCitationFooter(citations);
+      if (citationFooter) {
+        bubbleContainer.appendChild(citationFooter);
+      }
+    }
+  }
+
+  // Create thumbs up/down feedback button
+  function createThumbButton(sentiment, questionText) {
+    const btn = document.createElement('button');
+    btn.className =
+      'p-1.5 rounded-lg transition-all hover:bg-neutral-200 dark:hover:bg-neutral-600 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300';
+    btn.setAttribute('aria-label', sentiment === 'up' ? 'Helpful' : 'Not helpful');
+    btn.dataset.sentiment = sentiment;
+
+    // SVG icons
+    if (sentiment === 'up') {
+      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+      </svg>`;
+    } else {
+      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.737 3h4.017c.163 0 .326.02.485.06L17 4m-7 10v5a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 13V4m-7 10h2m5-6h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"/>
+      </svg>`;
+    }
+
+    return btn;
+  }
+
+  // Create feedback buttons container
+  function createFeedbackButtons(questionText) {
+    const wrapper = document.createElement('div');
+    wrapper.className =
+      'flex items-center gap-1 mt-2 pt-2 border-t border-neutral-200 dark:border-neutral-600';
+
+    const label = document.createElement('span');
+    label.className = 'text-xs text-neutral-400 dark:text-neutral-500 mr-1';
+    label.textContent = 'Helpful?';
+
+    const thumbsUp = createThumbButton('up', questionText);
+    const thumbsDown = createThumbButton('down', questionText);
+
+    // Click handlers
+    const handleFeedback = (selectedBtn, otherBtn, sentiment) => {
+      // Track feedback via analytics
+      if (window.analytics?.trackCarlFeedback) {
+        window.analytics.trackCarlFeedback(questionText, sentiment);
+      }
+
+      // Visual feedback - fill the selected button
+      selectedBtn.classList.remove(
+        'text-neutral-400',
+        'hover:text-neutral-600',
+        'dark:hover:text-neutral-300'
+      );
+      selectedBtn.classList.add(
+        sentiment === 'up' ? 'text-green-500' : 'text-red-500',
+        'cursor-default'
+      );
+      selectedBtn.querySelector('svg').setAttribute('fill', 'currentColor');
+
+      // Disable both buttons
+      selectedBtn.disabled = true;
+      otherBtn.disabled = true;
+      otherBtn.classList.add('opacity-30', 'cursor-default');
+      otherBtn.classList.remove('hover:bg-neutral-200', 'dark:hover:bg-neutral-600');
+
+      // Update label
+      label.textContent = sentiment === 'up' ? 'Thanks!' : 'Thanks for feedback';
+
+      // Emotive cloud animation on thumbs up
+      if (sentiment === 'up') {
+        setCarlState('happy');
+        setTimeout(() => setCarlState('idle'), 600);
+      }
+    };
+
+    thumbsUp.addEventListener('click', () => handleFeedback(thumbsUp, thumbsDown, 'up'));
+    thumbsDown.addEventListener('click', () => handleFeedback(thumbsDown, thumbsUp, 'down'));
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(thumbsUp);
+    wrapper.appendChild(thumbsDown);
+
+    return wrapper;
+  }
+
+  // Add feedback buttons to a response bubble
+  function addFeedbackToResponse(responseBubble, questionText) {
+    // Find the parent bubble container (the rounded div)
+    const bubbleContainer = responseBubble.parentElement;
+    if (bubbleContainer) {
+      const feedbackButtons = createFeedbackButtons(questionText);
+      bubbleContainer.appendChild(feedbackButtons);
     }
   }
 
@@ -3087,50 +3755,73 @@ const modelName = OLLAMA_CONFIG.model;
 
   // Add contextual follow-up suggestions
   function addFollowUpSuggestions(userMessage, aiResponse, location) {
-    const lowerMsg = userMessage.toLowerCase();
     const lowerResp = aiResponse.toLowerCase();
     const suggestions = [];
 
-    // Don't show suggestions if we just asked for location
-    if (lowerResp.includes('what city') || lowerResp.includes('what zip')) {
+    // Don't show suggestions if Carl is asking for location or clarification
+    if (
+      lowerResp.includes('what city') ||
+      lowerResp.includes('what zip') ||
+      lowerResp.includes('where are you') ||
+      lowerResp.includes('which county') ||
+      lowerResp.includes('can you tell me more') ||
+      lowerResp.includes('could you clarify')
+    ) {
       return;
     }
 
-    // Generate contextual follow-ups based on topic
-    if (lowerMsg.includes('food') || lowerResp.includes('calfresh') || lowerResp.includes('food')) {
-      if (!location) suggestions.push('I live in San Francisco');
-      suggestions.push('What are the income limits?');
-      suggestions.push('Where can I apply?');
-    } else if (
-      lowerMsg.includes('health') ||
+    // Check if Carl actually mentioned specific programs in the response
+    // Only offer "application" follow-ups if programs were discussed
+    const mentionedPrograms =
+      lowerResp.includes('calfresh') ||
       lowerResp.includes('medi-cal') ||
-      lowerResp.includes('healthcare')
-    ) {
-      if (!location) suggestions.push('I live in Oakland');
-      suggestions.push('What does Medi-Cal cover?');
-      suggestions.push('I need dental care');
-    } else if (
-      lowerMsg.includes('rent') ||
-      lowerMsg.includes('housing') ||
-      lowerResp.includes('section 8')
-    ) {
-      suggestions.push('How do I get on the waitlist?');
-      suggestions.push("I'm facing eviction");
-    } else if (
-      lowerMsg.includes('utility') ||
-      lowerMsg.includes('electric') ||
-      lowerMsg.includes('bill')
-    ) {
-      suggestions.push('How do I sign up for CARE?');
-      suggestions.push('Help with internet too');
-    } else if (!location) {
-      // If no topic detected and no location, suggest providing location
-      suggestions.push("I'm in San Jose");
-      suggestions.push("I'm in the East Bay");
+      lowerResp.includes('section 8') ||
+      lowerResp.includes('snap') ||
+      lowerResp.includes('wic') ||
+      lowerResp.includes('care program') ||
+      lowerResp.includes('lifeline') ||
+      lowerResp.includes('calworks');
+
+    const mentionedFood =
+      lowerResp.includes('food') || lowerResp.includes('calfresh') || lowerResp.includes('pantry');
+    const mentionedHealth =
+      lowerResp.includes('medi-cal') ||
+      lowerResp.includes('healthcare') ||
+      lowerResp.includes('clinic');
+    const mentionedHousing =
+      lowerResp.includes('section 8') ||
+      lowerResp.includes('housing') ||
+      lowerResp.includes('rent');
+    const mentionedUtilities =
+      lowerResp.includes('utility') ||
+      lowerResp.includes('care program') ||
+      lowerResp.includes('lifeline');
+
+    // If Carl mentioned specific programs, offer relevant follow-ups
+    if (mentionedPrograms) {
+      if (mentionedFood) {
+        suggestions.push('What are the income limits?');
+        suggestions.push('Where can I apply?');
+      } else if (mentionedHealth) {
+        suggestions.push('What does Medi-Cal cover?');
+        suggestions.push('I need dental care');
+      } else if (mentionedHousing) {
+        suggestions.push('How do I get on the waitlist?');
+        suggestions.push("I'm facing eviction");
+      } else if (mentionedUtilities) {
+        suggestions.push('How do I sign up for CARE?');
+        suggestions.push('Help with internet too');
+      }
     }
 
-    // Always offer to explore more
-    if (suggestions.length < 3) {
+    // If no location yet and Carl didn't already ask, suggest providing one
+    if (!location && suggestions.length === 0) {
+      suggestions.push("I'm in San Francisco");
+      suggestions.push("I'm in Oakland");
+    }
+
+    // Always offer to explore more if we have room
+    if (suggestions.length > 0 && suggestions.length < 3) {
       suggestions.push('What else is available?');
     }
 
@@ -3286,6 +3977,96 @@ const modelName = OLLAMA_CONFIG.model;
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* Carl Cloud Icon Emotive States */
+  .carl-cloud {
+    transition: all 0.3s ease;
+  }
+
+  .carl-cloud--idle {
+    animation: carl-breathe 3s ease-in-out infinite;
+  }
+
+  .carl-cloud--thinking {
+    animation: carl-bounce 0.6s ease-in-out infinite;
+  }
+
+  .carl-cloud--responding {
+    animation: carl-pulse 1s ease-in-out infinite;
+  }
+
+  .carl-cloud--error {
+    animation: carl-shake 0.5s ease;
+    background-color: rgba(239, 68, 68, 0.3) !important;
+  }
+
+  .carl-cloud--happy {
+    animation: carl-sparkle 0.6s ease;
+  }
+
+  @keyframes carl-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes carl-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @keyframes carl-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes carl-shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-2px);
+    }
+    40% {
+      transform: translateX(2px);
+    }
+    60% {
+      transform: translateX(-2px);
+    }
+    80% {
+      transform: translateX(2px);
+    }
+  }
+
+  @keyframes carl-sparkle {
+    0% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    50% {
+      transform: scale(1.15);
+      filter: brightness(1.3);
+    }
+    100% {
+      transform: scale(1);
+      filter: brightness(1);
     }
   }
 </style>

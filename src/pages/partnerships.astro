@@ -29,6 +29,45 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     </div>
   </section>
 
+  <!-- Who Can Partner Callout -->
+  <section
+    class="py-8 bg-primary-50 dark:bg-primary-900/20 border-y border-primary-100 dark:border-primary-800"
+  >
+    <div class="container-page">
+      <div class="max-w-3xl">
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white mb-4">
+          Who Can Partner With Us?
+        </h2>
+        <div class="space-y-3 text-neutral-700 dark:text-neutral-300">
+          <p>
+            <strong class="text-neutral-900 dark:text-white"
+              >Government agencies & nonprofits</strong
+            > — Primary focus for our directory
+          </p>
+          <p>
+            <strong class="text-neutral-900 dark:text-white">Private & for-profit companies</strong> —
+            We accept limited listings for discounts or services from private and for-profit companies,
+            provided they meet our strict standards. We do not accept payment for listings.
+          </p>
+          <p>
+            <strong class="text-neutral-900 dark:text-white">Religious organizations</strong> — Welcome
+            when providing secular public benefit services
+          </p>
+        </div>
+        <a
+          href="/partnerships/guidelines"
+          class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
+        >
+          View complete guidelines
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Value Proposition Section -->
   <section
     class="section bg-gradient-to-br from-primary-50 via-white to-blue-50 dark:from-neutral-800 dark:via-neutral-900 dark:to-neutral-800"
@@ -248,12 +287,12 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M12.504 0c-.155 0-.311.004-.466.013a6.5 6.5 0 00-1.545.193 5.2 5.2 0 00-.98.356c-.31.145-.615.34-.913.563-.597.448-1.058 1.067-1.455 1.734-.786 1.32-1.191 2.962-1.37 4.614-.173 1.6-.158 3.238.024 4.678.174 1.374.516 2.576 1.023 3.426a5.44 5.44 0 00.283.416l-.031.03c-.19.186-.322.405-.397.656-.074.249-.083.51-.037.764.047.254.152.496.313.715.082.11.178.217.29.31l-.03.031a3.02 3.02 0 00-.69.864 2.4 2.4 0 00-.236.68 2.2 2.2 0 00.015.735c.063.32.198.621.384.887.37.527.93.864 1.526 1.013.596.148 1.224.1 1.77-.126a2.77 2.77 0 00.552-.286l.025.025c.274.222.59.4.93.528a3.8 3.8 0 001.07.238 4.2 4.2 0 001.066-.061 3.7 3.7 0 00.971-.318c.354-.164.676-.38.96-.64l.022-.022c.156.1.33.183.513.245a2.4 2.4 0 001.137.078c.37-.055.722-.194 1.02-.405.594-.423.989-1.06 1.112-1.757a2.5 2.5 0 00-.233-1.474 2.5 2.5 0 00-.297-.443l.029-.03c.197-.193.362-.417.49-.664.255-.494.378-1.053.313-1.6-.044-.368-.15-.726-.313-1.06l.024-.024c.234-.08.46-.19.67-.328a2.9 2.9 0 00.556-.49 2.6 2.6 0 00.4-.587c.193-.41.305-.865.348-1.32.053-.562-.022-1.137-.209-1.662-.231-.649-.612-1.225-1.09-1.678a4.25 4.25 0 00-1.03-.723c-.402-.208-.83-.36-1.27-.44a5.7 5.7 0 00-1.335-.089c-.132.006-.263.017-.393.032l-.024-.024a4.87 4.87 0 00-.393-.564 5.35 5.35 0 00-1.215-1.134 5.3 5.3 0 00-.764-.457A4.9 4.9 0 0014.1.34a6 6 0 00-.871-.17A6.7 6.7 0 0012.504 0z"
+                  d="M12.504 0c-.155 0-.311.004-.466.013-1.86.115-3.3 1.12-4.138 2.665-.968 1.787-1.256 4.146-.964 6.398.097.749.267 1.493.508 2.195-.298.262-.551.59-.742.963-.33.645-.493 1.412-.451 2.193.042.782.296 1.58.738 2.255.442.675 1.072 1.228 1.82 1.548.748.32 1.617.407 2.43.218.814-.188 1.573-.653 2.144-1.325.255-.3.465-.633.625-.992.16.36.37.693.625.992.57.672 1.33 1.137 2.144 1.325.813.189 1.682.102 2.43-.218.748-.32 1.378-.873 1.82-1.548.442-.675.696-1.473.738-2.255.042-.78-.121-1.548-.451-2.193-.19-.373-.444-.7-.742-.963.241-.702.411-1.446.508-2.195.292-2.252.004-4.611-.964-6.398C17.804 1.133 16.364.128 14.504.013c-.155-.009-.31-.013-.466-.013h-1.534zM12 3.5c.653 0 1.35.287 1.884.836.534.55.866 1.322.866 2.164 0 .842-.332 1.614-.866 2.164-.534.55-1.231.836-1.884.836-.653 0-1.35-.287-1.884-.836C9.582 8.114 9.25 7.342 9.25 6.5c0-.842.332-1.614.866-2.164C10.65 3.787 11.347 3.5 12 3.5z"
                 ></path>
               </svg>
               <span class="text-xs text-neutral-600 dark:text-neutral-400">Linux</span>
             </div>
-            <!-- visionOS - Apple Vision Pro style goggles -->
+            <!-- visionOS - Apple Vision Pro headset -->
             <div
               class="flex flex-col items-center p-3 bg-neutral-50 dark:bg-neutral-800 rounded-lg"
             >
@@ -263,7 +302,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M2.5 9.5C2.5 7.01 4.51 5 7 5h10c2.49 0 4.5 2.01 4.5 4.5v5c0 2.49-2.01 4.5-4.5 4.5H7c-2.49 0-4.5-2.01-4.5-4.5v-5zM7 7a2.5 2.5 0 00-2.5 2.5v5A2.5 2.5 0 007 17h10a2.5 2.5 0 002.5-2.5v-5A2.5 2.5 0 0017 7H7zm.5 5a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0zm7 0a2.5 2.5 0 115 0 2.5 2.5 0 01-5 0z"
+                  d="M2 10c0-2.21 1.79-4 4-4h12c2.21 0 4 1.79 4 4v4c0 2.21-1.79 4-4 4H6c-2.21 0-4-1.79-4-4v-4zm4-2c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2H6zm1.5 3a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm9 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM0 12a1 1 0 0 1 1-1h1v2H1a1 1 0 0 1-1-1zm22 0a1 1 0 0 1 1 1h-1v-2h1a1 1 0 0 1-1 1z"
                 ></path>
               </svg>
               <span class="text-xs text-neutral-600 dark:text-neutral-400">visionOS</span>
@@ -362,93 +401,6 @@ import Breadcrumb from '../components/Breadcrumb.astro';
               Real-time updates across all platforms
             </li>
           </ul>
-        </div>
-      </div>
-
-      <!-- Additional Benefits Row -->
-      <div class="grid md:grid-cols-3 gap-6 items-stretch">
-        <div
-          class="flex items-start gap-4 p-5 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 h-full"
-        >
-          <div
-            class="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 text-amber-600 dark:text-amber-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              ></path>
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Reach More People</h4>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Your programs are discovered by Bay Area residents searching for assistance.
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="flex items-start gap-4 p-5 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 h-full"
-        >
-          <div
-            class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 text-purple-600 dark:text-purple-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-              ></path>
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Source Attribution</h4>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Programs display their source (your agency) so users know where data comes from.
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="flex items-start gap-4 p-5 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 h-full"
-        >
-          <div
-            class="w-10 h-10 bg-red-100 dark:bg-red-900/50 rounded-lg flex items-center justify-center flex-shrink-0"
-          >
-            <svg
-              class="w-5 h-5 text-red-600 dark:text-red-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <div>
-            <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">100% Free</h4>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              No fees, no subscriptions. Ever. We're a 501(c)(3) public charity.
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -746,194 +698,22 @@ import Breadcrumb from '../components/Breadcrumb.astro';
     </div>
   </section>
 
-  <!-- Guidelines Link Section -->
-  <section class="section bg-neutral-50 dark:bg-neutral-800">
-    <div class="container-page">
-      <div class="max-w-3xl">
-        <h2
-          class="text-2xl font-bold text-neutral-900 dark:text-white mb-4"
-          data-i18n="partnerships.listingGuidelines"
-        >
-          Listing Guidelines & Policies
-        </h2>
-        <p
-          class="text-neutral-600 dark:text-neutral-300 mb-8"
-          data-i18n="partnerships.listingGuidelinesDesc"
-        >
-          Before submitting your program, please review our partnership guidelines to ensure your
-          listing meets our standards.
-        </p>
-
-        <div class="grid sm:grid-cols-2 gap-6">
-          <a
-            href="/partnerships/guidelines#public-benefit-standards"
-            class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center"
-              >
-                <svg
-                  class="w-5 h-5 text-blue-600 dark:text-blue-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400"
-              >
-                501(c)(3) Standards
-              </h3>
-            </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Public benefit requirements for all listings
-            </p>
-          </a>
-
-          <a
-            href="/partnerships/guidelines#private-companies"
-            class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center"
-              >
-                <svg
-                  class="w-5 h-5 text-amber-600 dark:text-amber-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400"
-              >
-                Private Companies
-              </h3>
-            </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Requirements for for-profit listings
-            </p>
-          </a>
-
-          <a
-            href="/partnerships/guidelines#religious-organizations"
-            class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center"
-              >
-                <svg
-                  class="w-5 h-5 text-purple-600 dark:text-purple-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400"
-              >
-                Religious Organizations
-              </h3>
-            </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Secular service delivery requirements
-            </p>
-          </a>
-
-          <a
-            href="/partnerships/guidelines#non-discrimination-policy"
-            class="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
-          >
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center"
-              >
-                <svg
-                  class="w-5 h-5 text-green-600 dark:text-green-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                  ></path>
-                </svg>
-              </div>
-              <h3
-                class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400"
-              >
-                Non-Discrimination
-              </h3>
-            </div>
-            <p class="text-sm text-neutral-600 dark:text-neutral-300">
-              Equal access for all eligible individuals
-            </p>
-          </a>
-        </div>
-
-        <div class="mt-6">
-          <a
-            href="/partnerships/guidelines"
-            class="inline-flex items-center gap-2 text-primary-700 dark:text-primary-300 hover:underline font-medium"
-          >
-            View all partnership guidelines
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-              ></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
-  <section class="section">
+  <section
+    class="section bg-gradient-to-br from-primary-600 to-primary-800 dark:from-primary-700 dark:to-primary-900"
+  >
     <div class="container-page">
       <div class="max-w-2xl mx-auto text-center">
-        <h2
-          class="text-2xl font-bold text-neutral-900 dark:text-white mb-4"
-          data-i18n="partnerships.readyToPartner"
-        >
+        <h2 class="text-2xl font-bold text-white mb-4" data-i18n="partnerships.readyToPartner">
           Ready to Partner?
         </h2>
-        <p
-          class="text-neutral-600 dark:text-neutral-300 mb-8"
-          data-i18n="partnerships.readyToPartnerDesc"
-        >
+        <p class="text-primary-100 mb-8" data-i18n="partnerships.readyToPartnerDesc">
           Fill out our partnership inquiry form and we'll get back to you to discuss how we can work
           together to help Bay Area residents.
         </p>
         <a
           href="/partnerships/contact"
-          class="btn-primary py-3 px-8 text-lg font-semibold inline-flex items-center gap-2"
+          class="bg-white hover:bg-primary-50 text-primary-700 py-3 px-8 text-lg font-semibold inline-flex items-center gap-2 rounded-lg transition-colors"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
