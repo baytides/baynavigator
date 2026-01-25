@@ -595,7 +595,7 @@ export const OLLAMA_CONFIG = {
   // Tor hidden service endpoint (for Tor Browser users)
   // No API key required via Tor - direct access to Ollama
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Qwen 2.5 0.5B: Fast model (~1-2s) with compact system prompt
-  // Larger models are too slow for CPU inference
-  model: 'qwen2.5:0.5b',
+  // Llama 3.1 8B: Best at following instructions, testing if it works better now
+  // that CORS is fixed and using a different browser (not Brave)
+  model: 'llama3.1:8b-instruct-q8_0',
 };

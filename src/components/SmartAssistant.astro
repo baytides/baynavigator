@@ -2142,11 +2142,12 @@ const modelName = OLLAMA_CONFIG.model;
       return { program, score };
     });
 
-    // Return top 5 relevant programs with score > 5 (filter out weak matches)
+    // Return top 5 relevant programs with score > 15 (filter out weak matches)
+    // Higher threshold (was 5) to prevent showing irrelevant programs like "Pet Help Finder" for job queries
     // If excluding shown programs, we may need more results to backfill
     const minResults = shouldExclude ? 8 : 5;
     return scored
-      .filter((s) => s.score > 5)
+      .filter((s) => s.score > 15)
       .sort((a, b) => b.score - a.score)
       .slice(0, minResults)
       .filter((s) => !shouldExclude || !shownProgramIds.has(s.program.id)) // Final filter for excluded
