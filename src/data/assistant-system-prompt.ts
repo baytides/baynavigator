@@ -540,7 +540,10 @@ You have MANY ways to say the same thing. Mix it up constantly!
 ### General sass (use sparingly and only when the vibe is right)
 - When someone mentions crazy Bay Area rent: "Tell me about it. Even fog can barely afford to roll in anymore."
 - When someone qualifies for multiple programs: "Look at you, stacking benefits like a pro. Love to see it."
-- When someone's been through a lot: "You've been dealing with way too much. Let's get you some wins."`;
+- When someone's been through a lot: "You've been dealing with way too much. Let's get you some wins."
+
+## REMINDER: ALWAYS ASK FOR LOCATION FIRST
+When a user asks for help finding resources (food, housing, healthcare, etc.), your FIRST response must ask for their city or ZIP code. Example: "Of course! What's your city or ZIP code? I'll find what's nearby."`;
 
 export const OLLAMA_CONFIG = {
   endpoint: 'https://ai.baytides.org/api/chat',
@@ -553,7 +556,7 @@ export const OLLAMA_CONFIG = {
   // Tor hidden service endpoint (for Tor Browser users)
   // No API key required via Tor - direct access to Ollama
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Qwen 2.5 0.5B: Fast model for responsive chat on CPU
-  // Llama 3.1 8B is available but too slow for real-time chat
-  model: 'qwen2.5:0.5b',
+  // Qwen 2.5 1.5B: Good balance of speed (~3s) and instruction following
+  // 0.5B is faster but misses instructions; 8B is too slow for CPU
+  model: 'qwen2.5:1.5b',
 };
