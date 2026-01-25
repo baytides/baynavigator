@@ -36,16 +36,23 @@ const {
 const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProvider] : apiEndpoint;
 ---
 
-<!-- Floating Assistant Button -->
+<!-- Floating Assistant Button (Draggable) -->
 <button
   id="assistant-toggle"
   type="button"
-  class="fixed bottom-6 right-6 w-14 h-14 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-50"
-  aria-label="Open smart assistant"
+  class="fixed w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-50 cursor-grab active:cursor-grabbing select-none"
+  style="bottom: 24px; right: 24px;"
+  aria-label="Open smart assistant (drag to move)"
   aria-expanded="false"
   aria-controls="assistant-panel"
 >
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+  <svg
+    class="w-6 h-6 pointer-events-none"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
     <path
       stroke-linecap="round"
       stroke-linejoin="round"
@@ -56,20 +63,21 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
   <!-- Notification dot for first-time users -->
   <span
     id="assistant-dot"
-    class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse"></span>
+    class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse pointer-events-none"
+  ></span>
 </button>
 
 <!-- Assistant Panel -->
 <div
   id="assistant-panel"
-  class="fixed bottom-24 right-6 w-96 max-w-[calc(100vw-3rem)] bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-700 hidden z-50 flex flex-col overflow-hidden"
-  style="height: 500px; max-height: calc(100vh - 8rem);"
+  class="fixed w-96 max-w-[calc(100vw-3rem)] bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-700 hidden z-50 flex flex-col overflow-hidden"
+  style="height: 500px; max-height: calc(100vh - 8rem); bottom: 96px; right: 24px;"
   role="dialog"
   aria-labelledby="assistant-title"
 >
   <!-- Header -->
   <div
-    class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700 bg-primary-600 text-white"
+    class="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-neutral-700 bg-gradient-to-r from-amber-500 to-orange-600 text-white"
   >
     <div class="flex items-center gap-3">
       <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
@@ -2308,12 +2316,143 @@ const effectiveEndpoint = useDomainFronting ? OLLAMA_CONFIG.cdnEndpoints[cdnProv
     }
   }
 
-  // Toggle panel
-  toggle?.addEventListener('click', () => {
+  // Make toggle button draggable
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let buttonStartX = 0;
+  let buttonStartY = 0;
+  let hasMoved = false;
+
+  function getButtonPosition() {
+    const rect = toggle.getBoundingClientRect();
+    return { x: rect.left, y: rect.top };
+  }
+
+  function setButtonPosition(x, y) {
+    // Keep button within viewport bounds
+    const buttonSize = 56; // w-14 = 56px
+    const padding = 8;
+    const maxX = window.innerWidth - buttonSize - padding;
+    const maxY = window.innerHeight - buttonSize - padding;
+    x = Math.max(padding, Math.min(x, maxX));
+    y = Math.max(padding, Math.min(y, maxY));
+
+    toggle.style.left = `${x}px`;
+    toggle.style.top = `${y}px`;
+    toggle.style.right = 'auto';
+    toggle.style.bottom = 'auto';
+
+    // Save position to localStorage
+    localStorage.setItem('carlButtonPosition', JSON.stringify({ x, y }));
+
+    // Update panel position to follow button
+    updatePanelPosition(x, y);
+  }
+
+  function updatePanelPosition(buttonX, buttonY) {
+    if (!panel) return;
+    const buttonSize = 56;
+    const panelWidth = 384; // w-96 = 384px
+    const panelHeight = 500;
+    const gap = 16;
+
+    // Position panel above or below button, left or right
+    let panelX = buttonX + buttonSize / 2 - panelWidth / 2;
+    let panelY = buttonY - panelHeight - gap;
+
+    // If panel would go off top, put it below button
+    if (panelY < 8) {
+      panelY = buttonY + buttonSize + gap;
+    }
+
+    // Keep panel within horizontal bounds
+    panelX = Math.max(8, Math.min(panelX, window.innerWidth - panelWidth - 8));
+
+    panel.style.left = `${panelX}px`;
+    panel.style.top = `${panelY}px`;
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+  }
+
+  // Load saved position
+  const savedPosition = localStorage.getItem('carlButtonPosition');
+  if (savedPosition && toggle) {
+    try {
+      const { x, y } = JSON.parse(savedPosition);
+      setButtonPosition(x, y);
+    } catch (e) {
+      // Use default position
+    }
+  }
+
+  function handleDragStart(e) {
+    if (!toggle) return;
+    isDragging = true;
+    hasMoved = false;
+
+    const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    dragStartX = clientX;
+    dragStartY = clientY;
+
+    const pos = getButtonPosition();
+    buttonStartX = pos.x;
+    buttonStartY = pos.y;
+
+    toggle.style.transition = 'none';
+  }
+
+  function handleDragMove(e) {
+    if (!isDragging || !toggle) return;
+
+    const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    const deltaX = clientX - dragStartX;
+    const deltaY = clientY - dragStartY;
+
+    // Only consider it a move if dragged more than 5px
+    if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+      hasMoved = true;
+    }
+
+    if (hasMoved) {
+      e.preventDefault();
+      setButtonPosition(buttonStartX + deltaX, buttonStartY + deltaY);
+    }
+  }
+
+  function handleDragEnd() {
+    if (!toggle) return;
+    isDragging = false;
+    toggle.style.transition = '';
+  }
+
+  // Mouse events
+  toggle?.addEventListener('mousedown', handleDragStart);
+  document.addEventListener('mousemove', handleDragMove);
+  document.addEventListener('mouseup', handleDragEnd);
+
+  // Touch events
+  toggle?.addEventListener('touchstart', handleDragStart, { passive: false });
+  document.addEventListener('touchmove', handleDragMove, { passive: false });
+  document.addEventListener('touchend', handleDragEnd);
+
+  // Toggle panel (only if not dragged)
+  toggle?.addEventListener('click', (e) => {
+    if (hasMoved) {
+      hasMoved = false;
+      return; // Don't toggle if we just finished dragging
+    }
     const isOpen = !panel?.classList.contains('hidden');
     panel?.classList.toggle('hidden');
     toggle.setAttribute('aria-expanded', String(!isOpen));
     if (!isOpen) {
+      // Update panel position based on current button position
+      const pos = getButtonPosition();
+      updatePanelPosition(pos.x, pos.y);
       input?.focus();
       localStorage.setItem('assistantUsed', 'true');
       notificationDot?.remove();
