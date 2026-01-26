@@ -412,6 +412,7 @@ const modelName = OLLAMA_CONFIG.model;
   let currentConversationId = null; // For history tracking
   let historyEnabled = false; // Will be set from CarlStorage
   let shownProgramIds = new Set(); // Track programs already shown in this conversation
+  let pendingQueryType = null; // Store query type when waiting for user context (location/age)
 
   // Load location data (ZIP codes, cities, neighborhoods) for location parsing
   async function loadLocationData() {
@@ -899,6 +900,26 @@ const modelName = OLLAMA_CONFIG.model;
   function isFoodTruckQuery(text) {
     const lower = text.toLowerCase();
     return FOOD_TRUCK_KEYWORDS.some((kw) => lower.includes(kw));
+  }
+
+  // Parks and recreation keywords
+  const PARKS_KEYWORDS = [
+    'park',
+    'parks',
+    'playground',
+    'trail',
+    'hiking',
+    'picnic',
+    'open space',
+    'nature',
+    'outdoors',
+    'green space',
+  ];
+
+  // Detect if query is about parks
+  function isParksQuery(text) {
+    const lower = text.toLowerCase();
+    return PARKS_KEYWORDS.some((kw) => lower.includes(kw));
   }
 
   // Detect if query is about community resources (211/food pantries/etc)
@@ -1394,48 +1415,112 @@ const modelName = OLLAMA_CONFIG.model;
   }
 
   // ============================================
-  // SF CITY FACILITIES API (DataSF/Socrata)
+  // OPEN DATA CACHE (Pre-synced from Socrata portals)
   // ============================================
-  let sfFacilitiesCache = null;
-  let sfFacilitiesCacheTime = 0;
-  const SF_FACILITIES_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+  let openDataCache = null;
 
-  async function fetchSFCityFacilities(facilityType = null) {
+  async function loadOpenDataCache() {
+    if (openDataCache) return openDataCache;
     try {
-      const now = Date.now();
-      if (sfFacilitiesCache && now - sfFacilitiesCacheTime < SF_FACILITIES_CACHE_TTL) {
-        return filterFacilities(sfFacilitiesCache, facilityType);
-      }
-
-      // SF City Facilities API endpoint
-      const response = await fetch('https://data.sfgov.org/resource/nc68-ngbr.json?$limit=200', {
-        signal: AbortSignal.timeout(8000),
+      const response = await fetch('/data/open-data-cache.json', {
+        signal: AbortSignal.timeout(3000),
       });
-
-      if (!response.ok) {
-        console.warn('SF Facilities API returned', response.status);
-        return [];
+      if (response.ok) {
+        openDataCache = await response.json();
+        console.log('Loaded open data cache:', openDataCache.totals?.total, 'items');
       }
-
-      sfFacilitiesCache = await response.json();
-      sfFacilitiesCacheTime = now;
-      return filterFacilities(sfFacilitiesCache, facilityType);
     } catch (error) {
-      console.warn('Failed to fetch SF facilities:', error);
-      return [];
+      console.warn('Failed to load open data cache:', error);
     }
+    return openDataCache;
   }
 
-  function filterFacilities(facilities, type) {
-    if (!type) return facilities.slice(0, 10);
-    const lower = type.toLowerCase();
-    return facilities
-      .filter((f) => {
-        const name = (f.common_name || '').toLowerCase();
-        const dept = (f.dept || '').toLowerCase();
-        return name.includes(lower) || dept.includes(lower);
-      })
-      .slice(0, 10);
+  // Fetch facilities for a city/county from cache (instant!)
+  async function fetchFacilities(cityOrCounty = null, facilityType = null) {
+    const cache = await loadOpenDataCache();
+    if (!cache) return [];
+
+    let facilities = [];
+
+    // Get from city index first, then county
+    if (cityOrCounty) {
+      const lower = cityOrCounty.toLowerCase();
+      // Check city index
+      for (const [city, items] of Object.entries(cache.byCity || {})) {
+        if (city.toLowerCase().includes(lower)) {
+          facilities.push(...items.filter((i) => i.type === 'facility'));
+        }
+      }
+      // Check county index
+      for (const [county, items] of Object.entries(cache.byCounty || {})) {
+        if (county.toLowerCase().includes(lower)) {
+          facilities.push(...items.filter((i) => i.type === 'facility'));
+        }
+      }
+    } else {
+      facilities = cache.facilities || [];
+    }
+
+    // Filter by type if specified
+    if (facilityType) {
+      const typeLower = facilityType.toLowerCase();
+      facilities = facilities.filter((f) => {
+        const name = (f.name || '').toLowerCase();
+        const dept = (f.department || '').toLowerCase();
+        const cat = (f.category || '').toLowerCase();
+        return name.includes(typeLower) || dept.includes(typeLower) || cat.includes(typeLower);
+      });
+    }
+
+    return facilities.slice(0, 15);
+  }
+
+  // Fetch parks for a city/county from cache (instant!)
+  async function fetchParks(cityOrCounty = null) {
+    const cache = await loadOpenDataCache();
+    if (!cache) return [];
+
+    let parks = [];
+
+    if (cityOrCounty) {
+      const lower = cityOrCounty.toLowerCase();
+      // Check city index
+      for (const [city, items] of Object.entries(cache.byCity || {})) {
+        if (city.toLowerCase().includes(lower)) {
+          parks.push(...items.filter((i) => i.type === 'park'));
+        }
+      }
+      // Check county index
+      for (const [county, items] of Object.entries(cache.byCounty || {})) {
+        if (county.toLowerCase().includes(lower)) {
+          parks.push(...items.filter((i) => i.type === 'park'));
+        }
+      }
+    } else {
+      parks = cache.parks || [];
+    }
+
+    return parks.slice(0, 15);
+  }
+
+  // Fetch food vendors from cache (instant!)
+  async function fetchFoodVendors(location = null) {
+    const cache = await loadOpenDataCache();
+    if (!cache) return [];
+
+    let vendors = cache.food_vendors || [];
+
+    if (location) {
+      const lower = location.toLowerCase();
+      const filtered = vendors.filter((v) => {
+        const loc = (v.location || '').toLowerCase();
+        const addr = (v.address || '').toLowerCase();
+        return loc.includes(lower) || addr.includes(lower);
+      });
+      if (filtered.length > 0) vendors = filtered;
+    }
+
+    return vendors.slice(0, 12);
   }
 
   function formatFacilitiesForContext(facilities) {
@@ -1443,13 +1528,14 @@ const modelName = OLLAMA_CONFIG.model;
       return '';
     }
 
-    let context = '\n\n[SF CITY FACILITIES - LIVE DATA]:\n';
+    let context = '\n\n[PUBLIC FACILITIES]:\n';
     context += 'Public facilities the user can visit:\n\n';
 
-    facilities.slice(0, 6).forEach((f) => {
-      context += `- **${f.common_name || f.owned_leased}**`;
+    facilities.slice(0, 8).forEach((f) => {
+      context += `- **${f.name}**`;
       if (f.address) context += ` - ${f.address}`;
-      if (f.dept) context += ` (${f.dept})`;
+      if (f.city) context += `, ${f.city}`;
+      if (f.department) context += ` (${f.department})`;
       context += '\n';
     });
 
@@ -1457,69 +1543,42 @@ const modelName = OLLAMA_CONFIG.model;
     return context;
   }
 
-  // ============================================
-  // SF FOOD TRUCKS API (DataSF/Socrata)
-  // ============================================
-  let foodTrucksCache = null;
-  let foodTrucksCacheTime = 0;
-  const FOOD_TRUCKS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours (permits don't change often)
-
-  async function fetchFoodTrucks(location = null) {
-    try {
-      const now = Date.now();
-      if (foodTrucksCache && now - foodTrucksCacheTime < FOOD_TRUCKS_CACHE_TTL) {
-        return filterFoodTrucks(foodTrucksCache, location);
-      }
-
-      // SF Mobile Food Facility Permits API
-      const response = await fetch(
-        'https://data.sfgov.org/resource/rqzj-sfat.json?status=APPROVED&$limit=300',
-        { signal: AbortSignal.timeout(8000) }
-      );
-
-      if (!response.ok) {
-        console.warn('Food Trucks API returned', response.status);
-        return [];
-      }
-
-      foodTrucksCache = await response.json();
-      foodTrucksCacheTime = now;
-      return filterFoodTrucks(foodTrucksCache, location);
-    } catch (error) {
-      console.warn('Failed to fetch food trucks:', error);
-      return [];
-    }
-  }
-
-  function filterFoodTrucks(trucks, location) {
-    if (!location) return trucks.slice(0, 12);
-    const lower = location.toLowerCase();
-    // Filter by location description or address
-    const filtered = trucks.filter((t) => {
-      const loc = (t.locationdescription || '').toLowerCase();
-      const addr = (t.address || '').toLowerCase();
-      return loc.includes(lower) || addr.includes(lower);
-    });
-    return filtered.length > 0 ? filtered.slice(0, 12) : trucks.slice(0, 12);
-  }
-
-  function formatFoodTrucksForContext(trucks) {
-    if (!trucks || trucks.length === 0) {
+  function formatParksForContext(parks) {
+    if (!parks || parks.length === 0) {
       return '';
     }
 
-    let context = '\n\n[SF FOOD TRUCKS - LIVE DATA]:\n';
-    context += 'Active food vendors in San Francisco:\n\n';
+    let context = '\n\n[PARKS & RECREATION]:\n';
+    context += 'Parks and open spaces nearby:\n\n';
 
-    trucks.slice(0, 8).forEach((t) => {
-      context += `- **${t.applicant}**`;
-      if (t.fooditems) context += `: ${t.fooditems.substring(0, 80)}`;
-      if (t.locationdescription) context += ` (${t.locationdescription})`;
+    parks.slice(0, 8).forEach((p) => {
+      context += `- **${p.name}**`;
+      if (p.address) context += ` - ${p.address}`;
+      if (p.city) context += `, ${p.city}`;
+      if (p.acres) context += ` (${p.acres} acres)`;
       context += '\n';
     });
 
-    context +=
-      '\nThese are permitted food vendors. Food trucks often have affordable options. Note: Data is for SF only.';
+    context += '\nThese are free public parks and open spaces.';
+    return context;
+  }
+
+  function formatFoodVendorsForContext(vendors) {
+    if (!vendors || vendors.length === 0) {
+      return '';
+    }
+
+    let context = '\n\n[FOOD VENDORS]:\n';
+    context += 'Food vendors in the area:\n\n';
+
+    vendors.slice(0, 8).forEach((v) => {
+      context += `- **${v.name}**`;
+      if (v.foodItems) context += `: ${v.foodItems.substring(0, 60)}`;
+      if (v.location) context += ` (${v.location})`;
+      context += '\n';
+    });
+
+    context += '\nThese are permitted food vendors. Often have affordable options.';
     return context;
   }
 
@@ -3495,13 +3554,24 @@ const modelName = OLLAMA_CONFIG.model;
       }
 
       // Classify query type to determine which APIs to call
-      const queryType = classifyQueryType(message);
+      // If this is a follow-up providing context (location/age), use the stored query type
+      let queryType;
+      if (isJustLocation && pendingQueryType) {
+        // User is responding to Carl's context question - use the original query type
+        queryType = pendingQueryType;
+        pendingQueryType = null; // Clear it after using
+      } else {
+        queryType = classifyQueryType(message);
+      }
 
       // Check if we need more context before answering
       const contextQuestion = getContextQuestion(queryType, userLocation, userProfile);
 
       // If we need context and this isn't a location-only response, ask for it
       if (contextQuestion && !isJustLocation && !parsedLocation) {
+        // Store the query type so we can use it when the user provides context
+        pendingQueryType = queryType;
+
         // We need more info - ask the user instead of making API calls
         loadingEl?.remove();
         const responseBubble = createResponseBubble();
@@ -3696,27 +3766,31 @@ const modelName = OLLAMA_CONFIG.model;
         liveDataContext += getLibraryResourcesForContext(message, county);
       }
 
-      // Check for SF city facilities queries (only for SF users)
+      // Check for facilities queries (uses cached open data - instant!)
       if (isFacilitiesQuery(message)) {
+        const city = userLocation?.city || userProfile?.city || null;
         const county = userLocation?.county || userProfile?.county || null;
-        if (!county || county.toLowerCase() === 'san francisco') {
-          const facilityType = message.toLowerCase().includes('senior')
-            ? 'senior'
-            : message.toLowerCase().includes('rec')
-              ? 'recreation'
-              : null;
-          const facilities = await fetchSFCityFacilities(facilityType);
-          liveDataContext += formatFacilitiesForContext(facilities);
-        }
+        const facilityType = message.toLowerCase().includes('senior')
+          ? 'senior'
+          : message.toLowerCase().includes('rec')
+            ? 'recreation'
+            : null;
+        const facilities = await fetchFacilities(city || county, facilityType);
+        liveDataContext += formatFacilitiesForContext(facilities);
       }
 
-      // Check for food truck queries (SF data)
-      if (isFoodTruckQuery(message)) {
+      // Check for parks queries (uses cached open data - instant!)
+      if (isParksQuery(message)) {
+        const city = userLocation?.city || userProfile?.city || null;
         const county = userLocation?.county || userProfile?.county || null;
-        if (!county || county.toLowerCase() === 'san francisco') {
-          const trucks = await fetchFoodTrucks(userLocation?.neighborhood || null);
-          liveDataContext += formatFoodTrucksForContext(trucks);
-        }
+        const parks = await fetchParks(city || county);
+        liveDataContext += formatParksForContext(parks);
+      }
+
+      // Check for food vendor queries (uses cached open data - instant!)
+      if (isFoodTruckQuery(message)) {
+        const vendors = await fetchFoodVendors(userLocation?.neighborhood || null);
+        liveDataContext += formatFoodVendorsForContext(vendors);
       }
 
       // Check for community resources/211 queries
