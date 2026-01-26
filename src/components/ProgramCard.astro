@@ -57,6 +57,9 @@ interface Props {
   feeInfo?: string;
   // API source indicator - if set, data is from external API (hide "needs review")
   dataSource?: string;
+  // Geolocation for proximity filtering/sorting
+  latitude?: number;
+  longitude?: number;
 }
 
 const {
@@ -80,6 +83,8 @@ const {
   feeInfo,
   dataSource,
   keywords,
+  latitude,
+  longitude,
 } = Astro.props;
 
 // Don't show "needs review" for API-sourced data
@@ -185,6 +190,8 @@ const displayLocation = city || area;
   data-verified={verifiedBy ? 'true' : 'false'}
   data-program-id={id}
   data-keywords={keywords || ''}
+  data-lat={latitude || ''}
+  data-lng={longitude || ''}
   id={`program-${id}`}
   data-program-data={JSON.stringify({
     id,
