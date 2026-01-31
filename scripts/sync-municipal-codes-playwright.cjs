@@ -29,7 +29,15 @@ const SECTION_CATEGORIES = {
   noise: ['noise', 'loud', 'sound', 'quiet hours', 'decibel', 'peace', 'morals'],
   parking: ['parking', 'vehicle', 'traffic', 'street parking', 'overnight', 'motor vehicle'],
   pets: ['animal', 'dog', 'cat', 'pet', 'license', 'barking'],
-  building: ['building', 'construction', 'permit', 'inspection', 'structural', 'electrical', 'plumbing'],
+  building: [
+    'building',
+    'construction',
+    'permit',
+    'inspection',
+    'structural',
+    'electrical',
+    'plumbing',
+  ],
   adu: ['accessory dwelling', 'ADU', 'granny', 'secondary unit', 'in-law'],
   zoning: ['zoning', 'land use', 'setback', 'density', 'lot coverage', 'height limit'],
   rental: ['rent', 'tenant', 'landlord', 'eviction', 'just cause', 'relocation'],
@@ -91,14 +99,20 @@ async function getMunicodeTOC(page, city, baseUrl) {
     document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
       const text = a.textContent?.trim().replace(/\s+/g, ' ');
       const href = a.href;
-      if (text && text.length > 3 && href.includes('nodeId=') && !results.find((r) => r.href === href)) {
+      if (
+        text &&
+        text.length > 3 &&
+        href.includes('nodeId=') &&
+        !results.find((r) => r.href === href)
+      ) {
         // Determine depth by checking parent elements or text patterns
-        const isTitle = /^(TITLE|DIVISION|PART|APPENDIX)\s/i.test(text) ||
-                        /^[A-Z\s]+$/.test(text.substring(0, 30));
+        const isTitle =
+          /^(TITLE|DIVISION|PART|APPENDIX)\s/i.test(text) ||
+          /^[A-Z\s]+$/.test(text.substring(0, 30));
         results.push({
           text: text.substring(0, 250),
           href,
-          level: isTitle ? 'title' : 'chapter'
+          level: isTitle ? 'title' : 'chapter',
         });
       }
     });
@@ -126,7 +140,9 @@ async function getMunicodeChapterContent(page, url) {
     });
 
     // Get any actual code text visible
-    const codeText = document.querySelector('.chunk-content, .CodeSection, article, .content-chunk');
+    const codeText = document.querySelector(
+      '.chunk-content, .CodeSection, article, .content-chunk'
+    );
     const summary = codeText?.textContent?.trim().substring(0, 3000) || '';
 
     return {
@@ -171,7 +187,8 @@ async function scrapeMunicode(page, city, baseUrl) {
     if (VERBOSE) console.log(`    Found ${titleEntries.length} titles to process`);
 
     // Process each title to get its chapters
-    for (const title of titleEntries.slice(0, 30)) { // Limit to 30 titles
+    for (const title of titleEntries.slice(0, 30)) {
+      // Limit to 30 titles
       try {
         if (VERBOSE) console.log(`      Processing: ${title.text.substring(0, 60)}...`);
 
@@ -191,15 +208,20 @@ async function scrapeMunicode(page, city, baseUrl) {
           document.querySelectorAll('a[href*="nodeId"]').forEach((a) => {
             const text = a.textContent?.trim().replace(/\s+/g, ' ');
             const href = a.href;
-            if (text && text.length > 3 && text.length < 250 &&
-                href.includes('nodeId=') && !results.find((r) => r.href === href)) {
+            if (
+              text &&
+              text.length > 3 &&
+              text.length < 250 &&
+              href.includes('nodeId=') &&
+              !results.find((r) => r.href === href)
+            ) {
               results.push({ name: text, url: href });
             }
           });
           return results.slice(0, 50); // Limit chapters per title
         });
 
-        titleData.chapters = chapters.map(ch => ({
+        titleData.chapters = chapters.map((ch) => ({
           name: ch.name,
           url: ch.url,
           categories: categorizeSection(ch.name),
@@ -261,7 +283,10 @@ async function scrapeBerkeley(page) {
   };
 
   try {
-    await page.goto('https://berkeley.municipal.codes/BMC', { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto('https://berkeley.municipal.codes/BMC', {
+      waitUntil: 'networkidle',
+      timeout: 45000,
+    });
     await page.waitForTimeout(3000);
 
     // Extract all titles
@@ -306,15 +331,19 @@ async function scrapeBerkeley(page) {
           document.querySelectorAll('a[href*="/BMC/"]').forEach((a) => {
             const text = a.textContent?.trim();
             const href = a.href;
-            if (text && text.length > 5 && text.length < 200 &&
-                !results.find(r => r.name === text)) {
+            if (
+              text &&
+              text.length > 5 &&
+              text.length < 200 &&
+              !results.find((r) => r.name === text)
+            ) {
               results.push({ name: text, url: href });
             }
           });
           return results.slice(0, 30);
         });
 
-        titleData.chapters = chapters.map(ch => ({
+        titleData.chapters = chapters.map((ch) => ({
           name: ch.name,
           url: ch.url,
           categories: categorizeSection(ch.name),
@@ -356,25 +385,82 @@ async function scrapeSanFrancisco(page) {
 
   // San Francisco has multiple code books
   const sfCodes = [
-    { name: 'Administrative Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_admin/0-0-0-1' },
-    { name: 'Building Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_building/0-0-0-1' },
-    { name: 'Business and Tax Regulations Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_business/0-0-0-1' },
-    { name: 'Campaign and Governmental Conduct Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_campaign/0-0-0-1' },
-    { name: 'Charter', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_charter/0-0-0-1' },
-    { name: 'Electrical Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_electrical/0-0-0-1' },
-    { name: 'Environment Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_environment/0-0-0-1' },
-    { name: 'Fire Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_fire/0-0-0-1' },
-    { name: 'Green Building Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_green/0-0-0-1' },
-    { name: 'Health Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_health/0-0-0-1' },
-    { name: 'Housing Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_housing/0-0-0-1' },
-    { name: 'Mechanical Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_mechanical/0-0-0-1' },
-    { name: 'Park Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_park/0-0-0-1' },
-    { name: 'Planning Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-1' },
-    { name: 'Plumbing Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_plumbing/0-0-0-1' },
-    { name: 'Police Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_police/0-0-0-1' },
-    { name: 'Public Works Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_publicworks/0-0-0-1' },
-    { name: 'Subdivision Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_subdivision/0-0-0-1' },
-    { name: 'Transportation Code', url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_transportation/0-0-0-1' },
+    {
+      name: 'Administrative Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_admin/0-0-0-1',
+    },
+    {
+      name: 'Building Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_building/0-0-0-1',
+    },
+    {
+      name: 'Business and Tax Regulations Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_business/0-0-0-1',
+    },
+    {
+      name: 'Campaign and Governmental Conduct Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_campaign/0-0-0-1',
+    },
+    {
+      name: 'Charter',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_charter/0-0-0-1',
+    },
+    {
+      name: 'Electrical Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_electrical/0-0-0-1',
+    },
+    {
+      name: 'Environment Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_environment/0-0-0-1',
+    },
+    {
+      name: 'Fire Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_fire/0-0-0-1',
+    },
+    {
+      name: 'Green Building Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_green/0-0-0-1',
+    },
+    {
+      name: 'Health Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_health/0-0-0-1',
+    },
+    {
+      name: 'Housing Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_housing/0-0-0-1',
+    },
+    {
+      name: 'Mechanical Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_mechanical/0-0-0-1',
+    },
+    {
+      name: 'Park Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_park/0-0-0-1',
+    },
+    {
+      name: 'Planning Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_planning/0-0-0-1',
+    },
+    {
+      name: 'Plumbing Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_plumbing/0-0-0-1',
+    },
+    {
+      name: 'Police Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_police/0-0-0-1',
+    },
+    {
+      name: 'Public Works Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_publicworks/0-0-0-1',
+    },
+    {
+      name: 'Subdivision Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_subdivision/0-0-0-1',
+    },
+    {
+      name: 'Transportation Code',
+      url: 'https://codelibrary.amlegal.com/codes/san_francisco/latest/sf_transportation/0-0-0-1',
+    },
   ];
 
   for (const codeBook of sfCodes) {
@@ -385,15 +471,21 @@ async function scrapeSanFrancisco(page) {
       await page.waitForTimeout(2000);
 
       // Wait for Cloudflare to pass
-      await page.waitForSelector('body:not(:has(.cf-browser-verification))', { timeout: 10000 }).catch(() => {});
+      await page
+        .waitForSelector('body:not(:has(.cf-browser-verification))', { timeout: 10000 })
+        .catch(() => {});
 
       const chapters = await page.evaluate(() => {
         const results = [];
         document.querySelectorAll('a[href*="/sf_"]').forEach((a) => {
           const text = a.textContent?.trim();
           const href = a.href;
-          if (text && text.length > 5 && text.length < 200 &&
-              !results.find(r => r.name === text)) {
+          if (
+            text &&
+            text.length > 5 &&
+            text.length < 200 &&
+            !results.find((r) => r.name === text)
+          ) {
             results.push({ name: text, url: href });
           }
         });
@@ -404,7 +496,7 @@ async function scrapeSanFrancisco(page) {
         name: codeBook.name,
         url: codeBook.url,
         isCodeType: true,
-        chapters: chapters.map(ch => ({
+        chapters: chapters.map((ch) => ({
           name: ch.name,
           url: ch.url,
           categories: categorizeSection(ch.name),
@@ -454,8 +546,7 @@ async function scrapePaloAlto(page) {
       document.querySelectorAll('a[href*="/paloalto"]').forEach((a) => {
         const text = a.textContent?.trim();
         const href = a.href;
-        if (text && text.length > 3 && text.length < 250 &&
-            !items.find(i => i.text === text)) {
+        if (text && text.length > 3 && text.length < 250 && !items.find((i) => i.text === text)) {
           const isTitle = /^title/i.test(text) || /^division/i.test(text);
           items.push({ text, href, isTitle });
         }
@@ -519,7 +610,10 @@ async function scrapeSunnyvale(page) {
   };
 
   try {
-    await page.goto('https://qcode.us/codes/sunnyvale/', { waitUntil: 'networkidle', timeout: 45000 });
+    await page.goto('https://qcode.us/codes/sunnyvale/', {
+      waitUntil: 'networkidle',
+      timeout: 45000,
+    });
     await page.waitForTimeout(3000);
 
     const toc = await page.evaluate(() => {
@@ -527,8 +621,7 @@ async function scrapeSunnyvale(page) {
       document.querySelectorAll('a[href*="sunnyvale"]').forEach((a) => {
         const text = a.textContent?.trim();
         const href = a.href;
-        if (text && text.length > 3 && text.length < 250 &&
-            !items.find(i => i.text === text)) {
+        if (text && text.length > 3 && text.length < 250 && !items.find((i) => i.text === text)) {
           const isTitle = /^title/i.test(text) || /^division/i.test(text);
           items.push({ text, href, isTitle });
         }
@@ -634,17 +727,24 @@ async function scrapeCodePublishing(page, city) {
             const text = a.textContent?.trim();
             const href = a.href;
             // Match chapter links
-            if (text && text.length > 5 && text.length < 250 &&
-                (text.includes('Chapter') || text.includes('CHAPTER') ||
-                 /^\d+\.\d+/.test(text) || /^Article/i.test(text)) &&
-                href.includes('.html') && !results.find(r => r.name === text)) {
+            if (
+              text &&
+              text.length > 5 &&
+              text.length < 250 &&
+              (text.includes('Chapter') ||
+                text.includes('CHAPTER') ||
+                /^\d+\.\d+/.test(text) ||
+                /^Article/i.test(text)) &&
+              href.includes('.html') &&
+              !results.find((r) => r.name === text)
+            ) {
               results.push({ name: text, url: href });
             }
           });
           return results.slice(0, 50);
         });
 
-        titleData.chapters = chapters.map(ch => ({
+        titleData.chapters = chapters.map((ch) => ({
           name: ch.name,
           url: ch.url,
           categories: categorizeSection(ch.name),
@@ -672,14 +772,14 @@ async function scrapeCodePublishing(page, city) {
         document.querySelectorAll('a[href*=".html"]').forEach((a) => {
           const text = a.textContent?.trim();
           const href = a.href;
-          if (text && text.length > 5 && text.length < 250 && !items.find(i => i.text === text)) {
+          if (text && text.length > 5 && text.length < 250 && !items.find((i) => i.text === text)) {
             items.push({ text, href });
           }
         });
         return items.slice(0, 50);
       });
 
-      results.titles = fallbackToc.map(item => ({
+      results.titles = fallbackToc.map((item) => ({
         name: item.text,
         url: item.href,
         chapters: [],
@@ -716,8 +816,13 @@ async function scrapeQCode(page, city) {
       document.querySelectorAll('a').forEach((a) => {
         const text = a.textContent?.trim();
         const href = a.href;
-        if (text && text.length > 3 && text.length < 250 &&
-            href.includes('qcode') && !items.find((i) => i.text === text)) {
+        if (
+          text &&
+          text.length > 3 &&
+          text.length < 250 &&
+          href.includes('qcode') &&
+          !items.find((i) => i.text === text)
+        ) {
           const isTitle = /^title/i.test(text) || /^division/i.test(text);
           items.push({ text, href, isTitle });
         }
@@ -790,11 +895,16 @@ async function scrapeAmlegal(page, city) {
       document.querySelectorAll('a').forEach((a) => {
         const text = a.textContent?.trim();
         const href = a.href;
-        if (text && text.length > 3 && text.length < 250 &&
-            href.includes('amlegal') && !items.find((i) => i.text === text)) {
+        if (
+          text &&
+          text.length > 3 &&
+          text.length < 250 &&
+          href.includes('amlegal') &&
+          !items.find((i) => i.text === text)
+        ) {
           // Check for code types (Administrative Code, Planning Code, etc.)
-          const isCodeType = text.toLowerCase().includes('code') &&
-                            !text.toLowerCase().includes('chapter');
+          const isCodeType =
+            text.toLowerCase().includes('code') && !text.toLowerCase().includes('chapter');
           const isTitle = /^title/i.test(text) || isCodeType;
           items.push({ text, href, isTitle, isCodeType });
         }
@@ -850,7 +960,7 @@ async function scrapeAmlegal(page, city) {
 
     // If structure didn't work well, fall back to flat list
     if (results.titles.length === 0 && toc.length > 0) {
-      results.titles = toc.slice(0, 50).map(item => ({
+      results.titles = toc.slice(0, 50).map((item) => ({
         name: item.text,
         url: item.href,
         chapters: [],
@@ -893,7 +1003,8 @@ async function syncMunicipalCodes() {
   // Load existing cache if available
   let cache = {
     generated: new Date().toISOString(),
-    description: 'Complete municipal code table of contents for Bay Area cities (scraped with Playwright)',
+    description:
+      'Complete municipal code table of contents for Bay Area cities (scraped with Playwright)',
     categories: SECTION_CATEGORIES,
     cities: {},
   };
@@ -973,7 +1084,10 @@ async function syncMunicipalCodes() {
       cache.cities[city.name] = results;
 
       const titleCount = (results.titles || []).length;
-      const chapterCount = (results.titles || []).reduce((sum, t) => sum + (t.chapters?.length || 0), 0);
+      const chapterCount = (results.titles || []).reduce(
+        (sum, t) => sum + (t.chapters?.length || 0),
+        0
+      );
       if (titleCount > 0) {
         console.log(`  ✅ ${city.name}: ${titleCount} titles, ${chapterCount} chapters`);
         successCount++;
@@ -992,11 +1106,14 @@ async function syncMunicipalCodes() {
 
   // Update stats
   cache.stats = {
-    citiesWithContent: Object.values(cache.cities).filter((c) => (c.titles || []).length > 0).length,
+    citiesWithContent: Object.values(cache.cities).filter((c) => (c.titles || []).length > 0)
+      .length,
     totalCities: Object.keys(cache.cities).length,
     totalTitles: Object.values(cache.cities).reduce((sum, c) => sum + (c.titles || []).length, 0),
-    totalChapters: Object.values(cache.cities).reduce((sum, c) =>
-      sum + (c.titles || []).reduce((s, t) => s + (t.chapters?.length || 0), 0), 0),
+    totalChapters: Object.values(cache.cities).reduce(
+      (sum, c) => sum + (c.titles || []).reduce((s, t) => s + (t.chapters?.length || 0), 0),
+      0
+    ),
     lastUpdated: new Date().toISOString(),
   };
 

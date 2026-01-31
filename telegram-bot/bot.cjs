@@ -49,7 +49,7 @@ async function askOllama(userMessage, conversationHistory = []) {
   const messages = [
     { role: 'system', content: CARL_SYSTEM_PROMPT },
     ...conversationHistory,
-    { role: 'user', content: userMessage }
+    { role: 'user', content: userMessage },
   ];
 
   try {
@@ -62,9 +62,9 @@ async function askOllama(userMessage, conversationHistory = []) {
         stream: false,
         options: {
           temperature: 0.7,
-          num_predict: 500
-        }
-      })
+          num_predict: 500,
+        },
+      }),
     });
 
     if (!response.ok) {
@@ -78,7 +78,7 @@ async function askOllama(userMessage, conversationHistory = []) {
     if (error.code === 'ECONNREFUSED') {
       return "I'm having trouble connecting to my brain right now. Please make sure Ollama is running and try again!";
     }
-    return "Sorry, I ran into an issue. Please try again in a moment.";
+    return 'Sorry, I ran into an issue. Please try again in a moment.';
   }
 }
 
@@ -102,6 +102,7 @@ function addToConversation(userId, role, content) {
   conversations.set(userId, history);
 }
 
+// eslint-disable-next-line no-unused-vars -- Reserved for future /clear command
 function clearConversation(userId) {
   conversations.delete(userId);
 }
@@ -114,15 +115,15 @@ bot.start((ctx) => {
   const firstName = ctx.from?.first_name || 'friend';
   ctx.reply(
     `👋 Hey ${firstName}! I'm Carl, your Bay Area community resource assistant.\n\n` +
-    `I can help you find:\n` +
-    `🍎 Food assistance programs\n` +
-    `🏠 Housing resources\n` +
-    `🏥 Healthcare options\n` +
-    `📚 Library services\n` +
-    `🚇 Transit information\n` +
-    `📋 Local laws & regulations\n\n` +
-    `Just ask me anything about Bay Area resources!\n\n` +
-    `Type /help for more commands or visit baynavigator.org`
+      `I can help you find:\n` +
+      `🍎 Food assistance programs\n` +
+      `🏠 Housing resources\n` +
+      `🏥 Healthcare options\n` +
+      `📚 Library services\n` +
+      `🚇 Transit information\n` +
+      `📋 Local laws & regulations\n\n` +
+      `Just ask me anything about Bay Area resources!\n\n` +
+      `Type /help for more commands or visit baynavigator.org`
   );
 });
 
@@ -130,18 +131,18 @@ bot.start((ctx) => {
 bot.help((ctx) => {
   ctx.reply(
     `🌉 *Carl Help*\n\n` +
-    `*Commands:*\n` +
-    `/start - Start conversation\n` +
-    `/help - Show this help\n` +
-    `/about - Learn about Carl\n` +
-    `/donate - Support Bay Navigator\n\n` +
-    `*Ask me about:*\n` +
-    `• "How do I apply for CalFresh?"\n` +
-    `• "Free tutoring for my kids"\n` +
-    `• "Noise ordinance in San Jose"\n` +
-    `• "BART senior discount"\n` +
-    `• "Food banks near Oakland"\n\n` +
-    `Visit baynavigator.org for full resource listings!`,
+      `*Commands:*\n` +
+      `/start - Start conversation\n` +
+      `/help - Show this help\n` +
+      `/about - Learn about Carl\n` +
+      `/donate - Support Bay Navigator\n\n` +
+      `*Ask me about:*\n` +
+      `• "How do I apply for CalFresh?"\n` +
+      `• "Free tutoring for my kids"\n` +
+      `• "Noise ordinance in San Jose"\n` +
+      `• "BART senior discount"\n` +
+      `• "Food banks near Oakland"\n\n` +
+      `Visit baynavigator.org for full resource listings!`,
     { parse_mode: 'Markdown' }
   );
 });
@@ -150,11 +151,11 @@ bot.help((ctx) => {
 bot.command('about', (ctx) => {
   ctx.reply(
     `🌫️ *About Carl*\n\n` +
-    `I'm an AI assistant named after Karl the Fog (but spelled with a C for Chat!).\n\n` +
-    `I was created by Bay Tides to help Bay Area residents discover free and low-cost community resources.\n\n` +
-    `*Privacy:* I run on open-source AI (Ollama) and don't store your conversations permanently. Your privacy matters!\n\n` +
-    `*Powered by:* Bay Navigator (baynavigator.org)\n` +
-    `*AI Model:* ${OLLAMA_MODEL}`,
+      `I'm an AI assistant named after Karl the Fog (but spelled with a C for Chat!).\n\n` +
+      `I was created by Bay Tides to help Bay Area residents discover free and low-cost community resources.\n\n` +
+      `*Privacy:* I run on open-source AI (Ollama) and don't store your conversations permanently. Your privacy matters!\n\n` +
+      `*Powered by:* Bay Navigator (baynavigator.org)\n` +
+      `*AI Model:* ${OLLAMA_MODEL}`,
     { parse_mode: 'Markdown' }
   );
 });
@@ -170,16 +171,18 @@ bot.command('donate', async (ctx) => {
 
   await ctx.reply(
     `💙 *Support Bay Navigator*\n\n` +
-    `Thank you for considering a donation! Your support helps us maintain Bay Navigator and keep Carl running.\n\n` +
-    `Choose an amount below to donate with Telegram Stars:`,
+      `Thank you for considering a donation! Your support helps us maintain Bay Navigator and keep Carl running.\n\n` +
+      `Choose an amount below to donate with Telegram Stars:`,
     {
       parse_mode: 'Markdown',
       reply_markup: {
-        inline_keyboard: donationOptions.map(d => [{
-          text: `Donate ${d.label}`,
-          callback_data: `stars_${d.stars}`
-        }])
-      }
+        inline_keyboard: donationOptions.map((d) => [
+          {
+            text: `Donate ${d.label}`,
+            callback_data: `stars_${d.stars}`,
+          },
+        ]),
+      },
     }
   );
 });
@@ -221,12 +224,11 @@ bot.on('successful_payment', (ctx) => {
 
   ctx.reply(
     `🎉 *Thank you for your donation!*\n\n` +
-    `Your generous contribution of ${stars} ⭐ helps keep Bay Navigator free for everyone.\n\n` +
-    `Together, we're making Bay Area resources more accessible! 💙`,
+      `Your generous contribution of ${stars} ⭐ helps keep Bay Navigator free for everyone.\n\n` +
+      `Together, we're making Bay Area resources more accessible! 💙`,
     { parse_mode: 'Markdown' }
   );
 });
-
 
 // Handle all text messages
 bot.on('text', async (ctx) => {
@@ -272,7 +274,8 @@ console.log('🌫️ Carl is starting up...');
 console.log(`📡 Ollama URL: ${OLLAMA_URL}`);
 console.log(`🤖 Model: ${OLLAMA_MODEL}`);
 
-bot.launch()
+bot
+  .launch()
   .then(() => {
     console.log('✅ Carl is ready to help Bay Area residents!');
     console.log('🔗 @BayCarlbot is now live');

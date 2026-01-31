@@ -183,7 +183,9 @@ async function scrapeBerkeleyMunicipalCodes() {
       for (const [key, section] of Object.entries(SECTIONS_TO_SCRAPE)) {
         if (
           section.keywords.some(
-            (kw) => titleLower.includes(kw.toLowerCase()) || title.name.toLowerCase().includes(kw.toLowerCase())
+            (kw) =>
+              titleLower.includes(kw.toLowerCase()) ||
+              title.name.toLowerCase().includes(kw.toLowerCase())
           )
         ) {
           sectionKey = key;
