@@ -14,5 +14,5 @@
 // MARK: - Version Info
 public enum BayNavigatorCore {
     public static let version = "1.0.0"
-    public static let bundleIdentifier = "org.baytides.navigator"
+    public static let bundleIdentifier = "org.baytides.baynavigator"
 }

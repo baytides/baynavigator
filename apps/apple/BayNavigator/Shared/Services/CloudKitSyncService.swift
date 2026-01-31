@@ -28,7 +28,7 @@ class CloudKitSyncService {
     private let userPrefsRecordType = "UserPreferences"
 
     init() {
-        container = CKContainer(identifier: "iCloud.org.baytides.navigator")
+        container = CKContainer(identifier: "iCloud.org.baytides.baynavigator")
         privateDatabase = container.privateCloudDatabase
         recordZone = CKRecordZone(zoneName: "BayNavigatorZone")
 
@@ -371,7 +371,7 @@ class SyncManager {
     static let shared = SyncManager()
 
     private let cloudKit = CloudKitSyncService.shared
-    private let localStorage = UserDefaults(suiteName: "group.org.baytides.navigator")
+    private let localStorage = UserDefaults(suiteName: "group.org.baytides.baynavigator")
 
     var syncStatus: SyncStatus = .idle
     var lastSyncTime: Date?

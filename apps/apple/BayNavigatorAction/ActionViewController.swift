@@ -146,7 +146,7 @@ class ActionViewController: UIViewController {
         }
 
         // Save for later and open app
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         defaults?.set(text, forKey: "pendingSearch")
 
         // Open the app with search query

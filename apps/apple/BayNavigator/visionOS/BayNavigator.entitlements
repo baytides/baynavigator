@@ -4,9 +4,13 @@
 <dict>
     <key>com.apple.security.application-groups</key>
     <array>
-        <string>group.org.baytides.navigator</string>
+        <string>group.org.baytides.baynavigator</string>
     </array>
     <key>aps-environment</key>
     <string>production</string>
+    <key>com.apple.developer.applesignin</key>
+    <array>
+        <string>Default</string>
+    </array>
 </dict>
 </plist>

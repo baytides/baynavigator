@@ -107,25 +107,39 @@ JSON API (public/api/)
         └──► Mobile App (via HTTP fetch)
 ```
 
-### 2. Search Flow
+### 2. AI Chat & Search Flow
 
 ```
-User Query
+User Message (Bay Navigator Chat)
     │
     ▼
-┌─────────────────────┐
-│  Smart Assistant    │  ← Azure Function
-│  (Azure Functions)  │
-└─────────────────────┘
+┌─────────────────────────────────────────────┐
+│  TIER 1: Ollama - Conversation Handler       │
+│  ├── Greet user, build rapport              │
+│  ├── Collect: city/ZIP, birth year, needs   │
+│  ├── Parse into structured query            │
+│  └── Crisis? → Respond immediately!         │
+└─────────────────────────────────────────────┘
     │
-    ├──► Cloudflare Workers AI (Llama 3.1 8B)
-    │        └──► Keyword extraction
+    ▼ (structured query + context)
+┌─────────────────────────────────────────────┐
+│  TIER 2: vLLM - Data Retrieval Engine       │
+│  ├── Search program database                │
+│  ├── Match to user eligibility              │
+│  └── Retrieve relevant programs             │
+└─────────────────────────────────────────────┘
     │
-    └──► Azure AI Search
-             └──► Program retrieval
+    ├──► Client-side RAG (adds program context)
+    │
+    └──► Program cards rendered in UI
     │
     ▼
-Ranked Results
+┌─────────────────────────────────────────────┐
+│  Response (formatted by Ollama)             │
+│  ├── Links to Bay Navigator guides/cards    │
+│  ├── Clickable program cards below message  │
+│  └── Specific details only if requested     │
+└─────────────────────────────────────────────┘
 ```
 
 ## Technology Stack
@@ -153,13 +167,15 @@ Ranked Results
 
 ### Backend
 
-| Component | Technology            | Purpose                 |
-| --------- | --------------------- | ----------------------- |
-| Compute   | Azure Functions       | Serverless execution    |
-| AI/LLM    | Cloudflare Workers AI | Smart search keywords   |
-| Search    | Azure AI Search       | Program indexing        |
-| CDN       | Azure Static Web Apps | Global distribution     |
-| Analytics | Plausible CE          | Privacy-first analytics |
+| Component    | Technology            | Purpose                 |
+| ------------ | --------------------- | ----------------------- |
+| Compute      | Azure Functions       | Serverless execution    |
+| AI Primary   | Ollama (Llama 3.1 8B) | Fast queries, routing   |
+| AI Secondary | vLLM (Qwen2.5-3B)     | Complex analysis (GPU)  |
+| AI GPU       | Azure Container Apps  | Serverless T4 GPU       |
+| Search       | Azure AI Search       | Program indexing        |
+| CDN          | Azure Static Web Apps | Global distribution     |
+| Analytics    | Plausible CE          | Privacy-first analytics |
 
 ## Key Design Decisions
 
@@ -216,7 +232,97 @@ const fileHash = computeFileHash(filePath);
 const isChanged = cache.fileHashes[file] !== fileHash;
 ```
 
-### 5. Multi-Platform Shared Data
+### 5. Two-Tier AI Architecture
+
+Carl, the AI assistant, uses a two-tier approach with clear separation of responsibilities:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         WORKFLOW                                         │
+│  User Message → OLLAMA (engage, collect, parse) → VLLM (search, retrieve)│
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│  TIER 1: Ollama - User Engagement & Data Collection      │
+├─────────────────────────────────────────────────────────┤
+│  Model: Llama 3.1 8B Instruct (Q8)                      │
+│  Endpoint: ollama.baytides.org                          │
+│  Infrastructure: Always-on Azure VM (~45W TDP)          │
+│                                                          │
+│  Role: CONVERSATION HANDLER - "the face of Carl"        │
+│  ├── ALL user engagement and conversation               │
+│  ├── Collect context (city/ZIP, birth year, needs)      │
+│  ├── Parse user input into structured queries           │
+│  ├── Crisis response (immediate, no delay!)             │
+│  └── Format responses in Carl's friendly voice          │
+├─────────────────────────────────────────────────────────┤
+│  TIER 2: vLLM - Database Search & Resource Retrieval    │
+├─────────────────────────────────────────────────────────┤
+│  Model: Qwen2.5-3B-Instruct                             │
+│  Endpoint: ai.baytides.org / api.baytides.org           │
+│  Infrastructure: Serverless T4 GPU (~70W when active)   │
+│  Scale: Zero when idle, 3-min cooldown                  │
+│                                                          │
+│  Role: DATA RETRIEVAL ENGINE                             │
+│  ├── Search program database based on Ollama's query    │
+│  ├── Match programs to user eligibility                 │
+│  ├── Compare similar programs                           │
+│  └── Retrieve specific details when requested           │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Response Priorities:**
+
+1. **Always link to Bay Navigator** - program cards, eligibility guides, map
+2. **Let UI program cards be primary** - clickable cards below messages
+3. **Extract details only when asked** - phone, address, hours, external URLs
+
+**Design Rationale:**
+
+- **Clear separation**: Ollama converses, vLLM retrieves
+- **Cost efficiency**: GPU only runs when search/retrieval needed
+- **Low latency**: Conversation handled by always-on CPU tier
+- **Data-focused**: Both tiers parse/route existing data, never fabricate
+
+**User Profile Integration (All Apps):**
+
+Apps (iOS, Android, Windows, macOS, Linux) can pass a `ProfileContext` when users enable profile sharing:
+
+- Skip redundant questions (location already known)
+- Prioritize programs matching user's profile
+- Privacy-respecting: age ranges, county-level location, category tags
+- If not enabled, treat as anonymous (same as website visitor)
+
+**Tor / Onion Support:**
+
+Carl is fully accessible via Tor hidden service for maximum privacy:
+
+- Onion: `ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion`
+- No API key required (authenticated by onion routing)
+- Carl AI Tor Gateway provides access to both tiers:
+  - `/api/*` → Ollama (primary tier, conversation handling)
+  - `/v1/*` → vLLM (secondary tier, proxied through Carl VM to Azure GPU)
+- User IP never exposed to Azure - gateway proxies all requests
+- Full two-tier functionality available over Tor
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      TOR USER REQUEST FLOW                               │
+│                                                                          │
+│  Tor User → .onion:80 → Carl AI Gateway (nginx:11435)                   │
+│                              │                                           │
+│                    ┌─────────┼─────────┐                                │
+│                    ▼                   ▼                                │
+│              /api/* routes       /v1/* routes                           │
+│                    │                   │                                │
+│                    ▼                   ▼                                │
+│           Ollama:11434         Azure vLLM (via HTTPS)                   │
+│                                        │                                │
+│                            (User IP hidden - Carl VM proxies)           │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6. Multi-Platform Shared Data
 
 Both web and mobile apps consume the same JSON API:
 

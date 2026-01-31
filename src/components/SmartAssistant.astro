@@ -2,13 +2,20 @@
 /**
  * Smart Assistant Component - "Carl"
  * AI-powered chat interface to help users find relevant programs
- * Uses self-hosted Ollama (Llama 3.1) at ai.baytides.org
+ *
+ * TWO-TIER AI ARCHITECTURE:
+ * - Primary (Ollama): Fast queries, location parsing, routing - always running on Azure VM
+ * - Secondary (vLLM): Complex analysis on serverless GPU - scales to zero when idle
+ *
+ * Both tiers use the same SYSTEM_PROMPT and primarily parse/route existing program data.
+ * vLLM is pre-warmed when chat opens so it's ready for complex queries.
+ *
  * Features: Streaming responses, RAG search, interactive program cards
  *
  * Note: Location data is loaded via fetch from /api/location-data.json
  * to avoid YAML import issues when component is used in layouts.
  */
-import { SYSTEM_PROMPT, OLLAMA_CONFIG } from '../data/assistant-system-prompt';
+import { SYSTEM_PROMPT, OLLAMA_CONFIG, VLLM_CONFIG } from '../data/assistant-system-prompt';
 import libraryResources from '../data/library-digital-resources.json';
 import publicServices from '../data/public-services.json';
 
@@ -40,6 +47,10 @@ const torEndpoint = OLLAMA_CONFIG.torEndpoint;
 
 // Model to use for Carl
 const modelName = OLLAMA_CONFIG.model;
+
+// vLLM endpoint for warmup (GPU model for complex tasks)
+const vllmEndpoint = VLLM_CONFIG.endpoint;
+const vllmModel = VLLM_CONFIG.model;
 ---
 
 <!-- Floating Assistant Button (Draggable) -->
@@ -363,6 +374,32 @@ const modelName = OLLAMA_CONFIG.model;
   const activeEndpoint = isTorBrowser && torEndpoint ? torEndpoint : effectiveEndpoint;
   // No API key needed for Tor (direct Ollama access)
   const activeApiKey = isTorBrowser ? '' : apiKey;
+
+  // vLLM warmup - preemptively wake up the GPU model when chat opens
+  // This runs in background so it's ready if needed for complex queries
+  let vllmWarmedUp = false;
+  async function warmupVLLM() {
+    if (vllmWarmedUp) return; // Only warm up once per session
+    try {
+      // Send a minimal request to wake up the container (scale from zero)
+      const response = await fetch(vllmEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: vllmModel,
+          messages: [{ role: 'user', content: 'ping' }],
+          max_tokens: 1, // Minimal response
+        }),
+      });
+      if (response.ok) {
+        vllmWarmedUp = true;
+        console.log('[Carl] vLLM GPU warmed up and ready');
+      }
+    } catch (e) {
+      // Silently fail - vLLM warmup is optional
+      console.log('[Carl] vLLM warmup skipped:', e.message);
+    }
+  }
 
   // Language/locale detection - read from site's i18n setting
   const I18N_STORAGE_KEY = 'baynavigator_locale';
@@ -3455,6 +3492,9 @@ const modelName = OLLAMA_CONFIG.model;
       updateWelcomeMessage();
       // Preload programs for RAG
       loadPrograms();
+      // Warm up vLLM GPU in background (non-blocking)
+      // This wakes up the serverless GPU so it's ready for complex queries
+      warmupVLLM();
     }
   });
 

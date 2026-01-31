@@ -361,7 +361,7 @@ struct GetProgramCountIntent: AppIntent {
     static var description = IntentDescription("Get the total number of available programs")
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         let count = defaults?.integer(forKey: "totalPrograms") ?? 0
         let favorites = defaults?.integer(forKey: "favoriteCount") ?? 0
 
@@ -395,7 +395,7 @@ struct AddToFavoritesIntent: AppIntent {
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
         // Save to shared UserDefaults
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         var favorites = defaults?.stringArray(forKey: "favoriteIds") ?? []
 
         if !favorites.contains(program.id) {
@@ -430,7 +430,7 @@ struct ProgramEntity: AppEntity {
 struct ProgramEntityQuery: EntityQuery {
     func entities(for identifiers: [String]) async throws -> [ProgramEntity] {
         // Load programs from shared storage
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         guard let data = defaults?.data(forKey: "allPrograms"),
               let programs = try? JSONDecoder().decode([ProgramEntityData].self, from: data) else {
             return []
@@ -443,7 +443,7 @@ struct ProgramEntityQuery: EntityQuery {
 
     func suggestedEntities() async throws -> [ProgramEntity] {
         // Return recent/favorite programs as suggestions
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         guard let data = defaults?.data(forKey: "favoritePrograms"),
               let programs = try? JSONDecoder().decode([ProgramEntityData].self, from: data) else {
             return []
@@ -585,7 +585,7 @@ extension ProgramEntity {
 
         let item = CSSearchableItem(
             uniqueIdentifier: "program-\(id)",
-            domainIdentifier: "org.baytides.navigator.programs",
+            domainIdentifier: "org.baytides.baynavigator.programs",
             attributeSet: attributeSet
         )
 

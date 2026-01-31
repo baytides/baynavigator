@@ -1,12 +1,61 @@
 import Foundation
 
-/// Service for AI-powered smart search functionality
-/// Uses a tiered approach: Quick Answers first, then AI API if needed
+/// Service for AI-powered smart search functionality - "Carl"
+///
+/// TWO-TIER AI ARCHITECTURE:
+/// -------------------------
+/// WORKFLOW: User → OLLAMA (engage, collect, parse) → VLLM (search, retrieve) → Response
+///
+/// TIER 1 - OLLAMA (Primary): User Engagement & Data Collection
+///   - Model: Llama 3.1 8B Instruct (Q8)
+///   - Infrastructure: Always-on Azure VM (CPU-based)
+///   - Role: CONVERSATION HANDLER - the "face" of Carl
+///   - Responsibilities:
+///     * ALL user engagement and conversation
+///     * Collecting context (city/ZIP, birth year, needs)
+///     * Parsing user input into structured queries
+///     * Crisis response (immediate - no delay!)
+///     * Formatting responses in Carl's friendly voice
+///
+/// TIER 2 - VLLM (Secondary): Database Search & Resource Retrieval
+///   - Model: Qwen2.5-3B-Instruct
+///   - Infrastructure: Azure Container Apps with NVIDIA T4 (scales to zero after 3 min idle)
+///   - Role: DATA RETRIEVAL ENGINE - searches program database
+///   - Responsibilities:
+///     * Searching programs based on Ollama's parsed query
+///     * Matching programs to user eligibility
+///     * Retrieving specific details when requested
+///   - Pre-warmed when chat opens so it's ready when needed
+///
+/// RESPONSE PRIORITIES:
+/// 1. Always prioritize Bay Navigator links (program cards, eligibility guides)
+/// 2. Let clickable program cards be the primary source
+/// 3. Extract specific details (phone, address, hours) ONLY when specifically asked
+///
+/// USER PROFILE INTEGRATION (All Apps - iOS, Android, Windows, macOS, Linux):
+/// - If user has enabled profile sharing, use ProfileContext to pre-fill location, age, etc.
+/// - AI should use this context to skip redundant questions and prioritize relevant programs
+/// - If profile not enabled, treat user as anonymous (same as website visitor)
+/// - Profile data is privacy-respecting: uses age ranges, not exact dates; county, not address
+/// - This pattern should be implemented consistently across all platform apps
+///
+/// TOR SUPPORT:
+/// - Carl is fully accessible via Tor hidden service for maximum privacy
+/// - Uses: ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion
+/// - No API key required over Tor (already authenticated by onion routing)
+///
+/// IMPORTANT: Both tiers should NEVER make up program names, phone numbers, or addresses.
+///
 public actor SmartAssistantService {
     public static let shared = SmartAssistantService()
 
-    /// Direct AI endpoint (used when not using domain fronting)
-    private static let directAIEndpoint = "https://ai.baytides.org/api/chat"
+    /// Primary Ollama endpoint - for simple queries (location parsing, routing)
+    /// Model: Llama 3.1 8B Instruct, always-on Azure VM
+    private static let ollamaEndpoint = "https://ollama.baytides.org/api/chat"
+
+    /// Secondary vLLM endpoint - for complex tasks (deep analysis) - OpenAI compatible
+    /// Model: Qwen2.5-3B-Instruct on serverless T4 GPU, scales to zero when idle
+    private static let vllmEndpoint = "https://ai.baytides.org/v1/chat/completions"
 
     /// Privacy service for getting the correct endpoint based on privacy mode
     private let privacyService = PrivacyService.shared
@@ -47,11 +96,52 @@ public actor SmartAssistantService {
     CRISIS: 911 emergency, 988 suicide/crisis, 1-800-799-7233 DV.
     """
 
+    /// Track if vLLM has been warmed up this session
+    private var vllmWarmedUp = false
+
+    /// vLLM model name
+    private static let vllmModel = "Qwen/Qwen2.5-3B-Instruct"
+
     private init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = requestTimeout
         config.timeoutIntervalForResource = requestTimeout
         self.standardSession = URLSession(configuration: config)
+    }
+
+    // MARK: - vLLM Warmup
+
+    /// Warm up the vLLM GPU container in the background
+    /// Call this when the chat UI opens to preemptively wake up the serverless GPU
+    /// so it's ready for complex queries
+    public func warmupVLLM() async {
+        guard !vllmWarmedUp else { return } // Only warm up once per session
+
+        guard let url = URL(string: Self.vllmEndpoint) else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 90 // Allow time for cold start
+
+        let body: [String: Any] = [
+            "model": Self.vllmModel,
+            "messages": [["role": "user", "content": "ping"]],
+            "max_tokens": 1 // Minimal response
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            let (_, response) = try await standardSession.data(for: request)
+
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                vllmWarmedUp = true
+                print("[SmartAssistant] vLLM GPU warmed up and ready")
+            }
+        } catch {
+            // Silently fail - vLLM warmup is optional
+            print("[SmartAssistant] vLLM warmup skipped: \(error.localizedDescription)")
+        }
     }
 
     // MARK: - Privacy-Aware Endpoint Resolution
@@ -72,7 +162,7 @@ public actor SmartAssistantService {
 
         case .tor:
             // Tor uses direct endpoint (privacy is handled by Tor network)
-            return Self.directAIEndpoint
+            return Self.ollamaEndpoint
 
         case .standard:
             // Check if auto-detect censorship is enabled and we're censored
@@ -84,7 +174,7 @@ public actor SmartAssistantService {
                     return "\(cdnProvider.reflectorURL)/api/chat"
                 }
             }
-            return Self.directAIEndpoint
+            return Self.ollamaEndpoint
         }
     }
 
@@ -553,8 +643,21 @@ public struct CountyContact: Codable, Sendable {
 
 // MARK: - Profile Context for Personalized Responses
 
-/// Profile context for personalized AI responses
-/// Contains abstracted user attributes - never raw PII
+/// Profile context for personalized AI responses (App users only)
+///
+/// When a user has enabled profile sharing in the app, this context is passed to the AI
+/// so it can skip redundant questions (like asking for location) and prioritize
+/// programs relevant to the user's situation.
+///
+/// PRIVACY DESIGN:
+/// - Contains abstracted user attributes, NEVER raw PII
+/// - Age is stored as a range ("18-25", "65+"), not exact birth date
+/// - Location is city/county level, not street address
+/// - Qualifications are categories ("student", "veteran"), not specific details
+///
+/// If user hasn't enabled profile sharing, treat them like a website visitor
+/// (ask for location, age, etc. as needed during conversation).
+///
 public struct ProfileContext: Sendable {
     public let county: String?
     public let city: String?

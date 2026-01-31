@@ -7,7 +7,7 @@ class MessagesViewController: MSMessagesAppViewController {
 
     // MARK: - Properties
 
-    private let appGroupIdentifier = "group.org.baytides.navigator"
+    private let appGroupIdentifier = "group.org.baytides.baynavigator"
     private let favoritesKey = "shared_favorites"
 
     private var favorites: [[String: Any]] = []

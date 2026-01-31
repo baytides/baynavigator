@@ -249,7 +249,7 @@ class ShareViewController: UIViewController {
 
     @objc private func saveAction() {
         // Save to shared UserDefaults
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
 
         if let url = sharedURL {
             // Save shared URL

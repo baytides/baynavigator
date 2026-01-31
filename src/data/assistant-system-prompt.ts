@@ -93,6 +93,15 @@ NEVER make up URLs. If unsure, say "Check baynavigator.org/directory to search."
 - If no programs provided, say "I can help you search—check out the program cards below!" or link to /directory
 - The clickable program cards below your message are the source of truth
 
+## RESPONSE PRIORITIES
+1. ALWAYS prioritize linking to Bay Navigator pages (program cards, eligibility guides)
+2. Let the clickable program cards below your message do the heavy lifting
+3. Keep responses brief—guide users to the cards/guides for details
+4. Only include specific details (phone, address, hours, external URLs) when:
+   - User explicitly asks ("What's the phone number for...?")
+   - It's critical for immediate action (crisis resources)
+   - User needs a specific next step to take action
+
 ## ELIGIBILITY QUICK REFERENCE
 - Medicare: 65+ OR disabled (federal)
 - Medi-Cal: Income under ~$1,677/month for 1 person (California Medicaid)
@@ -652,18 +661,138 @@ You have MANY ways to say the same thing. Mix it up constantly!
 ## REMINDER: ALWAYS ASK FOR LOCATION FIRST
 When a user asks for help finding resources (food, housing, healthcare, etc.), your FIRST response must ask for their city or ZIP code. Example: "Of course! What's your city or ZIP code? I'll find what's nearby."`;
 
+// =============================================================================
+// AI SERVICE CONFIGURATION
+// =============================================================================
+//
+// Two-tier architecture with clear separation of responsibilities:
+//
+// ┌─────────────────────────────────────────────────────────────────────────────┐
+// │                           WORKFLOW OVERVIEW                                  │
+// │                                                                              │
+// │  User Message → OLLAMA (engage, collect, parse) → VLLM (search, retrieve)  │
+// │                                                                              │
+// │  1. Ollama handles ALL user-facing conversation                             │
+// │  2. Ollama collects needed info (location, age, needs)                      │
+// │  3. Ollama parses and structures the query                                  │
+// │  4. vLLM searches program database and returns relevant resources           │
+// │  5. Response prioritizes Bay Navigator links (program cards, guides)        │
+// │  6. Specific details (phone, address, hours) only when necessary/requested  │
+// └─────────────────────────────────────────────────────────────────────────────┘
+//
+// TIER 1: OLLAMA (PRIMARY) - User Engagement & Data Collection
+// ------------------------------------------------------------
+// - Model: Llama 3.1 8B Instruct (Q8 quantization)
+// - Infrastructure: Azure VM (Standard_D8s_v4), CPU-based inference
+// - Energy: ~45W TDP, always-on
+// - Role: CONVERSATION HANDLER - the "face" of Carl
+// - Responsibilities:
+//   * ALL user engagement and conversation
+//   * Greeting users, small talk, building rapport
+//   * Collecting required context (city/ZIP, birth year, specific needs)
+//   * Parsing user input into structured queries
+//   * Crisis response (must be immediate - 911, 988, DV hotlines)
+//   * Transit status checks (quick lookups)
+//   * Routing decisions (determining when vLLM is needed)
+//   * Formatting final responses in Carl's friendly voice
+//
+// TIER 2: VLLM (SECONDARY) - Database Search & Resource Retrieval
+// ----------------------------------------------------------------
+// - Model: Qwen2.5-3B-Instruct
+// - Infrastructure: Azure Container Apps with NVIDIA T4 GPU
+// - Energy: ~70W TDP when active, 0W when scaled to zero
+// - Scale behavior: Spins up on demand, scales to zero after 3 min idle
+// - Warmup: Pre-warmed when Bay Navigator chat panel opens
+// - Role: DATA RETRIEVAL ENGINE - searches and filters program data
+// - Responsibilities:
+//   * Searching program database based on parsed query from Ollama
+//   * Matching programs to user eligibility (location, age, income, groups)
+//   * Comparing similar programs
+//   * Retrieving specific program details when requested
+//   * Complex eligibility analysis across multiple programs
+//
+// RESPONSE PRIORITIES (both tiers follow this):
+// ---------------------------------------------
+// 1. ALWAYS prioritize links to Bay Navigator pages:
+//    - Program cards: /directory, /program/{id}
+//    - Eligibility guides: /eligibility/food-assistance, /eligibility/healthcare, etc.
+//    - Interactive map: /map
+// 2. Let the clickable program cards below the message be the primary source
+// 3. Only extract specific details (phone, address, hours, external URLs) when:
+//    - User specifically asks for them ("What's the phone number for...?")
+//    - The information is critical for immediate action (crisis resources)
+//    - The user needs to take a specific next step
+//
+// WHAT THE AI SHOULD NOT DO:
+// --------------------------
+// - Never make up program names, phone numbers, or addresses
+// - Never link to external sites when Bay Navigator has the info
+// - Never generate lengthy explanations when a program card link suffices
+// - Never bypass the data collection step (always get location first)
+//
+// USER PROFILE INTEGRATION (All Apps - iOS, Android, Windows, macOS, Linux):
+// ---------------------------------------------------------------------------
+// If the user has enabled profile sharing in the app, their ProfileContext
+// (location, age range, veteran status, etc.) is passed to the AI.
+// - Use this to skip redundant questions (don't ask for location if known)
+// - Prioritize programs matching their profile
+// - If profile not enabled, treat as anonymous (same as website visitor)
+// - Profile data is privacy-respecting: age ranges (not exact dates),
+//   county/city (not street address), categories (not specific details)
+//
+// TOR / ONION SUPPORT:
+// --------------------
+// Carl is fully accessible via Tor for maximum privacy:
+// - Onion: ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion
+// - No API key required over Tor (authenticated by onion routing)
+// - Carl AI Tor Gateway provides access to both tiers:
+//   * /api/* → Ollama (primary tier, conversation handling)
+//   * /v1/*  → vLLM (secondary tier, proxied through Carl VM to Azure GPU)
+// - User IP is never exposed to Azure - the gateway proxies requests
+// - Full two-tier functionality available over Tor
+//
+// =============================================================================
+
+// Primary: Ollama on Carl VM - for simple queries
 export const OLLAMA_CONFIG = {
-  endpoint: 'https://ai.baytides.org/api/chat',
+  // Main endpoint (via Cloudflare)
+  endpoint: 'https://ollama.baytides.org/api/chat',
   // CDN endpoints for domain fronting (censorship circumvention)
   cdnEndpoints: {
     cloudflare: 'https://baynavigator-ai-proxy.autumn-disk-6090.workers.dev/api/chat',
     fastly: 'https://arguably-unique-hippo.global.ssl.fastly.net/api/chat',
     azure: 'https://baynavigator-bacwcda5f8csa3as.z02.azurefd.net/api/chat',
   },
-  // Tor hidden service endpoint (for Tor Browser users)
-  // No API key required via Tor - direct access to Ollama
+  // Tor hidden service endpoint (for Tor Browser users - no API key needed)
   torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/api/chat',
-  // Llama 3.1 8B: Best at following instructions, testing if it works better now
-  // that CORS is fixed and using a different browser (not Brave)
+  // Model: Llama 3.1 8B - good for instruction following, runs on CPU
   model: 'llama3.1:8b-instruct-q8_0',
+  // Inference parameters for Ollama
+  options: {
+    temperature: 0.7, // Balanced creativity/consistency
+    top_p: 0.9,
+    num_predict: 512, // Max tokens - keep responses concise
+  },
+};
+
+// Secondary: vLLM on Azure GPU - for complex tasks
+export const VLLM_CONFIG = {
+  // Primary endpoint (via Cloudflare for DDoS protection)
+  endpoint: 'https://ai.baytides.org/v1/chat/completions',
+  // Alternative endpoint
+  apiEndpoint: 'https://api.baytides.org/v1/chat/completions',
+  // Direct Container Apps endpoint (bypass Cloudflare if needed)
+  directEndpoint:
+    'https://carl-vllm.prouddesert-7e432d16.westus2.azurecontainerapps.io/v1/chat/completions',
+  // Tor hidden service endpoint (proxied through Carl AI Gateway - user IP hidden)
+  torEndpoint: 'http://ul3gghpdow6o6rmtowpgdbx2c6fgqz3bogcwm44wg62r3vxq3eil43ad.onion/v1/chat/completions',
+  // Model: Qwen2.5-3B-Instruct running on T4 GPU
+  model: 'Qwen/Qwen2.5-3B-Instruct',
+  // Inference parameters for vLLM (OpenAI-compatible API)
+  options: {
+    temperature: 0.7,
+    top_p: 0.9,
+    max_tokens: 1024, // Allow longer responses for complex analysis
+    frequency_penalty: 0.1, // Slight penalty to reduce repetition
+  },
 };

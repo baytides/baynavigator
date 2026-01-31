@@ -106,7 +106,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     private func loadStats() -> WidgetStats {
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
         return WidgetStats(
             totalPrograms: defaults?.integer(forKey: "totalPrograms") ?? 0,
             favoriteCount: defaults?.integer(forKey: "favoriteCount") ?? 0,
@@ -115,7 +115,7 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     private func loadRecentPrograms(filter: CategoryFilter?, showFavorites: Bool) -> [WidgetProgram] {
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
 
         guard let data = defaults?.data(forKey: showFavorites ? "favoritePrograms" : "recentPrograms"),
               let programs = try? JSONDecoder().decode([WidgetProgramData].self, from: data) else {
@@ -466,7 +466,7 @@ struct FavoritesProvider: TimelineProvider {
     }
 
     private func loadFavorites() -> [WidgetProgram] {
-        let defaults = UserDefaults(suiteName: "group.org.baytides.navigator")
+        let defaults = UserDefaults(suiteName: "group.org.baytides.baynavigator")
 
         guard let data = defaults?.data(forKey: "favoritePrograms"),
               let programs = try? JSONDecoder().decode([WidgetProgramData].self, from: data) else {
