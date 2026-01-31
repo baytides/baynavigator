@@ -375,6 +375,36 @@ const vllmModel = VLLM_CONFIG.model;
   // No API key needed for Tor (direct Ollama access)
   const activeApiKey = isTorBrowser ? '' : apiKey;
 
+  // Ollama warmup - preemptively load the model when chat opens
+  // Model loading takes ~20 seconds, so warming up avoids timeout on first message
+  let ollamaWarmedUp = false;
+  async function warmupOllama() {
+    if (ollamaWarmedUp) return; // Only warm up once per session
+    try {
+      // Send a minimal request to load the model into memory
+      const response = await fetch(activeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
+        },
+        body: JSON.stringify({
+          model: modelName,
+          messages: [{ role: 'user', content: 'ping' }],
+          stream: false,
+          options: { num_predict: 1 }, // Minimal response
+        }),
+      });
+      if (response.ok) {
+        ollamaWarmedUp = true;
+        console.log('[Carl] Ollama model warmed up and ready');
+      }
+    } catch (e) {
+      // Silently fail - warmup is optional, first real message will load model
+      console.log('[Carl] Ollama warmup skipped:', e.message);
+    }
+  }
+
   // vLLM warmup - preemptively wake up the GPU model when chat opens
   // This runs in background so it's ready if needed for complex queries
   let vllmWarmedUp = false;
@@ -3492,8 +3522,10 @@ const vllmModel = VLLM_CONFIG.model;
       updateWelcomeMessage();
       // Preload programs for RAG
       loadPrograms();
-      // Warm up vLLM GPU in background (non-blocking)
-      // This wakes up the serverless GPU so it's ready for complex queries
+      // Warm up AI models in background (non-blocking)
+      // Ollama: loads model into memory (~20s) to avoid timeout on first message
+      // vLLM: wakes up serverless GPU so it's ready for complex queries
+      warmupOllama();
       warmupVLLM();
     }
   });
@@ -3999,9 +4031,10 @@ const vllmModel = VLLM_CONFIG.model;
         { role: 'user', content: message },
       ];
 
-      // Add timeout for slow connections (60 seconds - model can be slow with large context)
+      // Add timeout for slow connections (90 seconds - model cold start can take 20s + processing)
+      // Warmup runs when chat opens, but if user sends message immediately it may not be ready
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000);
+      const timeoutId = setTimeout(() => controller.abort(), 90000);
 
       // Stream the response with optimized settings for speed and quality
       // Uses activeEndpoint (Tor .onion or regular HTTPS) and activeApiKey
