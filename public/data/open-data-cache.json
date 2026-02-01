@@ -1,33 +1,33 @@
 {
-  "generated": "2026-01-31T06:17:59.250Z",
+  "generated": "2026-02-01T06:24:51.805Z",
   "sources": [
     {
       "name": "SF City Facilities",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 500,
-      "synced": "2026-01-31T06:18:00.285Z"
+      "synced": "2026-02-01T06:24:52.635Z"
     },
     {
       "name": "SF Food Trucks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 126,
-      "synced": "2026-01-31T06:18:00.569Z"
+      "synced": "2026-02-01T06:24:52.989Z"
     },
     {
       "name": "SF Parks",
       "city": "San Francisco",
       "county": "San Francisco",
       "count": 222,
-      "synced": "2026-01-31T06:18:01.209Z"
+      "synced": "2026-02-01T06:24:53.773Z"
     },
     {
       "name": "San Mateo County Parks",
       "city": "",
       "county": "San Mateo",
       "count": 200,
-      "synced": "2026-01-31T06:18:02.144Z"
+      "synced": "2026-02-01T06:24:54.987Z"
     }
   ],
   "facilities": [
