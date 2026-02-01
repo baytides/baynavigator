@@ -4010,55 +4010,87 @@ const vllmModel = VLLM_CONFIG.model;
         languageContext = `\n\n[LANGUAGE PREFERENCE]: The user has selected ${langName} as their preferred language. IMPORTANT: Respond in ${langName}. Keep program names, organization names, and acronyms (like CalFresh, Medi-Cal, BART) in English, but translate everything else. Be warm and conversational in ${langName}.`;
       }
 
-      // Build messages array for Ollama chat API
+      // Build the full system context
+      const fullSystemContext =
+        SYSTEM_PROMPT +
+        languageContext +
+        ragContext +
+        cityContactContext +
+        municipalCodeContext +
+        californiaCodeContext +
+        californiaCodesContentContext + // Actual law text - priority!
+        californiaResourcesContext +
+        locationContext +
+        profileContext +
+        liveDataContext;
+
+      // Determine which AI tier to use based on query complexity
+      // vLLM (GPU) for: large context, complex analysis, legal/rules queries
+      // Ollama (CPU) for: simple conversation, quick lookups
+      const hasLargeContext =
+        californiaCodesContentContext.length > 500 ||
+        municipalCodeContext.length > 200 ||
+        californiaCodeContext.length > 200;
+      const isComplexQuery = ['local_rules', 'legal', 'benefits', 'disability_benefits'].includes(
+        queryType
+      );
+      const useVLLM = vllmWarmedUp && (hasLargeContext || isComplexQuery);
+
+      // Build messages array
       const messages = [
-        {
-          role: 'system',
-          content:
-            SYSTEM_PROMPT +
-            languageContext +
-            ragContext +
-            cityContactContext +
-            municipalCodeContext +
-            californiaCodeContext +
-            californiaCodesContentContext + // Actual law text - priority!
-            californiaResourcesContext +
-            locationContext +
-            profileContext +
-            liveDataContext,
-        },
+        { role: 'system', content: fullSystemContext },
         ...conversationHistory.slice(-6),
         { role: 'user', content: message },
       ];
 
-      // Add timeout for slow connections (90 seconds - model cold start can take 20s + processing)
-      // Warmup runs when chat opens, but if user sends message immediately it may not be ready
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 90000);
+      // Configure endpoint and parameters based on tier
+      const endpoint = useVLLM ? vllmEndpoint : activeEndpoint;
+      const model = useVLLM ? vllmModel : modelName;
 
-      // Stream the response with optimized settings for speed and quality
-      // Uses activeEndpoint (Tor .onion or regular HTTPS) and activeApiKey
-      const response = await fetch(activeEndpoint, {
+      // Add timeout - vLLM is faster, Ollama needs more time for cold starts
+      const controller = new AbortController();
+      const timeoutMs = useVLLM ? 60000 : 90000;
+      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+      console.log(
+        `[Carl] Using ${useVLLM ? 'vLLM (GPU)' : 'Ollama (CPU)'} for query type: ${queryType}`
+      );
+
+      // Stream the response
+      // vLLM uses OpenAI-compatible API, Ollama uses its own format
+      const response = await fetch(useVLLM ? `${endpoint}` : endpoint, {
         signal: controller.signal,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
+          ...(useVLLM ? {} : activeApiKey && { Authorization: `Bearer ${activeApiKey}` }),
         },
-        body: JSON.stringify({
-          model: modelName,
-          messages: messages,
-          stream: true,
-          think: false, // Disable thinking mode for faster responses
-          options: {
-            temperature: 0.4, // Lower for more consistent, focused responses (reduced from 0.5)
-            num_predict: 250, // Slightly shorter responses for speed (reduced from 300)
-            num_ctx: 6144, // Reduced context for faster inference (was 8192)
-            top_k: 40, // Slightly wider token selection for better quality
-            top_p: 0.85, // Tighter nucleus sampling for focus (was 0.9)
-            repeat_penalty: 1.15, // Slightly higher to reduce repetition (was 1.1)
-          },
-        }),
+        body: JSON.stringify(
+          useVLLM
+            ? {
+                // vLLM (OpenAI-compatible format)
+                model: model,
+                messages: messages,
+                stream: true,
+                max_tokens: 300,
+                temperature: 0.4,
+              }
+            : {
+                // Ollama format
+                model: model,
+                messages: messages,
+                stream: true,
+                think: false,
+                options: {
+                  temperature: 0.4,
+                  num_predict: 250,
+                  num_ctx: 6144,
+                  top_k: 40,
+                  top_p: 0.85,
+                  repeat_penalty: 1.15,
+                },
+              }
+        ),
       });
 
       clearTimeout(timeoutId);
@@ -4073,7 +4105,7 @@ const vllmModel = VLLM_CONFIG.model;
       let fullResponse = '';
       setCarlState('responding');
 
-      // Handle streaming response
+      // Handle streaming response - different formats for vLLM vs Ollama
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
 
@@ -4086,10 +4118,16 @@ const vllmModel = VLLM_CONFIG.model;
 
         for (const line of lines) {
           if (!line.trim()) continue;
+          // vLLM streams with "data: " prefix (SSE format)
+          const jsonStr = line.startsWith('data: ') ? line.slice(6) : line;
+          if (jsonStr === '[DONE]') continue; // vLLM end marker
           try {
-            const json = JSON.parse(line);
-            if (json.message?.content) {
-              fullResponse += json.message.content;
+            const json = JSON.parse(jsonStr);
+            // vLLM: json.choices[0].delta.content
+            // Ollama: json.message.content
+            const content = json.choices?.[0]?.delta?.content || json.message?.content;
+            if (content) {
+              fullResponse += content;
               updateResponseBubble(responseBubble, fullResponse);
             }
           } catch (e) {
